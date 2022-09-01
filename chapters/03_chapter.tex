@@ -31,7 +31,7 @@ This chapter RQ: How do different sources present the same events? Can we analys
 
 % overview of subsections
 In the following sections, we are starting in Section~\ref{sec:cgs_cross_referencing} by reproducing an experiment from a paper~\cite{bountouridis2018explaining} that automatically extracts corroborated and omitted information in groups of articles. Then in Section~\ref{sec:cgs_similarity} we explore more the methods
- to compute document similarity, then in Section~\ref{sec:cgs_clustering_and_differences}
+ to compute document similarity, then in Section~\ref{sec:cgs_clustering_and_differences} how we extract differences.
 
 % % method
 % Method: 
@@ -66,16 +66,17 @@ In the following sections, we are starting in Section~\ref{sec:cgs_cross_referen
 % % , with the goal to find and formulate proper Research Questions and to prepare the execution of the proposal.
 
 
-\section{Paper reproduction~\cite{bountouridis2018explaining}}
+\section{Corroboration and omission extraction}
 \label{sec:cgs_cross_referencing}
 % Experiment 1
 % what
 We started by analysing the paper from~\citet{bountouridis2018explaining} which presents a methodology to analyse how much information overlaps between different similar documents, identifying points of information that are corroborated or omitted.
 % why
-We wanted to analyse this resource because it seems to be going in the broad direction of our project, analysing different presentations in the news of the same event.
+% We wanted to analyse this resource because it seems to be going in the broad direction of our project, analysing different presentations in the news of the same event.
+
 
 % how
-The paper has been analysed and reproduced, to get a deep understanding of how it works. The implementation started with the code publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis/InCredible}} but its incompleteness in some stages of the processing (e.g., the creation of the article-level cliques, and all the specific hyperparameters of the algorithms used) required integrating the codebase.\footnote{\url{https://github.com/MartinoMensio/InCredible}}
+The paper has been analysed and reproduced to get a deep understanding of how it works. The implementation started with the code publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis/InCredible}} but its incompleteness in some stages of the processing (e.g., the creation of the article-level cliques, and all the specific hyperparameters of the algorithms used) required integrating the codebase.\footnote{\url{https://github.com/MartinoMensio/InCredible}}
 
 % limitations
 With the experiments reproduced, we have been able to inspect the cliques of documents and sentences identified by the model, seeing the following limitations:
@@ -305,7 +306,7 @@ This data, although the description of the differences is not directly parseable
 The data collection done in these current months will continue across the PhD, and will be used in different stages of the analysis. It will serve as the seed to create the labelled dataset for the first Research Question and also provide a wide set of articles from different news sources to empower the studies of the second Research Question.
 Having articles from so many different news sources, we can on one side provide some indication of framing for news sources that are not usually targeted by manual framing studies because not enough ``important'', and on the other side be more confident to observe some phenomenon of information re-usage that is the underlying hypothesis for the last sub-question.
 
-\section{Formalisation and dissemination}
+\section{NO: Formalisation and dissemination}
 % what
 The last type of activity carried out during this year has been the presentation of this work to other researchers throughout different events, both internally to the Open University and externally.
 % why
@@ -321,3 +322,6 @@ The proposal described completely in this report has also been presented in the 
 For the more wide audience instead, during June we submitted a poster to the OU PhD Poster Competition which, involving a more general audience, focused more on being simple to understand.
 
 These documents can be found at the end of this file.
+
+
+\section{Findings and link to next chapter}
