@@ -32,6 +32,11 @@
 \author{Martino Mensio}
 \date{\today}
 
+\usepackage[toc,acronym]{glossaries}
+
+\makeglossaries
+\input{glossary}
+
 \begin{document}
 
 \input{title_page}
@@ -61,8 +66,14 @@ Abstract goes here
 \chapter{Common Ground Search}
 \input{chapters/03_chapter}
 
-\chapter{Chapter Four Title}
+\chapter{Linguistic Proxies of Persuasion}
 \input{chapters/04_chapter}
+
+\chapter{Perspectives and Political Sides}
+\input{chapters/05_chapter}
+
+\chapter{Chapter 6}
+\input{chapters/06_chapter}
 
 \chapter{Conclusion}
 \input{chapters/conclusion}
@@ -70,6 +81,9 @@ Abstract goes here
 
 \printbibliography[heading=bibintoc]
 % \bibliography{bibliography}
+
+\printglossary[type=\acronymtype]
+\printglossary
 
 \appendix
 \chapter{Appendix Title}
