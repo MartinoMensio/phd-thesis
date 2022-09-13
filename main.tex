@@ -1,14 +1,16 @@
-\documentclass[12pt]{scrreprt}
+% \documentclass[12pt]{scrreprt}
+\documentclass[12pt,lot, lof]{outhesis}
+\input{preamble}
 
 % template inspired from https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1):_Basic_Structure
 
-\usepackage[utf8]{inputenc}
+% \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 
 % for layout
-\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
-\usepackage{fancyhdr}
-\pagestyle{fancy} % adding header to pages
+% \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+% \usepackage{fancyhdr}
+% \pagestyle{fancy} % adding header to pages
 \newsavebox{\largestimage} % for the title_page
 
 % for figures
@@ -17,8 +19,10 @@
 
 % for references
 % \usepackage{biblatex}
-\usepackage[natbib=true]{biblatex}
-\addbibresource{references.bib}
+% \usepackage[natbib=true]{biblatex}
+% \addbibresource{references.bib}
+
+
 
 
 \graphicspath{ {images/} }
@@ -27,10 +31,11 @@
 \usepackage{titling}
 
 % document properties
-\title{Thesis Title}
-\subtitle{Subtitle}
-\author{Martino Mensio}
-\date{\today}
+% \title{Thesis Title}
+% % \subtitle{Subtitle}
+% \author{Martino Mensio}
+% \date{\today}
+\input{info}
 
 \usepackage[toc,acronym]{glossaries}
 
@@ -40,9 +45,12 @@
 \begin{document}
 
 \input{title_page}
+\makefrontmatter
 
-\chapter*{Abstract}
-Abstract goes here
+% \doublespacing
+
+% \chapter*{Abstract}
+% Abstract goes here
 
 % \chapter*{Dedication}
 % ...
@@ -53,9 +61,9 @@ Abstract goes here
 % \chapter*{Acknowledgements}
 % I want to thank...
 
-\tableofcontents
-\listoffigures
-\listoftables
+% \tableofcontents
+% \listoffigures
+% \listoftables
 
 \chapter{Introduction}
 \input{chapters/01_introduction}
@@ -79,8 +87,9 @@ Abstract goes here
 \input{chapters/conclusion}
 
 
-\printbibliography[heading=bibintoc]
+% \printbibliography[heading=bibintoc]
 % \bibliography{bibliography}
+\bibliography{references}
 
 \printglossary[type=\acronymtype]
 \printglossary
