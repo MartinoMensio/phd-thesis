@@ -37,7 +37,7 @@ This chapter RQ:
 % We take from the work of~\cite{bountouridis} and expand ...
 
 % overview of subsections
-In the following sections, we are starting in Section~\ref{sec:cgs_cross_referencing} by reproducing an experiment from a paper~\cite{bountouridis2018explaining} that automatically extracts corroborated and omitted information in groups of articles. Then in Section~\ref{sec:cgs_similarity} we explore more the methods
+In the following sections, we are starting in Section~\ref{sec:cgs_cross_referencing} by reproducing an experiment from a paper~\citep{bountouridis2018explaining} that automatically extracts corroborated and omitted information in groups of articles. Then in Section~\ref{sec:cgs_similarity} we explore more the methods
  to compute document similarity, then in Section~\ref{sec:cgs_clustering_and_differences} how we extract differences. Finally in Section~\ref{sec:cgs_findings} we discuss our findings.
 
 % % method
@@ -118,7 +118,7 @@ With the experiments reproduced, we have been able to inspect the cliques of doc
 % And also, it uses the similarity between TF-IDF just with a threshold, modelling the graph and cliques as unweighted (the weights are just used to select the most appropriate clique during their creation).
 
 % role of this experiment
-This experiment helped to see the limitation of this type of work.%, which belongs to the \emph{similarity} area of research (Section~\ref{sec:lit_relationships}).
+This experiment helped to see the limitation of this type of work. %, which belongs to the \emph{similarity} area of research (Section~\ref{sec:lit_relationships}).
 This paper provides a great way to analyse the overlap between articles and extracts pieces that have been omitted or that are corroborated, but does not investigate further the reason behind the selection of what to include or not.
 This opened up for further work to:
 \begin{enumerate}
@@ -155,8 +155,8 @@ The selected models used in the benchmark are the following:
 \begin{itemize}
     \item \textbf{TF-IDF}: with a feature size of 2000, with a preprocessing made of lowercasing and tokenizing, without lemmatisation;
     \item \textbf{GloVe-average}: considering GloVe word embeddings trained on the CommonCrawl dataset, and doing an average of the vectors over the sentence;\footnote{\url{https://spacy.io/models/en\#en_core_web_lg}}
-    \item \textbf{BERT}: using the most popular embeddings provided by Google Research~\cite{devlin2018bert} with the base uncased pre-trained weights;\footnote{\url{https://spacy.io/models/en-starters\#en_trf_bertbaseuncased_lg}}
-    \item \textbf{USE}: using sentence embeddings coming from Universal Sentence Encoder~\cite{cer2018universal} which has been specifically trained for sentence similarity.\footnote{\url{https://tfhub.dev/google/universal-sentence-encoder/}}
+    \item \textbf{BERT}: using the most popular embeddings provided by Google Research~\citep{devlin2018bert} with the base uncased pre-trained weights;\footnote{\url{https://spacy.io/models/en-starters\#en_trf_bertbaseuncased_lg}}
+    \item \textbf{USE}: using sentence embeddings coming from Universal Sentence Encoder~\citep{cer2018universal} which has been specifically trained for sentence similarity.\footnote{\url{https://tfhub.dev/google/universal-sentence-encoder/}}
 \end{itemize}
 
 In all the cases, the representations from these models have been compared with the cosine similarity.
@@ -202,7 +202,7 @@ It is also the only model considered that is purposely trained on a semantic sim
 
 % role of this experiment
 This experiment shows the need for a similarity model that accounts for the semantics more than the linguistic surface. And given the continuous progress of language models, we need to be able to switch our choice relatively easily.
-For example, by looking at the Semantic Textual Similarity benchmark,\footnote{\url{http://nlpprogress.com/english/semantic_textual_similarity.html}} at the moment the best model available is XLNet~\cite{yang2019xlnet} but this could change at any time.
+For example, by looking at the Semantic Textual Similarity benchmark,\footnote{\url{http://nlpprogress.com/english/semantic_textual_similarity.html}} at the moment the best model available is XLNet~\citep{yang2019xlnet} but this could change at any time.
 %so we will use it for our future experiments.
 % this means for us:
 % - we need to use a similarity resistant to changes in the linguistic surface
@@ -240,7 +240,7 @@ We then use agglomerative hierarchical clustering for different reasons:
     \item we can truncate the clustering when we reach a certain level of distance between the clusters, or a certain number of clusters;
     \item We can see the evolution of many different features (e.g., number of clusters, size, internal cohesion) while performing the clustering step by step;
     \item we have a graphical representation (dendrogram) which helps to inspect and understand what is happening;
-    \item it has widely been used for similar tasks (e.g., finding related claims~\cite{almeida2020text})
+    \item it has widely been used for similar tasks (e.g., finding related claims~\citep{almeida2020text})
 \end{itemize}
 
 % This clustering algorithm has the following parameters:
@@ -280,6 +280,10 @@ This gives a higher value of uniqueness to the word ``deceased'' that just appea
     \caption{A sentence cluster example, where the uniqueness of words in the cluster is highlighted with different shades of green.}
     \label{fig:words_uniqueness}
 \end{figure}
+
+
+TODO: findings from this?
+% there are many variations that are meaningless, some that instead are able to present things very differently from a few words. Similarity alone cannot distinguish between them.
 
 
 
@@ -334,7 +338,7 @@ This data, although the description of the differences is not directly parseable
 % % role of this
 % The data collection done in these current months will continue across the PhD, and will be used in different stages of the analysis. It will serve as the seed to create the labelled dataset for the first Research Question and also provide a wide set of articles from different news sources to empower the studies of the second Research Question.
 % Having articles from so many different news sources, we can on one side provide some indication of framing for news sources that are not usually targeted by manual framing studies because not enough ``important'', and on the other side be more confident to observe some phenomenon of information re-usage that is the underlying hypothesis for the last sub-question.
-This data was used for this and the second chapter. From Chapter~\ref{chap:chap_5} instead we rely mainly on a existing dataset, still coming from AllSides ~\cite{baly-dataset} because we want to compare our results with other works.
+This data was used for this and the second chapter. From Chapter~\ref{chap:chap_5} instead we rely mainly on a existing dataset, still coming from AllSides ~\citep{baly-dataset} because we want to compare our results with other works.
 
 % \section{NO: Formalisation and dissemination}
 % % what
@@ -354,7 +358,7 @@ This data was used for this and the second chapter. From Chapter~\ref{chap:chap_
 % These documents can be found at the end of this file.
 
 
-\section{Findings and link to next chapter}
+\section{Discussion}
 \label{sec:cgs_findings}
 
 From this chapter, we achieved to be able to understand the uniqueness of information at different granularities:
@@ -362,20 +366,30 @@ From this chapter, we achieved to be able to understand the uniqueness of inform
 - when most of the articles report all the same things
 - ?
 
-I need strong finding --> publish?
+TODO: I need something to link together this chapter and also need strong findings to conclude it.
+
+
 Possible findings:
 \begin{enumerate}
     \item As already denoted by the work of~\citet{bountouridis2018explaining}, the first part of this analysis shows a positive correlation between corroboration and credibility of news outlets, and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is greatly important for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. %: corroboration correlates positively to credibility of news outlets, omission negatively
     \item Extreme left and right corroborate less and omit more? (but needs leaning? No if we just take centrality-extremism)
-    \item Delta Time of publication: more similar published at similar times?
-    \item SOMETHING BIG
+    \item Delta Time of publication: more similar articles are published at similar times, instead the further the time delta the more further they are?
+    \item TODO: SOMETHING ELSE?
+    \item Observing similarities between multiple documents is made very difficult by linguistic variations. It is not only a matter of what is included and what is excluded. The similarity between sentences is also capturing some linguistic variations more than others.
+    \item We do not have any interpretation of what a change in a document conveys. Something may be written differently just because of random choices, or there can be some hidden reasons and some goal to persuade (see more in next section and next chapter).
 \end{enumerate}
 
 
+
+\section{Next}
+\label{sec:cgs_next}
 % link to next chapter
 
-But we still don't have any idea what this changes \textbf{convey}. It could be that the differences exist for different natures, originating from randomness (each author/source has different jargon / casual / ..) or there could be a purpose that is obscurely manifesting through these small choices.
+This chapter gives us some insights into how similar documents are changed and modified across news sources, and how critical corroboration and omission are.
 
-So for the next chapter, we want to investigate persuasive language. 
+But we still don't have any idea about what this changes \textbf{convey}. It could be that the differences exist for different natures, originating from randomness (each author/source has different jargon, or by casualties).
+Or on another side, there could be a purpose that is obscurely manifesting through these small choices. A purpose to influence the readers and subtly persuade them.
 
-What changes between these parts? What characterises the differences? / How can we characterise the differences quantitatively describing how they try to persuade the readers? (just a teaser into chapter 4, because we need propaganda and linguistic proxies from chap4)
+So for the next chapter, we want to investigate persuasive language and how it can be computationally quantified. 
+
+What changes between the changed parts? What characterises the differences? / How can we characterise the differences quantitatively describing how they try to persuade the readers?
