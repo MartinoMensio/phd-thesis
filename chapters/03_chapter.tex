@@ -1,5 +1,11 @@
 \section{Introduction}
 
+% TODO: Research Question of this chapter
+% Summary of findings / contributions
+% - limitations of current methods for corroboration/omission detection
+% - similarity methods ? 
+% - 
+
 % chapter motivation: multiple versions of the same story 
 This chapter contains the first set of practical experiments that we carried out.
 
@@ -111,6 +117,14 @@ With the experiments reproduced, we have been able to inspect the cliques of doc
 \end{itemize}
 
 
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/bountouridis_fig_3_noGA.pdf}
+    \caption{Reproduced figure showing correlation between corroboration and credibility score.}
+    \label{fig:figure_3_bountouridis_reproduced}
+\end{figure}
+
+
 % In addition to these problems, the model described is based on TF-IDF which is not as robust with changes on the linguistic surface (as we saw in the next experiment).
 % Models flourished
 % This is the motivation for 5.1.2
@@ -145,15 +159,17 @@ We wanted to see in practice how the usage of different representation models wo
 % why?
 Having a solid base for computing the distances between articles and sentences is a pillar for comparing different articles. The applications of similarity range from document clustering to the identification of omitted pieces of information in a cluster, therefore it is very important to use a proper method that is not deceived by the usage of synonyms and other linguistic variations in communicating the same information. To study the differences in the language of framing, we first need to be able to tell whether two pieces of text are discussing the same information, and distinguish degrees of similarity properly.
 
+
+\subsection{Qualitative differences benchmark ???}
 % how?
 % Specifically on the sentence level, we experimented to see how different models were able to pick similar sentences, by setting up a small benchmark.
 We set up a small benchmark where the goal is to find the most similar pairs of sentences coming from selected pairs of news articles which cover the same event. Each model candidate has to tell which 10 most similar pairs of sentences has found, one from one article and one from the other.
-The pairs of articles have been chosen manually, by considering three constraints: \textit{i)} description of the same event, \textit{ii)} from different news outlets, \textit{iii)} published near in time, with a maximum distance of one day.
-Each model would extract the most similar 10 pairs, and we then compare the pairs provided and their relative order.
+The pairs of articles have been chosen manually, by considering three constraints: \textit{i)} description of the same event, \textit{ii)} from different news outlets, \textit{iii)} published near in time, with a maximum time distance of one day.
+Each model would extract the most similar 10 pairs, and we then compare the pairs provided and their relative order in the rankings.
 
 The selected models used in the benchmark are the following:
 \begin{itemize}
-    \item \textbf{TF-IDF}: with a feature size of 2000, with a preprocessing made of lowercasing and tokenizing, without lemmatisation;
+    \item \textbf{TF-IDF}: with a feature size of 2000, with a preprocessing made of lowercasing and tokenizing, without lemmatising;
     \item \textbf{GloVe-average}: considering GloVe word embeddings trained on the CommonCrawl dataset, and doing an average of the vectors over the sentence;\footnote{\url{https://spacy.io/models/en\#en_core_web_lg}}
     \item \textbf{BERT}: using the most popular embeddings provided by Google Research~\citep{devlin2018bert} with the base uncased pre-trained weights;\footnote{\url{https://spacy.io/models/en-starters\#en_trf_bertbaseuncased_lg}}
     \item \textbf{USE}: using sentence embeddings coming from Universal Sentence Encoder~\citep{cer2018universal} which has been specifically trained for sentence similarity.\footnote{\url{https://tfhub.dev/google/universal-sentence-encoder/}}
@@ -200,6 +216,23 @@ It is also the only model considered that is purposely trained on a semantic sim
 
 % \todo{an example of two pairs where we can see some of the limitations?}
 
+\subsection{Semantic similarity model with corroboration and omission extraction}
+% Cliques with USE
+
+In this section we take the experiment from Section~\ref{sec:cgs_cross_referencing} and substitute the TF-IDF encoding method with a semantic similarity model (USE).
+
+While in the previous subsection we were assessing the quality of USE vs TF-IDF on their own, here we see the difference when applying them to downstream tasks.
+
+TODO: Show figure with USE, that results are better correlated? NO
+In figure XXX, we can see that when we compare the base model TF-IDF with USE, we get a better correlation between the corroboration and credibility.
+OR: we get unclear results. However, when inspecting the cliques, we see that 
+TODO: need an example
+
+Show cliques inspection quality
+
+
+\subsection{Conclusion subsection}
+
 % role of this experiment
 This experiment shows the need for a similarity model that accounts for the semantics more than the linguistic surface. And given the continuous progress of language models, we need to be able to switch our choice relatively easily.
 For example, by looking at the Semantic Textual Similarity benchmark,\footnote{\url{http://nlpprogress.com/english/semantic_textual_similarity.html}} at the moment the best model available is XLNet~\citep{yang2019xlnet} but this could change at any time.
@@ -225,6 +258,8 @@ We have seen with the reproduction of the model from \citet{bountouridis2018expl
 % \todo{from here on}
 % This comes from the limitation of the first experiment of reproduction of the paper. (from experiment 1)
 % (from experiment on similarity)
+
+\subsection{Hierarchical clustering}
 
 % how
 With this idea, we retrieved some groups of articles that relate to the same event from Google Headlines, which aggregates and clusters together news articles from multiple sources.\footnote{\url{https://www.blog.google/products/news/new-google-news-ai-meets-human-intelligence/}}
@@ -267,6 +302,7 @@ With this method, we create sentence clusters that are very similar in their sem
 
 TODO: some findings from this hierarchical analysis?
 
+\subsection{Term uniqueness}
 To facilitate an analysis of the differences, we experimented with different methods of highlighting the uniqueness of the words in a cluster.
 This can be seen in Figure~\ref{fig:words_uniqueness} where we score each of the words with a scale of uniqueness that is defined as:
 $$u_w = 1 - \frac{|\Set{s_i | s_i \in S \land w \in s_i}|}{|S|}$$
@@ -283,7 +319,8 @@ This gives a higher value of uniqueness to the word ``deceased'' that just appea
 
 
 TODO: findings from this?
-% there are many variations that are meaningless, some that instead are able to present things very differently from a few words. Similarity alone cannot distinguish between them.
+there are many variations that are meaningless, some that instead are able to present things very differently from a few words. Similarity alone cannot distinguish between them.
+Most of the differences observed are meaningless.
 
 
 
@@ -372,10 +409,10 @@ TODO: I need something to link together this chapter and also need strong findin
 Possible findings:
 \begin{enumerate}
     \item As already denoted by the work of~\citet{bountouridis2018explaining}, the first part of this analysis shows a positive correlation between corroboration and credibility of news outlets, and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is greatly important for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. %: corroboration correlates positively to credibility of news outlets, omission negatively
-    \item Extreme left and right corroborate less and omit more? (but needs leaning? No if we just take centrality-extremism)
-    \item Delta Time of publication: more similar articles are published at similar times, instead the further the time delta the more further they are?
-    \item TODO: SOMETHING ELSE?
-    \item Observing similarities between multiple documents is made very difficult by linguistic variations. It is not only a matter of what is included and what is excluded. The similarity between sentences is also capturing some linguistic variations more than others.
+    % \item Extreme left and right corroborate less and omit more? (but needs leaning? No if we just take centrality-extremism)
+    % \item Delta Time of publication: more similar articles are published at similar times, instead the further the time delta the more further they are?
+    % these are more limitations
+    \item Observing similarities between multiple documents is made very difficult by linguistic variations. It is not only a matter of what is included and what is excluded. The similarity between sentences is also capturing some linguistic variations more than others (more about the surface and less about the intention).
     \item We do not have any interpretation of what a change in a document conveys. Something may be written differently just because of random choices, or there can be some hidden reasons and some goal to persuade (see more in next section and next chapter).
 \end{enumerate}
 
@@ -387,6 +424,10 @@ Possible findings:
 
 This chapter gives us some insights into how similar documents are changed and modified across news sources, and how critical corroboration and omission are.
 
+% recap contributions
+
+
+% open for new chapter
 But we still don't have any idea about what this changes \textbf{convey}. It could be that the differences exist for different natures, originating from randomness (each author/source has different jargon, or by casualties).
 Or on another side, there could be a purpose that is obscurely manifesting through these small choices. A purpose to influence the readers and subtly persuade them.
 
