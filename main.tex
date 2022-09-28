@@ -23,6 +23,22 @@
 % \addbibresource{references.bib}
 
 
+% math parentheses
+\usepackage{braket}
+
+
+\usepackage{todonotes}
+% default inline todos
+% \presetkeys%
+%     {todonotes}%
+%     {inline,backgroundcolor=orange}{}
+% \makeatletter
+% \xpatchcmd{\@todo}{\setkeys{todonotes}{TODO: #1}}{\setkeys{todonotes}{inline,#1}}{}{}
+% \makeatother
+% \let\tododefault\todo
+% \renewcommand{\todo}[2][]{\tododefault[inline,#1]{#2}}
+\NewCommandCopy{\oldtodo}{\todo}
+\renewcommand{\todo}[2][]{\oldtodo[inline,#1]{TODO: #2}}
 
 
 \graphicspath{ {images/} }
@@ -89,6 +105,7 @@
 
 % \printbibliography[heading=bibintoc]
 % \bibliography{bibliography}
+% \bibliographystyle{acm} --> already apalike in outhesis.cls
 \bibliography{references}
 
 \printglossary[type=\acronymtype]
