@@ -97,17 +97,17 @@ Instead, the sources that \gls{omit} the most are the ones which get a lower sco
 % details about this approach, be specific that is not my work. But thesis should be standalone
 The approach used by the authors is the following:
 \begin{enumerate}
-    \item building document-level \gls{clique}[s]: document encoding representation, similarity computation, similarity threshold, cliquing algorithm, clique post-processing
-    \item building sentence-level \gls{clique}[s]: taking each group of articles belonging to a document-level clique (same story), splitting into sentences, encoding representation, similarity computation, similarity threshold, cliquing algorithm, clique post-processing
-    \item computing outlet-related corroboration and omission: group sentence-level cliques by publishing outlet, count totals, count omitted cliques (appearing in other otlets but not in the considered one), count corroborated cliques (appearing also in other outlets)
-    \item analysing correlation with Media Bias/Fact Check scores
+    \item building document-level \gls{clique}[s]: documents are encoded (using TF-IDF), the matrix of their similarity is computed, then a threshold is applied to prune the similarity relationships and therefore a graph is produced where the nodes are documents and the edges are the similarity relationships that satisfy the minimum threshold. This graph is then processed to identify the cliques and the outputs are then filtered to enforce that every document only belongs to one clique. Each clique represents a story that was covered by multiple documents (because they are similar between them). Not all the documents belong to a clique, they can be left out;
+    \item building sentence-level \gls{clique}[s]: starting from the document-level cliques of the previous step (same story), each one of them is considered on its own, and the articles are split into sentences. Then, all the sentences are processed as in the previous step (encoding representation, similarity computation, similarity threshold, cliquing algorithm, clique post-processing). The outputs are sentence-level cliques that represent a piece of specific information that appears in multiple documents; 
+    \item computing outlet-related corroboration and omission: sentence-level cliques are grouped by publishing outlet; then omitted cliques (appearing in other outlets but not in the considered one) and corroborated cliques (also appearing in other outlets) are counted;
+    \item analysing correlation with factuality scores: the ratios of omitted cliques and corroborated cliques are compared with the scores coming from Media Bias/Fact Check for each outlet, and the hypothesis of correlation is verified: corroboration appears more in factual sources, while omission appears more in non-credible sources.
 \end{enumerate}
 
 % dataset
-The dataset used is the \emph{All-the-news}\footnote{\url{https://www.kaggle.com/datasets/snapcrack/all-the-news}} which includes more than 140k articles published by fifteen major US outlets. To have the same results as the reference paper~\citep{bountouridis2018explaining}, only articles from 2016 have been considered. This brings the analysis to work with 203 document-level cliques
+The dataset used is the \emph{All-the-news}\footnote{\url{https://www.kaggle.com/datasets/snapcrack/all-the-news}} which includes more than 140k articles published by fifteen major US outlets. To have the same results as the reference paper~\citep{bountouridis2018explaining}, only articles from 2016 have been considered. This brings the analysis to work with 203 document-level cliques. 
 
 % how
-We analysed and reproduced this paper to get a deep understanding of how it works. The implementation started with the code and data\todoAW{What are the properties of the dataset?} publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis/InCredible}} but its incompleteness in some stages of the processing (e.g., the creation of the article-level cliques,\todoAW{What's an article-level clique?} and all the specific hyperparameters of the algorithms used) required integrating the codebase.\footnote{\url{https://github.com/MartinoMensio/InCredible}}
+We analysed and reproduced this paper to get a deep understanding of how it works. The implementation started with the code and data\todoAW{What are the properties of the dataset?} publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis/InCredible}} but its incompleteness in some stages of the processing (e.g., the creation of the document-level cliques, and all the specific hyperparameters of the algorithms used) required integrating the codebase.\footnote{\url{https://github.com/MartinoMensio/InCredible}}
 An example of the reproduced analysis can be seen in Figure~\ref{fig:cluster_similar_sentences_amiri}.
 
 \begin{figure}[!htbp]
@@ -118,24 +118,26 @@ An example of the reproduced analysis can be seen in Figure~\ref{fig:cluster_sim
 \end{figure}
 
 % limitations
-With the experiments reproduced, we have been able to inspect the cliques\todoAW{clique vs cluster?} of documents and sentences identified by the model, seeing the following limitations:
+With the experiments reproduced, we have been able to inspect the cliques of documents and sentences identified by the model, seeing the following limitations:
 
 \begin{itemize}
     % \item Their demo\footnote{\url{http://fairnews.ewi.tudelft.nl/InCredible/}} just shows one specific article as main and one specific clique (not very interesting)
-    \item The \emph{document clustering}\todoAW{You've jumped very suddenly into the use of particular algorithms. What are these algorithms doing? How do you interpret their output? Are they your implementation or Bountouridis et al's? etc} sometimes splits similar articles over different clusters, or in some cases has different stories that talk about a different detail within the same cluster (e.g., when a news story re-emerges because further details are discovered).
+    \item The \emph{document cliquing}
+    %\todoAW{You've jumped very suddenly into the use of particular algorithms. What are these algorithms doing? How do you interpret their output? Are they your implementation or Bountouridis et al's? etc} 
+    sometimes splits similar articles over different groups, or in some cases has different stories that talk about a different detail within the same clique (e.g., when a news story re-emerges because further details are discovered).
     This can be a consequence of having TF-IDF as the underlying method to represent the documents.
     This method is fast and efficient for coarse topic detection because it is based on bag-of-words which works well with specific terms that distinguish the topics.
     But when we need to have a finer-grained clustering such as in this case, the limitation of this method may surface because the terms of two political events with the same entities mentioned result in having similar feature vectors.
-    It is not enough to change the thresholds to obtain better document clusters.
-    \item The \emph{sentence clustering} method provided just computes the degree of similarity between two sentences but does not point to which specific words are responsible for the similarities and differences. This would require a fine-grained analysis that in this paper is not included. Furthermore, sentences in a clique are very similar, and no significant differences have been observed because the similarity metrics are based again on TF-IDF. This method is not robust enough to the usage of synonyms and other variations on the linguistic surface, while at the same time is unable to distinguish two sentences that use the same words but have different meanings because of the sentence structure or of the role of the words, so it makes selecting a threshold value very difficult.
-    \item The \emph{clique algorithms} are not the best choice for doing clustering when we have the information of how much similar two items are (a real-value instead of a binary-value is available from the similarity metric). The approach considers an unweighted version of the similarity graph by using a threshold (weights are just used to select the most appropriate clique during their creation), but instead dealing with the original weighted graph would allow better and more flexible clustering techniques (e.g., agglomerative clustering). %, like agglomerative clustering
+    It is not enough to change the thresholds to obtain better document cliques.
+    \item The \emph{sentence cliquing} method provided just uses the degree of similarity between two sentences but does not point to which specific words are responsible for the similarities and differences. This would require a fine-grained analysis that in this paper is not included. Furthermore, sentences in a clique are very similar, and no significant differences have been observed because the similarity metrics are based again on TF-IDF. This method is not robust enough to the usage of synonyms and other variations on the linguistic surface, while at the same time is unable to distinguish two sentences that use the same words but have different meanings because of the sentence structure or of the role of the words, so it makes selecting a threshold value very difficult.
+    \item The \emph{clique algorithms} are not the best choice for grouping when we have the information of how much similar two items are (a real-value instead of a binary-value is available from the similarity metric). The approach considers an unweighted version of the similarity graph by using a threshold (weights are just used to select the most appropriate clique during their creation), but instead dealing with the original weighted graph would allow better and more flexible clustering techniques (e.g., agglomerative clustering). %, like agglomerative clustering
 \end{itemize}
 
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/bountouridis_fig_3_noGA.pdf}
-    \caption{Reproduced figure showing correlation between corroboration and credibility score.}
+    \caption{Raw amount (top) and percentage (bottom) of corroborated (blue) and omitted (orange) POIs per news outlet. Colour shading (quantised to three bins) indicates the average TF-IDF similarity among the sentences in cliques, i.e. the lighter the shade, the more dissimilar. This plot is the reproduction of one originally contained in~\citet{bountouridis2018explaining}}
     \label{fig:figure_3_bountouridis_reproduced}
 \end{figure}
 
@@ -164,7 +166,7 @@ This opened up for further work to:
 This method of comparison has its main limitations in the similarity metric chosen. So we opted for doing some further research on the similarity metrics, in a way that accounts more for semantic similarity instead of just being term-based.
 
 
-\section{\statusorange Models for similarity analysis}
+\section{\statusgreen Models for similarity analysis}
 \label{sec:cgs_similarity}
 % Experiment 2
 % what
@@ -179,7 +181,7 @@ To study the similarity metrics, we use two different experiments. The first is 
 We conclude with some observations in Subsection~\ref{ssec:cgs_similarity_conclusion}.
 
 
-\subsection{Qualitative differences benchmark}
+\subsection{\statusgreen Qualitative differences benchmark}
 \label{ssec:cgs_similarity_qualitative}
 % how?
 % Specifically on the sentence level, we experimented to see how different models were able to pick similar sentences, by setting up a small benchmark.
@@ -191,14 +193,71 @@ The selected models used in the benchmark are the following:
 \begin{itemize}
     \item \textbf{TF-IDF}: with a feature size of 2000, with a preprocessing made of lowercasing and tokenizing, without lemmatising;
     \item \textbf{GloVe-average}: considering GloVe word embeddings~\citep{pennington2014glove} trained on the CommonCrawl dataset, and doing an average of the vectors over the sentence;\footnote{\url{https://spacy.io/models/en\#en_core_web_lg}}
-    \item \textbf{BERT}: using the most popular embeddings provided by Google Research~\citep{devlin2018bert} with the base uncased pre-trained weights;\footnote{\url{https://spacy.io/models/en-starters\#en_trf_bertbaseuncased_lg}}
-    \item \textbf{USE}: using sentence embeddings coming from Universal Sentence Encoder~\citep{cer2018universal} which has been specifically trained for sentence similarity.\footnote{\url{https://tfhub.dev/google/universal-sentence-encoder/}}
+    \item \textbf{\acrshort{bert}}: using the most popular embeddings provided by Google Research~\citep{devlin2018bert} with the base uncased pre-trained weights;\footnote{\url{https://spacy.io/models/en-starters\#en_trf_bertbaseuncased_lg}}
+    \item \textbf{\acrshort{use}}: using sentence embeddings coming from \acrfull{use}~\citep{cer2018universal} which has been specifically trained for sentence similarity.\footnote{\url{https://tfhub.dev/google/universal-sentence-encoder/}}
 \end{itemize}
 
 In all the cases, the representations from these models have been compared with the cosine similarity.
 For each pair of sentences that was provided by any of the models, we listed by manual analysis which differences were contained, in terms of details that changed, or different words used.
 
-\todo{Insert table with example sentences and ranking showing USE is better}
+\begin{table}[!htbp]
+    % \begin{subtable}[h]{\textwidth}
+        \centering
+        \begin{tabular}{r | p{0.4\linewidth} | p{0.4\linewidth} }
+        Index & First article & Second article \\
+        \hline
+        0\vspace{-2px} & \tiny{A 52-year-old man has been charged with the murder of journalist Lyra McKee in Londonderry.}\vspace{-2px} & \tiny{A man has been charged with the murder of journalist Lyra McKee in Northern Ireland.}\vspace{-2px}\\
+        1\vspace{-2px} & \tiny{He is also charged with possession of a firearm with intent to endanger life and professing to be a member of a proscribed organisation.}\vspace{-2px} & \tiny{Ms McKee, 29, was shot dead by dissident republicans as she observed rioting in Derry/Londonderry last year.}\vspace{-2px}\\
+        2\vspace{-2px} & \tiny{Ms McKee, who was 29, was observing rioting in Derry's Creggan estate when she was shot on 18 April 2019. }\vspace{-2px}& \tiny{She was standing near a police vehicle when she was hit by a bullet fired by a masked gunman towards officers.}\vspace{-2px}\\
+        3\vspace{-2px} & \tiny{The 52-year-old, who is from Derry, is due to appear at Londonderry Magistrates' Court on Thursday.}\vspace{-2px} & \tiny{The so-called New IRA said it carried out the killing, which took place on the Creggan estate on 18 April.}\vspace{-2px}\\
+        4\vspace{-2px} & \tiny{Det Supt Jason Murphy said a number of individuals were involved with the gunman on the night Ms McKee was killed.}\vspace{-2px} & \tiny{It said Ms McKee was caught in the line of fire while standing with what the organisation called "the enemy".}\vspace{-2px}\\
+        5\vspace{-2px} & \tiny{"And while today is significant for the investigation the quest for the evidence to bring the gunman to justice remains active and ongoing," he added.}\vspace{-2px} & \tiny{The 52-year-old suspect was arrested on Tuesday and taken to Musgrave Serious Crime Suite in Belfast.}\vspace{-2px}\\
+        6\vspace{-2px} & \tiny{Ms McKee was a writer and campaigner from Belfast who had only recently moved to Derry when she was killed.}\vspace{-2px}& \tiny{He has also been charged with possession of a firearm with intent to endanger life and professing to be a member of a proscribed organisation.}\vspace{-2px}\\
+        7\vspace{-2px} & \tiny{She was standing near a police 4x4 vehicle on the night of 18 April 2019 when a masked gunman fired towards officers and onlookers.}\vspace{-2px} & \tiny{The Police Service of Northern Ireland said the man, who comes from the city, is due to appear at Londonderry Magistrates' Court on Thursday.}\vspace{-2px} \\
+        8\vspace{-2px} & \tiny{Regarded by many as a rising star in Northern Ireland media circles, she had written for many publications, including Buzzfeed, Private Eye, the Atlantic and Mosaic Science.}\vspace{-2px} & \tiny{Detective Superintendent Jason Murphy said: "I have always said a number of individuals were involved with the gunman on the night Lyra was killed.}\vspace{-2px} \\
+        9\vspace{-2px} & \tiny{She was named Sky News young journalist of the year in 2006 and Forbes Magazine named her as one of their 30 under 30 in media in Europe in 2016.}\vspace{-2px} & \tiny{"And while today is significant for the investigation the quest for the evidence to bring the gunman to justice remains active and ongoing."}\vspace{-2px} \\
+        10\vspace{-2px} & \tiny{The Belfast woman had signed a two-book deal with the publisher Faber and Faber, with her forthcoming book The Lost Boys due out this year.}\vspace{-2px} & \tiny{The gay rights activist, who lived with her partner Sara Canning, was an advocate of a new and more tolerant Northern Ireland.}\vspace{-2px} \\
+        11\vspace{-2px} & \tiny{According to those who knew her best, the gay rights advocate was someone who "believed passionately in social and religious tolerance".}\vspace{-2px} & \tiny{Ms McKee's death sparked widespread revulsion and a renewed effort to restore a power-sharing agreement in Stormont following years of political instability in the country.}\vspace{-2px} \\
+        12\vspace{-2px} & \tiny{Her death caused widespread revulsion in Northern Ireland and further afield.}\vspace{-2px} & \tiny{Her funeral was attended by then prime minister Theresa May, Irish PM Leo Varadkar and Irish President Michael D Higgins at St Anne's Cathedral in Belfast.}\vspace{-2px} \\
+        13\vspace{-2px} &  & \tiny{At her service in April last year, the priest confronted politicians, saying: "Today we grieve but tomorrow let us fill that hole by adopting Lyra's spirit, example and vision.}\vspace{-2px} \\
+        14\vspace{-2px} &  & \tiny{"Let us put false starts behind us and once and for all build an alternative Ulster that we, and especially our children, can be proud of.}\vspace{-2px} \\
+        15\vspace{-2px} &  & \tiny{"Let us make the lasting legacy of Lyra McKee that peace."}\vspace{-2px} \\
+        16\vspace{-2px} &  & \tiny{Days later, the British and Irish governments announced a new talks process aimed at restoring devolution.}\vspace{-2px} \\
+        17\vspace{-2px} &  & \tiny{Power-sharing was restored at Stormont last month and the first same-sex marriage in Northern Ireland took place this week.} \vspace{-2px}
+       \end{tabular}
+       \caption{Sentences from two reference articles}
+       \label{tab:sentences}
+    % \end{subtable}
+\end{table}
+
+
+
+\begin{table}[!htbp]
+    % \hfill
+    % \pagebreak
+    % \begin{subtable}[h]{\textwidth}
+        \centering
+        \begin{tabular}{@{\hspace{-2cm}}r | r | p{0.55\linewidth} |p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}}
+        id\_1 & id\_2 & Qualitative description of differences & TF-IDF & GloVe & BERT & USE \\
+        \hline
+        1 & 6 & \tiny{Verb tense} & 1st 0.9707 & 1st 0.9973 & 1st 0.9835 & 1st 0.9668 \\
+        5 & 9 & \tiny{“He added” at the end} & 2nd 0.9638 & 2nd 0.9954 & 2nd 0.9563 & 2nd 0.9581\\
+        0 & 0 & \tiny{Details just on one article (52-year-old). Different level of detail (Londonderry vs Northern Ireland)} & 3rd 0.6858 & 4th 0.9535 & 4th 0.8972 & 3rd 0.9141\\
+        4 & 8 & \tiny{Abbreviations (Dept Supt vs Detective Superintendent). Direct reporting vs paraphrasing: quotation marks and colon. “I have always said” just on one article. “Ms McKee” vs “Lyra”} & & 6th 0.9463 & 3rd 0.9244 & 4th 0.8279\\
+        3 & 7 & \tiny{Subject of reporting just on sent\_2 “The Police Service of Northern Ireland said”. Detail on the man “the 52-year-old” vs “the man”. “Is” vs “comes” from. “Derry” vs “the city”} & & 5th 0.9509 & 7th 0.8533 & 5th 0.7490\\
+        7 & 2 & \tiny{Detail “4x4” just on first one. Detail “on the night of 18 April 2019”. Active vs passive sentence “a masked gunman fired towards” vs “she was hit by a bullet fired by a masked gunman towards”. Detail “a bullet” vs just the “fired” verb. “Towards officers and onlookers” vs “towards officers”: in the second, the target of the gunman are just officers.} & 6th 0.6557 & 3rd 0.9550 & 12th 0.8313 & 6th 0.7254\\
+        2 & 1 & \tiny{Age reporting a bit different “who was 29” vs “29”: the first has emphasis on the past tense (underlines she is dead now). Inversion of parts of the sentence: “was observing rioting when she was shot” vs “was shot as she observed rioting”. Verb tense “was observing rioting” vs “she observed rioting”. Place details “Derry’s Creggan estate” vs “Derry/Londonderry”. Shooter declared in the second one “dissident republicans”. Date details “18 April 2019” vs “last year”} & 4th 0.6782 & 9th 0.9180 & 9th 0.8487 & 7th 0.6009 \\
+        12 & 10 & \tiny{Delegation of who said it: “according to those who one her best” in the first sentence and then the quotation marks. “Advocate” vs “activist”+”advocate”: the first one does not say “activist”. Sentence 2 adds the incise “who lived with her partner Sara Canning”. Quoted part “believed passionately in social and religious tolerance” vs “advocate of a new and more tolerant Northern Ireland”: (First is stronger “believed passionately”, Second is narrower “Northern Ireland”, “Social and religious tolerance” vs “more tolerant”)} & & 7th 0.9282 & 6th 0.8538 & 8th 0.5863
+
+        \end{tabular}
+        \caption{Differences and relative rankings from models}
+        \label{tab:relative_ordering}
+     % \end{subtable}
+     % \caption{Example of quantification of qualitative analysis
+     % table with example sentences and ranking showing USE is better
+     % }
+     % \label{tab:temps}
+\end{table}
 
 
 \begin{figure}[!htb]
@@ -218,7 +277,10 @@ An example can be seen in Figure~\ref{fig:lyra} that shows a sentence from the B
     \item ``Towards officers and onlookers'' vs ``towards officers'': in the second, the targets of the gunman are just the officers.
 \end{itemize}
 
-With this kind of information on the number, type and magnitude of changes contained in different pairs of sentences, we can get a qualitative idea of how the measures of similarity coming from the different models are representative of the effective differences. If a model scores more similar a pair of sentences that appear to us to be less related than another pair,\todoAW{Disturbingly vague!!} that is a negative sign for that model. 
+With this kind of information on the number, type and magnitude of changes contained in different pairs of sentences, we can get a qualitative idea of how the measures of similarity coming from the different models are representative of the effective differences.
+If we have a two pairs of sentences, and the first pair contains bigger differences (count, magnitude) than the second one, we want the second pair to be ranked as more similar than the first one.
+Therefore, if the model ranks the first pair of sentences as more similar than the second pair, that is a negative sign for that model.
+% If a model scores more similar a pair of sentences that appear to us to be less related than another pair,\todoAW{Disturbingly vague!!} that is a negative sign for that model. 
 
 
 % Observations
@@ -232,9 +294,15 @@ Given these limitations, we find that sentences that are very similar in meaning
 
 Instead, considering GloVe-average, we observe in some cases that the measure of similarity provided does not capture substantial changes in the meaning. The problem is that, while it can use wordwise similarity quite well, the sentence structure is not accounted for its representation. The representation is a simple average of the word vectors (e.g. ``Luke insulted John'' results in being equal to ``John insulted Luke'').\todoAW{So this is a well known issue with VSM in general. How significant is it for the specific case you're looking at here?}
 
-For the language models (BERT and USE models), we see a big improvement\todoAW{I'm not entirely sure at this point how you're evaluating the various methods} in the pairs of sentences that come as more similar.
+For the language models (\acrshort{bert} and \acrshort{use} models), we see that the order given by the models is more aligned with what we consider to be the differences to be (second column of Table~\ref{tab:relative_ordering}).
+What we do with this experiment is to try to make measurable something that is very qualitative (the similarity between sentences).
+There exist already different benchmarks that are performed on the semantic similarity task~\citep{conneau-kiela-2018-senteval,chandrasekaran2021evolution}, and this experimentation is not trying to replicate them. Here we simply want to see how the different families of models compare on our task, where we need to understand the degree of similarity between related sentences and documents.
+
+% a big improvement\todoAW{I'm not entirely sure at this point how you're evaluating the various methods} in the pairs of sentences that come as more similar.
 % The values provided are very similar. This per-se is not a problem if some geometric properties are valid (ordering, proportions)
-We observe that USE provides values less skewed to the higher end, distributing the similarity values more evenly. The numbers make more sense without any re-scaling technique, and therefore the heatmaps shown in this document come from this model.
+We observe that \acrshort{use} provides values less skewed to the higher end, distributing the similarity values more evenly.
+This is something very positive, because we want a metric that is able to tell degrees of similarity with a good granularity in all of the range.
+The numbers make more sense without any re-scaling technique, and therefore the heatmaps shown in this document come from this model.
 It is also the only model considered that is purposely trained on a semantic similarity task, while the other models can provide similarity measures just because of how they represent language.
 
 
@@ -246,22 +314,23 @@ It is also the only model considered that is purposely trained on a semantic sim
 
 \todo{This section needs some work still. Or otherwise remove it. Is it crucial to have this experiment?}
 
-In this section, we take the experiment from Section~\ref{sec:cgs_cross_referencing} and substitute the TF-IDF encoding method with a semantic similarity model (USE).
+In this section, we take the experiment from Section~\ref{sec:cgs_cross_referencing} and substitute the TF-IDF encoding method with a semantic similarity model (\acrshort{use}).
 
 While in the previous Subsection~\ref{ssec:cgs_similarity_qualitative} we were assessing the quality of USE vs TF-IDF on their own, here we see the difference when applying them to downstream tasks.
 
 
-\todo{Show figure with USE, that results are better correlated? NO}
+\todo{Show figure with USE, that results are better correlated?}
 
-In figure XXX, we can see that when we compare the base model TF-IDF with USE, we get a better correlation between corroboration and credibility.
-OR: we get unclear results. However, when inspecting the cliques, we see that 
+In figure\ref{fig:usebetter}, we can see that when we compare the base model TF-IDF with USE, we get a better correlation between corroboration and credibility.
+% OR: we get unclear results.
+% However, 
+Show cliques inspection quality
+when inspecting the cliques, we see that 
 
 \todo{need an example}
 
-Show cliques inspection quality
 
-
-% \subsection{Conclusion of section}
+\subsection{\statusgreen Similarity analysis Findings}
 \label{ssec:cgs_similarity_conclusion}
 % \todo{rename subsection or remove?}
 
@@ -270,6 +339,8 @@ This experiment shows the need for a similarity model that accounts for the sema
 For example, by looking at the Semantic Textual Similarity benchmark,\footnote{\url{http://nlpprogress.com/english/semantic_textual_similarity.html}} at the moment the best model available is XLNet~\citep{yang2019xlnet} but this could change at any time.
 
 For this reason, our following experiments use the USE model instead of the latest available models. The difference is not very big and we have the advantage of being able to compare our experiments without re-running all of them when a new model is released.
+
+\acrshort{use} and XLNet both belong to the same family of models, so the differences between them should not be a big limitation of this work.
 
 %so we will use it for our future experiments.
 % this means for us:
@@ -282,7 +353,7 @@ For this reason, our following experiments use the USE model instead of the late
 % Purpose: implementation and building of the pipeline.
 
 
-\section{\statusorange Fine-grained differences extraction}
+\section{\statusgreen Fine-grained differences extraction}
 \label{sec:cgs_clustering_and_differences}
 
 % Experiment 3
@@ -291,7 +362,7 @@ This section has two goals: 1) to improve the cliquing approach used in Section~
 
 % The next experimentation that we have done regards the usage of the similarity values to group together sentences describing the same details and at the same time study the uniqueness of the words used.
 
-\subsection{Hierarchical sentence clustering}
+\subsection{\statusorange Hierarchical sentence clustering}
 \label{sec:cgs_clustering_and_differences_hierarchical}
 
 
@@ -307,7 +378,7 @@ With this idea, we retrieved some groups of articles that relate to the same eve
 These documents are processed with the SpaCy NLP Python library\footnote{\url{https://spacy.io/}} to split the documents into sentences and have available different NLP functions (e.g., tokenisation, POS tagging).
 
 % 1. distance computation
-Each of the sentences is then passed through a language model which creates a sentence embedding, in this case using the Universal Sentence Encoder because it showed to distribute the similarity values more evenly and is specifically trained for sentence similarity.
+Each of the sentences is then passed through a language model which creates a sentence embedding, in this case using \acrshort{use} because it showed to distribute the similarity values more evenly and is specifically trained for sentence similarity.
 
 % 2. hierarchical clustering (example with diagram)
 We then use agglomerative hierarchical clustering for different reasons:
@@ -341,23 +412,31 @@ Using this type of inspection, we can decide specific threshold values more cons
 % second motivation: highlight the different words and their uniqueness
 With this method, we create sentence clusters that are very similar in their semantic content, but at the same time have linguistic changes. This is a joined effect of having models that deliver a better similarity metric and also of applying a weighted-similarity approach when building the clusters and not just a binary approach.
 
-\todo{conclusion from this hierarchical analysis?}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/clusters_count_by_threshold.png}
+    \caption{Number of clusters (with minimal size of 1,2,3,4) plotted when the distance threshold varies. The blue line counts also for sentences that are on their own, while the others lines are more and more stricter with the number of sentences per group to be counted.}
+    \label{fig:clusers_count_by_threshold}
+\end{figure}
+\todo{improve figure: re-export, set limits, scale}
+In Figure~\ref{fig:clusers_count_by_threshold} we see how the number of clusters evolve when we increase the similarity threshold. First of all, we notice a steep drop at distance \~0: this is denoting that there are lots of sentences that score very similar (identical). Then we also notice that when the euclidean distance is \~0.6, the number of clusters with at least 2/3/4 sentences reaches its peak.
 
-Selected hyperparameter with USE by using the dendrogram and by looking at the samples:
-- threshold distance=0.6 euclidean distance ward
+By also inspecting several dendrograms, we consistently notice that around that interval, $0.55-0.65$ euclidean distance, we are able to capture good variations on the surface form but the meaning of the sentences keeps similar.
+Therefore, we select the value of $0.6$ as our threshold for the next subsection~\ref{sec:cgs_clustering_and_differences_uniqueness} (the example shown in it have this parameter).
 
-From this experiment, we learn that ???
-- how do we know this is better than cliques? Ground truth of clusters is not available. A benchmark test would be required to claim superiority.
 
-\subsection{Term uniqueness}
-\label{sec:cgs_clustering_and_differences_uniquenesss}
+\todo{How do we know this is better than cliques? Ground truth of clusters is not available. A benchmark test would be required to claim superiority. Do we need to repeat the initial experiment with this clustering instead of cliquing?}\todoAW{Does such a benchmark test exist anywhere? eg. for other domains?}
 
-\todo{more motivations than this?}
+\subsection{\statusgreen Term uniqueness}
+\label{sec:cgs_clustering_and_differences_uniqueness}
 
+With the outputs of the sentence clustering from the previous section~\ref{sec:cgs_clustering_and_differences_hierarchical}, we want now to take these sentences, that should be similar in the meaning but with some variations on the linguistical form, and analyse how they overlap or not in the terms used.
+
+What we want to achieve, is to have a good way to analyse the fine-grained differences between the extracted similar sentences.
 To facilitate an analysis of the differences, we experimented with different methods of highlighting the uniqueness of the words in a cluster.
 
-Inspired by software engineering tools, we first tried with algorithms based on \texttt{diff}~\citep{myers1986ano}. Diff (also coming as UNIX \texttt{diff} tool) is a great resource for comparing different modified versions of the same document.
-Suddenly we realise that one of the main advantages of diff analysis, the position, does not really matter a lot in our analysis, because natural language is more flexible and reordering phrases and sub phrases should not be accounted for in our analysis. So with the relaxed constraint on the position of the words, we moved to a measure of term uniqueness based merely on the words appearing or not in the considered sentences. For this reason, we named this comparison \texttt{set-based} instead of \texttt{diff-based} because we treat the words for each sentence as a set (unused position of words, repetitions not considered). Although we do not consider repeated words in a sentence as modifying the uniqueness, we think that repetition should not be considered when looking at single sentences and only be looked at when considering whole documents (repetition in an article may carry some persuasion).
+Inspired by software engineering tools, we first tried with algorithms based on \texttt{diff}~\citep{myers1986ano}. Diff (also coming in UNIX distributions under the \texttt{diff} tool) is a great resource for comparing different modified versions of the same document.
+Suddenly we realise that one of the main advantages of diff analysis, the position, is not very important in our analysis, because natural language is more flexible and reordering phrases and sub-phrases should not be accounted for in our analysis. So with the relaxed constraint on the position of the words, we moved to a measure of term uniqueness based merely on the words appearing or not in the considered sentences. For this reason, we named this comparison \texttt{set-based} instead of \texttt{diff-based} because we treat the words for each sentence as a set (unused position of words, repetitions not considered). Although we do not consider repeated words in a sentence as modifying the uniqueness, we think that repetition should not be considered when looking at single sentences and only be looked at when considering whole documents (repetition in an article may carry some persuasion).
 
 We therefore define a scale of uniqueness in the following way:
 $$u_w = 1 - \frac{|\set{s_i | s_i \in S \land w \in s_i}|}{|S|}$$
@@ -384,15 +463,21 @@ This uniqueness was used to inspect many sentence-level clusters that were gathe
     \item verb choices that convey a slightly different message
 \end{enumerate}
 
-\subsection{Conclusion of section}
-\todo{Rename subsection or remove?}
+\subsection{\statusgreen Meaning of fine-grained differences?}
 % TODO: findings?
-We try with this experimentation on one side to group the sentence accordingly to the semantic similarity (more broad and resistant to changes in the linguistical surface) and from the other to be able to extract and see how the word-level details change.
+The experimentations shown in this section have two directions that seem to be opposing: 
+\begin{itemize}
+    \item On one side (similarity), create clusters of sentences accordingly to their semantic similarity using a more flexible hierarchical clustering (to capture similar-enough sentences). %(more broad and resistant to changes in the linguistical surface)
+    \item On the other side (differences/uniqueness), to be able to extract and see how the word-level details change.
+\end{itemize}
+
 It may look like a contradiction, but we need this double analysis to link different sentences that share the same stories and to be able to see the actual differences between them.
 
-From our observation, we see that
-there are many variations that are meaningless, some that instead are able to present things very differently from a few words. Similarity alone cannot distinguish between them.
-Most of the differences observed are meaningless.
+With this approach, we are able to see in details which words have changed in sentences coming from different news sources.
+With comparison to the approach presented in~\citet{bountouridis2018explaining}, we are now able to see more granularly than just at the document and sentence-level.
+There are several ways in which the selection of what to include or to exclude in an article may show facts under a different light. Not only we are able to see which details corroborate or have been omitted (Agenda-setting~\citep{TODO}), but we identify single terms which can reveal the intention to persuade or to push for a certain interpretation by the writer. Seeing these terms, and the alternative terms used by articles on the same topic, enables us / the reader to get awareness of the possible influence of the point of view of the writer / news outlet.
+
+However, we see that many variations of terms do not seem to carry any differences in the perspective of the writer. Some others instead, convey a message very differently from a few words. Similarity alone cannot distinguish between them. And in this chapter we do not have the tools to quantify this phenomenon. A we will describe in the last section of this chapter, we need to jump on the work of persuasion/propaganda detection (next chapter).
 
 
 
@@ -486,7 +571,7 @@ The main findings that we have from this chapter are the following:
     % \item Extreme left and right corroborate less and omit more? (but needs leaning? No if we just take centrality-extremism)
     % \item Delta Time of publication: more similar articles are published at similar times, instead the further the time delta the more further they are?
     % these are more limitations
-    \item Observing similarities between multiple documents is made very difficult by linguistic variations. We experimented with models (e.g. USE) that are more resistant to words that carry similar meanings and are a better fit for doing this type of analysis. %It is not only a matter of what is included and what is excluded. The similarity between sentences is also capturing some linguistic variations more than others (more about the surface and less about the intention).
+    \item Observing similarities between multiple documents is made very difficult by linguistic variations. We experimented with models (e.g. \acrshort{use}) that are more resistant to words that carry similar meanings and are a better fit for doing this type of analysis. %It is not only a matter of what is included and what is excluded. The similarity between sentences is also capturing some linguistic variations more than others (more about the surface and less about the intention).
     \item We do not have any interpretation of what a change in a document conveys. Something may be written differently just because of random choices, or there can be some hidden reasons and some goals to persuade. The similarity computation, necessary to understand how the documents overlap or not, gives no understanding of the persuasion means and the intention behind specific choices. This will be explored in the next Chapter~\ref{chap:linguistic_persuasion}.
 \end{itemize}
 
@@ -505,6 +590,8 @@ This chapter gives us some insights into how similar documents are changed and m
 But we still don't have any idea about what these changes \textbf{convey}. It could be that the differences exist for different natures, originating from randomness (each author/source has different jargon, or by casualties).
 Or on another side, there could be a purpose that is subtly manifesting through these small choices. A purpose to influence the readers and persuade or manipulate them.
 
-What changes between the changed parts? What characterises the differences? / How can we characterise the differences quantitatively describing how they try to persuade the readers?
+This chapter arose some questions that need to be answered:
+What changes between the changed parts? What characterises those differences? How can we characterise the differences quantitatively describing how they try to persuade the readers? To give an answer to these questions, we need to include into our analysis some concepts of persuasion.
+\todoAW{The point of reproducing the expt. is to determine how well their technique supports your own research aims. So this section really wants to have some quantification of the results. But also, you're interested in the qualitative question of how well you can identify those sentences which are not the basic statements of fact. So you want this chapter to lead into a discussion of how well you can identify the factual v. manipulative sentences, and the degree to which the non-factual sentences can be used to identify propaganda etc.}
 
 So for the next chapter, we want to investigate persuasive language and how it can be computationally quantified. 
