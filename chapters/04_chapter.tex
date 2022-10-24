@@ -1,11 +1,18 @@
 \label{chap:linguistic_persuasion}
 
+In this chapter, we add our second ingredient: persuasion (in general) / propaganda (in specific).
+
 Linguistic proxies of persuasion (different means that are used by articles to influence the reader)
 
 Motivation: analyse if terms that change between multiple are correlated with linguistic proxies of propaganda
 
 
-RQ: Is there a link between the parts that are different and propaganda/loaded language? 
+RQ: 
+\begin{enumerate}
+    \item What do writers use to persuade the reader?
+    \item Is there a link between the parts that are different and propaganda/loaded language?
+\end{enumerate}
+
 
 
 strong/loaded language: using sentiment analysis tools 
@@ -18,7 +25,9 @@ Different parts are not always loaded with loaded language or propaganda
 A lot of changes are not meaningful in terms of propaganda: linguistic variance
 
 
-\section{Propaganda variations across similar articles}
+\section{Related articles}
+
+\subsection{Propaganda variations across similar articles}
 
 sentiment/propaganda across related articles
 
@@ -27,7 +36,17 @@ What
 How
 Results
 
-\section{Removing propaganda to make better similarity?}
+
+Sentiment
+
+% % sentiment
+% Instead for the sentiment analysis, since we want to have detailed information (e.g. which specific words contain sentiment, and with which properties), we are relying on lexicon-based tools. Other more advanced tools (e.g. Stanford CoreNLP) have models which do not provide fine-grained scores but only sentence/document level. (This could be improved)
+% % which sentiment lexicons?
+% We selected some lexicons: Sentistrength, Vader, and AFINN (TODO description).
+% % problems?
+% The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
+
+\subsection{Removing propaganda to make better similarity?}
 
 effect of sentiment/propaganda words on sentence clustering
 
@@ -44,5 +63,7 @@ Why
 What
 How
 Results
+
+Studying how much propaganda and populism are (correlation analysis)
 
 - dataset

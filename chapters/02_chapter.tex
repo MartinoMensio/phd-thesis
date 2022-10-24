@@ -4,12 +4,12 @@ Propaganda and misinformation
 \Gls{political-leaning}: definitions/classification
 
 
-TODO: from upgrade Report and from TTO submission
-
 \section{Propaganda}
 \label{sec:lit_propaganda}
 
 TODO propaganda definition in different fields
+
+\subsection{Propaganda techniques}
 
 \subsection{Propaganda detection}
 \label{ssec:lit_propaganda_detection}
@@ -17,6 +17,44 @@ TODO propaganda definition in different fields
 TODO: 
 - techniques of propaganda
 - methods
+
+
+% FROM TTO21
+%\subsection{Propaganda}
+%\label{ssec:related_prop}
+
+In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
+Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas. However, to the best of our knowledge, current research on political leaning detection largely overlooked the direct inclusion of propaganda as analysis features in their computational models. 
+
+Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination \cite{da2020survey}. Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\cite{rashkin2017truth,barron2019proppy}. More recently, \citet{da2019fine} used a neural network approach to identify the text fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
+
+\todo{Does not actually belong here}
+Unlike previous work on political leaning detection, in this paper we use a propaganda detection method (from \citet{da2019fine}) to identify the existence of propaganda and its type of technique in given articles, and incorporate this information directly as additional features into the training and testing of the model.  
+
+%On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
+%The mixed analysis would allow to understand better why a certain article is classified as being left/right with respect to the black box BERT classifier.
+
+
+%On the other side, we are considering the use of language that is targeted to push for a certain political view. There are many linguistic choices and devices, along with how the narrative is structured, that are used to promote a specific viewpoint.
+%Propaganda is defined as something that can be recognised by its persuasive function, sizeable target audience, the representation of a specific group’s agenda, and the use of faulty reasoning and/or emotional appeals~\cite{miller1939techniques}. The list of such techniques is very long\footnote{\url{https://en.wikipedia.org/wiki/Propaganda_techniques}}, and here we are considering the ones that have been analysed automatically by~\citet{da2019fine}. The propaganda is the most persuasive/loaded part of an article.
+% \item sentiment usage: loaded language in the articles can reveal strong subjectivity against the mentioned entities. This relates to the subjective part of articles and we want to take this into consideration
+% \item narrative/persuasion and other related analyses?
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{figures/propaganda_example_1_color.png}
+    \caption{Detection of propaganda techniques using~\citet{baly2020we}.% the article comes from NationalReview, a source with Right-leaning bias.
+    }
+    \label{fig:propaganda_example_1}
+\end{figure}
+
+
+%For the propaganda analysis, we are focusing on the computational propaganda, defined as the propaganda that has been analysed by computational approaches. 
+%The survey conducted by~\citet{da2020survey} displays the most important works, and also underlines the main limitation of current methods.
+%The biggest limitation that we see, is that \emph{explainability is a desirable feature} but current approaches do not provide it.
+%Most of the models only classify full articles as being propagandist or not~\cite{barron2019proppy,rashkin2017truth}, and this does not help to understand why.
+%Therefore, another work focuses on fine-grained techniques~\cite{da2019fine}: every article analysed is annotated with labels coming from 18 different techniques, also indicating the spans affected by the techniques. So we can see where propaganda is inside an article and which specific techniques were used. Figure~\ref{fig:propaganda_example_1}
+
 
 \subsection{Layers of information}
 \label{ssec:lit_layers_of_info}
@@ -31,6 +69,14 @@ Hypothesis: we can observe the two layers distinctly?
 \label{sec:lit_leaning}
 
 TODO: definition
+
+Not going into political sciences. Here we take the definition L/R from mainly US context (democrats vs republicans) because most of the resources about news use it.
+
+\subsection{Political Spectrum}
+
+Comparing different scales:
+- left/right
+- moderate/extreme
 
 \subsection{Political Leaning Classification}
 \label{ssec:lit_leaning_classification}
@@ -69,8 +115,8 @@ according to the leaning of their source or of their author. %\todo{manually?}
 %Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to that given to their sources (AllSides confirmed that this is due to using author-based leaning). 
 %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
  %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
- Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. However, %unlike ~\cite{baly2020we}, 
- unlike previous work, we use propaganda features in the political learning prediction model.   
+ % Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. However, %unlike ~\cite{baly2020we}, 
+ % unlike previous work, we use propaganda features in the political learning prediction model.   
 
 % - Problem: learning the source instead of the political leaning
 %Main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases were there is a difference between the political leaning of a particular article from that of its source. Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to the given to their sources (AllSides confirmed that this is due to using author-based leaning labels for some articles). 
@@ -101,68 +147,8 @@ according to the leaning of their source or of their author. %\todo{manually?}
 
 
 
-%\subsection{Propaganda}
-%\label{ssec:related_prop}
-
-In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
-Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas. However, to the best of our knowledge, current research on political leaning detection largely overlooked the direct inclusion of propaganda as analysis features in their computational models. 
-
-Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination \cite{da2020survey}. Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\cite{rashkin2017truth,barron2019proppy}. More recently, \citet{da2019fine} used a neural network approach to identify the text fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
-
-Unlike previous work on political leaning detection, in this paper we use a propaganda detection method (from \citet{da2019fine}) to identify the existence of propaganda and its type of technique in given articles, and incorporate this information directly as additional features into the training and testing of the model.  
-
-%On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
-%The mixed analysis would allow to understand better why a certain article is classified as being left/right with respect to the black box BERT classifier.
 
 
-%On the other side, we are considering the use of language that is targeted to push for a certain political view. There are many linguistic choices and devices, along with how the narrative is structured, that are used to promote a specific viewpoint.
-%Propaganda is defined as something that can be recognised by its persuasive function, sizeable target audience, the representation of a specific group’s agenda, and the use of faulty reasoning and/or emotional appeals~\cite{miller1939techniques}. The list of such techniques is very long\footnote{\url{https://en.wikipedia.org/wiki/Propaganda_techniques}}, and here we are considering the ones that have been analysed automatically by~\citet{da2019fine}. The propaganda is the most persuasive/loaded part of an article.
-% \item sentiment usage: loaded language in the articles can reveal strong subjectivity against the mentioned entities. This relates to the subjective part of articles and we want to take this into consideration
-% \item narrative/persuasion and other related analyses?
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\linewidth]{figures/propaganda_example_1_color.png}
-    \caption{Detection of propaganda techniques using~\citet{baly2020we}.% the article comes from NationalReview, a source with Right-leaning bias.
-    }
-    \label{fig:propaganda_example_1}
-\end{figure}
-
-
-%For the propaganda analysis, we are focusing on the computational propaganda, defined as the propaganda that has been analysed by computational approaches. 
-%The survey conducted by~\citet{da2020survey} displays the most important works, and also underlines the main limitation of current methods.
-%The biggest limitation that we see, is that \emph{explainability is a desirable feature} but current approaches do not provide it.
-%Most of the models only classify full articles as being propagandist or not~\cite{barron2019proppy,rashkin2017truth}, and this does not help to understand why.
-%Therefore, another work focuses on fine-grained techniques~\cite{da2019fine}: every article analysed is annotated with labels coming from 18 different techniques, also indicating the spans affected by the techniques. So we can see where propaganda is inside an article and which specific techniques were used. Figure~\ref{fig:propaganda_example_1}
-
-%\begin{figure}[!htb]
-%    \centering
-%    \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
-%    \caption{The leaning of the propagandist sources from MBFC (TODO compare with effective training dataset, which is 100\% right)}
-%    \label{fig:mbfc_leaning}
-%\end{figure}
-
-% - Possible problems?
-%A possible problem of this approach that is not defended in the paper, is the choice of articles that have been annotated by experts. They have been selected from sources "propagandistic by Media Bias/Fact Check", in other words from the page \url{https://mediabiasfactcheck.com/fake-news/}. The propagandistic sources listed in this page, as Figure~\ref{fig:mbfc_leaning} shows, are mostly on the extreme-right side of the spectrum. Furthermore, the selection done by the authors (table 3 of that paper) results in all the sources of the articles to lean on the right.
-%So the resulting model is \textbf{being trained on very propagandistic sources from the right only}. The model will not be able to see left-propaganda because it never saw it in the training phase.
-
-
-% % sentiment
-% Instead for the sentiment analysis, since we want to have detailed information (e.g. which specific words contain sentiment, and with which properties), we are relying on lexicon-based tools. Other more advanced tools (e.g. Stanford CoreNLP) have models which do not provide fine-grained scores but only sentence/document level. (This could be improved)
-% % which sentiment lexicons?
-% We selected some lexicons: Sentistrength, Vader, and AFINN (TODO description).
-% % problems?
-% The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
-
-
-% Why the two could benefit / be related?
-
-%The point of contact between political leaning prediction and propaganda is that both are dealing with political analysis.
-%Given that the facts that are being narrated are the same (exception: inclusion/exclusion), the main difference between an article from the left to one from the right is their point of view / subjective / persuasive component. Propaganda analysis is focused on analysing this specific component of the articles, the anti-topic model.
-%On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
-%The mixed analysis would allow to understand better why a certain article is classified as being left/right with respect to the black box BERT classifier.
-
-%The following sections first describe the general setup of the experiment, then deal with each one of the three research questions that we listed in the introduction: quantity, quantity by type, terms analysis.% TODO , context.
 
 
 % Sentiment analysis
@@ -196,6 +182,8 @@ Unlike previous work on political leaning detection, in this paper we use a prop
 \section{Similarity between articles}
 \label{sec:lit_relationships}
 
+?? Is this necessary? Or just mention corroboration/omission in framing techniques?
+
 \section{Other related phenomena}
 
 TODO: here talk about misinformation, argumentation mining and defend the scope of this thesis: propaganda.
@@ -209,8 +197,17 @@ Work of~\citet{orrumachine} where persuasiveness is observed to exist more in fa
 
 
 
-\cite{roozenbeek2022countering} Good evidence that making people aware is helpful, people can learn to recognise manipulation techniques (it worked on YouTube). The paper talks about manipulation, but the techniques overlap with propaganda and logical fallacies. Also shifts the goal from recognising True/False from recognising manipulation. Work from Psychology.
+\cite{roozenbeek2022countering} Good evidence that making people aware is helpful, people can learn to recognise manipulation techniques (it worked on YouTube). The paper talks about manipulation, but the techniques overlap with propaganda and logical fallacies. Also shifts the goal from recognising True/False to recognising manipulation. Work from Psychology.
 
 \subsection{Opinion and Subjectivity and Manipulation?}
 
 \section{Scope of this work}
+
+Main ingredients:
+- Propaganda detection
+- Political leaning
+
+We see that the two can be related and we want to understand their relationships.
+How does propaganda change across political leaning?
+Can we recognise the political orientation of a piece of news from how it uses propaganda techniques?
+How does propaganda relate to shared/unique information? How do small variations relate to propaganda?

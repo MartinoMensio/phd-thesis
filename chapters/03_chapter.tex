@@ -8,24 +8,24 @@
 
 % chapter motivation: multiple versions of the same story 
 % This chapter contains the first set of practical experiments that we carried out.
-
+\todoHA{Run Grammarly on all text}
 % general goal
 This chapter aims to analyse how different articles present the same event from different perspectives. For each \gls{event}, a big multitude of articles can be more or less similar between them.
-And this variety of linguistical forms is an excellent opportunity to study the relationship between the bare facts (common ground) and the additional choices that are made to try to persuade the reader of a specific opinion (with phenomena such as framing, interpretation, manipulation, propaganda).\todoAW{How similar are these terms? Framing is much less loaded than Propaganda}
+And this variety of linguistical forms\todoHA{Articles about same events does not necessarily mean you get a variety of linguistic form} is an excellent opportunity to study the relationship between the bare facts (common ground) and the additional choices that are made to try to persuade the reader of a specific opinion (with phenomena such as framing, interpretation, manipulation, propaganda).\todoAW{How similar are these terms? Framing is much less loaded than Propaganda}\todoHA{Only mention the ones you are studying}
 
 % fit into thesis
-But how does this fit into the overall goal of the thesis? Our overall research questions aim at studying the relationship between propaganda and political leaning (overall RQ1: \textbf{What is the relationship between propaganda and political leaning?}).
+But how does this fit into the overall goal of the thesis? Our overall research questions aim at studying the relationship between propaganda and political leaning (overall RQ1: \textbf{What is the relationship between propaganda and political leaning?}).\todoHA{Unclear how this chapter is connected to this RQ}
 % But, first of all, we need to take awareness that 
 In order to study propaganda as the additional layer on top of information
 (as discussed in the hypothesis done in Section~\ref{ssec:lit_layers_of_info})
 we want to exploit the multitude of writings about the same topics. For this reason, this first practical chapter is about parallel news and comparing the shared information between the articles.
 Given that the articles are a mix between raw facts and this additional layer of persuasion/opinion/propaganda,\todoAW{Interesting that you didn't include "framing" here...} % framing not used because it is more difficult to detect agenda setting (e.g. selecting what to include in article? But at the same time this chapter is about omission and corroboration so should be related
-if we take into consideration many of them coming from different points of view (political sides/sources) we can then extract which part is shared and therefore is likely to be more closely related to the base layer of facts.
+if we take into consideration many of them coming from different points of view (political sides/sources) we can then extract which part is shared and therefore is likely to be more closely related to the base layer of facts.\todoHA{?}
 And at the same time knowing which parts are unique to a specific article, and do not appear in others, may be useful for understanding the point of view of the document and how it differs from others.
 %(TODO: to retake this afterwards and talk about credibility signals from bountouridis corroboration omission).
 % Having this first differentiation between shared, omitted and unique, we also want to assess whether this is correlated to language that wants to persuade (propaganda). --> chapter 4 
 
-Our first experiments, therefore, are directed at automatically comparing and finding differences in similar articles, and trying to understand the reasons for articles to be different or similar.
+Our first experiments, therefore, are directed at automatically comparing and finding differences in similar articles, and trying to understand the reasons for articles to be different or similar.\todoHA{How does this fit with your RQ?}
 
 % RQ of this chapter
 For this reason, we dive into the work of spotting similarities and differences in multiple articles.
@@ -47,7 +47,7 @@ The Research Questions that we address in this chapter are:
 % We take from the work of~\cite{bountouridis} and expand ...
 
 % overview of subsections
-In the following sections, we are starting in Section~\ref{sec:cgs_cross_referencing} by reproducing an experiment from a paper~\citep{bountouridis2018explaining} that automatically extracts corroborated and omitted information in groups of articles. Then in Section~\ref{sec:cgs_similarity} we explore more the methods to compute document similarity, then in Section~\ref{sec:cgs_clustering_and_differences} how we extract differences. Finally in Section~\ref{sec:cgs_findings} we discuss our findings.
+In the following sections, we are starting in Section~\ref{sec:cgs_cross_referencing} by reproducing an experiment\todoHA{Unclear why?} from a paper~\citep{bountouridis2018explaining} that automatically extracts corroborated and omitted information in groups of articles. Then in Section~\ref{sec:cgs_similarity} we explore more the methods to compute document similarity, then in Section~\ref{sec:cgs_clustering_and_differences} how we extract differences. Finally in Section~\ref{sec:cgs_findings} we discuss our findings.
 
 % % method
 % Method: 
@@ -107,7 +107,7 @@ The approach used by the authors is the following:
 The dataset used is the \emph{All-the-news}\footnote{\url{https://www.kaggle.com/datasets/snapcrack/all-the-news}} which includes more than 140k articles published by fifteen major US outlets. To have the same results as the reference paper~\citep{bountouridis2018explaining}, only articles from 2016 have been considered. This brings the analysis to work with 203 document-level cliques. 
 
 % how
-We analysed and reproduced this paper to get a deep understanding of how it works. The implementation started with the code and data\todoAW{What are the properties of the dataset?} publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis/InCredible}} but its incompleteness in some stages of the processing (e.g., the creation of the document-level cliques, and all the specific hyperparameters of the algorithms used) required integrating the codebase.\footnote{\url{https://github.com/MartinoMensio/InCredible}}
+We analysed and reproduced this paper to get a deep understanding of how it works.\todoHA{Expand: anything else to be discovered?} The implementation started with the code and data\todoAW{What are the properties of the dataset?} publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis/InCredible}} but its incompleteness in some stages of the processing (e.g., the creation of the document-level cliques, and all the specific hyperparameters of the algorithms used) required integrating the codebase.\footnote{\url{https://github.com/MartinoMensio/InCredible}}
 An example of the reproduced analysis can be seen in Figure~\ref{fig:cluster_similar_sentences_amiri}.
 
 \begin{figure}[!htbp]
@@ -115,10 +115,10 @@ An example of the reproduced analysis can be seen in Figure~\ref{fig:cluster_sim
     \includegraphics[width=\linewidth]{figures/cluster_similar_sentences_amiri.png}
     \caption{A sentence from a Vox article which is corroborated with two sentences coming from Fox News and Washington Post.}
     \label{fig:cluster_similar_sentences_amiri}
-\end{figure}
+\end{figure}\todoHA{Good to have an example. But unclear what is the output, what did you get when processed these examples?}
 
 % limitations
-With the experiments reproduced, we have been able to inspect the cliques of documents and sentences identified by the model, seeing the following limitations:
+With the experiments reproduced, we have been able to inspect the cliques of documents and sentences identified by the model, seeing the following limitations:\todoHA{How? Method? How many? Give proper numbers}
 
 \begin{itemize}
     % \item Their demo\footnote{\url{http://fairnews.ewi.tudelft.nl/InCredible/}} just shows one specific article as main and one specific clique (not very interesting)
@@ -132,6 +132,7 @@ With the experiments reproduced, we have been able to inspect the cliques of doc
     \item The \emph{sentence cliquing} method provided just uses the degree of similarity between two sentences but does not point to which specific words are responsible for the similarities and differences. This would require a fine-grained analysis that in this paper is not included. Furthermore, sentences in a clique are very similar, and no significant differences have been observed because the similarity metrics are based again on TF-IDF. This method is not robust enough to the usage of synonyms and other variations on the linguistic surface, while at the same time is unable to distinguish two sentences that use the same words but have different meanings because of the sentence structure or of the role of the words, so it makes selecting a threshold value very difficult.
     \item The \emph{clique algorithms} are not the best choice for grouping when we have the information of how much similar two items are (a real-value instead of a binary-value is available from the similarity metric). The approach considers an unweighted version of the similarity graph by using a threshold (weights are just used to select the most appropriate clique during their creation), but instead dealing with the original weighted graph would allow better and more flexible clustering techniques (e.g., agglomerative clustering). %, like agglomerative clustering
 \end{itemize}
+\todoHA{All this is interesting but not very clear how you reached these conclusions and what they signify}
 
 
 \begin{figure}[!htbp]
@@ -139,7 +140,7 @@ With the experiments reproduced, we have been able to inspect the cliques of doc
     \includegraphics[width=\linewidth]{figures/bountouridis_fig_3_noGA.pdf}
     \caption{Raw amount (top) and percentage (bottom) of corroborated (blue) and omitted (orange) POIs per news outlet. Colour shading (quantised to three bins) indicates the average TF-IDF similarity among the sentences in cliques, i.e. the lighter the shade, the more dissimilar. This plot is the reproduction of one originally contained in~\citet{bountouridis2018explaining}}
     \label{fig:figure_3_bountouridis_reproduced}
-\end{figure}
+\end{figure}\todoHA{Do you point to this from anywhere?}
 
 
 % In addition to these problems, the model described is based on TF-IDF which is not as robust with changes on the linguistic surface (as we saw in the next experiment).
@@ -153,8 +154,8 @@ This experiment helped to see the limitation of this type of work. %, which belo
 This paper provides a great way to analyse the overlap between articles and extracts pieces that have been omitted or that are corroborated but does not investigate further the reason behind the selection of what is included or not.
 This opened up for further work to:
 \begin{enumerate}
-    \item investigate how to represent the documents better to provide meaningful similarity metrics (Section~\ref{sec:cgs_similarity});
-    \item experiment with document and sentence clustering to bring up fine-grained differences, e.g. how specific terms are chosen (Section~\ref{sec:cgs_clustering_and_differences});
+    \item investigate how to represent the documents better to provide meaningful similarity metrics (Section~\ref{sec:cgs_similarity});\todoHA{Similarity of what? Why need it?}
+    \item experiment with document and sentence clustering to bring up fine-grained differences, e.g. how specific terms are chosen\todoHA{Where? Why?} (Section~\ref{sec:cgs_clustering_and_differences});
     % \item investigate the works that analyse framing theories and detection;
     \item investigate the reason for such differences to exist. As we will do in the next Chapter~\ref{chap:linguistic_persuasion}
     % \item collect data from more recent articles that would be more relevant and interesting.
@@ -175,7 +176,7 @@ We wanted to see in practice how the usage of different representation models wo
 % finding and exploring more advanced methods to find the similarity between texts by using language models, we experimented on how to use these methods.
 
 % why?
-Having a solid base for computing the distances between articles and sentences is a pillar for comparing different articles. The applications of similarity range from document clustering to the identification of omitted pieces of information in a cluster, therefore it is very important to use a method that is properly not deceived by the usage of synonyms and other linguistic variations in communicating the same information. To study the differences in the language of framing, we first need to be able to tell whether two pieces of text are discussing the same information, and distinguish degrees of similarity properly.
+Having a solid base for computing the distances between articles and sentences is a pillar\todoHA{Too strong} for comparing different articles. The applications of similarity range from document clustering to the identification of omitted pieces of information in a cluster, therefore it is very important to use a method that is properly not deceived by the usage of synonyms and other linguistic variations in communicating the same information. To study the differences in the language of framing, we first need to be able to tell whether two pieces of text are discussing the same information, and distinguish degrees of similarity properly.
 
 To study the similarity metrics, we use two different experiments. The first is detailed in Subsection~\ref{ssec:cgs_similarity_qualitative}, where we observe qualitatively the effects of using one similarity metric or others when comparing sentences. The second instead, in Subsection~\ref{ssec:cgs_similarity_cliques}, observes the effect of such choice on the downstream task of corroboration and omission extraction.
 We conclude with some observations in Subsection~\ref{ssec:cgs_similarity_conclusion}.
@@ -186,7 +187,7 @@ We conclude with some observations in Subsection~\ref{ssec:cgs_similarity_conclu
 % how?
 % Specifically on the sentence level, we experimented to see how different models were able to pick similar sentences, by setting up a small benchmark.
 We set up a small benchmark where the goal is to find the most similar pairs of sentences coming from selected pairs of news articles which cover the same event. Each model candidate has to tell which ten most similar pairs of sentences has found, one from one article and one from the other.
-The pairs of articles have been chosen manually, by considering three constraints: \textit{i)} description of the same event, \textit{ii)} from different news outlets, \textit{iii)} published near in time, with a maximum time distance of one day.
+The pairs of articles have been chosen manually,\todoHA{By whom?} by considering three constraints: \textit{i)} description of the same event, \textit{ii)} from different news outlets, \textit{iii)} published near in time, with a maximum time distance of one day.
 Each model would extract the most similar pairs, and we then compare the pairs provided and their relative order in the rankings.
 
 The selected models used in the benchmark are the following:
@@ -198,7 +199,7 @@ The selected models used in the benchmark are the following:
 \end{itemize}
 
 In all the cases, the representations from these models have been compared with the cosine similarity.
-For each pair of sentences that was provided by any of the models, we listed by manual analysis which differences were contained, in terms of details that changed, or different words used.
+For each pair of sentences that was provided by any of the models, we listed by manual analysis which differences were contained, in terms of details that changed, or different words used.\todoHA{The dataset used is not clearly described}
 
 \begin{table}[!htbp]
     % \begin{subtable}[h]{\textwidth}
@@ -229,6 +230,7 @@ For each pair of sentences that was provided by any of the models, we listed by 
        \label{tab:sentences}
     % \end{subtable}
 \end{table}
+\todoHA{How found?}
 
 
 
@@ -266,6 +268,7 @@ For each pair of sentences that was provided by any of the models, we listed by 
     \caption{The comparison between two sentences, one from the BBC and the other from Sky News, where multiple differences exist.}
     \label{fig:lyra}
 \end{figure}
+\todoHA{Table 3.2 and 3.3 refer to from text and explain}
 
 An example can be seen in Figure~\ref{fig:lyra} that shows a sentence from the BBC\footnote{\url{https://www.bbc.co.uk/news/uk-england-hereford-worcester-51791346}} and one from Sky News,\footnote{\url{https://www.dailymail.co.uk/news/article-8088805/Britons-facing-heavy-downpours-four-inches-rain-50mph-winds-set-batter-UK.html}} where the differences are the following:
 
@@ -279,7 +282,7 @@ An example can be seen in Figure~\ref{fig:lyra} that shows a sentence from the B
 
 With this kind of information on the number, type and magnitude of changes contained in different pairs of sentences, we can get a qualitative idea of how the measures of similarity coming from the different models are representative of the effective differences.
 If we have a two pairs of sentences, and the first pair contains bigger differences (count, magnitude) than the second one, we want the second pair to be ranked as more similar than the first one.
-Therefore, if the model ranks the first pair of sentences as more similar than the second pair, that is a negative sign for that model.
+Therefore, if the model ranks the first pair of sentences as more similar than the second pair, that is a negative sign for that model.\todoHA{And then what?}
 % If a model scores more similar a pair of sentences that appear to us to be less related than another pair,\todoAW{Disturbingly vague!!} that is a negative sign for that model. 
 
 
@@ -300,9 +303,9 @@ There exist already different benchmarks that are performed on the semantic simi
 
 % a big improvement\todoAW{I'm not entirely sure at this point how you're evaluating the various methods} in the pairs of sentences that come as more similar.
 % The values provided are very similar. This per-se is not a problem if some geometric properties are valid (ordering, proportions)
-We observe that \acrshort{use} provides values less skewed to the higher end, distributing the similarity values more evenly.
+We observe\todoHA{Many "observations" made here, but unclear how. Add some details if you can} that \acrshort{use} provides values less skewed to the higher end, distributing the similarity values more evenly.
 This is something very positive, because we want a metric that is able to tell degrees of similarity with a good granularity in all of the range.
-The numbers make more sense without any re-scaling technique, and therefore the heatmaps shown in this document come from this model.
+The numbers make more sense without any re-scaling technique, and therefore the heatmaps shown in this document\todoHA{?} come from this model.
 It is also the only model considered that is purposely trained on a semantic similarity task, while the other models can provide similarity measures just because of how they represent language.
 
 
@@ -313,6 +316,7 @@ It is also the only model considered that is purposely trained on a semantic sim
 % Cliques with USE
 
 \todo{This section needs some work still. Or otherwise remove it. Is it crucial to have this experiment?}
+\todoHA{Can't tell yet. THe workflow of your thoughts and experiments need more clarification upfront in this chapter}
 
 In this section, we take the experiment from Section~\ref{sec:cgs_cross_referencing} and substitute the TF-IDF encoding method with a semantic similarity model (\acrshort{use}).
 
@@ -397,20 +401,21 @@ We then use agglomerative hierarchical clustering for different reasons:
 % \end{itemize}
 % \todo{describe why ward and cosine look better}
 
-As we can see in Figure~\ref{fig:dendrogram}, we can explore what is the distance required to have different sentences inside the same cluster, and select a certain threshold more consistently.\todo{bigger figure}
+As we can see in Figure~\ref{fig:dendrogram}, we can explore what is the distance required to have different sentences inside the same cluster,\todoHA{How these links were detected? How many sentences processed? Links context? Etc.} and select a certain threshold more consistently.\todo{bigger figure}
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{figures/dendrogram.png}
     \caption{A portion of the dendrogram that shows how different sentences are merged in the clusters by increasing distance values.}
     \label{fig:dendrogram}
 \end{figure}
+\todoHA{Put in a page by itself}
 
-Using this type of inspection, we can decide specific threshold values more consistently: we can see what is the required similarity to make two pairs of sentences be in the same cluster.
+Using this type of inspection, we can decide specific threshold values more consistently:\todoHA{Too strong} we can see what is the required similarity to make two pairs of sentences be in the same cluster.
 % \todo{some observations about the distance values and threshold}
 
 % 3. extract degree of uniqueness of words (from pairwise to clusterwise, with bag-of-words or difftool (order matters, duplicates))
 % second motivation: highlight the different words and their uniqueness
-With this method, we create sentence clusters that are very similar in their semantic content, but at the same time have linguistic changes. This is a joined effect of having models that deliver a better similarity metric and also of applying a weighted-similarity approach when building the clusters and not just a binary approach.
+With this method, we can create sentence clusters that are very similar in their semantic content, but at the same time have linguistic changes. This is a joined effect of having models that deliver a better similarity metric and also of applying a weighted-similarity approach when building the clusters and not just a binary approach.
 
 \begin{figure}[!htbp]
     \centering
@@ -425,14 +430,16 @@ By also inspecting several dendrograms, we consistently notice that around that 
 Therefore, we select the value of $0.6$ as our threshold for the next subsection~\ref{sec:cgs_clustering_and_differences_uniqueness} (the example shown in it have this parameter).
 
 
-\todo{How do we know this is better than cliques? Ground truth of clusters is not available. A benchmark test would be required to claim superiority. Do we need to repeat the initial experiment with this clustering instead of cliquing?}\todoAW{Does such a benchmark test exist anywhere? eg. for other domains?}
+\todo{How do we know this is better than cliques? Ground truth of clusters is not available. A benchmark test would be required to claim superiority. Do we need to repeat the initial experiment with this clustering instead of cliquing?}
+\todoHA{Important question to be discussed. Need to evaluate, if not quantitatively then qualitatively}
+\todoAW{Does such a benchmark test exist anywhere? eg. for other domains?}
 
 \subsection{\statusgreen Term uniqueness}
 \label{sec:cgs_clustering_and_differences_uniqueness}
 
 With the outputs of the sentence clustering from the previous section~\ref{sec:cgs_clustering_and_differences_hierarchical}, we want now to take these sentences, that should be similar in the meaning but with some variations on the linguistical form, and analyse how they overlap or not in the terms used.
 
-What we want to achieve, is to have a good way to analyse the fine-grained differences between the extracted similar sentences.
+What we want to achieve, is to have a good way to analyse the fine-grained differences between the extracted similar sentences.\todoHA{What? What's the final goal?}
 To facilitate an analysis of the differences, we experimented with different methods of highlighting the uniqueness of the words in a cluster.
 
 Inspired by software engineering tools, we first tried with algorithms based on \texttt{diff}~\citep{myers1986ano}. Diff (also coming in UNIX distributions under the \texttt{diff} tool) is a great resource for comparing different modified versions of the same document.
@@ -442,7 +449,7 @@ We therefore define a scale of uniqueness in the following way:
 $$u_w = 1 - \frac{|\set{s_i | s_i \in S \land w \in s_i}|}{|S|}$$
 where S is the set of sentences considered, $w$ is the word for which to compute the index. The expression compares the sentences of the current cluster where $w$ appears (numerator) with respect to the cluster size.
 A value close to $1$ means that the word is used in just a few sentences in the cluster.
-This gives, in the example below, a higher value of uniqueness to the word ``deceased'' that just appears in one over three sentences ($u = 2/3$), while ``surgery'' has $u = 0$.
+This gives, in the example below, a higher value of uniqueness to the word ``deceased'' that just appears in one in three sentences\todoHA{You mean overall or in this example?} ($u = 2/3$), while ``surgery'' has $u = 0$.
 
 The application of this metric can be seen in Figure~\ref{fig:words_uniqueness} where we score each of the words with their uniqueness score.
 
@@ -457,7 +464,7 @@ The application of this metric can be seen in Figure~\ref{fig:words_uniqueness} 
 % not only uniqueness, but how it was used to observe variations of terms
 This uniqueness was used to inspect many sentence-level clusters that were gathered by using the hierarchical clustering as described in Section~\ref{sec:cgs_clustering_and_differences_hierarchical}. Helped by the uniqueness degree of the words, we are able to spot the differences between the sentences faster and classify the main types of singular words that change:
 \begin{enumerate}
-    \item verb tenses: not meaningful
+    \item verb tenses: not meaningful in this context
     \item chunks of information at the beginning or end of the sentence. Usually, those pieces are just a matter of segmentation of the sentences (e.g. the reporter actually includes the omitted terms in the next or previous sentence) 
     \item details that are present in some articles and omitted in others (e.g. Figure~\ref{fig:words_uniqueness})
     \item verb choices that convey a slightly different message
@@ -475,9 +482,9 @@ It may look like a contradiction, but we need this double analysis to link diffe
 
 With this approach, we are able to see in details which words have changed in sentences coming from different news sources.
 With comparison to the approach presented in~\citet{bountouridis2018explaining}, we are now able to see more granularly than just at the document and sentence-level.
-There are several ways in which the selection of what to include or to exclude in an article may show facts under a different light. Not only we are able to see which details corroborate or have been omitted (Agenda-setting~\citep{TODO}), but we identify single terms which can reveal the intention to persuade or to push for a certain interpretation by the writer. Seeing these terms, and the alternative terms used by articles on the same topic, enables us / the reader to get awareness of the possible influence of the point of view of the writer / news outlet.
+There are several ways in which the selection of what to include or to exclude in an article may show facts under a different light. Not only we are able to see which details corroborate or have been omitted (Agenda-setting~\citep{TODO}), but we identify single terms which can reveal the intention to persuade or to push for a certain interpretation by the writer. Seeing these terms, and the alternative terms used by articles on the same topic, could enable us / the reader to get awareness of the possible influence of the point of view of the writer / news outlet.
 
-However, we see that many variations of terms do not seem to carry any differences in the perspective of the writer. Some others instead, convey a message very differently from a few words. Similarity alone cannot distinguish between them. And in this chapter we do not have the tools to quantify this phenomenon. A we will describe in the last section of this chapter, we need to jump on the work of persuasion/propaganda detection (next chapter).
+However, we see that many variations of terms do not seem to carry any differences in the perspective of the writer. Some others instead, convey a message very differently from a few words. Similarity alone cannot distinguish between them. And in this chapter we do not have the tools to quantify this phenomenon. A we will describe in the last section of this chapter, we need to experiment with the work of persuasion/propaganda detection (next chapter).
 
 
 
@@ -497,6 +504,7 @@ However, we see that many variations of terms do not seem to carry any differenc
 
 
 \section{\statusgreen Data used}
+\todoHA{Data needs to be fully described before using in experiments}
 % what
 % We also started collecting, early this year, several types of data that will be useful for the analysis planned.
 For this first chapter, we have been focusing on parallel news dataset. We started by using existing datasets, and then we started collecting on our own because we wanted specific features.
@@ -557,7 +565,7 @@ This data was used for this and the second chapter. From Chapter~\ref{chap:polit
 
 From this chapter, we achieved to be able to understand and study when information is unique or shared between different news sources, at different granularities:
 \begin{itemize}
-    \item article-level: finding related articles that cover the same events;
+    \item article-level: finding related articles that cover the same events;\todoHA{Which section shows these results?}
     \item sentence-level: being able to find the sentences that corroborate, the ones that are unique or omitted;
     \item word-level: computing the degree of uniqueness of single terms, and observing how single words are changed between multiple sources.
 \end{itemize}
@@ -567,7 +575,7 @@ From this chapter, we achieved to be able to understand and study when informati
 The main findings that we have from this chapter are the following:
 
 \begin{itemize}
-    \item As already denoted by the work of~\citet{bountouridis2018explaining}, we confirm a positive correlation between corroboration and credibility of news outlets and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is greatly important for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. %: corroboration correlates positively to credibility of news outlets, omission negatively
+    \item As already denoted by the work of~\citet{bountouridis2018explaining}, we confirm a positive correlation between corroboration and credibility of news outlets and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. %: corroboration correlates positively to credibility of news outlets, omission negatively
     % \item Extreme left and right corroborate less and omit more? (but needs leaning? No if we just take centrality-extremism)
     % \item Delta Time of publication: more similar articles are published at similar times, instead the further the time delta the more further they are?
     % these are more limitations
@@ -593,5 +601,8 @@ Or on another side, there could be a purpose that is subtly manifesting through 
 This chapter arose some questions that need to be answered:
 What changes between the changed parts? What characterises those differences? How can we characterise the differences quantitatively describing how they try to persuade the readers? To give an answer to these questions, we need to include into our analysis some concepts of persuasion.
 \todoAW{The point of reproducing the expt. is to determine how well their technique supports your own research aims. So this section really wants to have some quantification of the results. But also, you're interested in the qualitative question of how well you can identify those sentences which are not the basic statements of fact. So you want this chapter to lead into a discussion of how well you can identify the factual v. manipulative sentences, and the degree to which the non-factual sentences can be used to identify propaganda etc.}
+\todoHA{I agree}
 
 So for the next chapter, we want to investigate persuasive language and how it can be computationally quantified. 
+
+\todoHA{Overall, I can see a good chapter here, but need a good revision to better link the experiment with the RQss in this thesis, to detail the data used, detail the results and explain them more thoroughly, to describe the steps and rationale of the experiments more clearly (structure). And to more clearly explain the contribution beyond just replicating a previous paper.}
