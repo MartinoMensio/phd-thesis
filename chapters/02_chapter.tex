@@ -1,6 +1,11 @@
+TODO: write intro here, mentioning the main themes:
+
 Similarity
+
 \gls{propaganda}
+
 Propaganda and misinformation
+
 \Gls{political-leaning}: definitions/classification
 
 
@@ -9,27 +14,36 @@ Propaganda and misinformation
 
 TODO propaganda definition in different fields
 
+First of all, we need to give a definition of propaganda.
+We can define it as the use of language that has the specific goal to persuade the reader. It has many points in common with argumentation/rhetorics and is usually associated with deceiving techniques, partial point of views, logical fallacies.
+In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
+
+Features of propaganda: persuasive function, sizable target audience, representation of a specific group's agenda, and the use of faulty reasoning and/or emotional appeals~\cite{miller1939techniques}
+
+Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas.
+Propaganda can more practically be defined as the usage of a set of techniques. These techniques vary from the usage of emotional language (e.g. loaded language, appeal to fear) to logical fallacies (bandwagon, red herring).
+
+Agenda-setting: \cite{Cohen_1964} and \cite{mccombs1972agenda} theory: ability of the news media to influence the importance placed on the topics of the public agenda.
+
 \subsection{Propaganda techniques}
+
+If we look at more practical definitions of propaganda, we see that in the literature several works have addressed propaganda as a set of techniques~\citep{torok2015symbiotic,miller1939techniques,weston2018rulebook}. The recent work of~\citet{da2019fine} takes from these works and considers only the techniques that can be found in journalistic articles and that can be judged intrinsically without needing external evidence.
+
+
 
 \subsection{Propaganda detection}
 \label{ssec:lit_propaganda_detection}
-
-TODO: 
-- techniques of propaganda
-- methods
 
 
 % FROM TTO21
 %\subsection{Propaganda}
 %\label{ssec:related_prop}
 
-In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
-Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas. However, to the best of our knowledge, current research on political leaning detection largely overlooked the direct inclusion of propaganda as analysis features in their computational models. 
+% In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
+% Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas. However, to the best of our knowledge, current research on political leaning detection largely overlooked the direct inclusion of propaganda as analysis features in their computational models. 
 
 Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination \cite{da2020survey}. Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\cite{rashkin2017truth,barron2019proppy}. More recently, \citet{da2019fine} used a neural network approach to identify the text fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
 
-\todo{Does not actually belong here}
-Unlike previous work on political leaning detection, in this paper we use a propaganda detection method (from \citet{da2019fine}) to identify the existence of propaganda and its type of technique in given articles, and incorporate this information directly as additional features into the training and testing of the model.  
 
 %On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
 %The mixed analysis would allow to understand better why a certain article is classified as being left/right with respect to the black box BERT classifier.
@@ -55,6 +69,7 @@ Unlike previous work on political leaning detection, in this paper we use a prop
 %Most of the models only classify full articles as being propagandist or not~\cite{barron2019proppy,rashkin2017truth}, and this does not help to understand why.
 %Therefore, another work focuses on fine-grained techniques~\cite{da2019fine}: every article analysed is annotated with labels coming from 18 different techniques, also indicating the spans affected by the techniques. So we can see where propaganda is inside an article and which specific techniques were used. Figure~\ref{fig:propaganda_example_1}
 
+TODO: The datasets for detection: article-level, fine-grained
 
 \subsection{Layers of information}
 \label{ssec:lit_layers_of_info}
@@ -81,7 +96,7 @@ Comparing different scales:
 \subsection{Political Leaning Classification}
 \label{ssec:lit_leaning_classification}
 
-FROM TTO2019
+FROM TTO2020
 
 %First we present literature on political leaning prediction, then on propaganda detection, and how the two analyses could be connected. %with the possible points of contact and why the two analysis could benefit from an integration.
 
@@ -198,6 +213,8 @@ Work of~\citet{orrumachine} where persuasiveness is observed to exist more in fa
 
 
 \cite{roozenbeek2022countering} Good evidence that making people aware is helpful, people can learn to recognise manipulation techniques (it worked on YouTube). The paper talks about manipulation, but the techniques overlap with propaganda and logical fallacies. Also shifts the goal from recognising True/False to recognising manipulation. Work from Psychology.
+
+Cite TTO2019 comparison of different credibility measures, and we saw that propagandistic sources are usually considered as part of misinformation (MBFC dataset).
 
 \subsection{Opinion and Subjectivity and Manipulation?}
 
