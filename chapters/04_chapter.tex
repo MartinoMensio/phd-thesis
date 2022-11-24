@@ -1,6 +1,7 @@
 \label{chap:linguistic_persuasion}
 
 \section{\statusgreen Introduction}
+\label{sec:lp_intro}
 
 % what (orientation)
 In this chapter, we add our second ingredient: persuasion. We intend persuasion as a general umbrella that encompasses several phenomena where the writer of a piece of text is trying to persuade the reader of a certain point of view.
@@ -168,7 +169,7 @@ Subjectivity and quotations: quotations increase subjectivity of articles, are t
 Finding 2: the results of lexicon-based sentiment detection are not very great, and they are prone to many errors (e.g. Trump treated as positive words from the musical instrument).
 TODO: show more qualitative analysis about this finding?w
 
-\subsection{Fine-grained Propaganda Analysis}
+\subsection{\statusorange Fine-grained Propaganda Analysis}
 
 Taking from the literature described in~\ref{sec:lit_propaganda}, we consider the recent work of~\cite{da2019fine} as it is the only one that has fine-grained detection. This method uses a neural network to to annotate text articles and to see which words belong to specific propaganda techniques (Figure~\ref{fig:propaganda_example_1}).
 The model is a sequence model based on BERT. It is based on the dataset CITE which contains articles annotated at the span level (specific words are highlighted and assigned to a specific technique). The model then learns to reproduce these annotations by looking at words in their context (sequence model).
@@ -178,9 +179,10 @@ It performs classification on the word level. Each word is classified as being o
 \todo{Here talk about general setup, statistics of applying propaganda detection over news articles in our datasets.}
 
 
-\subsection{Propaganda vs Populism}
+\subsection{\statusred Propaganda vs Populism}
 
 propaganda vs populism
+\todo{this section}
 
 Why
 What
@@ -189,22 +191,24 @@ Results
 
 Studying how much propaganda and populism are (correlation analysis)
 
-- dataset
+dataset of populism (another one): why not the same dataset? To avoid errors on the populism detection, so that it is ground truth and errors can only be in propaganda detection.
 
 
 \section{Relationship between proxies and words changed}
 \label{sec:lp_relationship}
 
-In this section we analyse the relationship between the proxies just described, and the variations acrosss the articles.
+After having described in the previous sections the detection of the \emph{linguistic proxies of persuasion} on their own, we describe in this section the last stage of the pipeline announced in the introduction to this chapter (Section~\ref{sec:lp_intro}).
 
-We present two experiments:
+Therefore, here we analyse the relationship between the linguistic proxies of persuasion, and the variations across the articles (from previous Chapter~\ref{chap:common_ground_search}).
+
+To analyse this relationship, we have two different experiments:
 
 \begin{enumerate}
     \item variations vs propaganda: TODO
     \item improving sentence clustering by eliminating propaganda: TODO
 \end{enumerate}
 
-\subsection{Propaganda variations across similar articles}
+\subsection{\statusred Propaganda variations across similar articles}
 
 sentiment/propaganda across related articles
 
@@ -226,7 +230,7 @@ Sentiment
 % % problems?
 % The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
 
-\subsection{Removing propaganda/sentiment to make better clustering?}
+\subsection{\statusorange Removing propaganda/sentiment to make better clustering?}
 
 effect of sentiment/propaganda words on sentence clustering
 
@@ -286,4 +290,9 @@ We can compare the behaviour of this curve between the full text and the text wi
 
 
 \subsubsection{Findings}
+
+Slightly easier to cluster when sentiment and propaganda words are removed from the corpus.
+So propaganda and sentiment are acting like noise in clustering.
+
+TODO explain better
 
