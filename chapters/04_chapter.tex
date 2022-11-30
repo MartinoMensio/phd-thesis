@@ -4,21 +4,22 @@
 \label{sec:lp_intro}
 
 % what (orientation)
-In this chapter, we add our second ingredient: persuasion. We intend persuasion as a general umbrella that encompasses several phenomena where the writer of a piece of text is trying to persuade the reader of a certain point of view.
+In this chapter, we add our second ingredient: persuasion.\todoAW{abrupt start}
+We intend persuasion as a general umbrella that encompasses several techniques where the writer of a piece of text is trying to persuade the reader of a certain point of view.
 
 % why (rationale)
 From the last chapter~\ref{chap:common_ground_search}, we concluded with the need to understand how specific terms are used to persuade the reader. We are able to extract terms that have been changed in related articles, but we want to characterise them quantitatively along some dimensions that can describe or are related to persuasion.
 
-For this reason, this chapter investigates the \emph{linguistic proxies of persuasion}, in other words how the persuasion manifests itself on the textual/linguistical surface.
+For this reason, this chapter investigates the \emph{linguistic techniques of persuasion}, in other words, how the persuasion manifests itself on the textual/linguistical surface.
 
 % aim
-Our motivation is to analyse whether the terms that change between multiple articles/sentences are correlated with the linguistic proxies of persuasion.
+Our motivation is to analyse whether the terms that change between multiple articles/sentences are correlated with the linguistic techniques of persuasion.
 
 The Research Questions we want to answer are: 
 \begin{enumerate}
     \item What do writers use to persuade the reader?
-    \item Is there a link between the parts that are different and persuasion proxies (propaganda/loaded language)?
-    \item Which are the possible indicators of these differences? 
+    \item How can we automatically detect those techniques [which are used by writers to persuade]? % Which are the possible indicators of these differences? // 
+    \item Are the differences between similar articles (extracted in the previous chapter) related to a different use of persuasion techniques? % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
 \end{enumerate}
 
 
@@ -27,20 +28,26 @@ The Research Questions we want to answer are:
 % 18 techniques of propaganda
 
 % Experiment together with common ground search
-To answer these research questions, we carry the following experiment:
+To answer these research questions, we take from Chapter~\ref{sec:lit_propaganda} the most commonly/recently analysed \gls{persuasion} means for which we have computational detection methods: \gls{propaganda}, \gls{sentiment}, populism.
 
-We take into study the terms that change between articles and we analyse whether there exist some persuasion proxies that indicate something about the changes in the sentences.
+% carry the following experiment:
+Therefore, we have the first part of this chapter that covers the detection of these persuasion techniques (Section~\ref{sec:lp_techniques}).
+And then, we put this in relationship with the analysis from the previous Chapter~\ref{chap:common_ground_search} in Section~\ref{sec:lit_relationships}.
+In this last part, 
+we take into study the terms that change between articles, and we analyse whether they contain some persuasion techniques, and in which relationship. %indicate something about the changes in the sentences.
 
 This is implemented according to the following pipeline:
 \begin{enumerate}
     \item Analysis from Chapter~\ref{chap:common_ground_search}: extracts the words that are changed between similar sentences of similar articles
-    \item Extraction of different proxies (sentiment, propaganda, persuasion) on the sentences (described in the next Section~\ref{sec:lp_proxies}
-    \item Analysis of the relationship between these proxies and the changes in the sentences (described in Section~\ref{sec:lp_relationship})
+    \item Extraction of different techniques (sentiment, propaganda, persuasion) on the sentences (described in the next Section~\ref{sec:lp_techniques}
+    \item Analysis of the relationship between these techniques and the changes in the sentences (described in Section~\ref{sec:lp_relationship})
 \end{enumerate}
 
 
 % findings
-We discover that sentiment itself is not very precise to indicate the persuasion, while the initial methods for fine-grained propaganda detection seem to be more promising. For this reason, we mainly use propaganda for the experiments of the following chapters. 
+We discover that
+the initial methods for fine-grained propaganda detection seem to be more promising. For this reason, we mainly use propaganda for the experiments of the following chapters. 
+Sentiment, on the other side, while being related to the propaganda technique of \texttt{Loaded\_language}, does not provide useful insights when observed together with the changes occurring in the articles. The multi-dimensionality of propaganda across the techniques is much more useful.
 
 Our findings from this chapter include:
 \begin{enumerate}
@@ -51,21 +58,21 @@ Our findings from this chapter include:
 % interpretation
 
 % TODO: Interpretation? Or just pointers to next sections
-The next sections are organised as follows. Section~\ref{sec:lp_proxies} contains some proxies that we identifed being related to persuasion. We present there what they are able to detect on our datasets (stage 2 of the pipeline above described). Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these proxies and the words changed (stage 3 of the pipeline).
+The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains some techniques that we identifed being related to persuasion. We present there what they are able to detect on our datasets (stage 2 of the pipeline above described). Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed (stage 3 of the pipeline).
 
-\section{Different Proxies}
-\label{sec:lp_proxies}
+\section{Different Techniques of Persuasion}
+\label{sec:lp_techniques}
 
-% TODO preamble to different proxies: sentiment, propaganda, populism, ...
+% TODO preamble to different techniques: sentiment, propaganda, populism, ...
 
 From all the different methods and approaches described in Chapter~\ref{sec:lit_propaganda}\tododefault{check ref}, in this section, we are using a round of tools that aims at detecting phenomena related to persuasion and manipulation and do that at the word-level.
-In other words, we are using several proxies that we assume to be related to persuasion: sentiment (subjectivity), propaganda and populism.
+In other words, we are using several techniques that we assume to be related to persuasion~\cite{gass2018persuasion}: sentiment (subjectivity), propaganda and populism.\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclassses. Look in literature.}
 And we require to be able to work at the word-level, because our end goal is to study the relationship between them and the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need word-level information. We are analysing word substitutions.
 
 \subsection{Sentiment detection}
 
 First of all, we start with some sentiment detection. It is known that persuasion is related to an emotional response from the reader/listener, being related to emotions~\citep{rocklage2018persuasion,petty2015emotion,desteno2004discrete} and to sentiment~\citep{gatti2014sentiment}.
-While computational approaches to detect emotions (usually quantified across the 5-big emotions) exist, the computational tools available for sentiment detection are more numerous and more common. The main disadvantage of only using sentiment detection instead of emotions is that it usually gives an output on 1 or 2 axes: valence (positive or negative) and strength (from neutral to strong). But for an initial analysis, we deem that sentiment is enough.
+While computational approaches to detect emotions exist (usually quantified across the 5-big emotions), the computational tools available for sentiment detection are more numerous and more common. The main disadvantage of only using sentiment detection instead of emotions is that it usually gives an output on 1 or 2 axes: valence (positive or negative) and strength (from neutral to strong). But for an initial analysis, we deem that sentiment is enough.
 
 For detecting the sentiment, we decide to use term-based analyses that, despite being less accurate, they are punctual. We need to see which words are responsible for the sentiment scores, so we are accepting less accuracy if necessary. Our main reason is to be able to find words that are loaded with sentiment. If the score of sentiment is not perfect, it is not a problem.
 
@@ -123,6 +130,8 @@ In this way, we are able to see the sentiment of the single words and not only t
 
 \todo{stats over our datasets}
 
+\todoAW{I'm not sure what you've done about the three systems you've just described. Is this section supposed to explain how you chose one of them? Yes explain how they were used together (combined), and how they perform separately on the dataset (justifying why all of them). Before next section.}
+
 average sentiment, variance across tools
 
 by news source: sources with highest/lowest/strongest
@@ -171,6 +180,8 @@ TODO: show more qualitative analysis about this finding?w
 
 \subsection{\statusorange Fine-grained Propaganda Analysis}
 
+Propaganda is a form of persuasion that is characterised by its goal to indoctrinate population towards an individual or a particular agenda.
+
 Taking from the literature described in~\ref{sec:lit_propaganda}, we consider the recent work of~\cite{da2019fine} as it is the only one that has fine-grained detection. This method uses a neural network to to annotate text articles and to see which words belong to specific propaganda techniques (Figure~\ref{fig:propaganda_example_1}).
 The model is a sequence model based on BERT. It is based on the dataset CITE which contains articles annotated at the span level (specific words are highlighted and assigned to a specific technique). The model then learns to reproduce these annotations by looking at words in their context (sequence model).
 
@@ -194,12 +205,12 @@ Studying how much propaganda and populism are (correlation analysis)
 dataset of populism (another one): why not the same dataset? To avoid errors on the populism detection, so that it is ground truth and errors can only be in propaganda detection.
 
 
-\section{Relationship between proxies and words changed}
+\section{Relationship between techniques and words changed}
 \label{sec:lp_relationship}
 
-After having described in the previous sections the detection of the \emph{linguistic proxies of persuasion} on their own, we describe in this section the last stage of the pipeline announced in the introduction to this chapter (Section~\ref{sec:lp_intro}).
+After having described in the previous sections the detection of the \emph{linguistic techniques of persuasion} on their own, we describe in this section the last stage of the pipeline announced in the introduction to this chapter (Section~\ref{sec:lp_intro}).
 
-Therefore, here we analyse the relationship between the linguistic proxies of persuasion, and the variations across the articles (from previous Chapter~\ref{chap:common_ground_search}).
+Therefore, here we analyse the relationship between the linguistic techniques of persuasion, and the variations across the articles (from previous Chapter~\ref{chap:common_ground_search}).
 
 To analyse this relationship, we have two different experiments:
 
@@ -233,6 +244,7 @@ Sentiment
 \subsection{\statusorange Removing propaganda/sentiment to make better clustering?}
 
 effect of sentiment/propaganda words on sentence clustering
+\todoAW{for doing what? More motivation, this is only operational}
 
 What: removing the “highlighted” words from the article analysis, the clustering would work better or worse.
 
