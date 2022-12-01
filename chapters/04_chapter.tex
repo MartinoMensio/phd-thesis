@@ -20,6 +20,7 @@ The Research Questions we want to answer are:
     \item What do writers use to persuade the reader?
     \item How can we automatically detect those techniques [which are used by writers to persuade]? % Which are the possible indicators of these differences? // 
     \item Are the differences between similar articles (extracted in the previous chapter) related to a different use of persuasion techniques? % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
+    \item Is persuasion an obstacle in recognising the events in multiple articles? (clustering)
 \end{enumerate}
 
 
@@ -125,18 +126,37 @@ The scores in output have an integer value in the interval $[0;4]$ (0 = Strong\_
 From the SentimentTree, we wrote a parser that parses its syntax and gives the score to the single words.\footnote{\url{https://github.com/MartinoMensio/corenlp-sentiment-tree-parser}}
 In this way, we are able to see the sentiment of the single words and not only the overall score for a sentence.
 
+\subsubsection{\statusorange Combination of the tools}
+% Why combine
+From this list of tools, we decided to combine them together in order to increase the rate of words detected as sentiment-carrying. As each one of them has different lexicons covering 
+
+% How combined all of them
+We therefore combine them in the following way:
+we run them in parallel for each input text, and then we collect the results.
+We consider two types of outputs: the score(s) given to the text, and the words responsible for the score.
+
+For the score, uniforming the scales and doing the average. Ranges --> conversion --> average
+
+For the words, we take the union of the words outputted from each tool. Each word can then have a positive/negative score so we also merge them,.
+If one word is given back by just one tool, then the score is given by the tool (uniforming again the score as above). Instead if the word is given back by multiple tools, we consider it only once and we average the uniformed scores. 
+
 
 \subsubsection{\statusred Stats over our datasets}
 
-\todo{stats over our datasets}
+How they perform separately on the dataset (justifying why all of them) and the result of combination.
 
-\todoAW{I'm not sure what you've done about the three systems you've just described. Is this section supposed to explain how you chose one of them? Yes explain how they were used together (combined), and how they perform separately on the dataset (justifying why all of them). Before next section.}
+
+Stats over dataset
+
+\todo{stats over our datasets}
 
 average sentiment, variance across tools
 
 by news source: sources with highest/lowest/strongest
 
-problems of the tools: false sentiment words
+problems of the tools: false sentiment words. How am I compensating for it?
+
+Combined results
 
 
 \subsubsection{\statusorange Sentiment variation along articles}
@@ -215,24 +235,59 @@ Therefore, here we analyse the relationship between the linguistic techniques of
 To analyse this relationship, we have two different experiments:
 
 \begin{enumerate}
-    \item variations vs propaganda: TODO
+    \item persuasion variations across similar articles: TODO
     \item improving sentence clustering by eliminating propaganda: TODO
 \end{enumerate}
 
-\subsection{\statusred Propaganda variations across similar articles}
+\subsection{\statusorange The effects of small changes on detected persuasion}
 
-sentiment/propaganda across related articles
+% Why
+% What
+For this first experiment, we want to observe how the small changes detected in the previous chapter affect the detected persuasion.
+Having computing methods for sentiment and for fine-grained propaganda detection, we do not proceed with populism detection.
 
-Why
+% RQ
+Our RQ (chap4) 3 is "are the differences between similar articles related to a different use of persuasion techniques?".
+So to answer this question, here we take groups of linked sentences (from chapter 3) and we see how their variations are related to changes in persuasion.
 
-What
+% How: method
+We describe persuasion with the help of sentiment detection (a seen in section~\ref{sec:TODO}) and fine-grained propaganda detection (section~\ref{sec:TODO}).
+The comparison is done in different ways:
+\begin{enumerate}
+    \item score: sentiment or propaganda scores. For example one change in an adjective could result in more negative sentiment, or in more of a specific propaganda technique;
+    \item words: the words changed could be the words that carry sentiment/propaganda. And instead of just hypothesising that the change in the words are responsible for a different score (point above), we have a direct indication that the words belong to a persuasion technique.
+\end{enumerate}
 
-How: method
+% data
+For this experiment we use a set of pairs of sentences (extracted from the analysis of chapter 3) which are characterised by high similarity score (USE model). \todo{How many, stats?}
 
-Results
+\todo{Figure with example: uniqueness of words highlighted, corresponding plot with scores of the two sentences, and also persuasion words in the text (different colour?)}
+
+The output measures are: on average how many variations in percentage also imply a different measured persuasion. Is it that most of the changes are not making the scores change? And, are the words changed also loaded with techniques of persuasion? 
+
+% Results
+The results show that, on average, it depends on which persuasion technique is considered.
+
+First the quantitative results
 
 
-Sentiment
+Then the qualitative results (because we don't have actually the ground truth, we are estimating it based on our observations)
+
+We can define false/true positive/negatives in the following way:
+- ground truth: our estimation, but not available
+- detected: whether a persuasion score changes between the two sentences
+
+True positive: our estimation is that it should change, and it actually changes.
+False positive: our estimation is that the sentences carry the same type of persuasion, but the detection of persuasion tells that there is something different
+False negative: we deem that the two sentences should contain a change in persuasion, but the detection says nothing
+True negative: no change should be contained, and detection does not detect differences on the persuasion level.
+
+Sentiment detection might not be the best choice. Very noisy detection, and scores do not change all the times even when the sentences should imply a change.
+We then have a set of sentence pairs that only looks like a re-wording with no persuasion changes, and persuasion/propaganda 
+
+\todo{finish}
+
+% Sentiment
 
 % % sentiment
 % Instead for the sentiment analysis, since we want to have detailed information (e.g. which specific words contain sentiment, and with which properties), we are relying on lexicon-based tools. Other more advanced tools (e.g. Stanford CoreNLP) have models which do not provide fine-grained scores but only sentence/document level. (This could be improved)
@@ -241,12 +296,14 @@ Sentiment
 % % problems?
 % The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
 
-\subsection{\statusorange Removing propaganda/sentiment to make better clustering?}
+\subsection{\statusorange Removing persuasion to make better clustering?}
 
 effect of sentiment/propaganda words on sentence clustering
 \todoAW{for doing what? More motivation, this is only operational}
 
 What: removing the “highlighted” words from the article analysis, the clustering would work better or worse.
+
+RQ (chap4) 4: Is persuasion an obstacle in recognising the events in multiple articles? (clustering)"
 
 Why:
 The articles are made of two components:
