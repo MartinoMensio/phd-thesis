@@ -166,17 +166,20 @@ Even if we average and combine the results, we keep the original outputs for eac
 
 To uniform the scales, we consider two main axes: polarity (used by all of the tools) and strength (provided by SentiStrength, and subjectivity by TextBlob). We map the numerical intervals from $[min;max]$ to $[-1;1]$ by means of a linear transformation. The categorical values, instead, are mapped by firstly sorting the output labels from negative to positive, then converting to increasing numerical values (e.g., for 4 labels, $\set{1,2,3,4}$) and then applying the linear transformation as in the other case.
 
-\subsubsection{\statusred Stats over our datasets}
-
-How they perform separately on the dataset (justifying why all of them) and the result of combination.
-
-
-Stats over dataset
+\subsubsection{\statusred Statistics over our datasets}
 
 \todo{stats over our datasets}
+% How they perform separately on the dataset (justifying why all of them) and the result of combination.
+In this subsection we provide some statistics about how the described approach for sentiment detection works on the datasets we selected.
 
-Datasets: AllSides, AllNews
+% Datasets: AllSides, AllNews
+First of all, as described also in the previous chapter, we rely here on two datasets: AllSides and AllNews.
 
+The first one, AllSides, contains X \todo{copy main numbers from chapter 3}
+
+The second one, AllNews, ...\todo{finish}
+
+% average scores
 Scores:
 - Unified scores by each tool (polarity and strength)
 - Correlation between tools
@@ -184,6 +187,7 @@ Scores:
 Words:
 - percentage of words detected by each tool
 - percentage of words detected by combination
+- term analysis: most frequent words positive/negative
 
 Group by News source:
 - sources with highest/lowest/strongest
@@ -199,7 +203,7 @@ Combined results
 
 \subsubsection{\statusorange Sentiment variation along articles}
 
-With this setup of the tools, we now moved to inspect the articles more closely. We want to see how the sentiment evolves inside a single article and if it is linked to any other external factors.
+With this setup of the tools, we moved to inspect the articles more closely. We want to see how the sentiment evolves inside a single article and if it is linked to any other external factors.
 % We then experimented with the selected libraries to see how they could analyse the sentences in news articles. 
 We started by observing how the sentiment scores vary across one single article at a time, when we consider the sentences of the articles. For each sentence, we compute the sentiment scores and then we compare how the tone changes across a single article at a time.
 
@@ -215,13 +219,14 @@ Some sentences appear to be very neutral, and some instead are very subjective/i
 \end{figure}
 \todo{Fig~\ref{fig:sentiment_across_one_article} coming from which libraries?}
 
-\subsubsection{Sentiment is correlated to quotation}
+% \subsubsection{Sentiment is correlated to quotation}
 By looking closely at several articles where this behaviour occurs, we noticed that this duality of tones in the articles is mostly correlated to direct/indirect reporting. When the articles give space to some interviewee (quoted) the sentiment libraries detect intense and subjective words/scores. Instead, when the reporter is narrating, the tone is quieter and more neutral.
 
 To study this correlation on large scale on our dataset, we tested our observation by automating it.
 On one side, using the sentiment libraries. On the other, using a model for quotation detection~\citep{scheible2016model}.\footnote{\url{https://github.com/christianscheible/qsample}}
-For each sentence, computing: sentiment score and quotation percentage (defined as number of words inside a quotation divided by total number of words).
-Figure~\ref{fig:sentiment_vs_quotation} shows for the same example article, how the two are moving together.
+
+For each sentence, we computed both sentiment score and the quotation percentage (defined as number of words inside a quotation divided by total number of words).
+Figure~\ref{fig:sentiment_vs_quotation} shows for the same example article, how the two measures are moving together.
 
 \begin{figure}[!htbp]
     \centering
@@ -232,39 +237,112 @@ Figure~\ref{fig:sentiment_vs_quotation} shows for the same example article, how 
 
 \todo{correlation stats across all the dataset? Quantify. Total correlation across the dataset: ??}
 
+Findings recap
+
 Finding 1:
 Subjectivity and quotations: quotations increase subjectivity of articles, are the most subjective parts
 
-Finding 2: the results of lexicon-based sentiment detection are not very great, and they are prone to many errors (e.g. Trump treated as positive words from the musical instrument).
-TODO: show more qualitative analysis about this finding?w
+Finding 2 (shown in previous subsection): the results of lexicon-based sentiment detection are not very great, and they are prone to many errors.
 
 \subsection{\statusorange Fine-grained Propaganda Analysis}
 \label{ssec:lp_techniques_propaganda}
 
-Propaganda is a form of persuasion that is characterised by its goal to indoctrinate population towards an individual or a particular agenda.
+As a second group of persuasion techniques, we consider \gls{propaganda}.
 
+Propaganda is a form of persuasion that is characterised by its goal to indoctrinate population towards an individual or a particular agenda. It manifests through several techniques that have been studied in the literature. Each technique has its own peculiarities.
+
+For detecting propaganda, we want an approach that gives us not only a binary label (propaganda vs non-propaganda), but we want to have an insight about which specific techniques have been used. For this reason, we need to have fine-grained detection of propaganda, that produces as output the specific techniques used and which words are responsible for it.
 Taking from the literature described in~\ref{sec:lit_propaganda}, we consider the recent work of~\cite{da2019fine} as it is the only one that has fine-grained detection. This method uses a neural network to to annotate text articles and to see which words belong to specific propaganda techniques (Figure~\ref{fig:propaganda_example_1}).
-The model is a sequence model based on BERT. It is based on the dataset CITE which contains articles annotated at the span level (specific words are highlighted and assigned to a specific technique). The model then learns to reproduce these annotations by looking at words in their context (sequence model).
+The model is a sequence model based on BERT. It is based on the dataset~\citet{TODO} which contains articles annotated at the span level (specific words are highlighted and assigned to a specific technique). The model then learns to reproduce these annotations by looking at words in their context (sequence model).
 
 It performs classification on the word level. Each word is classified as being one of 18 different techniques or none of them.
 
+\subsubsection{\statusred Statistics over our datasets}
 \todo{Here talk about general setup, statistics of applying propaganda detection over news articles in our datasets.}
 
+Datasets
 
-\subsection{\statusred Propaganda vs Populism}
+Stats: definition of word-based percentage, overall word-based percentage of propaganda (any techniques), technique specific percentages. Term analysis: most frequent across techniques, technique-specific terms
+
+
+\subsection{\statusorange Propaganda vs Populism}
 \label{ssec:lp_techniques_populism_vs_propaganda}
 
-propaganda vs populism
-\todo{this section}
+% \todo{this section}
 
-Why
-What
-How
-Results
+% from "Propaganda datasets unbalanced?"
+% What
+In this section, we experiment with another concept from the literature that is shown to be close to persuasion and propaganda: \gls{populism}~\citep{tumber2021routledge,pasquino2008populism}.
+We want to understand: is there is any substantial difference between populism and propaganda?
+This question arises purely from a logistical point of view: we have automated methods for detecting propaganda, but we do not have tools to detect populism. Therefore, if we can prove that populism and propaganda are actually correlated, then it becomes not important for us to be able to detect something that is very much correlated to something else that we already detect.
 
-Studying how much propaganda and populism are (correlation analysis)
+% concepts
+On the conceptual level, propaganda and populism are two separate concepts. The first describes more the persuasion mean used to push for an agenda, while the second one is usually used more together with the actor that wants to push the agenda. Populism is ``a type of politics that claims to represent the opinions and wishes of ordinary people".\footnote{\url{https://www.oxfordlearnersdictionaries.com/definition/english/populism}}
+And to be on the side of ordinary people, it uses propaganda as a mean. So a populistic \emph{actor} uses propaganda \emph{techniques}. Conceptually, they are related.
 
-dataset of populism (another one): why not the same dataset? To avoid errors on the populism detection, so that it is ground truth and errors can only be in propaganda detection.
+% practically/computationally
+On the computational/detection side, we want to see if this relationship between populism and propaganda stands.
+So to evaluate it, we have computational approaches for propaganda detection, but not for populism detection.
+A solution to this problem, is to use a dataset where we have the ground truth for the populism, which will be run through the propaganda detection pipeline. Then we will compute the correlation between the two, and we can establish whether this relationship is proven. The advantage of using directly the ground truth for one of the two phenomena (populism) is that we can only have errors for the propaganda detection. Instead, if we were to compare two predictions, the errors could be on both sides.
+
+% dataset used
+For this experiment, after looking at the available datasets for populism, we selected the one from~\citet{hawkins2019global} because it is quite balanced in terms of the political orientation of the actors annotated (liberal vs conservative). It contains 1240 political speeches, from several countries and languages
+For each one of them there are four annotators that give a numerical score of populism in the range $[0;2]$ where $0$ means non-populistic and $2$ means very populistic. The single annotations are already averaged out.
+So from the 4961 raw rows, by deduplicating (4 annotations for each speech) we have 1240 speeches, out of which 265 are in English (then down in the rankings, 304 in Spanish and 148 in Portuguese).
+
+This 265 speeches all have a leaning classification (we will see more about leanings in the next chapter)
+
+\todo{Continue here}
+
+
+% Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
+% Each annotator (4 for each speech) gave a score between 0 (non-populistic) to 2 (very populistic)
+% 4961 rows 
+% 1240 deduped (352 left, 256 center, 469 right, 652 NA)
+% Languages: 265 en (304 es, 148 pt, …),
+% Leaning of the english ones: (36 left, 37 center, 84 right, 106 NA)
+
+
+
+Goals:
+Correlation between propaganda and populism on this dataset
+Use a more balanced dataset (left-leaning articles)
+
+% results
+Correlation between populism (averagerubric column) and propaganda. Spearman’s:
+0.169 with total propaganda quantity → generally low
+With each technique:
+0.0016816375499880873, 'PROPAGANDA:Loaded\_Language'
+0.09130843484547149, 'PROPAGANDA:Doubt'
+0.22264102520957332, 'PROPAGANDA:Flag-Waving'
+0.14597783189491995, 'PROPAGANDA:Name\_Calling/Labeling'
+0.05473195042155012, 'PROPAGANDA:Appeal\_to\_fear-prejudice'
+0.009004957223912572, 'PROPAGANDA:Exaggeration/Minimisation'
+-0.030922623225167634, 'PROPAGANDA:Appeal\_to\_Authority'
+0.1144714471745093, 'PROPAGANDA:Reductio\_ad\_hitlerum'
+nan, 'PROPAGANDA:Bandwagon'
+0.09621605042614789, 'PROPAGANDA:Black-and-White\_Fallacy'
+0.10482905539247817, 'PROPAGANDA:Causal\_Oversimplification'
+nan, 'PROPAGANDA:Obfuscation/Intentional\_Vagueness/Confusion'
+nan, 'PROPAGANDA:Red\_Herring'
+-0.06071980052307917, 'PROPAGANDA:Repetition'
+0.14586262060219735, 'PROPAGANDA:Slogans'
+nan, 'PROPAGANDA:Straw\_Men'
+0.04832388032279562, 'PROPAGANDA:Thought-terminating\_Cliches'
+0.03393924564812576, 'PROPAGANDA:Whataboutism'
+
+--> \todo{PLOT this}
+
+L/R evaluation:
+Assumption: propaganda correlates to populism similarly in L/C/R
+Result total: 0.225 Left, 0.005 Center, 0.374 Right → Why? Is it a matter of quantity of populism/propaganda?
+Populism average:  [0.1259, 0.0729, 0.2712]
+Propaganda average: [0.0165, 0.0271, 0.0432]
+Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on right (21% more), but the correlation Right is bigger than left of 66%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
+
+% findings
+Propaganda and populism are correlated, but not too strongly. In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → unbalanced detection caused by unbalanced data
+
 
 
 \section{Relationship between techniques and words changed}
