@@ -367,7 +367,7 @@ For this experiment, we want to observe how the small changes detected in the pr
 Having computing methods for sentiment and for fine-grained propaganda detection, we decide not proceed with populism detection, but only keeping as axes for measurements the sentiment ones (strength and polarity) and the 18 propaganda techniques.
 
 % RQ3
-Our RQ3 is``are the differences between similar articles related to a different use of persuasion techniques?".
+Our RQ3 is ``are the differences between similar articles related to a different use of persuasion techniques?".
 So to answer this question, here we take groups of linked sentences (from chapter 3) and we see how their variations are related to changes in persuasion.
 
 % How: method
@@ -401,29 +401,39 @@ Overall, on the quantitative side, we see that a portion (\%?) of the variations
 And secondly, still on the quantitative side, we also compute a measure based on the words: how many changed words (percentage) are also persuasion related? To compute this, we have X words that have been changed (out of Z sentence pairs), and Y words that are related to persuasion.
 With respect to the first measure, this metric is based on the words instead of being based on the number of samples. The red bars of Figure~\ref{TODO} illustrate it.
 
-\todo{Barchart (horizontal) of: 1(blue) percentage of variations that also correspond to a change in the  for each of the techniques. X axis: percentage, Y axes: techniques. 2(red): percentage of words changed that also are persuasion related}
+\todo{Barchart (horizontal) of: 1(blue) percentage of variations that also correspond to a change in the values for each of the techniques. X axis: percentage, Y axes: techniques. 2(red): percentage of words changed that also are persuasion related}
 
+\todo{compute results: currently having a small problem with my pipeline, I need to put back together the articles used in the past from Google News. The dataset from AllSides instead works already, but only 3 articles for each headline so less sentences similar enough.}
 \todo{now comment on the quantitative results}
 
 
 Then the qualitative results: do the scores/words represent correctly the persuasion differences? For measuring this, we rely on manual analysis of a subset of sentence pairs. We selected these pairs randomly. We manually label these pairs (How many?)
 (because we don't actually have the ground truth, we are estimating it based on our observations) in two categories: with differences in persuasion or without them.
 
-We can define false/true positives/negatives in the following way:
-- ground truth: our estimation, but not really a "ground truth";
-- detected: whether a persuasion score changes between the two sentences
+We can define reference values in the following way:
 
-True positive: our estimation is that it should change, and it actually changes.
-False positive: our estimation is that the sentences carry the same type of persuasion, but the detection of persuasion tells that there is something different
-False negative: we deem that the two sentences should contain a change in persuasion, but the detection says nothing
-True negative: no change should be contained, and detection does not detect differences on the persuasion level.
+\begin{itemize}
+    \item \textbf{reference value}: our estimation, but not really a "ground truth";
+    \item \textbf{detected}: whether a persuasion score changes between the two sentences
+\end{itemize}
 
+Therefore, the true/false positives/negatives for the confusion matrix become:
+
+\begin{itemize}
+    \item True positive: our estimation is that it should change, and it actually changes.
+    \item False positive: our estimation is that the sentences carry the same type of persuasion, but the detection of persuasion tells that there is something different
+    \item False negative: we deem that the two sentences should contain a change in persuasion, but the detection says nothing
+    \item True negative: no change should be contained, and detection does not detect differences on the persuasion level.
+\end{itemize}
+
+% results
+The results show???\todo{finish}
+
+% findings
 Sentiment detection might not be the best choice. Very noisy detection, and scores do not change all the times even when the sentences should imply a change.
 We then have a set of sentence pairs that only looks like a re-wording with no persuasion changes, and persuasion/propaganda 
 
-\todo{finish}
-
-Results? To be analysed
+Propaganda instead ?
 
 % Sentiment
 
@@ -437,35 +447,51 @@ Results? To be analysed
 \subsection{\statusorange Removing persuasion to improve clustering}
 \label{ssec:lp_relationship_removing}
 
-effect of sentiment/propaganda words on sentence clustering
-\todoAW{for doing what? More motivation, this is only operational}
+The last experiment of this chapter takes the problem of analysing the relationship between persuasion and news articles variation from another perspective.
+We approach this analysis from the point of view of clustering.
+The previous chapter already analysed the clustering algorithms at the article and sentence level.
+Here instead we question whether we can help clustering articles by removing the persuasion from the articles.
 
-What: removing the “highlighted” words from the article analysis, the clustering would work better or worse.
+Our RQ4 is ``Is persuasion an obstacle in recognising the events in multiple articles?" To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned" from persuasion.
 
-RQ (chap4) 4: Is persuasion an obstacle in recognising the events in multiple articles? (clustering)"
-
-Why:
-The articles are made of two components:
-the story/event which can be seen from topical words, entities, …
-The layer of framing which here is intended as sentiment-loaded words and propaganda techniques
-
-Hypothesis
-The framing layer does not help understanding the topics described in the articles. This set of words can be removed to perform clustering better.
-We want to compare clustering of articles “as they are” and “without framing terms” and see an improvement of the clustering obtained.
+% why
+The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}), and in this experiment we target only the cases where they appear in different words. (TODO: if style-transfer is applied, we can also target the cases where they co-live on the same words).
 
 
-How
+% effect of sentiment/propaganda words on sentence clustering
+% \todoAW{for doing what? More motivation, this is only operational}
 
-Results
+% What: removing the “highlighted” words from the article analysis, the clustering would work better or worse.
 
+% RQ (chap4) 4: Is persuasion an obstacle in recognising the events in multiple articles? (clustering)"
+
+% Why:
+% The articles are made of two components:
+% the story/event which can be seen from topical words, entities, …
+% The layer of framing which here is intended as sentiment-loaded words and propaganda techniques
+
+% Hypothesis
+% The framing layer does not help understanding the topics described in the articles. This set of words can be removed to perform clustering better.
+
+
+
+% How
+To bring this plan into action, we compare the results of  clustering algorithms applied to articles ``as they are" against the articles ``without persuasion terms" and see whether the clustering obtained improves or not.
+
+In the next subsections we analyse the dataset used, the approach and the findings.
+
+\todo{rephrasing needed for these 3 subsections, at the moment they are quite raw}
 \subsubsection{Dataset}
 
-1-Dataset: using ground truth for document clustering: so that at least we start from gold-standard groups.
+1-Dataset: using ground truth for document clustering: so that at least we start from gold-standard groups, defined by human annotators. For this reason, we prefer AllSides with respect to the Google News dataset because it is built and annotated by humans instead of being an output of a clustering algorithm already.
 
 As also described in the dedicated document for data, there are some datasets that we can use for having the clustering ground truth. The candidates for this experiment are:
+
 AllSides: articles are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October) 5124 headlines, for a total of 15050 articles. Positive sides: human-curated, public. Negative sides: only 3 articles for each headline. But for each topic there are 46 articles on average
+
 Google headlines: articles are grouped in clusters. Clusters have around 20-90 articles each. Each cluster belongs to a certain broader topic (UK, World, Business, Entertainment, Sports, Science, Health). Positive sides: very large. Negative side: the clusters change over time, they are created by ML (no human-curated
-For this reason I initially selected AllSides.
+
+For this reason we selected AllSides.
 
 \subsubsection{Approach}
 
@@ -475,29 +501,39 @@ Test the ability of matching gold clusters with predicted clusters.
 
 Seeing if there is an improvement or not when removing propaganda words.
 
-Removal of the terms: sentiment-loaded terms (multiple lexicons and tools: sentistrength, vader, AFINN, BING) and propaganda spans (from https://www.tanbih.org/prta).
+Removal of the terms: sentiment-loaded terms (multiple lexicons and tools: sentistrength, vader, )
+%And these? AFINN, BING) 
+and propaganda spans (from https://www.tanbih.org/prta).
+
+Document representation:
+Embed the document with the Universal Sentence Encoder / TF-IDF
 
 Clustering methods:
-There are multiple clustering methods, and document representations that influence the clustering. I decided to use a method that does not require to specify the number of clusters wanted.
-I started with this specific method (also used in my previous analysis):
-Embed the document with the Universal Sentence Encoder / TF-IDF
-Use Hierarchical Agglomerative Clustering (ward method, euclidean distance), which  is very flexible in showing how the clusters evolve when the distance threshold is raised
+There are multiple clustering methods, and document representations that influence the clustering. We decided to use a method that does not require to specify the number of clusters wanted.
+We started with this specific method (also used in the previous Chapter):
+Hierarchical Agglomerative Clustering (ward method, euclidean distance), which  is very flexible in showing how the clusters evolve when the distance threshold is raised
 
 
 Clustering evaluation metrics:
-Although clustering is an unsupervised task, we need to see how well the clustering matches with the ground truth annotations of the data. I found online that the most used metrics for comparing clustering are:
-Adjusted Rand index
-Adjusted Mutual Information
+Although clustering is an unsupervised task, we need to see how well the clustering matches with the ground truth annotations of the data. 
+The most used metrics for comparing clustering are:
+Adjusted Rand index,
+Adjusted Mutual Information.
+
 The value of the metrics can be computed by comparing the ground-truth-clustering with the predicted one.
 By plotting the metric values against the increasing threshold of distance of the Hierarchical Agglomerative Clustering, we can observe how it increases until a certain point, then decreases again.
 
 TODO figure
 
 The interpretation of this curve is that, when the hierarchical clustering begins to raise the threshold, the clusters match more with the gold clusters, until a certain point where distinct clusters are merging together and therefore lowering the scores.
-We can compare the behaviour of this curve between the full text and the text without the loaded/propaganda pieces. The comparison can be at the maximum point, where the threshold is optimal (we should truncate the clustering there) or we can compare the full curve. For simplicity, in the results below, we compare the maximum value of the curve, reporting also the distance where it has been reached
+We can compare the behaviour of this curve between the full text and the text without the loaded/propaganda pieces. The comparison can be at the maximum point, where the threshold is optimal (we should truncate the clustering there) or we can compare the full curve. For simplicity, in the results below, we compare the maximum value of the curve, reporting also the distance where it has been reached.
 
 
-\subsubsection{Findings}
+\subsubsection{Results and Findings}
+
+TODO: copy table from google docs.
+The table is showing how, from a small corpus to bigger corpuses, the effect of removing the persuasion words is changing.
+The different rows represent the number of clusters in the gold dataset 
 
 Slightly easier to cluster when sentiment and propaganda words are removed from the corpus.
 So propaganda and sentiment are acting like noise in clustering.
@@ -506,7 +542,7 @@ TODO explain better
 
 \todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 
-\section{Discussion}
+\section{\statusorange Discussion}
 
 Responses to the 4 RQs with contributions:
 
@@ -514,7 +550,7 @@ Responses to the 4 RQs with contributions:
     \item What do writers use to persuade the reader? Different persuasion techniques: sentiment / emotion manipulation, propaganda and populism (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
     \item How can we automatically detect those techniques? Sentiment is detected through lexicons and sentiment treebanks. Propaganda with fine-grained models and datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda. Answered also in Section~\ref{sec:lp_techniques}.
     \item Are the differences between similar articles related to a different use of persuasion techniques? In some cases they are. But in the majority of the cases, the ddifferences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences. Or also we have errors in the detection (especially sentiment) that avoid us to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
-    \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our assumption done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
+    \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
 \end{enumerate}
 
 % Findings:
@@ -523,7 +559,7 @@ Responses to the 4 RQs with contributions:
 %     \item 
 % \end{itemize}
 
-\section{Next}
+\section{\statusgreen Next}
 % link to next chapter
 In this chapter we investigated the persuasion techniques. But we have not studied the relationship between this observed persuasion in the text and the ideals/agenda/perspective of the author/outlet. It can be really useful to understand the context around the source of an article in order to interpret its persuasion.
 For this reason, the next chapter will consider perspectives and political sides. In this way we will try to understand if the persuasion of each political side is similar or which are the differences. If a different goal for the persuasion also can be observed on the persuasion itself.
