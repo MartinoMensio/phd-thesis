@@ -62,3 +62,29 @@ TODO: split this in
 A possible problem of this approach that is not defended in the paper, is the choice of articles that have been annotated by experts. They have been selected from sources "propagandistic by Media Bias/Fact Check", in other words from the page \url{https://mediabiasfactcheck.com/fake-news/}. The propagandistic sources listed in this page, as Figure~\ref{fig:mbfc_leaning} shows, are mostly on the extreme-right side of the spectrum. Furthermore, the selection done by the authors (table 3 of that paper) results in all the sources of the articles to lean on the right.
 So the resulting model is \textbf{being trained on very propagandistic sources from the right only}. The model will not be able to see left-propaganda because it never saw it in the training phase.
 
+
+
+\subsubsection{Populism and Propaganda by leaning}
+
+This is the continuation of Section~\ref{ssec:lp_techniques_populism_vs_propaganda} from the previous chapter. Now that we introduced the leaning and the problem of unbalance, we are going to break down the analysis with respect to the political leaning of the speeches.
+% Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
+% Each annotator (4 for each speech) gave a score between 0 (non-populistic) to 2 (very populistic)
+% 4961 rows 
+% 1240 deduped (352 left, 256 center, 469 right, 652 NA)
+% Languages: 265 en (304 es, 148 pt, …),
+% Leaning of the english ones: (36 left, 37 center, 84 right, 106 NA)
+
+These 265 speeches all have a leaning classification (we will see more about leanings in the next chapter): 36 left, 37 center, 84 right, 106 NA. We use this information in order to check whether the results that we get are general across the political spectrum.
+
+RESULTS
+
+L/R evaluation:
+Assumption: propaganda correlates to populism similarly in L/C/R
+Result total: 0.225 Left, 0.005 Center, 0.374 Right → Why? Is it a matter of quantity of populism/propaganda?
+Populism average:  [0.1259, 0.0729, 0.2712]
+Propaganda average: [0.0165, 0.0271, 0.0432]
+Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on right (21\% more), but the correlation Right is bigger than left of 66\%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
+
+Findings
+
+Propaganda and populism are correlated, but not too strongly. In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → unbalanced detection caused by unbalanced data

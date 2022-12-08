@@ -83,7 +83,7 @@ When selecting which techniques to target, we have an important requirement to k
 In the following subsections, we illustrate the models that we are using to perform sentiment detection (Subsection~\ref{ssec:lp_techniques_sentiment}) and fine-grained propaganda detection (Subsection~\ref{ssec:lp_techniques_propaganda}).
 Then in Subsection~\ref{ssec:lp_techniques_populism_vs_propaganda} we show some work done on populism. Even though we don't have computational detection of populism, we wanted to see the relationship that it has with propaganda.
 
-\subsection{Sentiment detection}
+\subsection{\statusorange Sentiment detection}
 \label{ssec:lp_techniques_sentiment}
 
 First of all, we start with some sentiment detection. It is known that persuasion is related to an emotional response from the reader/listener, being related to emotions~\citep{rocklage2018persuasion,petty2015emotion,desteno2004discrete} and to sentiment~\citep{gatti2014sentiment}.
@@ -257,6 +257,16 @@ The model is a sequence model based on BERT. It is based on the dataset~\citet{T
 
 It performs classification on the word level. Each word is classified as being one of 18 different techniques or none of them.
 
+From its publication paper~\cite{da2019fine}, we can see in table 6 and 7 that this model has been evaluated in two ways:
+
+\begin{itemize}
+    \item sentence-level: binary classification, whether the sentence contains propaganda or not. For this task the reported F1 is around $60\%$
+    \item span-level (full task): whether the corrects words have been identified with the correct technique or not, so accounting both for position/boundaries and for the label. For this task the reported F1 is slightly above $22.5\%$
+\end{itemize}
+
+These statistics make us aware that, even though this model is the currrent State of the Art, its ability to recognise the proper techniques of propaganda are quite low overall.
+Therefore we need to take with a grain of salt the outputs coming from this model.
+
 \subsubsection{\statusred Statistics over our datasets}
 \todo{Here talk about general setup, statistics of applying propaganda detection over news articles in our datasets.}
 
@@ -265,10 +275,8 @@ Datasets
 Stats: definition of word-based percentage, overall word-based percentage of propaganda (any techniques), technique specific percentages. Term analysis: most frequent across techniques, technique-specific terms
 
 
-\subsection{\statusorange Propaganda vs Populism}
+\subsection{\statusgreen Propaganda vs Populism}
 \label{ssec:lp_techniques_populism_vs_propaganda}
-
-% \todo{this section}
 
 % from "Propaganda datasets unbalanced?"
 % What
@@ -290,9 +298,8 @@ For this experiment, after looking at the available datasets for populism, we se
 For each one of them there are four annotators that give a numerical score of populism in the range $[0;2]$ where $0$ means non-populistic and $2$ means very populistic. The single annotations are already averaged out.
 So from the 4961 raw rows, by deduplicating (4 annotations for each speech) we have 1240 speeches, out of which 265 are in English (then down in the rankings, 304 in Spanish and 148 in Portuguese).
 
-This 265 speeches all have a leaning classification (we will see more about leanings in the next chapter)
-
-\todo{Continue here}
+% These 265 speeches all have a leaning classification (we will see more about leanings in the next chapter): 36 left, 37 center, 84 right, 106 NA. We use this information in order to check whether the results that we get are general across the political spectrum.
+% --> moved to chapter 5
 
 
 % Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
@@ -304,44 +311,36 @@ This 265 speeches all have a leaning classification (we will see more about lean
 
 
 
-Goals:
-Correlation between propaganda and populism on this dataset
-Use a more balanced dataset (left-leaning articles)
+% Goals:
+With this dataset, as we described, we want to compute the 
+correlation between propaganda and populism. So we take each speech in the corpus and we proceed to compute the Spearman's correlation~\citep{spearman1910correlation} between the  populism averaged out between the annotators and different propaganda metrics: total word-based percentage of propaganda, and word-based percentage of each of the propaganda techniques. 
+
 
 % results
-Correlation between populism (averagerubric column) and propaganda. Spearman’s:
-0.169 with total propaganda quantity → generally low
-With each technique:
-0.0016816375499880873, 'PROPAGANDA:Loaded\_Language'
-0.09130843484547149, 'PROPAGANDA:Doubt'
-0.22264102520957332, 'PROPAGANDA:Flag-Waving'
-0.14597783189491995, 'PROPAGANDA:Name\_Calling/Labeling'
-0.05473195042155012, 'PROPAGANDA:Appeal\_to\_fear-prejudice'
-0.009004957223912572, 'PROPAGANDA:Exaggeration/Minimisation'
--0.030922623225167634, 'PROPAGANDA:Appeal\_to\_Authority'
-0.1144714471745093, 'PROPAGANDA:Reductio\_ad\_hitlerum'
-nan, 'PROPAGANDA:Bandwagon'
-0.09621605042614789, 'PROPAGANDA:Black-and-White\_Fallacy'
-0.10482905539247817, 'PROPAGANDA:Causal\_Oversimplification'
-nan, 'PROPAGANDA:Obfuscation/Intentional\_Vagueness/Confusion'
-nan, 'PROPAGANDA:Red\_Herring'
--0.06071980052307917, 'PROPAGANDA:Repetition'
-0.14586262060219735, 'PROPAGANDA:Slogans'
-nan, 'PROPAGANDA:Straw\_Men'
-0.04832388032279562, 'PROPAGANDA:Thought-terminating\_Cliches'
-0.03393924564812576, 'PROPAGANDA:Whataboutism'
+The Spearman's correlation between the populism and the total word-based percentage (all techniques together) is $0.1694$. This value is quite low. So it seems that they are quite unrelated.
 
---> \todo{PLOT this}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/populism_propaganda_correlation.pdf}
+    \caption{Spearman's correlation between populism and each propaganda technique}
+    \label{fig:populism_propaganda_correlation}
+\end{figure}
 
-L/R evaluation:
-Assumption: propaganda correlates to populism similarly in L/C/R
-Result total: 0.225 Left, 0.005 Center, 0.374 Right → Why? Is it a matter of quantity of populism/propaganda?
-Populism average:  [0.1259, 0.0729, 0.2712]
-Propaganda average: [0.0165, 0.0271, 0.0432]
-Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on right (21% more), but the correlation Right is bigger than left of 66%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
+By breaking it down to the correlation of populism to each propaganda technique, we can see in Figure~\ref{fig:populism_propaganda_correlation} that the strongest correlation is found with \texttt{Flag-waving}, \texttt{Name\_Calling/Labeling} and \texttt{Slogans}. Some of the techniques have very low correlation. It is interesting to notice that two techniques have slightly negative correlation (\texttt{Repetition} and \texttt{Appeal\_to\_Authority}), so this means that they are used by less populistic speeches.
+
+
+% L/R evaluation:
+% Assumption: propaganda correlates to populism similarly in L/C/R
+% Result total: 0.225 Left, 0.005 Center, 0.374 Right → Why? Is it a matter of quantity of populism/propaganda?
+% Populism average:  [0.1259, 0.0729, 0.2712]
+% Propaganda average: [0.0165, 0.0271, 0.0432]
+% Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on right (21\% more), but the correlation Right is bigger than left of 66\%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
 
 % findings
-Propaganda and populism are correlated, but not too strongly. In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → unbalanced detection caused by unbalanced data
+Propaganda and populism are correlated, but not too strongly.
+The fact that some of the techniques are correlated to populism is a good sign, even though the correlation scores are still low to be considered as ``strong ccorrelation''. We will expand this experiment in the next Chapter when we take into consideration political leaning.
+Considering that the current fine-grained propaganda detection is not so accurate (cf. Section~\ref{ssec:lp_techniques_propaganda}), we can say that this weak correlation can still be considered as a signal that the two phenomena are related.
+% In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → unbalanced detection caused by unbalanced data
 
 
 
@@ -355,23 +354,24 @@ Therefore, here we analyse the relationship between the linguistic techniques of
 To analyse this relationship, we have two different experiments:
 
 \begin{enumerate}
-    \item persuasion variations across similar articles: TODO
-    \item improving sentence clustering by eliminating propaganda: TODO
+    \item small variations vs detected persuasion: we want to investigate if the small variations (between several texts about the same event detail) can also be seen with changes on the detected persuasion; 
+    \item removing persuasion to improve clustering: is persuasion acting as noise when we want to cluster news articles? We want to test what happens when we remove persuasive words from the articles.
 \end{enumerate}
 
-\subsection{\statusorange The effects of small changes on detected persuasion}
+\subsection{\statusorange The effects of small variations on detected persuasion}
+\label{ssec:lp_relationship_small_variations}
 
 % Why
 % What
 For this experiment, we want to observe how the small changes detected in the previous chapter affect the detected persuasion.
 Having computing methods for sentiment and for fine-grained propaganda detection, we decide not proceed with populism detection, but only keeping as axes for measurements the sentiment ones (strength and polarity) and the 18 propaganda techniques.
 
-% RQ
-Our RQ (chap4) 3 is``are the differences between similar articles related to a different use of persuasion techniques?".
+% RQ3
+Our RQ3 is``are the differences between similar articles related to a different use of persuasion techniques?".
 So to answer this question, here we take groups of linked sentences (from chapter 3) and we see how their variations are related to changes in persuasion.
 
 % How: method
-We describe persuasion with the help of sentiment detection (as seen in section~\ref{sec:TODO}) and fine-grained propaganda detection (section~\ref{sec:TODO}).
+We describe persuasion with the help of sentiment detection (as seen in section~\ref{ssec:lp_techniques_sentiment}) and fine-grained propaganda detection (section~\ref{ssec:lp_techniques_propaganda}).
 The comparison is done in different ways:
 \begin{enumerate}
     \item score: sentiment or propaganda scores. For example, one change in an adjective could result in more negative sentiment, or in more of a specific propaganda technique;
@@ -379,25 +379,38 @@ The comparison is done in different ways:
 \end{enumerate}
 
 % data
-For this experiment we use a set of pairs of sentences (extracted from the analysis of chapter 3) which are characterised by high similarity score (USE model). \todo{How many, stats?}
+For this experiment we use a set of pairs of sentences (extracted from the analysis of chapter 3) which are characterised by high similarity score (USE model). \todo{How many, stats? describe dataset}
 
 \todo{Figure with example: uniqueness of words highlighted, corresponding plot with scores of the two sentences, and also persuasion words in the text (different colour?)}
 
-The output measures are: on average how many variations in percentage also imply a different measured persuasion. Is it that most of the changes are not making the scores change? And, are the words changed also loaded with techniques of persuasion? 
+The output measures are: on average, how many variations in percentage also imply a different measured persuasion (in terms of scores)? %Are the variations between the texts making the persuasion scores change? 
+And, are the words changed also loaded with techniques of persuasion? 
 
 % Results
-The results show that, on average, it depends on which persuasion technique is considered.
-
-First the quantitative results: 
-- number of changes vs score variations
-- number of changes vs persuasion-loaded terms: how many terms in percentage?
+The results have a first quantitative side and then also a qualitative one.
+% it depends on which persuasion technique is considered.
 
 
-Then the qualitative results: do the scores/words represent correctly the persuasion differences? For measuring this, we rely on manual analysis on a subset of sentence pairs. We selected these pairs randomly. Some of these pairs (How many?)
-(because we don't have actually the ground truth, we are estimating it based on our observations)
+\todo{compute metrics from results}
+% quantitative
+% number of changes vs score variations
+Overall, on the quantitative side, we see that a portion (\%?) of the variations in the texts is causing a persuasion score change. Out of X couples of sentences with small variations, only for Y we see a change. Among these, Y1 are changes to the sentiment and Y2 to the propaganda score. The breakdown by techniques is illustrated in the blue bars of Figure~\ref{TODO}, which shows the percentages of variations that correspond to a change in the respective technique. (for each technique, for each sentence pair, a boolean yes/no where yes corresponds to ``changed" and no to ``unchanged", then counting the percentages of yes)
 
-We can define false/true positive/negatives in the following way:
-- ground truth: our estimation, but not available
+
+%number of changes vs persuasion-loaded terms: how many terms in percentage?
+And secondly, still on the quantitative side, we also compute a measure based on the words: how many changed words (percentage) are also persuasion related? To compute this, we have X words that have been changed (out of Z sentence pairs), and Y words that are related to persuasion.
+With respect to the first measure, this metric is based on the words instead of being based on the number of samples. The red bars of Figure~\ref{TODO} illustrate it.
+
+\todo{Barchart (horizontal) of: 1(blue) percentage of variations that also correspond to a change in the  for each of the techniques. X axis: percentage, Y axes: techniques. 2(red): percentage of words changed that also are persuasion related}
+
+\todo{now comment on the quantitative results}
+
+
+Then the qualitative results: do the scores/words represent correctly the persuasion differences? For measuring this, we rely on manual analysis of a subset of sentence pairs. We selected these pairs randomly. We manually label these pairs (How many?)
+(because we don't actually have the ground truth, we are estimating it based on our observations) in two categories: with differences in persuasion or without them.
+
+We can define false/true positives/negatives in the following way:
+- ground truth: our estimation, but not really a "ground truth";
 - detected: whether a persuasion score changes between the two sentences
 
 True positive: our estimation is that it should change, and it actually changes.
@@ -410,6 +423,8 @@ We then have a set of sentence pairs that only looks like a re-wording with no p
 
 \todo{finish}
 
+Results? To be analysed
+
 % Sentiment
 
 % % sentiment
@@ -419,7 +434,8 @@ We then have a set of sentence pairs that only looks like a re-wording with no p
 % % problems?
 % The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
 
-\subsection{\statusorange Removing persuasion to make better clustering?}
+\subsection{\statusorange Removing persuasion to improve clustering}
+\label{ssec:lp_relationship_removing}
 
 effect of sentiment/propaganda words on sentence clustering
 \todoAW{for doing what? More motivation, this is only operational}
@@ -488,3 +504,26 @@ So propaganda and sentiment are acting like noise in clustering.
 
 TODO explain better
 
+\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
+
+\section{Discussion}
+
+Responses to the 4 RQs with contributions:
+
+\begin{enumerate}
+    \item What do writers use to persuade the reader? Different persuasion techniques: sentiment / emotion manipulation, propaganda and populism (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
+    \item How can we automatically detect those techniques? Sentiment is detected through lexicons and sentiment treebanks. Propaganda with fine-grained models and datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda. Answered also in Section~\ref{sec:lp_techniques}.
+    \item Are the differences between similar articles related to a different use of persuasion techniques? In some cases they are. But in the majority of the cases, the ddifferences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences. Or also we have errors in the detection (especially sentiment) that avoid us to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
+    \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our assumption done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
+\end{enumerate}
+
+% Findings:
+
+% \begin{itemize}
+%     \item 
+% \end{itemize}
+
+\section{Next}
+% link to next chapter
+In this chapter we investigated the persuasion techniques. But we have not studied the relationship between this observed persuasion in the text and the ideals/agenda/perspective of the author/outlet. It can be really useful to understand the context around the source of an article in order to interpret its persuasion.
+For this reason, the next chapter will consider perspectives and political sides. In this way we will try to understand if the persuasion of each political side is similar or which are the differences. If a different goal for the persuasion also can be observed on the persuasion itself.
