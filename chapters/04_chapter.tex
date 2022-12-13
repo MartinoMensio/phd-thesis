@@ -14,7 +14,9 @@ Therefore, in order to characterise those differences, this chapter introduces \
 From the last chapter~\ref{chap:common_ground_search}, 
 %we concluded with the need to understand how specific terms are used to persuade the reader. 
 we are able to extract terms that have been changed in related articles, from sentences that are very similar but have still some differences.
-We want now to quantitatively analyse these detected variations to quantify their specific use of persuasion techniques.\todoHA{Why? What is the value of this detection?}
+We want now to quantitatively analyse these detected variations to quantify their specific use of persuasion techniques.
+% \todoHA{Why? What is the value of this detection?}
+In this way, we can understand if the specific term choices are in fact done to persuade the reader of a specific idea, or if they are only the manifestation of random choices.
 
 For this reason, this chapter investigates the \emph{linguistic techniques of persuasion}, in other words, how the persuasion manifests itself on the linguistical surface.
 
@@ -23,10 +25,11 @@ Our motivation is to analyse whether the terms that change between multiple arti
 
 The Research Questions we want to answer are: 
 \begin{enumerate}
-    \item What do writers use to persuade the reader?
-    \item How can we automatically detect those techniques [which are used by writers to persuade]? % Which are the possible indicators of these differences? // 
-    \item Are the differences between similar articles (extracted in the previous chapter) related to a different use of persuasion techniques? % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
-    \item Is persuasion an obstacle in recognising the events in multiple articles? (clustering)\todoHA{What led to this RQ? Previous text does not lead to this}
+    \item \emph{What do writers use to persuade the reader?}
+    \item \emph{How can we automatically detect those techniques [which are used by writers to persuade]?} % Which are the possible indicators of these differences? // 
+    \item \emph{How are the differences between similar articles} (extracted in the previous chapter) \emph{related to a different use of persuasion techniques?} % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
+    \item If the same story can be narrated differently depending on the persuasion techniques used, then persuasion is adding variations to the narration. Therefore, \emph{how much of an obstacle is persuasion in recognising the events in multiple articles?} %(clustering)
+    %\todoHA{What led to this RQ? Previous text does not lead to this}
 \end{enumerate}
 
 
@@ -35,8 +38,21 @@ The Research Questions we want to answer are:
 % 18 techniques of propaganda
 
 % Experiment together with common ground search
-To answer these research questions, we take from Chapter~\ref{sec:lit_propaganda} the most commonly/recently analysed \gls{persuasion} means for which we have computational detection methods: \gls{propaganda} and \gls{sentiment}.\todoHA{Any refs that link propaganda and sentiment with persuasion?}
+To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly/recently analysed \gls{persuasion} means for which we have computational detection methods: \gls{propaganda} and \gls{sentiment}.
+%\todoHA{Any refs that link propaganda and sentiment with persuasion?}
+
+% BEGIN response to HA
+As discussed in Chapter~\ref{sec:lit_persuasion}, we consider here \gls{persuasion} as a term that encompasses both \gls{sentiment} and \gls{propaganda}. % and populism
+It is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
+And the relationship with propaganda comes from the inherent goal of propaganda to influence the view of the public about an idea or a group~\citep{bernays,jowett2018propaganda}.
+
+% It is known that persuasion is related to an emotional response from the reader/listener, being related to emotions.
+% Persuasion and Discursive Repertories~\cite{orrumachine}
+% propaganda is a``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
+% Persuasion and Propaganda: ~\cite{jowett2018propaganda}.
 %, populism.
+% END response to HA
+
 
 % carry the following experiment:
 Therefore, we have the first part of this chapter that covers the detection of these persuasion techniques (Section~\ref{sec:lp_techniques}).
@@ -54,15 +70,20 @@ This is implemented according to the following pipeline:\todoHA{Rationale?}
 
 % findings
 We discover that
-the initial methods for fine-grained propaganda detection seem to be more promising\todoHA{How? In what way?} than sentiment detection.
-Fine-grained propaganda analysis gives a lot of\todoHA{?}
+the initial methods for fine-grained propaganda detection seem to be more promising %\todoHA{How? In what way?}
+than sentiment detection.
+Fine-grained propaganda analysis gives a multidimensional result because it provides the amount and words for each specific technique. Instead, sentiment only provides a mono- (or bi-) dimensional result. And furthermore, it shows weaker results, as will be shown in the next sections.
+Sentiment is (cor)related to the specific propaganda technique of \texttt{Loaded\_language}, and having one technique instead of $18$ is only a disadvantage.
+% does not provide useful insights when observed together with the changes occurring in the articles. 
+The multi-dimensionality of propaganda across the techniques is much more useful.
 For this reason, we mainly use propaganda for the experiments of the following chapters. 
-Sentiment, on the other side, while being related to the propaganda technique of \texttt{Loaded\_language}, does not provide useful insights when observed together with the changes occurring in the articles. The multi-dimensionality of propaganda across the techniques is much more useful.
 
 Our findings from this chapter include:
 \begin{enumerate}
     \item The relationship between the changed terms and propaganda language is not very clear: different parts are not always loaded with loaded language or propaganda. A lot of changes are not meaningful in terms of propaganda: linguistic variance.
-    \item Removing propaganda and/or sentiment from articles makes related articles slightly easier to cluster correctly.\todoHA{For what? Not discussed earlier}
+    \item As we hypothesised, the persuasion in the articles is adding terms and concepts that create variations (fitting different persuasion goals). As a consequence, these selected words make it slightly more difficult to recognise groups of articles related to the same event.
+    Removing propaganda and/or sentiment from articles makes related articles slightly easier to cluster correctly.
+    %\todoHA{For what? Not discussed earlier}
 \end{enumerate}
 
 % interpretation
@@ -76,8 +97,10 @@ The next sections are organised as follows. Section~\ref{sec:lp_techniques} cont
 % TODO preamble to different techniques: sentiment, propaganda, populism, ...
 
 From all the different methods and approaches described in Chapter~\ref{sec:lit_propaganda}\tododefault{check ref}, in this section, we are using a set of methods to detect phenomena related to persuasion. % and do that at the word-level.
-In other words, we are detecting several techniques that we assume\todoHA{Assume? No references to support this assumption} to be related to persuasion~\cite{gass2018persuasion}: sentiment (subjectivity) and 18 different propaganda techniques.% and populism.
-\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclasses. Look in literature.}
+In other words, we are detecting several techniques that we know 
+%\todoHA{Assume? No references to support this assumption} 
+to be related to persuasion~\cite{gass2018persuasion}: sentiment and 18 different propaganda techniques.% and populism.
+%\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclasses. Look in literature.}
 
 When selecting which techniques to target, we have an important requirement to keep in mind: we are interested to work at the word-level, because our end goal is to study how persuasion techniques relate to the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need word-level information. We are analysing word substitutions.
 
@@ -87,15 +110,16 @@ Then in Subsection~\ref{ssec:lp_techniques_populism_vs_propaganda} we show some 
 \subsection{\statusorange Sentiment detection}
 \label{ssec:lp_techniques_sentiment}
 
-First of all, we start with some sentiment detection. It is known that persuasion is related to an emotional response from the reader/listener, being related to emotions~\citep{rocklage2018persuasion,petty2015emotion,desteno2004discrete} and to sentiment~\citep{gatti2014sentiment}.
+First of all, we start with some sentiment detection. It is known that persuasion is very often related to an emotional response from the reader/listener, being related to emotions~\citep{rocklage2018persuasion,petty2015emotion,desteno2004discrete} and to sentiment~\citep{gatti2014sentiment}.
 While computational approaches to detect emotions exist (usually quantified across the 5-big emotions), the computational tools available for sentiment detection are more numerous and more common. The main disadvantage of only using sentiment detection instead of emotions is that it usually gives an output on 1 or 2 axes: valence (positive or negative) and strength (from neutral to strong). But for an initial analysis, we deem that sentiment is enough.
 
-For detecting the sentiment, we decide to use term-based analyses that, despite being less accurate,\todoHA{in comparison to what?} they are punctual.\todoHA{?} We need to see which words are responsible for the sentiment scores, so we are accepting less accuracy if necessary.\todoHA{unclear} Our main reason is to be able to find words that are loaded with sentiment. If the score of sentiment is not perfect, it is not a problem.\todoHA{unclear} \todoHAinline{You are telling the reader that accuracy will be bad, and that this is ok. But unclear why it will be bad, and why this is ok. Better to leave accuracy to much later, rather that accepting low accuracy upfront}
+For detecting the sentiment, we decide to use term-based analyses that, despite being less accurate than huge deep-learning models, %\todoHA{in comparison to what?}
+they can provide the specific words responsible for the output. We need to see which words are responsible for the sentiment scores, so we are accepting less accuracy if necessary.\todoHA{unclear} Our main reason is to be able to find words that are loaded with sentiment. If the score of sentiment is not perfect, it is not a problem.\todoHA{unclear} \todoHAinline{You are telling the reader that accuracy will be bad, and that this is ok. But unclear why it will be bad, and why this is ok. Better to leave accuracy to much later, rather that accepting low accuracy upfront}
 In the next subsections, first we describe the chosen detection tools, then we describe how we combined them together, what they are able to extract on our datasets. Finally, we conclude with some findings that we discovered while applying sentiment detection to news articles (big variations of sentiment across the articles, correlation with quotation).
 
 \subsubsection{\statusgreen Sentiment analysis tools}
 
-For detection, most of the methods that we pick are lexicon-based. This happens because of our focus on getting the words responsible for the scores.\todoHAinline{change the order. start by explaining your needs, and justify them, then explain what you found/selected} Most of these tools work based on a lexicon that is combined with different scoring mechanisms (e.g., sentistrength, textblob, vader). They are built around a lexicon where each word has a specific score, and some combination rules. But we do not exclude tools that work with a different, more complex approach. It is only required from them to give a punctual\todoHA{?} score to the individual words. For example we use Stanford CoreNLP which is based on a RNN~\citep{socher2013recursive} that accounts for the sequence but also for the dependency tree of the sentence (in other words, discovering the combination rules autonomously). It is not based on a lexicon, but instead on a more complex dataset linking sentiment scores to a dependency tree.
+For detection, most of the methods that we pick are lexicon-based. This happens because of our focus on getting the words responsible for the scores.\todoHAinline{change the order. start by explaining your needs, and justify them, then explain what you found/selected} Most of these tools work based on a lexicon that is combined with different scoring mechanisms (e.g., sentistrength, textblob, vader). They are built around a lexicon where each word has a specific score, and some combination rules. But we do not exclude tools that work with a different, more complex approach. It is only required from them to give a score specific to the individual words. For example we use Stanford CoreNLP which is based on a RNN~\citep{socher2013recursive} that accounts for the sequence but also for the dependency tree of the sentence (in other words, discovering the combination rules autonomously). It is not based on a lexicon, but instead on a more complex dataset linking sentiment scores to a dependency tree.
 % We selected the following methods: sentistrength, textblob, vader, Stanford CoreNLP
 
 % Describe each of the methods
@@ -298,7 +322,7 @@ And to be on the side of ordinary people, it uses propaganda as a mean. So a pop
 
 \todoHAinline{ok, but what would detecting populism give you? Why is this of value?}
 
-\todoHAinline{I would start by: 1. explaining ways of detecting populism. 2. detecting it and evaluating that, then 3. see if correlated with propaganda}
+\todoHAinline{I would start by: 1. explaining value of detecting populism. 2. detecting it and evaluating that, then 3. see if correlated with propaganda}
 
 % practically/computationally
 On the computational/detection side, we want to see if this relationship between populism and propaganda stands.
@@ -379,7 +403,7 @@ For this experiment, we want to observe how the small changes detected in the pr
 Having computing methods for sentiment and for fine-grained propaganda detection, we decide not proceed with populism detection,\todoHA{probably move section on populism to the end since it is weak and experiment not thorough} but only keeping as axes for measurements the sentiment ones (strength and polarity) and the 18 propaganda techniques.
 
 % RQ3
-Our RQ3 is ``are the differences between similar articles related to a different use of persuasion techniques?".
+Our RQ3 is ``how are the differences between similar articles related to a different use of persuasion techniques?".
 So to answer this question, here we take groups of linked sentences (from chapter 3) and we see how their variations are related to changes in persuasion.
 
 % How: method
@@ -580,7 +604,7 @@ Responses to the 4 RQs with contributions:
 \begin{enumerate}
     \item What do writers use to persuade the reader? Different persuasion techniques: sentiment / emotion manipulation, propaganda and populism (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
     \item How can we automatically detect those techniques? Sentiment is detected through lexicons and sentiment treebanks. Propaganda with fine-grained models and datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda. Answered also in Section~\ref{sec:lp_techniques}.
-    \item Are the differences between similar articles related to a different use of persuasion techniques? In some cases they are. But in the majority of the cases, the ddifferences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences. Or also we have errors in the detection (especially sentiment) that avoid us to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
+    \item How are the differences between similar articles related to a different use of persuasion techniques? In some cases they are. But in the majority of the cases, the ddifferences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences. Or also we have errors in the detection (especially sentiment) that avoid us to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
     \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
 \end{enumerate}
 
