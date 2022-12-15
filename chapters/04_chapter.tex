@@ -483,15 +483,17 @@ Propaganda instead ?
 \subsection{\statusorange Removing persuasion to improve clustering}
 \label{ssec:lp_relationship_removing}
 
-The last experiment of this chapter takes the problem of analysing the relationship between persuasion and news articles variation from another perspective.
+The last experiment of this chapter takes the problem of analysing the relationship between persuasion and variations in news articles from another perspective.
 We approach this analysis from the point of view of clustering.
 The previous chapter already analysed the clustering algorithms at the article and sentence level.
 Here instead we question whether we can help clustering articles by removing the persuasion from the articles.
 
-Our RQ4 is ``Is persuasion an obstacle in recognising the events in multiple articles?" To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned" from persuasion.\todoHA{Avoid yes/no type of RQs}
+Our RQ4 is ``how much of an obstacle is persuasion in recognising the events in multiple articles?" To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned" from persuasion.
+%\todoHA{Avoid yes/no type of RQs}
 
 % why
-The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}), and in this experiment we target only the cases where they appear in different words. (TODO: if style-transfer is applied, we can also target the cases where they co-live on the same words).
+The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}), and in this experiment we target only the cases where they appear in different words.
+\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words}
 
 
 % effect of sentiment/propaganda words on sentence clustering
@@ -521,7 +523,7 @@ In the next subsections we analyse the dataset used, the approach and the findin
 
 \subsubsection{Dataset}
 
-There are two different datasets that we can use for having the clustering ground truth:
+We need some data that contains groups of articles that are related to the same events. There are two different datasets that we can use for having the clustering ground truth:
 
 \begin{itemize}
     \item AllSides: articles are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October) 5124 headlines, for a total of 15050 articles. Positive sides: human-curated, public. Negative sides: only 3 articles for each headline. But for each topic there are 46 articles on average;
@@ -536,19 +538,23 @@ Between these two datasets, we want to be using good quality ground truth for do
 
 \subsubsection{Approach}
 
-Since we want to understand whether by removing persuasion we can have better clustering, our approach is to:
-\todo{not sequential, better to describe pipeline: encoding, clustering, measuring, comparing}
+Since we want to understand whether by removing persuasion we can have better clustering, our approach is to apply a standard clustering pipeline to two different inputs: first, to the raw articles, and then to the articles with the removed persuasion. So the steps that we do are the following:
 \begin{enumerate}
-    \item decide one clustering approach: it needs to be customisable in terms of numbers of clusters
-    \item test the clustering on the articles from the dataset
-    \item measure the accuracy of the clustering with respect to the ground truth
-    \item remove the persuasion terms
-    \item run the clustering on the ``cleaned'' articles, with the same clustering algorithm and parameters
-    \item measure again the predcted clusters with the same metric
-    \item compare the scores and determine which case is better
+    \item remove persuasion from the article in the first dataset to prepare the second dataset to feed into the pipeline
+    \item encode the documents (for both datasets)
+    \item run the clustering algorithm (both datasets)
+    \item measure the quality of the clusters with the ground truth labels (both datasets)
+    \item compare the two cases to determine which one is better
+    % \item decide one clustering approach: it needs to be customisable in terms of numbers of clusters
+    % \item test the clustering on the articles from the dataset
+    % \item measure the accuracy of the clustering with respect to the ground truth
+    % \item remove the persuasion terms
+    % \item run the clustering on the ``cleaned'' articles, with the same clustering algorithm and parameters
+    % \item measure again the predicted clusters with the same metric
+    % \item compare the scores and determine which case is better
 \end{enumerate}
 
-We do this procedure with different number of ground truth clusters, increasing the dataset from an initially small subset.
+We do this procedure with different number of ground truth clusters, increasing the dataset from an initially small subset.\tododefault[size=\tiny]{say this after the description of each step}
 
 % Test the ability of matching gold clusters with predicted clusters.
 % - standard full article
@@ -556,19 +562,24 @@ We do this procedure with different number of ground truth clusters, increasing 
 
 % Seeing if there is an improvement or not when removing propaganda words.
 
-Removal of the terms: sentiment-loaded terms (multiple lexicons and tools: sentistrength, vader, )
-%And these? AFINN, BING) 
-and propaganda spans (from https://www.tanbih.org/prta).
+% STEP 1
+For the Step 1, we proceed to remove the terms of persuasion with the methods described in Section~\ref{ssec:lp_techniques_sentiment} for sentiment and in Section~\ref{ssec:lp_techniques_propaganda} for propaganda. We input the text articles, and we get in output from the methods the terms that are loaded with sentiment or propaganda techniques. Then we proceed to remove these words from the original articles and we build a second dataset ``cleaned" from persuasion.
+% Removal of the terms: sentiment-loaded terms (multiple lexicons and tools: sentistrength, vader, )
+% %And these? AFINN, BING) 
+% and propaganda spans (from https://www.tanbih.org/prta).
 
+% STEP 2
+For the Step 2, document encoding, we take
 Document representation:
 Embed the document with the Universal Sentence Encoder / TF-IDF
 
+% STEP 3 
 Clustering methods:
 There are multiple clustering methods, and document representations that influence the clustering. We decided to use a method that does not require to specify the number of clusters wanted.
 We started with this specific method (also used in the previous Chapter):
 Hierarchical Agglomerative Clustering (ward method, euclidean distance), which  is very flexible in showing how the clusters evolve when the distance threshold is raised
 
-
+% STEP 4
 Clustering evaluation metrics:
 Although clustering is an unsupervised task, we need to see how well the clustering matches with the ground truth annotations of the data. 
 The most used metrics for comparing clustering are:
@@ -583,7 +594,7 @@ TODO figure
 The interpretation of this curve is that, when the hierarchical clustering begins to raise the threshold, the clusters match more with the gold clusters, until a certain point where distinct clusters are merging together and therefore lowering the scores.
 We can compare the behaviour of this curve between the full text and the text without the loaded/propaganda pieces. The comparison can be at the maximum point, where the threshold is optimal (we should truncate the clustering there) or we can compare the full curve. For simplicity, in the results below, we compare the maximum value of the curve, reporting also the distance where it has been reached.
 
-
+% STEP 5 comparing
 \subsubsection{Results and Findings}
 
 TODO: copy table from google docs.
@@ -595,6 +606,9 @@ So propaganda and sentiment are acting like noise in clustering.
 
 TODO explain better
 
+Limitation: removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it could be a problem.
+
+Limitation 2: if some words are both persuasion and topical, by removing them, it becomes more difficult to form the correct cluster. This is why non-persuasive rephrasing could be needed. (choice of terms, but still some meaning).
 \todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 
 \section{\statusorange Discussion}
