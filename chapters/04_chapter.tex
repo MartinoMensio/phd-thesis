@@ -40,6 +40,7 @@ The Research Questions we want to answer are:
 % Experiment together with common ground search
 To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly/recently analysed \gls{persuasion} means for which we have computational detection methods: \gls{propaganda} and \gls{sentiment}.
 %\todoHA{Any refs that link propaganda and sentiment with persuasion?}
+\todoAW{Harith asks what links propaganda, sentiment and persuasion. I'd ask what separates them. ie. why do you need to study persuasion at all if you can detect the other two cases?}
 
 % BEGIN response to HA
 As discussed in Chapter~\ref{sec:lit_persuasion}, we consider here \gls{persuasion} as a term that encompasses both \gls{sentiment} and \gls{propaganda}. % and populism
@@ -63,7 +64,7 @@ we take into study the terms that change between articles, and we analyse whethe
 This is implemented according to the following pipeline:\todoHA{Rationale?}
 \begin{enumerate}
     \item Analysis from Chapter~\ref{chap:common_ground_search}: extracts the words that are changed between similar sentences of similar articles
-    \item Extraction of different techniques (sentiment, propaganda) on the sentences (described in the next Section~\ref{sec:lp_techniques})
+    \item Extraction of different techniques (sentiment, propaganda) on the sentences (described in the next Section~\ref{sec:lp_techniques})\todoAW{Doesn't your earlier paragraph suggest that we've already got this? ("means for which we have computational detection methods: propaganda and sentiment"))}
     \item Analysis of the relationship between these techniques and the changes in the sentences (described in Section~\ref{sec:lp_relationship})
 \end{enumerate}
 
@@ -80,16 +81,17 @@ For this reason, we mainly use propaganda for the experiments of the following c
 
 Our findings from this chapter include:
 \begin{enumerate}
-    \item The relationship between the changed terms and propaganda language is not very clear: different parts are not always loaded with loaded language or propaganda. A lot of changes are not meaningful in terms of propaganda: linguistic variance.
+    \item The relationship between the changed terms and propaganda language is not very clear: different parts do not always contain loaded language or propaganda. A lot of changes are not meaningful in terms of propaganda: linguistic variance.\todoAW{Not sure what you're getting at here.}
     \item As we hypothesised, the persuasion in the articles is adding terms and concepts that create variations (fitting different persuasion goals). As a consequence, these selected words make it slightly more difficult to recognise groups of articles related to the same event.
-    Removing propaganda and/or sentiment from articles makes related articles slightly easier to cluster correctly.
+    Removing propaganda and/or sentiment from articles makes related articles slightly easier to cluster correctly.\todoAW{Not sure what you mean by this. In most cases of cluster analysis, there's no meaningful concept of a "correct cluster"}
     %\todoHA{For what? Not discussed earlier}
 \end{enumerate}
 
 % interpretation
 
 % TODO: Interpretation? Or just pointers to next sections
-The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains some techniques that we identifed being related to persuasion. We present there what they are able to detect on our datasets (stage 2 of the pipeline above described). Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed (stage 3 of the pipeline).
+The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains some techniques that we identifed being related to persuasion.\todoAW{? I don't know what you mean by "related to" here.}
+We present there what they are able to detect on our datasets (stage 2 of the pipeline above described). Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed (stage 3 of the pipeline).
 
 \section{Different Techniques of Persuasion}
 \label{sec:lp_techniques}
@@ -102,20 +104,23 @@ In other words, we are detecting several techniques that we know
 to be related to persuasion~\cite{gass2018persuasion}: sentiment and 18 different propaganda techniques.% and populism.
 %\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclasses. Look in literature.}
 
-When selecting which techniques to target, we have an important requirement to keep in mind: we are interested to work at the word-level, because our end goal is to study how persuasion techniques relate to the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need word-level information. We are analysing word substitutions.
+When selecting which techniques to target, we have an important requirement to keep in mind: we are interested to work at the word-level, because our end goal is to study how persuasion techniques relate to the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need word-level information.\todoAW{Not sure what you're getting at here. What information exactly are you hoping for at the word level? And it's not usually single words that persuage; rather, it's usually a sentence or article. So it's fine to want to identify the properties of the words that make them propagandistic, but I'd be wary of suggesting that that means you shouldn't be trying to also do a sentence- or article-level analysis.}
+We are analysing word substitutions.
 
 In the following subsections, we illustrate the models that we are using to perform sentiment detection (Subsection~\ref{ssec:lp_techniques_sentiment}) and fine-grained propaganda detection (Subsection~\ref{ssec:lp_techniques_propaganda}).
-Then in Subsection~\ref{ssec:lp_techniques_populism_vs_propaganda} we show some work done on populism. Even though we don't have computational detection of populism, we wanted to see the relationship that it has with propaganda.
+Then in Subsection~\ref{ssec:lp_techniques_populism_vs_propaganda} we show some work done on populism. Even though we don't have computational detection of populism, we wanted to see the relationship that it has with propaganda.\todoAW{Not sure this para is necessary}
 
 \subsection{\statusorange Sentiment detection}
 \label{ssec:lp_techniques_sentiment}
 
 First of all, we start with some sentiment detection. It is known that persuasion is very often related to an emotional response from the reader/listener, being related to emotions~\citep{rocklage2018persuasion,petty2015emotion,desteno2004discrete} and to sentiment~\citep{gatti2014sentiment}.
-While computational approaches to detect emotions exist (usually quantified across the 5-big emotions), the computational tools available for sentiment detection are more numerous and more common. The main disadvantage of only using sentiment detection instead of emotions is that it usually gives an output on 1 or 2 axes: valence (positive or negative) and strength (from neutral to strong). But for an initial analysis, we deem that sentiment is enough.
+While computational approaches to detect emotions exist (usually quantified across the 5-big emotions), the computational tools available for sentiment detection are more numerous and more common. The main disadvantage of only using sentiment detection instead of emotions is that it usually gives an output on 1 or 2 axes:\todoAW{Wouldn't a 2-dimensional analysis be more fine grained than a 5-bucket "big emotion" analysis? In which case, it's an advantage of using sentiment rather than emotions.}
+valence (positive or negative) and strength (from neutral to strong). But for an initial analysis, we deem\todoAW{How?} that sentiment is enough.
 
 For detecting the sentiment, we decide to use term-based analyses that, despite being less accurate than huge deep-learning models, %\todoHA{in comparison to what?}
 they can provide the specific words responsible for the output. We need to see which words are responsible for the sentiment scores, so we are accepting less accuracy if necessary.\todoHA{unclear} Our main reason is to be able to find words that are loaded with sentiment. If the score of sentiment is not perfect, it is not a problem.\todoHA{unclear} \todoHAinline{You are telling the reader that accuracy will be bad, and that this is ok. But unclear why it will be bad, and why this is ok. Better to leave accuracy to much later, rather that accepting low accuracy upfront}
 In the next subsections, first we describe the chosen detection tools, then we describe how we combined them together, what they are able to extract on our datasets. Finally, we conclude with some findings that we discovered while applying sentiment detection to news articles (big variations of sentiment across the articles, correlation with quotation).
+\todoAW{If you're using OTS sentiment analysers, you don't really need to justify their lack of accuracy. Rather, you should focus on what it means for your own results, and whether the (lack of) performance of the sentiment analyser will excessively impact your work.}
 
 \subsubsection{\statusgreen Sentiment analysis tools}
 
@@ -147,30 +152,34 @@ The outputs can be read in two modalities:
 \end{enumerate}
 
 Also for Vader, to obtain the single words that are loaded with sentiment, we take a look at the lexicon to match manually. The advantage of this tool is that the lexicon is much larger than the one from Sentistrength.
+\todoAW{Risky comment: you can modify sentistrength with your own lexicon and then retrain it. This is pretty well established, so I don't think you can really count this as an advantage unless you can convicingly argue that you've a good reason for only considering the prebuilt models.}
 
 
 
 \paragraph{TextBlob}
-The next tool is TextBlob\footnote{\url{ https://textblob.readthedocs.io/}}, which instead provides the words/parts responsible for the sentiment natively.
-The lexicon only contains adjectives, in total 2918. Each one of them is marked with the \emph{polarity}, \emph{subjectivity}, \emph{intensity} (for the booster words) and with the \emph{confidence}. Having these scores, the tool keeps track of the input text across two dimensions: polarity and subjectivity.
+The next tool is TextBlob\footnote{\url{ https://textblob.readthedocs.io/}}, which instead provides the words/parts responsible for the sentiment natively.\todoAW{?}
+The lexicon only contains adjectives, in total 2918. Each one of them is marked with the \emph{polarity}, \emph{subjectivity}, \emph{intensity} (for the booster words)\todoAW{What's a booster word? "very", for example? If so, that's an adverb, not an adjective.} and with the \emph{confidence}. Having these scores, the tool keeps track of the input text across two dimensions: polarity and subjectivity.
 Therefore, the outputs of the analysis are the two scores of \emph{polarity}, a real value in $[-1;1]$ (-1 negative, 0 neutral, 1 positive), and \emph{subjectivity}, a real value in $[0;1]$ (0 objective, 1 subjective).
 
-Relatively small lexicon, but it has the advantage of being focused on the adjectives. Combining it with the other tools enables us to expand the overall lexicon.
+Relatively small lexicon, but it has the advantage of being focused on the adjectives.\todoAW{Why is that an advantage? If I describe someone as a "bearded idiot" for example, then I'm intending the noun to be the main sentiment bearer rather than the adjective.}
+Combining it with the other tools enables us to expand the overall lexicon.
 
 
 \paragraph{Stanford CoreNLP}
-Finally, Stanford CoreNLP, which is a tool that performs several NLP tasks, and one of them is sentiment analysis. The sentiment detection, differently from the previous tools presented here, is based on a more elaborated approach involving a special RNN which relates to the parse tree. 
+Finally, Stanford CoreNLP, which is a tool that performs several NLP tasks, and one of them is sentiment analysis.\todoAW{verb? Sentences, please!}
+The sentiment detection, differently from the previous tools presented here, is based on a more elaborated approach involving a special RNN which relates to the parse tree. 
 The dataset used to train this sentiment analysis model is Sentiment Treebank\footnote{\url{https://nlp.stanford.edu/sentiment/treebank.html}} which contains sentiment scores linked to dependency trees).
 The outputs of the sentiment analysis module are dual. There is an overall score of sentiment to the full sentences. And also it generates a SentimentTree which is a representation of how the sentiment is conveyed from the leaves (the single words) to the full sentence, following the dependency tree.
 The scores in output (both total and parts of the tree) have an integer value in the interval $[0;4]$ (0 = Strong\_Negative, 1 = Weak\_Negative, 2 = Neutral, 3 = Weak\_Positive, 4 = Strong\_Positive).
 
-From the SentimentTree, we wrote a parser that parses its syntax and extracts the scores to the single words.\footnote{\url{https://github.com/MartinoMensio/corenlp-sentiment-tree-parser}}
-In this way, we are able to see the sentiment of the single words and not only the overall score for a sentence.
+From the SentimentTree, we wrote a parser\todoAW{I don't think we did; writing a parser is a major undertaking.} that parses its syntax and extracts the scores to the single words.\footnote{\url{https://github.com/MartinoMensio/corenlp-sentiment-tree-parser}}
+In this way, we are able to see the sentiment of the single words and not only the overall score for a sentence.\todoAW{Really needs some examples to illustrate this point.}
 
 \subsubsection{\statusgreen Combination of the tools}
 \todoHAinline{deciding to combine upfront is not very good. Better way is to use them individually, then combine. This way you scientifically demonstrate value of each approach.}
 % Why combine
-From this list of tools, we decided to combine them together in order to increase the rate of words detected as sentiment-carrying. As each one of them has different\todoHA{what if they contradict each others?} lexicons covering different groups of words (e.g., TextBlob only adjectives), and given that they do not overlap totally,\todoHA{avoid such vague language. This is also not supported by any data. Why not?} the combined lexicon (not correct word, because CoreNLP does not use one) / detection power can be much larger than just considering one of them.
+From this list of tools, we decided to combine them together in order to increase the rate of words detected as sentiment-carrying.\todoAW{I think you mean that you wanted to improve the accuracy of the sentiment recognition.}
+As each one of them has different\todoHA{what if they contradict each others?} lexicons covering different groups of words (e.g., TextBlob only adjectives), and given that they do not overlap totally,\todoHA{avoid such vague language. This is also not supported by any data. Why not?} the combined lexicon (not correct word, because CoreNLP does not use one) / detection power can be much larger than just considering one of them.
 
 % How combined all of them
 We therefore combine them in the following way:
@@ -188,9 +197,10 @@ We therefore combine them in the following way:
 % For the words, we take the union of the words outputted from each tool. Each word can then have a positive/negative score so we also merge them,.
 % If one word is given back by just one tool, then the score is given by the tool (uniforming again the score as above). Instead if the word is given back by multiple tools, we consider it only once and we average the uniformed scores.
 
-Even if we average and combine the results, we keep the original outputs for each tool in order to backtrack the results and see where the problematics come from.
+Even if we average and combine the results, we keep the original outputs for each tool in order to backtrack the results and see where the problems come from.
 
 To uniform the scales, we consider two main axes: polarity (used by all of the tools) and strength (provided by SentiStrength, and subjectivity by TextBlob). We map the numerical intervals from $[min;max]$ to $[-1;1]$ by means of a linear transformation. The categorical values, instead, are mapped by firstly sorting the output labels from negative to positive, then converting to increasing numerical values (e.g., for 4 labels, $\set{1,2,3,4}$) and then applying the linear transformation as in the other case.
+\todoAW{Would it have made more sense to combine the lexicons from the different systems and then used them to augment one of the existing models (eg. SentiStrength)? Even if not, you should be prepared to answer that question in your viva.}
 
 \subsubsection{\statusred Statistics over our datasets}
 
@@ -229,9 +239,10 @@ Combined results
 
 \subsubsection{\statusorange Sentiment variation along articles}
 
-With this setup of the tools, we moved to inspect the articles more closely. We want to see how the sentiment evolves inside a single article\todoHA{unclear} and if it is linked to any other external factors.\todoHA{like what?}
+With this setup of the tools, we moved to inspect the articles more closely. We want to see how the sentiment evolves inside a single article\todoHA{unclear} and if it is linked to any other external factors.\todoHA{like what?}\todoAW{Such as the reader? Very vague!}
 % We then experimented with the selected libraries to see how they could analyse the sentences in news articles. 
-We started by observing how the sentiment scores vary across one single article at a time, when we consider the sentences of the articles. For each sentence, we compute the sentiment scores and then we compare how the tone changes across a single article at a time.\todoHAinline{changes how? and what change would tell us? remember that reader won't know why you are doing something unless you make that clear}
+We started by observing how the sentiment scores vary across one article at a time, when we consider the sentences of the articles.\todoAW{Earlier, you were arguing that you were concerned about word-level sentiment rather than the sentence or article level}
+For each sentence, we compute the sentiment scores and then we compare how the tone changes across a single article at a time.\todoHAinline{changes how? and what change would tell us? remember that reader won't know why you are doing something unless you make that clear}
 
 Figure~\ref{fig:sentiment_across_one_article} shows how the detected sentiment changes a lot across an article.
 \todo{which article is it? Why this one?}
@@ -243,14 +254,15 @@ Some sentences appear to be very neutral, and some instead are very subjective/i
     \caption{Sentiment along a single article. Each point on the x axis is a different sentence, while vertically on the y axis several scores are plotted.}
     \label{fig:sentiment_across_one_article}
 \end{figure}
+\todoAW{I don't understand this. Why aren't the axes labelled? What does the title mean? And where is the graph described and interpreted in the text?}
 \todo{Fig~\ref{fig:sentiment_across_one_article} coming from which libraries?}
 
 % \subsubsection{Sentiment is correlated to quotation}
-By looking closely at several articles where this behaviour occurs, we noticed that this duality of tones\todoHA{clarity} in the articles is mostly correlated to direct/indirect reporting. When the articles give space to some interviewee (quoted)\todoHA{shouldn't this be part of the evaluation? why mentioned here?} the sentiment libraries detect intense and subjective words/scores. Instead, when the reporter is narrating, the tone is quieter and more neutral.
+By looking closely at several articles where this behaviour\todoAW{What behaviour?} occurs, we noticed that this duality of tones\todoHA{clarity} in the articles is mostly correlated to direct/indirect reporting. When the articles give space to some interviewee (quoted)\todoHA{shouldn't this be part of the evaluation? why mentioned here?} the sentiment libraries detect intense and subjective words/scores. Instead, when the reporter is narrating, the tone is quieter and more neutral.
 \todoHAinline{you need examples throughout}
 
-To study this correlation on large scale on our dataset, we tested our observation by automating it.
-On one side, using the sentiment libraries. On the other, using a model for quotation detection~\citep{scheible2016model}.\footnote{\url{https://github.com/christianscheible/qsample}}
+To study this correlation on large scale on our dataset, we tested our observation\todoAW{Do you mean that from the observations you formed a hypothesis, which you then tested?} by automating it.
+On one side, using the sentiment libraries. On the other, using a model for quotation detection~\citep{scheible2016model}.\footnote{\url{https://github.com/christianscheible/qsample}}\todoAW{Sentences!}
 
 For each sentence, we computed both sentiment score and the quotation percentage (defined as number of words inside a quotation divided by total number of words).
 Figure~\ref{fig:sentiment_vs_quotation} shows for the same example article, how the two measures are moving together.
@@ -279,7 +291,8 @@ Finding 2 (shown in previous subsection): the results of lexicon-based sentiment
 
 As a second group of persuasion techniques, we consider \gls{propaganda}.
 
-Propaganda is a form of persuasion that is characterised by its goal to indoctrinate population towards an individual or a particular agenda. It manifests through several techniques that have been studied in the literature. Each technique has its own peculiarities.
+Propaganda is a form of persuasion that is characterised by its goal to indoctrinate population towards an individual or a particular agenda.\todoAW{Find a good quote from the political discourse literature if you can.}
+It manifests through several techniques that have been studied in the literature. Each technique has its own peculiarities.
 
 For detecting propaganda, we want an approach that gives us not only a binary label (propaganda vs non-propaganda), but we want to have an insight about which specific techniques have been used. For this reason, we need to have fine-grained detection of propaganda, that produces as output the specific techniques used and which words are responsible for it.
 Taking from the literature described in~\ref{sec:lit_propaganda}, we consider the recent work of~\cite{da2019fine} as it is the only one\todoHA{Too strong} that has fine-grained detection. This method uses a neural network to annotate text articles and to see which words belong to specific propaganda techniques (Figure~\ref{fig:propaganda_example_1}).
@@ -287,7 +300,7 @@ The model is a sequence model based on BERT. It is based on the dataset~\citet{T
 
 It performs classification on the word level. Each word is classified as being one of 18 different techniques or none of them.
 
-From its publication paper~\cite{da2019fine}, we can see in table 6 and 7 that this model has been evaluated in two ways:
+From its publication paper~\cite{da2019fine}, we can see in table 6 and 7 that this model has been evaluated in two ways:\todoAW{Did you attempt to reproduce this evaluation?}
 
 \begin{itemize}
     \item sentence-level: binary classification, whether the sentence contains propaganda or not. For this task the reported F1 is around $60\%$\todoHA{reported dataset? clarify}
@@ -295,7 +308,7 @@ From its publication paper~\cite{da2019fine}, we can see in table 6 and 7 that t
 \end{itemize}
 
 These statistics make us aware that, even though this model is the currrent State of the Art, its ability to recognise the proper techniques of propaganda are quite low overall.
-Therefore we need to take with a grain of salt the outputs coming from this model.
+Therefore we need to take with a grain of salt the outputs coming from this model.\todoAW{Too informal. What does "tak[ing something] with a grain of salt" mean in practical terms?}
 
 \todoHAinline{leave self-criticism to later. also, reported \% here are only indicators since other data is different to yours}
 
@@ -330,7 +343,8 @@ So to evaluate it, we have computational approaches for propaganda detection, bu
 A solution to this problem, is to use a dataset where we have the ground truth for the populism, which will be run through the propaganda detection pipeline. Then we will compute the correlation between the two, and we can establish whether this relationship is proven. The advantage of using directly the ground truth for one of the two phenomena (populism) is that we can only have errors for the propaganda detection.\todoHA{unclear} Instead, if we were to compare two predictions, the errors could be on both sides.
 
 % dataset used
-For this experiment, after looking at the available datasets for populism, we selected the one from~\citet{hawkins2019global} because it is quite balanced in terms of the political orientation of the actors annotated (liberal vs conservative). It contains 1240 political speeches, from several countries and languages
+For this experiment, after looking at the available datasets for populism, we selected the one from~\citet{hawkins2019global} because it is quite balanced in terms of the political orientation of the actors annotated (liberal vs conservative).\todoAW{It strikes me here that this is a very US-centric interpretation of the political landscape. Do you consider whether the make up of the dataset poses any threats to validity?}
+It contains 1240 political speeches, from several countries and languages
 For each one of them there are four annotators that give a numerical score of populism in the range $[0;2]$ where $0$ means non-populistic and $2$ means very populistic. The single annotations are already averaged out.
 So from the 4961 raw rows, by deduplicating (4 annotations for each speech) we have 1240 speeches, out of which 265 are in English (then down in the rankings, 304 in Spanish and 148 in Portuguese).
 
@@ -353,7 +367,7 @@ correlation between propaganda and populism. So we take each speech in the corpu
 
 
 % results
-The Spearman's correlation between the populism and the total word-based percentage (all techniques together) is $0.1694$. This value is quite low. So it seems that they are quite unrelated.
+The Spearman's correlation between the populism and the total word-based percentage (all techniques together) is $0.1694$. This value is quite low. So it seems that they are quite unrelated.\todoAW{This feels to me like the sort of investigation and analysis which forms the bedrock of your research. So I think you need to set it out more formally so that it feels like less of an aside.}
 
 \begin{figure}[!htbp]
     \centering
@@ -373,7 +387,7 @@ By breaking it down to the correlation of populism to each propaganda technique,
 % Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on right (21\% more), but the correlation Right is bigger than left of 66\%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
 
 % findings
-Propaganda and populism are correlated, but not too strongly.
+Propaganda and populism are correlated, but not too strongly.\todoAW{?}
 The fact that some of the techniques are correlated to populism is a good sign,\todoHA{why?} even though the correlation scores are still low to be considered as ``strong ccorrelation''. We will expand this experiment in the next Chapter when we take into consideration political leaning.
 Considering that the current fine-grained propaganda detection is not so accurate (cf. Section~\ref{ssec:lp_techniques_propaganda}), we can say that this weak correlation can still be considered as a signal that the two phenomena are related.
 % In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → unbalanced detection caused by unbalanced data
@@ -397,10 +411,13 @@ To analyse this relationship, we have two different experiments:
 \subsection{\statusorange The effects of small variations on detected persuasion}
 \label{ssec:lp_relationship_small_variations}
 
+\todoAWinline{It all starts getting very choppy from here. In general, I think the main thing in this chapter is that your experiments need to be presented more formally. You have interesting looking results, but I don't really see where they come from.
+Ask yourself how someone would reproduce the work you've presented here. I wouldn't know how to start.}
+
 % Why
 % What
 For this experiment, we want to observe how the small changes detected in the previous chapter affect the detected persuasion.
-Having computing methods for sentiment and for fine-grained propaganda detection, we decide not proceed with populism detection,\todoHA{probably move section on populism to the end since it is weak and experiment not thorough} but only keeping as axes for measurements the sentiment ones (strength and polarity) and the 18 propaganda techniques.
+Having computing methods for sentiment and for fine-grained propaganda detection, we decide not proceed with populism detection,\todoHA{probably move section on populism to the end since it is weak and experiment not thorough}\todoAW{I'm not entirely clear what that decision was based on.} but only keeping as axes for measurements the sentiment ones (strength and polarity) and the 18 propaganda techniques.
 
 % RQ3
 Our RQ3 is ``how are the differences between similar articles related to a different use of persuasion techniques?".
@@ -430,7 +447,7 @@ The results have a first quantitative side and then also a qualitative one.
 \todo{compute metrics from results}
 % quantitative
 % number of changes vs score variations
-Overall, on the quantitative side, we see that a portion (\%?) of the variations in the texts is causing a persuasion score change. Out of X couples of sentences with small variations, only for Y we see a change. Among these, Y1 are changes to the sentiment and Y2 to the propaganda score. The breakdown by techniques is illustrated in the blue bars of Figure~\ref{TODO}, which shows the percentages of variations that correspond to a change in the respective technique. (for each technique, for each sentence pair, a boolean yes/no where yes corresponds to ``changed" and no to ``unchanged", then counting the percentages of yes)
+Overall, on the quantitative side, we see that a portion (\%?) of the variations in the texts is causing a persuasion score change. Out of X couples of sentences with small variations, only for Y we see a change. Among these, Y1 are changes to the sentiment and Y2 to the propaganda score. The breakdown by techniques is illustrated in the blue bars of Figure~\ref{TODO}, which shows the percentages of variations that correspond to a change in the respective technique. (for each technique, for each sentence pair, a boolean yes/no where yes corresponds to ``changed" and no to ``unchanged", then counting the percentages of yes) 
 
 
 %number of changes vs persuasion-loaded terms: how many terms in percentage?
