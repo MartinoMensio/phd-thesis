@@ -544,7 +544,7 @@ In the next subsections we analyse the dataset used, the approach and the findin
 We need some data that contains groups of articles that are related to the same events. There are two different datasets that we can use for having the clustering ground truth:
 
 \begin{itemize}
-    \item AllSides: articles are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October) 5124 headlines, for a total of 15050 articles. Positive sides: human-curated, public. Negative sides: only 3 articles for each headline. But for each topic there are 46 articles on average;
+    \item AllSides: articles are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October) 5124 headlines, for a total of 15050 articles. They are grouped in triples, called \emph{headlines}. And each triple belongs to one of several topics, which can be seen as more loosely-grained clusters. Positive sides: human-curated, public. Negative sides: only 3 articles for each headline. But for each topic, there are 46 articles on average;
     \item Google headlines: articles are grouped in clusters. Clusters have around 20-90 articles each. Each cluster belongs to a certain broader topic (UK, World, Business, Entertainment, Sports, Science, Health). Positive sides: very large. Negative side: the clusters change over time, they are created by ML (no human-curated)
 \end{itemize}
 
@@ -587,34 +587,72 @@ For the Step 1, we proceed to remove the terms of persuasion with the methods de
 % and propaganda spans (from https://www.tanbih.org/prta).
 
 % STEP 2
-For the Step 2, document encoding, we take the approaches TODO finish
-Document representation:
-Embed the document with the Universal Sentence Encoder / TF-IDF
+For the Step 2, document encoding, we take the approaches 
+also used in the previous Chapter~\ref{chap:common_ground_search}: we use for comparison both TF-IDF and \Gls{use}. The first one to represent simpler approaches while the second one to stand for more recent and complex ones. The aim of the comparison is to understand whether there is any advantage of using more sophisticated approaches for this task.
+The output for each document is a numerical representation.
+% Document representation:
+% Embed the document with the Universal Sentence Encoder / TF-IDF
 
 % STEP 3 
-Clustering methods:
-There are multiple clustering methods, and document representations that influence the clustering. We decided to use a method that does not require to specify the number of clusters wanted.
-We started with this specific method (also used in the previous Chapter):
-Hierarchical Agglomerative Clustering (ward method, euclidean distance), which  is very flexible in showing how the clusters evolve when the distance threshold is raised
+For the 3rd Step, we consider two different approaches: Hierarchical Agglomerative Clustering and K-means. The first one (Hierarchical AC) was used also in the previous chapter, and is very important for us because it does not require to specify the number of clusters wanted. This is ideal for situations where we do not know a-priori the number of topics or headlines that we are looking for. And also it is very useful for providing insights at the different levels of the dendrogram (varying the distance threshold), to explore and identify the optimal distances and parameters by observing the intermediate clusters.
+Instead, K-means is used to have higher precision in identifying the clusters. It works by deciding the number of output clusters in advance, and in a controlled experiment like ours, we know this parameter from the ground truth. %: the number of clusters is the number of different 
+
+% Clustering methods:
+% There are multiple clustering methods, and document representations that influence the clustering. We decided to use a method that does not require to specify the number of clusters wanted.
+% We started with this specific method (also used in the previous Chapter):
+% Hierarchical Agglomerative Clustering (ward method, euclidean distance), which  is very flexible in showing how the clusters evolve when the distance threshold is raised
 
 % STEP 4
-Clustering evaluation metrics:
-Although clustering is an unsupervised task, we need to see how well the clustering matches with the ground truth annotations of the data. 
-The most used metrics for comparing clustering are:
-Adjusted Rand index,
-Adjusted Mutual Information.
+For step 4, clustering evaluation, we need to find suitable metrics that can describe how well the produced clusters correspond to the ground truth.
+By looking at the literature~\citep{romano2016adjusting, }, it emerged that the most used metrics for comparing clusters are Adjusted Rand Index~\citep{rand1971objective} and Adjusted Mutual Information~\citep{vinh2009information}.
+The difference between the two is that they are based on different theories. The former is based on pair counting (counting the pairs that appear or not in the same cluster in the reference and in the evaluation), while the latter is based on Shannon Information Theory. In practice, ARI works better when ground truth clustering has large equal sized clusters, while AMI is better when there exist small clusters and ground truth clustering may be unbalanced.
+Given the statistics of our datasets, we know that ARI will be better to measure the clustering at the \emph{headline} level (reference clusters are always with $size=3$), while AMI will be better for the clustering at the topic level (very different in size, unbalanced).
 
-The value of the metrics can be computed by comparing the ground-truth-clustering with the predicted one.
-By plotting the metric values against the increasing threshold of distance of the Hierarchical Agglomerative Clustering, we can observe how it increases until a certain point, then decreases again.
 
-TODO figure
 
-The interpretation of this curve is that, when the hierarchical clustering begins to raise the threshold, the clusters match more with the gold clusters, until a certain point where distinct clusters are merging together and therefore lowering the scores.
-We can compare the behaviour of this curve between the full text and the text without the loaded/propaganda pieces. The comparison can be at the maximum point, where the threshold is optimal (we should truncate the clustering there) or we can compare the full curve. For simplicity, in the results below, we compare the maximum value of the curve, reporting also the distance where it has been reached.
+% Clustering evaluation metrics:
+% Although clustering is an unsupervised task, we need to see how well the clustering matches with the ground truth annotations of the data. 
+% The most used metrics for comparing clustering are:
+% Adjusted Rand index,
+% Adjusted Mutual Information.
+
+
 
 % STEP 5 comparing
+For the last step, comparing, we use the two metrics to understand what is the effect of removing the persuasion terms.
+
 \subsubsection{Results and Findings}
 
+This experiment has several results.
+%: firstly, related to increasing the distance threshold in hierarchical clustering, then 
+
+
+% Step 4 results (curve)
+First of all, observing the effect of increasing the distance threshold in hierarchical clustering, we see how the metrics of ARI and AMI behave.
+
+The value of the metrics can be computed by comparing the ground-truth-clustering with the predicted one.
+By plotting the metric values against the increasing threshold of distance of the Hierarchical Agglomerative Clustering, we can observe how both ARI and AMI increase until a certain point, then decreases again.
+Figure~\ref{fig:hierarchical_sentpropnoise_evolution} shows the values of ARI for a simplified case, where only $4$ headlines are considered. If we observe the line for \textit{complete text}, we can see that it starts on the left with increasing values, then reaches the maximum in the centre and then the score goes down again. At the beginning and at the end, the value is low because the distance threshold is either too tight (left) or too relaxed (right) and the corresponding evaluation clusters are too small (left) or too big (right).
+At the center it is more similar to the ground truth, so both the ARI and AMI scores are higher.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/sentpropnoise_4_en_tfidf_fitness_topic-cropped.pdf}
+    \caption{Adjusted Rand Index on a simplified scenario (only 4 clusters to identify) using Hierarchical Agglomerative Clustering on TF-IDF features. On the $x$ axis, we have the euclidean distance which corresponds to the current progress of clustering: from the left to the right, initial small clusters are merged and become bigger.}
+    \label{fig:hierarchical_sentpropnoise_evolution}
+\end{figure}
+
+% The interpretation of this curve is that, when the hierarchical clustering begins to raise the threshold, the clusters match more with the gold clusters, until a certain point where distinct clusters are merging together and therefore lowering the scores.
+At this point we do the comparison with the other collections of articles where each one of them has been cleaned from sentiment and/or propaganda words. We see in this figure that, while sentiment does not look to have much impact on clustering, removing propaganda increases the ability to cluster more similarly to the reference. 
+
+% We can compare the behaviour of this curve between the full text and the text without the loaded/propaganda pieces.
+The comparison can be at the maximum point, where the threshold is optimal, % (we should truncate the clustering there)
+or we can compare the full curve. For simplicity, we compare the maximum value of the curve, reporting also the distance where it has been reached. However, the full curve has analogue results, as seen in the figure above (higher maximum point, higher curve).
+
+Still in Figure~\ref{fig:hierarchical_sentpropnoise_evolution} we can see that removing propaganda helps TF-IDF reaching 100\% perfect clustering with threshold 1.26 euclidean distance (12 articles on 3 topics: Supreme court, Elections, Coronavirus, Supreme Court). Instead without removal, TF-IDF misplaces some elements with the full text.
+
+
+% table: step 5 results? Check
 TODO: copy table from google docs.
 The table is showing how, from a small corpus to bigger corpuses, the effect of removing the persuasion words is changing.
 The different rows represent the number of clusters in the gold dataset 
@@ -624,9 +662,11 @@ So propaganda and sentiment are acting like noise in clustering.
 
 TODO explain better
 
-Limitation: removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it could be a problem.
+Limitation: when increasing the size, difference becomes smaller and smaller. This means that ???
 
-Limitation 2: if some words are both persuasion and topical, by removing them, it becomes more difficult to form the correct cluster. This is why non-persuasive rephrasing could be needed. (choice of terms, but still some meaning).
+Limitation 2: removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it could be a problem.
+
+Limitation 3: if some words are both persuasion and topical, by removing them, it becomes more difficult to form the correct cluster. This is why non-persuasive rephrasing could be needed. (choice of terms, but still some meaning).
 \todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 
 \section{\statusorange Discussion}
