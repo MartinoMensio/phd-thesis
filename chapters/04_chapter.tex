@@ -628,6 +628,7 @@ This experiment has several results.
 
 
 % Step 4 results (curve)
+\paragraph{Hierarchical Agglomerative Clustering}
 First of all, observing the effect of increasing the distance threshold in hierarchical clustering, we see how the metrics of ARI and AMI behave.
 
 The value of the metrics can be computed by comparing the ground-truth-clustering with the predicted one.
@@ -653,14 +654,73 @@ Still in Figure~\ref{fig:hierarchical_sentpropnoise_evolution} we can see that r
 
 
 % table: step 5 results? Check
-TODO: copy table from google docs.
-The table is showing how, from a small corpus to bigger corpuses, the effect of removing the persuasion words is changing.
-The different rows represent the number of clusters in the gold dataset 
+\paragraph{K-Means}
+For evaluating the effects with different sizes f datasets, we show here some results with K-Means.
 
+\begin{table}[!htbp]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{r|r|r|llll|llll}
+ &  &  & \multicolumn{4}{c|}{Headlines clustering} & \multicolumn{4}{c}{Topic clustering} \\ \cline{4-11} 
+\multirow{-2}{*}{\#headlines} & \multirow{-2}{*}{\# articles} & \multirow{-2}{*}{\# topics} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} \\ \hline
+2 & 6 & 2 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 \\ \hline
+4 & 12 & 3 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}} & \cellcolor{green}1.0 & \cellcolor{green}1.0 \\ \hline
+10 & 30 & 6 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular} \\ \hline
+100 & 300 & 35 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .585M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.455R\\ .584M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .581M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.467R\\ \cellcolor{green}.599M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.271R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{red}.260R\\ \cellcolor{green}.516M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.274R\\ \cellcolor{green}.514M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red}.263R\\ \cellcolor{green}.515M\end{tabular}
+\end{tabular}%
+}
+\caption{Results of clustering applied to TF-IDF features with K-means. Full text is compared against \textit{no sentiment} (sentiment words have been removed), \textit{no propaganda} (propaganda words have been removed) and \textit{no sentiment and propaganda}. For each row, the values represent the ARI (denoted with \textit{R}) and AMI (denoted with \textit{M} for two different granularities: headline and topic clustering. Higher values represent predicted clusters more similar to the reference ones (improvements highlighted in green), while lower values represent more difference (deterioration shown in red). The different rows represent increasing dataset size.}
+\label{tab:sentpropnoise_tfidf}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{r|r|r|llll|llll}
+ &  &  & \multicolumn{4}{c|}{Headlines clustering} & \multicolumn{4}{c}{Topic clustering} \\ \cline{4-11} 
+\multirow{-2}{*}{\#headlines} & \multirow{-2}{*}{\# articles} & \multirow{-2}{*}{\# topics} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} \\ \hline
+2 & 6 & 2 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 \\ \hline
+4 & 12 & 3 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.287R\\ .403M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.543R\\ \cellcolor{green}.641M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.287R\\ .403M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.543R\\ \cellcolor{green}.641M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.566R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.713R\\ \cellcolor{green}.750M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.566R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.713R\\ \cellcolor{green}.750M\end{tabular}} \\ \hline
+10 & 30 & 6 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.313R\\ .416M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.408R\\ \cellcolor{green}.509M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.313R\\ .416M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.343R\\ \cellcolor{green}.434M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.301R\\ .479M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.331R\\ \cellcolor{green}.507M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.301R\\ .479M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.436R\\ \cellcolor{green}.533M\end{tabular}} \\ \hline
+100 & 300 & 35 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.250R\\ .362M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{red}.240R\\ \cellcolor{green}.367M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.251R\\ \cellcolor{green}.372M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red}.234R\\ .362M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.185R\\ .420M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.191R\\ \cellcolor{red}.408M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.210R\\ \cellcolor{red}.418M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.223R\\ \cellcolor{red}.418M\end{tabular}
+\end{tabular}%
+}
+ \caption{Results of the clustering applied to USE features with K-Means. The explanation is the same as in Table~\ref{tab:sentpropnoise_tfidf}. The difference is that the vector representations are derived}
+ \label{tab:sentpropnoise_use}
+\end{table}
+
+% analysis of results
+Table~\ref{tab:sentpropnoise_tfidf} is showing how, from a small corpus to bigger corpuses, the effect of removing the persuasion words is changing.
+The different rows represent the number of clusters in the gold dataset.
+We can notice that in the first row, with only two headlines, the metrics are seeing that the evaluation clusters are identical to the reference clusters (score of $1.0$ both ARI and AMI).
+
+Then in the second row, we can see that also here (as previously in Figure~\ref{fig:hierarchical_sentpropnoise_evolution}, that with topic clustering we reach $1.0$ with AMI and ARI, because we manage to match perfectly with the ground truth clusters.
+This happens with the removal of propaganda, while the removal of sentiment shows no effects.
+With the headline clustering instead, we still have some significant improvements (from $.390R$ to $.645R$, but we cannot reach $1.0$.
+
+Third row
+
+and fourth row, we see that TODO
+
+USE results:
+propaganda removed does not help, even with small dataset. Propaganda pieces in an article are usually more than isolated words, are spans with longer length. Instead adjectives are usually isolated words. USE with respect to TF-IDF is more exposed to the sequence of words, and by inspecting the ``cleaned" articles we can see that the sentences are incomplete and cannot stand. For this reason, a simpler model like TF-IDF is being helped by the removal of propaganda, while actually for USE the sentences become broken and the clustering struggles more.
+
+Discrepancy between AMI and ARI: TODO
+
+\paragraph{Inspection of the predictions}
+Let’s consider for inspection the articles belonging to cluster 0 and cluster 7.
+In the K-Means TF-IDF they have been labelled as:
+1, 1, 0 and 0, 1, 0 with the full text, while 1, 1, 2 and 2, 2, 2 when removing the propaganda and sentiment. The first and last article of cluster 7 are able to be grouped to the cluster 7 instead of cluster 0.
+
+The ground truth for cluster 0 is here https://www.allsides.com/story/trump-mounts-legal-challenges-biden-gains-ground-vote-count and for cluster 7 here https://www.allsides.com/story/what-watch-2020-presidential-election . They are both about US elections (3 November and 5 November)
+
+Explanation:
+Terms like “win” (win, winner, ..) are removed and more subtle changes in terms usage is possible:
+Lead in cluster 0 (5th November)
+Patience, legal, wait in cluster 7 (3 November)
+
+The removal of these terms helps in the fine-grained differentiation of the stories but may not help with coarse topic clustering
+
+
+\paragraph{Limitations and findings}
+% meaning of the results
 Slightly easier to cluster when sentiment and propaganda words are removed from the corpus.
 So propaganda and sentiment are acting like noise in clustering.
-
-TODO explain better
 
 Limitation: when increasing the size, difference becomes smaller and smaller. This means that ???
 
