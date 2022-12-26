@@ -536,7 +536,7 @@ To bring this plan into action, we compare the results of  clustering algorithms
 
 In the next subsections we analyse the dataset used, the approach and the findings.
 
-\todo{rephrasing needed for these 3 subsections, at the moment they are quite raw}
+% \todo{rephrasing needed for these 3 subsections, at the moment they are quite raw}
 
 
 \subsubsection{Dataset}
@@ -655,7 +655,7 @@ Still in Figure~\ref{fig:hierarchical_sentpropnoise_evolution} we can see that r
 
 % table: step 5 results? Check
 \paragraph{K-Means}
-For evaluating the effects with different sizes f datasets, we show here some results with K-Means.
+For evaluating the effects with different sizes of datasets, we show here some results with K-Means.
 
 \begin{table}[!htbp]
 \resizebox{\textwidth}{!}{%
@@ -664,7 +664,7 @@ For evaluating the effects with different sizes f datasets, we show here some re
 \multirow{-2}{*}{\#headlines} & \multirow{-2}{*}{\# articles} & \multirow{-2}{*}{\# topics} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} \\ \hline
 2 & 6 & 2 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 \\ \hline
 4 & 12 & 3 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}} & \cellcolor{green}1.0 & \cellcolor{green}1.0 \\ \hline
-10 & 30 & 6 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular} \\ \hline
+10 & 30 & 6 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.634R\\ \cellcolor{green}.771M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.634R\\ \cellcolor{green}.771M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.558R\\ \cellcolor{green}.730M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.558R\\ \cellcolor{green}.730M\end{tabular}} \\ \hline
 100 & 300 & 35 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .585M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.455R\\ .584M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .581M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.467R\\ \cellcolor{green}.599M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.271R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{red}.260R\\ \cellcolor{green}.516M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.274R\\ \cellcolor{green}.514M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red}.263R\\ \cellcolor{green}.515M\end{tabular}
 \end{tabular}%
 }
@@ -680,30 +680,59 @@ For evaluating the effects with different sizes f datasets, we show here some re
 100 & 300 & 35 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.250R\\ .362M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{red}.240R\\ \cellcolor{green}.367M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.251R\\ \cellcolor{green}.372M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red}.234R\\ .362M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.185R\\ .420M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.191R\\ \cellcolor{red}.408M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.210R\\ \cellcolor{red}.418M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.223R\\ \cellcolor{red}.418M\end{tabular}
 \end{tabular}%
 }
- \caption{Results of the clustering applied to USE features with K-Means. The explanation is the same as in Table~\ref{tab:sentpropnoise_tfidf}. The difference is that the vector representations are derived}
+ \caption{Results of the clustering applied to USE features with K-Means. The explanation is the same as in Table~\ref{tab:sentpropnoise_tfidf}. The difference is that the vector representations are derived from the USE model instead of computing a TF-IDF representation of the texts.}
  \label{tab:sentpropnoise_use}
 \end{table}
 
 % analysis of results
 Table~\ref{tab:sentpropnoise_tfidf} is showing how, from a small corpus to bigger corpuses, the effect of removing the persuasion words is changing.
 The different rows represent the number of clusters in the gold dataset.
-We can notice that in the first row, with only two headlines, the metrics are seeing that the evaluation clusters are identical to the reference clusters (score of $1.0$ both ARI and AMI).
+We can notice that in the first row (2 \#headlines), with only two headlines, the metrics are seeing that the evaluation clusters are identical to the reference clusters (score of $1.0$ both ARI and AMI).
 
-Then in the second row, we can see that also here (as previously in Figure~\ref{fig:hierarchical_sentpropnoise_evolution}, that with topic clustering we reach $1.0$ with AMI and ARI, because we manage to match perfectly with the ground truth clusters.
+Then in the second row (4 \#headlines, we can see that also here (as previously in Figure~\ref{fig:hierarchical_sentpropnoise_evolution}), that with topic clustering we reach $1.0$ with AMI and ARI, because we manage to match perfectly with the ground truth clusters.
 This happens with the removal of propaganda, while the removal of sentiment shows no effects.
 With the headline clustering instead, we still have some significant improvements (from $.390R$ to $.645R$, but we cannot reach $1.0$.
 
-Third row
+In the third row (10 headlines), we still see a similar improvement caused by the removal of propaganda. In this case, the improvement is smaller, both for headline and topic clustering.
 
-and fourth row, we see that TODO
+And in the fourth row, with the biggest subset of data made of 100 headlines, we see that the effects of removing sentiment or propaganda decrease for both tasks. For the headlines clustering, only when removing both sentiment and propaganda we see an improvement with the used metrics, and the improvement is quite small (change of around $1.3\%$ ARI and $2.3\%$ AMI). For the topic clustering, the scores change only of some percentage points, and we see some degradation too on the ARI metric.
 
-USE results:
-propaganda removed does not help, even with small dataset. Propaganda pieces in an article are usually more than isolated words, are spans with longer length. Instead adjectives are usually isolated words. USE with respect to TF-IDF is more exposed to the sequence of words, and by inspecting the ``cleaned" articles we can see that the sentences are incomplete and cannot stand. For this reason, a simpler model like TF-IDF is being helped by the removal of propaganda, while actually for USE the sentences become broken and the clustering struggles more.
+% USE table 4.2
+For comparison, we compute the same metrics with the same clustering method but this time with a more complex model for document embedding (USE). This sequence model has two main differences with respect to count-based models (e.g. TF-IDF): it accounts for the order of the words, because it is a sequence model, and it can make use of synonyms because it is based on the distributional semantics (semantic similarity based on the context)~\citep{firth1957synopsis}. Since this model accounts for the sequence of words, and since we may remove words and break the semantics of the articles when cleaning from sentiment or propaganda, we need to have this comparison.
 
-Discrepancy between AMI and ARI: TODO
+Table~\ref{tab:sentpropnoise_use} shows the results when USE is used to compute the document representations.
+With respect with Table~\ref{tab:sentpropnoise_tfidf}, we can see that when we remove propaganda from the articles, we have less impact. This time, the improvement is due to the removal of the sentiment from the articles.
+% when size increases
+Also here, as with TF-IDF, the effects of removing persuasion decay when the dataset increases in size.
+
+% USE meaning
+The meaning of these results is that with such a complex model (USE),
+propaganda removal does not help, even with a small dataset. Propaganda pieces in an article are usually more than isolated words, and are spans with a longer length. Instead, adjectives (one of the common manifestations of sentiment) are frequently isolated words. USE with respect to TF-IDF is more exposed to the sequence of words, and by inspecting the ``cleaned" articles we can see that the sentences are incomplete and cannot stand. For this reason, a simpler model like TF-IDF is being helped by the removal of propaganda, while actually for USE the sentences become broken and the clustering struggles more.
+
+% Discrepancy between AMI and ARI
+In the two tables, we see that there are some cases where the AMI and ARI metrics provide opposite direction (improvement vs degradation). In those cases, we need to keep into consideration that the two metrics come from two different theories, and also that the values do not change a lot in the affected cells.
+% Therefore, moving one article from one cluster to another one, may be seen as improvement or not
 
 \paragraph{Inspection of the predictions}
-Let’s consider for inspection the articles belonging to cluster 0 and cluster 7.
+
+% Why? What?
+In addition to the analysis of the previous paragraphs, we want to take a closer look into the predictions, to understand better the quantitative results just described.
+
+For simplicity, we consider the case where we have 10 headlines (corresponding to the third row of tables~\ref{tab:sentpropnoise_tfidf} and~\ref{tab:sentpropnoise_use}).
+Let’s consider for inspection the articles belonging to two clusters (IDs given by our experimentation): cluster 0\footnote{\url{https://www.allsides.com/story/biden-leads-vote-count-trump-initiates-legal-challenges}} and cluster 7.\footnote{\url{https://www.allsides.com/story/what-watch-2020-presidential-election}}. They each include three articles, and cover the US elections of 2020. The first one was published on 5th November 2020, while the second on 3rd November 2020. So they are quite similar in the entities mentioned, but the most recent one is centred on the legal challenges initiated for the vote counts while the other headline is still pre-vote (3rd of November was the election day). This means that it is challenging for clustering to differentiate between the two ground truth clusters because a lot of terms in common exist.
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{c|c}
+         &  \\
+         \hline
+         & 
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+\todo{How to visualise this? Table? Plot?}
+
 In the K-Means TF-IDF they have been labelled as:
 1, 1, 0 and 0, 1, 0 with the full text, while 1, 1, 2 and 2, 2, 2 when removing the propaganda and sentiment. The first and last article of cluster 7 are able to be grouped to the cluster 7 instead of cluster 0.
 
