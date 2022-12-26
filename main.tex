@@ -42,6 +42,7 @@
 % \renewcommand{\todo}[2][]{\tododefault[inline,#1]{#2}}
 \NewCommandCopy{\tododefault}{\todo}
 \renewcommand{\todo}[2][]{\tododefault[inline,#1]{TODO: #2}}
+\newcommand{\todomargin}[2][]{\tododefault[size=\tiny]{#2}}
 \newcommand{\todoAW}[2][]{\tododefault[color=purple,size=\tiny]{AW: #2}}
 \newcommand{\todoHA}[2][]{\tododefault[color=red,size=\tiny]{HA: #2}}
 \newcommand{\todoHAinline}[2][]{\tododefault[color=red,inline]{HA: #2}}

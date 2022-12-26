@@ -498,7 +498,7 @@ Propaganda instead ?
 % % problems?
 % The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
 
-\subsection{\statusorange Removing persuasion to improve clustering}
+\subsection{\statusgreen Removing persuasion to improve clustering}
 \label{ssec:lp_relationship_removing}
 
 The last experiment of this chapter takes the problem of analysing the relationship between persuasion and variations in news articles from another perspective.
@@ -545,7 +545,7 @@ We need some data that contains groups of articles that are related to the same 
 
 \begin{itemize}
     \item AllSides: articles are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October) 5124 headlines, for a total of 15050 articles. They are grouped in triples, called \emph{headlines}. And each triple belongs to one of several topics, which can be seen as more loosely-grained clusters. Positive sides: human-curated, public. Negative sides: only 3 articles for each headline. But for each topic, there are 46 articles on average;
-    \item Google headlines: articles are grouped in clusters. Clusters have around 20-90 articles each. Each cluster belongs to a certain broader topic (UK, World, Business, Entertainment, Sports, Science, Health). Positive sides: very large. Negative side: the clusters change over time, they are created by ML (no human-curated)
+    \item Google headlines: articles are grouped in clusters. Clusters have around 20-90 articles each. Each cluster belongs to a certain broader topic (UK, World, Business, Entertainment, Sports, Science, Health). Positive sides: very large. Negative side: the clusters change over time, they are created by ML (not human-curated)
 \end{itemize}
 
 Between these two datasets, we want to be using good quality ground truth for document clustering: so that at least we start from gold-standard groups, defined by human annotators. For this reason, we prefer AllSides with respect to the Google News dataset because it is built and annotated by humans instead of being an output of a clustering algorithm already.
@@ -572,7 +572,7 @@ Since we want to understand whether by removing persuasion we can have better cl
     % \item compare the scores and determine which case is better
 \end{enumerate}
 
-We do this procedure with different number of ground truth clusters, increasing the dataset from an initially small subset.\tododefault[size=\tiny]{say this after the description of each step}
+We do this procedure with different number of ground truth clusters, increasing the dataset from an initially small subset.\todomargin{say this after the description of each step}
 
 % Test the ability of matching gold clusters with predicted clusters.
 % - standard full article
@@ -581,14 +581,14 @@ We do this procedure with different number of ground truth clusters, increasing 
 % Seeing if there is an improvement or not when removing propaganda words.
 
 % STEP 1
-For the Step 1, we proceed to remove the terms of persuasion with the methods described in Section~\ref{ssec:lp_techniques_sentiment} for sentiment and in Section~\ref{ssec:lp_techniques_propaganda} for propaganda. We input the text articles, and we get in output from the methods the terms that are loaded with sentiment or propaganda techniques. Then we proceed to remove these words from the original articles and we build a second dataset ``cleaned" from persuasion.
+For the Step 1, we proceed to remove the terms of persuasion with the methods described in Section~\ref{ssec:lp_techniques_sentiment} for sentiment and in Section~\ref{ssec:lp_techniques_propaganda} for propaganda. We input the text articles, and we get in output from the methods the terms that are loaded with sentiment or propaganda techniques. Then we proceed to remove these words from the original articles and we build a second dataset ``cleaned" from persuasion. Additionally, we also have the ``no sentiment" and ``no propaganda" datasets which come from the original dataset by only removing one of the two persuasion types.
 % Removal of the terms: sentiment-loaded terms (multiple lexicons and tools: sentistrength, vader, )
 % %And these? AFINN, BING) 
 % and propaganda spans (from https://www.tanbih.org/prta).
 
 % STEP 2
 For the Step 2, document encoding, we take the approaches 
-also used in the previous Chapter~\ref{chap:common_ground_search}: we use for comparison both TF-IDF and \Gls{use}. The first one to represent simpler approaches while the second one to stand for more recent and complex ones. The aim of the comparison is to understand whether there is any advantage of using more sophisticated approaches for this task.
+also used in the previous Chapter~\ref{chap:common_ground_search}: we use for comparison both TF-IDF and \acrshort{use}. The first one to represent simpler approaches while the second one to stand for more recent and complex ones. The aim of the comparison is to understand whether there is any advantage of using more sophisticated approaches for this task.
 The output for each document is a numerical representation.
 % Document representation:
 % Embed the document with the Universal Sentence Encoder / TF-IDF
@@ -604,7 +604,7 @@ Instead, K-means is used to have higher precision in identifying the clusters. I
 
 % STEP 4
 For step 4, clustering evaluation, we need to find suitable metrics that can describe how well the produced clusters correspond to the ground truth.
-By looking at the literature~\citep{romano2016adjusting, }, it emerged that the most used metrics for comparing clusters are Adjusted Rand Index~\citep{rand1971objective} and Adjusted Mutual Information~\citep{vinh2009information}.
+By looking at the literature~\citep{romano2016adjusting}, it emerged that the most used metrics for comparing clusters are Adjusted Rand Index~\citep{rand1971objective} and Adjusted Mutual Information~\citep{vinh2009information}.
 The difference between the two is that they are based on different theories. The former is based on pair counting (counting the pairs that appear or not in the same cluster in the reference and in the evaluation), while the latter is based on Shannon Information Theory. In practice, ARI works better when ground truth clustering has large equal sized clusters, while AMI is better when there exist small clusters and ground truth clustering may be unbalanced.
 Given the statistics of our datasets, we know that ARI will be better to measure the clustering at the \emph{headline} level (reference clusters are always with $size=3$), while AMI will be better for the clustering at the topic level (very different in size, unbalanced).
 
@@ -621,14 +621,15 @@ Given the statistics of our datasets, we know that ARI will be better to measure
 % STEP 5 comparing
 For the last step, comparing, we use the two metrics to understand what is the effect of removing the persuasion terms.
 
-\subsubsection{Results and Findings}
+% \subsubsection{Results}
 
-This experiment has several results.
-%: firstly, related to increasing the distance threshold in hierarchical clustering, then 
+% This experiment has several results.
+
+We show the results in the following three subsections (1: Hierarchical Agglomerative Clustering, 2: K-means, 3: inspection of the predictions), before wrapping up with the findings and limitations. % in Subsection~\ref{ssec:lp_relationship_removing_findings}
 
 
 % Step 4 results (curve)
-\paragraph{Hierarchical Agglomerative Clustering}
+\subsubsection{Hierarchical Agglomerative Clustering}
 First of all, observing the effect of increasing the distance threshold in hierarchical clustering, we see how the metrics of ARI and AMI behave.
 
 The value of the metrics can be computed by comparing the ground-truth-clustering with the predicted one.
@@ -648,16 +649,18 @@ At this point we do the comparison with the other collections of articles where 
 
 % We can compare the behaviour of this curve between the full text and the text without the loaded/propaganda pieces.
 The comparison can be at the maximum point, where the threshold is optimal, % (we should truncate the clustering there)
-or we can compare the full curve. For simplicity, we compare the maximum value of the curve, reporting also the distance where it has been reached. However, the full curve has analogue results, as seen in the figure above (higher maximum point, higher curve).
+or we can compare the full curve. For simplicity, we compare the maximum value of the curve, that in this case is $1.0$.
+%reporting also the distance where it has been reached.
+Nonetheless, the full curve has analogue results, as seen in the figure above (higher maximum point, higher curve).
 
-Still in Figure~\ref{fig:hierarchical_sentpropnoise_evolution} we can see that removing propaganda helps TF-IDF reaching 100\% perfect clustering with threshold 1.26 euclidean distance (12 articles on 3 topics: Supreme court, Elections, Coronavirus, Supreme Court). Instead without removal, TF-IDF misplaces some elements with the full text.
+In Figure~\ref{fig:hierarchical_sentpropnoise_evolution} we can see that removing propaganda helps TF-IDF reaching 100\% perfect clustering with threshold 1.26 euclidean distance (12 articles on 3 topics: Supreme court, Elections, Coronavirus, Supreme Court). Instead without removal, TF-IDF misplaces some elements with the full text.
 
 
 % table: step 5 results? Check
-\paragraph{K-Means}
+\subsubsection{K-Means}
 For evaluating the effects with different sizes of datasets, we show here some results with K-Means.
 
-\begin{table}[!htbp]
+\begin{table}[!bp]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{r|r|r|llll|llll}
  &  &  & \multicolumn{4}{c|}{Headlines clustering} & \multicolumn{4}{c}{Topic clustering} \\ \cline{4-11} 
@@ -713,50 +716,68 @@ propaganda removal does not help, even with a small dataset. Propaganda pieces i
 In the two tables, we see that there are some cases where the AMI and ARI metrics provide opposite direction (improvement vs degradation). In those cases, we need to keep into consideration that the two metrics come from two different theories, and also that the values do not change a lot in the affected cells.
 % Therefore, moving one article from one cluster to another one, may be seen as improvement or not
 
-\paragraph{Inspection of the predictions}
+\subsubsection{Inspection of the predictions}
 
 % Why? What?
 In addition to the analysis of the previous paragraphs, we want to take a closer look into the predictions, to understand better the quantitative results just described.
 
-For simplicity, we consider the case where we have 10 headlines (corresponding to the third row of tables~\ref{tab:sentpropnoise_tfidf} and~\ref{tab:sentpropnoise_use}).
+For simplicity, we consider the case where we have 10 headlines and we use TF-IDF (corresponding to the third row of table~\ref{tab:sentpropnoise_tfidf}). We choose the TF-IDF result because it is easier to analyse the features and see what is happening.
 Let’s consider for inspection the articles belonging to two clusters (IDs given by our experimentation): cluster 0\footnote{\url{https://www.allsides.com/story/biden-leads-vote-count-trump-initiates-legal-challenges}} and cluster 7.\footnote{\url{https://www.allsides.com/story/what-watch-2020-presidential-election}}. They each include three articles, and cover the US elections of 2020. The first one was published on 5th November 2020, while the second on 3rd November 2020. So they are quite similar in the entities mentioned, but the most recent one is centred on the legal challenges initiated for the vote counts while the other headline is still pre-vote (3rd of November was the election day). This means that it is challenging for clustering to differentiate between the two ground truth clusters because a lot of terms in common exist.
 
 \begin{table}[!htbp]
     \centering
-    \begin{tabular}{c|c}
-         &  \\
+    \begin{tabular}{c|c|c}
+         & Articles from headline 0 & Articles from headline 7 \\
          \hline
-         & 
+        Full article & 0 0 7 & 7 0 7 \\
+        Without propaganda & 0 0 7 & 7 7 7
     \end{tabular}
-    \caption{Caption}
-    \label{tab:my_label}
+    \caption{Inspection of how the articles belonging to two headlines get clustered when considered in full (first row) and when propaganda is removed (second row).}
+    \label{tab:sentpropnoise_inspection}
 \end{table}
-\todo{How to visualise this? Table? Plot?}
 
-In the K-Means TF-IDF they have been labelled as:
-1, 1, 0 and 0, 1, 0 with the full text, while 1, 1, 2 and 2, 2, 2 when removing the propaganda and sentiment. The first and last article of cluster 7 are able to be grouped to the cluster 7 instead of cluster 0.
+% In the K-Means TF-IDF they have been labelled as:
+% 1, 1, 0 and 0, 1, 0 with the full text, while 1, 1, 2 and 2, 2, 2 when removing the propaganda and sentiment. The first and last article of cluster 7 are able to be grouped to the cluster 7 instead of cluster 0.
 
-The ground truth for cluster 0 is here https://www.allsides.com/story/trump-mounts-legal-challenges-biden-gains-ground-vote-count and for cluster 7 here https://www.allsides.com/story/what-watch-2020-presidential-election . They are both about US elections (3 November and 5 November)
+% The ground truth for cluster 0 is here https://www.allsides.com/story/trump-mounts-legal-challenges-biden-gains-ground-vote-count and for cluster 7 here https://www.allsides.com/story/what-watch-2020-presidential-election . They are both about US elections (3 November and 5 November)
 
-Explanation:
-Terms like “win” (win, winner, ..) are removed and more subtle changes in terms usage is possible:
-Lead in cluster 0 (5th November)
-Patience, legal, wait in cluster 7 (3 November)
+% what happened
+From Table~\ref{tab:sentpropnoise_inspection}, we can see that one article from the headline 7 (the middle one), in the first row is clustered together with the ones from headline 0, while when propaganda is removed, it is correctly clustered together with its companions.
 
-The removal of these terms helps in the fine-grained differentiation of the stories but may not help with coarse topic clustering
+% Term importance
+Looking at the TF-IDF features for the articles, we see that when we consider the version without propaganda, terms like \emph{win} (win, winner, ..) are removed. These terms are in common between the two clusters and act as noise for the clustering.
+In this way, the distinguishing terms of each headline are able to emerge and have more importance:
+\emph{Lead} in cluster 0 (5th November), 
+\emph{Patience}, \emph{legal}, \emph{wait} in cluster 7 (3 November).
+
+The removal of these terms helps in the fine-grained differentiation of the stories.
+% but may not help with coarse topic clustering
+However, when there are many different headlines to identify, these removals can also be detrimental.
 
 
-\paragraph{Limitations and findings}
+\subsubsection{Findings and limitations} % and limitations
+\label{ssec:lp_relationship_removing_findings}
 % meaning of the results
-Slightly easier to cluster when sentiment and propaganda words are removed from the corpus.
-So propaganda and sentiment are acting like noise in clustering.
 
-Limitation: when increasing the size, difference becomes smaller and smaller. This means that ???
+From this whole experiment, we have the overall finding that removing persuasion from news articles helps to recognise clusters, but only in specific conditions:
+\begin{enumerate}
+    \item the clusters have to be not too many (less than 100). Increasing the number of ground truth clusters reduces the effect of the removal;
+    \item for count-based models, the improvements are better when propaganda is removed. These terms act as noise and it is better to remove them to allow the topical words to have higher weights;
+    \item for language models like USE, removing propaganda can in some cases be detrimental because the sentences lose the semantics on which these models work;
+    \item these findings are analogous both for Hierarchical Agglomerative Clustering and for K-means.
+\end{enumerate}
 
-Limitation 2: removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it could be a problem.
+% Slightly easier to cluster when sentiment and propaganda words are removed from the corpus.
+% So propaganda and sentiment are acting like noise in clustering.
 
-Limitation 3: if some words are both persuasion and topical, by removing them, it becomes more difficult to form the correct cluster. This is why non-persuasive rephrasing could be needed. (choice of terms, but still some meaning).
+There are some limitations to this experiment:
+
+\begin{enumerate}
+    \item when increasing the size, the difference on the metrics used become smaller and smaller. This means that this approach does not scale well to thousands of headlines;
+    \item removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it becomes problem;
+    \item if some words belong both to persuasion and to the topic, by removing them, it becomes more difficult to form the correct cluster. This is why non-persuasive rephrasing could be needed. (choice of terms, but still some meaning).
 \todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
+\end{enumerate}
 
 \section{\statusorange Discussion}
 
@@ -774,6 +795,10 @@ Responses to the 4 RQs with contributions:
 % \begin{itemize}
 %     \item 
 % \end{itemize}
+
+Overall, this chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea on the relationship between persuasion and the variations that different news sources produce when reporting events.
+On the other side, we have also a deeper understanding of the limitations of the current status of this automated detection, and the repercussions it can have when we use these methods in other tasks.
+Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it will clearly improve.
 
 \section{\statusgreen Next}
 % link to next chapter
