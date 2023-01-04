@@ -424,6 +424,18 @@ Having computing methods for sentiment and for fine-grained propaganda detection
 Our RQ3 is ``how are the differences between similar articles related to a different use of persuasion techniques?".
 So to answer this question, here we take groups of linked sentences (from chapter 3) and we see how their variations are related to changes in persuasion.
 
+\subsubsection{Dataset}
+
+% data
+For this experiment we use a set of pairs of sentences (extracted from the analysis of chapter~\ref{chap:common_ground_search}) which are characterised by high similarity score (USE model). \todo{How many, stats? describe dataset}
+
+The dataset of origin is Google News Headlines, as it presents clusters of articles with a high number of articles each (between 20 and 90). Therefore, applying the methodology described in Section~\ref{sec:cgs_clustering_and_differences}, with quite strict thesholds on the distance between sentences, we can still produce in output many cliques of sentences. These cliques contain sentences that have minimal variations and we aim with this current experiment to understand if they are related to a different usage of persuasion.
+% Google headlines: articles are grouped in clusters. Clusters have around 20-90 articles each. Each cluster belongs to a certain broader topic (UK, World, Business, Entertainment, Sports, Science, Health). Positive sides: very large. Negative side: the clusters change over time, they are created by ML (not human-curated)
+
+The Google News Headlines that we selected are between 8th September and 14th October 2020, because that is the timespan during which this experiment was conducted. We could repeat the experimentation in other timespans. 
+
+\subsubsection{Approach}
+
 % How: method
 We describe persuasion with the help of sentiment detection (as seen in section~\ref{ssec:lp_techniques_sentiment}) and fine-grained propaganda detection (section~\ref{ssec:lp_techniques_propaganda}).
 The comparison is done in different ways:
@@ -431,9 +443,6 @@ The comparison is done in different ways:
     \item score: sentiment or propaganda scores. For example, one change in an adjective could result in more negative sentiment, or in more of a specific propaganda technique;
     \item words: the words changed could be the words that carry sentiment/propaganda. And instead of just hypothesising that the change in the words are responsible for a different score (point above), we have a direct indication that the words belong to a persuasion technique.
 \end{enumerate}
-
-% data
-For this experiment we use a set of pairs of sentences (extracted from the analysis of chapter 3) which are characterised by high similarity score (USE model). \todo{How many, stats? describe dataset}
 
 \todo{Figure with example: uniqueness of words highlighted, corresponding plot with scores of the two sentences, and also persuasion words in the text (different colour?)}
 
@@ -444,8 +453,18 @@ And, are the words changed also loaded with techniques of persuasion?
 The results have a first quantitative side and then also a qualitative one.
 % it depends on which persuasion technique is considered.
 
+\subsubsection{Quantitative results}
 
-\todo{compute metrics from results}
+\todo{compute metrics from results
+Quantitative results\\
+- reduce groups to pairs: select rows and merge\\
+- count statistics about dataset: number of pairs\\
+- find example and create figure with sentence pairs with scores, words\\
+- add propaganda features (score and words) to each csv and merge sentiment analysis (score and words)\\
+- compute score results: score changes average for each technique (shows which techniques are mostly affected by variations)\\
+- compute words results: \#words persuasion / \#words changed\\
+- plot results (techniques vs percentages)
+}
 % quantitative
 % number of changes vs score variations
 Overall, on the quantitative side, we see that a portion (\%?) of the variations in the texts is causing a persuasion score change. Out of X couples of sentences with small variations, only for Y we see a change. Among these, Y1 are changes to the sentiment and Y2 to the propaganda score. The breakdown by techniques is illustrated in the blue bars of Figure~\ref{TODO}, which shows the percentages of variations that correspond to a change in the respective technique. (for each technique, for each sentence pair, a boolean yes/no where yes corresponds to ``changed" and no to ``unchanged", then counting the percentages of yes) 
@@ -460,6 +479,15 @@ With respect to the first measure, this metric is based on the words instead of 
 \todo{compute results: currently having a small problem with my pipeline, I need to put back together the articles used in the past from Google News. The dataset from AllSides instead works already, but only 3 articles for each headline so less sentences similar enough.}
 \todo{now comment on the quantitative results}
 
+\subsubsection{Qualitative results}
+
+\todo{
+Qualitative results:\\
+- annotate a subset of pairs: does this change mean something in terms of persuasion? Boolean\\
+- "confusion matrix"\\
+- plot barchart of the ones that behave mostly as predicted\\
+- limitations: because these annotations are done only by me
+}
 
 Then the qualitative results: do the scores/words represent correctly the persuasion differences? For measuring this, we rely on manual analysis of a subset of sentence pairs. We selected these pairs randomly. We manually label these pairs (How many?)
 (because we don't actually have the ground truth, we are estimating it based on our observations) in two categories: with differences in persuasion or without them.\todoHA{I'm assuming this text not finished?}
@@ -482,6 +510,8 @@ Therefore, the true/false positives/negatives for the confusion matrix become:
 
 % results
 The results show???\todo{finish}
+
+\subsubsection{Findings and limitations}
 
 % findings
 Sentiment detection might not be the best choice. Very noisy detection, and scores do not change all the times even when the sentences should imply a change.
@@ -572,7 +602,7 @@ Since we want to understand whether by removing persuasion we can have better cl
     % \item compare the scores and determine which case is better
 \end{enumerate}
 
-We do this procedure with different number of ground truth clusters, increasing the dataset from an initially small subset.\todomargin{say this after the description of each step}
+We do this procedure with different number of ground truth clusters, increasing the dataset from an initially small subset.%\todomargin{say this after the description of each step}
 
 % Test the ability of matching gold clusters with predicted clusters.
 % - standard full article
