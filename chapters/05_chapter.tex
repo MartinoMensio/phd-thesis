@@ -1,6 +1,6 @@
 \label{chap:political_sides}
 
-\section{Introduction}
+\section{\statusorange Introduction}
 
 % In this chapter we investigated the persuasion techniques. But we have not studied the relationship between this observed persuasion in the text and the ideals/agenda/perspective of the author/outlet. It can be really useful to understand the context around the source of an article in order to interpret its persuasion.
 % For this reason, the next chapter will consider perspectives and political sides. In this way we will try to understand if the persuasion of each political side is similar or which are the differences. If a different goal for the persuasion also can be observed on the persuasion itself.
@@ -30,7 +30,7 @@ For this chapter, we follow the structure from the previous one~\ref{chap:lingui
 \end{itemize}
 
 
-\section{Political Leaning Prediction}
+\section{\statusred Political Leaning Prediction}
 \label{sec:ps_political_sides}
 
 Here we describe Political Leaning Prediction.
@@ -70,13 +70,15 @@ Problems: learning the source instead of learning L/R task
 
 \subsection{Our datasets and experiments of prediction}
 
-\section{Propaganda and Political Leaning Prediction}
+\section{\statusorange Propaganda and Political Leaning Prediction}
 \label{sec:ps_prop_and_leaning}
 
 Here we want to see the relationship between Propaganda (studied in the previous Chapter~\ref{ssec:lp_techniques_propaganda} and Political Leaning (from the previous Section~\ref{sec:ps_political_sides}.
 
-\subsection{Propaganda across political spectrum}
-Experiment 4.3: comparison of sentiment/propaganda across political leaning
+\subsection{\statusorange Propaganda across political spectrum}
+% From Experiment 4.3: comparison of sentiment/propaganda across political leaning
+
+Our first RQ for this chapter is: \emph{How does propaganda vary across the political spectrum?}
 
 Instead of measuring the effect of removing the “framing” pieces on clustering algorithms, here we want to observe what is the effect on document similarity between different sources.
 Given articles from the left/center/right, we want to compare if there is a change in similarity when we remove sentiment and propaganda terms (e.g., articles are more similar than before).
@@ -179,9 +181,12 @@ y axis in the fraction of terms marked as sentiment/propaganda.
 
 
 
-\subsection{Political leaning prediction using propaganda features}
-5: political leaning classifier from propaganda features. Why
+\subsection{\statusorange Political leaning prediction using propaganda features}
 
+% 5: political leaning classifier from propaganda features. Why
+
+
+RQ2: \emph{Can we predict the political leaning of a news article by observing the propaganda it uses?}
 
 Why the two could benefit / be related?
 
@@ -271,9 +276,11 @@ TODO: split this in
 1. data subsection (needed) and in
 2. results of political leaning prediction subsection (previous subsection)
 
-\subsection{Propaganda datasets are unbalanced}
+\subsection{\statusorange Propaganda datasets are unbalanced}
 
-8: propaganda datasets are unbalanced
+exp 8: propaganda datasets are unbalanced
+
+RQ3: \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
 
 \begin{figure}[!htb]
    \centering
@@ -320,9 +327,9 @@ Propaganda and populism are correlated, but not too strongly. In the Right more.
 what was achieved, findings by RQ:
 
 \begin{itemize}
-    \item How does propaganda vary across the political spectrum?
-    \item Can we predict the political leaning of a news article by observing the propaganda it uses?
-    \item Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature? Quite unbalanced datasets
+    \item How does propaganda vary across the political spectrum? Less in the centre. More in the extremes. This was expected. Right seems to be more propagandistic, especially with some techniques (slogans, ...)
+    \item Can we predict the political leaning of a news article by observing the propaganda it uses? Very difficult task. We see minimal effects
+    \item Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature? Quite unbalanced datasets. Not clear what the effect of this imbalance is.
 \end{itemize}
 
 limitations
@@ -330,6 +337,7 @@ limitations
 \section{Next}
 \label{sec:ps_next}
 
+Propaganda features are not enough to recognise leaning, and propaganda seems to be spread around in almost all leanings. We need to find whether, by including another dimension, we can differentiate better. 
 Does it depend on the topics of the articles?
 
-Need to break down by topic
+Need to break down by topic and see whether for some of them, propaganda of one leaning is very different from the one of the others.

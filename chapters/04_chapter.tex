@@ -534,14 +534,14 @@ Propaganda instead ?
 The last experiment of this chapter takes the problem of analysing the relationship between persuasion and variations in news articles from another perspective.
 We approach this analysis from the point of view of clustering.
 The previous chapter already analysed the clustering algorithms at the article and sentence level.
-Here instead we question whether we can help clustering articles by removing the persuasion from the articles.
+Here, instead, we question whether we can help the clustering of articles by removing the persuasion from the articles.
 
 Our RQ4 is ``how much of an obstacle is persuasion in recognising the events in multiple articles?" To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned" from persuasion.
 %\todoHA{Avoid yes/no type of RQs}
 
 % why
-The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}), and in this experiment we target only the cases where they appear in different words.
-\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words}
+The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}). In this experiment, we target only the case where they appear in different words, because it is simpler to separate and see the effect of removal. For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning}.
+\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words. check models, there are some for spinning but what about un-spinning?}
 
 
 % effect of sentiment/propaganda words on sentence clustering
@@ -564,7 +564,7 @@ The motivation behind this experiment lies in our hypothesis done in Chapter~\re
 % How
 To bring this plan into action, we compare the results of  clustering algorithms applied to articles ``as they are" against the articles ``without persuasion terms" and see whether the clustering obtained improves or not.
 
-In the next subsections we analyse the dataset used, the approach and the findings.
+In the next subsections we analyse the dataset used, the approach, the results, and the findings.
 
 % \todo{rephrasing needed for these 3 subsections, at the moment they are quite raw}
 
@@ -809,7 +809,7 @@ There are some limitations to this experiment:
 \todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 \end{enumerate}
 
-\section{\statusorange Discussion}
+\section{\statusgreen Discussion}
 
 Responses to the 4 RQs with contributions:
 
