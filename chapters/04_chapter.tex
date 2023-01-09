@@ -6,7 +6,7 @@
 % what (orientation)
 In this second experimental chapter, we introduce a new ingredient in our analysis: persuasion techniques.
 With the previous Chapter~\ref{chap:common_ground_search}, we underlined our need to understand how different terms, that are used to describe the same details, can effectively convey a different message to the readers.
-Therefore, in order to characterise those differences, this chapter introduces \gls{persuasion} as an umbrella term that encompasses several techniques where the writer of a piece of text is trying to persuade the reader of a certain point of view.
+Therefore, in order to characterise those differences, this chapter introduces \gls{persuasion} as an umbrella term that encompasses several techniques where the writer of a piece of text is trying to push to the reader a certain point of view.
 % In this chapter, we add our second ingredient: persuasion.\todoAW{abrupt start}
 % We intend persuasion as a general umbrella that encompasses several techniques where the writer of a piece of text is trying to persuade the reader of a certain point of view.
 
@@ -38,9 +38,10 @@ The Research Questions we want to answer are:
 % 18 techniques of propaganda
 
 % Experiment together with common ground search
-To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly/recently analysed \gls{persuasion} means for which we have computational detection methods: \gls{propaganda} and \gls{sentiment}.
+To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly/recently analysed \gls{persuasion} means for which exist computational detection methods: \gls{propaganda} and \gls{sentiment}.
 %\todoHA{Any refs that link propaganda and sentiment with persuasion?}
 \todoAW{Harith asks what links propaganda, sentiment and persuasion. I'd ask what separates them. ie. why do you need to study persuasion at all if you can detect the other two cases?}
+\todomargin{MM: Persuasion including both, needed a term to simplify instead of always saying propaganda and sentiment}
 
 % BEGIN response to HA
 As discussed in Chapter~\ref{sec:lit_persuasion}, we consider here \gls{persuasion} as a term that encompasses both \gls{sentiment} and \gls{propaganda}. % and populism
@@ -58,40 +59,43 @@ And the relationship with propaganda comes from the inherent goal of propaganda 
 % carry the following experiment:
 Therefore, we have the first part of this chapter that covers the detection of these persuasion techniques (Section~\ref{sec:lp_techniques}).
 And then, we put this in relationship with the analysis from the previous Chapter~\ref{chap:common_ground_search} in Section~\ref{sec:lit_relationships}.
-In this last part, 
+In this last part (Section~\ref{sec:lp_relationship}), 
 we take into study the terms that change between articles, and we analyse whether they contain some persuasion techniques, and in which relationship. %indicate something about the changes in the sentences.
 
-This is implemented according to the following pipeline:\todoHA{Rationale?}
-\begin{enumerate}
-    \item Analysis from Chapter~\ref{chap:common_ground_search}: extracts the words that are changed between similar sentences of similar articles
-    \item Extraction of different techniques (sentiment, propaganda) on the sentences (described in the next Section~\ref{sec:lp_techniques})\todoAW{Doesn't your earlier paragraph suggest that we've already got this? ("means for which we have computational detection methods: propaganda and sentiment"))}
-    \item Analysis of the relationship between these techniques and the changes in the sentences (described in Section~\ref{sec:lp_relationship})
-\end{enumerate}
+% This is implemented according to the following pipeline:\todoHA{Rationale?}
+% \begin{enumerate}
+%     \item Analysis from Chapter~\ref{chap:common_ground_search}: extracts the words that are changed between similar sentences of similar articles
+%     \item Extraction of different techniques (sentiment, propaganda) on the sentences (described in the next Section~\ref{sec:lp_techniques})\todoAW{Doesn't your earlier paragraph suggest that we've already got this? ("means for which we have computational detection methods: propaganda and sentiment"))}
+%     \item Analysis of the relationship between these techniques and the changes in the sentences (described in Section~\ref{sec:lp_relationship})
+% \end{enumerate}
 
 
 % findings
 We discover that
 the initial methods for fine-grained propaganda detection seem to be more promising %\todoHA{How? In what way?}
 than sentiment detection.
-Fine-grained propaganda analysis gives a multidimensional result because it provides the amount and words for each specific technique. Instead, sentiment only provides a mono- (or bi-) dimensional result. And furthermore, it shows weaker results, as will be shown in the next sections.
-Sentiment is (cor)related to the specific propaganda technique of \texttt{Loaded\_language}, and having one technique instead of $18$ is only a disadvantage.
+Fine-grained propaganda analysis gives a multidimensional result because it provides the amount and words for each specific technique. Instead, sentiment only provides a mono- (or bi-) dimensional result. And furthermore, it shows weaker results, as will be shown in the next sections: sentiment detection produces many words that are \emph{false positives}, and it becomes more difficult to understand which outputs we can rely on.
+% Sentiment is (cor)related to the specific propaganda technique of \texttt{Loaded\_language}, and having one technique instead of $18$ is only a disadvantage.
 % does not provide useful insights when observed together with the changes occurring in the articles. 
-The multi-dimensionality of propaganda across the techniques is much more useful.
+The multi-dimensionality of propaganda across the techniques is much more useful and also more precise.
 For this reason, we mainly use propaganda for the experiments of the following chapters. 
 
 Our findings from this chapter include:
 \begin{enumerate}
-    \item The relationship between the changed terms and propaganda language is not very clear: different parts do not always contain loaded language or propaganda. A lot of changes are not meaningful in terms of propaganda: linguistic variance.\todoAW{Not sure what you're getting at here.}
+    \item The relationship between the changed terms and propaganda language is not very straightforward: different parts do not always contain loaded language or propaganda. A lot of changes are not meaningful in terms of propaganda: multiple wording can be unrelated to persuasion. % linguistic variance.\todoAW{Not sure what you're getting at here.}
+    \item Some techniques, such as \texttt{Doubt} and \texttt{Appeal\_to\_fear-prejudice}, appear less in general but are the one that differentiate more one version from the other. \texttt{Loaded\_language}, on the other side, is more ubiquitous since news sources are competing for the attention of the reader, and results less in a comparative analysis.
     \item As we hypothesised, the persuasion in the articles is adding terms and concepts that create variations (fitting different persuasion goals). As a consequence, these selected words make it slightly more difficult to recognise groups of articles related to the same event.
-    Removing propaganda and/or sentiment from articles makes related articles slightly easier to cluster correctly.\todoAW{Not sure what you mean by this. In most cases of cluster analysis, there's no meaningful concept of a "correct cluster"}
+    Removing propaganda and/or sentiment from articles makes related articles slightly easier to group correctly in the case where the ground truth of the group is known.%\todoAW{Not sure what you mean by this. In most cases of cluster analysis, there's no meaningful concept of a "correct cluster"}
     %\todoHA{For what? Not discussed earlier}
 \end{enumerate}
 
 % interpretation
 
 % TODO: Interpretation? Or just pointers to next sections
-The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains some techniques that we identifed being related to persuasion.\todoAW{? I don't know what you mean by "related to" here.}
-We present there what they are able to detect on our datasets (stage 2 of the pipeline above described). Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed (stage 3 of the pipeline).
+The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains the analysis of persuasion techniques: sentiment and propaganda.
+%some techniques that we identifed being related to persuasion.\todoAW{? I don't know what you mean by "related to" here.}
+We present what they are able to detect on our datasets. %(stage 2 of the pipeline above described).
+Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed.%(stage 3 of the pipeline).
 
 \section{Different Techniques of Persuasion}
 \label{sec:lp_techniques}
@@ -101,14 +105,15 @@ We present there what they are able to detect on our datasets (stage 2 of the pi
 From all the different methods and approaches described in Chapter~\ref{sec:lit_propaganda}\tododefault{check ref}, in this section, we are using a set of methods to detect phenomena related to persuasion. % and do that at the word-level.
 In other words, we are detecting several techniques that we know 
 %\todoHA{Assume? No references to support this assumption} 
-to be related to persuasion~\cite{gass2018persuasion}: sentiment and 18 different propaganda techniques.% and populism.
+to be related to persuasion~\citep{gass2018persuasion}: sentiment and 18 different propaganda techniques.% and populism.
 %\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclasses. Look in literature.}
 
-When selecting which techniques to target, we have an important requirement to keep in mind: we are interested to work at the word-level, because our end goal is to study how persuasion techniques relate to the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need word-level information.\todoAW{Not sure what you're getting at here. What information exactly are you hoping for at the word level? And it's not usually single words that persuage; rather, it's usually a sentence or article. So it's fine to want to identify the properties of the words that make them propagandistic, but I'd be wary of suggesting that that means you shouldn't be trying to also do a sentence- or article-level analysis.}
-We are analysing word substitutions.
+When selecting which techniques to target, we have an important requirement to keep in mind: we are interested to work at the word-level, because our end goal is to study how persuasion techniques relate to the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need also word-level information. %\todoAW{Not sure what you're getting at here. What information exactly are you hoping for at the word level? And it's not usually single words that persuade; rather, it's usually a sentence or article. So it's fine to want to identify the properties of the words that make them propagandistic, but I'd be wary of suggesting that that means you shouldn't be trying to also do a sentence- or article-level analysis.}
+Having a score on the sentence-level is useful to capture complex cases where no specific word is responsible but it's the context that makes a subset of words responsible (e.g. when using \texttt{Doubt} or \texttt{Repetition}). We need to have in output the responsible words from the analysis tools, because we want to see how persuasion differs when very similar sentences exist. We can already compute which words differ, and we want to see if these words are also expressing persuasion.
 
 In the following subsections, we illustrate the models that we are using to perform sentiment detection (Subsection~\ref{ssec:lp_techniques_sentiment}) and fine-grained propaganda detection (Subsection~\ref{ssec:lp_techniques_propaganda}).
-Then in Subsection~\ref{ssec:lp_techniques_populism_vs_propaganda} we show some work done on populism. Even though we don't have computational detection of populism, we wanted to see the relationship that it has with propaganda.\todoAW{Not sure this para is necessary}
+
+% Then in Subsection~\ref{ssec:lp_techniques_populism_vs_propaganda} we show some work done on populism. Even though we don't have computational detection of populism, we wanted to see the relationship that it has with propaganda.\todoAW{Not sure this para is necessary}
 
 \subsection{\statusorange Sentiment detection}
 \label{ssec:lp_techniques_sentiment}
@@ -394,7 +399,7 @@ Considering that the current fine-grained propaganda detection is not so accurat
 
 
 
-\section{Relationship between techniques and words changed}
+\section{\statusgreen Relationship between techniques and words changed}
 \label{sec:lp_relationship}
 
 After having described in the previous sections the detection of the \emph{linguistic techniques of persuasion} on their own, we describe in this section the last stage of the pipeline announced in the introduction to this chapter (Section~\ref{sec:lp_intro}).
@@ -408,11 +413,11 @@ To analyse this relationship, we have two different experiments:
     \item removing persuasion to improve clustering: is persuasion acting as noise when we want to cluster news articles? We want to test what happens when we remove persuasive words from the articles.\todoHA{why assuming it might be noise?}
 \end{enumerate}
 
-\subsection{\statusorange The effects of small variations on detected persuasion}
+\subsection{\statusgreen The effects of small variations on detected persuasion}
 \label{ssec:lp_relationship_small_variations}
 
-\todoAWinline{It all starts getting very choppy from here. In general, I think the main thing in this chapter is that your experiments need to be presented more formally. You have interesting looking results, but I don't really see where they come from.
-Ask yourself how someone would reproduce the work you've presented here. I wouldn't know how to start.}
+%\todoAWinline{It all starts getting very choppy from here. In general, I think the main thing in this chapter is that your experiments need to be presented more formally. You have interesting looking results, but I don't really see where they come from.
+%Ask yourself how someone would reproduce the work you've presented here. I wouldn't know how to start.}
 
 
 % Why
@@ -442,6 +447,14 @@ We extracted from them a subset of 138 sentence pairs, by using the approach des
     %\item Manual annotation of whether the differences in the sentence pairs are making use of different persuasion or relate to a different opinion / point of view. This specific data is used for the experiments ``comparison with manual annotations" at the end of this Section~\ref{ssec:lp_relationship_small_variations_qual}
 \end{enumerate}
 
+Figure~\ref{fig:raw_clique_data} shows an example drawn from our dataset that shows how the same detail has been phrased differently by different news articles.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/annotation_212_raw_cluster.png}
+    \caption{Example of a clique of sentences that we used to build sentence pairs.}
+    \label{fig:raw_clique_data}
+\end{figure}
 
 
 \subsubsection{Approach}
@@ -463,54 +476,91 @@ The comparison is done in different ways:
     \item words: the words changed could be the words that carry sentiment/propaganda. And instead of just hypothesising that the change in the words are responsible for a different score (point above), we have a direct indication that the words belong to a persuasion technique.
 \end{enumerate}
 
-\todo{Figure with example: uniqueness of words highlighted, corresponding plot with scores of the two sentences, and also persuasion words in the text (different colour?). Take from one of the three on my desktop (only pair, not clique), and create the display on streamlit/displacy}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/annotation_212_annotated.png}
+    \caption{Example of a pair of sentences that has been annotated by the uniqueness analysis (in green the words that are unique of this sentence with respect to the other) and by the persuasion analysis (in purple the detected propaganda technique of \texttt{Apppeal\_to\_fear-prejudice}).}
+    \label{fig:annotated_clique_data}
+\end{figure}
+
+Figure~\ref{fig:annotated_clique_data} shows a pair of sentences that contain one persuasion technique. Some words (e.g., \emph{deadly}, \emph{spiral out of control}) are both unique of the first sentence and also belong to the technique of \texttt{Apppeal\_to\_fear-prejudice}. Instead in many other pairs of our dataset, the changes do not manifest in terms of persuasion techniques.
+Our goal is to understand this relationship between changes in articles and persuasion.
 
 % split between computational results and human judgement
-We conduct the analysis following two main points of view:
-\begin{enumerate}
-    \item computational-only: we compute how much the differences in wording affect the scores and words of detected persuasion;
-    \item soft-validation of computational results: we try to see how good the detected changes in persuasion are when we compare to human-generated labels.
-\end{enumerate}
-
+We conduct the analysis following a purely computational approach.
+% \begin{enumerate}
+%     \item computational-only: we compute how much the differences in wording affect the scores and words of detected persuasion;
+%     %\item soft-validation of computational results: we try to see how good the detected changes in persuasion are when we compare to human-generated labels.
+% \end{enumerate}
+%
 % While the first one is less prone to criticism, being computed, the second one is less valid because only I annotated the sentences
-The output measures are: on average, how many variations in percentage also imply a different measured persuasion (in terms of scores)? %Are the variations between the texts making the persuasion scores change? 
-And, are the words changed also loaded with techniques of persuasion? 
+% We compute how much the differences in wording affect the scores and words of detected persuasion
+We want to measure on average how many variations in percentage also imply a different measured persuasion (in terms of scores). %Are the variations between the texts making the persuasion scores change? 
+And also analyse if the words changed are also loaded with techniques of persuasion.
+% Instead on the validation side with human annotations, we want to check if the results we are getting are 
+% \todo{finish sentence}
+
+There could be also an approach based on additional manual annotations, to check the validity of the results with human-based judgement (e.g. to validate whether the extracted persuasion is perceived as different in sentence pairs or not), but we just choose to compute the results using automated approaches.
+
 
 % Results
-The results have a first quantitative side and then also a qualitative one. ? rename to automated vs manual???
+% The results have a first quantitative side and then also a qualitative one. ? rename to automated vs manual???
 % it depends on which persuasion technique is considered.
 
 \subsubsection{Computational results}
 \label{ssec:lp_relationship_small_variations_quant}
 
-\todo{compute metrics from results
-Quantitative results\\
-- reduce groups to pairs: select rows and merge\\
-- count statistics about dataset: number of pairs\\
-- find example and create figure with sentence pairs with scores, words\\
-- add propaganda features (score and words) to each csv and merge sentiment analysis (score and words)\\
-- compute score results: score changes average for each technique (shows which techniques are mostly affected by variations)\\
-- compute words results: \#words persuasion / \#words changed\\
-- plot results (techniques vs percentages)
-}
+% \todo{compute metrics from results
+% Quantitative results\\
+% - reduce groups to pairs: select rows and merge\\
+% - count statistics about dataset: number of pairs\\
+% - find example and create figure with sentence pairs with scores, words\\
+% - add propaganda features (score and words) to each csv and merge sentiment analysis (score and words)\\
+% - compute score results: score changes average for each technique (shows which techniques are mostly affected by variations)\\
+% - compute words results: \#words persuasion / \#words changed\\
+% - plot results (techniques vs percentages)
+% }
 % quantitative
 Firstly, we computed some statistics over our dataset.
-With the selected 138 samples, we have on average $32.0\%$ of the words that are unique in sentence pairs. The words that count as unique in a sentence pair are the ones that do not appear in the other sentence belonging to the same pair. This corresponds in our example of Figure~\ref{fig:TODO} to the words highlighted in green.
+With the selected 138 samples, we have on average $32.0\%$ of the words that are unique in sentence pairs. The words that count as unique in a sentence pair are the ones that do not appear in the other sentence belonging to the same pair. This corresponds in our example of Figure~\ref{fig:annotated_clique_data} to the words highlighted in green.
 
-In the sentence pairs, the average percentage of words that are detected as related to any persuasion technique is $14.8\%$. Of these, most of them are detected as carrying sentiment ($12.5\%$) while only $3.2\%$ related to propaganda.
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{r|rr}
+         Technique & \% sentences & avg. word-based \% \\
+         \hline
+         any & 89.8\% & 14.8\% \\
+        sentiment\_total & 89.8\% & 12.5\% \\
+        propaganda\_any & 10.1\% & 3.2\% \\
+        PROPAGANDA:Loaded\_Language & 4.3\% & 0.8\% \\
+        PROPAGANDA:Doubt & 0.7\% & 0.5\% \\
+        PROPAGANDA:Flag-Waving & 1.4\% & 0.6\% \\
+        PROPAGANDA:Name\_Calling/Labeling & 1.4\% & 0.3\% \\
+        PROPAGANDA:Appeal\_to\_fear-prejudice & 1.4\% & 0.3\% \\
+        PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.6\% \\
+        PROPAGANDA:Repetition & 0.7\% & 0.1\% \\
+    \end{tabular}
+    \caption{The amount of detected persuasion techniques. The column \textit{\% sentences} represents how many of the sentences have the specific technique detected. The column \textit{avg. word-based \%} instead is an average over the percentage of words that belong to the technique.}
+    \label{tab:detected_persuasion_in_variations}
+\end{table}
+
+For the detected persuasion, we have that in $89.8\%$ of the sentences, some techniques are detected. And it is always sentiment that gets triggered, while propaganda is detected only in $14\%$ of the sentences.
+The average percentage of words that are detected as related to any persuasion technique is $10.1\%$, meaning that even though persuasion appears in approximately 9 out of 10 sentences, usually it appears just in a few words. Breaking down by type of technique, most of the words are detected as carrying sentiment ($12.5\%$) while only $3.2\%$ related to propaganda.
+We can see that the percentages are much smaller than the values provided by the sentiment libraries.
+By inspecting the samples, we see that generally sentiment detection provides way more terms in result than the propaganda detection. This means that potentially more words are being recalled, but the precision is much lower because we see lots of false positives.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/4.3.1_propaganda_avg.pdf}
-    \caption{Average of the detected propaganda techniques across the dataset of sentence pairs.}
+    \caption{Average of the detected propaganda techniques across the dataset of sentence pairs. On the horizontal axis, the techniques that appear in this dataset. On the vertical axis, the average of word-based percentage of the corresponding technique.}
     \label{fig:propaganda_avg}
 \end{figure}
 
-Figure~\ref{fig:propaganda_avg} shows the percentages of each detected propaganda technique in the corpus. We can see that the percentages are much smaller than the value provided by the sentiment libraries.
-By inspecting the samples, we see that generally sentiment detection provides way more terms in result than the propaganda detection. This means that potentially more words are being recalled, but the precision is much lower because we see lots of false positives.
+Figure~\ref{fig:propaganda_avg} shows the percentages of each detected propaganda technique in the corpus (same values as in Table~\ref{tab:detected_persuasion_in_variations}, but filtering by technique only propaganda and considering the last column.
+The propaganda techniques appearing the most are \texttt{Loaded\_laanguage}, \texttt{Exaggeration/Minimisation}, \texttt{Flag-Waving} and \texttt{Doubt}.
 
 % number of changes vs score variations
-Up to this point, the persuasion statistics were given on single sentences. This next paragraphs instead contain the analysis of the change of detected persuasion between the sentence pairs.
+Up to this point, the statistics were given on single sentences. This next paragraphs instead contain the analysis of the change of detected persuasion between the sentence pairs.
 How many times the variation of the sentences results in a change over the persuasion scores? And how big is the change in the scores?
 We answer these question by first considering every minimal change in the scores. And then by considering the magnitude of the change.
 
@@ -518,9 +568,9 @@ We answer these question by first considering every minimal change in the scores
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{r|rr}
-         Technique & any change & magnitude \\
+         Technique & \% scores changed & avg. magnitude \\
          \hline
-         any & 98.5\% & 0.0\% \\
+         any & 98.5\% & N/A \\
         sentiment\_total & 98.5\% & 9.3\% \\
         propaganda\_any & 14.4\% & 3.4\% \\
         PROPAGANDA:Loaded\_Language & 7.2\% & 1.0\% \\
@@ -531,75 +581,122 @@ We answer these question by first considering every minimal change in the scores
         PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.1\% \\
         PROPAGANDA:Repetition & 1.4\% & 0.1\% \\
     \end{tabular}
-    \caption{Caption}
+    \caption{The impact on detected persuasion of the variations between the sentence pairs. The column \textit{\% scores changed} is computed by considering wwhether each sentence pair has different scores (percentage of binary values). The column \textit{avg. magnitude} instead expresses the magnitude of the change, measured in percentage of the allowed interval for each technique.}
     \label{tab:change_scores_persuasion_in_variations}
 \end{table}
 
 
 The result of Table~\ref{tab:change_scores_persuasion_in_variations} show that in $98.5\%$ of the cases, we can see a change in the scores of at least one technique.
-Breaking down this result, we have that in all these cases (still $98.5\%$) there is a change in the sentiment
+Breaking down this result, we have that in all these cases (still $98.5\%$) there is a change in the sentiment score. So the sentiment detection, not only is picking on more terms (with many possible false negatives), but also is very sensible to the terms used (perturbing the output scores).
+Propaganda, on the other side, is detected less and is perturbed less.
 
-Overall, on the quantitative side, we see that a portion (\%?) of the variations in the texts is causing a persuasion score change. Out of X couples of sentences with small variations, only for Y we see a change. Among these, Y1 are changes to the sentiment and Y2 to the propaganda score. The breakdown by techniques is illustrated in the blue bars of Figure~\ref{TODO}, which shows the percentages of variations that correspond to a change in the respective technique. (for each technique, for each sentence pair, a boolean yes/no where yes corresponds to ``changed" and no to ``unchanged", then counting the percentages of yes) 
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/4.3.1_normalised_ratio_scores.pdf}
+    \caption{Normalised ratio between the average variation of the score of each technique, and the average quantity of that technique. On the horizontal axis, we have the different techniques that are detected in the corpus, while on the vertical axis the values represent how affected is the technique by having the same details provided by two different sentences.}
+    \label{fig:normalised_ratio_scores_persuasion}
+\end{figure}
+
+We analyse the ratio between the average magnitude of changes from this table and the average word-based percentage from Table~\ref{tab:detected_persuasion_in_variations} to normalise the results and find the techniques that are mostly affected by this variation.
+Figure~\ref{fig:normalised_ratio_scores_persuasion} shows the results of this normalisation. The most affected techniques are \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}.
+It is important to normalise to discount the effects of the natural improportion of the techniques used. For example, loaded language is the propaganda technique most used in general, but as we can see in the figure, it is not the one that changes the most between the pairs of sentences. This is due to the fact that most of the news sources tend to describe with loaded words the same events in their race for attention/clickbaitness~\citep{bazaco2019clickbait,davenport2001attention}. And using loaded terms is the easiest way to compete and make users read an article. But techniques that are less evident are the ones in which we can see more differences.
+
+
+As per the sentence pair in the previous Figure~\ref{fig:annotated_clique_data}, only the first one contains \texttt{Appeal\_to\_fear-prejudice} to communicate the detail. This is the type of variation we are interested in.
+
+
+% Overall, on the quantitative side, we see that a portion (\%?) of the variations in the texts is causing a persuasion score change. Out of X couples of sentences with small variations, only for Y we see a change. Among these, Y1 are changes to the sentiment and Y2 to the propaganda score. The breakdown by techniques is illustrated in the blue bars of Figure~\ref{TODO}, which shows the percentages of variations that correspond to a change in the respective technique. (for each technique, for each sentence pair, a boolean yes/no where yes corresponds to ``changed" and no to ``unchanged", then counting the percentages of yes) 
 
 
 %number of changes vs persuasion-loaded terms: how many terms in percentage?
-And secondly, still on the quantitative side, we also compute a measure based on the words: how many changed words (percentage) are also persuasion related? To compute this, we have X words that have been changed (out of Z sentence pairs), and Y words that are related to persuasion.
-With respect to the first measure, this metric is based on the words instead of being based on the number of samples. The red bars of Figure~\ref{TODO} illustrate it.\todoHA{Use tables to present results}
+We also compute a measure based on the words: how many changed words (percentage) are also persuasion related? Some words can be unique for one sentence but not be related to persuasion, while others can be both unique and loaded of one/more persuasion techniques.
 
-\todo{Barchart (horizontal) of: 1(blue) percentage of variations that also correspond to a change in the values for each of the techniques. X axis: percentage, Y axes: techniques. 2(red): percentage of words changed that also are persuasion related}
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{r|rr}
+         Technique & \%pairs & \%words \\
+         \hline
+         any & 86.9\% & 18.8\% \\
+        sentiment\_total & 85.5\% & 17.0\% \\
+        propaganda\_any & 10.1\% & 2.9\% \\
+        PROPAGANDA:Loaded\_Language & 5.7\% & 1.0\% \\
+        PROPAGANDA:Doubt & 1.4\% & 0.4\% \\
+        PROPAGANDA:Flag-Waving & 1.4\% & 0.1\% \\
+        PROPAGANDA:Name\_Calling/Labeling & 0\% & 0\% \\
+        PROPAGANDA:Appeal\_to\_fear-prejudice & 1.4\% & 0.7\% \\
+        PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.6\% \\
+        PROPAGANDA:Repetition & 0\% & 0\% \\
+    \end{tabular}
+    \caption{Comparison of persuasion words against unique words (unique of only one sentence in the pair). The column \textit{\%pairs} is defined as the ratio between the number of sentences where at least one word of persuasion is also one unique word (not in common) and the number of sentence pairs. The column \textit{\%words} instead is defined as the total number of words that are both persuasion and unique, divided by the total number of unique words.}
+    \label{tab:words_persuasion_in_variations}
+\end{table}
 
-\todo{compute results: currently having a small problem with my pipeline, I need to put back together the articles used in the past from Google News. The dataset from AllSides instead works already, but only 3 articles for each headline so less sentences similar enough.}
-\todo{now comment on the quantitative results}
+Table~\ref{tab:words_persuasion_in_variations} shows that in $86.9\%$ of the pairs, we have words that appear only in one of the two sentences that also contain some persuasion. The proportion word-based is $18.8\%$ as we have 2240 words that have been changed (out of 138 sentence pairs, summing the unique words for each pair), and 422 of them are related to persuasion.
+We can confirm the results found when using the scores instead of the words. The only differences are in the \texttt{Name\_Calling} and \texttt{Repetition} techniques, that in this case do not overlap with the unique terms.
 
-\subsubsection{Computational vs Human Judgement results}
-\label{ssec:lp_relationship_small_variations_qual}
+While all these results are really useful to understand the relationship between the detected persuasion and the variations appearing in multiple versions of the same detail, we have a main limitation which is: does this analysis reflect on what a news consumer would perceive?
+% To try to give an answer to this question, we make use of the following subsection which analyses the correlation with human judgements.
 
-\todo{
-Qualitative results:\\
-- annotate a subset of pairs: does this change mean something in terms of persuasion? Boolean\\
-- "confusion matrix"\\
-- plot barchart of the ones that behave mostly as predicted\\
-- limitations: because these annotations are done only by me
-}
+% \subsubsection{Computational vs Human Judgement results}
+% \label{ssec:lp_relationship_small_variations_qual}
 
-Goals:
-- understand how the previous computational results are not just picking any changes. $98.5\%$ of the variation caused a change in the persuasion scores, so we need to assess if we are not only???? 
+% For this last part of the experiment, we want to understand whether the findings of the previous computational analysis are possibly indicating something that really exists.
+% For this reason, we conducted a very limited analysis based on manual annotations.
+
+% TODO
+
+% \todo{
+% Qualitative results:\\
+% - annotate a subset of pairs: does this change mean something in terms of persuasion? Boolean\\
+% - "confusion matrix"\\
+% - plot barchart of the ones that behave mostly as predicted\\
+% - limitations: because these annotations are done only by me
+% }
+
+% Goals:
+% - understand how the previous computational results are not just picking any changes. $98.5\%$ of the variation caused a change in the persuasion scores, so we need to assess if we are not only???? 
 
 
-Manual annotation of whether the differences in the sentence pairs are making use of different persuasion or relate to a different opinion / point of view. This specific data is used for the experiments ``comparison with manual annotations" at the end of this Section~\ref{ssec:lp_relationship_small_variations_qual}
+% Manual annotation of whether the differences in the sentence pairs are making use of different persuasion or relate to a different opinion / point of view. This specific data is used for the experiments ``comparison with manual annotations" at the end of this Section~\ref{ssec:lp_relationship_small_variations_qual}
 
-% annotations why how and annotation guidelines
-TODO
+% % annotations why how and annotation guidelines
+% TODO
 
-Then the qualitative results: do the scores/words represent correctly the persuasion differences? For measuring this, we rely on manual analysis of a subset of sentence pairs. We selected these pairs randomly. We manually label these pairs (How many?)
-(because we don't actually have the ground truth, we are estimating it based on our observations) in two categories: with differences in persuasion or without them.\todoHA{I'm assuming this text not finished?}
+% Then the qualitative results: do the scores/words represent correctly the persuasion differences? For measuring this, we rely on manual analysis of a subset of sentence pairs. We selected these pairs randomly. We manually label these pairs (How many?)
+% (because we don't actually have the ground truth, we are estimating it based on our observations) in two categories: with differences in persuasion or without them.\todoHA{I'm assuming this text not finished?}
 
-We can define reference values in the following way:
+% We can define reference values in the following way:
 
-\begin{itemize}
-    \item \textbf{reference value}: our estimation, but not really a "ground truth";
-    \item \textbf{detected}: whether a persuasion score changes between the two sentences
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{reference value}: our estimation, but not really a "ground truth";
+%     \item \textbf{detected}: whether a persuasion score changes between the two sentences
+% \end{itemize}
 
-Therefore, the true/false positives/negatives for the confusion matrix become:
+% Therefore, the true/false positives/negatives for the confusion matrix become:
 
-\begin{itemize}
-    \item True positive: our estimation is that it should change, and it actually changes.
-    \item False positive: our estimation is that the sentences carry the same type of persuasion, but the detection of persuasion tells that there is something different
-    \item False negative: we deem that the two sentences should contain a change in persuasion, but the detection says nothing
-    \item True negative: no change should be contained, and detection does not detect differences on the persuasion level.
-\end{itemize}
+% \begin{itemize}
+%     \item True positive: our estimation is that it should change, and it actually changes.
+%     \item False positive: our estimation is that the sentences carry the same type of persuasion, but the detection of persuasion tells that there is something different
+%     \item False negative: we deem that the two sentences should contain a change in persuasion, but the detection says nothing
+%     \item True negative: no change should be contained, and detection does not detect differences on the persuasion level.
+% \end{itemize}
 
-% results
-The results show???\todo{finish}
+% % results
+% The results show???\todo{finish}
 
 \subsubsection{Findings and limitations}
 
+\todo{Rephrase and finish}
 % findings
-Sentiment detection might not be the best choice. Very noisy detection, and scores do not change all the times even when the sentences should imply a change.
-We then have a set of sentence pairs that only looks like a re-wording with no persuasion changes, and persuasion/propaganda 
+% quantitative
+Sentiment detection might not be the best choice. Very noisy detection, picking up lots of terms.
+When normalisation is performed, we find that \texttt{Loaded\_Language} being the easiest technique to deploy. More subtle techniques instead appear to have a higher normalised score because they only appear in one of the two sentences in the pairs analysed.
+This is particularly meaningful because TODO
+% qualitative
+We then have a set of sentence pairs that only looks like a re-wording with no persuasion changes, and persuasion/propaganda.
+% When compared to human juddgement, TODO
 
-Propaganda instead ?
+
 
 % Sentiment
 
@@ -622,8 +719,8 @@ Our RQ4 is ``how much of an obstacle is persuasion in recognising the events in 
 %\todoHA{Avoid yes/no type of RQs}
 
 % why
-The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}). In this experiment, we target only the case where they appear in different words, because it is simpler to separate and see the effect of removal. For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning}.
-\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words. check models, there are some for spinning but what about un-spinning?}
+The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}). In this experiment, we target only the case where they appear in different words, because it is simpler to separate and see the effect of removal. For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning}, which is beyond our scope.
+%\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words. check models, there are some for spinning but what about un-spinning?}
 
 
 % effect of sentiment/propaganda words on sentence clustering
@@ -888,7 +985,7 @@ There are some limitations to this experiment:
     \item when increasing the size, the difference on the metrics used become smaller and smaller. This means that this approach does not scale well to thousands of headlines;
     \item removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it becomes problem;
     \item if some words belong both to persuasion and to the topic, by removing them, it becomes more difficult to form the correct cluster. This is why non-persuasive rephrasing could be needed. (choice of terms, but still some meaning).
-\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
+%\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 \end{enumerate}
 
 \section{\statusgreen Discussion}
@@ -898,7 +995,7 @@ Responses to the 4 RQs with contributions:
 \begin{enumerate}
     \item What do writers use to persuade the reader? Different persuasion techniques: sentiment / emotion manipulation, propaganda and populism (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
     \item How can we automatically detect those techniques? Sentiment is detected through lexicons and sentiment treebanks. Propaganda with fine-grained models and datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda. Answered also in Section~\ref{sec:lp_techniques}.
-    \item How are the differences between similar articles related to a different use of persuasion techniques? In some cases they are. But in the majority of the cases, the ddifferences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences. Or also we have errors in the detection (especially sentiment) that avoid us to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
+    \item How are the differences between similar articles related to a different use of persuasion techniques? In some cases they are. We managed to find that techniques like \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition} are the ones that are mostly affected by the variations in expressing the same detail. But in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences. Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
     \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
 \end{enumerate}
 
@@ -914,5 +1011,10 @@ Computational detection of persuasion means is quite a recent research area, and
 
 \section{\statusgreen Next}
 % link to next chapter
-In this chapter we investigated the persuasion techniques. But we have not studied the relationship between this observed persuasion in the text and the ideals/agenda/perspective of the author/outlet. It can be really useful to understand the context around the source of an article in order to interpret its persuasion.
-For this reason, the next chapter will consider perspectives and political sides. In this way we will try to understand if the persuasion of each political side is similar or which are the differences. If a different goal for the persuasion also can be observed on the persuasion itself.
+In this chapter we investigated the persuasion techniques and how they relate to wording changes in similar sentences and articles.
+But we have not studied the relationship between this observed persuasion in the text and the ideals/agenda/perspective of the author/outlet.
+It can be really useful to understand the context around the source of an article in order to interpret its persuasion.
+For this reason, the next chapter will consider perspectives and political sides.
+In this way we will try to understand if the persuasion of each political side is similar or which are the differences.
+Can we observe the different goals that generated the articles (the perspective or political side) also on the persuasion itself? We will investigate what is the relationship between political sides and persuasion.
+% If a different goal for the persuasion also can be observed on the persuasion itself.
