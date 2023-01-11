@@ -39,6 +39,7 @@ The Research Questions we want to answer are:
 
 % Experiment together with common ground search
 To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly/recently analysed \gls{persuasion} means for which exist computational detection methods: \gls{propaganda} and \gls{sentiment}.
+\todoAW{Slightly weird phrasing here... have you run this through Grammarly?}
 %\todoHA{Any refs that link propaganda and sentiment with persuasion?}
 \todoAW{Harith asks what links propaganda, sentiment and persuasion. I'd ask what separates them. ie. why do you need to study persuasion at all if you can detect the other two cases?}
 \todomargin{MM: Persuasion including both, needed a term to simplify instead of always saying propaganda and sentiment}
@@ -47,6 +48,7 @@ To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion
 As discussed in Chapter~\ref{sec:lit_persuasion}, we consider here \gls{persuasion} as a term that encompasses both \gls{sentiment} and \gls{propaganda}. % and populism
 It is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
 And the relationship with propaganda comes from the inherent goal of propaganda to influence the view of the public about an idea or a group~\citep{bernays,jowett2018propaganda}.
+\todoAW{Good early citation shows you're aware of the broader literature... do you have others elsewhere in the dissertation? If not, probably worth making sure you're aware of some of the key authors in the area. Three or four should be enough.}
 
 % It is known that persuasion is related to an emotional response from the reader/listener, being related to emotions.
 % Persuasion and Discursive Repertories~\cite{orrumachine}
@@ -58,9 +60,9 @@ And the relationship with propaganda comes from the inherent goal of propaganda 
 
 % carry the following experiment:
 Therefore, we have the first part of this chapter that covers the detection of these persuasion techniques (Section~\ref{sec:lp_techniques}).
-And then, we put this in relationship with the analysis from the previous Chapter~\ref{chap:common_ground_search} in Section~\ref{sec:lit_relationships}.
+And then, we put this in relationship with the analysis from the previous Chapter~\ref{chap:common_ground_search} in Section~\ref{sec:cgs_clustering_and_differences}.
 In this last part (Section~\ref{sec:lp_relationship}), 
-we take into study the terms that change between articles, and we analyse whether they contain some persuasion techniques, and in which relationship. %indicate something about the changes in the sentences.
+we extend the study to consider the terms that change between articles, and we analyse whether they contain some persuasion techniques, and in which relationship. %indicate something about the changes in the sentences.
 
 % This is implemented according to the following pipeline:\todoHA{Rationale?}
 % \begin{enumerate}
@@ -88,11 +90,14 @@ Our findings from this chapter include:
     Removing propaganda and/or sentiment from articles makes related articles slightly easier to group correctly in the case where the ground truth of the group is known.%\todoAW{Not sure what you mean by this. In most cases of cluster analysis, there's no meaningful concept of a "correct cluster"}
     %\todoHA{For what? Not discussed earlier}
 \end{enumerate}
+\todoAW{All rather detailed and heavyweight for the introductory section.
+Probably need to be more abstract for this section.}
 
 % interpretation
 
 % TODO: Interpretation? Or just pointers to next sections
 The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains the analysis of persuasion techniques: sentiment and propaganda.
+\todoAW{You've already told me this...}
 %some techniques that we identifed being related to persuasion.\todoAW{? I don't know what you mean by "related to" here.}
 We present what they are able to detect on our datasets. %(stage 2 of the pipeline above described).
 Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed.%(stage 3 of the pipeline).
@@ -108,8 +113,11 @@ In other words, we are detecting several techniques that we know
 to be related to persuasion~\citep{gass2018persuasion}: sentiment and 18 different propaganda techniques.% and populism.
 %\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclasses. Look in literature.}
 
-When selecting which techniques to target, we have an important requirement to keep in mind: we are interested to work at the word-level, because our end goal is to study how persuasion techniques relate to the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need also word-level information. %\todoAW{Not sure what you're getting at here. What information exactly are you hoping for at the word level? And it's not usually single words that persuade; rather, it's usually a sentence or article. So it's fine to want to identify the properties of the words that make them propagandistic, but I'd be wary of suggesting that that means you shouldn't be trying to also do a sentence- or article-level analysis.}
+When selecting which techniques to target, we have an important requirement to keep in mind: we are interested to work at the word-level, because our end goal is to study how persuasion techniques relate to the variations across the articles (as will be seen in Section~\ref{sec:lp_relationship}). Only having a score for the whole article or for a whole sentence is not helpful, because we need also word-level information.
+\todoAW{You really need an example here. I don't understand why you think that a sentence-level analysis is not helpful, nor why a word-level analysis would help.}
+%\todoAW{Not sure what you're getting at here. What information exactly are you hoping for at the word level? And it's not usually single words that persuade; rather, it's usually a sentence or article. So it's fine to want to identify the properties of the words that make them propagandistic, but I'd be wary of suggesting that that means you shouldn't be trying to also do a sentence- or article-level analysis.}
 Having a score on the sentence-level is useful to capture complex cases where no specific word is responsible but it's the context that makes a subset of words responsible (e.g. when using \texttt{Doubt} or \texttt{Repetition}). We need to have in output the responsible words from the analysis tools, because we want to see how persuasion differs when very similar sentences exist. We can already compute which words differ, and we want to see if these words are also expressing persuasion.
+\todoAW{You've attempted a justification here, but it's very wordy and I can't follow it. An example would clarify things much more.}
 
 In the following subsections, we illustrate the models that we are using to perform sentiment detection (Subsection~\ref{ssec:lp_techniques_sentiment}) and fine-grained propaganda detection (Subsection~\ref{ssec:lp_techniques_propaganda}).
 
@@ -119,10 +127,12 @@ In the following subsections, we illustrate the models that we are using to perf
 \label{ssec:lp_techniques_sentiment}
 
 First of all, we start with some sentiment detection. It is known that persuasion is very often related to an emotional response from the reader/listener, being related to emotions~\citep{rocklage2018persuasion,petty2015emotion,desteno2004discrete} and to sentiment~\citep{gatti2014sentiment}.
-While computational approaches to detect emotions exist (usually quantified across the 5-big emotions), the computational tools available for sentiment detection are more numerous and more common. The main difference of only using sentiment detection instead of emotions is that it usually gives an output on 1 or 2 axes: %\todoAW{Wouldn't a 2-dimensional analysis be more fine grained than a 5-bucket "big emotion" analysis? In which case, it's an advantage of using sentiment rather than emotions.}
+While computational approaches to detect emotions exist (usually quantified across the 5-big emotions),\todoAW{Which are? Reference? (x-ref, if you've discussed elsewhere)} the computational tools available for sentiment detection are more numerous and more common.\todoAW{than what?}
+The main difference of only using sentiment detection instead of emotions\todoAW{I don't know what difference you're trying to draw between sentiment and emotion.} is that it usually gives an output on 1 or 2 axes: %\todoAW{Wouldn't a 2-dimensional analysis be more fine grained than a 5-bucket "big emotion" analysis? In which case, it's an advantage of using sentiment rather than emotions.}
 valence (positive or negative) and strength (from neutral to strong). %But for an initial analysis, we deem\todoAW{How?} that sentiment is enough.
 
-For detecting the sentiment, we decide to use term-based analyses that, despite being less accurate than huge deep-learning models, %\todoHA{in comparison to what?}
+For detecting the sentiment, we decide to use term-based analyses that, despite being less accurate than huge deep-learning models, \todoAW{How much less? If they're doing different tasks (word-based v. document based), how can their relative accuracy be measured?}
+%\todoHA{in comparison to what?}
 they can provide the specific words responsible for the output. Our main focus is to see which words are responsible for the sentiment scores, instead of optimizing for accuracy. Our main reason is to be able to find words that are loaded with sentiment. %If the score of sentiment is not perfect, it is not a problem.\todoHA{unclear} \todoHAinline{You are telling the reader that accuracy will be bad, and that this is ok. But unclear why it will be bad, and why this is ok. Better to leave accuracy to much later, rather that accepting low accuracy upfront}
 In the next subsections, first we describe the chosen detection tools, then we describe how we combined them together, what they are able to extract on our datasets. Finally, we conclude with some findings that we discovered while applying sentiment detection to news articles (big variations of sentiment across the articles, correlation with quotation).
 %\todoAW{If you're using OTS sentiment analysers, you don't really need to justify their lack of accuracy. Rather, you should focus on what it means for your own results, and whether the (lack of) performance of the sentiment analyser will excessively impact your work.}
@@ -140,7 +150,8 @@ They are built around a lexicon where each word has a specific score, and some c
 Here we describe each of the methods used.
 
 \paragraph{Sentistrength}
-The first tool considered is Sentistrength\footnote{\url{http://sentistrength.wlv.ac.uk/}}. This tool is built around a lexicon of 2546 words (or in some cases \emph{word stems}) where each entry is annotated with a score (integer in the range $[-5;5]$) and a set of combination rules considering negations, boosters, questions. The outputs given can be retrieved in different forms:
+The first tool considered is Sentistrength\footnote{\url{http://sentistrength.wlv.ac.uk/}}. This tool is built around a lexicon of 2546 words (or in some cases \emph{word stems}) where each entry is annotated with a score (integer in the range $[-5;5]$) and a set of combination rules considering negations, boosters, questions.\todoAW{Examples?}
+The outputs given can be retrieved in different forms:
 \begin{itemize}
     \item Dual score: as the name suggests, it gives two values, one for the Negative score ( -1 not negative to -5 extremely negative) and a Positive score (1 not positive to 5 extremely positive). A sentence can be both positive and negative so the two scores are independent
     \item Binary $\set{positive, negative}$
@@ -149,7 +160,7 @@ The first tool considered is Sentistrength\footnote{\url{http://sentistrength.wl
 \end{itemize}
 
 But, as we said, we are interested in the single words responsible for the sores, so we needed to adapt the tool to output them. We achieve this by comparing the sentences with the lexicon and outputting the original scores given to them.
-
+\todoAW{Do we get more detail on this anywhere? Need a x-ref.}
 
 \paragraph{Vader}
 Very similarly to Sentistrength, also Vader\footnote{\url{https://github.com/cjhutto/vaderSentiment}} has a lexicon-based approach and does not natively give in the outputs the words responsible for the sentiment. Vader has been built mostly to analyse social media content, optimised for short texts.
@@ -162,6 +173,7 @@ The outputs can be read in two modalities:
 
 Also for Vader, to obtain the single words that are loaded with sentiment, we take a look at the lexicon to match manually. The advantage of this tool is that the lexicon is much larger than the one from Sentistrength.
 \todoAW{Risky comment: you can modify sentistrength with your own lexicon and then retrain it. This is pretty well established, so I don't think you can really count this as an advantage unless you can convicingly argue that you've a good reason for only considering the prebuilt models.}
+\todoAW{Did you address my earlier comment on lexicon size?}
 
 
 
@@ -216,10 +228,12 @@ In this way, we are able to see the sentiment of the single words and not only t
 %\todoAW{Really needs some examples to illustrate this point.}
 
 \subsubsection{\statusgreen Combination of the tools}
+\todoAWinline{So from the previous section, I don't really get a sense of the practical differences between the approaches, as you haven't given a running example that would let me see what the difference between the systems is. Also, you don't seem to have discussed what scope there is for adjusting the lexicons for each system, or what difference that might make to the final analysis.}
 \todoHAinline{deciding to combine upfront is not very good. Better way is to use them individually, then combine. This way you scientifically demonstrate value of each approach.}
 % Why combine
 From this list of tools, we decided to combine them together in order to increase the accuracy of the sentiment recognition. %\todoAW{I think you mean that you wanted to improve the accuracy of the sentiment recognition.}
 As each one of them has different\todoHA{what if they contradict each others?} lexicons covering different groups of words (e.g., TextBlob only adjectives), and given that they do not overlap totally,\todoHA{avoid such vague language. This is also not supported by any data. Why not?} the combined lexicon (not correct word, because CoreNLP does not use one) / detection power can be much larger than just considering one of them.
+\todoAW{proof?}
 
 % How combined all of them
 We therefore combine them in the following way:
@@ -239,11 +253,11 @@ We therefore combine them in the following way:
 
 Even if we average and combine the results, we keep the original outputs for each tool in order to backtrack the results and see where the problems come from.
 
-To uniform the scales, we consider two main axes: polarity (used by all of the tools) and strength (provided by SentiStrength, and subjectivity by TextBlob). We map the numerical intervals from $[min;max]$ to $[-1;1]$ by means of a linear transformation. The categorical values, instead, are mapped by firstly sorting the output labels from negative to positive, then converting to increasing numerical values (e.g., for 4 labels, $\set{1,2,3,4}$) and then applying the linear transformation as in the other case.
+To normalise the scales, we consider two main axes: polarity (used by all of the tools) and strength (provided by SentiStrength, and subjectivity by TextBlob). We map the numerical intervals from $[min;max]$ to $[-1;1]$ by means of a linear transformation. The categorical values, instead, are mapped by firstly sorting the output labels from negative to positive, then converting to increasing numerical values (e.g., for 4 labels, $\set{1,2,3,4}$) and then applying the linear transformation as in the other case.
 \todoAW{Would it have made more sense to combine the lexicons from the different systems and then used them to augment one of the existing models (eg. SentiStrength)? Even if not, you should be prepared to answer that question in your viva.}
 
 \subsubsection{\statusred Statistics over our datasets}
-
+\todoAW{This section doesn't appear to have been updated from the previous draft}
 \todo{finish this subsection, copy numbers from notebook and produce plots}
 % How they perform separately on the dataset (justifying why all of them) and the result of combination.
 In this subsection we provide some statistics about how the described approach for sentiment detection works on the datasets we selected.
@@ -490,11 +504,12 @@ So to answer this question, here we take groups of linked sentences (from Chapte
 
 % data
 For this experiment we use a set of pairs of sentences (extracted from the analysis of chapter~\ref{chap:common_ground_search}) which are characterised by high similarity score (\acrshort{use} model).
+\todoAW{What's that? Is it explained in ch 3?}
 
 The dataset of origin is Google News Headlines, as it presents clusters of articles with a high number of articles each (between 20 and 90). Therefore, applying the methodology described in Section~\ref{sec:cgs_clustering_and_differences}, with quite strict thresholds on the distance between sentences, we can still produce in output many cliques of sentences. These cliques contain sentences that have minimal variations and we aim with this current experiment to understand if they are related to a different usage of persuasion.
 % Google headlines: articles are grouped in clusters. Clusters have around 20-90 articles each. Each cluster belongs to a certain broader topic (UK, World, Business, Entertainment, Sports, Science, Health). Positive sides: very large. Negative side: the clusters change over time, they are created by ML (not human-curated)
 
-The Google News Headlines that we selected are between 8th September and 14th October 2020, because that is the timespan during which this experiment was conducted. We could repeat the experimentation in other timespans.
+The Google News Headlines that we selected are between 8th September and 14th October 2020,\todoAW{OK, but be prepared to talk about whether you should have done a later version of the experiment. That will be a minimum of 2 1/2 years prior to the viva.} because that is the timespan during which this experiment was conducted. We could repeat the experimentation in other timespans.
 We extracted from them a subset of 138 sentence pairs, by using the approach described in the previous Chapter~\ref{sec:cgs_clustering_and_differences}:
 \begin{enumerate}
     \item cliques of sentences are extracted using Hierarchical Agglomerative Clustering, to be able to cut the similarity threshold at any point.
@@ -511,6 +526,7 @@ Figure~\ref{fig:raw_clique_data} shows an example drawn from our dataset that sh
     \caption{Example of a clique of sentences that we used to build sentence pairs.}
     \label{fig:raw_clique_data}
 \end{figure}
+\todoAW{Were there any cases omitted from this clique for being too similar?}
 
 
 \subsubsection{Approach}
@@ -538,9 +554,10 @@ The comparison is done in different ways:
     \caption{Example of a pair of sentences that has been annotated by the uniqueness analysis (in green the words that are unique of this sentence with respect to the other) and by the persuasion analysis (in purple the detected propaganda technique of \texttt{Apppeal\_to\_fear-prejudice}).}
     \label{fig:annotated_clique_data}
 \end{figure}
+\todoAW{I've missed something, I think... where do you discuss how the detected technique is classified?}
 
-Figure~\ref{fig:annotated_clique_data} shows a pair of sentences that contain one persuasion technique. Some words (e.g., \emph{deadly}, \emph{spiral out of control}) are both unique of the first sentence and also belong to the technique of \texttt{Apppeal\_to\_fear-prejudice}. Instead in many other pairs of our dataset, the changes do not manifest in terms of persuasion techniques.
-Our goal is to understand this relationship between changes in articles and persuasion.
+Figure~\ref{fig:annotated_clique_data} shows a pair of sentences that contain one persuasion technique. Some words (e.g., \emph{deadly}, \emph{spiral out of control}) are both unique to the first sentence and also belong to the technique of \texttt{Apppeal\_to\_fear-prejudice}. Instead in many other pairs of our dataset, the changes do not manifest in terms of persuasion techniques.
+Our goal is to understand this relationship between changes in documents and persuasion.
 
 % split between computational results and human judgement
 We conduct the analysis following a purely computational approach.
@@ -600,9 +617,10 @@ With the selected 138 samples, we have on average $32.0\%$ of the words that are
     \label{tab:detected_persuasion_in_variations}
 \end{table}
 
-For the detected persuasion, Table~\ref{tab:detected_persuasion_in_variations} shows that in $89.8\%$ of the sentences, some techniques are detected. And it is always sentiment that gets triggered, while propaganda is detected only in $10.1\%$ of the sentences.
-The average percentage of words (last column) that are detected as related to any persuasion technique is $14.8\%$, meaning that even though persuasion appears in approximately 9 out of 10 sentences, usually it appears just in a few words. Breaking down by type of technique, most of the words are detected as carrying sentiment ($12.5\%$) while only $3.2\%$ related to propaganda.
+For the detected persuasion, Table~\ref{tab:detected_persuasion_in_variations} shows that in $89.8\%$\todoAW{Don't give accuracy to 1 in 1000 when you've only got 138 cases. 2sf is appropriate here.} of the sentences, some techniques are detected. And it is always sentiment that gets triggered, while propaganda is detected only in $10.1\%$ of the sentences.
+The average percentage of words (last column) that are detected as related to any persuasion technique is $14.8\%$,\todoAW{Do you count each of the three words in "out of control"? Does that matter?} meaning that even though persuasion appears in approximately 9 out of 10 sentences, usually it appears just in a few words. Breaking down by type of technique, most of the words are detected as carrying sentiment ($12.5\%$) while only $3.2\%$ related to propaganda.
 We can see that the propaganda percentages are much smaller than the values provided by the sentiment libraries.
+\todoAW{Is that because of the content of the documents, or the standard of the technology for recognising them?}
 By inspecting the samples, we see that generally sentiment detection provides way more terms in result than the propaganda detection. This means that potentially more words are being recalled, but the precision is much lower because we see lots of false positives.
 
 \begin{figure}[!htbp]
@@ -612,7 +630,7 @@ By inspecting the samples, we see that generally sentiment detection provides wa
     \label{fig:propaganda_avg}
 \end{figure}
 
-Figure~\ref{fig:propaganda_avg} shows the percentages of each detected propaganda technique in the corpus (same values as in Table~\ref{tab:detected_persuasion_in_variations}, but filtering by technique only propaganda and considering the last column.
+Figure~\ref{fig:propaganda_avg} shows the percentages of each detected propaganda technique in the corpus (same values as in Table~\ref{tab:detected_persuasion_in_variations}), but filtering by technique only propaganda and considering the last column.
 The propaganda techniques appearing the most are \texttt{Loaded\_laanguage}, \texttt{Exaggeration/Minimisation}, \texttt{Flag-Waving} and \texttt{Doubt}.
 
 % number of changes vs score variations
@@ -637,10 +655,11 @@ We answer these question by first considering every minimal change in the scores
         PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.1\% \\
         PROPAGANDA:Repetition & 1.4\% & 0.1\% \\
     \end{tabular}
-    \caption{The impact on detected persuasion of the variations between the sentence pairs. The column \textit{\% scores changed} is computed by considering wwhether each sentence pair has different scores (percentage of binary values). The column \textit{avg. magnitude} instead expresses the magnitude of the change, measured in percentage of the allowed interval for each technique.}
+    \caption{The impact on detected persuasion of the variations between the sentence pairs. The column \textit{\% scores changed} is computed by considering whether each sentence pair has different scores (percentage of binary values). The column \textit{avg. magnitude} instead expresses the magnitude of the change, measured in percentage of the allowed interval for each technique.}
     \label{tab:change_scores_persuasion_in_variations}
 \end{table}
-
+\todoAW{Although this (sentence pairs) is presumably working at the sentence level, which you said you didn't want to do?}
+\todoAW{What's that? (percentage of the allowed interval)}
 
 The result of Table~\ref{tab:change_scores_persuasion_in_variations} show that in $98.5\%$ of the cases, we can see a change in the scores of at least one technique.
 Breaking down this result, we have that in all these cases (still $98.5\%$) there is a change in the sentiment score. So the sentiment detection, not only is picking on more terms (with many possible false negatives), but also is very sensible to the terms used (perturbing the output scores).
@@ -655,7 +674,7 @@ Propaganda, on the other side, is detected less and is perturbed less.
 
 We then analyse the ratio between the average magnitude of changes from this table and the average word-based percentage from Table~\ref{tab:detected_persuasion_in_variations} to normalise the results and find the techniques that are mostly affected by this variation.
 Figure~\ref{fig:normalised_ratio_scores_persuasion} shows the results of this normalisation. The most affected techniques are \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}.
-It is important to normalise to discount the effects of the natural improportion of the techniques used. For example, loaded language is the propaganda technique most used in general, but as we can see in the figure, it is not the one that changes the most between the pairs of sentences. This is due to the fact that most of the news sources tend to describe with loaded words the same events in their race for attention/clickbaitness~\citep{bazaco2019clickbait,davenport2001attention}. And using loaded terms is the easiest way to compete and make users read an article. But techniques that are less evident are the ones in which we can see more differences.
+It is important to normalise to discount the effects of the natural disproportion of the techniques used. For example, loaded language is the propaganda technique most used in general, but as we can see in the figure, it is not the one that changes the most between the pairs of sentences. This is due to the fact that\todoAW{why should that apply more to loaded language than to other techniques?} most of the news sources tend to describe with loaded words the same events in their race for attention/clickbaitness~\citep{bazaco2019clickbait,davenport2001attention}.\todoAW{OK, good that you've got some citations, but I think I'd include a quote as well to clarify exactly what point these authors are making. } And using loaded terms is the easiest way to compete and make users read an article. But techniques that are less evident are the ones in which we can see more differences.
 
 
 As per the sentence pair in the previous Figure~\ref{fig:annotated_clique_data}, only the first one contains \texttt{Appeal\_to\_fear-prejudice} to communicate the detail. This is the type of variation we are interested in.
@@ -748,8 +767,8 @@ All the results are really useful to understand the relationship between the det
 We have been able to find which techniques change mostly due to the changes represented in our corpus. And also to understand how a detail may be rephrased to express persuasion.
 Being that some techniques appear more (like 
  sentiment and \texttt{Loaded\_Language}) and some other less, we normalised the variation of the persuasion scores based on the average quantity of each technique.
- By doing that, we discovered that some techniques which are more rare (e.g., \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}), are much more probable to occurr only in one of the variations of the same detail.
-This is particularly meaningful when contextualised to the attention economy~\citep{davenport2001attention}, because sentiment and loaded language are the techniques more easy to deploy and therefore are more spread to all the versions of the same story.
+ By doing that, we discovered that some techniques which are more rare (e.g., \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}), are much more probable to occur only in one of the variations of the same detail.
+This is particularly meaningful when contextualised to the attention economy~\citep{davenport2001attention},\todoAW{I think you need to flesh this out a bit, although a well selected quote from D\&B should be fine for that.} because sentiment and loaded language are the techniques more easy to deploy and therefore are more spread to all the versions of the same story.
 
 Instead regarding to the higher level grouping of techniques (sentiment and propaganda, instead of the specific techniques), we found that sentiment detection is providing details that are optimizing recall but not precision. We see a lot of false positives which are disturbing our analysis. This makes harder to distinguish the cases of word change that really matter. For this reason, sentiment detection might not be the best choice and in the next experiments we decide to use less this feature, in favour of propaganda.
 
@@ -786,7 +805,8 @@ Our RQ4 is \emph{how much of an obstacle is persuasion in recognising the events
 %\todoHA{Avoid yes/no type of RQs}
 
 % why
-The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}). In this experiment, we target only the case where they appear in different words, because it is simpler to separate and see the effect of removal. For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning}, which is beyond our scope.
+The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}). In this experiment, we target only the case where they appear in different words, because it is simpler to separate and see the effect of removal.\todoAW{But does it invalidate your claims?}
+For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning}, which is beyond our scope.
 %\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words. check models, there are some for spinning but what about un-spinning?}
 
 
@@ -808,7 +828,7 @@ The motivation behind this experiment lies in our hypothesis done in Chapter~\re
 
 
 % How
-To bring this plan into action, we compare the results of  clustering algorithms applied to articles ``as they are" against the articles ``without persuasion terms" and see whether the clustering obtained improves or not.
+To bring this plan into action, we compare the results of  clustering algorithms applied to articles ``as they are"\todoAW{Who are you quoting?} against the articles ``without persuasion terms" and see whether the clustering obtained improves or not.
 
 In the next subsections we analyse the dataset used, the approach, the results, and the findings.
 
@@ -832,7 +852,7 @@ Between these two datasets, we want to be using good quality ground truth for do
 
 \subsubsection{Approach}
 
-Since we want to understand whether by removing persuasion we can have better clustering, our approach is to apply a standard clustering pipeline to two different inputs: first, to the raw articles, and then to the articles with the removed persuasion. So the steps that we do are the following:
+Since we want to understand whether by removing persuasion we can have better clustering, our approach is to apply a standard clustering pipeline to two different inputs: first, to the raw articles, and then to the articles with the removed persuasion. So the steps that we do are the following:\todoAW{This is good... a clear explanation of how you're going to progress.}
 \begin{enumerate}
     \item remove persuasion from the article in the first dataset to prepare the second dataset to feed into the pipeline
     \item encode the documents (for both datasets)
@@ -857,21 +877,23 @@ We do this procedure with different number of ground truth clusters, increasing 
 % Seeing if there is an improvement or not when removing propaganda words.
 
 % STEP 1
-For the Step 1, we proceed to remove the terms of persuasion with the methods described in Section~\ref{ssec:lp_techniques_sentiment} for sentiment and in Section~\ref{ssec:lp_techniques_propaganda} for propaganda. We input the text articles, and we get in output from the methods the terms that are loaded with sentiment or propaganda techniques. Then we proceed to remove these words from the original articles and we build a second dataset ``cleaned" from persuasion. Additionally, we also have the ``no sentiment" and ``no propaganda" datasets which come from the original dataset by only removing one of the two persuasion types.
+For the Step 1, we proceed to remove the terms of persuasion with the methods described in Section~\ref{ssec:lp_techniques_sentiment} for sentiment and in Section~\ref{ssec:lp_techniques_propaganda} for propaganda. We input the text articles, and we get in output from the methods the terms that are loaded with sentiment or propaganda techniques. Then we proceed to remove these words from the original articles and we build a second dataset ``cleaned" from persuasion.
+\todoAWinline{Doesn't this rather assume that the terms can be removed without affecting the meaning? For example, "Johnson heroically took us out of the EU" and "Johnson stupidly took us out of the EU" retain their meaning even if we remove the propagandistic terms "heroically" and "stupidly". OTOH, "Johnson claimed that his actions were legal" and "Johnson proved that his actions were legal" lose their meaning if you remove the loaded terms "claimed" and "proved". Does this matter?}
+Additionally, we also have the ``no sentiment" and ``no propaganda" datasets which come from the original dataset by only removing one of the two persuasion types.
 % Removal of the terms: sentiment-loaded terms (multiple lexicons and tools: sentistrength, vader, )
 % %And these? AFINN, BING) 
 % and propaganda spans (from https://www.tanbih.org/prta).
 
 % STEP 2
 For the Step 2, document encoding, we take the approaches 
-also used in the previous Chapter~\ref{chap:common_ground_search}: we use for comparison both TF-IDF and \acrshort{use}. The first one to represent simpler approaches while the second one to stand for more recent and complex ones. The aim of the comparison is to understand whether there is any advantage of using more sophisticated approaches for this task.
+also used in the previous Chapter~\ref{chap:common_ground_search}: we use for comparison both TF-IDF and \acrshort{use}. The first one is selected to represent simpler approaches while the second one stands for more recent and complex ones. The aim of the comparison is to understand whether there is any advantage of using more sophisticated approaches for this task.
 The output for each document is a numerical representation.
 % Document representation:
 % Embed the document with the Universal Sentence Encoder / TF-IDF
 
 % STEP 3 
 For the 3rd Step, we consider two different approaches: Hierarchical Agglomerative Clustering and K-means. The first one (Hierarchical AC) was used also in the previous chapter, and is very important for us because it does not require to specify the number of clusters wanted. This is ideal for situations where we do not know a-priori the number of topics or headlines that we are looking for. And also it is very useful for providing insights at the different levels of the dendrogram (varying the distance threshold), to explore and identify the optimal distances and parameters by observing the intermediate clusters.
-Instead, K-means is used to have higher precision in identifying the clusters. It works by deciding the number of output clusters in advance, and in a controlled experiment like ours, we know this parameter from the ground truth. %: the number of clusters is the number of different 
+Instead, K-means is used to have higher accuracy in identifying the clusters. It works by deciding the number of output clusters in advance, and in a controlled experiment like ours, we know this parameter from the ground truth. %: the number of clusters is the number of different 
 
 % Clustering methods:
 % There are multiple clustering methods, and document representations that influence the clustering. We decided to use a method that does not require to specify the number of clusters wanted.
@@ -882,7 +904,9 @@ Instead, K-means is used to have higher precision in identifying the clusters. I
 For step 4, clustering evaluation, we need to find suitable metrics that can describe how well the produced clusters correspond to the ground truth.
 By looking at the literature~\citep{romano2016adjusting}, it emerged that the most used metrics for comparing clusters are Adjusted Rand Index~\citep{rand1971objective} and Adjusted Mutual Information~\citep{vinh2009information}.\todomargin{MM: acronyms}
 The difference between the two is that they are based on different theories. The former is based on pair counting (counting the pairs that appear or not in the same cluster in the reference and in the evaluation), while the latter is based on Shannon Information Theory. In practice, ARI works better when ground truth clustering has large equal sized clusters, while AMI is better when there exist small clusters and ground truth clustering may be unbalanced.
+\todoAW{citation?}
 Given the statistics of our datasets, we know that ARI will be better to measure the clustering at the \emph{headline} level (reference clusters are always with $size=3$), while AMI will be better for the clustering at the topic level (very different in size, unbalanced).
+\todoAW{I think you need to be more explicit in showing how you come to these conclusions.}
 
 
 
@@ -911,12 +935,12 @@ First of all, observing the effect of increasing the distance threshold in hiera
 The value of the metrics can be computed by comparing the ground-truth-clustering with the predicted one.
 By plotting the metric values against the increasing threshold of distance of the Hierarchical Agglomerative Clustering, we can observe how both ARI and AMI increase until a certain point, then decreases again.
 Figure~\ref{fig:hierarchical_sentpropnoise_evolution} shows the values of ARI for a simplified case, where only $4$ headlines are considered. If we observe the line for \textit{complete text}, we can see that it starts on the left with increasing values, then reaches the maximum in the centre and then the score goes down again. At the beginning and at the end, the value is low because the distance threshold is either too tight (left) or too relaxed (right) and the corresponding evaluation clusters are too small (left) or too big (right).
-At the center it is more similar to the ground truth, so both the ARI and AMI scores are higher.
+At the center it is more similar to the ground truth, so both the ARI and AMI\todoAW{You haven't told me what these are yet, I don't think. Where do you explain how they are calculated?} scores are higher.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/sentpropnoise_4_en_tfidf_fitness_topic-cropped.pdf}
-    \caption{Adjusted Rand Index on a simplified scenario (only 4 clusters to identify) using Hierarchical Agglomerative Clustering on TF-IDF features. On the $x$ axis, we have the euclidean distance which corresponds to the current progress of clustering: from the left to the right, initial small clusters are merged and become bigger.}
+    \caption{Adjusted Rand Index on a simplified scenario (only 4 clusters to identify) using Hierarchical Agglomerative Clustering on TF-IDF features. On the $x$ axis, we have the Euclidean distance which corresponds to the current progress of clustering: from the left to the right, initial small clusters are merged and become bigger.}
     \label{fig:hierarchical_sentpropnoise_evolution}
 \end{figure}
 
@@ -936,6 +960,7 @@ In Figure~\ref{fig:hierarchical_sentpropnoise_evolution} we can see that removin
 \subsubsection{K-Means}
 For evaluating the effects with different sizes of datasets, we show here some results with K-Means.
 
+\todoAW{Don't have huge captions like this... move the description of the table into the body of the text.}
 \begin{table}[!bp]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{r|r|r|llll|llll}
@@ -964,7 +989,7 @@ For evaluating the effects with different sizes of datasets, we show here some r
 \end{table}
 
 % analysis of results
-Table~\ref{tab:sentpropnoise_tfidf} is showing how, from a small corpus to bigger corpuses, the effect of removing the persuasion words is changing.
+Table~\ref{tab:sentpropnoise_tfidf} is showing how, from a small corpus to bigger corpora, the effect of removing the persuasion words is changing.
 The different rows represent the number of clusters in the gold dataset.
 We can notice that in the first row (2 \#headlines), with only two headlines, the metrics are seeing that the evaluation clusters are identical to the reference clusters (score of $1.0$ both ARI and AMI).
 
@@ -985,11 +1010,12 @@ With respect with Table~\ref{tab:sentpropnoise_tfidf}, we can see that when we r
 Also here, as with TF-IDF, the effects of removing persuasion decay when the dataset increases in size.
 
 % USE meaning
-The meaning of these results is that with such a complex model (USE),
-propaganda removal does not help, even with a small dataset. Propaganda pieces in an article are usually more than isolated words, and are spans with a longer length. Instead, adjectives (one of the common manifestations of sentiment) are frequently isolated words. USE with respect to TF-IDF is more exposed to the sequence of words, and by inspecting the ``cleaned" articles we can see that the sentences are incomplete and cannot stand. For this reason, a simpler model like TF-IDF is being helped by the removal of propaganda, while actually for USE the sentences become broken and the clustering struggles more.
+The meaning of these results\todoAW{If you're interpreting the results, I'd create a conclusions section.} is that with such a complex model (USE),
+propaganda removal does not help, even with a small dataset.\todoAW{Doesn't help with what? You haven't really shown how your results answer your research questions.} Propaganda pieces in an article are usually more than isolated words, and are spans with a longer length. Instead, adjectives (one of the common manifestations of sentiment) are frequently isolated words. USE with respect to TF-IDF is more exposed to the sequence of words, and by inspecting the ``cleaned" articles we can see that the sentences are incomplete and cannot stand. For this reason, a simpler model like TF-IDF is being helped by the removal of propaganda, while actually for USE the sentences become broken and the clustering struggles more.
 
 % Discrepancy between AMI and ARI
 In the two tables, we see that there are some cases where the AMI and ARI metrics provide opposite direction (improvement vs degradation). In those cases, we need to keep into consideration that the two metrics come from two different theories, and also that the values do not change a lot in the affected cells.
+\todoAW{I think you need a much more critical comparison of the two methods, to give some indication of exactly why the methods give the different results that they do.}
 % Therefore, moving one article from one cluster to another one, may be seen as improvement or not
 
 \subsubsection{Inspection of the predictions}
@@ -1037,7 +1063,7 @@ However, when there are many different headlines to identify, these removals can
 
 From this whole experiment, we have the overall finding that removing persuasion from news articles helps to recognise clusters, but only in specific conditions:
 \begin{enumerate}
-    \item the clusters have to be not too many (less than 100). Increasing the number of ground truth clusters reduces the effect of the removal;
+    \item the clusters have to be not too many (less than 100).\todoAW{Is that figure of 100 absolute? Looks very close to your figure of 138 articles. How did you arrive at this number?} Increasing the number of ground truth clusters reduces the effect of the removal;
     \item for count-based models, the improvements are better when propaganda is removed. These terms act as noise and it is better to remove them to allow the topical words to have higher weights;
     \item for language models like USE, removing propaganda can in some cases be detrimental because the sentences lose the semantics on which these models work;
     \item these findings are analogous both for Hierarchical Agglomerative Clustering and for K-means.
@@ -1049,24 +1075,25 @@ From this whole experiment, we have the overall finding that removing persuasion
 There are some limitations to this experiment:
 
 \begin{enumerate}
-    \item when increasing the size, the difference on the metrics used become smaller and smaller. This means that this approach does not scale well to thousands of headlines;
-    \item removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it becomes problem;
-    \item if some words belong both to persuasion and to the topic, by removing them, it becomes more difficult to form the correct cluster. This is why automated non-persuasive rephrasing could be needed. But we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
+    \item when increasing the size, the difference on the metrics used become smaller and smaller. This means that this approach does not scale well to thousands of headlines;\todoAW{Is this a consequence of the curse of dimensionality? If so, it's worth being explicit about it. It's worth being explicit if it isn't, come to that...
+}
+    \item removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it becomes problem;\todoAW{What exactly is the problem, and how does it affect your analysis?}
+    \item if some words belong both to persuasion and to the topic, by removing them, it becomes more difficult to form the correct cluster.\todoAW{As my comments have suggested, I think this is a pretty fundamental issue. Even if you don't do any more experiments, I think you probably need a unpick the issues a bit more.} This is why automated non-persuasive rephrasing could be needed. But we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
 %\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 \end{enumerate}
 
 And in addition, we could benefit from knowing more information about the sources of the pieces of text included. This information could contextualise the articles and potentially allow us to find groups of sources that are easier to cluster together than others. This will be considered in the next Chapter~\ref{chap:political_sides}.
 
-Or also, adding informations about the topic of the article to find if different topics behave in different ways. The topics will be introduced in our last experimental Chapter~\ref{chap:topics}.
+Or also, it could be useful adding the information about the topic of the article to find if different topics behave in different ways. The topics will be introduced in our last experimental Chapter~\ref{chap:topics}.
 
 \section{\statusgreen Discussion}
 
 This section contains the discussion of all the results of this chapter. We list here the four Research Questions together with the relative responses:
 
 \begin{enumerate}
-    \item What do writers use to persuade the reader? Different persuasion techniques are used: here we analysed sentiment / emotion manipulation, propaganda and populism (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
-    \item How can we automatically detect those techniques? Sentiment is detected through lexicons and sentiment treebanks. Propaganda with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda. Answered in Section~\ref{sec:lp_techniques}.
-    \item How are the differences between similar articles related to a different use of persuasion techniques? In some cases the words that change between multiple versions of the same detail, also cause a change in the detecte persuasion. We managed to find that techniques like \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition} are the ones that are mostly affected by the variations in expressing the same detail. But in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences. Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
+    \item What do writers use to persuade the reader? Different persuasion techniques are used: here we analysed sentiment / emotion manipulation, propaganda and populism\todoAW{Really? My interpretation was that you were using an existing understanding of propaganda techniques, and investigating how common they were in the documents?} (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
+    \item How can we automatically detect those techniques? Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.\todoAW{This isn't a discussion, it's a summary.} Answered in Section~\ref{sec:lp_techniques}.
+    \item How are the differences between similar articles related to a different use of persuasion techniques? In some cases the words that change between multiple versions of the same detail, also cause a change in the detected persuasion. We managed to find that techniques like \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition} are the ones that are mostly affected by the variations in expressing the same detail. But in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences.\todoAW{Examples?} Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
     \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
 \end{enumerate}
 
@@ -1078,7 +1105,7 @@ This section contains the discussion of all the results of this chapter. We list
 
 Overall, this chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea on the relationship between persuasion and the variations that different news sources produce when reporting events.
 On the other side, we have also a deeper understanding of the limitations of the current status of this automated detection, and the repercussions it can have when we use these methods in other tasks.
-Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it will clearly improve.
+Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it will clearly improve.\todoAW{Big assumption. I'd rephrase.}
 
 \section{\statusgreen Next}
 % link to next chapter
