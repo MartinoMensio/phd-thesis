@@ -16,7 +16,7 @@ From the last chapter~\ref{chap:common_ground_search},
 we are able to extract terms that have been changed in related articles, from sentences that are very similar but have still some differences.
 We want now to quantitatively analyse these detected variations to quantify their specific use of persuasion techniques.
 % \todoHA{Why? What is the value of this detection?}
-In this way, we can understand if the specific term choices are in fact done to persuade the reader of a specific idea, or if they are only the manifestation of random choices.
+In this way, we could understand if the specific term choices are in fact done to persuade the reader of a specific idea, or if they are only the manifestation of random choices.
 
 For this reason, this chapter investigates the \emph{linguistic techniques of persuasion}, in other words, how the persuasion manifests itself on the linguistical surface.
 
@@ -26,7 +26,7 @@ Our motivation is to analyse whether the terms that change between multiple arti
 The Research Questions we want to answer are: 
 \begin{enumerate}
     \item \emph{What do writers use to persuade the reader?}
-    \item \emph{How can we automatically detect those techniques [which are used by writers to persuade]?} % Which are the possible indicators of these differences? // 
+    \item \emph{How could we automatically detect those techniques [which are used by writers to persuade]?} % Which are the possible indicators of these differences? // 
     \item \emph{How are the differences between similar articles} (extracted in the previous chapter) \emph{related to a different use of persuasion techniques?} % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
     \item If the same story can be narrated differently depending on the persuasion techniques used, then persuasion is adding variations to the narration. Therefore, \emph{how much of an obstacle is persuasion in recognising the events in multiple articles?} %(clustering)
     %\todoHA{What led to this RQ? Previous text does not lead to this}
@@ -62,7 +62,7 @@ And the relationship with propaganda comes from the inherent goal of propaganda 
 Therefore, we have the first part of this chapter that covers the detection of these persuasion techniques (Section~\ref{sec:lp_techniques}).
 And then, we put this in relationship with the analysis from the previous Chapter~\ref{chap:common_ground_search} in Section~\ref{sec:cgs_clustering_and_differences}.
 In this last part (Section~\ref{sec:lp_relationship}), 
-we extend the study to consider the terms that change between articles, and we analyse whether they contain some persuasion techniques, and in which relationship. %indicate something about the changes in the sentences.
+we extend the study to consider the terms that change between articles, and we analyse whether they are associated with some persuasion techniques, and in what way. %indicate something about the changes in the sentences.
 
 % This is implemented according to the following pipeline:\todoHA{Rationale?}
 % \begin{enumerate}
@@ -81,6 +81,10 @@ Fine-grained propaganda analysis gives a multidimensional result because it prov
 % does not provide useful insights when observed together with the changes occurring in the articles. 
 The multi-dimensionality of propaganda across the techniques is much more useful and also more precise.
 For this reason, we mainly use propaganda for the experiments of the following chapters. 
+\todoHA{I agree with AW. 
+also, you had a pipeline in the previous version. why removed? 
+good to tell the reader what steps you’ll be taking and why, before getting into all the detail. 
+}
 
 Our findings from this chapter include:
 \begin{enumerate}
@@ -108,7 +112,7 @@ Then Section~\ref{sec:lp_relationship} contains two experiments aimed at underst
 % TODO preamble to different techniques: sentiment, propaganda, populism, ...
 
 From all the different methods and approaches described in Chapter~\ref{sec:lit_propaganda}\tododefault{check ref}, in this section, we are using a set of methods to detect phenomena related to persuasion. % and do that at the word-level.
-In other words, we are detecting several techniques that we know 
+In other words, we are detecting several techniques that are considered 
 %\todoHA{Assume? No references to support this assumption} 
 to be related to persuasion~\citep{gass2018persuasion}: sentiment and 18 different propaganda techniques.% and populism.
 %\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclasses. Look in literature.}
@@ -128,12 +132,13 @@ In the following subsections, we illustrate the models that we are using to perf
 
 First of all, we start with some sentiment detection. It is known that persuasion is very often related to an emotional response from the reader/listener, being related to emotions~\citep{rocklage2018persuasion,petty2015emotion,desteno2004discrete} and to sentiment~\citep{gatti2014sentiment}.
 While computational approaches to detect emotions exist (usually quantified across the 5-big emotions),\todoAW{Which are? Reference? (x-ref, if you've discussed elsewhere)} the computational tools available for sentiment detection are more numerous and more common.\todoAW{than what?}
-The main difference of only using sentiment detection instead of emotions\todoAW{I don't know what difference you're trying to draw between sentiment and emotion.} is that it usually gives an output on 1 or 2 axes: %\todoAW{Wouldn't a 2-dimensional analysis be more fine grained than a 5-bucket "big emotion" analysis? In which case, it's an advantage of using sentiment rather than emotions.}
+The main difference of only using sentiment detection instead of emotions\todoAW{I don't know what difference you're trying to draw between sentiment and emotion.} is that it usually gives an output on 1 or 2 axes:\todoHA{this not a good enough reason to ditch emotion analysis altogether. 
+might be best to only talk about sentiment here, and leave the mention of emotions to the end of the chapter in the discussions section, and again in the Discussions chapter for the whole thesis.} %\todoAW{Wouldn't a 2-dimensional analysis be more fine grained than a 5-bucket "big emotion" analysis? In which case, it's an advantage of using sentiment rather than emotions.}
 valence (positive or negative) and strength (from neutral to strong). %But for an initial analysis, we deem\todoAW{How?} that sentiment is enough.
 
 For detecting the sentiment, we decide to use term-based analyses that, despite being less accurate than huge deep-learning models, \todoAW{How much less? If they're doing different tasks (word-based v. document based), how can their relative accuracy be measured?}
 %\todoHA{in comparison to what?}
-they can provide the specific words responsible for the output. Our main focus is to see which words are responsible for the sentiment scores, instead of optimizing for accuracy. Our main reason is to be able to find words that are loaded with sentiment. %If the score of sentiment is not perfect, it is not a problem.\todoHA{unclear} \todoHAinline{You are telling the reader that accuracy will be bad, and that this is ok. But unclear why it will be bad, and why this is ok. Better to leave accuracy to much later, rather that accepting low accuracy upfront}
+they can provide the specific words responsible for the output. Our main focus is to see which words are responsible for the sentiment scores, instead of optimizing for accuracy.\todoHA{best not to bring up accuracy at all here. not at this stage. you don’t want to tell the reader up front that your approach is not accurate enough. } Our main reason is to be able to find words that are loaded with sentiment. %If the score of sentiment is not perfect, it is not a problem.\todoHA{unclear} \todoHAinline{You are telling the reader that accuracy will be bad, and that this is ok. But unclear why it will be bad, and why this is ok. Better to leave accuracy to much later, rather that accepting low accuracy upfront}
 In the next subsections, first we describe the chosen detection tools, then we describe how we combined them together, what they are able to extract on our datasets. Finally, we conclude with some findings that we discovered while applying sentiment detection to news articles (big variations of sentiment across the articles, correlation with quotation).
 %\todoAW{If you're using OTS sentiment analysers, you don't really need to justify their lack of accuracy. Rather, you should focus on what it means for your own results, and whether the (lack of) performance of the sentiment analyser will excessively impact your work.}
 
@@ -307,7 +312,7 @@ We already removed the outputs from some other libraries because they were provi
 
 \todomargin{MM: Maybe this subsection is not important, and drifts away from the main focus of this chapter}
 
-With this setup of the tools, we moved to inspect the articles more closely. We want to see how the sentiment changes from the beginning to the end of the articles. %and if it is linked to any other external factors.\todoHA{like what?}\todoAW{Such as the reader? Very vague!}
+With this setup of the tools, we moved to inspect the articles more closely. We want to see how the sentiment changes from the beginning to the end of the articles.\todoHA{why? what is the value of knowing this?} %and if it is linked to any other external factors.\todoHA{like what?}\todoAW{Such as the reader? Very vague!}
 % We then experimented with the selected libraries to see how they could analyse the sentences in news articles. 
 We started by observing how the sentiment scores vary across one article at a time, when we consider the sentences of the articles.\todoAW{Earlier, you were arguing that you were concerned about word-level sentiment rather than the sentence or article level}
 For each sentence, we compute the sentiment scores and then we compare how the tone varies across a single article at a time.\todoHA{changes how? and what change would tell us? remember that reader won't know why you are doing something unless you make that clear}
@@ -364,7 +369,7 @@ As a second group of persuasion techniques, we consider \gls{propaganda}.
 Propaganda is a form of persuasion that is characterised by its goal to indoctrinate population towards an individual or a particular agenda~\citep{bernays}.
 It manifests through several techniques that have been studied in the literature~\citep{torok2015symbiotic}. Each technique has its own peculiarities.
 
-For detecting propaganda, we want an approach that gives us not only a binary label (propaganda vs non-propaganda), but we want to have an insight about which specific techniques have been used. For this reason, we need to have fine-grained detection of propaganda, that produces as output the specific techniques used and which words are responsible for it.
+For detecting propaganda, we want an approach that gives us not only a binary label (propaganda vs non-propaganda), but we want to have an insight about which specific techniques have been used.\todoHA{why?} For this reason, we need to have fine-grained detection of propaganda, that produces as output the specific techniques used and which words are responsible for it.
 Taking from the literature described in~\ref{sec:lit_propaganda}, we consider the recent work of~\cite{da2019fine} as it is able to provide fine-grained detection. This method uses a neural network to annotate text articles and to see which words belong to specific propaganda techniques (Figure~\ref{fig:propaganda_example_1}).
 The model is a sequence model based on BERT. It is based on the PTC dataset that is part of the same paper. This dataset contains articles annotated at the span level (specific words are highlighted and assigned to a specific technique). The model then learns to reproduce these annotations by looking at words in their context (sequence model).
 
@@ -473,7 +478,7 @@ Considering that the current fine-grained propaganda detection is not so accurat
 \section{\statusgreen Relationship between techniques and words changed}
 \label{sec:lp_relationship}
 
-After having described in the previous sections the detection of the \emph{linguistic techniques of persuasion} on their own, we describe in this section the combination with the analysis of the variations.
+After having described in the previous sections the detection of the \emph{linguistic techniques of persuasion} on their own, we describe in this section the combination with the analysis of the variations.\todoHA{why combine? what are you hoping to find or learn? always make your thoughts and rationale very clear upfront }
 Therefore, here we analyse the relationship between the linguistic techniques of persuasion, and the variations across the articles (from previous Chapter~\ref{chap:common_ground_search}).
 
 To analyse this relationship, we have two different experiments:
@@ -775,7 +780,9 @@ Instead regarding to the higher level grouping of techniques (sentiment and prop
 % we have a main limitation which is: does this analysis reflect on what a news consumer would perceive?
 
 % NEED of contextualising the source
-One big limitation of our current analysis is that, once we discover how the techniques are related to the variations in the articles, we still do not have a \emph{context} where to place this analysis. We currently lack the information on how to place a news article considering the news source or the author that wrote it. We are missing the link between the persuasion used and the original point of view which could motivate such use of techniques.
+One big limitation of our current analysis is that, once we discover how the techniques are related to the variations in the articles, we still do not have a \emph{context} where to place this analysis. We currently lack the information on how to place a news article considering the news source or the author that wrote it.\todoHA{unclear. 
+what are you trying to say here?}
+We are missing the link between the persuasion used and the original point of view which could motivate such use of techniques.
 This limitation will be targeted in the next chapter, considering the perspectives and the political leanings.
 
 % % qualitative
@@ -801,12 +808,12 @@ We approach this analysis from the point of view of clustering.
 The previous chapter already analysed the clustering algorithms at the article and sentence level.
 Here, instead, we question whether we can help the clustering of articles by removing the persuasion from the articles.
 
-Our RQ4 is \emph{how much of an obstacle is persuasion in recognising the events in multiple articles?} To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned up" from persuasion.
+Our RQ4 is \emph{how much of an obstacle is persuasion in recognising the events\todoHA{so you are considering that clustering can help recognising events? this is unclear or not well described} in multiple articles?} To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned up" from persuasion.
 %\todoHA{Avoid yes/no type of RQs}
 
 % why
 The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}). In this experiment, we target only the case where they appear in different words, because it is simpler to separate and see the effect of removal.\todoAW{But does it invalidate your claims?}
-For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning}, which is beyond our scope.
+For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning},\todomargin{ChatGPT citation} which is beyond our scope.
 %\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words. check models, there are some for spinning but what about un-spinning?}
 
 
@@ -1078,7 +1085,7 @@ There are some limitations to this experiment:
     \item when increasing the size, the difference on the metrics used become smaller and smaller. This means that this approach does not scale well to thousands of headlines;\todoAW{Is this a consequence of the curse of dimensionality? If so, it's worth being explicit about it. It's worth being explicit if it isn't, come to that...
 }
     \item removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. But for USE it becomes problem;\todoAW{What exactly is the problem, and how does it affect your analysis?}
-    \item if some words belong both to persuasion and to the topic, by removing them, it becomes more difficult to form the correct cluster.\todoAW{As my comments have suggested, I think this is a pretty fundamental issue. Even if you don't do any more experiments, I think you probably need a unpick the issues a bit more.} This is why automated non-persuasive rephrasing could be needed. But we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
+    \item if some words belong both to persuasion and to the topic, by removing them, it becomes more difficult to form the correct cluster.\todoAW{As my comments have suggested, I think this is a pretty fundamental issue. Even if you don't do any more experiments, I think you probably need a unpick the issues a bit more.} This is why automated non-persuasive rephrasing could be needed.\todo{ChatGPT?} But we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
 %\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 \end{enumerate}
 
