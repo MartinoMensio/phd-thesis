@@ -25,10 +25,10 @@ Our motivation is to analyse whether the terms that change between multiple arti
 
 The Research Questions we want to answer are: 
 \begin{enumerate}
-    \item \emph{What do writers use to persuade the reader?}
-    \item \emph{How could we automatically detect those techniques [which are used by writers to persuade]?} % Which are the possible indicators of these differences? // 
+    \item \emph{How could we automatically detect the persuasion techniques used by writers?} % Which are the possible indicators of these differences? // 
+    \item \emph{Which persuasion techniques do we detect most frequently?}
     \item \emph{How are the differences between similar articles} (extracted in the previous chapter) \emph{related to a different use of persuasion techniques?} % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
-    \item If the same story can be narrated differently depending on the persuasion techniques used, then persuasion is adding variations to the narration. Therefore, \emph{how much of an obstacle is persuasion in recognising the events in multiple articles?} %(clustering)
+    \item If the same story can be narrated differently depending on the persuasion techniques used, then persuasion is adding variations to the narration. Therefore, \emph{how much of an obstacle is persuasion in recognising articles that are related to the same news?} %(clustering) % how much of an obstacle is persuasion in recognising the events in multiple articles?
     %\todoHA{What led to this RQ? Previous text does not lead to this}
 \end{enumerate}
 
@@ -38,8 +38,8 @@ The Research Questions we want to answer are:
 % 18 techniques of propaganda
 
 % Experiment together with common ground search
-To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly/recently analysed \gls{persuasion} means for which exist computational detection methods: \gls{propaganda} and \gls{sentiment}.
-\todoAW{Slightly weird phrasing here... have you run this through Grammarly?}
+To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly and recently analysed \gls{persuasion} techniques for which computational detection methods exist: \gls{propaganda} and \gls{sentiment}.
+%\todoAW{Slightly weird phrasing here... have you run this through Grammarly?}
 %\todoHA{Any refs that link propaganda and sentiment with persuasion?}
 \todoAW{Harith asks what links propaganda, sentiment and persuasion. I'd ask what separates them. ie. why do you need to study persuasion at all if you can detect the other two cases?}
 \todomargin{MM: Persuasion including both, needed a term to simplify instead of always saying propaganda and sentiment}
@@ -64,12 +64,12 @@ And then, we put this in relationship with the analysis from the previous Chapte
 In this last part (Section~\ref{sec:lp_relationship}), 
 we extend the study to consider the terms that change between articles, and we analyse whether they are associated with some persuasion techniques, and in what way. %indicate something about the changes in the sentences.
 
-% This is implemented according to the following pipeline:\todoHA{Rationale?}
-% \begin{enumerate}
-%     \item Analysis from Chapter~\ref{chap:common_ground_search}: extracts the words that are changed between similar sentences of similar articles
-%     \item Extraction of different techniques (sentiment, propaganda) on the sentences (described in the next Section~\ref{sec:lp_techniques})\todoAW{Doesn't your earlier paragraph suggest that we've already got this? ("means for which we have computational detection methods: propaganda and sentiment"))}
-%     \item Analysis of the relationship between these techniques and the changes in the sentences (described in Section~\ref{sec:lp_relationship})
-% \end{enumerate}
+In order to achieve this goal, we consider in this chapter the following processing pipeline:
+\begin{enumerate}
+    \item Analysis from Chapter~\ref{chap:common_ground_search}: extracts the words that are changed between similar sentences of similar articles
+    \item Extraction of different techniques (sentiment, propaganda) on the sentences (described in the next Section~\ref{sec:lp_techniques})\todoAW{Doesn't your earlier paragraph suggest that we've already got this? ("means for which we have computational detection methods: propaganda and sentiment"))}
+    \item Analysis of the relationship between these techniques and the changes in the sentences (described in Section~\ref{sec:lp_relationship})
+\end{enumerate}
 
 
 % findings
@@ -527,11 +527,10 @@ Figure~\ref{fig:raw_clique_data} shows an example drawn from our dataset that sh
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/annotation_212_raw_cluster.png}
-    \caption{Example of a clique of sentences that we used to build sentence pairs.}
+    \includegraphics[width=\linewidth]{figures/annotation_212_raw_with_duplicate.png}
+    \caption{Example of a clique of sentences that we used to build sentence pairs. The last sentence was removed because it was 100\% similar to the third one, and we only accept similarities in the range $[80\%,98\%]$.}
     \label{fig:raw_clique_data}
 \end{figure}
-\todoAW{Were there any cases omitted from this clique for being too similar?}
 
 
 \subsubsection{Approach}
@@ -1097,9 +1096,10 @@ Or also, it could be useful adding the information about the topic of the articl
 
 This section contains the discussion of all the results of this chapter. We list here the four Research Questions together with the relative responses:
 
+% each RQ
 \begin{enumerate}
-    \item What do writers use to persuade the reader? Different persuasion techniques are used: here we analysed sentiment / emotion manipulation, propaganda and populism\todoAW{Really? My interpretation was that you were using an existing understanding of propaganda techniques, and investigating how common they were in the documents?} (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
-    \item How can we automatically detect those techniques? Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.\todoAW{This isn't a discussion, it's a summary.} Answered in Section~\ref{sec:lp_techniques}.
+    \item How could we automatically detect the persuasion techniques used by writers? Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.\todoAW{This isn't a discussion, it's a summary.} Answered in Section~\ref{sec:lp_techniques}. \todomargin{this is not a finding/discussion}
+    \item Which persuasion techniques do we detect the most? Different persuasion techniques are used: here we analysed sentiment / emotion manipulation, propaganda and populism\todoAW{Really? My interpretation was that you were using an existing understanding of propaganda techniques, and investigating how common they were in the documents?} (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
     \item How are the differences between similar articles related to a different use of persuasion techniques? In some cases the words that change between multiple versions of the same detail, also cause a change in the detected persuasion. We managed to find that techniques like \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition} are the ones that are mostly affected by the variations in expressing the same detail. But in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences.\todoAW{Examples?} Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
     \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
 \end{enumerate}
