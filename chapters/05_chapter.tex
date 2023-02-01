@@ -21,7 +21,13 @@ Our Research Questions for this chapter are:
     \item RQ3: Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?
 \end{itemize}
 
-\todo{list contributions of this chapter}
+% \todo{list contributions of this chapter}
+In this chapter we find that:
+\begin{enumerate}
+    \item Propaganda is used by every political leaning
+    \item By looking at propaganda features only, it is quite difficult to recognise the leaning of a news article. However, when combining the propaganda features together with the baseline features, we can improve slightly the results (but not significantly)
+    \item Propaganda datasets are very unbalanced. Most of the annotated sources and articles are coming from the political right. This may cause problems in the detection of left-leaning propaganda. With unbalanced models, we still detect left-leaning propaganda but we have no idea whether the detection is accurate.
+\end{enumerate}
 
 For this chapter, we follow the structure from the previous one~\ref{chap:linguistic_persuasion}:
 \begin{itemize}
@@ -33,7 +39,7 @@ For this chapter, we follow the structure from the previous one~\ref{chap:lingui
 \section{\statusred Political Leaning Prediction}
 \label{sec:ps_political_sides}
 
-Here we describe Political Leaning Prediction.
+First of all, we are taking again the definition of political leaning given in Chapter~\ref{sec:lit_leaning}: 
 
 As we already described in the literature chapter~\ref{sec:lit_leaning}, 
 
@@ -51,12 +57,24 @@ Several axes when describing news sources: L/R, factuality,
 
 \subsection{Datasets for Political Leaning Prediction}
 
+Having the task of political leaning prediction, the practical definition of leaning comes from the datasets that have been used.
+For our analysis on the leaning, we have selected two resources because they are:
+\begin{enumerate}
+    \item publicly available
+    \item relatively large: we need a good number of articles (e.g. ~) 
+    \item directly indicate the political leaning of the source/articles
+\end{enumerate}
+
 Datasets annotating sources:
 
 - MBFC
 - AllSides
 
 Datasets of articles? Is article always considered with the same leaning as source?
+
+Details of the AllSides dataset: leaning of the author instead of the leaning of the news outlet (example).
+
+The work by~\cite{baly2020we} mentions that the annotations are defined on the article level. But in reality, we found that from the dataset all the articles from a specific source have the same leaning annotation. ??? TRUE? OR author level?
 
 \subsection{Models for Political Leaning Prediction}
 
@@ -74,12 +92,76 @@ Problems: learning the source instead of learning L/R task
 \label{sec:ps_prop_and_leaning}
 
 Here we want to see the relationship between Propaganda (studied in the previous Chapter~\ref{ssec:lp_techniques_propaganda} and Political Leaning (from the previous Section~\ref{sec:ps_political_sides}.
+For this reason, we are combining the two analyses with the following experiments:
 
-\subsection{\statusorange Propaganda across political spectrum}
+\begin{enumerate}
+    \item Analysis of propaganda features across the political spectrum: we want to understand if we can see some difference between the propaganda of left/center/right (Section~\ref{ssec:ps_prop_leaning_across})
+    \item Prediction of the political leaning using propaganda features. Can machine learning models differentiate between propaganda from left and right? (Section~\ref{ssec:ps_prop_leaning_classifier})
+    \item Are the current propaganda datasets unbalanced? (Section~\ref{ssec:ps_prop_leaning_unbalanced})
+\end{enumerate}
+
+\subsection{\statusorange Propaganda across the political spectrum}
+\label{ssec:ps_prop_leaning_across}
 % From Experiment 4.3: comparison of sentiment/propaganda across political leaning
 
 Our first RQ for this chapter is: \emph{How does propaganda vary across the political spectrum?}
 
+To answer this question, we perform a comparison across the political leanings to see if we can identify major differences (for example, one leaning could contain more of one specific technique, or differentiate in the terms used).
+For this reason, we perform the comparison by considering both the amount of each persuasion technique, and the term frequencies.
+
+- overall sentiment and propaganda across spectrum
+    - quantities
+    - terms
+- for each technique, what are the variations
+    - quantities
+    - terms
+
+% dataset
+The dataset used is AllSides, as in the previous experiments.
+We take from it the text of the articles and the label for the leaning, expressed over 3 distinct values: Left Center, Right
+%, Mixed, Not Rated. The first 5 values are properly placed across the spectrum, from left to right. The last values instead are for data that is not clearly aligned with one leaning.
+
+% features extraction: sentiment/propaganda
+From the text of each of the articles, we then extract the persuasion techniques (sentiment and propaganda, as in the previous Chapter~\ref{sec:lp_techniques}). This gives us for each document a set of words annotated with the corresponding technique. From these words we compute two features:
+\begin{enumerate}
+    \item word-based percentage of each technique
+    \item terms for each technique
+\end{enumerate}
+
+
+1. Extraction of propaganda/sentiment
+Each article is analysed independently from the others, using the propaganda detection method and the sentiment lexicons.
+The percentages of words annotated with respect to the total number of words are computed for each article.
+2. Grouping the percentages by political bias
+Considering the labels given by AllSides (left, center, right), the average of sentiment-words-ratio, propaganda-words-ratio and both-ratio are computed. This gives an idea of how much of the articles from each political side is detected as sentiment-related or propaganda-related.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/prop_sent_tech_across_leaning_headlines.pdf} % features_by_bias_box_cleaned_all.pdf
+    \caption{Comparison of the detected sentiment and propaganda across the political leaning (horizontal axis). On the vertical axis, the average of the word-based percentage is represented.}
+    \label{fig:prop_sent_across_leaning}
+\end{figure}
+
+
+This plot in Figure~\ref{fig:prop_sent_across_leaning} is a quartile representation (with data points on the left of the boxes) which shows the distribution of the ratios computed. We can see that for sentiment, we have very similar average values and distributions. Instead, when we consider propaganda, we see that on the Right we have more words detected as propagandistic.
+
+% We did a c
+
+% From this plot we see that there are some very strange values (76\% of highlighted words in one article from the center). Looking at the details, this is an article from BBC which does not look so subjective. The problem is that from the full article, the scraping library only captured the sentence The statement says: ``It is an assault on UK sovereignty and any such use by a State party is a clear violation of the Chemical Weapons Convention and a breach of international law. It threatens the security of us all." which is annotated as almost everything propaganda. For other BBC articles, scraping manages to retrieve the full text without problems.
+
+% There are also a lot of articles which have a percentage of 0\%. Looking at the distribution of the length of the documents, some documents, especially from some sources, have length=0 or a very short length (scraping the cookie disclaimer instead of the full article).
+% For this reason a minimum length threshold has been set to cut out these problems: 150 tokens at least.
+
+% This is the same plot, but with the filter on the minimum length.
+We can see that:
+The most annotated side is the Right
+The least annotated side is the Left
+Article from the Center do not contain less sentiment/propaganda (against assumption)
+There are less propaganda words than sentiment words
+
+
+\subsubsection{REMOVE: this is about removing propaganda to increase similarity across leanings}
+\todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda acrosss spectrum}
 Instead of measuring the effect of removing the “framing” pieces on clustering algorithms, here we want to observe what is the effect on document similarity between different sources.
 Given articles from the left/center/right, we want to compare if there is a change in similarity when we remove sentiment and propaganda terms (e.g., articles are more similar than before).
 Hypothesis
@@ -91,16 +173,16 @@ The percentages of words annotated with respect to the total number of words are
 2. Grouping the percentages by political bias
 Considering the labels given by AllSides (left, lean-left, center, lean-right, right, mixed, not-rated), the average of sentiment-words-ratio, propaganda-words-ratio and both-ratio are computed. This gives an idea of how much of the articles from each political side is detected as sentiment-related or propaganda-related.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=\linewidth]{figures/4.3_prop_sent_across_leaning.png}
-    \caption{Caption}
-    \label{fig:prop_sent_across_leaning}
-\end{figure}
-\todo{Replace Figure~\ref{fig:prop_sent_across_leaning} with the one cleaned down in google docs}
+% \begin{figure}[!htbp]
+%     \centering
+%     \includegraphics[width=\linewidth]{figures/4.3_prop_sent_across_leaning.png}
+%     \caption{Comparison of the detected sentiment and propaganda across the political leaning}
+%     \label{fig:prop_sent_across_leaning}
+% \end{figure}
+% \todo{Replace Figure~\ref{fig:prop_sent_across_leaning} with the one cleaned up, next in google docs}
 
 This plot in Figure~\ref{fig:prop_sent_across_leaning} is a quartile representation (with data points on the left of the boxes) which shows the distribution of the ratios computed. We can see that the average value (the line in the middle of the box) of “both\_ratio” is the highest for the “Right” side.
-From this plot we see that there are some very strange values (76\% of highlighted words in one article from the center). Looking at the details, this is an article from BBC which does not look so subjective. The problem is that from the full article, the scraping library only captured the sentence The statement says: "It is an assault on UK sovereignty and any such use by a State party is a clear violation of the Chemical Weapons Convention and a breach of international law. It threatens the security of us all." which is annotated as almost everything propaganda. For other BBC articles, scraping manages to retrieve the full text without problems.
+From this plot we see that there are some very strange values (76\% of highlighted words in one article from the center). Looking at the details, this is an article from BBC which does not look so subjective. The problem is that from the full article, the scraping library only captured the sentence The statement says: ``It is an assault on UK sovereignty and any such use by a State party is a clear violation of the Chemical Weapons Convention and a breach of international law. It threatens the security of us all." which is annotated as almost everything propaganda. For other BBC articles, scraping manages to retrieve the full text without problems.
 
 There are also a lot of articles which have a percentage of 0\%. Looking at the distribution of the length of the documents, some documents, especially from some sources, have length=0 or a very short length (scraping the cookie disclaimer instead of the full article).
 For this reason a minimum length threshold has been set to cut out these problems: 150 tokens at least.
@@ -169,23 +251,27 @@ Verify correlation between propaganda:loaded\_language and sentiment. It is prob
 Improve visualisations of similarity changes (heatmap so big is confusing)
 Use dimensionality reduction and use a single TF-IDF model
 
-\todo{the rest goes in topic breakdown (next chapter)}
+
+% \todo{the rest (shapes...) goes in topic breakdown (next chapter)}
 
 
-Types of shapes (propaganda)
-(look at purple: propaganda)
+% Types of shapes (propaganda)
+% (look at purple: propaganda)
 
-Blue is sentiment (+ and -) and purple is propaganda. 
-y axis in the fraction of terms marked as sentiment/propaganda.
+% Blue is sentiment (+ and -) and purple is propaganda. 
+% y axis in the fraction of terms marked as sentiment/propaganda.
 
 
 
 \subsection{\statusorange Political leaning prediction using propaganda features}
+\label{ssec:ps_prop_leaning_classifier}
 
 % 5: political leaning classifier from propaganda features. Why
+Here in this section, we take a different approach.
+In the previous section, we saw how propaganda is slightly different considering the political leanings.
+Here we take that result and we try to reverse the problem: using the features of propaganda extracted from the articles, can we automatically predict the leaning of the article?
 
-
-RQ2: \emph{Can we predict the political leaning of a news article by observing the propaganda it uses?}
+This is what our RQ2 asks: \emph{Can we predict the political leaning of a news article by observing the propaganda it uses?}
 
 Why the two could benefit / be related?
 
@@ -276,6 +362,7 @@ TODO: split this in
 2. results of political leaning prediction subsection (previous subsection)
 
 \subsection{\statusorange Propaganda datasets are unbalanced}
+\label{ssec:ps_prop_leaning_unbalanced}
 
 exp 8: propaganda datasets are unbalanced
 
