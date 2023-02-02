@@ -116,34 +116,45 @@ For this reason, we perform the comparison by considering both the amount of eac
     - quantities
     - terms
 
+
+Our assumption is that more extreme views will contain more persuasion (especially propaganda techniques). This might be the case because stronger positions are characteristic of the extremes, while moderate and center views may express news in a more neutral way.
+
 % dataset
 The dataset used is AllSides, as in the previous experiments.
 We take from it the text of the articles and the label for the leaning, expressed over 3 distinct values: Left Center, Right
 %, Mixed, Not Rated. The first 5 values are properly placed across the spectrum, from left to right. The last values instead are for data that is not clearly aligned with one leaning.
+It is important to note that the articles in this dataset are grouped in triples covering the same story, and this grouping makes the topic perfectly balanced across the dataset. For each article belonging to one leaning, there exist two other articles that belong to the other two leanings.
+In this way, we do not need to consider the fact that some topics may naturally be more subject to persuasion (e.g. political issues) while other topics may be less (e.g. sports, where the writing style could be less loaded).
+Having this link between the articles in the dataset allows us to focus on the comparative results excluding the variable of the topic (for now, but we will introduce the topic as a variable in the next Chapter~\ref{chap:topics}).
 
 % features extraction: sentiment/propaganda
-From the text of each of the articles, we then extract the persuasion techniques (sentiment and propaganda, as in the previous Chapter~\ref{sec:lp_techniques}). This gives us for each document a set of words annotated with the corresponding technique. From these words we compute two features:
+From the text of each of the articles, we then extract the persuasion techniques (sentiment and propaganda, as in the previous Chapter~\ref{sec:lp_techniques}). This gives us for each document a set of words annotated with the corresponding technique. From these annotated words, we compute two features:
 \begin{enumerate}
     \item word-based percentage of each technique
     \item terms for each technique
 \end{enumerate}
 
 
-1. Extraction of propaganda/sentiment
-Each article is analysed independently from the others, using the propaganda detection method and the sentiment lexicons.
-The percentages of words annotated with respect to the total number of words are computed for each article.
-2. Grouping the percentages by political bias
-Considering the labels given by AllSides (left, center, right), the average of sentiment-words-ratio, propaganda-words-ratio and both-ratio are computed. This gives an idea of how much of the articles from each political side is detected as sentiment-related or propaganda-related.
+% 1. Extraction of propaganda/sentiment
+% Each article is analysed independently from the others, using the propaganda detection method and the sentiment lexicons.
+% The percentages of words annotated with respect to the total number of words are computed for each article.
+
+% 2. Grouping the percentages by political bias
+We then consider the labels given by AllSides (left, center, right), and we aggregate the average of word-based percentages (mean, quartiles, distribution). %This gives an idea of how much of the articles from each political side is detected as sentiment-related or propaganda-related.
+We also aggregate the term distributions to compute the term relative importance (TF-IDF) to then try to understand if the left, center and right are using different language to express their persuasion.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/prop_sent_tech_across_leaning_headlines.pdf} % features_by_bias_box_cleaned_all.pdf
-    \caption{Comparison of the detected sentiment and propaganda across the political leaning (horizontal axis). On the vertical axis, the average of the word-based percentage is represented.}
+    \includegraphics[width=\linewidth]{figures/prop_sent_tech_across_leaning_headlines_mod.pdf} % features_by_bias_box_cleaned_all.pdf
+    \caption{Comparison of the detected sentiment and propaganda across the political leaning (horizontal axis). On the vertical axis, the average of the word-based percentage is represented. The boxes represent Q1 (25\% quartile) Q2 (median) and Q3 (75\% quartile). The diamond represents mean and standard deviation, while the whiskers are drawn within the 1.5 IQR value.}
     \label{fig:prop_sent_across_leaning}
 \end{figure}
 
 
-This plot in Figure~\ref{fig:prop_sent_across_leaning} is a quartile representation (with data points on the left of the boxes) which shows the distribution of the ratios computed. We can see that for sentiment, we have very similar average values and distributions. Instead, when we consider propaganda, we see that on the Right we have more words detected as propagandistic.
+Figure~\ref{fig:prop_sent_across_leaning} is a representation (with data points on the left, and the boxplot with quartiles on the right) which shows the distribution of the ratios computed. We can see that for sentiment, we have very similar average values and distributions (median, Q1, Q3).
+Instead, when we consider propaganda, we see that on the Right we have more words detected as propagandistic.
+The Center has slightly fewer words detected in propaganda with respect to the other two leanings (mean values Center=$4.1\%$, Left=$4.9\%$, Right=$5.6\%$).
+This confirms 
 
 % We did a c
 
@@ -153,14 +164,32 @@ This plot in Figure~\ref{fig:prop_sent_across_leaning} is a quartile representat
 % For this reason a minimum length threshold has been set to cut out these problems: 150 tokens at least.
 
 % This is the same plot, but with the filter on the minimum length.
-We can see that:
-The most annotated side is the Right
-The least annotated side is the Left
-Article from the Center do not contain less sentiment/propaganda (against assumption)
-There are less propaganda words than sentiment words
+% We can see that:
+% The most annotated side is the Right
+% The least annotated side is the Left
+% Article from the Center do not contain less sentiment/propaganda (against assumption)
+% There are fewer propaganda words than sentiment words
+
+BREAKDOWN BY TECHNIQUE
+We then
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/prop_tech_detail_across_leaning_baly.pdf}
+    \caption{Breakdown of propaganda technique by political leaning.}
+    \label{fig:my_label}
+\end{figure}
 
 
-\subsubsection{REMOVE: this is about removing propaganda to increase similarity across leanings}
+TERM ANALYSIS OVERALL
+We then move to the term analysis
+TF-IDF to compute the term frequencies and importances.
+
+TERM ANALYSIS PER TECHNIQUE
+
+
+
+\subsubsection{REMOVE: this subsubsection is about removing propaganda to increase similarity across leanings}
 \todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda acrosss spectrum}
 Instead of measuring the effect of removing the “framing” pieces on clustering algorithms, here we want to observe what is the effect on document similarity between different sources.
 Given articles from the left/center/right, we want to compare if there is a change in similarity when we remove sentiment and propaganda terms (e.g., articles are more similar than before).
