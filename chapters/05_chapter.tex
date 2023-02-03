@@ -117,7 +117,7 @@ For this reason, we perform the comparison by considering both the amount of eac
     - terms
 
 
-Our assumption is that more extreme views will contain more persuasion (especially propaganda techniques). This might be the case because stronger positions are characteristic of the extremes, while moderate and center views may express news in a more neutral way.
+Our hypothesis is that more extreme views will contain more persuasion (especially propaganda techniques). This might be the case because stronger positions are characteristic of the extremes, while moderate and center views may express news in a more neutral way.
 
 % dataset
 The dataset used is AllSides, as in the previous experiments.
@@ -143,6 +143,8 @@ From the text of each of the articles, we then extract the persuasion techniques
 We then consider the labels given by AllSides (left, center, right), and we aggregate the average of word-based percentages (mean, quartiles, distribution). %This gives an idea of how much of the articles from each political side is detected as sentiment-related or propaganda-related.
 We also aggregate the term distributions to compute the term relative importance (TF-IDF) to then try to understand if the left, center and right are using different language to express their persuasion.
 
+\subsubsection{Comparison of the quantity of propaganda across leanings}
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/prop_sent_tech_across_leaning_headlines_mod.pdf} % features_by_bias_box_cleaned_all.pdf
@@ -151,10 +153,10 @@ We also aggregate the term distributions to compute the term relative importance
 \end{figure}
 
 
-Figure~\ref{fig:prop_sent_across_leaning} is a representation (with data points on the left, and the boxplot with quartiles on the right) which shows the distribution of the ratios computed. We can see that for sentiment, we have very similar average values and distributions (median, Q1, Q3).
+Figure~\ref{fig:prop_sent_across_leaning} is a representation (with data points on the left, and the boxplot with quartiles on the right) which shows the distribution of the ratios computed. We can see that for sentiment, we have very similar average values and distributions (median, Q1, Q3, mean).
 Instead, when we consider propaganda, we see that on the Right we have more words detected as propagandistic.
 The Center has slightly fewer words detected in propaganda with respect to the other two leanings (mean values Center=$4.1\%$, Left=$4.9\%$, Right=$5.6\%$).
-This confirms 
+This confirms our hypothesis that the center contains less propaganda than more polarised political leanings.
 
 % We did a c
 
@@ -170,20 +172,59 @@ This confirms
 % Article from the Center do not contain less sentiment/propaganda (against assumption)
 % There are fewer propaganda words than sentiment words
 
-BREAKDOWN BY TECHNIQUE
-We then
+% BREAKDOWN BY TECHNIQUE
+We then analyse more in detail the breakdown by specific propaganda technique. For this, we keep separated the word-based percentages for each technique.
+Our aim is to see whether some techniques are used more in one specific leaning than in the others.
+
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/prop_tech_detail_across_leaning_baly.pdf}
-    \caption{Breakdown of propaganda technique by political leaning.}
-    \label{fig:my_label}
+    \includegraphics[trim={0 0 0 2cm},clip,width=\linewidth]{figures/prop_tech_detail_across_leaning_baly.pdf}
+    \caption{Breakdown of propaganda techniques by political leaning.}
+    \label{fig:prop_tech_details_across_leaning}
 \end{figure}
+\todo{Would it be better to show also std deviation or other distribution info like in the previous plot?}
 
+Figure~\ref{fig:prop_tech_details_across_leaning} shows on the vertical axis the different propaganda techniques, and each colour represents a different political leaning. The vertical axis represents the mean word-based percentage of the specific propaganda technique for the considered leaning.
+With this plot we can compare the techniques across the leanings.
 
-TERM ANALYSIS OVERALL
-We then move to the term analysis
-TF-IDF to compute the term frequencies and importances.
+First of all, we notice that the most common propaganda techniques are \texttt{Loaded\_Language}, \texttt{Doubt}, \texttt{Flag-Waving} and \texttt{Name\_Calling/Labeling}.
+The articles in the dataset contain on average $1.5$ loaded terms every $100$ words.
+
+% shape analysis
+We can see different types of patterns in this plot, which are shown with different shapes over the leanings.
+% U-shape
+The first one, that we call \emph{U-shape}, happens when the bars of the Left and Right are higher than the bar of the Center. This means that what is represented is polarised on the extremes of the political spectrum.
+A good example of this type is the \texttt{Loaded\_Language}, where the Center is using this technique on $1.38\%$ of the words, while Left and Right are using it considerably more.
+The same happens with \texttt{Doubt}, \texttt{Name\_Calling/Labeling}, \texttt{Exaggeration/Minimisation}, \texttt{Causal\_Oversimplification}.
+These techniques are used by more extreme articles and are giving the general trend that we observed in the previous Figure~\ref{fig:prop_sent_across_leaning}: the center is more moderate and uses less them.
+
+% triangular shape
+A second pattern that we notice, is the \emph{triangular shape}. In this shape, the quantities of the technique considered increase (\emph{triangular Right}) or decrease (\emph{triangular Left}) monotonically when going from Left to Right leaning.
+This behaviour means that the technique analysed is inherent of a specific extreme of the political leaning spectrum, and constantly decreases when moving to the other side.
+It is not surprising that \texttt{Flag-Waving} presents this behaviour, where it is way more detected in Right-leaning articles with respect to Center and even more with Left. This technique is conceptually linked with the principles of nationality, and the strong nationalism is usually associated with Right-leaning political stance.
+The same pattern occurs with \texttt{Slogans}. We could link this Right-leaning prevalence to Trump? Or maybe not? \todomargin{check}
+
+% Reversed U
+Another pattern that we see, is the opposite of the first one: \emph{reversed-U shape}. This is characterised by a higher use in the Center than in the extremes.
+It represents techniques that are used to moderate more and may have a balancing intent.\todomargin{?}
+We can see this pattern with the techniques \texttt{Appeal\_to\_fear-prejudice} and \texttt{Appeal\_to\_authority}. While for the first one, it is unbalanced (highest value center, then Right and then quite less Left), in the second case this is more balanced (Left and Right have similar values).
+
+\subsubsection{Comparing propaganda-term importance across leaning}
+We then move to the term analysis, to see if we can find any differences in the specific terms used by each leaning.
+We rely on the concept of term importance, as defined by the TF-IDF model: the importance of a term is directly proportional to how many times it appears in the considered document (Term Frequency) and inversely proportional to the number of times it appears in the whole corpus (Inverse Document Frequency).
+
+Here, since we want to understand the relative importance of terms between political leanings, we consider as documents the concatenation of all the selected terms (from propaganda analysis) from all the articles coming from a certain leaning. In other words, we have a corpus made of 3 documents (one for Left, one for Center, one for Right).
+
+We perform this analysis first with all the propaganda techniques together, and secondly by considering each technique separately.
+
+% TERM ANALYSIS OVERALL
+For the term importance across all the propaganda techniques, we process each article and select the detected words of propaganda that belong to any of the 18 techniques. Then we collect all these words in 3 buckets, one for each leaning.
+We apply on these 3 groups the standard TF-IDF as provided by the \texttt{gensim} library (dictionary size 2000, applied on lemmatised words).
+
+Then to analyse the results, we
+
+\todo{Continue here to explain the term importance}
 
 TERM ANALYSIS PER TECHNIQUE
 
