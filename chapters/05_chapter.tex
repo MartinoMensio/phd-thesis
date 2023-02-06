@@ -220,106 +220,196 @@ We perform this analysis first with all the propaganda techniques together, and 
 
 % TERM ANALYSIS OVERALL
 For the term importance across all the propaganda techniques, we process each article and select the detected words of propaganda that belong to any of the 18 techniques. Then we collect all these words in 3 buckets, one for each leaning.
-We apply on these 3 groups the standard TF-IDF as provided by the \texttt{gensim} library (dictionary size 2000, applied on lemmatised words).
+We apply on these 3 groups the standard TF-IDF as provided by the \texttt{gensim} library (applied on lemmatised words).
+This produces a matrix of weights with a shape of $[n_{features}, 3]$ (feature size x number of classes), together with the features names.
 
-Then to analyse the results, we
+Then to identify the features that differ the most between the leanings, we ranked the features based on decreasing $(max - min)$. In this way, we get as first ones the features whose values have the maximal difference.
+These features have high value for the leaning they are mostly occurring in, and lower values for the leaning where they do not appear very frequently.
+We can then say that these terms are the most distinguishable propaganda terms across the political spectrum.
 
-\todo{Continue here to explain the term importance}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[trim={0 0 0 2cm},clip,width=\linewidth]{figures/baly_prop_tech_words_all_across_leaning.pdf}
+    \caption{Terms with the maximum difference in TF-IDF importance across political leaning.}
+    \label{fig:baly_prop_tech_words_all_across_leaning}
+\end{figure}
 
-TERM ANALYSIS PER TECHNIQUE
+Figure~\ref{fig:baly_prop_tech_words_all_across_leaning} shows the top 50 features (words) that have the maximal difference between the maximum and the minimum.
+We did not remove stopwords because we are only dealing with some fragments of sentences that have been detected as propagandistic. For this reason the plot is showing some stopwords (e.g., ``a", ``of", ``the").
+From this plot we can recognise some propaganda terms.
+For example ``our" and ``american", ``leftist", ``people", ``america" that are more important for the right. From~\citet{seargeant2020art} we know that the Right is using more statements like ``we the people" which is a Right-leaning expression of populism. We also think that the appearance of ``leftist" as a pseudonym given by Right-wing to discredit Left-wing is quite meaningful.
+Then we notice some terms that are more related to the center: ``country", ``trump", ``nation", ``partisan", ``whistleblower", ``great".
+
+% TERM ANALYSIS PER TECHNIQUE
+However, from this analysis, it is not clear how the terms found relate to the specific propaganda techniques. For this reason, we decide to perform again this analysis, but for each propaganda technique separately.
+This means that we build the term frequencies for each of the 18 techniques, by collecting the terms that have been used in the specific technique by each leaning, and then building the TF-IDF feature separately and sorting again by the $max - min$ criterion.
+
+With this method, we summarise the most important words for each technique and leaning in Table~\ref{tab:prop_words_by_technique_and_leaning}.
+
+\begin{table}[!htbp]
+% \Rotatebox{90}{%
+\resizebox{\textwidth}{!}{
+    \centering
+    \begin{tabular}{p{0.30\textwidth}|p{0.40\textwidth}|p{0.40\textwidth}|p{0.40\textwidth}}
+        technique & Left & Center & Right \\
+        \hline
+         \texttt{Loaded\_Language} & in, that, into, self, devastating, hell & balk, more, very, whistleblower, hit, expose, batten, out, badgering, divisive, blast, circus, dramatic, chaos, severe & evil, blasted  \\
+         \hline
+         \texttt{Doubt} & just, & trump, inadequate, transparency, grapple, will  & why, FBI, if \\
+         \hline
+         \texttt{Flag-Waving} & America, white, black, life, society  & democracy, state, security, family, value & people, we, freedom, law, liberty \\
+         \hline
+         \texttt{Name\_Calling/ Labeling} & party, republican, right, conservative, wing, real,   & partisan, trump, witch, hunt, dems, whistleblower, innovator, dreamer, centrist, president, democratic, hoax  & leftist, racist, hating, law, liberal, progressive,   \\
+         \hline
+         \texttt{Appeal\_to\_fear- prejudice} & threat, climate, difficult, death, die, disproportionate   & risk, backfire, credible, dangerous, confidence   & all, destroy, attack, fight, economically, racism, invade  \\
+         \hline
+         \texttt{Exaggeration/ Minimisation} & best, more, incredible, impossible, biggest, could, dramatically,  & history, deadliest, big, unprecedented, life, degradation  & worst, absolutely, great, ever,  \\
+         \hline
+         \texttt{Appeal\_to\_Authority} & medium, wisdom, news, know  & transparent, intelligence, official  & note, lie, open, written, accurate, fair, reflect,   \\
+         \hline
+         \texttt{Reductio\_ad\_ hitlerum} & Stalinist, communism, partisan, & gestapo, nazi, eagle, religion, blame,   & hitler, Donald, tactic, propaganda, resurgent, science, death, gay \\
+         \hline
+         \texttt{Bandwagon} & find, common & say & taken, some, leave, future \\
+         \hline
+         \texttt{Black-and-White\_ Fallacy} & evolution, bible, proof, fall,  & impeachable, wall, good, strength, punch, military, justice, democratic, deal & my, live, change, amendment, senate \\
+         \hline
+         \texttt{Causal\_ Oversimplification} & plot, think & all, say, reality, reason, political & member, leftist, life, left  \\
+         \hline
+         \texttt{Obfuscation/ Intentional\_ Vagueness/ Confusion} & suggest, wrong, impossible, guide, evil, efficacy, anything & power, right, answer, excuse, truth, simply,  & wing, meaning, rule, master, magic, fiction\\
+         \hline
+         \texttt{Red\_Herring} & love, pay, believe, anymore, like & & life, think, family, adulterous, America, republican, statement  \\
+         \hline
+         \texttt{Repetition} & jealous, blind, ObamaCare, bully, poison, lie  & more, temple, satanic, breathe & trump, obama, abiding, careless, law, pray, rigged, extremely  \\
+         \hline
+         \texttt{Slogans} & survival, fight, matter, life, face, lives & America, first, great, win, make, anchor, hero  & learn, amid, hearing, over, call, tax, race  \\
+         \hline
+         \texttt{Straw\_Men} & read, vote, opposition, trump & love, rule, poll & lie, news, god, want \\
+         \hline
+         \texttt{Thought-terminating\_ Cliches} & give, follow, lie  & wasting, time, drama & enough, break, evidence \\
+         \hline
+         \texttt{Whataboutism} & control, prison, & point, system, news, real, democrat, care,  & apartheid, people, law, American, make, worse, contain \\
+    \end{tabular}
+}
+    \caption{Terms with higher difference in TF-IDF weights for each propaganda technique across leaning.}
+    \label{tab:prop_words_by_technique_and_leaning}
+\end{table}
+
+As we can see, for each propaganda techniques there are different terms that are more or less important for each leaning. While for some of these techniques, the terms are not very talkative, we can see in some cases that the results are quite meaningful.
+For example, in the \texttt{Name\_Calling/Labeling} technique we can see how the different political leanings address each others: the Right addresses the Left with the term \emph{leftist}, \emph{liberal} and \emph{progressive} and never with \emph{democrats} (term used instead by the center). Instead, the Left addresses the Right with \emph{republican}, \emph{right} and \emph{conservative}.
+
+Another notable difference is in the use of the \texttt{Slogans} technique.
+The center outlets emerges with the repetition of \emph{make America great again}, while the Left is repeating more slogan \emph{Black lives matter}.
+
+\subsubsection{Discussion}
+\todo{WHAT DOES THIS MEAN? CONCLUDE THIS EXPERIMENT}
+
+The results from this experiment show that X Y Z
+
+Quantities findings,  motivations and implications
+
+Terms findings, motivations and implications
+
+
+While the quantity analysis provided quite useful insights in which techniques are preferred by each political leaning, the term analysis was a bit more problematic and did not provide strong insights.
+One reason for the latter, may be that the automated propaganda annotation that we are using is not providing the best outputs and in many cases we observed that only parts of a technique were detected (boundaries not correctly captured, excluding terms that could be very useful for our term analysis).
+
+% link to next chapter
+Furthermore, we would need to capture a bit more around the context of the propaganda techniques in order to understand what is their intent. We think that by analysing the topics of the articles more in details we could understand better the targets of propaganda and how propaganda is used as a mean to persuade in a certain direction about the topics. We will investigate the topics in the next Chapter~\ref{chap:topics}.
+
+% link to next experiment
+And as last limitation, it is not clear whether these features can be used to automatically differentiate between the propaganda of the left and the one from the right. We experiment in this direction with the following Section~\ref{ssec:ps_prop_leaning_classifier}.
+
+
+% \subsubsection{REMOVE: this subsubsection is about removing propaganda to increase similarity across leanings}
+% \todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda acrosss spectrum}
+% Instead of measuring the effect of removing the “framing” pieces on clustering algorithms, here we want to observe what is the effect on document similarity between different sources.
+% Given articles from the left/center/right, we want to compare if there is a change in similarity when we remove sentiment and propaganda terms (e.g., articles are more similar than before).
+% Hypothesis
+% When removing propaganda/sentiment some political sides will be more similar to others. This is because the different parts are related to the propaganda/sentiment which is an added layer on top of the facts described.
+
+% 1. Extraction of propaganda/sentiment
+% Each article is analysed independently from the others, using the propaganda detection method and the sentiment lexicons.
+% The percentages of words annotated with respect to the total number of words are computed for each article.
+% 2. Grouping the percentages by political bias
+% Considering the labels given by AllSides (left, lean-left, center, lean-right, right, mixed, not-rated), the average of sentiment-words-ratio, propaganda-words-ratio and both-ratio are computed. This gives an idea of how much of the articles from each political side is detected as sentiment-related or propaganda-related.
+
+% % \begin{figure}[!htbp]
+% %     \centering
+% %     \includegraphics[width=\linewidth]{figures/4.3_prop_sent_across_leaning.png}
+% %     \caption{Comparison of the detected sentiment and propaganda across the political leaning}
+% %     \label{fig:prop_sent_across_leaning}
+% % \end{figure}
+% % \todo{Replace Figure~\ref{fig:prop_sent_across_leaning} with the one cleaned up, next in google docs}
+
+% This plot in Figure~\ref{fig:prop_sent_across_leaning} is a quartile representation (with data points on the left of the boxes) which shows the distribution of the ratios computed. We can see that the average value (the line in the middle of the box) of “both\_ratio” is the highest for the “Right” side.
+% From this plot we see that there are some very strange values (76\% of highlighted words in one article from the center). Looking at the details, this is an article from BBC which does not look so subjective. The problem is that from the full article, the scraping library only captured the sentence The statement says: ``It is an assault on UK sovereignty and any such use by a State party is a clear violation of the Chemical Weapons Convention and a breach of international law. It threatens the security of us all." which is annotated as almost everything propaganda. For other BBC articles, scraping manages to retrieve the full text without problems.
+
+% There are also a lot of articles which have a percentage of 0\%. Looking at the distribution of the length of the documents, some documents, especially from some sources, have length=0 or a very short length (scraping the cookie disclaimer instead of the full article).
+% For this reason a minimum length threshold has been set to cut out these problems: 150 tokens at least.
+
+% This is the same plot, but with the filter on the minimum length.
+% We can see that:
+% The most annotated side is the Right
+% The least annotated side is the Left
+% Article from the Center do not contain less sentiment/propaganda (against assumption)
+% There are less propaganda words than sentiment words
 
 
 
-\subsubsection{REMOVE: this subsubsection is about removing propaganda to increase similarity across leanings}
-\todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda acrosss spectrum}
-Instead of measuring the effect of removing the “framing” pieces on clustering algorithms, here we want to observe what is the effect on document similarity between different sources.
-Given articles from the left/center/right, we want to compare if there is a change in similarity when we remove sentiment and propaganda terms (e.g., articles are more similar than before).
-Hypothesis
-When removing propaganda/sentiment some political sides will be more similar to others. This is because the different parts are related to the propaganda/sentiment which is an added layer on top of the facts described.
-
-1. Extraction of propaganda/sentiment
-Each article is analysed independently from the others, using the propaganda detection method and the sentiment lexicons.
-The percentages of words annotated with respect to the total number of words are computed for each article.
-2. Grouping the percentages by political bias
-Considering the labels given by AllSides (left, lean-left, center, lean-right, right, mixed, not-rated), the average of sentiment-words-ratio, propaganda-words-ratio and both-ratio are computed. This gives an idea of how much of the articles from each political side is detected as sentiment-related or propaganda-related.
-
-% \begin{figure}[!htbp]
-%     \centering
-%     \includegraphics[width=\linewidth]{figures/4.3_prop_sent_across_leaning.png}
-%     \caption{Comparison of the detected sentiment and propaganda across the political leaning}
-%     \label{fig:prop_sent_across_leaning}
-% \end{figure}
-% \todo{Replace Figure~\ref{fig:prop_sent_across_leaning} with the one cleaned up, next in google docs}
-
-This plot in Figure~\ref{fig:prop_sent_across_leaning} is a quartile representation (with data points on the left of the boxes) which shows the distribution of the ratios computed. We can see that the average value (the line in the middle of the box) of “both\_ratio” is the highest for the “Right” side.
-From this plot we see that there are some very strange values (76\% of highlighted words in one article from the center). Looking at the details, this is an article from BBC which does not look so subjective. The problem is that from the full article, the scraping library only captured the sentence The statement says: ``It is an assault on UK sovereignty and any such use by a State party is a clear violation of the Chemical Weapons Convention and a breach of international law. It threatens the security of us all." which is annotated as almost everything propaganda. For other BBC articles, scraping manages to retrieve the full text without problems.
-
-There are also a lot of articles which have a percentage of 0\%. Looking at the distribution of the length of the documents, some documents, especially from some sources, have length=0 or a very short length (scraping the cookie disclaimer instead of the full article).
-For this reason a minimum length threshold has been set to cut out these problems: 150 tokens at least.
-
-This is the same plot, but with the filter on the minimum length.
-We can see that:
-The most annotated side is the Right
-The least annotated side is the Left
-Article from the Center do not contain less sentiment/propaganda (against assumption)
-There are less propaganda words than sentiment words
+% 3. Creation of modified documents without the sentiment/propaganda parts
+% As in the previous experiment (clustering), for each document other three documents have been created:
+% Without propaganda words
+% Without sentiment words
+% Without propaganda and sentiment words
+% Each document is embedded with two different methods:
+% Universal Sentence Encoder
+% TF-IDF (TODO dimensionality reduction, now it is a local TF-IDF to the cluster, see next point)
 
 
+% 4. Comparing the articles about the same story
+% Using the labels from AllSides, where articles are put together in groups of three items (usually one from the left, one from the center, one from the right), we compute the pairwise similarity matrix by using the embedded representations.
+% For each cluster (provided by AllSides) we have 12 documents:
+% Left-Full: the article from the left side, the full text
+% Left-NoSent: the article from the left side, without sentiment words
+% Left-NoProp: the article from the left side, without propaganda words
+% Left-NoBoth: the article from the left side, without propaganda and sentiment words
+% Center-Full: the article from the center side, the full text
+% Center-NoSent: the article from the center side, without sentiment words
+% Center-NoProp: the article from the center side, without propaganda words
+% Center-NoBoth: the article from the center side, without propaganda and sentiment words
+% Right-Full: the article from the right side, the full text
+% Right-NoSent: the article from the right side, without sentiment words
+% Right-NoProp: the article from the right side, without propaganda words
+% Right-NoBoth: the article from the right side, without propaganda and sentiment words
+% These articles are compared with a 12x12 matrix where the values are the similarity between the pair of docs.
+% NOTE: at the moment, TF-IDF is computed locally to each cluster. I need to do the dimensionality reduction to be able to scale to more documents
 
-3. Creation of modified documents without the sentiment/propaganda parts
-As in the previous experiment (clustering), for each document other three documents have been created:
-Without propaganda words
-Without sentiment words
-Without propaganda and sentiment words
-Each document is embedded with two different methods:
-Universal Sentence Encoder
-TF-IDF (TODO dimensionality reduction, now it is a local TF-IDF to the cluster, see next point)
-
-
-4. Comparing the articles about the same story
-Using the labels from AllSides, where articles are put together in groups of three items (usually one from the left, one from the center, one from the right), we compute the pairwise similarity matrix by using the embedded representations.
-For each cluster (provided by AllSides) we have 12 documents:
-Left-Full: the article from the left side, the full text
-Left-NoSent: the article from the left side, without sentiment words
-Left-NoProp: the article from the left side, without propaganda words
-Left-NoBoth: the article from the left side, without propaganda and sentiment words
-Center-Full: the article from the center side, the full text
-Center-NoSent: the article from the center side, without sentiment words
-Center-NoProp: the article from the center side, without propaganda words
-Center-NoBoth: the article from the center side, without propaganda and sentiment words
-Right-Full: the article from the right side, the full text
-Right-NoSent: the article from the right side, without sentiment words
-Right-NoProp: the article from the right side, without propaganda words
-Right-NoBoth: the article from the right side, without propaganda and sentiment words
-These articles are compared with a 12x12 matrix where the values are the similarity between the pair of docs.
-NOTE: at the moment, TF-IDF is computed locally to each cluster. I need to do the dimensionality reduction to be able to scale to more documents
-
-These similarities are then merged for all the AllSides clusters (being careful with the labels which can be different) and a final matrix is computed by doing an average of the matrices from the single clusters.
-The result is a 24x24 matrix (6 bias labels, not only left/center/right, multiplied with 4 variations of the same article).
-With this matrix it is possible to observe if, removing some parts of the articles, the similarity scores increase or decrease between different political sides.
+% These similarities are then merged for all the AllSides clusters (being careful with the labels which can be different) and a final matrix is computed by doing an average of the matrices from the single clusters.
+% The result is a 24x24 matrix (6 bias labels, not only left/center/right, multiplied with 4 variations of the same article).
+% With this matrix it is possible to observe if, removing some parts of the articles, the similarity scores increase or decrease between different political sides.
 
 
-Results
+% Results
 
-\todo{figures import}
+% \todo{figures import}
 
-Observations:
-Within the rectangles on the main diagonal (yellow bright): comparison of the original articles with the modified ones generated from it:
-The removals are not changing the representations a lot: the scores are all quite high (minimum around 92% of similarity)
-The removal of propaganda parts is keeping the documents very similar to the original ones: average 98% similarity
-The removal of sentiment is changing a bit more the representation of the articles: minimum 93%, average 95%
-Increasing values between different biases (main diagonal of each block, see below):
-Usually similarity increases from Full article to noBoth
-Removing sentiment increases similarity (best scores)
-Removing propaganda decreases similarity a bit
-TODO: find a better way to represent this result. Just look at the main diagonals of each block, not so interesting to see the comparison between full articles and 
+% Observations:
+% Within the rectangles on the main diagonal (yellow bright): comparison of the original articles with the modified ones generated from it:
+% The removals are not changing the representations a lot: the scores are all quite high (minimum around 92% of similarity)
+% The removal of propaganda parts is keeping the documents very similar to the original ones: average 98% similarity
+% The removal of sentiment is changing a bit more the representation of the articles: minimum 93%, average 95%
+% Increasing values between different biases (main diagonal of each block, see below):
+% Usually similarity increases from Full article to noBoth
+% Removing sentiment increases similarity (best scores)
+% Removing propaganda decreases similarity a bit
+% TODO: find a better way to represent this result. Just look at the main diagonals of each block, not so interesting to see the comparison between full articles and 
 
-Further improvements (TODOs):
-Propaganda/sentiment used by political sides by topic: break down by topic
-Propaganda types and sentiment scores by political sides: break down by fine-grained labels
-Verify correlation between propaganda:loaded\_language and sentiment. It is probably the same thing
-Improve visualisations of similarity changes (heatmap so big is confusing)
-Use dimensionality reduction and use a single TF-IDF model
+% Further improvements (TODOs):
+% Propaganda/sentiment used by political sides by topic: break down by topic
+% Propaganda types and sentiment scores by political sides: break down by fine-grained labels
+% Verify correlation between propaganda:loaded\_language and sentiment. It is probably the same thing
+% Improve visualisations of similarity changes (heatmap so big is confusing)
+% Use dimensionality reduction and use a single TF-IDF model
 
 
 % \todo{the rest (shapes...) goes in topic breakdown (next chapter)}
