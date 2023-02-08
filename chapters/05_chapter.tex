@@ -689,37 +689,48 @@ And as last limitation, it is not clear whether these features can be used to au
 % 5: political leaning classifier from propaganda features. Why
 Here in this section, we take a different approach.
 In the previous section, we saw how propaganda is slightly different considering the political leanings.
-Here we take that result and we try to reverse the problem: using the features of propaganda extracted from the articles, can we automatically predict the leaning of the article?
+Taking from that result, we try to reverse the problem: using the features of propaganda extracted from the articles, can we automatically predict the leaning of an article?
 
 This is what our RQ2 asks: \emph{Can we predict the political leaning of a news article by observing the propaganda it uses?}
+More in detail, we want to see if it is possible to recognise the political leaning of articles from the:
+\begin{enumerate}
+    \item \emph{Total amount} of propaganda found in the text (RQ2.1)
+    %\item RQ2: Is it possible to recognise political leaning of articles from the \emph{amount of each propaganda technique} in the text?
+    \item \emph{Amount of each propaganda technique} in the text (RQ2.2)
+    \item \emph{Specific words belonging to propaganda techniques} in the article text (RQ2.3)
+\end{enumerate}
 
-Why the two could benefit / be related?
+% reasons
+We have several reasons to think that political leaning and propaganda are related; in other words, that propaganda changes across the political spectrum.
+First of all, the results of our previous experiment that show differences in the quantity of propaganda techniques and also in the specific terms used.
 
-\todo{link here and avoid the repetition down from CIMPLE report}
+% intro of TTO2019
+We have also reasons coming from the field of automated news analysis, where there is growing interest in understanding and classifying news articles based on their political ideology.
+Various automated approaches have been recently proposed for the classification of articles with regards to political leaning~\cite{baly2020we} or credibility~\cite{horne2018assessing}. Others focused on capturing the usage of various propaganda techniques~\cite{da2019fine} or argumentation techniques~\cite{lippi2016argumentation}. However, the role that propaganda could play in automatically determining the leaning of articles has not been thoroughly investigated.
+Propaganda is usually directly linked to the ideology of articles by having the ``intention of influencing people's opinions''.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}} To this end, we aim to better understand the relationship between propaganda analysis and the identification of political leaning of articles, simplified to three categories: \textit{Left}, \textit{Centre}, and \textit{Right}.
 
-The point of contact between political leaning prediction and propaganda is that both are dealing with political analysis.
-Given that the facts that are being narrated are the same (exception: inclusion/exclusion), the main difference between an article from the left to one from the right is their point of view / subjective / persuasive component. Propaganda analysis is focused on analysing this specific component of the articles, the anti-topic model.
-On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
-The mixed analysis would allow to understand better why a certain article is classified as being left/right with respect to the black box BERT classifier.
+Then, we also have a conceptual reason. Both political leaning prediction and propaganda analysis are types of political analysis.
+% The point of contact between political leaning prediction and propaganda is that both are dealing with political analysis.
+Given that we are considering articles that cover the same stories (as we have seen in the previous sections, we have triples of articles) the facts that are being narrated are the same (except for the inclusion/exclusion of details). The main difference between an article from the left to one from the right is their point of view / subjective / persuasive component. Propaganda analysis is focused on analysing this specific component of the articles.
+As we discussed in Chapter~\ref{ssec:lit_layers_of_info}, we can think of news articles as a composition of two elements: the topical element (facts, entities, events) and the anti-topical element (how things are narrated, persuasion).
+The topical elements need to be similar across the articles that narrate the same events (constraint of the dataset), and therefore we have a good setting for studying how the anti-topical elements vary across political leanings. 
 
-The following sections first describe the general setup of the experiment, then deal with each one of the three research questions that we listed in the introduction: quantity, quantity by type, terms analysis.% TODO , context.
+% hypothesis
+On top of this reasoning, we build our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
+
+% advantages
+With respect to the State of the Art classifier presented in Section~\ref{ssec:ps_leaning_classifier}, whose results cannot be easily interpreted, we could understand better why a certain article is classified as being left/right. We can get the relationship with the features and see which ones (quantities and terms) influenced more the classification outputs. 
+
 
 
 Unlike previous work on political leaning detection, in this experiment we use a propaganda detection method (from \citet{da2019fine}) to identify the existence of propaganda and its type of technique in given articles, and incorporate this information directly as additional features into the training and testing of the model.  
 
-
+% what about sentiment?
 We also experimented briefly with sentiment features, but after seeing the null results (and also the results from the previous experiment), we decided not to proceed with sentiment but only with propaganda. Therefore from here we switch our terminology from \emph{persuasion} (propaganda+sentiment) to \emph{propaganda}.
 
+% structure of next sections
+The following sections first describe the general setup of the experiment, then deal with each one of the three sub-research questions that we listed in the introduction: quantity, quantity by type, terms analysis.% TODO , context.
 
-% THIS IS FROM CIMPLE REPORT / TTO paper
-In the experiment reported in this section, different types of propaganda used in news articles are used for identifying the political leaning of the articles. 
-Propaganda is a regularly used technique in media and politics that aims to influence the perception of the audience and to sway their opinions in specific directions. However, it is unclear to what extent can we automatically identify the political leaning of news from their use of propaganda. This experiment investigates the use of propaganda features as input to an automated political leaning classifier.
-Propaganda is usually directly linked to the ideology of articles by having the ``intention of influencing people’s opinions". To this end, we aim to better understand the relationship between propaganda analysis and the identification of political leaning of articles, simplified to three categories: Left, Centre, and Right.
-Our hypothesis is that it is possible to recognise the political leaning of an article by using the features extracted through propaganda analysis. In other words, we hope to boost the performance of political leaning classifiers by learning which and how propaganda techniques are being used by which political side. This leads to three sub-research questions, aimed to see if it is possible to recognise the political leaning of articles from the:
-Total amount of propaganda found in the text (RQ3.1)
-Amount of each propaganda technique in the text (RQ3.2)
-Specific words belonging to propaganda techniques in the article text (RQ3.3)
-In this experiment, we use a propaganda detection method proposed in~\citet{da2019fine} to identify the existence of propaganda and its type of technique in given articles, and incorporate this information directly as additional features into the training and testing of the model.
 
 \subsubsection{Dataset}
 \todo{move to \ref{ssec:ps_leaning_classifier}}
@@ -729,16 +740,6 @@ Media: where the articles in the test set are from media sources that do not occ
 
 \subsubsection{Experimental Setup}
 
-CIMPLE VERSION
-
-The following steps are followed in this experiment:
- Implement the BERT-based political-leaning classifier described in~\citet{baly2020we} and apply it to the dataset to detect the political leaning of each article to reproduce the baseline results.
- Extract propaganda for each article using the tool from~\citet{da2019fine}.
-Add propaganda-related features to the BERT model, by injecting the values in the neural network using the (a) total presence of propaganda as a feature (Experiment 1), (b) percentage of each propaganda technique (Experiment 2), and (c) words that appear in the detected propaganda text (Experiment 3).
-Train and test the model under different configurations with two splits, one   one less biased to media source.
-Compare our results with two baselines; the majority class (where the political leaning is assumed to be that of the most popular leaning in the dataset), and the results from our re-implementation of the model in step 1
-
-TTO2019 VERSION
 % General things before experiments
 Our experiments are designed to test the role of propaganda features in detecting the political leaning of articles. The following steps are followed in our experiments:
 \begin{enumerate}
