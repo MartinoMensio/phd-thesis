@@ -1389,6 +1389,8 @@ The appearance of propaganda, and the techniques used, showed not to be sufficie
 % motivation
 % By seeing the results of the two previous experiments, we
 
+\todo{take key concepts from here, place them in the introduction below and remove this with the heading of "introduction"}
+
 Idea: from the propaganda detection tool, we saw that the data it’s trained on considers propaganda mainly from Right-leaning sources. But propaganda is common in every political leaning (literature) and also our experiment detected propaganda from every leaning. So we want to explore this gap between socio-political works (where propaganda is described as coming from every political leaning) and computational detection of propaganda (only targeted at recognising right-leaning).
 
 
@@ -1409,7 +1411,7 @@ So the resulting model is \textbf{being trained on very propagandistic sources f
 \subsubsection{Introduction}
 
 % Orientation: Importance of propaganda computational studies
-Over the last decades, several works have started addressing the recognition of propaganda techniques in text. A lot of progress has been done already, from the detection of propaganda at the document level to fine-grained technique analysis. But there is a limitation of these computational studies: they target just a subset of the propaganda, specifically the one from the far-right. %(based on the US context).
+Over the last decades, several works have started addressing the recognition of propaganda techniques in text. A lot of progress has been done already, from the detection of propaganda at the document level to fine-grained technique analysis. But there is a limitation of these computational studies: they target just a subset of the propaganda, specifically the one from the extreme-right. %(based on the US context).
 
 % Propaganda is strongly linked to argumentation and rhetorics, it's the art of persuading listeners. And it has always been used by the state, media and political figures as a tool to convince the audience.
 
@@ -1418,37 +1420,44 @@ Over the last decades, several works have started addressing the recognition of 
 
 
 % RATIONALE
-Therefore, with this paper, we want to address a gap between the historical socio-political works about propaganda and the computational studies to detect propaganda.
-While it is common knowledge that propaganda appears in different socio-political contexts, the computational approaches and datasets available are currently having a narrower view.
+Therefore, we want to address a gap between the historical socio-political works about propaganda, which find propaganda and populism all over the political spectrum, and the computational studies to detect propaganda, which seem to have a much narrower view in the current situation.
+While it is common knowledge that propaganda appears in different socio-political contexts, the computational approaches and datasets available currently have a narrower view.
+This view is currently linked to extreme-right leaning news sources, at the border with misinformation
 % This view is linked to the US context of recent years and therefore it’s manifesting in the link between propaganda and far-right ideology (JUSTIFY THIS).
 
 
 % Aim
-Our aim is to observe how propaganda actually can be detected all over the political spectrum. Not only in far-right media, but also in other leanings.
+Our aim is to observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion device.
 
 % RQ
-The Research Questions are the following:
+The Research Question RQ3 is \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
+are the following:
 
 % (Why is computational research targeted against right-leaning propaganda? Is it a matter of quantity/context?) → related works
 % Can we detect propaganda also in left and centre leanings? With a tool that is trained on right-leaning propaganda?
 % How different is the detected propaganda across the political spectrum?
 
-RQ3.1: How different is the detected propaganda across the political spectrum?
+% RQ3.1: How different is the detected propaganda across the political spectrum? --> already answered in 5.3.1
 RQ3.2: Which generalisation problems can arise when applying a propaganda detection tool outside the usually-targeted extreme-right leaning?
 
 
 
 % Method
-For our experiment we use a propaganda annotation tool which tells the single detected words and the specific techniques used. By having this fine-grained analysis, we can do a quantity and term analysis across external dimensions, such as political leaning in this case.
+1. statistically it is all across
+2. automatic classification of leaning based on propaganda features is not very good
 
-Then we try to find what distinguishes propaganda across the spectrum:
-- statistically: looking at quantities, terms ??? across the spectrum
-- by using a classifier and using propaganda features to predict the leaning
+--> there should be some problems in the propaganda features
+
+% For our experiment we use a propaganda annotation tool which tells the single detected words and the specific techniques used. By having this fine-grained analysis, we can do a quantity and term analysis across external dimensions, such as political leaning in this case.
+
+% Then we try to find what distinguishes propaganda across the spectrum:
+% - statistically: looking at quantities, terms ??? across the spectrum
+% - by using a classifier and using propaganda features to predict the leaning
 
 
 % Findings
-We find that, although the tool used is only trained on extreme right-leaning propagandistic
-articles, we can actually detect propaganda all across the spectrum. This ongoing experiment is directed at understanding the relationship between propaganda, points of view and the topics discussed
+% We find that, although the tool used is only trained on extreme right-leaning propagandistic
+% articles, we can actually detect propaganda all across the spectrum. This ongoing experiment is directed at understanding the relationship between propaganda, points of view and the topics discussed
 
 % We find that:
 % - propaganda is almost evenly distributed across political spectrum
@@ -1458,20 +1467,26 @@ articles, we can actually detect propaganda all across the spectrum. This ongoin
 % This means that we need more diversity of propaganda examples in order to be more generic than the specific US-based propaganda.
 
 
-\subsubsection{Propaganda campaigns}
-This subsection’s question: in which political contexts has propaganda shown predominantly? 
+\subsubsection{Propaganda campaigns contexts}
+This subsection’s question: in which political contexts have propaganda shown predominantly?
 
 
-Listed in \cite{woolley2018computational}
-- Russia --> Parties, State --> RT and Sputnik major sources rated as Leaning Right. Russian state is extreme-right leaning https://mediabiasfactcheck.com/russia-media-profile/
-- Ukraine --> Russian on one side, counter-propaganda from Ukraine
-- Canada --> 
-- Poland
-- Taiwan
-- Brazil
-- Germany → ”skeptical political zeitgeist” suspicious of political elites and establishment. Right-wing populist movements: anti-immigration. Historically: nazi propaganda in WWII, anti-communist propaganda during Cold War, anti russian-propaganda recently.
-- United States → mostly about Trump coverage in the news (elections campaigns 2016 Trump-Clinton / presidency)
-- China
+Listed in \citet{woolley2018computational} we have several contexts:
+\begin{itemize}
+    \item Russia: political Parties and State are the major creators of propaganda. RT and Sputnik major sources rated as Leaning Right (according to the US rating system). Russian state is extreme-right leaning https://mediabiasfactcheck.com/russia-media-profile/
+    \item Ukraine: where two major sources of propaganda have been in recent years the Russian propaganda on one side, and the counter-propaganda from patriotic Ukraine. A propaganda war, that lives inside the current conflict. And it crosses many times the border between persuasion and misinformation, with many stories shared with the intent to deceive and rewrite the narrative.
+    \item Canada --> 
+    \item Poland
+    \item Taiwan
+    \item Brazil
+    \item Germany → ”skeptical political zeitgeist” suspicious of political elites and establishment. Right-wing populist movements: anti-immigration. Historically: nazi propaganda in WWII, anti-communist propaganda during Cold War, anti russian-propaganda recently.
+    \item United States → mostly about Trump coverage in the news (elections campaigns 2016 Trump-Clinton / presidency)
+    \item China
+\end{itemize}
+
+
+TODO: see \url{https://en.wikipedia.org/wiki/Right-wing_populism#Contemporary_movements_by_country} 
+and \url{https://en.wikipedia.org/wiki/Left-wing_populism#By_country}
 
 
 
@@ -1573,7 +1588,7 @@ Bipartisan Report: 4060 articles in NELA
 
 \paragraph{In other languages}
 https://www.mdpi.com/2306-5729/7/3/29/htm 
-https://zenodo.org/record/5828240#.YduLv2hBxPY 
+https://zenodo.org/record/5828240\#.YduLv2hBxPY 
 H-Prop is the translation of a subset of QProp (28k articles out of 51k). Data of Qprop is translated with IBM Watson.
 The data, therefore, is still right-leaning.
 
@@ -1627,6 +1642,8 @@ Is this imbalance a problem? Are the propaganda techniques used by the left and 
 
 
 \subsubsection{Populism and Propaganda by leaning}
+
+TODO: explain Why?
 
 This is the continuation of Section~\ref{ssec:lp_techniques_populism_vs_propaganda} from the previous chapter. Now that we introduced the leaning and the problem of unbalance, we are going to break down the analysis with respect to the political leaning of the speeches.
 % Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
