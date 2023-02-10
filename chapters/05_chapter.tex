@@ -167,8 +167,7 @@ We embed the articles in our dataset with a pre-trained BERT model (110M paramet
         
     \end{tabular}
     % }
-    \caption{Results given by two different baselines and the measure reported in~\citet{baly2020we}.
-    }
+    \caption{Results given by two different baselines and the measure reported in~\citet{baly2020we}.}
     \label{tab:results_baselines_classifier}
 \end{table}
 
@@ -1397,12 +1396,6 @@ Idea: from the propaganda detection tool, we saw that the data it’s trained on
 
 RQ3: \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
 
-\begin{figure}[!htb]
-   \centering
-   \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
-   \caption{The leaning of the propagandist sources from MBFC (TODO compare with effective training dataset, which is 100\% right)}
-   \label{fig:mbfc_leaning}
-\end{figure}
 
 - Possible problems?
 A possible problem of this approach that is not defended in the paper, is the choice of articles that have been annotated by experts. They have been selected from sources "propagandistic by Media Bias/Fact Check", in other words from the page \url{https://mediabiasfactcheck.com/fake-news/}. The propagandistic sources listed in this page, as Figure~\ref{fig:mbfc_leaning} shows, are mostly on the extreme-right side of the spectrum. Furthermore, the selection done by the authors (table 3 of that paper) results in all the sources of the articles to lean on the right.
@@ -1467,18 +1460,23 @@ RQ3.2: Which generalisation problems can arise when applying a propaganda detect
 % This means that we need more diversity of propaganda examples in order to be more generic than the specific US-based propaganda.
 
 
-\subsubsection{Propaganda campaigns contexts}
-This subsection’s question: in which political contexts have propaganda shown predominantly?
+\subsubsection{Propaganda across all political contexts}
+This subsection’s question: in which political contexts have propaganda shown?
 
 
-Listed in \citet{woolley2018computational} we have several contexts:
+Listed in \citet{woolley2018computational} we have several contexts. 
+As seen in Chapter~\ref{sec:lit_propaganda} the relationship between populism and propaganda is quite strong. So here we take some publications that refer to populism to be able to place it in several contexts (countries and leanings)
+
+The term ``populist” has been applied to a heterogeneous group of political groups ranging from the anti-globalization left and greens to the nationalist right.~\citep{kuzio2010populism}.
+
+A few examples:
 \begin{itemize}
     \item Russia: political Parties and State are the major creators of propaganda. RT and Sputnik major sources rated as Leaning Right (according to the US rating system). Russian state is extreme-right leaning https://mediabiasfactcheck.com/russia-media-profile/
     \item Ukraine: where two major sources of propaganda have been in recent years the Russian propaganda on one side, and the counter-propaganda from patriotic Ukraine. A propaganda war, that lives inside the current conflict. And it crosses many times the border between persuasion and misinformation, with many stories shared with the intent to deceive and rewrite the narrative.
-    \item Canada --> 
-    \item Poland
-    \item Taiwan
-    \item Brazil
+    \item Canada --> right-wing populism has roots from the 1970s with the \emph{western alienation}~\citep{henry2000revisiting}, and keeps up to recent times with political parties as the \emph{People's Party} which has self-described as ``smart populism"
+    \item Poland --> Right-wing
+    \item Taiwan --> RIght-wing
+    \item Brazil --> Right-wing Bolsonaro and Left-wing Lulism
     \item Germany → ”skeptical political zeitgeist” suspicious of political elites and establishment. Right-wing populist movements: anti-immigration. Historically: nazi propaganda in WWII, anti-communist propaganda during Cold War, anti russian-propaganda recently.
     \item United States → mostly about Trump coverage in the news (elections campaigns 2016 Trump-Clinton / presidency)
     \item China
@@ -1489,6 +1487,8 @@ TODO: see \url{https://en.wikipedia.org/wiki/Right-wing_populism#Contemporary_mo
 and \url{https://en.wikipedia.org/wiki/Left-wing_populism#By_country}
 
 
+% The left propaganda?
+% \cite{phillips2007left} analyses coverage of Left liberal (liberal=centre-left) independent sources, as opposed to the mainstream media sources that dominate
 
 \subsubsection{Corpuses for propaganda detection}
 
@@ -1500,93 +1500,190 @@ TSHP, QProp and PTC are mentioned in \cite{da2020survey}.
 
 
 \paragraph{TSHP-17}
-https://aclanthology.org/D17-1317.pdf  https://hrashkin.github.io/factcheck.html
-Document level annotations
-Propaganda is selected from only 2 sources:
 
-\todo{copy table}
+%https://aclanthology.org/D17-1317.pdf dataset description: https://hrashkin.github.io/factcheck.html
+The first dataset is TSHP-17, which was published in the work of~\citet{rashkin2017truth}. In this dataset, the articles are annotated accordingly to the news source that published them. Each news source belongs to a specific category:
+\begin{itemize}
+    \item Satire: The Onion, Borowitz Report, Clickhole
+    \item Hoax: American News, DC Gazette
+    \item Propaganda: Natural News, Activist Report (Activist News and Activist Report
+    \item Trusted news: from Gigaword News corups. Articles come from several sources, including AFP (Agence France Press), Associated Press, New York Times, The Xinhua News Agency. The dataset is not including these articles.
+\end{itemize}
 
-The other categories in the dataset are:
-Satire:
-The Onion:?  https://mediabiasfactcheck.com/the-onion/ 
-Borowitz Report: left-satire https://mediabiasfactcheck.com/borowitz-report/ 
-Clickhole: ? https://mediabiasfactcheck.com/clickhole/ 
-Hoax:
-American News: extreme-right https://mediabiasfactcheck.com/anews-24-com-american-news/ 
-DC Gazette: extreme-right https://mediabiasfactcheck.com/dc-gazette/ 
-Trusted news: from English Gigaword corpus:
-Agence France Press English Service: least biased https://mediabiasfactcheck.com/afp-agence-france-presse/ 
-Associated Press Worldstream English Service: left-center https://mediabiasfactcheck.com/associated-press/ 
-The New York Times Newswire Service: left-center https://mediabiasfactcheck.com/new-york-times/ 
-The Xinhua News Agency English Service: left https://mediabiasfactcheck.com/xinhua-news-agency/ 
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{c|c|r|c|c}
+        label & source & \#articles & MBFC leaning & MBFC link \\
+        \hline
+        \multirow{3}{*}{satire} & The Onion & 14,170 & ? & \href{https://mediabiasfactcheck.com/the-onion/}{the-onion} \\
+                                & The Borrowitz Report & 627 & left & \href{https://mediabiasfactcheck.com/borowitz-report/}{borowitz-report} \\
+                                & Clickhole & 188 & ? & \href{https://mediabiasfactcheck.com/clickhole/}{clickhole} \\
+        \hline
+        \multirow{2}{*}{hoax} & American News & 6,914 & extreme right & \href{https://mediabiasfactcheck.com/anews-24-com-american-news/}{american-news} \\
+                                & DC Gazette & 5,133 & extreme right & \href{https://mediabiasfactcheck.com/dc-gazette/}{dc-gazette} \\
+        \hline
+        \multirow{2}{*}{propaganda} & Natural News & 15,580 & far right & \href{https://mediabiasfactcheck.com/natural-news/}{natural-news} \\
+                                & Activist Report & 17,869 & left & \href{https://mediabiasfactcheck.com/activist-post/}{activist-post} \\
+        \hline
+        trusted news & Gigaword News & 13.995 & ? & 
+        % \multirow{}{*}{trusted news} & Natural News & 15,580 & far right & \href{https://mediabiasfactcheck.com/natural-news/}{natural-news} \\
+        %                         & Activist Report & 17,869 & far left & \href{https://mediabiasfactcheck.com/activist-post/}{activist-post} \\
+    \end{tabular}
+    \caption{TSHP-17 dataset analysis across leaning}
+    \label{tab:tshp17_across_leaning}
+\end{table}
 
 
-Unbalance analysis
-Propaganda sources → quite balanced
-Hoax: mainly extreme-right
-Trusted news: left-center
+% The other categories in the dataset are:
+% Satire:
+% The Onion:?  https://mediabiasfactcheck.com/the-onion/ 
+% Borowitz Report: left-satire https://mediabiasfactcheck.com/borowitz-report/ 
+% Clickhole: ? https://mediabiasfactcheck.com/clickhole/ 
+% Hoax:
+% American News: extreme-right https://mediabiasfactcheck.com/anews-24-com-american-news/ 
+% DC Gazette: extreme-right https://mediabiasfactcheck.com/dc-gazette/ 
+% Trusted news: from English Gigaword corpus:
+% Agence France Press English Service: least biased https://mediabiasfactcheck.com/afp-agence-france-presse/ 
+% Associated Press Worldstream English Service: left-center https://mediabiasfactcheck.com/associated-press/ 
+% The New York Times Newswire Service: left-center https://mediabiasfactcheck.com/new-york-times/ 
+% The Xinhua News Agency English Service: left https://mediabiasfactcheck.com/xinhua-news-agency/ 
 
-\paragraph{QPROP corpus (QCRI)}
 
-https://www.sciencedirect.com/science/article/pii/S0306457318306058 (paper)
-taken from MBFC data. http://proppy.qcri.org/about.html bad gateway (found on webarchive)
-https://zenodo.org/record/3271522\#.XS6qRUUzau4 
-Document-level annotations of propaganda
+% Unbalance analysis
+% Propaganda sources → quite balanced
+% Hoax: mainly extreme-right
+% Trusted news: left-center
+We can see in Table~\ref{tab:tshp17_across_leaning} that the propaganda sources are quite balanced for this dataset, as we have one source that is labelled as ``far right" and one as ``left".
+This may be one of the only datasets that include also left-leaning propaganda. However, it is not annotated at the technique-level but only at the source level.
 
-Table 6 from paper, expanded with leaning and MBFC link
 
-\todo{copy table}
+\paragraph{QPROP corpus}
 
-Unbalance analysis
-Apart from 3 sources (not found/unknown bias), they are all extreme right sources.
+This second dataset~\citep{alberto_barron_cedeno_2019_3271522}, comes from the work of~\cite{barron2019proppy}, and also in this case we have a collection of articles coming from a set of sources. These sources have source-level annotations coming from MBFC, from which the authors selected the two classes: \emph{propaganda} and \emph{trustworthy}.
+For the \textit{trustworty} class we only know that they come from 94 sources with different leanings (left, left-center, center, right-center, right) and that in total there are 45.6k articles.
+For the propaganda class instead, we have the breakdown of the sources considered, that is shown in Table~\ref{tab:qprop_across_leaning}.
+
+% taken from MBFC data. http://proppy.qcri.org/about.html bad gateway (found on webarchive)
+% https://zenodo.org/record/3271522\#.XS6qRUUzau4 
+% Document-level annotations of propaganda
+
+% Table 6 from paper, expanded with leaning and MBFC link
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{c|r|c|c}
+        source & \#articles & MBFC leaning & MBFC link \\
+        \hline
+        freedomoutpost.com & 1,638 & ? & \href{https://mediabiasfactcheck.com/freedom-outpost/}{freedom-outpost} \\
+        frontpagemag.com & 1,259 & extreme right & \href{https://mediabiasfactcheck.com/frontpage-magazine/}{frontpage-magazine} \\
+        lewrockwell.com & 821 & extreme right & \href{https://mediabiasfactcheck.com/lew-rockwell/}{lew-rockwell} \\
+        shtfplan.com & 778 & extreme right & \href{https://mediabiasfactcheck.com/shtfplan-com/}{shtfplan-com} \\
+        vdare.com & 468 & extreme right & \href{https://mediabiasfactcheck.com/vdare/}{vdare} \\
+        personalliberty.com & 434 & extreme right & \href{https://mediabiasfactcheck.com/personal-liberty/}{personal-liberty} \\
+        remnantnewspaper.com & 139 & extreme right & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
+        thewashingtonstandard.com & 115 & ? &  \\
+        breaking911.com & 73 & ? (82\%~MBFC viewers rate it~Right)  & \href{https://mediabiasfactcheck.com/breaking911/}{breaking911} \\
+        clashdaily.com & 12 & extreme right & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily} \\     
+    \end{tabular}
+}
+    \caption{QPROP dataset analysis across leaning}
+    \label{tab:qprop_across_leaning}
+\end{table}
+
+% Unbalance analysis
+We can see that all the sources, with the exception of three of them (two without leaning annotation, and one with only the votes from MBFC viewers), are rated as having a \emph{extreme right} leaning.
+% Apart from 3 sources (not found/unknown bias), they are all extreme right sources.
 
 \paragraph{PTC corpus}
-is the one from Da San Martino 2019 https://aclanthology.org/D19-1565.pdf that the tool is trained on.
-Annotation guidelines: https://aclanthology.org/D19-1565/ (in the attachment)
-Definition of the techniques: https://propaganda.qcri.org/annotations/definitions.html 
-Fine-grained techniques
+This dataset comes from another work by the same research group.
+With respect to the previous datasets, this one has fine-grained annotations of the specific propaganda techniques. The work of~\citet{da2019fine} is our reference for our experiments from Chapter~\ref{ssec:lp_techniques_propaganda} and is the ones that differentiates between 18 different propaganda techniques.
+Table~\ref{tab:ptc_across_leaning} shows the sources that were used to build this dataset. We can notice that most of the sources are the same as in the previous QPROP. But this time the number of articles is much smaller because the annotations have been performed with much higher granularity (not at the source-level but at the technique-level with specific words annotated).
+% is the one from Da San Martino 2019 https://aclanthology.org/D19-1565.pdf that the tool is trained on.
+% Annotation guidelines: https://aclanthology.org/D19-1565/ (in the attachment)
+% Definition of the techniques: https://propaganda.qcri.org/annotations/definitions.html 
+% Fine-grained techniques
 
-\todo{copy table}
-Unbalance analysis
-Apart from 3 sources (not found/unknown bias), they are all extreme right sources. (sources very similar to the ones from QPROP, the dataset is from the same research group)
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{c|r|c|c}
+        source & \#articles & MBFC leaning & MBFC link \\
+        \hline
+        freedomoutpost.com & 133 & ? & \href{https://mediabiasfactcheck.com/freedom-outpost/}{freedom-outpost} \\
+        frontpagemag.com & 56 & extreme right & \href{https://mediabiasfactcheck.com/frontpage-magazine/}{frontpage-magazine} \\
+        shtfplan.com & 55 & extreme right & \href{https://mediabiasfactcheck.com/shtfplan-com/}{shtfplan-com} \\
+        lewrockwell.com & 26 & extreme right & \href{https://mediabiasfactcheck.com/lew-rockwell/}{lew-rockwell} \\
+        vdare.com & 20 & extreme right & \href{https://mediabiasfactcheck.com/vdare/}{vdare} \\
+        remnantnewspaper.com & 19 & extreme right & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
+        personalliberty.com & 18 & extreme right & \href{https://mediabiasfactcheck.com/personal-liberty/}{personal-liberty} \\
+        Remnant Magazine & 14 & extreme right & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
+        breaking911.com & 11 & ? (82\%~MBFC viewers rate it~Right)  & \href{https://mediabiasfactcheck.com/breaking911/}{breaking911} \\
+        truthuncensored.net & 8 & extreme right  & \href{https://mediabiasfactcheck.com/truth-uncensored/}{truth-uncensored} \\
+        thewashingtonstandard.com & 6 & ? &  \\
+        www.unz.com & 5 & extreme right & \href{https://mediabiasfactcheck.com/the-unz-report/}{the-unz-report} \\     
+        clashdaily.com & 1 & extreme right & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily} \\     
+    \end{tabular}
+}
+    \caption{PTC dataset analysis across leaning}
+    \label{tab:ptc_across_leaning}
+\end{table}
 
-\paragraph{Media Bias/Fact Check}
-“Propagandist sources” (also selected from here for Qprop and PTC), are listed in https://mediabiasfactcheck.com/fake-news/ 
-Most of them are from the far-right, but these are from Left (also there were some from the center)x2:
-https://mediabiasfactcheck.com/basnews-agency/
-https://mediabiasfactcheck.com/bbarta24/
-https://mediabiasfactcheck.com/bdnews24/ 
-https://mediabiasfactcheck.com/beijing-review/
-https://mediabiasfactcheck.com/bipartisan-report/
-https://mediabiasfactcheck.com/blacknews-com/
-https://mediabiasfactcheck.com/bossip/
-https://mediabiasfactcheck.com/cctv-america/
-https://mediabiasfactcheck.com/true-activist/
-https://mediabiasfactcheck.com/china-daily/
-https://mediabiasfactcheck.com/china-global-television-network-cgtn/
+% Unbalance analysis
+This dataset suffers, as the previous one, of a high imbalance of the leaning of the sources included.
+% Apart from 3 sources (not found/unknown bias), they are all extreme right sources. (sources very similar to the ones from QPROP, the dataset is from the same research group)
+
+\paragraph{Media Bias/Fact Check propaganda}
+As both the previous QPROP and PTC are derived from the a subset of MBFC propaganda sources, we went and analysed the full MBFC propaganda subset.
+
+“Propagandist sources” (also selected from here for Qprop and PTC), are listed in the MBFC under the name ``questionable sources".
+We retrieved the details of these sources, and discovered that 85\% of the sources that have ``propaganda" in the label are from the Right.
+
+\begin{figure}[!htb]
+   \centering
+   \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
+   \caption{MBFC dataset analysis across leaning}
+   \label{fig:mbfc_across_leaning}
+\end{figure}
+
+% Unbalance analysis
+% Most of the propagandist sources are from the right. But at the same time, PTC and QPROP selected only from the right. Ignoring the 15% from left/center.
+As we can see in Figure~\ref{fig:mbfc_across_leaning}, this dataset is very imbalanced. But what is even more imbalanced, is the selection that was done by the creators of PTC and QPROP, completely excluding left-leaning and center sources (15\% totally underrepresented).
+
+% Most of them are from the far-right, but these are from Left (also there were some from the center)x2:
+% https://mediabiasfactcheck.com/basnews-agency/
+% https://mediabiasfactcheck.com/bbarta24/
+% https://mediabiasfactcheck.com/bdnews24/ 
+% https://mediabiasfactcheck.com/beijing-review/
+% https://mediabiasfactcheck.com/bipartisan-report/
+% https://mediabiasfactcheck.com/blacknews-com/
+% https://mediabiasfactcheck.com/bossip/
+% https://mediabiasfactcheck.com/cctv-america/
+% https://mediabiasfactcheck.com/true-activist/
+% https://mediabiasfactcheck.com/china-daily/
+% https://mediabiasfactcheck.com/china-global-television-network-cgtn/
 
 
 
-Most of the sources that have “Propaganda” are from the right: 85%
+% Most of the sources that have “Propaganda” are from the right: 85\%
 
-\todo{copy plot}
-Propaganda vs the other labels listed as “questionable reasoning”
-Unbalance analysis
-Most of the propagandist sources are from the right. But at the same time, PTC and QPROP selected only from the right. Ignoring the 15% from left/center.
+% Propaganda vs the other labels listed as “questionable reasoning”
 
-\paragraph{Media Bias/Fact Check propaganda intersection with Baly}
-MBFC propagandistic sources intersected with Baly sources:
-{'breitbart.com',  'theepochtimes.com',  'newsmax.com',  'townhall.com',  'dailymail.co.uk',  'theblaze.com'} → all right / extreme-right
+% \paragraph{Media Bias/Fact Check propaganda intersection with Baly}
+% MBFC propagandistic sources intersected with Baly sources:
+% {'breitbart.com',  'theepochtimes.com',  'newsmax.com',  'townhall.com',  'dailymail.co.uk',  'theblaze.com'} → all right / extreme-right
 
-\paragraph{Media Bias/Fact Check propaganda intersection with NELA}
-MBFC propagandistic sources intersected with NELA sources:
-{'conservative tribune', 'daily stormer', 'western journal', 'newswars', 'freedom daily', 'true activist', 'the duran', 'the d.c. clothesline', 'breitbart', 'bipartisan report', 'the right scoop', 'dc gazette', 'frontpage magazine', 'the gateway pundit', 'cns news', 'daily mail'} 
-From Left-leaning:
-{'true activist', 'bipartisan report'} → from Left:
-True Activist https://mediabiasfactcheck.com/true-activist/ : 370 articles in NELA
-Bipartisan Report: 4060 articles in NELA
+% \paragraph{Media Bias/Fact Check propaganda intersection with NELA}
+% MBFC propagandistic sources intersected with NELA sources:
+% {'conservative tribune', 'daily stormer', 'western journal', 'newswars', 'freedom daily', 'true activist', 'the duran', 'the d.c. clothesline', 'breitbart', 'bipartisan report', 'the right scoop', 'dc gazette', 'frontpage magazine', 'the gateway pundit', 'cns news', 'daily mail'} 
+% From Left-leaning:
+% {'true activist', 'bipartisan report'} → from Left:
+% True Activist https://mediabiasfactcheck.com/true-activist/ : 370 articles in NELA
+% Bipartisan Report: 4060 articles in NELA
 
 \paragraph{In other languages}
+\todo{CONTINUE HERE}
+
 https://www.mdpi.com/2306-5729/7/3/29/htm 
 https://zenodo.org/record/5828240\#.YduLv2hBxPY 
 H-Prop is the translation of a subset of QProp (28k articles out of 51k). Data of Qprop is translated with IBM Watson.
@@ -1644,6 +1741,13 @@ Is this imbalance a problem? Are the propaganda techniques used by the left and 
 \subsubsection{Populism and Propaganda by leaning}
 
 TODO: explain Why?
+
+Populism vs propaganda:
+
+As seen in Chapter~\ref{sec:lit_propaganda} the relationship between populism and propaganda is quite strong.
+
+The term ``populist” has been applied to a heterogeneous group of political groups ranging from the anti-globalization left and greens to the nationalist right.~\citep{kuzio2010populism}
+
 
 This is the continuation of Section~\ref{ssec:lp_techniques_populism_vs_propaganda} from the previous chapter. Now that we introduced the leaning and the problem of unbalance, we are going to break down the analysis with respect to the political leaning of the speeches.
 % Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
