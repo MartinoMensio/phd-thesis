@@ -1642,7 +1642,7 @@ We retrieved the details of these sources, and discovered that 85\% of the sourc
 \begin{figure}[!htb]
    \centering
    \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
-   \caption{MBFC dataset analysis across leaning}
+   \caption{MBFC dataset analysis: sources across leaning}
    \label{fig:mbfc_across_leaning}
 \end{figure}
 
@@ -1682,57 +1682,106 @@ As we can see in Figure~\ref{fig:mbfc_across_leaning}, this dataset is very imba
 % Bipartisan Report: 4060 articles in NELA
 
 \paragraph{In other languages}
-\todo{CONTINUE HERE}
 
-https://www.mdpi.com/2306-5729/7/3/29/htm 
-https://zenodo.org/record/5828240\#.YduLv2hBxPY 
-H-Prop is the translation of a subset of QProp (28k articles out of 51k). Data of Qprop is translated with IBM Watson.
-The data, therefore, is still right-leaning.
+We also analysed other datasets of propaganda that we found occurring for other languages, to see if this imbalance also exists in other countries and languages.
+
+
+% https://www.mdpi.com/2306-5729/7/3/29/htm 
+% https://zenodo.org/record/5828240\#.YduLv2hBxPY 
+First of all, we find two datasets in Hindi: \textbf{H-Prop} and \textbf{H-Prop-News}~\citep{chaudhari2022h,chaudhari_deptii_2022_5828240}.
+The first one, \textbf{H-Prop}, is the translation of a subset of QPROP. The authors translated 28k articles (out of 51k total) with IBM Watson, and built this dataset. It has the same features as QPROP, and given that QPROP had no articles coming from the Left or Center, H-Prop also does not. The data, therefore, is still unbalanced.
 
 H-Prop-News instead is scraped from 30+ prominent Hindi News websites. The labeling was done by human annotators and the inter-annotator agreement using Cohen’s Kappa measure observed is 0.81.
 
-\todo{copy table}
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{c|r|r|P{0.23\textwidth}|c}
+        source & \#non-prop articles & \#prop articles & MBFC leaning & MBFC link \\
+        \hline
+        Amar Ujala & 360 & 244 & \multirow{3}{=}{\setlength\parskip{\baselineskip}Right? in the top 4 controlling Indian media (right)} & \multirow{3}{*}{\href{https://mediabiasfactcheck.com/india-media-profile/}{india-media-profile}} \\
+        Bhaskar & 293 & 204 &  &  \\
+        Dainik Jagran & 269 & 238 &  &  \\
+        \hline
+        One India & 166 & 120 & Left-center & \href{https://mediabiasfactcheck.com/oneindia/}{oneindia}  \\
+        Zee News & 150 & 85 & ? & \\
+        Patrika & 133 & 347 & ? & \\
+        News On AIR & 131 & 20 & ? & \\
+        India & 130 & 78 & right-center & \href{https://mediabiasfactcheck.com/india-com/}{india-com}  \\
+        Punjab Kesari & 121 & 78 & ? & \\
+        Dainik Tribune & 114 & 79 & ? & \\
+        Khas Khabar & 111 & 63 & ? & \\
+        TV9 Hindi & 111 & 99 & ? & \\
+        Samay Live & 107 & 111 & ? & \\
+        Lokmat News & 95 & 52 & ? & \\
+        Tehelka Hindi & 77 & 156 & ? & \\
+        ABP Live & 76 & 40 & ? & \\
+        Dainik Navjyoti & 78 & 56 & ? & \\
+        Pratahkal & 63 & 85 & ? & \\
+        Jansatta & 61 & 93 & ? & \\
+        Asianet News & 51 & 21 & ? & \\
+        BBC Hindi & 36 & 21 & ? & \\
+        Nai Duniya & 32 & 15 & ? & \\
+        Oulook Hindi & 25 & 54 & ? & \\
+        Univarta & 16 & 3 & ? & \\
+        The Quint & 15 & 28 & left-center &\href{https://mediabiasfactcheck.com/the-quint/}{the-quint} \\
+        Bebak Post & 12 & 16 & ? & \\
+        The Wire & 12 & 34 & left-center &\href{https://mediabiasfactcheck.com/the-wire-india/}{the-wire-india} \\
+        Live Hindustan & 11 & 8 & ? & \\
+        Aaj Tak & 10 & 168 & ? & \\
+        DW & 9 & 1 & ? & \\
+        Times Now & 5 & 8 & ? & \\
+        India TV & 0 & 5 & right-center &\href{https://mediabiasfactcheck.com/india-tv/}{india-tv} \\
+        
+    \end{tabular}
+}
+    \caption{H-Prop-News dataset analysis across leaning}
+    \label{tab:hpropnews_across_leaning}
+\end{table}
 
-Unbalance analysis
-H-Prop: Same as QProp: Apart from 3 sources (not found/unknown bias), they are all extreme right sources
-H-Prop-News: not enough information available on the leaning of the news sources (MBFC / allsides / adfontesmedia). But from the few data points available, this dataset looks balanced in terms of leaning
+% Unbalance analysis
+We can see in Table~\ref{tab:hpropnews_across_leaning}, that the labelling did not occur at the source level, but at the article level. In fact, for each source there are both propagandistic and non-propagandistic articles.
+For the leaning, we see that for most of the sources we do not have enough information, as MBFC, AllSides and AdFontesMedia do not provide informationo about them. But from the few data points available, this dataset looks more balanced in terms of leaning.
 
 
+% Czech Newspaper texts Propaganda
+The next dataset that we found in other languages is published in~\citet{baisa2019benchmark}.
+% Data not published online
+The dataset is composed of news articless coming from four news sources: sputnik.cz, parlamentnilisty.cz, ac24.cz and www.svetkolemnas.info. For these four sources, we could only find some information about Sputnik which is annotated as \href{https://mediabiasfactcheck.com/sputnik-news/}{right-center from MBFC}.
+% Unbalance analysis
+So it becomes difficult to understand if there is some imbalance or not.
+This dataset contains also fine-grained annotations of the techniques, and they are contextualised to the situation in Czech Republic.
+% As anotherList of techniques is different from Di Martino 2019, interesting
+% 1 source out of 4 is from right, the others are unknown. So it may be unbalanced?
 
-Czech Newspaper texts Propaganda
-https://aclanthology.org/R19-1010.pdf
-Data not found online, but the paper says “The newspaper texts were extracted from four newspaper media domains”: 
-\todo{copy table}
-List of techniques is different from Di Martino 2019, interesting
-Unbalance analysis
-1 source out of 4 is from right, the others are unknown. So it may be unbalanced?
+We also found other datasets related to China or to the Russo-Ukrainian conflict, but they do not contain information about the political leaning so we had to discard them from our analysis.
 
-\paragraph{Other corpora (not news)}
-For this set of datasets, no leaning information is available, so it’s impossible to analyse the imbalance
-PRC tweets with propaganda in china
-https://arxiv.org/pdf/2106.07544.pdf
-https://github.com/annabechang/Propaganda\_Tech\_Twitter\_PRC 
-No info on leaning, but they chose the same techniques as in Da San Martino 2019. Manual annotators (2 for each tweet)
-Reddit pro-China vs neutral
-https://arxiv.org/pdf/2108.12269.pdf 
-No data public?
-Russia-Ukraine tweets
-https://arxiv.org/pdf/2203.02955.pdf 
-Data: https://github.com/ehsanulhaq1/russo\_ukraine\_dataset 
-No explicit encoding of propaganda, it’s just a collection of tweets related to a list of keywords/mentions, so this dataset is not useful
-PropaNews
-https://arxiv.org/pdf/2203.05386.pdf
-Data not yet published (paper from March 2022)
-Data contains generated articles that are loaded with propaganda techniques. Keep an eye on this if released
-Russia-ukraine VK
-https://www.kaggle.com/datasets/ustyk5/war-in-ukraine-russian-social-network-discussions 
-It’s in russian. Open challenge for Kaggle community
-Russian propaganda from EuVsDisinfo
-https://www.kaggle.com/datasets/stevenpeutz/misinformation-fake-news-text-dataset-79k?select=EXTRA\_RussianPropagandaSubset.csv 
-This file “EXTRA” contains data from EuVsDisinfo and is labelled as misinformation/propaganda (not distinguished).
+% \paragraph{Other corpora (not news)}
+% For this set of datasets, no leaning information is available, so it’s impossible to analyse the imbalance
+% PRC tweets with propaganda in china
+% https://arxiv.org/pdf/2106.07544.pdf
+% https://github.com/annabechang/Propaganda\_Tech\_Twitter\_PRC 
+% No info on leaning, but they chose the same techniques as in Da San Martino 2019. Manual annotators (2 for each tweet)
+% Reddit pro-China vs neutral
+% https://arxiv.org/pdf/2108.12269.pdf 
+% No data public?
+% Russia-Ukraine tweets
+% https://arxiv.org/pdf/2203.02955.pdf 
+% Data: https://github.com/ehsanulhaq1/russo\_ukraine\_dataset 
+% No explicit encoding of propaganda, it’s just a collection of tweets related to a list of keywords/mentions, so this dataset is not useful
+% PropaNews
+% https://arxiv.org/pdf/2203.05386.pdf
+% Data not yet published (paper from March 2022)
+% Data contains generated articles that are loaded with propaganda techniques. Keep an eye on this if released
+% Russia-ukraine VK
+% https://www.kaggle.com/datasets/ustyk5/war-in-ukraine-russian-social-network-discussions 
+% It’s in russian. Open challenge for Kaggle community
+% Russian propaganda from EuVsDisinfo
+% https://www.kaggle.com/datasets/stevenpeutz/misinformation-fake-news-text-dataset-79k?select=EXTRA\_RussianPropagandaSubset.csv 
+% This file “EXTRA” contains data from EuVsDisinfo and is labelled as misinformation/propaganda (not distinguished).
 
 \subsubsection{Hypothesis}
-From this view on the computational detection resources, we recognise a quite strong skew over right-leaning sources. We want to understand if propaganda can be also detected on sources from the left and centre.
+From this view on the computational detection resources, we recognise a quite strong skew over right-leaning sources that is happening in the English-based datasets. We want to understand if propaganda can be also detected on sources from the left and centre.
 Is this imbalance a problem? Are the propaganda techniques used by the left and the right actually different, or they are the same and the only thing that changes is the goal of using propaganda?
 
 \todo{continue importing and fixing}
