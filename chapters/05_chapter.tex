@@ -1,5 +1,8 @@
 \label{chap:political_sides}
 
+
+% \input{mindmaps/chapter_5_mindmap.tex}
+
 \section{\statusorange Introduction}
 
 % In this chapter we investigated the persuasion techniques. But we have not studied the relationship between this observed persuasion in the text and the ideals/agenda/perspective of the author/outlet. It can be really useful to understand the context around the source of an article in order to interpret its persuasion.
@@ -28,7 +31,7 @@ In this chapter, we find that:
 \begin{enumerate}
     \item Persuasion is used by every political leaning. With sentiment, it is more difficult to find differences as the statistical distributions are quite similar across political leaning. With propaganda, we see different usage in the quantities of techniques used in the articles, and also some term differences between left and right.
     \item By looking at propaganda features only, it is quite difficult to recognise the leaning of a news article. However, when combining the propaganda features together with the baseline features, we can improve slightly the results (but not significantly)
-    \item Propaganda datasets are very unbalanced. Most of the annotated sources and articles are coming from the political right. This may cause problems in the detection of left-leaning propaganda. With unbalanced models, we still detect left-leaning propaganda, but we have no idea whether the detection is accurate.
+    \item Propaganda datasets are very imbalanced. Most of the annotated sources and articles are coming from the political right. This may cause problems in the detection of left-leaning propaganda. With imbalanced models, we still detect left-leaning propaganda, but we have no idea whether the detection is accurate.
 \end{enumerate}
 
 For this chapter, we follow the structure from the previous one~\ref{chap:linguistic_persuasion}:
@@ -220,7 +223,7 @@ The results of Table~\ref{tab:results_rq123} show that the baseline we reproduce
 
 % Being this dataset much smaller than the reference one, we performed a second data collection which this time considers also articles that are annotated singularly, not in groups of three as before.\footnote{\url{https://www.allsides.com/unbiased-balanced-news}}.
 % This second dataset collected instead has a size of 60k articles.
-% The main difference with the first one is that the articles are not grouped in triples of Left/Center/Right. This results in the 60k dataset being much more unbalanced than the 13k (which still is a bit unbalanced because not exactly all the groups keep the balance).
+% The main difference with the first one is that the articles are not grouped in triples of Left/Center/Right. This results in the 60k dataset being much more imbalanced than the 13k (which still is a bit imbalanced because not exactly all the groups keep the balance).
 
 % The third dataset is coming from~\citet{baly2020we} through the official GitHub repository \url{https://github.com/ramybaly/Article-Bias-Prediction}. We observe that there are some differences with what is stated in their paper, as can be seen in table~\ref{tab:baly_size}. What probably happened is that the authors kept collecting more articles.
 
@@ -242,7 +245,7 @@ The results of Table~\ref{tab:results_rq123} show that the baseline we reproduce
 % Now, by comparing the two different datasets collected with the dataset from~\cite{baly2020we}, Figure~\ref{fig:venn} shows that the 13k and Baly are mostly balanced subsets of the 60k.
 % Although the URLs of the articles in the Baly dataset are a subset of the URLs of the articles in our datasets (13k and 60k), the texts of the articles do not match: the data cleaning of \texttt{Baly} is different and better than our data cleaning (e.g. removing non-article content), and having different texts makes the propaganda annotations differ slightly.
 
-% The last dataset considered is derived from the 60k, by keeping it balanced between target labels. Since the smaller group (Center) has 11309 articles, we limited the articles from the Left and Right to contain 11309 articles too, through random selection. We will compare the results of the unbalanced 60k with the balanced 60k.
+% The last dataset considered is derived from the 60k, by keeping it balanced between target labels. Since the smaller group (Center) has 11309 articles, we limited the articles from the Left and Right to contain 11309 articles too, through random selection. We will compare the results of the imbalanced 60k with the balanced 60k.
 
 % TODO: only table or only histogramm
 % \begin{figure}[!htb]
@@ -299,7 +302,7 @@ For this reason, we are combining the two analyses with the following experiment
 \begin{enumerate}
     \item Analysis of persuasion features across the political spectrum: we want to understand if we can see some difference between the persuasion means of left, center and right (Section~\ref{ssec:ps_prop_leaning_across}). We are able to identify some differences both in the quantity of specific techniques, and in the terms used.
     \item Prediction of the political leaning using persuasion features. Can machine learning models differentiate between propaganda and sentiment from left and right? (Section~\ref{ssec:ps_prop_leaning_classifier}) The motivation of this experiment is that we are able to see some differences from the previous experiment, and therefore we want to see if also machine learning classifiers can differentiate and how well. We find that it is possible to classify the leaning of news articles based on their use of propaganda, but that it is quite hard to be better than classifiers based on the full text of the articles. 
-    \item Are the current propaganda datasets unbalanced? (Section~\ref{ssec:ps_prop_leaning_unbalanced}). Given that the results of both previous experiments (manual and automated) are dependent on the quality of the automated propaganda detection, in this last experiment of the chapter we do an analysis of the imbalance of the data that was used to train the propaganda detector. We find that in most of the cases, propaganda examples come from Right-leaning sources and the Left and Center are underrepresented.
+    \item Are the current propaganda datasets imbalanced? (Section~\ref{ssec:ps_prop_leaning_imbalanced}). Given that the results of both previous experiments (manual and automated) are dependent on the quality of the automated propaganda detection, in this last experiment of the chapter we do an analysis of the imbalance of the data that was used to train the propaganda detector. We find that in most of the cases, propaganda examples come from Right-leaning sources and the Left and Center are underrepresented.
 \end{enumerate}
 
 \subsection{\statusgreen Persuasion across the political spectrum}
@@ -413,7 +416,7 @@ The same pattern occurs with \texttt{Slogans}. We can link this with the abundan
 % Reversed U
 Another pattern that we see, is the opposite of the first one: \emph{reversed-U shape}. This is characterised by a higher use in the Center than in the extremes.
 It represents techniques that are used to moderate more and may have a balancing intent.\todomargin{?}
-We can see this pattern with the techniques \texttt{Appeal\_to\_fear-prejudice} and \texttt{Appeal\_to\_authority}. While for the first one, it is unbalanced (highest value center, then Right and then quite less Left), in the second case this is more balanced (Left and Right have similar values).
+We can see this pattern with the techniques \texttt{Appeal\_to\_fear-prejudice} and \texttt{Appeal\_to\_authority}. While for the first one, it is imbalanced (highest value center, then Right and then quite less Left), in the second case this is more balanced (Left and Right have similar values).
 
 \subsubsection{Comparing propaganda-term importance across leaning}
 We then move to the term analysis, to see if we can find any differences in the specific terms used by each leaning.
@@ -901,7 +904,7 @@ In summary, the answer to RQ2.1 is \textbf{No, the total amount of propaganda in
 %      \begin{subfigure}[b]{0.45\linewidth}
 %          \centering
 %          \includegraphics[width=\linewidth]{figures/nodes_stratified_confusion_matrix_propaganda_total_percentage.pdf}
-%          \caption{Unbalanced 60k}
+%          \caption{imbalanced 60k}
 %          \label{fig:total_prop_confusion_60k}
 %      \end{subfigure}
 %     %  \hfill
@@ -1043,7 +1046,7 @@ The improved generalisation abilities of this feature is perhaps what is driving
     %  \begin{subfigure}[b]{0.45\linewidth}
     %      \centering
     %      \includegraphics[width=\linewidth]{figures/nodes_stratified_confusion_matrix_propaganda_percentages.pdf}
-    %      \caption{Unbalanced 60k}
+    %      \caption{imbalanced 60k}
     %      \label{fig:prop_tech_confusion_60k}
     %  \end{subfigure}
     % %  \hfill
@@ -1073,7 +1076,7 @@ The improved generalisation abilities of this feature is perhaps what is driving
 
 % confusion matrix
 Figure~\ref{fig:prop_tech_confusion} is the confusion matrix for the classifier using the \texttt{Prop-Techniques} feature alone. It shows that the situation is very similar to the previous experiment. More articles are predicted as being Right-leaning with respect to the other two classes. %, because it is the most represented class.
-% From the unbalanced situation in \ref{fig:prop_tech_confusion_60k}, where the articles were generally predicted to be Left leaning, the subfigure \ref{fig:prop_tech_confusion_60k_balanced} shows that after the correction most of the articles are classified on the Centre.
+% From the imbalanced situation in \ref{fig:prop_tech_confusion_60k}, where the articles were generally predicted to be Left leaning, the subfigure \ref{fig:prop_tech_confusion_60k_balanced} shows that after the correction most of the articles are classified on the Centre.
 If we compare the subfigures~\ref{fig:prop_tech_confusion_baly_random} and~\ref{fig:prop_tech_confusion_baly_media}, we see that they are quite similar (F1 and accuracy are very similar too). The only difference is that the Media split predictions are a bit more Right-leaning biased, resulting in lower local F1 for Left and Centre.
 
 \begin{figure}[!htb]
@@ -1135,7 +1138,7 @@ On the other hand, the feature \texttt{Prop-Techniques-Terms} (3b) refers to spl
 % %TODO: SUBFIGURE DIFFERENCE a/b is NOT RELEVANT. 
 % \textcolor{red}{unclear what we learn from this particular confusion matrix. either explain or remove it.  }
 
-% On the unbalanced dataset, the class that has more errors is the Center and the Left side is the most correct, while in the balanced the main diagonal is able to emerge a bit from the other values. On the balanced dataset there is a small bias of the model to say the articles are Right leaning.
+% On the imbalanced dataset, the class that has more errors is the Center and the Left side is the most correct, while in the balanced the main diagonal is able to emerge a bit from the other values. On the balanced dataset there is a small bias of the model to say the articles are Right leaning.
 % The results and confusion matrix are very similar between the feature (3a) and (3b).
 
 % \begin{figure}[!h]
@@ -1143,7 +1146,7 @@ On the other hand, the feature \texttt{Prop-Techniques-Terms} (3b) refers to spl
 %      \begin{subfigure}[b]{0.45\linewidth}
 %          \centering
 %          \includegraphics[width=\linewidth]{figures/nodes_stratified_confusion_matrix_propaganda_tf_idf.pdf}
-%          \caption{Unbalanced 60k}
+%          \caption{imbalanced 60k}
 %          \label{fig:terms_confusion_60k}
 %      \end{subfigure}
 %     %  \hfill
@@ -1310,7 +1313,7 @@ For example, the same words can be used with different meaning/targets (e.g. ``e
 
 % Limitations
 \noindent\textbf{Bias in propaganda detection}: One limitation is that only articles from the Right political spectrum were used for training the propaganda detection tool provided in \cite{da2019fine}. %, which we use in our analysis. 
-As we saw in our first experiment, propaganda is not limited to any particular political leaning. Therefore, propaganda annotations and model training should be less biased to a particular political leaning, and propaganda from all political directions should be used to train such models in the future, which is likely to enhance our results given our balanced dataset. We analyse this limitation in the next experiment in Section~\ref{ssec:ps_prop_leaning_unbalanced}.
+As we saw in our first experiment, propaganda is not limited to any particular political leaning. Therefore, propaganda annotations and model training should be less biased to a particular political leaning, and propaganda from all political directions should be used to train such models in the future, which is likely to enhance our results given our balanced dataset. We analyse this limitation in the next experiment in Section~\ref{ssec:ps_prop_leaning_imbalanced}.
 
 \noindent\textbf{Baseline In/Comparability}: %with the real baseline of~\cite{baly2020we}.
 As noted in Section~\ref{ssec:exp_leaning}, the shared dataset by \citet{baly2020we} differs from the one described in their paper, producing incompatibility issues between our results and theirs. %the ones they report.
@@ -1381,30 +1384,72 @@ The appearance of propaganda, and the techniques used, showed not to be sufficie
 
 
 \subsection{\statusorange Imbalance of Propaganda datasets}
-\label{ssec:ps_prop_leaning_unbalanced}
+\label{ssec:ps_prop_leaning_imbalanced}
 
-% exp 8: propaganda datasets are unbalanced
+% exp 8: propaganda datasets are imbalanced
 
 % motivation
 % By seeing the results of the two previous experiments, we
-
-\todo{take key concepts from here, place them in the introduction below and remove this with the heading of "introduction"}
-
-Idea: from the propaganda detection tool, we saw that the data it’s trained on considers propaganda mainly from Right-leaning sources. But propaganda is common in every political leaning (literature) and also our experiment detected propaganda from every leaning. So we want to explore this gap between socio-political works (where propaganda is described as coming from every political leaning) and computational detection of propaganda (only targeted at recognising right-leaning).
+In this section, we analyse whether the datasets, used for training propaganda recognition models, are balanced or not across political leaning.
 
 
-
-RQ3: \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
-
-
-- Possible problems?
-A possible problem of this approach that is not defended in the paper, is the choice of articles that have been annotated by experts. They have been selected from sources "propagandistic by Media Bias/Fact Check", in other words from the page \url{https://mediabiasfactcheck.com/fake-news/}. The propagandistic sources listed in this page, as Figure~\ref{fig:mbfc_leaning} shows, are mostly on the extreme-right side of the spectrum. Furthermore, the selection done by the authors (table 3 of that paper) results in all the sources of the articles to lean on the right.
-So the resulting model is \textbf{being trained on very propagandistic sources from the right only}. The model will not be able to see left-propaganda because it never saw it in the training phase.
-
-\subsubsection{Introduction}
 
 % Orientation: Importance of propaganda computational studies
-Over the last decades, several works have started addressing the recognition of propaganda techniques in text. A lot of progress has been done already, from the detection of propaganda at the document level to fine-grained technique analysis. But there is a limitation of these computational studies: they target just a subset of the propaganda, specifically the one from the extreme-right. %(based on the US context).
+Over the last decades, several works have started addressing the recognition of propaganda techniques in text. A lot of progress has been done already, from the detection of propaganda at the document level to fine-grained technique analysis. %But there is a limitation of these computational studies: they target just a subset of the propaganda, specifically the one from the extreme-right.
+At the same time, we see that the literature, especially in socio-political works, refers to a very similar concept, \emph{populism}~\citep{tumber2021routledge,pasquino2008populism}, and this concept is placed in context with several political leanings.
+
+
+% RATIONALE
+%Therefore, we want to address a gap between the historical socio-political works about populism, which find populism all over the political spectrum, and the computational studies to detect propaganda, which seem to have a much narrower view in the current situation.
+%While it is common knowledge ??? that propaganda appears in different socio-political contexts, the computational approaches and datasets available currently have a narrower view.
+% This view is currently linked to extreme-right leaning news sources, at the border with misinformation
+% This view is linked to the US context of recent years and therefore it’s manifesting in the link between propaganda and far-right ideology (JUSTIFY THIS).
+
+% Aim
+Therefore, we want to study how the current datasets of propaganda are distributed across political leaning, and see if there is some imbalance in the datasets. 
+Relying on the wider literature about populism, we want to see how these two phenomena are related by performing a correlation analysis.
+Being automated propaganda detection a quite recent task, we want to perform this correlation analysis to test our hypothesis that they are related. 
+%In this way, we can see if there are some discrepancies between populism existing from all political leanings, an
+% if we find that the propaganda datasets are imbalanced while the populism literature shows that 
+If they show to be related, then both propaganda and populism should be distributed in a similar way across the political spectrum.
+
+% Our aim is to analyse how observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion device.
+% And also to 
+
+
+
+The research question that we aim to answer in this section is RQ3: \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
+
+In order to answer it, we find that we need to rely on the external concept of populism, and therefore we also need to analyse \emph{How strongly is propaganda related to populism?}
+
+
+
+
+% \todo{take key concepts from here, place them in the introduction below and remove this with the heading of "introduction"}
+
+% Idea: from the propaganda detection tool, we saw that the data it’s trained on considers propaganda mainly from Right-leaning sources. But propaganda is common in every political leaning (literature) and also our experiment detected propaganda from every leaning. So we want to explore this gap between socio-political works (where propaganda is described as coming from every political leaning) and computational detection of propaganda (only targeted at recognising right-leaning).
+
+
+
+
+
+
+Our narrative for this section proceeds with the following points:
+
+\begin{enumerate}
+    \item Conceptual similarities and differences between \textit{propaganda and populism}: not much literature exists considering propaganda and political leaning. At the same time, we see a lot of publications that refer to a similar concept, populism, that is being observed and studied across countries and political ideologies. We show the differences and similarities between these two concepts, and why we hypothesise that they are related.
+    \item Populism across many contexts of the left and right: we present some contexts where populism is being studied, belonging to different political ideologies and leanings.
+    \item Propaganda dataset analysis: we analyse the (im)balance of propaganda datasets, showing how the majority of them is derived from MBFC that is already imbalanced and during the sampling some categories of leanings disappear completely.
+    \item Correlation between propaganda and populism: here we test our hypothesis with correlation analysis. With a dataset that contains speeches with leaning and populism information, we analyse the speeches with propaganda analysis to see the correlation between the detected propaganda techniques against the populism annotations. We also do a breakdown by leaning to see in which leaning the correlation is stronger.
+    \item Reflections: we sum up and discuss the discoveries of this analysis.
+\end{enumerate}
+
+Each of the following subsections contains one of these steps.
+
+% \subsubsection{Introduction}
+
+% % Orientation: Importance of propaganda computational studies
+% Over the last decades, several works have started addressing the recognition of propaganda techniques in text. A lot of progress has been done already, from the detection of propaganda at the document level to fine-grained technique analysis. But there is a limitation of these computational studies: they target just a subset of the propaganda, specifically the one from the extreme-right. %(based on the US context).
 
 % Propaganda is strongly linked to argumentation and rhetorics, it's the art of persuading listeners. And it has always been used by the state, media and political figures as a tool to convince the audience.
 
@@ -1412,34 +1457,34 @@ Over the last decades, several works have started addressing the recognition of 
 
 
 
-% RATIONALE
-Therefore, we want to address a gap between the historical socio-political works about propaganda, which find propaganda and populism all over the political spectrum, and the computational studies to detect propaganda, which seem to have a much narrower view in the current situation.
-While it is common knowledge that propaganda appears in different socio-political contexts, the computational approaches and datasets available currently have a narrower view.
-This view is currently linked to extreme-right leaning news sources, at the border with misinformation
+% % RATIONALE
+% Therefore, we want to address a gap between the historical socio-political works about propaganda, which find propaganda and populism all over the political spectrum, and the computational studies to detect propaganda, which seem to have a much narrower view in the current situation.
+% While it is common knowledge that propaganda appears in different socio-political contexts, the computational approaches and datasets available currently have a narrower view.
+% This view is currently linked to extreme-right leaning news sources, at the border with misinformation
 % This view is linked to the US context of recent years and therefore it’s manifesting in the link between propaganda and far-right ideology (JUSTIFY THIS).
 
 
-% Aim
-Our aim is to observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion device.
+% % Aim
+% Our aim is to observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion device.
 
-% RQ
-The Research Question RQ3 is \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
-are the following:
+% % RQ
+% The Research Question RQ3 is \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
+% are the following:
 
 % (Why is computational research targeted against right-leaning propaganda? Is it a matter of quantity/context?) → related works
 % Can we detect propaganda also in left and centre leanings? With a tool that is trained on right-leaning propaganda?
 % How different is the detected propaganda across the political spectrum?
 
 % RQ3.1: How different is the detected propaganda across the political spectrum? --> already answered in 5.3.1
-RQ3.2: Which generalisation problems can arise when applying a propaganda detection tool outside the usually-targeted extreme-right leaning?
+% RQ3.2: Which generalisation problems can arise when applying a propaganda detection tool outside the usually-targeted extreme-right leaning?
 
 
 
-% Method
-1. statistically it is all across
-2. automatic classification of leaning based on propaganda features is not very good
+% % Method
+% 1. statistically it is all across
+% 2. automatic classification of leaning based on propaganda features is not very good
 
---> there should be some problems in the propaganda features
+% --> there should be some problems in the propaganda features
 
 % For our experiment we use a propaganda annotation tool which tells the single detected words and the specific techniques used. By having this fine-grained analysis, we can do a quantity and term analysis across external dimensions, such as political leaning in this case.
 
@@ -1459,9 +1504,22 @@ RQ3.2: Which generalisation problems can arise when applying a propaganda detect
 % Interpretation
 % This means that we need more diversity of propaganda examples in order to be more generic than the specific US-based propaganda.
 
+\subsubsection{Populism and Propaganda}
 
-\subsubsection{Propaganda across all political contexts}
-This subsection’s question: in which political contexts have propaganda shown?
+As seen in Chapter~\ref{sec:lit_propaganda} the relationship between populism and propaganda is quite strong.
+
+concept from the literature that is shown to be close to persuasion and propaganda: \gls{populism}~\citep{tumber2021routledge,pasquino2008populism}.
+
+% concepts
+On the conceptual level, propaganda and populism are two separate concepts. The first describes more the persuasion means used to push for an agenda, while the second one is usually used more together with the actor that wants to push the agenda. Populism is ``a type of politics that claims to represent the opinions and wishes of ordinary people".\footnote{\url{https://www.oxfordlearnersdictionaries.com/definition/english/populism}}
+And to be on the side of ordinary people, it uses propaganda as a mean to persuade. So a populistic \emph{actor} uses propaganda \emph{techniques}. % Conceptually, they are related.
+
+Populism is often defined on political speeches from political leaders. Most of the existing datasets are a collection of public speeches that come from public representatives.
+As an example, we see that CITE DATASET
+
+
+\subsubsection{Populism across all political contexts}
+This subsection’s question: does populism exist in political contexts all across the spectrum?
 
 
 Listed in \citet{woolley2018computational} we have several contexts. 
@@ -1475,10 +1533,10 @@ A few examples:
     \item Ukraine: where two major sources of propaganda have been in recent years the Russian propaganda on one side, and the counter-propaganda from patriotic Ukraine. A propaganda war, that lives inside the current conflict. And it crosses many times the border between persuasion and misinformation, with many stories shared with the intent to deceive and rewrite the narrative.
     \item Canada --> right-wing populism has roots from the 1970s with the \emph{western alienation}~\citep{henry2000revisiting}, and keeps up to recent times with political parties as the \emph{People's Party} which has self-described as ``smart populism"
     \item Poland --> Right-wing
-    \item Taiwan --> RIght-wing
+    \item Taiwan --> Right-wing
     \item Brazil --> Right-wing Bolsonaro and Left-wing Lulism
-    \item Germany → ”skeptical political zeitgeist” suspicious of political elites and establishment. Right-wing populist movements: anti-immigration. Historically: nazi propaganda in WWII, anti-communist propaganda during Cold War, anti russian-propaganda recently.
-    \item United States → mostly about Trump coverage in the news (elections campaigns 2016 Trump-Clinton / presidency)
+    \item Germany → ”skeptical political zeitgeist” suspicious of political elites and establishment. Right-wing populist movements: anti-immigration. Historically: nazi propaganda in WWII, anti-communist propaganda during Cold War (right), anti-russian propaganda recently (left).
+    \item United States → mostly about Trump coverage in the news (elections campaigns 2016 Trump-Clinton / presidency) (right)
     \item China
 \end{itemize}
 
@@ -1493,8 +1551,9 @@ and \url{https://en.wikipedia.org/wiki/Left-wing_populism#By_country}
 \subsubsection{Corpuses for propaganda detection}
 
 We take a look at the available datasets of annotated instances of propaganda.
-Our goal is to underline that most of the data belongs to right-leaning sources (extreme, not moderate).
-The gap is that the extreme left is usually not considered.
+Our goal is to find if there are some overall trends, for example a big imbalance considering the political leaning.
+% underline that most of the data belongs to right-leaning sources (extreme, not moderate).
+% The gap is that the extreme left is usually not considered.
 
 TSHP, QProp and PTC are mentioned in \cite{da2020survey}.
 
@@ -1549,12 +1608,13 @@ The first dataset is TSHP-17, which was published in the work of~\citet{rashkin2
 % The Xinhua News Agency English Service: left https://mediabiasfactcheck.com/xinhua-news-agency/ 
 
 
-% Unbalance analysis
+% imbalance analysis
 % Propaganda sources → quite balanced
 % Hoax: mainly extreme-right
 % Trusted news: left-center
 We can see in Table~\ref{tab:tshp17_across_leaning} that the propaganda sources are quite balanced for this dataset, as we have one source that is labelled as ``far right" and one as ``left".
-This may be one of the only datasets that include also left-leaning propaganda. However, it is not annotated at the technique-level but only at the source level.
+% may be one of the only
+This dataset includes propaganda from both political-leanings and therefore we consider it as balanced. However, it is not annotated at the technique-level but only at the source level.
 
 
 \paragraph{QPROP corpus}
@@ -1591,13 +1651,13 @@ For the propaganda class instead, we have the breakdown of the sources considere
     \label{tab:qprop_across_leaning}
 \end{table}
 
-% Unbalance analysis
+% imbalance analysis
 We can see that all the sources, with the exception of three of them (two without leaning annotation, and one with only the votes from MBFC viewers), are rated as having a \emph{extreme right} leaning.
 % Apart from 3 sources (not found/unknown bias), they are all extreme right sources.
 
 \paragraph{PTC corpus}
-This dataset comes from another work by the same research group.
-With respect to the previous datasets, this one has fine-grained annotations of the specific propaganda techniques. The work of~\citet{da2019fine} is our reference for our experiments from Chapter~\ref{ssec:lp_techniques_propaganda} and is the ones that differentiates between 18 different propaganda techniques.
+This dataset comes from another work by the same research group as the previous QPROP.
+With respect to the previous datasets, this one has fine-grained annotations of the specific propaganda techniques. The dataset is presented in~\citet{da2019fine}, that is also our reference for our experiments from Chapter~\ref{ssec:lp_techniques_propaganda} and is the ones that differentiates between 18 different propaganda techniques.
 Table~\ref{tab:ptc_across_leaning} shows the sources that were used to build this dataset. We can notice that most of the sources are the same as in the previous QPROP. But this time the number of articles is much smaller because the annotations have been performed with much higher granularity (not at the source-level but at the technique-level with specific words annotated).
 % is the one from Da San Martino 2019 https://aclanthology.org/D19-1565.pdf that the tool is trained on.
 % Annotation guidelines: https://aclanthology.org/D19-1565/ (in the attachment)
@@ -1629,14 +1689,14 @@ Table~\ref{tab:ptc_across_leaning} shows the sources that were used to build thi
     \label{tab:ptc_across_leaning}
 \end{table}
 
-% Unbalance analysis
+% imbalance analysis
 This dataset suffers, as the previous one, of a high imbalance of the leaning of the sources included.
 % Apart from 3 sources (not found/unknown bias), they are all extreme right sources. (sources very similar to the ones from QPROP, the dataset is from the same research group)
 
 \paragraph{Media Bias/Fact Check propaganda}
-As both the previous QPROP and PTC are derived from the a subset of MBFC propaganda sources, we went and analysed the full MBFC propaganda subset.
+As both the previous QPROP and PTC are derived from the a subset of MBFC propaganda sources, we analysed the full MBFC propaganda subset.
 
-“Propagandist sources” (also selected from here for Qprop and PTC), are listed in the MBFC under the name ``questionable sources".
+“Propagandist sources” (also selected from here for Qprop and PTC), are listed in the MBFC under the name \href{https://mediabiasfactcheck.com/fake-news/}{``questionable sources"}.
 We retrieved the details of these sources, and discovered that 85\% of the sources that have ``propaganda" in the label are from the Right.
 
 \begin{figure}[!htb]
@@ -1646,9 +1706,14 @@ We retrieved the details of these sources, and discovered that 85\% of the sourc
    \label{fig:mbfc_across_leaning}
 \end{figure}
 
-% Unbalance analysis
+% imbalance analysis
 % Most of the propagandist sources are from the right. But at the same time, PTC and QPROP selected only from the right. Ignoring the 15% from left/center.
 As we can see in Figure~\ref{fig:mbfc_across_leaning}, this dataset is very imbalanced. But what is even more imbalanced, is the selection that was done by the creators of PTC and QPROP, completely excluding left-leaning and center sources (15\% totally underrepresented).
+
+% - Possible problems?
+% A possible problem of this approach %that is not defended in the paper, 
+% is the choice of articles that have been annotated by experts. They have been selected from sources "propagandistic by Media Bias/Fact Check", in other words from the page \url{https://mediabiasfactcheck.com/fake-news/}. The propagandistic sources listed in this page, as Figure~\ref{fig:mbfc_leaning} shows, are mostly on the extreme-right side of the spectrum. Furthermore, the selection done by the authors (table 3 of that paper) results in all the sources of the articles to lean on the right.
+So the resulting models that use these imbalanced datasets, are \textbf{being trained on very propagandistic sources from the right only}. The models may have some problems in detecting correctly left-leaning propaganda because they never saw it in the training phase. This may be caused by different expressions or even different techniques. 
 
 % Most of them are from the far-right, but these are from Left (also there were some from the center)x2:
 % https://mediabiasfactcheck.com/basnews-agency/
@@ -1689,7 +1754,7 @@ We also analysed other datasets of propaganda that we found occurring for other 
 % https://www.mdpi.com/2306-5729/7/3/29/htm 
 % https://zenodo.org/record/5828240\#.YduLv2hBxPY 
 First of all, we find two datasets in Hindi: \textbf{H-Prop} and \textbf{H-Prop-News}~\citep{chaudhari2022h,chaudhari_deptii_2022_5828240}.
-The first one, \textbf{H-Prop}, is the translation of a subset of QPROP. The authors translated 28k articles (out of 51k total) with IBM Watson, and built this dataset. It has the same features as QPROP, and given that QPROP had no articles coming from the Left or Center, H-Prop also does not. The data, therefore, is still unbalanced.
+The first one, \textbf{H-Prop}, is the translation of a subset of QPROP. The authors translated 28k articles (out of 51k total) with IBM Watson, and built this dataset. It has the same features as QPROP, and given that QPROP had no articles coming from the Left or Center, H-Prop also does not. The data, therefore, is still imbalanced.
 
 H-Prop-News instead is scraped from 30+ prominent Hindi News websites. The labeling was done by human annotators and the inter-annotator agreement using Cohen’s Kappa measure observed is 0.81.
 
@@ -1739,7 +1804,7 @@ H-Prop-News instead is scraped from 30+ prominent Hindi News websites. The label
     \label{tab:hpropnews_across_leaning}
 \end{table}
 
-% Unbalance analysis
+% imbalance analysis
 We can see in Table~\ref{tab:hpropnews_across_leaning}, that the labelling did not occur at the source level, but at the article level. In fact, for each source there are both propagandistic and non-propagandistic articles.
 For the leaning, we see that for most of the sources we do not have enough information, as MBFC, AllSides and AdFontesMedia do not provide informationo about them. But from the few data points available, this dataset looks more balanced in terms of leaning.
 
@@ -1748,11 +1813,11 @@ For the leaning, we see that for most of the sources we do not have enough infor
 The next dataset that we found in other languages is published in~\citet{baisa2019benchmark}.
 % Data not published online
 The dataset is composed of news articless coming from four news sources: sputnik.cz, parlamentnilisty.cz, ac24.cz and www.svetkolemnas.info. For these four sources, we could only find some information about Sputnik which is annotated as \href{https://mediabiasfactcheck.com/sputnik-news/}{right-center from MBFC}.
-% Unbalance analysis
+% imbalance analysis
 So it becomes difficult to understand if there is some imbalance or not.
 This dataset contains also fine-grained annotations of the techniques, and they are contextualised to the situation in Czech Republic.
 % As anotherList of techniques is different from Di Martino 2019, interesting
-% 1 source out of 4 is from right, the others are unknown. So it may be unbalanced?
+% 1 source out of 4 is from right, the others are unknown. So it may be imbalanced?
 
 We also found other datasets related to China or to the Russo-Ukrainian conflict, but they do not contain information about the political leaning so we had to discard them from our analysis.
 
@@ -1780,25 +1845,89 @@ We also found other datasets related to China or to the Russo-Ukrainian conflict
 % https://www.kaggle.com/datasets/stevenpeutz/misinformation-fake-news-text-dataset-79k?select=EXTRA\_RussianPropagandaSubset.csv 
 % This file “EXTRA” contains data from EuVsDisinfo and is labelled as misinformation/propaganda (not distinguished).
 
-\subsubsection{Hypothesis}
-From this view on the computational detection resources, we recognise a quite strong skew over right-leaning sources that is happening in the English-based datasets. We want to understand if propaganda can be also detected on sources from the left and centre.
-Is this imbalance a problem? Are the propaganda techniques used by the left and the right actually different, or they are the same and the only thing that changes is the goal of using propaganda?
+\paragraph{Overall trend}
+From this view on the computational detection resources, we recognise a quite strong skew over right-leaning sources that is happening in the English-based datasets.
+The main reason is that the corpora are based on the already-imbalanced MBFC propaganda collection. And they push the imbalance even more, resulting in being completely imbalanced.
+This happens especially for the PTC corpus, which is the only one that provides fine-grained annotation of techniques.
 
-\todo{continue importing and fixing}
-
-
-\subsubsection{Populism and Propaganda by leaning}
-
-TODO: explain Why?
-
-Populism vs propaganda:
-
-As seen in Chapter~\ref{sec:lit_propaganda} the relationship between populism and propaganda is quite strong.
-
-The term ``populist” has been applied to a heterogeneous group of political groups ranging from the anti-globalization left and greens to the nationalist right.~\citep{kuzio2010populism}
+For other languages we do not have enough information to draw conclusions.
 
 
-This is the continuation of Section~\ref{ssec:lp_techniques_populism_vs_propaganda} from the previous chapter. Now that we introduced the leaning and the problem of unbalance, we are going to break down the analysis with respect to the political leaning of the speeches.
+
+\subsubsection{The correlation between Populism and Propaganda}
+
+% explain Why?
+At this point, having noticed the imbalance of the propaganda datasets and the ubiquitousness of populism, we need to verify or refute our hypothesis about the correlation between populism and propaganda.
+
+We need to understand the magnitude of this correlation because here in this section we are showing a discrepancy between populism (all across leaning) and propaganda datasets (mainly right-leaning).
+We hypothesise the correlation between propaganda and populism, but we need to actually analyse it.
+
+% On the experimental side, we need to verify our assumption, that we took from the literature, of \textit{the correlation between propaganda and populism}
+
+% Populism vs propaganda: seen before in
+
+% The term ``populist” has been applied to a heterogeneous group of political groups ranging from the anti-globalization left and greens to the nationalist right.~\citep{kuzio2010populism}
+
+% setup
+Therefore, we proceed with this experiment with the following setup:
+
+\begin{itemize}
+    \item identify a dataset which contains both information about populism and political leaning;
+    \item annotate such dataset with propaganda techniques;
+    \item perform correlation analysis between populism scores and propaganda techniques.
+\end{itemize}
+
+% dataset
+After looking at the available datasets for populism, we selected the dataset from~\citet{hawkins2019global} because it is quite balanced in terms of the political orientation of the actors annotated (liberal vs conservative, since it is US-based).%\todoAW{It strikes me here that this is a very US-centric interpretation of the political landscape. Do you consider whether the make up of the dataset poses any threats to validity?}
+It contains 1240 political speeches, from several countries and languages
+For each one of them there are four annotators that give a numerical score of populism in the range $[0;2]$ where $0$ means non-populistic and $2$ means very populistic. The single annotations are already averaged out.
+So from the 4961 raw rows, by deduplicating (4 annotations for each speech) we have 1240 speeches, out of which 265 are in English (then down in the rankings, 304 in Spanish and 148 in Portuguese).
+These 265 speeches all have a leaning classification (we will see more about leanings in the next chapter): 36 left, 37 center, 84 right, 106 NA. We use this information in order to check whether the results that we get are general across the political spectrum.
+
+% annotation of the dataset
+We run this dataset through the propaganda annotation tool~\citep{da2019fine}, to detect the specific propaganda techniques that have been used.
+As in the previous sections, we rely on two metrics: the total quantity of propaganda in each article, as a word-based percentage, and the quantity of each propaganda technique. % Not words? Term analysis?
+
+% correlation as Spearman's correlation
+For the correlation we want to compute how much propaganda and populism are strictly related. So we take each speech in the corpus and we proceed to compute the Spearman's correlation~\citep{spearman1910correlation} between the  populism averaged out between the annotators and different propaganda metrics: total word-based percentage of propaganda, and word-based percentage of each of the propaganda techniques. 
+
+% first overall
+% then breakdown by political leaning
+We first analyse these correlation metrics on the overall dataset, then we break down the analysis considering the labels of the political leaning of the articles.
+
+
+\paragraph{Correlation between propaganda and populism overall}
+% TODO bring \ref{ssec:lp_techniques_populism_vs_propaganda} here
+
+% from "Propaganda datasets imbalanced?"
+% What
+% In this section, we experiment with another concept from the literature that is shown to be close to persuasion and propaganda: \gls{populism}~\citep{tumber2021routledge,pasquino2008populism}. %\todoHA{Not mentioned in intro. Why not?}
+% We want to understand: what is the substantial difference between populism and propaganda? Can these two phenomena be related?
+
+% why
+% We need to understand the magnitude of this correlation because here in this section we are showing a discrepancy between populism (all across leaning) and propaganda datasets (mainly right-leaning).
+% We hypothesise the correlation between propaganda and populism, but we need to actually analyse it.
+% This question arises purely from a logistical point of view: we have automated methods for detecting propaganda, but we do not have tools to detect populism.
+% Therefore, if we can prove that populism and propaganda are actually correlated, then it becomes not important for us to be able to detect something that is very much correlated to something else that we already detect.
+
+% \todoHAinline{ok, but what would detecting populism give you? Why is this of value?}
+
+% \todoHAinline{I would start by: 1. explaining value of detecting populism. 2. detecting it and evaluating that, then 3. see if correlated with propaganda}
+
+% practically/computationally
+% On the computational/detection side, we want to see if this relationship between populism and propaganda stands.
+% So to evaluate it, we have computational approaches for propaganda detection, but not for populism detection.
+% A solution to this problem, is to use a dataset where we have the ground truth for the populism, which will be run through the propaganda detection pipeline. Then we will compute the correlation between the two, and we can establish whether this relationship is proven. The advantage of using directly the ground truth for one of the two phenomena (populism) is that we can only have errors for the propaganda detection.\todoHA{unclear} Instead, if we were to compare two predictions, the errors could be on both sides.
+
+% % dataset used
+% For this experiment, after looking at the available datasets for populism, we selected the one from~\citet{hawkins2019global} because it is quite balanced in terms of the political orientation of the actors annotated (liberal vs conservative).\todoAW{It strikes me here that this is a very US-centric interpretation of the political landscape. Do you consider whether the make up of the dataset poses any threats to validity?}
+% It contains 1240 political speeches, from several countries and languages
+% For each one of them there are four annotators that give a numerical score of populism in the range $[0;2]$ where $0$ means non-populistic and $2$ means very populistic. The single annotations are already averaged out.
+% So from the 4961 raw rows, by deduplicating (4 annotations for each speech) we have 1240 speeches, out of which 265 are in English (then down in the rankings, 304 in Spanish and 148 in Portuguese).
+
+% These 265 speeches all have a leaning classification (we will see more about leanings in the next chapter): 36 left, 37 center, 84 right, 106 NA. We use this information in order to check whether the results that we get are general across the political spectrum.
+
+
 % Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
 % Each annotator (4 for each speech) gave a score between 0 (non-populistic) to 2 (very populistic)
 % 4961 rows 
@@ -1806,20 +1935,142 @@ This is the continuation of Section~\ref{ssec:lp_techniques_populism_vs_propagan
 % Languages: 265 en (304 es, 148 pt, …),
 % Leaning of the english ones: (36 left, 37 center, 84 right, 106 NA)
 
-These 265 speeches all have a leaning classification (we will see more about leanings in the next chapter): 36 left, 37 center, 84 right, 106 NA. We use this information in order to check whether the results that we get are general across the political spectrum.
 
-RESULTS
 
-L/R evaluation:
-Assumption: propaganda correlates to populism similarly in L/C/R
-Result total: 0.225 Left, 0.005 Center, 0.374 Right → Why? Is it a matter of quantity of populism/propaganda?
-Populism average:  [0.1259, 0.0729, 0.2712]
-Propaganda average: [0.0165, 0.0271, 0.0432]
-Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on right (21\% more), but the correlation Right is bigger than left of 66\%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
+% Goals:
+% With this dataset, as we described, we want to compute the 
+% correlation between propaganda and populism. So we take each speech in the corpus and we proceed to compute the Spearman's correlation~\citep{spearman1910correlation} between the  populism averaged out between the annotators and different propaganda metrics: total word-based percentage of propaganda, and word-based percentage of each of the propaganda techniques. 
 
-Findings
 
-Propaganda and populism are correlated, but not too strongly. In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → unbalanced detection caused by unbalanced data
+% results
+The Spearman's correlation between the populism and the total word-based percentage (all techniques together) is $0.1694$. This value is quite low. So it seems that they are quite unrelated. %\todoAW{This feels to me like the sort of investigation and analysis which forms the bedrock of your research. So I think you need to set it out more formally so that it feels like less of an aside.}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/populism_propaganda_correlation.pdf}
+    \caption{Spearman's correlation between populism and each propaganda technique}
+    \label{fig:populism_propaganda_correlation}
+\end{figure}
+
+By breaking it down to the correlation of populism to each propaganda technique, we can see in Figure~\ref{fig:populism_propaganda_correlation} that the strongest correlation is found with \texttt{Flag-waving}, \texttt{Name\_Calling/Labeling} and \texttt{Slogans}. Some of the techniques have very low correlation. It is interesting to notice that two techniques have slightly negative correlation (\texttt{Repetition} and \texttt{Appeal\_to\_Authority}), so this means that they are used by less populistic speeches.
+
+
+% L/R evaluation:
+% Assumption: propaganda correlates to populism similarly in L/C/R
+% Result total: 0.225 Left, 0.005 Center, 0.374 Right → Why? Is it a matter of quantity of populism/propaganda?
+% Populism average:  [0.1259, 0.0729, 0.2712]
+% Propaganda average: [0.0165, 0.0271, 0.0432]
+% Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on the right (21\% more), but the correlation Right is bigger than the left at 66\%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
+
+% findings
+Propaganda and populism are correlated, but not too strongly.\todoAW{?}
+The fact that some of the techniques are correlated to populism is a good sign,\todoHA{why?} even though the correlation scores are still low to be considered as ``strong correlation''. We will expand this experiment in the next Chapter when we take into consideration political leaning.
+Considering that the current fine-grained propaganda detection is not so accurate (cf. Section~\ref{ssec:lp_techniques_propaganda}), we can say that this weak correlation can still be considered as a signal that the two phenomena are related.
+% In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → imbalanced detection caused by imbalanced data
+
+
+\paragraph{Correlation by political leaning}
+% This is the continuation of Section~\ref{ssec:lp_techniques_populism_vs_propaganda} from the previous chapter. 
+Now we introduce the leaning and %the problem of imbalance, we are going to 
+break down the analysis with respect to the political leaning of the speeches.
+% Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
+% Each annotator (4 for each speech) gave a score between 0 (non-populistic) to 2 (very populistic)
+% 4961 rows 
+% 1240 deduped (352 left, 256 center, 469 right, 652 NA)
+% Languages: 265 en (304 es, 148 pt, …),
+% Leaning of the english ones: (36 left, 37 center, 84 right, 106 NA)
+
+These 265 speeches all have a leaning classification: 36 left, 37 center, 84 right, 106 NA. We use this information in order to calculate separately the correlations.
+
+
+% RESULTS
+When we consider populism and the total amount of propaganda, without differentiating by techniques, we get the results shown in Figure~\ref{fig:populism_propaganda_quantities_by_leaning}. The blue bars represent the average of the scores given by the annotators (range $[0;2]$), the red bar instead are the word-based ratio of propaganda (range $[0;1]$) and the green bars are the Spearman's correlations (range $[-1;1]$).
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/populism_propaganda_quantities_by_leaning.pdf}
+    \caption{Quantity of populism and propaganda and correlation between them across leaning}
+    \label{fig:populism_propaganda_quantities_by_leaning}
+\end{figure}
+
+We can, first of all, notice that there is more populism and more propaganda in the Right leaning.
+While Populism has a \emph{U-shape}, with lower values in the Center, Propaganda has a triangular Right shape, with the values monotonically increasing from Left to Right.
+
+The correlation instead is the one that changes the most: it has its maximum value of 0.374 in the Right, a lower value of 0.225 in the Left, and it is almost zero (0.005) in the Center.
+% \begin{itemize}
+%     \item 0.225 for speeches in the Left
+%     \item 0.005 for speeches in the Center
+%     \item 0.374 for speeches in the Right
+% \end{itemize}
+This means that for the speeches in the Center, populism and propaganda behave in completely independent ways, if we consider all propaganda techniques together.
+The value for the Right represents still a weak correlation, but we cannot dismiss it, as it represents a correlation that exists.
+
+% We see that the correlation is higher in the Right leaning.
+
+% Result total: , ,  → Why? Is it a matter of quantity of populism/propaganda?
+% Populism average:  [0.1259, 0.0729, 0.2712]
+% Propaganda average: [0.0165, 0.0271, 0.0432]
+% Ratio: [0.1317, 0.3717, 0.1593] → populism over propaganda ratio is a bit bigger on right (21\% more), but the correlation Right is bigger than left of 66\%. So it is less likely that this is just a matter of quantity. On the Right, propaganda and populism are strongly linked
+
+We then proceed to combine the previous breakdown by propaganda technique with the breakdown by leaning. In this way, we can see how specific propaganda techniques correlate across the political spectrum.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/populism_propaganda_correlation_by_leaning.pdf}
+    \caption{Spearman's correlation between populism and each propaganda technique across leaning}
+    \label{fig:populism_propaganda_correlation_by_leaning}
+\end{figure}
+
+Figure~\ref{fig:populism_propaganda_correlation_by_leaning} shows the breakdown by each technique considering the political leaning of the speeches.
+
+We can see that for some techniques, the values vary a lot across leaning. For example, let us consider the technique \texttt{Exaggeration/Minimisation}. In the right it has a positive value, while in the left it has a negative value. %, and in the center more neutral values.
+In other words, populism is correlated positively with this technique in right-leaning speeches, while it is negatively correlated in left-leaning ones. We have this type of behaviour also with \texttt{Repetition}, \texttt{Slogans} and \texttt{Causal\_Oversimplification}. This means that these techniques correspond more to the populism of the right, while are used in the Left in relatively non-populistic speeches (hypothesis of positive correlation broken). Or it could also mean that the detection of these techniques in the Left is not working as it should (and actually the hypothesis of positive correlation is still valid)
+
+Instead, the techniques \texttt{Name\_Calling/Labeling}, \texttt{Flag-Waving} and \texttt{Doubt} have positive correlations for all political leanings.
+
+\subsubsection{Results and discussion}
+
+In the previous subsections we have seen:
+
+\begin{enumerate}
+    \item the conceptual similarities and differences between propaganda and populism
+    \item populism across many contexts of the left and right
+    \item propaganda dataset showing highly imbalanced resources for the English language
+    \item correlation between propaganda and populism that confirms a relationships but for some techniques it shows null or negative correlation to 
+\end{enumerate}
+
+
+% we have the following points:
+% Findings
+We want to wrap up our main findings of this investigation.
+
+1. Distinction of terminology: socio-political works tend to use more the populism terminology. Focus is less on the linguistic means, it is more about the ideals expressed. And populism is more from the political leaders of a position (political speeches).
+Instead, on the NLP side, focus has been more on the propaganda terminology, with some references to persuasion. And propaganda is seen more as related to news sources instead of political leaders.
+
+2. Populism, with a quite wide literature from socio-political works, exists on any political leanings, across several countries, languages and contexts.
+
+3. Computational NLP resources (NLP) are quite imbalanced, especially the English based. The main motivation is that most of the works consider as a starting resource MBFC which has a label ``propaganda" that is on the limit of fake news, which is associated with extreme leanings, and it is more common in the extreme-right leaning with fewer sources on the extreme-left leaning. The datasets derived from MBFC, by selecting the news sources do an under-representation of left-leaning and centre, with the result of being completely imbalanced.
+At the moment, there are not many datasets available for propaganda detection, and therefore this problem is showing more.
+The answer to our RQ3 is \emph{no, the propaganda detection is imbalanced. The imbalance comes from the datasets that currently only contain right-leaning examples}.
+As more datasets will be developed, this balance may disappear.
+
+4. Correlation analysis shows a weak (but existing) correlation.
+% The most correlated techniques are: X Y Z.
+More correlation is shown in Right-leaning speeches as a consequence of propaganda being trained on right-leaning sources. But we are still able to detect weaker correlation with propaganda on the left and center.
+This may be one of the first noticeable consequences of having unbalanced data for training automated propaganda recognition.
+
+
+
+
+% possible problems
+% We want to understand if propaganda can be also detected on sources from the left and centre.
+The resulting models that use these imbalanced datasets, are \textbf{being trained on very propagandistic sources from the right only}. The models may have some problems in detecting correctly left-leaning propaganda because they never saw it in the training phase. This may be caused by different expressions or even different techniques.
+
+Is this imbalance a problem? Are the propaganda techniques used by the left and the right actually different, or they are the same and the only thing that changes is the end goal of using propaganda?
+
+% Which generalisation problems can arise when applying a propaganda detection tool outside the usually-targeted extreme-right leaning?
+
+We currently can only leave these questions unanswered
 
 
 \section{Discussions}
@@ -1830,7 +2081,7 @@ what was achieved, findings by RQ:
 \begin{itemize}
     \item How does persuasion vary across the political spectrum? Less in the centre. More in the extremes. This was expected. Right seems to be more propagandistic, especially with some techniques (slogans, ...)
     \item Can we predict the political leaning of a news article by observing the propaganda it uses? Very difficult task. We see minimal effects
-    \item Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature? Quite unbalanced datasets. Not clear what the effect of this imbalance is.
+    \item Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature? Quite imbalanced datasets. Not clear what the effect of this imbalance is.
 \end{itemize}
 
 limitations
