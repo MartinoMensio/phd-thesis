@@ -61,57 +61,266 @@ Disclaimer US vs the rest?
 
 Several axes when describing news sources: L/R, factuality, 
 
-\subsection{\statusred Datasets for Political Leaning Prediction}
+\subsection{\statusgreen Datasets for Political Leaning Prediction}
 \label{ssec:ps_leaning_data}
 
 Having the task of political leaning prediction, the practical definition of leaning comes from the datasets that have been used.
-For our analysis on the leaning, we have selected two resources because they are:
+For our analysis on the leaning, we have selected resources based on the following criteria:
+
 \begin{enumerate}
-    \item publicly available
-    \item relatively large: we need a good number of articles (e.g. ~) 
+    \item publicly available, possibly containing the full text of the articles. If the full text is not available, they may refer to a whole news source and therefore we can combine this dataset with article-based datasets
+    \item relatively large: we need a good number of articles (e.g. $\sim$10k) in order to apply successfully big models 
     \item directly indicate the political leaning of the source/articles
 \end{enumerate}
 
-Datasets annotating sources:
+We found two broad categories of datasets: the first annotating the news sources, and the second providing collections of articles.
 
-- MBFC
-- AllSides
+% source-level vs author-level
+This implies that in most of the cases, the datasets give a source-based political leaning definition. This means that all the articles from a certain news source have the same leaning.
+This may generally be true, as each news source has its own editorial processes and perspectives. But in some cases, with guest writers and opinion pieces, the political orientation of a news article can differ from the orientation of the news source.
 
-Datasets of articles? Is article always considered with the same leaning as source?
+For this reason, one of the datasets that we consider is \texttt{AllSides} which also considers the political leaning based on the author of the news article. They have source-based leaning labels that are used in the wide majority of the cases (as in the source-based datasets), but in some cases they annotate the articles with the author that wrote them.\footnote{\url{https://www.allsides.com/media-bias/ratings}}
 
-Details of the AllSides dataset: leaning of the author instead of the leaning of the news outlet (example).
+% Datasets annotating sources:
 
-The work by~\cite{baly2020we} mentions that the annotations are defined on the article level. But in reality, we found that from the dataset all the articles from a specific source have the same leaning annotation. ??? TRUE? OR author level?
+% - MBFC
+% - AllSides
+
+% Datasets of articles? Is article always considered with the same leaning as source?
+
+We describe in the following subsections the most relevant datasets used for political leaning classification.
+
+
 
 \subsubsection{MBFC dataset}
+% stats updated 15/02/2023
 
+more than 5600 sources, that are mainly classified across two axes: political leaning and level of factual reporting, as shown in Figure~\ref{fig:mbfc_bbc}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/mbfc_bbc.png}
+    \caption{Example of rating from MBFC}
+    \label{fig:mbfc_bbc}
+\end{figure}
+
+We are interested in the leaning information, and they are grouped under 5 top-level categories:
+
+\begin{itemize}
+    \item \href{https://mediabiasfactcheck.com/left/}{Left Bias}: 351 sources
+    \item \href{https://mediabiasfactcheck.com/leftcenter/}{Left-Center Bias}: 904 sources
+    \item \href{https://mediabiasfactcheck.com/center/}{Least-Biased}: 1202 sources
+    \item \href{https://mediabiasfactcheck.com/right-center/}{Right-Center Bias}: 543 sources
+    \item \href{https://mediabiasfactcheck.com/center/}{Right-Center Bias}: 543 sources
+    \item \href{https://mediabiasfactcheck.com/right/}{Right Bias}: 252 sources
+\end{itemize}
+
+Furthermore, this resource has other special categories, whose sources may also have a political leaning:
+
+\begin{itemize}
+    \item \href{https://mediabiasfactcheck.com/fake-news/}{Questionable Sources}: 1483 sources that may contain extreme bias, propaganda, conspiracies, poor sourcing, lack of transparency or fake news
+    \item \href{https://mediabiasfactcheck.com/conspiracy/}{Conspiracy-Pseudoscience}: 438 sources that usually publish unverifiable information lacking evidence
+    \item \href{https://mediabiasfactcheck.com/pro-science/}{Pro-Science}: 214 sources that are based credible scientific sourcing
+    \item \href{https://mediabiasfactcheck.com/satire/}{Pro-Satire}: 149 sources that are clear that they are satire and do not try to deceive
+\end{itemize}
+
+This dataset does not provide any articles, but it is used as reference by many other datasets in order to estimate the political leaning or the credibility of a news source.
+
+We use this dataset in two different places in this chapter.
+The first one, when experimenting with the political leaning classifier based on propaganda features, in Section~\ref{ssec:ps_prop_leaning_classifier}, as its leaning labels are used in the \texttt{NELA-GT18} dataset that we use as a secondary dataset to confirm our findings.
+And the second place where we use this dataset is in Section~\ref{ssec:ps_prop_leaning_imbalanced} to analyse the imbalance of the datasets across political leaning and we need its information to place news sources across the political spectrum.
 
 \subsubsection{AllSides dataset}
+% stats updated 15/02/2023
 
-\subsubsection{\statusgreen Baly dataset}
+Another very useful resource is \href{https://www.allsides.com/}{AllSides} which contains two different types of collections:
+
+\begin{itemize}
+    \item Sources collection: each source is annotated with its political leaning
+    \item Parallel news collection: \emph{Headline Roundups\texttrademark} made of 3 articles that discuss the same story, one from the Left, one from the Center and one from the Right
+\end{itemize}
+
+\paragraph{Sources collection}
+
+As mentioned above, AllSides provides leaning annotations that differ from  the ones given only at the source-level.
+As can be seen from the \href{https://www.allsides.com/media-bias/ratings}{Media Bias Ratings} published on their website, they have leaning ratings for Author (500), News Media (894), Think Tank / Policy Group (108), Reference (25) and Fact-Check (20).
+
+This allows to know the leaning of specific articles written by authors even if they are published on news outlets with a different political leaning. 
+
+\paragraph{Headline Roundups\texttrademark}
+
+The other collection that is very useful from AllSides is the \href{https://www.allsides.com/headline-roundups}{Headline Roundups\texttrademark}. In this section, the editors regularly publish a hand-curated set of stories. Each of them contains a brief textual introduction of how the story has been framed by the news coverage, and then displays three different articles coming from different political leanings
+
+% is a platform that collects articles from different news sources providing a hand-curated set of stories where articles with opposing political bias are put together, with also a brief textual introduction of the framing differences.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{figures/allsides.png}
+    \caption{Example of AllSides Headline Roundup \url{https://www.allsides.com/story/trump-tweets-about-protesters-ahead-saturday-tulsa-rally}}
+    \label{fig:allsides}
+\end{figure}
+
+In Figure~\ref{fig:allsides} we can see an example that is displaying how a source from the left, one from the centre and one from the right present the story of Trump tweeting about his rally in Tulsa.
 
 
-% FROM TTO2019
-The dataset we use is from~\citet{baly2020we}, and consists of articles in English language from over 800 sources (majority from the US),\footnote{\url{https://www.allsides.com/media-bias/media-bias-ratings}} labelled for their political leaning (Left, Centre or Right).\footnote{AllSides sources: \url{https://github.com/ramybaly/Article-Bias-Prediction}}
-This dataset contains several attributes for each article: full text, political leaning, topic, news source, and author name. However, in our models and experiments, we only use the text of the articles to avoid bias associated with the other attributes.
+
+% - allsides: human-created with interesting framing differences
+% Another data source that we actively retrieve is AllSides which provides a curated set of ``headlines''\footnote{\url{https://www.allsides.com/story/admin}} where
+The three articles with a different political leaning are put together and compared in their difference.
+The curators describe how the story gets framed by the considered sources, using natural language.
+This description usually contains the usage of terms or themes that get mentioned.
+% At the end of June, we have available 4764 headlines, with 13979 articles linked.
+% Differently from Google Headlines which has different versions for each country, 
+This data is US-focused being curated in the US and therefore has a scope slightly limited. Also, the discussion of bias and framing is mainly focused on political issues, without giving much space to other types of stories.
+% role of this specific data
+% This data, although the description of the differences is not directly parseable, will be used to feed the user study and understand the role of comparing different sides.
+
+
+% The work by~\cite{baly2020we} mentions that the annotations are defined on the article level. But in reality, we found that from the dataset all the articles from a specific source have the same leaning annotation. ??? TRUE? OR author level?
+
+
+% STATS
+
+This collection contains 7766 headlines (as of 15/02/2023), for a total of 23298 links to articles. The oldest headlines were published in 2012.
+However, the full text of the articles needs to be separately retrieved by connecting to the corresponding news outlets, and therefore the process of collecting and cleaning the data is not error-free.
+
+We initially experimented with the data collected from this dataset, but we quickly found the limitation of applying custom data retrieval and also the problem of not having comparable results, as would happen with public and established datasets.
+
+
+\subsubsection{Baly dataset}
+
+This dataset is derived from \emph{Allsides Headline Roundup\texttrademark}, as it was built in the work of~\citet{baly2020we} by downloading and cleaning from AllSides and from the respective news outlets all the articles (dataset including headlines until 21 July 2020).
+
+The dataset therefore 
+% % FROM TTO2019
+% The dataset we use is from~\citet{baly2020we}, and
+consists of articles in English language from over 800 sources (majority from the US), labelled for their political leaning (Left, Centre or Right).\footnote{\url{https://github.com/ramybaly/Article-Bias-Prediction}}
+This dataset contains several attributes for each article: full text (collected from several news websites and cleaned), political leaning, topic, news source, and author name (attributes from AllSides).
+% However, in our models and experiments, we only use the text of the articles to avoid bias associated with the other attributes.
 The topic distribution of the articles is uniform across the political leanings, because the dataset comes from triples of articles, one from each political leaning, about the same issue. 
 % Authors of this paper publicly provide a dataset, collected from AllSides, where individual articles are labelled for their political leaning.
 Note that there is a discrepancy between the description of the dataset contained in its reference paper and the dataset made publicly available by the authors on GitHub.
 The dataset described in ~\citet{baly2020we} contains 34,737 articles, whereas in GitHub it has 37,554 articles (12,590 Left, 10,285 Centre, 13,399 Right).
 The dataset contains two pre-splitted folds for training and testing:
 \begin{itemize}
-    \item \texttt{Random}: where splits are randomly generated. This classification model might encounter articles from the same media source during both training and testing phases. 
+    \item \texttt{Random}: where splits are randomly generated. Articles from the same media source may be contained both in the training and testing sets. 
     \item \texttt{Media}; where the articles in the test set are from media sources that do not occur in the training set. %, which is more appropriate for article-based political leaning analysis. 
 \end{itemize}
 
 The Media split enables testing the classifier with less potential bias to previously seen sources, which is not the case with the Random split. Although the political-leaning of articles could sometimes be gauged by their sources, there are many examples where articles' political leaning differ from that of their sources, or the sources' leanings are not well known, or the sources themselves are unknown. Hence there is a need for such a detection to be independent of where an article came from.      
 %and alignment.
 
-\subsubsection{NELA-GT18}
+\subsubsection{NELA-GT-2018}
 
-s application of MBFC labels
+This dataset, published in~\citet{DVN/ULHLCB_2019}, contains $713,534$ news articles coming from $194$ news sources (most frequents, in descending order: The Sun, The Telegraph, The Russophile, Sputnik, New York Post, The Independent, Drudge Report, Evening Standard, The Guardian, BBC, Instapundit, OANN, TruePundit, Daily Mirror, Daily Caller).
 
-our work to make it balanced etc
+For each article, the available attributes are: publishing date, source, title and content.
+And then, for each source, there are many attributes that come from MBFC, AllSides, NewsGuard, Pew Research Center, Open Sources, BuzzFeed. Out of these many attributes, the one that refer to the political leaning are: MBFC, AllSides and BuzzFeed. Out of these three classifications, we find that in the majority of the cases, the labels agree and the only cases where they do not agree are between the Center label (by AllSides) and the Center-Left and Center-Right of MBFC. In other words, the systems only differ in the thresholds around the Center.
+Instead, the labels from BuzzFeed cover a significant lower number of sources, and they allow only the two values Left and Right, with no Center category.
+
+We describe here in the following paragraphs our processing to build a second dataset for the political leaning classifier, prepared with random and media splits as the \texttt{Baly} dataset.
+
+\paragraph{Our selection}
+
+In order to reduce the dataset, we selected the news sources that have both ratings from AllSides and MBFC telling the same result (excluding the few sources that do not have both, and the ones that have some disagreement).
+This results in 65 sources (out of 194) and a total of $286,235$ articles (out of $713,534$).
+In this way, we can select the labels from AllSides and we do not need to rely on any mapping strategies between the different labelling systems.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/nela_subset_allsides_simplified.pdf}
+    \caption{NELA subset across political leaning}
+    \label{fig:nela_subset_allsides_simplified}
+\end{figure}
+
+Figure~\ref{fig:nela_subset_allsides_simplified} shows the resulting dataset distribution over political leaning. As we see, this results in a subset that is quite imbalanced. For this reason, we will build subsets that are balanced across political leaning.
+
+With respect to the \texttt{Baly} dataset, we have no relationship between the topics of each leaning, as this dataset comes from unlinked articles (not triples as in \texttt{Baly}). Therefore, even if we balance the splits, we will not have the topics balanced.
+Therefore, by testing with this subset, we will see if this becomes a problem or not.
+
+\paragraph{Random Splits Imbalanced}
+
+For the random splits it is less difficult as we have less constraints.
+
+We take the subset identified, and we perform a 5-Folds split, stratified on the leaning. In this way we keep the proportion between the number of articles of each leaning. We obtain therefore the \texttt{NELA-Random-Imbalanced}.
+We decide to perform a 5-Folds split instead of a simpler 80-20\% train-test split, because we want to avoid the problem of which part of the dataset is selected for testing (which leads to less-generalised results). Instead, by doing a 5-Folds split, every item of the dataset is used in the test split at different times.
+The stratification on the leaning makes every fold with the same proportions across leaning, that is imbalanced but constant.
+
+\paragraph{Random Splits Balanced}
+
+From the \texttt{NELA-Random-Imbalanced} we then derive a balanced version with respect to the leaning. We first identify the leaning that has less articles (center) for each fold, and we cap the number of articles in the other two leanings.
+We cannot simply select randomly the articles to remain, because we may lose some of the news sources completely (because the dataset is very unbalanced across news sources).
+Therefore, we compute a reduction factor for the Left and one for the Right for each fold (e.g. for $L$=Left and fold=1, $\alpha_{L,1} = \#articles_{L,1} / \#articles_{C,1}$) and we scale proportionally with them the number of articles allowed for each news source in the Left and in the Right. When all these source-based caps have been computed, we then perform a random selection for the articles of each news source.  
+We call this subset \texttt{NELA-Random-Balanced}, and contains $150,315$ articles ($10021$ articles for each fold and leaning)
+
+\paragraph{Media Splits Imbalanced}
+
+Instead for the media splits, we need to keep the constraint that all the news articles from a specific source need to belong to the same fold. In this way, there is no ``leaking" between training and testing, as the models could learn to recognise the style of the source~\citep{baly2020we} and find a shortcut~\citep{geirhos2020shortcut} to the classification problem.
+
+Therefore, the news sources need to be inserted each one in a different fold. At the same time, since there is a big difference between the maximum and minimum number of articles that come from each source, we need to optimize the selection in order to keep the dataset as balanced as possible (even if then we create a balanced version).
+
+The greedy strategy that we choose is an adaptation of the Longest-processing-time-first (LPT) algorithm~\citep{graham1969bounds}, that is usually applied in the \emph{minimizing the maximum completion time} problem.
+The analogy is that the folds are the processors (fixed in number), the goal is to reduce the size of the largest fold instead of reducing the total processing time (with the addition that we have three classes of items that represent the leaning), and the number of articles for each news source corresponds to the processing time of each task.
+The only modification is that our objective depends both on the total size of each fold, but also on the desired balance also across political leaning.
+
+By applying the LPT greedy algorithm, we first sort the sources by decreasing number of articles. Then, at each iteration, we allocate each source (in the order just computed) to one of the folds. The original LPT allocates to the processor that has the smallest total load. In our case, we allocate to the fold that has the smallest quantity of articles for the leaning of the currently considered source.
+This modification to LPT is the consequence of the modified objective stated before.
+We prioritize the intra-fold balance across leaning to the inter-fold balance.
+
+% Imbalanced
+% articles: [19887, 16416, 33763]	sources: [6, 1, 1]
+% articles: [19669, 8360, 25786]	sources: [6, 2, 2]
+% articles: [19737, 8492, 25764]	sources: [6, 3, 6]
+% articles: [19792, 8386, 25805]	sources: [6, 3, 7]
+% articles: [20200, 8451, 25727]	sources: [6, 2, 8]
+
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{l|rrr|rrr}
+        \multirow{2}{*}{Fold} & \multicolumn{3}{c}{\#Articles} & \multicolumn{3}{c}{\#Sources} \\
+         & Left & Center & Right & Left & Center & Right \\
+        \hline
+        Fold 1 & 19887 & 16416 & 33763 & 6 & 1 & 1 \\
+        Fold 2 & 19669 & 8360 & 25786 & 6 & 2 & 2 \\
+        Fold 3 & 19737 & 8492 & 25764 & 6 & 3 & 6 \\
+        Fold 4 & 19792 & 8386 & 25805 & 6 & 3 & 7 \\
+        Fold 5 & 20200 & 8451 & 25727 & 6 & 2 & 8 \\
+    \end{tabular}
+    \caption{\texttt{NELA-Media-Imbalanced} across leanings and folds}
+    \label{tab:nela_media_imbalanced}
+\end{table}
+
+The result of the modified LPT algorithm is shown in Table~\ref{nela_media_imbalanced}, and we name this split with \texttt{NELA-Media-Imbalanced}.
+As we can see, the largest source is from the Right with 33763 news articles (\emph{The Sun}, positioned in Fold 1). This causes the most imbalance in our situation. However, the greedy algorithm places it as the first one, and then manages to pull together 6 sources from the Left that sum up to 19887 news articles.
+We see that overall the folds are quite balanced, with this exception of the Right in Fold 1, and the Center between Fold 1 and the other folds.
+
+\paragraph{Media Splits Balanced}
+
+The last splits that we create, are derived from \texttt{NELA-Media-Imbalanced}, but adding the constraint of being balanced across leaning.
+For each fold, we take the minimum number of articles (always the Center) and, as in \texttt{NELA-Media-Balanced}, we compute a reduction factor for the Left and one for the Right for each fold. Then we scale proportionally with these factors the number of articles allowed for each news source in the Left and in the Right. When all these source-based caps have been computed, we then perform a random selection for the articles of each news source.  
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{l|rrr|rrr}
+        \multirow{2}{*}{Fold} & \multicolumn{3}{c}{\#Articles} & \multicolumn{3}{c}{\#Sources} \\
+         & Left & Center & Right & Left & Center & Right \\
+        \hline
+        Fold 1 & 16416 & 16416 & 16416 & 6 & 1 & 1 \\
+        Fold 2 & 8360 & 8360 & 8360 & 6 & 2 & 2 \\
+        Fold 3 & 8492 & 8492 & 8492 & 6 & 3 & 6 \\
+        Fold 4 & 8386 & 8386 & 8386 & 6 & 3 & 7 \\
+        Fold 5 & 8451 & 8451 & 8451 & 6 & 2 & 8 \\
+    \end{tabular}
+    \caption{\texttt{NELA-Media-Balanced} across leanings and folds}
+    \label{tab:nela_media_balanced}
+\end{table}
+
+Table~\ref{tab:nela_media_balanced} shows the result of the balancing, where the first fold results being the largest one as its limit (number of articles in the Center) is higher.
+We call this subset \texttt{NELA-Media-Balanced}
+
+We will use all these subsets in the following Section~\ref{ssec:ps_prop_leaning_classifier} in order to see if the results generalise or not to other datasets.
+
 
 \subsection{\statusorange Models for Political Leaning Prediction}
 \label{ssec:ps_leaning_models}
@@ -1216,7 +1425,8 @@ With the current analysis, we can say that \textbf{the answer to RQ2.3 is a part
 
 What: this experiment was reproduced with NELA dataset (MBFC for leaning of the sources)
 
-Why: check with other datasets if this behaviour generalises
+Why: The results have similar scores. The significance test is passed but we question whether the results would generalise to other datasets.
+% check with other datasets if this behaviour generalises
 
 Result: similar behaviour
 
@@ -2062,7 +2272,7 @@ As more datasets will be developed, this balance may disappear.
 4. Correlation analysis shows a weak (but existing) correlation.
 % The most correlated techniques are: X Y Z.
 More correlation is shown in Right-leaning speeches as a consequence of propaganda being trained on right-leaning sources. But we are still able to detect weaker correlation with propaganda on the left and center.
-This may be one of the first noticeable consequences of having unbalanced data for training automated propaganda recognition.
+This may be one of the first noticeable consequences of having imbalanced data for training automated propaganda recognition.
 
 
 
