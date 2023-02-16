@@ -36,20 +36,25 @@ In this chapter, we find that:
 
 For this chapter, we follow a structure that is similar to the one of the previous Chapter~\ref{chap:linguistic_persuasion}:
 \begin{itemize}
-    \item first, in Section~\ref{sec:ps_political_sides}, we introduce the new ingredient: political leaning. We describe the datasets in use and the task of political leaning prediction;
+    \item first, in Section~\ref{sec:ps_political_sides}, we introduce the new ingredient: political leaning. We describe the datasets in use and the task of political leaning classification;
     \item then, in Section~\ref{sec:ps_prop_and_leaning}, we combine the analysis of political leaning with the analysis of the previous chapters. More in specific, we analyse the relationship between propaganda and political leaning. This is the core of this experimental chapter.
 \end{itemize}
 
 
-\section{\statusred Political Leaning Prediction}
+\section{\statusgreen Political Leaning Classification}
 \label{sec:ps_political_sides}
+
+In this section, we introduce the concept of \emph{Political Leaning} and the task of \emph{Political Leaning Classification}.
+
+We are considering political leaning as the new ingredient of this chapter. After the introduction at the conceptual level in Section~\ref{ssec:ps_leaning_def}, we investigate and describe the available datasets that are used to perform political leaning classification in Section~\ref{ssec:ps_leaning_data} and then we analyse the existing models for the classification and reproduce the baseline in Section~\ref{ssec:ps_leaning_classifier}.
+
+
+\subsection{\statusred Political Leaning Definition}
+\label{ssec:ps_leaning_def}
 
 First of all, we are taking again the definition of political leaning given in Chapter~\ref{sec:lit_leaning}: 
 
 As we already described in the literature chapter~\ref{sec:lit_leaning}, 
-
-\subsection{\statusred Political Leaning Definition}
-\label{ssec:ps_leaning_def}
 
 From literature
 
@@ -61,10 +66,10 @@ Disclaimer US vs the rest?
 
 Several axes when describing news sources: L/R, factuality, 
 
-\subsection{\statusgreen Datasets for Political Leaning Prediction}
+\subsection{\statusgreen Datasets for Political Leaning Classification}
 \label{ssec:ps_leaning_data}
 
-Having the task of political leaning prediction, the practical definition of leaning comes from the datasets that have been used.
+Having the task of political leaning classification, the practical definition of leaning comes from the datasets that have been used.
 For our analysis on the leaning, we have selected resources based on the following criteria:
 
 \begin{enumerate}
@@ -147,6 +152,7 @@ As can be seen from the \href{https://www.allsides.com/media-bias/ratings}{Media
 
 This allows to know the leaning of specific articles written by authors even if they are published on news outlets with a different political leaning. 
 
+
 \paragraph{Headline Roundups\texttrademark}
 
 The other collection that is very useful from AllSides is the \href{https://www.allsides.com/headline-roundups}{Headline Roundups\texttrademark}. In this section, the editors regularly publish a hand-curated set of stories. Each of them contains a brief textual introduction of how the story has been framed by the news coverage, and then displays three different articles coming from different political leanings
@@ -178,11 +184,28 @@ This data is US-focused being curated in the US and therefore has a scope slight
 
 % The work by~\cite{baly2020we} mentions that the annotations are defined on the article level. But in reality, we found that from the dataset all the articles from a specific source have the same leaning annotation. ??? TRUE? OR author level?
 
-
 % STATS
 
 This collection contains 7766 headlines (as of 15/02/2023), for a total of 23298 links to articles. The oldest headlines were published in 2012.
-However, the full text of the articles needs to be separately retrieved by connecting to the corresponding news outlets, and therefore the process of collecting and cleaning the data is not error-free.
+
+%This is based on the observation 
+By analysing the dataset, there are some articles (3.11\%) %(1,080 individual articles, 3.11\% on a total of 34737)
+that have a leaning different from their source leaning.
+This comes from the fact that some of the articles are annotated with the leaning of the author and not with the leaning of the news outlet, as we discussed before.
+
+%To clarify this point, we personally asked to the AllSides team about this discrepancy between article-level bias and source bias, and we understood that there are two types of annotation:
+%\begin{itemize}
+ %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
+ %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be different from the media bias\footnote{\url{https://www.allsides.com/media-bias/media-bias-ratings\#ratings}}
+%\end{itemize}
+
+%Therefore the 3.11\% is due to the author-level annotation. We want to underline that in this way, the annotation of the political leaning is not specifically assigned to the single article but instead it is assigned to the author. It is still a "distant supervision" in some extent.
+
+
+
+
+
+For utilising this dataset directly, however, there is a limitation. The full text of the articles needs to be separately retrieved by connecting to the corresponding news outlets, and therefore the process of collecting and cleaning the data is not error-free.
 
 We initially experimented with the data collected from this dataset, but we quickly found the limitation of applying custom data retrieval and also the problem of not having comparable results, as would happen with public and established datasets.
 
@@ -322,16 +345,54 @@ We call this subset \texttt{NELA-Media-Balanced}
 We will use all these subsets in the following Section~\ref{ssec:ps_prop_leaning_classifier} in order to see if the results generalise or not to other datasets.
 
 
-\subsection{\statusorange Models for Political Leaning Prediction}
+\subsection{\statusgreen Models for Political Leaning Classification}
 \label{ssec:ps_leaning_models}
 
-How it is computed
+% How it is computed
 
-Usual features
+% Usual features
 
-State of the Art
+% State of the Art
 
-Problems: learning the source instead of learning L/R task
+% Problems: learning the source instead of learning L/R task
+
+% FROM TTO2019
+
+Political leaning detection models have been produced for general media sources~\cite{budak} or for 
+specific political corpora such as congressional records~\cite{gentzkow}, political party websites~\cite{yan2017perils}, and political blogs~\cite{ahmed201}.  
+Others focused on inferring the political leaning of Twitter accounts~\cite{Cohen2013ClassifyingPO}, Facebook users~\cite{Bakshy1130}, politicians~\cite{thomas-etal-2006-get}, or political writers~\cite{iyyer-etal-2014-political}. 
+Various analysis methods were used in such studies, such as linguistic analysis \cite{gentzkow}, graph analysis \cite{chen2017opinion}, topic modelling \cite{ahmed201, Cohen2013ClassifyingPO}, support vector machines (SVM) \cite{Bakshy1130,thomas-etal-2006-get}, and neural networks \cite{iyyer-etal-2014-political,baly2020we}. In this paper, we focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (see Section~\ref{sec:dataset}), using a neural network approach fused with propaganda features. %\todo{description ok?} 
+
+%often used supervised or unsupervised models applied to , or on opinion graph mining ~\cite{thomas-etal-2006-get}.
+
+%gentzkow - linguistic analysis 
+%yan2017perils - regression models and neural networks
+%budak - supervised learning and crowdsourcing
+%ahmed - topic models
+%Cohen2013ClassifyingPO - SVM and topic models
+%bakshy support vector machine 
+%thomas - svm
+%iyyer - NN
+%chen - SVM, LDA
+
+%Most models use supervised or unsupervised machine learning algorithms, trained using source annotations or crowdsourced articles annotations  
+ 
+%underlined that most of the approaches do not generalise well across domains. 
+%As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\cite{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
+
+In~\citet{baly2020we}, authors used a BERT-based model for predicting the political leaning of individual articles. The model takes as input the text of the article and produces one of three labels: Left/Centre/Right. The model is trained with a corpus from AllSides  (the previously described \texttt{Baly} dataset) which groups articles %with their political leaning 
+according to the leaning of their source or of their author. %\todo{manually?}
+%Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to that given to their sources (AllSides confirmed that this is due to using author-based leaning). 
+%   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
+ %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
+ % Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. 
+
+
+% Problem: learning the source instead of the political leaning
+Main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases were there is a difference between the political leaning of a particular article from that of its source.
+% Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to the given to their sources (AllSides confirmed that this is due to using author-based leaning labels for some articles). 
+Other approaches focus on learning the media bias of a the source~\cite{baly2020written,biessmann2016automating}.
+
 
 
 \subsubsection{\statusgreen Baseline reproduction}
@@ -493,7 +554,7 @@ we mean the reproduction of the baseline as in \texttt{Baly-baseline}. Using the
 % \\
 
 
-\section{\statusorange Persuasion and Political Leaning Prediction}
+\section{\statusgreen Persuasion and Political Leaning Classification}
 \label{sec:ps_prop_and_leaning}
 
 Here we want to see the relationship between Persuasion (studied in the previous Chapter~\ref{ssec:lp_techniques_propaganda} and Political Leaning (from the previous Section~\ref{sec:ps_political_sides}).
@@ -502,7 +563,7 @@ For this reason, we are combining the two analyses with the following experiment
 
 \begin{enumerate}
     \item Analysis of persuasion features across the political spectrum: we want to understand if we can see some difference between the persuasion means of left, center and right (Section~\ref{ssec:ps_prop_leaning_across}, targeting RQ1). We are able to identify some differences both in the quantity of specific techniques, and in the terms used.
-    \item Prediction of the political leaning using persuasion features. Can machine learning models differentiate between propaganda and sentiment from left and right? (Section~\ref{ssec:ps_prop_leaning_classifier}, targeting RQ2) The motivation of this experiment is that we are able to see some differences from the previous experiment, and therefore we want to see if also machine learning classifiers can differentiate and how well. We find that it is possible to classify the leaning of news articles based on their use of propaganda, but that it is quite hard to be better than classifiers based on the full text of the articles. 
+    \item Classification of the political leaning using persuasion features. Can machine learning models differentiate between propaganda and sentiment from left and right? (Section~\ref{ssec:ps_prop_leaning_classifier}, targeting RQ2) The motivation of this experiment is that we are able to see some differences from the previous experiment, and therefore we want to see if also machine learning classifiers can differentiate and how well. We find that it is possible to classify the leaning of news articles based on their use of propaganda, but that it is quite hard to be better than classifiers based on the full text of the articles. 
     \item Are the current propaganda datasets imbalanced? (Section~\ref{ssec:ps_prop_leaning_imbalanced}, targeting RQ3) Given that the results of both previous experiments (manual and automated) are dependent on the quality of the automated propaganda detection, in this last experiment of the chapter we do an analysis of the imbalance of the data that was used to train the propaganda detector. We find that in most of the cases, propaganda examples come from Right-leaning sources and the Left and Center are underrepresented.
 \end{enumerate}
 
@@ -592,7 +653,7 @@ Our aim is to see whether some techniques are used more in one specific leaning 
     \caption{Breakdown of propaganda techniques by political leaning.}
     \label{fig:prop_tech_details_across_leaning}
 \end{figure}
-\todo{Would it be better to show also std deviation or other distribution info like in the previous plot?}
+\todo{Fig~\ref{fig:prop_tech_details_across_leaning} Would it be better to show also std deviation or other distribution info like in the previous plot?}
 
 Figure~\ref{fig:prop_tech_details_across_leaning} shows on the vertical axis the different propaganda techniques, and each colour represents a different political leaning. The vertical axis represents the mean word-based percentage of the specific propaganda technique for the considered leaning.
 With this plot we can compare the techniques across the leanings.
@@ -889,7 +950,7 @@ And as last limitation, it is not clear whether these features can be used to au
 
 
 
-\subsection{\statusgreen Political leaning prediction using propaganda features}
+\subsection{\statusgreen Political Leaning Classification using Propaganda Features}
 \label{ssec:ps_prop_leaning_classifier}
 
 % 5: political leaning classifier from propaganda features. Why
@@ -915,7 +976,7 @@ We have also reasons coming from the field of automated news analysis, where the
 Various automated approaches have been recently proposed for the classification of articles with regards to political leaning~\cite{baly2020we} or credibility~\cite{horne2018assessing}. Others focused on capturing the usage of various propaganda techniques~\cite{da2019fine} or argumentation techniques~\cite{lippi2016argumentation}. However, the role that propaganda could play in automatically determining the leaning of articles has not been thoroughly investigated.
 Propaganda is usually directly linked to the ideology of articles by having the ``intention of influencing people's opinions''.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}} To this end, we aim to better understand the relationship between propaganda analysis and the identification of political leaning of articles, simplified to three categories: \textit{Left}, \textit{Centre}, and \textit{Right}.
 
-Then, we also have a conceptual reason. Both political leaning prediction and propaganda analysis are types of political analysis.
+Then, we also have a conceptual reason. Both political leaning classification and propaganda analysis are types of political analysis.
 % The point of contact between political leaning prediction and propaganda is that both are dealing with political analysis.
 Given that we are considering articles that cover the same stories (as we have seen in the previous sections, we have triples of articles in the \texttt{baly} dataset) the facts that are being narrated are the same (except for the inclusion/exclusion of details). The main difference between an article from the left to one from the right is their point of view / subjective / persuasive component. Propaganda analysis is focused on analysing this specific component of the articles.
 As we discussed in Chapter~\ref{ssec:lit_layers_of_info}, we can think of news articles as a composition of two elements: the topical element (facts, entities, events) and the anti-topical element (how things are narrated, persuasion).
@@ -1417,31 +1478,91 @@ Further investigation is needed to better capture what each of these words means
 
 With the current analysis, we can say that \textbf{the answer to RQ2.3 is a partial Yes: using as feature the terms of propaganda achieves a very similar score to the baseline (rows indicated with (3a) and (3b)), and when added to the baseline features, it helps to achieve a small (but not significant, \textit{p-value=0.657}) improvement}. % NOT SIGNIFICANT IMPROVEMENT: p-value=0.657
 
-% TODO continue on this line!!!!
 
-\subsubsection{\statusred Reproduction on other datasets}
-\todo{take from experiment 6 document}
-% 6: classifier (propaganda → leaning) on other datasets
+\subsubsection{\statusorange Reproduction on \texttt{NELA} dataset}
 
-What: this experiment was reproduced with NELA dataset (MBFC for leaning of the sources)
+% \todo{take from experiment 6 document}
+% % 6: classifier (propaganda → leaning) on other datasets
 
-Why: The results have similar scores. The significance test is passed but we question whether the results would generalise to other datasets.
+% What: this experiment was reproduced with NELA dataset (MBFC for leaning of the sources)
+
+% Why: The results have similar scores. The significance test is passed but we question whether the results would generalise to other datasets.
 % check with other datasets if this behaviour generalises
+
+We have seen in the previous sections that the results of the classifier based on the propaganda features are not setting a big difference in the F1 scores. On the media splits, we managed to increase by a few percentage points, while on the random splits the baseline still provides the best results.
+The feature combination $(0) + (2)$ (baseline and quantity of propaganda techniques), when tested for with McNemar test, resulted significant ($p-value=0.008$).
+But we still question whether the results, with such a small margin would generalise to other datasets.
+
+For this reason, in this subsection, we take the \texttt{NELA} dataset from Section~\ref{ssec:ps_leaning_data} and we perform the same analysis. In specific, we test on the built subsets denoted with \texttt{NELA-Random-Imbalanced}, \texttt{NELA-Random-Balanced}, \texttt{NELA-Media-Imbalanced} and \texttt{NELA-Media-Balanced}.
+
+
+The only difference in the experimental setup is that here we are performing a 5-Folds cross-validation instead of a simple train-test.
+As discussed in Section~\ref{ssec:ps_leaning_data}, this gives more generalisable results and is less dependent on which articles have been chosen for the test set (particularly when we are using the media splits).
+
+For computing the F1 and accuracy metrics, we accumulate over the 5 folds the values of the true and predicted labels.
+
+Table~\ref{TODO} shows the results
+
+\begin{table}[!htbp]
+    \centering
+   \scriptsize
+  %\small
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|rr|rr|rr|rr}
+        & \multicolumn{2}{c}{\texttt{NELA-Random-Imbalanced}} & \multicolumn{2}{c}{\texttt{NELA-Random-Balanced}} & \multicolumn{2}{c}{\texttt{NELA-Media-Imbalanced}} & \multicolumn{2}{c}{\texttt{NELA-Media-Balanced}} \\
+        Model & F1-Macro & Accuracy & F1-Macro & Accuracy \\
+        \hline
+        \texttt{Majority} & 21.5632 & 47.8086 & \\
+        % \texttt{Baly-API} & 42.3355 & 43.8356 & 42.0523 & 43.6910 & 41.6863 & 41.7993 & & & & \\
+        \texttt{Baly-baseline} (0) &  \\
+        %\texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
+        \hline
+        \texttt{Prop-Total} (1) &  \\
+        \texttt{Prop-Techniques} (2) &  \\
+        \texttt{Prop-Total-Terms} (3a) &  \\
+        \texttt{Prop-Techniques-Terms} (3b) &  \\
+        % \texttt{Prop-words-BERT} (3) & 35.4718 & 48.2387 & 35.4718 & 48.2387 \\
+        \hline
+        (0) + (1) &  \\
+        (0) + (2) &  \\
+        (1) + (2) &  \\
+        (0) + (1) + (2) &  \\
+        (0) + (3a) &  \\
+        (0) + (3b) &  \\
+        (3a) + (3b) &  \\
+        (0) + (3a) + (3b) &  \\
+        (1) + (2) + (3a) &  \\
+        (0) + (1) + (2) + (3a) &  \\
+        (1) + (2) + (3b) &  \\
+        (0) + (1) + (2) + (3b) &  \\
+        (1) + (2) + (3a) + (3b) &  \\
+        (0) + (1) + (2) + (3a) + (3b) &  \\
+        
+    \end{tabular}
+    }
+    \caption{Results NELA}
+    \label{tab:results_prop_features_classifier_nela}
+\end{table}
+
+\paragraph{Total Quantity of Propaganda}
+\paragraph{Quantity of Propaganda Techniques}
 
 Result: similar behaviour
 
+\todo{getting results from the server}
 
-How: steps needed:
+\paragraph{Feature importance}
 
-- mapping ideologies
 
-- balancing and creating the splits
+% features: ['random'] splits: random balanced: unbalanced
+% Macro-F1: 21.56329772147112
+% Accuracy: 47.808618792251124
+% Flip Error-rate: 34.68653379216378
+% MAE: 0.8687791499991266
 
-Describe:
+Media vs Random
 
-1. data subsection (needed) here or in the previous datasets of 5.2?
-
-2. results of political leaning prediction subsection (previous subsection)
+Balanced vs unbalanced
 
 
 \subsubsection{Discussion}
@@ -1528,7 +1649,7 @@ For example, the same words can be used with different meaning/targets (e.g. ``e
 As we saw in our first experiment, propaganda is not limited to any particular political leaning. Therefore, propaganda annotations and model training should be less biased to a particular political leaning, and propaganda from all political directions should be used to train such models in the future, which is likely to enhance our results given our balanced dataset. We analyse this limitation in the next experiment in Section~\ref{ssec:ps_prop_leaning_imbalanced}.
 
 \noindent\textbf{Baseline In/Comparability}: %with the real baseline of~\cite{baly2020we}.
-As noted in Section~\ref{ssec:exp_leaning}, the shared dataset by \citet{baly2020we} differs from the one described in their paper, producing incompatibility issues between our results and theirs. %the ones they report.
+As noted in Section~\ref{ssec:ps_leaning_data}, the shared dataset by \citet{baly2020we} differs from the one described in their paper, producing incompatibility issues between our results and theirs. %the ones they report.
 Additionally, re-implementing their model could have introduced other minor differences. Therefore, we believe that comparing the results from our models with those we obtained from re-implementing the model of \citet{baly2020we} offers a fairer approach. We will repeat our tests if their model becomes available, and will continue to seek other compatible baselines once other article-specific political leaning detection models become available.  
 
 \noindent\textbf{Meaning and Context}: As shown in experiment 3, some terminologies are common to Left, Right, and Centre articles. In political narrative, many words tend to be used frequently by different political-leaning groups, but for different meanings or to refer to different groups \cite{seargeant2020art}. For example, the word ``Elite'' is used by the Left to refer to people holding economic and political powers, and by the Right to point to those in the cultural and knowledge sector \cite{seargeant2020art}.  
@@ -1579,7 +1700,7 @@ All this suggests the need for a more advanced analysis on the use of certain pr
 
 \subsubsection{Conclusions}
 
-This work analysed the relationship between propaganda and political leaning detection. Using available works for propaganda detection and political leaning, we explored the effects of the propaganda features on the task of political leaning prediction. We showed that (a) propaganda is equally found in Left, Centre, and Right leaning articles, (b) detecting political-leanings with propaganda features is challenging, and (c) detection performance improves when we use the amount of each propaganda technique together with the baseline features (0)+(2).
+This work analysed the relationship between propaganda and political leaning detection. Using available works for propaganda detection and political leaning, we explored the effects of the propaganda features on the task of political leaning classification. We showed that (a) propaganda is equally found in Left, Centre, and Right leaning articles, (b) detecting political-leanings with propaganda features is challenging, and (c) detection performance improves when we use the amount of each propaganda technique together with the baseline features (0)+(2).
 
 %produced negative to mixed results. However, it also showed a small positive impact on automated political-leaning classification of articles. 
 
@@ -1595,7 +1716,7 @@ The appearance of propaganda, and the techniques used, showed not to be sufficie
 
 
 
-\subsection{\statusorange Imbalance of Propaganda datasets}
+\subsection{\statusgreen Imbalance of Propaganda datasets}
 \label{ssec:ps_prop_leaning_imbalanced}
 
 % exp 8: propaganda datasets are imbalanced
@@ -2068,7 +2189,7 @@ For other languages we do not have enough information to draw conclusions.
 
 
 
-\subsubsection{The correlation between Populism and Propaganda}
+\subsubsection{\statusgreen The correlation between Populism and Propaganda}
 
 % explain Why?
 At this point, having noticed the imbalance of the propaganda datasets and the ubiquitousness of populism, we need to verify or refute our hypothesis about the correlation between populism and propaganda.
@@ -2288,10 +2409,12 @@ Is this imbalance a problem? Are the propaganda techniques used by the left and 
 We currently can only leave these questions unanswered
 
 
-\section{Discussions}
+\section{\statusorange Discussions}
 \label{sec:ps_discussions}
 
 what was achieved, findings by RQ:
+
+\todo{take findings for each experiment, put them together and discuss}
 
 \begin{itemize}
     \item How does persuasion vary across the political spectrum? Less in the centre. More in the extremes. This was expected. Right seems to be more propagandistic, especially with some techniques (slogans, ...)
@@ -2301,7 +2424,7 @@ what was achieved, findings by RQ:
 
 limitations
 
-\section{Next}
+\section{\statusorange Next}
 \label{sec:ps_next}
 
 Propaganda features are not enough to recognise leaning, and propaganda seems to be spread around in almost all leanings. We need to find whether, by including another dimension, we can differentiate better. 
