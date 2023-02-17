@@ -49,14 +49,15 @@ In this section, we introduce the concept of \emph{Political Leaning} and the ta
 We are considering political leaning as the new ingredient of this chapter. After the introduction at the conceptual level in Section~\ref{ssec:ps_leaning_def}, we investigate and describe the available datasets that are used to perform political leaning classification in Section~\ref{ssec:ps_leaning_data} and then we analyse the existing models for the classification and reproduce the baseline in Section~\ref{ssec:ps_leaning_classifier}.
 
 
-\subsection{\statusred Political Leaning Definition}
+\subsection{\statusorange Political Leaning Definition}
 \label{ssec:ps_leaning_def}
 
 First of all, we are taking again the definition of political leaning given in Chapter~\ref{sec:lit_leaning}: 
 
-As we already described in the literature chapter~\ref{sec:lit_leaning}, 
+As we already described in the literature chapter~\ref{sec:lit_leaning}, political leaning is a broad concept that generally describes how much someone is positioned between left and right ideologies. This is an oversimplification, and you can find more details in the literature analysis performed there.
 
-From literature
+The practical definition that we take into consideration is a mono-dimensional feature that varies across an axis that links Left and Right.
+
 
 Political leaning over Left/Right axis: Left/Right definitions
 
@@ -64,7 +65,7 @@ Points from Left and Right ideologies (inspired by AllSides and Wikipedia and ci
 
 Disclaimer US vs the rest?
 
-Several axes when describing news sources: L/R, factuality, 
+% Several axes when describing news sources: L/R, factuality, 
 
 \subsection{\statusgreen Datasets for Political Leaning Classification}
 \label{ssec:ps_leaning_data}
@@ -215,7 +216,7 @@ We initially experimented with the data collected from this dataset, but we quic
 This dataset is derived from \emph{Allsides Headline Roundup\texttrademark}, as it was built in the work of~\citet{baly2020we} by downloading and cleaning from AllSides and from the respective news outlets all the articles (dataset including headlines until 21 July 2020).
 
 The dataset therefore 
-% % FROM TTO2019
+% % FROM TTO2020
 % The dataset we use is from~\citet{baly2020we}, and
 consists of articles in English language from over 800 sources (majority from the US), labelled for their political leaning (Left, Centre or Right).\footnote{\url{https://github.com/ramybaly/Article-Bias-Prediction}}
 This dataset contains several attributes for each article: full text (collected from several news websites and cleaned), political leaning, topic, news source, and author name (attributes from AllSides).
@@ -356,7 +357,7 @@ We will use all these subsets in the following Section~\ref{ssec:ps_prop_leaning
 
 % Problems: learning the source instead of learning L/R task
 
-% FROM TTO2019
+% FROM TTO2020
 
 Political leaning detection models have been produced for general media sources~\cite{budak} or for 
 specific political corpora such as congressional records~\cite{gentzkow}, political party websites~\cite{yan2017perils}, and political blogs~\cite{ahmed201}.  
@@ -971,7 +972,7 @@ More in detail, we want to see if it is possible to recognise the political lean
 We have several reasons to think that political leaning and propaganda are related; in other words, that propaganda changes across the political spectrum.
 First of all, the results of our previous experiment that show differences in the quantity of propaganda techniques and also in the specific terms used.
 
-% intro of TTO2019
+% intro of TTO2020
 We have also reasons coming from the field of automated news analysis, where there is growing interest in understanding and classifying news articles based on their political ideology.
 Various automated approaches have been recently proposed for the classification of articles with regards to political leaning~\cite{baly2020we} or credibility~\cite{horne2018assessing}. Others focused on capturing the usage of various propaganda techniques~\cite{da2019fine} or argumentation techniques~\cite{lippi2016argumentation}. However, the role that propaganda could play in automatically determining the leaning of articles has not been thoroughly investigated.
 Propaganda is usually directly linked to the ideology of articles by having the ``intention of influencing people's opinions''.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}} To this end, we aim to better understand the relationship between propaganda analysis and the identification of political leaning of articles, simplified to three categories: \textit{Left}, \textit{Centre}, and \textit{Right}.
@@ -1509,24 +1510,24 @@ Table~\ref{TODO} shows the results
   %\small
     \resizebox{\textwidth}{!}{
     \begin{tabular}{l|rr|rr|rr|rr}
-        & \multicolumn{2}{c}{\texttt{NELA-Random-Imbalanced}} & \multicolumn{2}{c}{\texttt{NELA-Random-Balanced}} & \multicolumn{2}{c}{\texttt{NELA-Media-Imbalanced}} & \multicolumn{2}{c}{\texttt{NELA-Media-Balanced}} \\
-        Model & F1-Macro & Accuracy & F1-Macro & Accuracy \\
+        & \multicolumn{2}{c}{\texttt{Random-Imbalanced}} & \multicolumn{2}{c}{\texttt{Random-Balanced}} & \multicolumn{2}{c}{\texttt{Media-Imbalanced}} & \multicolumn{2}{c}{\texttt{Media-Balanced}} \\
+        Model & F1-Macro & Accuracy & F1-Macro & Accuracy & F1-Macro & Accuracy & F1-Macro & Accuracy \\
         \hline
-        \texttt{Majority} & 21.5632 & 47.8086 & \\
+        \texttt{Majority} & 21.5632 & 47.8086 & 16.6666 & 33.3333 & \\
         % \texttt{Baly-API} & 42.3355 & 43.8356 & 42.0523 & 43.6910 & 41.6863 & 41.7993 & & & & \\
-        \texttt{Baly-baseline} (0) &  \\
+        \texttt{Baly-baseline} (0) & 69.2076 & 71.2211 & 70.9808 & 70.8977 & \\
         %\texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
         \hline
-        \texttt{Prop-Total} (1) &  \\
-        \texttt{Prop-Techniques} (2) &  \\
-        \texttt{Prop-Total-Terms} (3a) &  \\
-        \texttt{Prop-Techniques-Terms} (3b) &  \\
+        \texttt{Prop-Total} (1) & 21.5632 & 47.8086 & 29.5603 & 35.2938 &  \\
+        \texttt{Prop-Techniques} (2) & 25.6280 & 47.8404 & 38.4605 & 39.7791 & \\
+        \texttt{Prop-Total-Terms} (3a) & 41.3193 & 49.6682 & 41.8435 & 42.3996 & \\
+        \texttt{Prop-Techniques-Terms} (3b) & & & 39.3319 & 41.0597 &  \\
         % \texttt{Prop-words-BERT} (3) & 35.4718 & 48.2387 & 35.4718 & 48.2387 \\
         \hline
-        (0) + (1) &  \\
-        (0) + (2) &  \\
-        (1) + (2) &  \\
-        (0) + (1) + (2) &  \\
+        (0) + (1) & & & 70.9899 & 70.9057 &   \\
+        (0) + (2) & & & 71.0331 & 70.9510 & \\
+        (1) + (2) & & & 38.5816 &  39.8064 &  \\
+        (0) + (1) + (2) & & & -69.6198 & -71.8145 & \\
         (0) + (3a) &  \\
         (0) + (3b) &  \\
         (3a) + (3b) &  \\
@@ -1559,6 +1560,11 @@ Result: similar behaviour
 % Accuracy: 47.808618792251124
 % Flip Error-rate: 34.68653379216378
 % MAE: 0.8687791499991266
+% features: ['bert'] splits: random balanced: unbalanced
+% Macro-F1: 69.20762604343277
+% Accuracy: 71.22119936415882
+% Flip Error-rate: 16.809265114329136
+% MAE: 0.45588065750170315
 
 Media vs Random
 
