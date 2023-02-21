@@ -1095,29 +1095,29 @@ This combination is performed by concatenating the inputs to the SoftMax dense l
         \hline
         \texttt{Majority} & 21.0286 & 46.0769 & 21.0286 & 46.0769 \\
         % \texttt{Baly-API} & 42.3355 & 43.8356 & 42.0523 & 43.6910 & 41.6863 & 41.7993 & & & & \\
-        \texttt{Baly-baseline} (0) & $\star$56.4447 & $\star$58.6153 & 40.8647 & 46.2307 \\
+        \texttt{Baly-baseline (0)} & $\star$56.4447 & $\star$58.6153 & 40.8647 & 46.2307 \\
         %\texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
         \hline
-        \texttt{Prop-Total} (1) & 36.2966 & 42.3076 & 28.8285 & 41.5384 \\
-        \texttt{Prop-Techniques} (2) & 36.7166 & 40.6153 & 33.0682 & 40.5384 \\
-        \texttt{Prop-Total-Terms} (3a) & 42.0261 & 43.5384 & 41.5915 & 43.3076 \\
-        \texttt{Prop-Techniques-Terms} (3b) & 42.4357 & 43.2307 & 40.8192 & 41.9230 \\
+        \texttt{Prop-Total (1)} & 36.2966 & 42.3076 & 28.8285 & 41.5384 \\
+        \texttt{Prop-Techniques (2)} & 36.7166 & 40.6153 & 33.0682 & 40.5384 \\
+        \texttt{Prop-Total-Terms (3a)} & 42.0261 & 43.5384 & 41.5915 & 43.3076 \\
+        \texttt{Prop-Techniques-Terms (3b)} & 42.4357 & 43.2307 & 40.8192 & 41.9230 \\
         % \texttt{Prop-words-BERT} (3) & 35.4718 & 48.2387 & 35.4718 & 48.2387 \\
         \hline
-        (0) + (1) & 55.7786 & 57.7692 & \textbf{42.1847} & \textbf{47.5384} \\
-        (0) + (2) & 54.9714 & 56.9999 & \textbf{42.4362} & \textbf{$\star$47.6153} \\
-        (1) + (2) & 36.5217 & 40.4615 & 33.6202 & 41.0000 \\
-        (0) + (1) + (2) & 55.2121 & 57.1538 & \textbf{42.2102} & \textbf{47.3846} \\
-        (0) + (3a) & 54.6287 & 56.6923 & \textbf{41.9766} & \textbf{46.5384} \\
-        (0) + (3b) & 54.8004 & 56.3076 & \textbf{41.9965} & 46.2307 \\
-        (3a) + (3b) & 44.3506 & 46.3076 & \textbf{41.8725} & 44.3076 \\
-        (0) + (3a) + (3b) & 53.2549 & 54.7692 & \textbf{42.0576} & 45.92307 \\
-        (1) + (2) + (3a) & 42.0611 & 43.8461 & \textbf{42.5401} & 44.5384 \\
-        (0) + (1) + (2) + (3a) & 54.0515 & 56.0769 & \textbf{42.2358} & \textbf{46.8461} \\
-        (1) + (2) + (3b) & 44.3166 & 45.6153 & \textbf{41.9613} & 44.0000 \\
-        (0) + (1) + (2) + (3b) & 45.6153 & 45.6153 & \textbf{41.9292} & 46.2307 \\
-        (1) + (2) + (3a) + (3b) & 45.0456 & 47.2307 & \textbf{$\star$43.4564} & 45.9230 \\
-        (0) + (1) + (2) + (3a) + (3b) & 53.6459 & 53.6459 & \textbf{42.5509} & \textbf{46.5384} \\
+        \texttt{(0)+(1)} & 55.7786 & 57.7692 & \textbf{42.1847} & \textbf{47.5384} \\
+        \texttt{(0)+(2)} & 54.9714 & 56.9999 & \textbf{42.4362} & \textbf{$\star$47.6153} \\
+        \texttt{(1)+(2)} & 36.5217 & 40.4615 & 33.6202 & 41.0000 \\
+        \texttt{(0)+(1)+(2)} & 55.2121 & 57.1538 & \textbf{42.2102} & \textbf{47.3846} \\
+        \texttt{(0)+(3a)} & 54.6287 & 56.6923 & \textbf{41.9766} & \textbf{46.5384} \\
+        \texttt{(0)+(3b)} & 54.8004 & 56.3076 & \textbf{41.9965} & 46.2307 \\
+        \texttt{(3a)+(3b)} & 44.3506 & 46.3076 & \textbf{41.8725} & 44.3076 \\
+        \texttt{(0)+(3a)+(3b)} & 53.2549 & 54.7692 & \textbf{42.0576} & 45.92307 \\
+        \texttt{(1)+(2)+(3a)} & 42.0611 & 43.8461 & \textbf{42.5401} & 44.5384 \\
+        \texttt{(0)+(1)+(2)+(3a)} & 54.0515 & 56.0769 & \textbf{42.2358} & \textbf{46.8461} \\
+        \texttt{(1)+(2)+(3b)} & 44.3166 & 45.6153 & \textbf{41.9613} & 44.0000 \\
+        \texttt{(0)+(1)+(2)+(3b)} & 45.6153 & 45.6153 & \textbf{41.9292} & 46.2307 \\
+        \texttt{(1)+(2)+(3a)+(3b)} & 45.0456 & 47.2307 & \textbf{$\star$43.4564} & 45.9230 \\
+        \texttt{(0)+(1)+(2)+(3a)+(3b)} & 53.6459 & 53.6459 & \textbf{42.5509} & \textbf{46.5384} \\
         
     \end{tabular}
     % }
@@ -1513,7 +1513,7 @@ Further investigation is needed to better capture what each of these words means
 With the current analysis, we can say that \textbf{the answer to RQ2.3 is a partial Yes: using as feature the terms of propaganda achieves a very similar score to the baseline (rows indicated with \texttt{(3a)} and \texttt{(3b)}), and when added to the baseline features, it helps to achieve a small (but not significant, \textit{p-value=0.657}) improvement}. % NOT SIGNIFICANT IMPROVEMENT: p-value=0.657
 
 
-\subsubsection{\statusorange Reproduction on \texttt{NELA} dataset}
+\subsubsection{\statusgreen Reproduction on \texttt{NELA} dataset}
 
 % \todo{take from experiment 6 document}
 % % 6: classifier (propaganda → leaning) on other datasets
@@ -1549,26 +1549,26 @@ For computing the F1 and accuracy metrics, we accumulate over the 5 folds the va
         \texttt{Baly-baseline} (0) & 69.2076 & 71.2211 & 70.9808 & 70.8977 & 45.1628 & 50.5888 & 46.2165 & 46.0180 \\
         %\texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
         \hline
-        \texttt{Prop-Total} (1) & 21.5632 & 47.8086 & 29.5603 & 35.2938 & 21.7242 & 47.8372 & 32.4953 & 33.0485 \\
-        \texttt{Prop-Techniques} (2) & 25.6280 & 47.8404 & 38.4605 & 39.7791 & 24.2318 & 46.1973 & 36.3153 & 37.5012 \\
-        \texttt{Prop-Total-Terms} (3a) & 41.3193 & 49.6682 & 41.8435 & 42.3996 & 37.0437 & 45.3760 & 36.8032 & 36.8067 \\
-        \texttt{Prop-Techniques-Terms} (3b) & 38.3522 & 50.3530 & 39.3319 & 41.0597 & 35.3254 & 47.3457 & 35.6495 & 35.8892 \\
+        \texttt{Prop-Total (1)} & 21.5632 & 47.8086 & 29.5603 & 35.2938 & 21.7242 & 47.8372 & 32.4953 & 33.0485 \\
+        \texttt{Prop-Techniques (2)} & 25.6280 & 47.8404 & 38.4605 & 39.7791 & 24.2318 & 46.1973 & 36.3153 & 37.5012 \\
+        \texttt{Prop-Total-Terms (3a)} & 41.3193 & 49.6682 & 41.8435 & 42.3996 & 37.0437 & 45.3760 & 36.8032 & 36.8067 \\
+        \texttt{Prop-Techniques-Terms (3b)} & 38.3522 & 50.3530 & 39.3319 & 41.0597 & 35.3254 & 47.3457 & 35.6495 & 35.8892 \\
         % \texttt{Prop-words-BERT} (3) & 35.4718 & 48.2387 & 35.4718 & 48.2387 \\
         \hline
-        (0) + (1) & \textbf{69.2085} & \textbf{71.2271} & \textbf{70.9899} & \textbf{70.9057} & 45.1531 & \textbf{50.6024} & \textbf{46.2288} & \textbf{46.0346}  \\
-        (0) + (2) & \textbf{69.2905} & \textbf{71.2991} & \textbf{71.0331} & \textbf{70.9510} & \textbf{45.1835} & \textbf{50.6412} & \textbf{46.3481} & \textbf{46.1550} \\
-        (1) + (2) & 25.7629 & 47.8299 & 38.5816 & 39.8064 & 24.4286 & 46.2459 & 36.2956 & 37.1280 \\
-        (0) + (1) + (2) & \textbf{69.2994} & \textbf{71.3019} & \textbf{$\star$71.0358} & \textbf{$\star$70.9529} & \textbf{45.1998} & \textbf{50.6524} & \textbf{46.3457} & \textbf{46.1517} \\
-        (0) + (3a) & 65.7886 & 68.5003 & 68.5460 & 68.4628 & 44.7002 & 49.4820 & 46.1694 & 46.1916 \\
-        (0) + (3b) & 66.1823 & 68.7194 & 68.5074 & 68.4349 & 45.0300 & 49.8181 & \textbf{46.4617} & \textbf{46.4431} \\
-        (3a) + (3b) & 41.4558 & 49.5529 & 42.5407 & 42.6677 & 37.0566 & 45.1370 & 36.5396 & 36.5419 \\
-        (0) + (3a) + (3b) & 65.0796 & 67.8463 & 67.4347 & 67.3705 & & & 45.9924 & 46.0147  \\
-        (1) + (2) + (3a) & 41.6843 & 49.9994 & 42.2068 & 42.7608 & & & 36.4236 & 36.4208   \\
-        (0) + (1) + (2) + (3a) & 65.7779 & 68.4993 & 68.5715 & 68.4921 & & & \textbf{46.2871} & \textbf{46.3227}  \\
-        (1) + (2) + (3b) & 38.8414 & 50.4508 & 39.6869 & 41.3132 & & & 35.8977 & 36.0895  \\
-        (0) + (1) + (2) + (3b) & 66.1066 & 68.6778 & 68.5074 & 68.4376 & & & \textbf{$\star$46.6062} & \textbf{$\star$46.6054} \\
-        (1) + (2) + (3a) + (3b) & & & 42.6323 & 42.7555 & & & 36.7762 & 36.8838 \\
-        (0) + (1) + (2) + (3a) + (3b) & & & 67.4353 & 67.3718 & & & 46.05313 & 46.0858  \\
+        \texttt{(0)+(1)} & \textbf{69.2085} & \textbf{71.2271} & \textbf{70.9899} & \textbf{70.9057} & 45.1531 & \textbf{50.6024} & \textbf{46.2288} & \textbf{46.0346}  \\
+        \texttt{(0)+(2)} & \textbf{69.2905} & \textbf{71.2991} & \textbf{71.0331} & \textbf{70.9510} & \textbf{45.1835} & \textbf{50.6412} & \textbf{46.3481} & \textbf{46.1550} \\
+        \texttt{(1)+(2)} & 25.7629 & 47.8299 & 38.5816 & 39.8064 & 24.4286 & 46.2459 & 36.2956 & 37.1280 \\
+        \texttt{(0)+(1)+(2)} & \textbf{$\star$69.2994} & \textbf{$\star$71.3019} & \textbf{$\star$71.0358} & \textbf{$\star$70.9529} & \textbf{$\star$45.1998} & \textbf{$\star$50.6524} & \textbf{46.3457} & \textbf{46.1517} \\
+        \texttt{(0)+(3a)} & 65.7886 & 68.5003 & 68.5460 & 68.4628 & 44.7002 & 49.4820 & 46.1694 & 46.1916 \\
+        \texttt{(0)+(3b)} & 66.1823 & 68.7194 & 68.5074 & 68.4349 & 45.0300 & 49.8181 & \textbf{46.4617} & \textbf{46.4431} \\
+        \texttt{(3a)+(3b)} & 41.4558 & 49.5529 & 42.5407 & 42.6677 & 37.0566 & 45.1370 & 36.5396 & 36.5419 \\
+        \texttt{(0)+(3a)+(3b)} & 65.0796 & 67.8463 & 67.4347 & 67.3705 & 44.4791 & 49.1030 & 45.9924 & 46.0147  \\
+        \texttt{(1)+(2)+(3a)} & 41.6843 & 49.9994 & 42.2068 & 42.7608 & 36.9627 & 45.4902 & 36.4236 & 36.4208   \\
+        \texttt{(0)+(1)+(2)+(3a)} & 65.7779 & 68.4993 & 68.5715 & 68.4921 & 44.8164 & 49.5117 & \textbf{46.2871} & \textbf{46.3227}  \\
+        \texttt{(1)+(2)+(3b)} & 38.8414 & 50.4508 & 39.6869 & 41.3132 & 35.7261 & 47.4435 & 35.8977 & 36.0895  \\
+        \texttt{(0)+(1)+(2)+(3b)} & 66.1066 & 68.6778 & 68.5074 & 68.4376 & 45.0148 & 49.8192 & \textbf{$\star$46.6062} & \textbf{$\star$46.6054} \\
+        \texttt{(1)+(2)+(3a)+(3b)} & 41.7298 & 49.8055 & 42.6323 & 42.7555 & 36.8644 & 45.1150 & 36.7762 & 36.8838 \\
+        \texttt{(0)+(1)+(2)+(3a)+(3b)} & 65.0692 & 67.8439 & 67.4353 & 67.3718 & 44.5016 & 49.1166 & 46.05313 & 46.0858  \\
         
     \end{tabular}
     }
@@ -1585,46 +1585,229 @@ First of all, if we consider the macro categories of baseline / propaganda featu
 But in this case, for each of the 4 splitting methods, we have that some feature combinations are better than the baseline.
 
 % random vs media
-Comparing Random vs Media splits, we have confirmed also with this dataset that the Media splits are harder to learn. Having the articles from each media appear only or in the training set or in the testing set, the model finds at prediction time only news articles that come from unknown sources and whose linguistical style is unknown. Therefore, it cannot use the shortcut of simply recognising the news source style and then output the corresponding leaning.
+Comparing Random vs Media splits, we have confirmed also with this dataset that the Media splits are harder to learn. Having the articles from each media source appear only or in the training set or in the testing set, the model finds at prediction time only news articles that come from unknown sources and whose linguistical style is unknown. Therefore, it cannot use the shortcut of simply recognising the news source style and then output the corresponding leaning.
 
-Also here we see that the propaganda sources considered on their own have a smaller gap with respect to the baseline in the media splits (less than 10\% in the media splits, almost 30\% in the random splits).
+Also here we see that the propaganda features considered on their own have a smaller gap with respect to the baseline in the media splits (less than 10\% in the media splits, almost 30\% in the random splits).
+This means that they are able to generalise better with unseen news sources.
 
+These improved generalisation abilities over the media splits, also reflect on the improvements over the baseline:
+\begin{itemize}
+    \item with \texttt{Random-Balanced}, the delta between \texttt{(0)+(1)+(2)} and \texttt{(0)} is: 0.055\% F1, 0.0552\% Accuracy;
+    \item with \texttt{Media-Balanced}, the same delta is: 0.1292\% F1, 0.1337\% Accuracy;
+    \item the best result of \texttt{Media-Balanced} \texttt{(0)+(1)+(2)+(3b)} has a way bigger delta from \texttt{(0)}: 0.3897\% F1, 0.5874\% Accuracy;
+    \item \texttt{Media-Balanced} has many more rows that are superior to the baseline.
+\end{itemize}
+% Media the improvement is higher:
+% (0.3897\% F1, 0.5874\% accuracy media-balanced (0)(1)(2)(3b))
+% (0.1292\% F1, 0.1337\% accuracy media-balanced (0)(1)(2)
+% (0.055\% F1, 0.0552\% accuracy random-balanced (0)(1)(2)
 
-Media the improvement is higher:
-(0.3897\% F1, 0.5874\% accuracy media-balanced (0)(1)(2)(3b))
-(0.055\% F1, 0.0552\% accuracy random-balanced (0)(1)(2)
-
-\todo{Finish when all results are there}
+The propaganda features, also with this dataset, show better results with the Media splits.
 
 % balanced vs imbalanced
-Balanced and imbalanced datasets have very similar results.
+Instead, Balanced and Imbalanced splits have very similar results when considering the Random splits. However, there is some difference in the Media splits, where balancing the dataset leads to more positive results (better than baseline) for the propaganda features.
 % But we can see that the gap between the baseline and propaganda features on their own is smaller
 
+Compared to the results over the \texttt{Baly} dataset, we can see that we have far more consistent results (the row of the table that has overall best results is \texttt{(0)+(1)+(2)}, only surpassed in \texttt{Media-Balanced} by better combinations).
+This may be the result of the cross-validation process that provides more stable results with respect to a single train-test scenario. 
+
+\paragraph{Significance}
 % which results are significant
-When tested for statistical significance with the McNemar test, 
+We then tested for statistical significance all the values that are denoted in \textbf{bold} in Table~\ref{tab:results_prop_features_classifier_nela} with the McNemar test.
+
+\begin{table}[!htbp]
+    \centering
+        \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|r|r|r|r}
+        Model & \texttt{Random-Imbalanced} & \texttt{Random-Balanced} & \texttt{Media-Imbalanced} & \texttt{Media-Balanced} \\
+        \hline
+        \texttt{(0)+(1)} & .741 & .717 & .457 & .408 \\
+        \texttt{(0)+(2)} & \textbf{.003} & .088 & .055 & \textbf{1.15e-5}\\
+        \texttt{(0)+(1)+(2)} & \textbf{.001} & .069 & \textbf{.015} & \textbf{1.68e-5} \\
+        \texttt{(0)+(3b)} & & & & \textbf{1.45e-5} \\
+        \texttt{(0)+(1)+(2)+(3a)} & & & & \textbf{.004} \\
+        \texttt{(0)+(1)+(2)+(3b)} & & & & \textbf{2.77e-9}
+    \end{tabular}
+    }
+    \caption{p-values of features set that have improvements in NELA dataset}
+    \label{tab:pvalues_nela_classifier}
+\end{table}
+
+The results are shown in Table~\ref{tab:pvalues_nela_classifier}, that is showing the p-values. We indicate in \textbf{bold} the values that satisfy the threshold of significance (0.05) and are therefore significant. Some cells are not shown because the corresponding F1/Accuracy values are lower than the baseline.
+
+We can see that only some of the results pass the significance test. The \texttt{Media-Balanced} passes it for almost all the feature sets, with very low p-values. 
+
+% \texttt{(0)+(1)}
+% - random imbalanced: statistic=1166.000, p-value=0.741 --> non-significant
+% - random balanced: statistic=455.000, p-value=0.717 --> non-significant
+% - media imbalanced: statistic=1286.000, p-value=0.457 --> non-significant
+% - media balanced: statistic=409.000, p-value=0.408 --> non-significant
+
+% \texttt{(0)+(2)}
+% - random imbalanced: statistic=2636.000, p-value=0.003 --> significant
+% - random balanced: statistic=1035.000, p-value=0.088 --> non-significant
+% - media imbalanced: statistic=2942.000, p-value=0.055 --> non-significant
+% - media balanced: statistic=991.000, p-value=0.0000115649 --> significant
 
 
-But also in this case, even if the results are statistically significant, the margins are very narrow.
+% \texttt{(0)+(1)+(2)}
+% - Random imbalanced: 
+% contingency: [[ 79823.   2552.]
+%              [  2321. 201539.]]
+% statistic=2321.000, p-value=0.001 --> significant
 
-\paragraph{What the models learn}
+% - Random balanced:
+% Contingency: [[ 42684.   1061.]
+%              [   978. 105592.]]
+% statistic=978.000, p-value=0.069 --> non-significant
 
-Analysis of what the models learned
+% - Media imbalanced:
+% [[138562.   2870.]
+%  [  2688. 142115.]]
+%  statistic=2688.000, p-value=0.015 --> significant
 
-confusion matrix analysis (where is the error)
+% - Media balanced:
+% [[79961.  1182.]
+%  [  981. 68191.]]
+% statistic=981.000, p-value=0.0000168321 --> significant
 
-weights analysis: is it similar?
+% \texttt{(0)+(3b)}:
+% - media balanced:
+% [[69993. 11150.]
+%  [10511. 58661.]]
+% statistic=10511.000, p-value=0.0000145614 --> significant
+
+% \texttt{(0)+(1)+(2)+(3a)}:
+% [[67978. 13165.]
+%  [12707. 56465.]]
+%  statistic=12707.000, p-value=0.0044935554 --> significant
+ 
+% \texttt{(0)+(1)+(2)+(3b)}:
+% [[69691. 11452.]
+%  [10569. 58603.]]
+% statistic=10569.000, p-value=0.00000000277 --> significant
+
+But also with this dataset, even if the results are statistically significant, the margins are very narrow.
+As noted before, the highest delta of improvement in Table~\ref{tab:results_prop_features_classifier_nela} is 0.3897\% F1 and 0.5874\% Accuracy.
+
+\paragraph{Confusion Analysis}
+
+We want to understand with this dataset what the models learn. Here we analyse the confusion matrices and in the next paragraph the feature importances.
 
 
-% features: ['random'] splits: random balanced: unbalanced
-% Macro-F1: 21.56329772147112
-% Accuracy: 47.808618792251124
-% Flip Error-rate: 34.68653379216378
-% MAE: 0.8687791499991266
-% features: ['bert'] splits: random balanced: unbalanced
-% Macro-F1: 69.20762604343277
-% Accuracy: 71.22119936415882
-% Flip Error-rate: 16.809265114329136
-% MAE: 0.45588065750170315
+% random unbalanced:
+% - tot quantity, prop tech quantities: predict almost everything Right
+% - bert vs bert+1+2 (significant): 
+%   - actual Left (correct almost the same, wrong from Right to Center)
+%   - actual center (more correct, from L and R to center)
+%   - actual Right (more correct, from L to C, from C to R)
+
+% random balanced:
+% - tot quantity: predict almost everything center/right
+% - prop tech quantities: mostly center/right
+% - bert vs bert+1+2 (not significant):
+%   - actual Left (+20 correct, 10 from Center 10 from Right)
+%   - actual Center (from Center to L and R --> wrong)
+%   - actual Right (86 from L to R --> good)
+
+% media unbalanced:
+% - tot quantity: all Right
+% - prop tech quantities: almost all Right (some Left)
+% - bert vs bert+1+2 (significant):
+%   - actual Left (+66 correct, 100 from Right to Center)
+%   - actual Center (-9 correct, 30 from Left to Right)
+%   - actual Right (+125 correct, center +60 from Left)
+
+% media balanced:
+% - tot quantity / tech quantities: way more balanced, but still bias towards 
+% - bert vs bert+1+2 (significant):
+%   - actual Left (+61 correct, 46 more in Center, 107 less Right --> good)
+%   - actual Center (+161 correct, -137 Left, -24 Right --> good)
+%   - actual Right (-21 Right, +49 Center, -28 Left)
+% - bert vs bert+1+2+3b (significant, best)
+%   - actual Left (-1359 correct, -396 Center, +1755 Right --> very bad)
+%   - actual Center (+689 correct, -2286 Left, +1597 Right --> bad)
+%   - actual Right (+1553 correct, +781 Center, -2334 Left --> very good)
+
+% Figures to include: 2 columns (splits), 3 rows (models)
+% random unbalanced:
+% - bert: good for R and also (less for L), not good for center
+% - prop quantities: Right bias
+% - combined:
+
+% media balanced:
+% - bert left bias in prediction
+% - prop quantities Right/Center bias
+% - combined: drifting a bit to the Right (and problems? what is better? still unbalanced to Left)
+
+\begin{figure}[!htb]
+    \centering
+     \begin{subfigure}[b]{0.48\linewidth}
+         \centering
+         \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert.pdf}
+         \caption{\texttt{Baly-baseline (0)}}
+         \label{fig:nela_confusion_bert}
+     \end{subfigure}
+    %  \hfill
+    % \begin{subfigure}[b]{0.48\linewidth}
+    %      \centering 
+    %      \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_propaganda_percentages.pdf}
+    %      \caption{\texttt{Prop-Techniques (2)}}
+    %      \label{fig:nela_confusion_prop_quantities}
+    %  \end{subfigure}
+    \begin{subfigure}[b]{0.48\linewidth}
+         \centering 
+         \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_propaganda_techniques_tf_idf.pdf}
+         \caption{\texttt{Prop-Techniques-Terms (3b)}}
+         \label{fig:nela_confusion_prop}
+     \end{subfigure}
+    \begin{subfigure}[b]{0.48\linewidth}
+         \centering 
+         \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert,propaganda_total_percentage,propaganda_percentages,propaganda_techniques_tf_idf.pdf}
+         \caption{\texttt{(0)+(1)+(2)+(3b)}}
+         \label{fig:nela_confusion_combined}
+     \end{subfigure}
+    \caption{Confusion matrix NELA dataset: baseline, propaganda feature, combination}
+    \label{fig:nela_confusion}
+\end{figure}
+
+Figure~\ref{fig:nela_confusion} shows the inspection of the confusion matrix from three features sets on the \texttt{Media-Balanced} splits.
+In Subfigure~\ref{fig:nela_confusion_bert} we can see that the baseline is having problems with the Left.
+On one side, articles that are actually from the Left are being predicted as being from the Center and Right.
+At the same time, articles from Center and Right are being predicted as being from the Left. And this results in the model to be biased towards the Left (56018 articles, with respect to the actual 50105).
+
+In Subfigure~\ref{fig:nela_confusion_prop} instead, we see that the considered propaganda feature has a strong bias towards the Right, as it predicts mostly Right and Center classes (65728 articles, compared to the actual 50105).
+
+By combining the baseline feature with many propaganda features (\texttt{(0)+(1)+(2)+(3b)}) that all have this bias towards the Right, the previous Table~\ref{tab:results_prop_features_classifier_nela} showed that we have an improvement and this improvement tested as significant.
+Subfigure~\ref{fig:nela_confusion_combined} shows what happens in details. The overall bias of the BERT baseline is compensated with the bias of the propaganda features (predictions: 50039 Left, 50854 Center, 49422 Right).
+The values on the main diagonal are higher for the Right (+1553) and the Center (+689), while they are lower for the Left (-1359).
+
+In the other splits we have a similar when comparing \texttt{(0)+(1)+(2)} to the baseline. We selected this example because it has the highest delta in F1 and Accuracy, and highest significance. 
+
+% media balanced:
+% - bert left bias in prediction
+% - prop quantities Right/Center bias
+% - combined: drifting a bit to the Right (and problems? what is better? still unbalanced to Left)
+% - bert vs bert+1+2+3b (significant, best)
+%   - actual Left (-1359 correct, -396 Center, +1755 Right --> very bad)
+%   - actual Center (+689 correct, -2286 Left, +1597 Right --> bad)
+%   - actual Right (+1553 correct, +781 Center, -2334 Left --> very good)
+
+\paragraph{Feature Importance Analysis}
+
+For the feature importance, we have very similar weights in the \texttt{Prop-Total} and \texttt{Prop-Techniques} with respect to the \texttt{Baly} dataset.
+
+For the propaganda terms, we analyse here the weights given to the \texttt{Prop-Techniques-Terms (3b)} on the \texttt{Media-Balanced}, that is the feature that we analysed above for the confusion analysis.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{figures/nela_allsides_subset_media_balanced_weights_propaganda_techniques_tf_idf_2.pdf}
+    \caption{Feature weights of the \texttt{Prop-Techniques-Terms (3b)} features on NELA dataset}
+    \label{fig:nela_weights_prop_tech_terms}
+\end{figure}
+
+We can see in Figure~\ref{fig:nela_weights_prop_tech_terms} that we have most of the terms more associated with the Left and Right, and less with Center. We can note that the term \textit{power} in the \texttt{Name\_Calling} technique is associated by the model to the Right. Or also \textit{justice} in \texttt{Doubt}, or \textit{kill} in \texttt{Slogan}.
+In the Left instead we can notice \textit{violent} in \texttt{Name\_Calling}, \textit{civil}, \textit{democratic} and \textit{state} in \texttt{Flag\_Waving}.
 
 
 
@@ -1708,14 +1891,16 @@ For example, the same words can be used with different meaning/targets (e.g. ``e
 
 
 % Limitations
-\noindent\textbf{Imbalance in propaganda detection}: One limitation is that only articles from the Right political spectrum were used for training the propaganda detection tool provided in \cite{da2019fine}. %, which we use in our analysis. 
+\paragraph{Imbalance in propaganda detection} One limitation is that only articles from the Right political spectrum were used for training the propaganda detection tool provided in \cite{da2019fine}. %, which we use in our analysis. 
 As we saw in our first experiment, propaganda is not limited to any particular political leaning. Therefore, propaganda annotations and model training should be less biased to a particular political leaning, and propaganda from all political directions should be used to train such models in the future, which is likely to enhance our results given our balanced dataset. We analyse this limitation in the next experiment in Section~\ref{ssec:ps_prop_leaning_imbalanced}.
 
-\noindent\textbf{Baseline In/Comparability}: %with the real baseline of~\cite{baly2020we}.
+\paragraph{Baseline In/Comparability} %with the real baseline of~\cite{baly2020we}.
 As noted in Section~\ref{ssec:ps_leaning_data}, the shared dataset by \citet{baly2020we} differs from the one described in their paper, producing incompatibility issues between our results and theirs. %the ones they report.
 Additionally, re-implementing their model could have introduced other minor differences. Therefore, we believe that comparing the results from our models with those we obtained from re-implementing the model of \citet{baly2020we} offers a fairer approach. %We will repeat our tests if their model becomes available, and will continue to seek other compatible baselines once other article-specific political leaning detection models become available. 
 
-\noindent\textbf{Meaning and Context}: As shown in experiment 3, some terminologies are common to Left, Right, and Centre articles. In political narrative, many words tend to be used frequently by different political-leaning groups, but for different meanings or to refer to different groups \cite{seargeant2020art}. For example, the word ``Elite'' is used by the Left to refer to people holding economic and political powers, and by the Right to point to those in the cultural and knowledge sector \cite{seargeant2020art}.  
+Also related to comparabilty, we have to underline that the splits shared with the \texttt{baly} dataset (especially the media splits) may not be the best strategy, as we have seen across the cross-validation performed on the media splits of the \texttt{Nela} dataset, results change quite significantly across the folds because very different news sources are used for training/testing. Therefore, using cross-validation provides results that are way more meaningful and representative of the whole dataset.
+
+\paragraph{Meaning and Context} As shown in experiment 3, some terminologies are common to Left, Right, and Centre articles. In political narrative, many words tend to be used frequently by different political-leaning groups, but for different meanings or to refer to different groups \cite{seargeant2020art}. For example, the word ``Elite'' is used by the Left to refer to people holding economic and political powers, and by the Right to point to those in the cultural and knowledge sector \cite{seargeant2020art}.  
 Figure~\ref{fig:propaganda_example_2} shows a sentence where the \texttt{Loaded\_Language} propaganda technique was detected. In such complex examples, the structure of the discourse and framing of arguments take an essential role in discerning political leaning. 
 
 In such cases, it might be helpful to consider propaganda techniques in relation to the surrounding context, similarly to the idea proposed in~\citet{chen2017opinion} where semantic entity analysis was used to determine opinion targets. 
@@ -1740,9 +1925,9 @@ All this suggests the need for a more advanced analysis on the use of certain pr
 %     \label{fig:my_label}
 % \end{figure}
 
-%\noindent\textbf{Machine Learning Models}: In this paper, we pinned our analysis on neural network models. The additional features we calculated (e.g. TF-IDF, propaganda techniques) were added to NN models. This choice is influenced by the leading performance of such models in similar works. However, for completeness, we plan  to further test our propaganda-based features using other simpler machine learning models. %\textcolor{red}{Martino, check this plz} 
+%\paragraph{Machine Learning Models}: In this paper, we pinned our analysis on neural network models. The additional features we calculated (e.g. TF-IDF, propaganda techniques) were added to NN models. This choice is influenced by the leading performance of such models in similar works. However, for completeness, we plan  to further test our propaganda-based features using other simpler machine learning models. %\textcolor{red}{Martino, check this plz} 
 
-%\noindent\textbf{Context}: %features considered do not have awareness of the context.
+%\paragraph{Context}: %features considered do not have awareness of the context.
 %Articles from different political sides about the same event will naturally overlap in terminology given the shared underlining story and context. 
 
 
@@ -1763,7 +1948,8 @@ All this suggests the need for a more advanced analysis on the use of certain pr
 
 \subsubsection{Conclusions}
 
-This work analysed the relationship between propaganda and political leaning detection. Using available works for propaganda detection and political leaning, we explored the effects of the propaganda features on the task of political leaning classification. We showed that (a) propaganda is equally found in Left, Centre, and Right leaning articles, (b) detecting political-leanings with propaganda features is challenging, and (c) detection performance improves when we use the amount of each propaganda technique together with the baseline features (0)+(2).
+This experiment analysed the relationship between propaganda and political leaning detection. Using available works for propaganda detection and political leaning, we explored the effects of the propaganda features on the task of political leaning classification. We showed that %(a) propaganda is found in Left, Centre, and Right leaning articles, 
+(a) detecting political-leanings with propaganda features is challenging, and (b) detection performance improves when we combine the propaganda features with baseline features (\texttt{baly} dataset: amount of each propaganda technique together with the baseline features \texttt{(0)+(2)}, \texttt{NELA} dataset: \texttt{(0)+(1)+(2) in most of the splits}).
 
 %produced negative to mixed results. However, it also showed a small positive impact on automated political-leaning classification of articles. 
 
