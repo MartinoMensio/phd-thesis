@@ -16,6 +16,14 @@ Propaganda and misinformation
 Persuasion definition~\cite{gass2018persuasion}: \gls{persuasion} can influence a person's beliefs, attitudes, intentions, motivations, or behaviours.
 Umbrella term for many forms: \gls{propaganda} (to indoctrinate a population towards an individual or a particular agenda), sentiment, \gls{populism}, coercion (aggressive threats and the provocation of fear and/or shame to influence a person's behavior.)
 
+\gls{persuasion} as a term that encompasses both \gls{sentiment} and \gls{propaganda}. % and populism
+It is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
+And the relationship with propaganda comes from the inherent goal of propaganda to influence the view of the public about an idea or a group~\citep{bernays,jowett2018propaganda}.
+
+\cite{jowett2012propaganda}:
+Propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist.Persuasion is interactive and attempts to satisfy the needs of both persuader  and  persuadee.  A  model  of  propaganda  depicts  how  elements of  informative  and  persuasive  communication  may  be  incorporated into  propagandistic  communication,  thus  distinguishing  propaganda as  a  specific  class  of  communication.  References  are  made  to  past theories  of  rhetoric  that  indicate  propaganda  has  had  few  systematic theoretical  treatments  prior  to  the  20th  century.  Public  opinion  and behavioral change can be affected by propaganda.
+The terms propaganda and persuasion have been used interchangeably in the literature on propaganda, as well as in everyday speech. Propaganda employs persuasive strategies, but it differs from persuasion in purpose.
+
 \subsection{Propaganda}
 \label{sec:lit_propaganda}
 TODO propaganda definition in different fields.
@@ -305,12 +313,14 @@ according to the leaning of their source or of their author. %\todo{manually?}
 ?? Is this necessary? Or just mention corroboration/omission in framing techniques?
 
 \section{Other related phenomena}
+\label{sec:lit_related}
 
 TODO: here talk about misinformation, argumentation mining and defend the scope of this thesis: propaganda.
 
 But at the same time mention the relationship with them
 
 \subsection{Propaganda and Misinformation}
+\label{sec:lit_related_misinformation}
 
 Work of~\citet{orrumachine} where persuasiveness is observed to exist more in fake news outlets: discursive repertoires that are more persuasive appear more in fake, while some other discursive repertoires that are less persuasive appear in more trustworthy news outlets.
 
@@ -319,7 +329,7 @@ Work of~\citet{orrumachine} where persuasiveness is observed to exist more in fa
 
 \cite{roozenbeek2022countering} Good evidence that making people aware is helpful, people can learn to recognise manipulation techniques (it worked on YouTube). The paper talks about manipulation, but the techniques overlap with propaganda and logical fallacies. Also shifts the goal from recognising True/False to recognising manipulation. Work from Psychology.
 
-Cite TTO2019 comparison of different credibility measures, and we saw that propagandistic sources are usually considered as part of misinformation (MBFC dataset).
+Cite TTO2019 comparison of different credibility measures, and we saw that propagandistic sources are usually considered as part of misinformation (MBFC dataset that usually places propaganda inside ``questionable news sources" = ``fake news").
 
 
 \cite{romain2022misinformation} persuasive writing strategies for misinformation detection (TODO analyse this paper)
@@ -329,33 +339,42 @@ Cite TTO2019 comparison of different credibility measures, and we saw that propa
 TODO: here talk about all the tools/websites that rank news sources or score them with respect to misinformation/propaganda/bias/leaning
 
 \subsection{Propaganda and Populism}
+\label{sec:lit_related_populism}
 
 Relationship between propaganda and populism:
-~\cite{tumber2021routledge,pasquino2008populism}
+~\cite{oates2021rewired,tumber2021routledge,pasquino2008populism}
 %https://ebrary.net/177441/sociology/the_routledge_companion_to_media_disinformation_and_populism
-they are very strictly linked
+they are very strictly linked.
 % http://www.ask-force.org/web/Fundamentalists/Pasquino-Populism-and-Democrady-2005.pdf 
 
-another concept from the literature that is shown to be close to persuasion and propaganda: \gls{populism}~\citep{tumber2021routledge,pasquino2008populism}.\todoHA{Not mentioned in intro. Why not?}
+In~\citet{oates2021rewired}, ``rewired propaganda"
+concept of ``rewired propaganda" that analyses the interplay of propaganda and populism in the digital age. In particular, an awareness of the classic concept of propaganda allows us to see how the democratising effect of online information to create informed citizens is outmatched by the internet’s ability to leverage misinformation in the service of populist propaganda.
+In other words, propaganda can now ‘hide in plain sight’ as it is so difficult to disentangle from the broad range of information in the digital sphere.
+The concept of ‘rewired propaganda’ is suggested as way of understanding a communicative method that leverages misinformation, campaign tactics, and the way both traditional and social media functioned in the 2016 US elections.
+``When populism replaces party-based politics rooted in ideology and articulated policies, rewired propaganda becomes as powerful in democracies as it has been in non-free states such as Russia."
+
+% another concept from the literature that is shown to be close to persuasion and propaganda: \gls{populism}~\citep{tumber2021routledge,pasquino2008populism}.\todoHA{Not mentioned in intro. Why not?}
 % We want to understand: what is the substantial difference between populism and propaganda? Can these two phenomena be related?
 % This question arises purely from a logistical point of view: we have automated methods for detecting propaganda, but we do not have tools to detect populism. Therefore, if we can prove that populism and propaganda are actually correlated, then it becomes not important for us to be able to detect something that is very much correlated to something else that we already detect.
 
 % % concepts
 On the conceptual level, propaganda and populism are two distinct concepts. The first describes more the persuasion mean used to push for an agenda, while the second one is usually used more together with the actor that wants to push the agenda. Populism is ``a type of politics that claims to represent the opinions and wishes of ordinary people".\footnote{\url{https://www.oxfordlearnersdictionaries.com/definition/english/populism}}
 And to be on the side of ordinary people, it uses propaganda as a mean. So a populistic \emph{actor} uses propaganda \emph{techniques}. Conceptually, they are related.
-We need them to be related to demonstrate that propaganda exists across all political leanings.
+% We need them to be related to demonstrate that propaganda exists across all political leanings.
 
 
 Literature shows “populism” as a concept together with Propaganda
 What is the difference between populism and propaganda?
-Can we use some datasets about populism to understand how they contain propaganda?
+% Can we use some datasets about populism to understand how they contain propaganda?
 
-Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
-Each annotator (4 for each speech) gave a score between 0 (non-populistic) to 2 (very populistic)
-4961 rows 
-1240 deduped (352 left, 256 center, 469 right, 652 NA)
-Languages: 265 en (304 es, 148 pt, …),
-Leaning of the english ones: (36 left, 37 center, 84 right, 106 NA)
+% Dataset found: populism in political speeches %https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LFTQEZ&version=2.0 
+% Each annotator (4 for each speech) gave a score between 0 (non-populistic) to 2 (very populistic)
+% 4961 rows 
+% 1240 deduped (352 left, 256 center, 469 right, 652 NA)
+% Languages: 265 en (304 es, 148 pt, …),
+% Leaning of the english ones: (36 left, 37 center, 84 right, 106 NA)
+
+We will use the concept and literature of \gls{populism} in Chapter~\ref{ssec:ps_prop_leaning_imbalanced} to analyse the imbalance of propaganda datasets.
 
 
 \subsection{Opinion and Subjectivity and Manipulation?}
