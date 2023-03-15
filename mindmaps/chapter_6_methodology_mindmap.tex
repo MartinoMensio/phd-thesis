@@ -1,0 +1,48 @@
+% \digraph{abc}{
+%   rankdir=LR;
+%   a -> b -> c;
+% }
+
+
+% \digraph{structs} {
+%     node [shape=record];
+%      rankdir=LR
+%     struct1 [label="<f0> left|<f1> mid dle|<f2> right"];
+%     struct2 [label="<f0> one|<f1> two"];
+%     struct3 [label="hello\gvnewline world |{ b |{c|<here> d|e}| f}| g | h"];
+%     struct1:f1 -> struct2:f0;
+%     struct1:f2 -> struct3:here;
+% }
+
+% \resizebox{\textwidth}{!}{
+\digraph{chap6} {
+    rankdir="LR";
+    node [shape=record];
+    annotation [label="annotations"];
+    a1 [label="topic"];
+    a2 [label="leaning"];
+    a3 [label="propaganda"];
+    combination [label="combination"]
+    e_type1 [label="refine topic methodology"]
+    e_type2 [label="answer RQs"]
+    e1 [label="topic at different granularities"]
+    e2 [label="topic across leanings"]
+    e3 [label="propaganda across topics\gvnewline RQ1"]
+    e4 [label="propaganda across topics+leanings\gvnewline RQ2"]
+    e5 [label="CLF (topic, propaganda)  leaning \gvnewline RQ3"]
+    
+    annotation -> a1;
+    annotation -> a2;
+    annotation -> a3;
+    a1 -> combination;
+    a2 -> combination;
+    a3 -> combination;
+    combination -> e_type1;
+    combination -> e_type2;
+    e_type1 -> e1;
+    e_type1 -> e2;
+    e_type2 -> e3;
+    e_type2 -> e4;
+    e_type2 -> e5;
+}
+% }

@@ -313,6 +313,79 @@ according to the leaning of their source or of their author. %\todo{manually?}
 
 ?? Is this necessary? Or just mention corroboration/omission in framing techniques?
 
+\subsection{Parallel News}
+
+Explain here the concept of parallel news.
+
+Corpora: Google News, AllSides. They allow to see articles for the same story
+
+Then some papers that use the concept.
+- Bountouridis to analyse corroboration and omission
+- https://arxiv.org/pdf/2205.12221.pdf ``Beyond Fact Verification: Comparing and Contrasting Claims on Contentious Topics" to analyse the interrelationship between points of view, dataset derived from AllSides.
+
+\section{Topics}
+\label{sec:lit_topics}
+
+\subsection{Topic definition}
+\label{sec:lit_topics_def}
+
+What it is:
+- categories / groups 
+
+How it relates to concepts described in this thesis:
+- headlines, clusters
+- topic and anti-topic layers/words: refer to Chapter~\ref{ssec:lit_layers_of_info}
+
+\subsection{Computational Approaches}
+\label{sec:lit_topics_computation}
+
+
+Explain here different tools/methods that provide topics/entities
+
+We have approaches that try to determine the topics without having external knowledge, and approaches that instead an existing taxonomy/list of topics and try to map the input documents to them.
+
+\subsubsection{LDA topics}
+
+One of the most common methods to extract topics is to ``automatically detecting them" from the corpus.
+The idea is to learn from the data and by selecting a specific number of output topics, we get them.
+Problem: difficult to extract labels
+
+The problem of assigning labels: can we really tell what is different about the groups?
+Need to know beforehand how many topics we want in output.
+TODO
+
+Topic identification is a method for identifying hidden subjects in enormous amounts of text1. It can help you find common themes or keywords that represent the main ideas of a document or a collection of documents. For example, if you have a set of news articles, you can use topic identification to find out what are the most discussed topics among them.
+
+One of the techniques for topic identification is called Latent Dirichlet Allocation (LDA)12. It is a statistical model that assumes that each document is composed of a mixture of topics, and each topic is composed of a distribution of words. LDA can learn these topics and words from the data without any prior knowledge or labels. LDA can be implemented using Python’s Gensim package1, which provides various tools for natural language processing.
+
+LDA is a type of topic modeling that uses a latent Dirichlet allocation approach12. Topic modeling is a form of unsupervised learning that can be used for exploring unstructured text data by inferring the relationships that exist between the words in a set of documents23.
+
+LDA assumes that each document is composed of a mixture of topics, and each topic is composed of a distribution of words13. LDA can discover topics that are hidden (latent) in a set of text documents by inferring possible topics based on the words in the documents34. LDA uses a generative probabilistic model and Dirichlet distributions to achieve this4.
+
+Another technique for topic identification is called bag-of-words2. It is a simple way to represent text data as a collection of words and their frequencies. Bag-of-words ignores the order and structure of sentences, but it can capture some basic information about the content and vocabulary of a document. Bag-of-words can be used with simple NLP models such as TF-IDF or Naive Bayes to identify topics from texts.
+
+
+\subsubsection{Entity Annotators}
+DBPedia spotlight: entity annotation is not very good. It struggles to recognise all the entities in the articles (proof?) → DISCARDED
+BLINK (Facebook): huge (30GB models to fit on RAM), not running on my laptop. On server: no NVIDIA drivers (wants GPU) → DISCARDED
+Spacy-entity-linker https://github.com/egerber/spaCy-entity-linker/ . Not very widely used. → DISCARDED
+
+Then from entities, need ways to derive the topics by navigating knowledge bases (wikidata in most cases)
+
+\subsubsection{TextRazor}
+TextRazor: seems more accurate, industrial, FreeBase taxonomy. Each entity is annotated with wikidata id and a list of FreeBase types. Also provides topics and fine-grained topics
+
+benchmarks? check that it is better than other tools
+% Regarding the validation of TextRazor, I am not aware of a benchmark done to check if it is better than other tools. It was suggested by Harith to use it, and I find that the data it provides is generally quite good (for topics and entities). But this is qualitative, I didn’t do a benchmark or looked up for benchmarks. The assumption was that it’s a commercial product and it should be good.
+some papers that claim to do benchmarks:
+http://giusepperizzo.github.io/publications/Rizzo\_Erp-LREC2014.pdf for the entities
+https://www.linkedin.com/pulse/google-nli-kill-market-linguistic-apis-review-yuri-kitin/ mentioning that TextRazor is useful because it links to Wikipedia/DBPedia
+
+TextRazor is the only one that provides already hierarchical topics, the other ones always give topics that are not hierarchical or can be made hierarchical with external knowledge (e.g. using DBPedia to navigate broader topics).
+
+What it provides
+
+
 \section{Other related phenomena}
 \label{sec:lit_related}
 
