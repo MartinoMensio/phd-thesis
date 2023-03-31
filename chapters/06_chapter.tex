@@ -21,12 +21,12 @@ In our last chapter, we concluded with the need to analyse the topics of the art
 
 \begin{enumerate}
     \item finding the topics where propaganda varies mostly across the political spectrum. There may be some topics where the discussion is not using a lot of propaganda techniques to drive the reader in a certain direction, or where the usage may not be very distinctive (e.g., when talking about sports, Left and Right persuasion may be quite difficult to tell apart). With an analysis of the topics, we can find the ones where the detected propaganda differs the most, and therefore where we can try to recognise automatically more easily the political leaning of a news article by using the propaganda features.
-    \item analyse the topics is to try to locate where the current approach to propaganda detection might have some issues in being accurate. We will perform this analysis and try to find insights that could lead to the development of future propaganda detection resources (e.g., datasets).
+    \item analyse the topics to try to locate where the current approach to propaganda detection might have some issues in being accurate. We will perform this analysis and try to find insights that could lead to the development of future propaganda detection resources (e.g., datasets).
 \end{enumerate}
 
-This chapter introduces \emph{Topic} as the last ingredient of our analysis.
+This chapter therefore introduces \emph{Topic} as the last ingredient of our analysis.
 
-Hypothesis: some topics have highly distinguishable propaganda, some topics not.
+Our hypothesis is that certain topics have highly distinguishable propaganda between how they are described by news outlets coming from opposing political leanings.
 This hypothesis is supported by the work of~\cite{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
 And with this chapter we aim to analyse if this controversy is manifesting through the usage of language of the articles themselves.
 
@@ -34,19 +34,20 @@ And with this chapter we aim to analyse if this controversy is manifesting throu
 
 
 % why
-Why?
+% Why?
 
 
 
 % RQ
 
-RQs:
+Our Research Questions are the following: 
 \begin{itemize}
     % \item RQ1: How can we optimise the definition of the topic in order to have enough details? 
     % \item RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
-    \item RQ1: How does the detected propaganda change across the topics?
-    \item RQ2: How does the detected propaganda change across topics and leanings?
-    \item RQ3: How does the topic, combined with the propaganda features, affect the classification of leaning?
+    \item RQ1: How does the detected propaganda change across the topics? Are there major differences when considering ``controversial" topics with respect to more neutral topics?
+    \item RQ2: How does the detected propaganda change across leanings in ``controversial" topics? And how does it change in non-controversial ones?
+    % \item RQ3: How does the topic, combined with the propaganda features, affect the classification of leaning?
+    \item RQ3: What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
     % \item RQ6: Can we find some topics where propaganda detection is not working as expected?
 \end{itemize}
 
@@ -64,8 +65,8 @@ RQs:
 findings
 \todo{findings}
 
-The structure of this chapter is the following. First, in Section~\ref{sec:top}
-methodology in the next section, then each of the experiments that target the research questions, then discussions and conclusions
+The structure of this chapter is the following. First, in Section~\ref{sec:topic_method} we describe the methodology used. Then in Section~\ref{sec:topic_topic_granularities} we analyse different topic definitions and we fine-tune the selected method by showing what we need for our comparative analysis across leaning. Then in Section~\ref{sec:topic_propaganda} we target our RQ1 by looking how detected propaganda varies across topics. In Section~\ref{sec:topic_propaganda_leaning} we do the comparative analysis of how propaganda varies across topics and leanings. And in Section~\ref{sec:topic_classifier_propaganda} we analyse the effects on automatic classification of leaning.
+Finally, Section~\ref{sec:topic_discussion} includes the discussion of the findings.
 
 
 % two documents:
@@ -83,55 +84,78 @@ methodology in the next section, then each of the experiments that target the re
 \label{sec:topic_method}
 
 Being our main goal to understand how propaganda varies across topics and leanings, we first need to decompose it as we are introducing a new factor in our analysis.
-For this reason, this chapter first starts analysing different methods and definitions of topic on their own, and gradually combines it with leaning and propaganda. The result is that we have similar experiments that only differ in the different factors included.
+For this reason, this chapter first starts analysing different methods and definitions of topic on their own, and gradually combines it with leaning and propaganda. The result is that we have similar experiments that only differ in the factors included.
 We group the experiments in two broad types:
 \begin{enumerate}
     \item experiments to select and refine the topic detection methodology: we compare different techniques, and we discuss what we need from the topic; 
     \item experiments that combine topic and propaganda: here we analyse and answer the Research Questions listed before.
 \end{enumerate}
 
-Across the experiments of this whole chapter, we use the same methodology, that we describe here.
+We can see in Figure~\ref{fig:methodology_mindmap_chapter6} the connections between the different parts of the chapter.
+
 
 \begin{figure}[!htbp]
     \centering
     \resizebox{\textwidth}{!}{
     \trimbox{2cm 1cm 2cm 1cm}{\input{mindmaps/chapter_6_methodology_mindmap.tex}
     }}
-    \caption{Methodology of Chapter 6}
+    \caption{Structure of Chapter 6}
     \label{fig:methodology_mindmap_chapter6}
 \end{figure}
 
 
-\subsection{Dataset annotation}
+Across the experiments of this whole chapter, we use the same methodology, that we describe here: dataset and annotations (propaganda/topic/leaning, described in the first subsection~\ref{sec:topic_method_data}).
+Then in the other subsections of methodology we see why and how we are combining the analysis of the different annotations and then we discuss how the different experiments are linked together~\ref{sec:topic_method_combining}. %~\ref{sec:topic_method_linking}.
 
-For the experiments, we take, as in the previous chapter, the \texttt{baly} dataset.
+
+\subsection{Dataset annotation}
+\label{sec:topic_method_data}
+
+For the experiments, we take, as in the previous chapter, the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}).
 
 We make use of annotations that cover different dimensions:
-- Propaganda: as in the previous chapters, words and techniques
-- Leaning: from the dataset itself (L/C/R), as in previous chapter
-- Topic analysis: provided by TextRazor, coarse topics, topics, IPTC topics (explain in detail what they are)
+\begin{itemize}
+    \item Propaganda: as in the previous chapters, words and techniques of propaganda are extracted using the pre-trained model from~\cite{da2019fine}.
+    \item Leaning: this dimension is directly available from the dataset. As mentioned in the previous chapter, the dataset is annotated with the leaning of the author / news source that falls into one of three classes: Left, Center, Right.
+    \item Topic analysis: this is the novelty of this chapter, and therefore we expand on it in the following subsection. %provided by TextRazor, coarse topics, topics, IPTC topics (explain in detail what they are)
+\end{itemize}
+
 
 
 \subsubsection{Topic annotation}
-We use for the experiments of this chapter different topic annotations. As we discussed in Chapter~\ref{sec:lit_topics_computation}, there are several methods that can be used, but in this chapter we focus on the results given by TextRazor.
-TextRazor gives topics in different ways:
+We use for the experiments of this chapter different topic annotations. As we discussed in Chapter~\ref{sec:lit_topics_computation}, there are several methods and tools that can be used.
+From the comparison of them, in this chapter we want to compare multiple strategies and choose the one that gives more insights for our goal of comparative analysis (comparing propaganda across topics and leanings).
+
+Therefore, the types of topics that we use are the following
 
 \begin{enumerate}
-    \item Coarse topics
-    \item fine-grained topics
-    \item IPTC media topics: hierarchical
-    \item entities with their types.
+    \item native topics given by AllSides, included in the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}); each article is associated with one topic only. There are 108 topic labels and they include very broad labels (e.g. politics) and very narrow ones (e.g. DEA).
+    \item Coarse topics: low-granularity topics, given as a set of probabilities to belong to 17 different topics. We rely on TextRazor to provide them.
+    \item fine-grained topics: around 98k different topics, provided by TextRazor. Each topic is linked to wikidata.
+    \item IPTC media topics: hierarchical topics, defined by IPTC (global standard body of the News Media) with a topology.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
+    The topology is specific for news, and it defines 17 top-level topics, which are then expanded with different level of detail. TextRazor provides this type of topic, as for the other ones, as a set of 5 for each input article with the relative probability. So for each one of the topics, we can understand where it is placed in the hierarchy and the parent topics.
+    % \item entities with their types.
 \end{enumerate}
 
-We use them and compare in Sections~\ref{sec:topic_topic_granularities} and~\ref{sec:topics_topics_leaning}.
+\todo{EXAMPLE OF INPUT TEXT AND TOPIC ANNOTATION}
 
-\subsection{Processing and combining the annotations}
+Other methods (e.g. LDA topics, extracting topics from types of entities using Knowledge Base) are out of scope. We want topics that have explicit labels and are already defined.
 
-Having the annotations related to three different dimensions (propaganda/leaning/topic) we compare them to understand what varies between the different topics, combining them gradually with the other two dimensions (propaganda and leaning).
+% , but in this chapter we focus on the results given by TextRazor.
+% TextRazor gives topics in different ways:
+
+In Sections~\ref{sec:topic_topic_granularities} and~\ref{sec:topics_topics_leaning} we use the selected methods to provide statistics of the the \texttt{baly} dataset across topics and across leanings. In this way we also give an insight in the methods themselves. In this way, we decide which of the methods is better for our comparative analysis.
+
+\subsection{Combining the analysis of dimensions}
+\label{sec:topic_method_combining}
+
+Having the annotations related to three different dimensions (propaganda/leaning/topic), the next step is to perform a comparative analysis bringing the dimensions together.
+we compare them to understand what varies between the different topics, combining them gradually with the other two dimensions (propaganda and leaning).
 
 
 
-\subsection{Linking the experiments together}
+% \subsection{Linking the experiments together}
+% \label{sec:topic_method_linking}
 % How each of the following experiments is linked together
 
 For each of the experiments, we combine differently the annotations and analyse their relationship. For experiments 1-4, we observe the differences when applying different partitioning of the dataset (based on the chosen annotations). For experiment 5, we instead use the annotations of the topic to break down the results of the political leaning classifier of the previous chapter.
@@ -266,6 +290,9 @@ In aspect: e.g. geography (south corea, africa, china, russia) vs more generic a
 \end{figure}
 
 These topic labels are given by the AllSides team with an unknown criteria, and the above shows how diverse and not-uniformed they are.
+
+
+
 
 
 \subsection{Coarse Topics}
@@ -474,7 +501,7 @@ TOPIC+LEANING
 Coarse topics are very similar across political spectrum
 Fine-grained topics are slightly different (quantity, terms). Which ones? They express the choice of details that we discussed in chapter 3
 
-RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
+% RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
 
 \subsection{AllSides topics}
 
@@ -504,11 +531,12 @@ Right: crime law and justice, government, conflict war and peace, society
 
 
 \section{Breakdown of propaganda by topics}
+\label{sec:topic_propaganda}
 
 This section contains analysis of how propaganda is distributed across topics and what differences topics contain in terms of propaganda.
 Assumption: propaganda is used for certain topics more than in others
 
-RQ3: How does the detected propaganda change across the topics?
+RQ1: How does the detected propaganda change across the topics?
 
 Experiment 4.3: 
 - topic breakdown: AllSides Topics, IPTC
@@ -645,10 +673,11 @@ Term analysis L/C/R with and without considering propaganda
 
 
 \section{Topic+leaning+propaganda}
+\label{sec:topic_propaganda_leaning}
 
 Assumption: propaganda is used for certain topics in a very recognisable way to push for the ideas of the leaning of the source
 
-RQ4: How does the detected propaganda change across topics and leanings? 
+RQ2: How does the detected propaganda change across topics and leanings? 
 
 \subsubsection{Correlation Left vs Right IPTC}
 Exploratory way: observe the correlation between features of the left and features of the right. If correlation is high, it means that the differences are small. Instead if the correlation is low, it means that there exist differences between left and right.
@@ -720,21 +749,46 @@ TODO: maybe it’s not the best way to compare distributions (something like vio
 
 
 
-\section{Leaning classifier: breakdown by topic}
+\section{Leaning classifier}
+
+RQ3: \emph{What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?}
+
+\subsection{Breakdown by topic}
+\label{sec:topic_classifier_propaganda}
 
 In this section we aim to analyse the relationship between topics, propaganda and leaning from a different perspective.
 
+First by inspecting F1 across topics, showing which topics are most accurate.
+But this does not perform training again, only breaking down by topic the F1 results (which samples are selected.
 
-\section{Predicting Leaning from topics and propaganda}
+\todo{IMPORT PLOT}
+
+As figure~\ref{TODO} shows, the F1 metric is very similar across topics.
+Although, in some topics it is much higher than the others: X.
+In some other topics it is significantly lower.
+
+\todo{INSPECTION OF DATA SAMPLES}
 
 
-RQ2: \emph{knowing the topic, does it make classification (prop-->leaning) easier?}
+
+\subsection{Predicting Leaning from topics and propaganda}
+\label{sec:topic_classifier_propaganda_2}
 
 7: topics+propaganda for political leaning prediction
 
-
 \section{Discussions}
+\label{sec:topic_discussion}
+
+Main findings from this chapter:
+
+\begin{enumerate}
+    \item we need fine-grained topic to be able to see differences. With coarse topics show similar propaganda across topics leaning. The more we use fine-grained topics, the more differences we are able to see. But at the same time we lose support (less articles specific to the topics, too narrow filters). Need of tradeoff between granularity (see good differences) and support (significance of results). A larger dataset could help.
+    \item Topics where propaganda is very different between Left and Right: why is it?
+    \item Classifier works better in certain topics
+\end{enumerate}
 
 
 \section{Conclusions}
-What is the conclusion of this work?
+\label{sec:topic_conclusion}
+
+What is the conclusion of this chapter?
