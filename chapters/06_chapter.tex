@@ -1,7 +1,7 @@
 \chapter{\statusorange Topics}
 \label{chap:topics}
 
-\section{Introduction}
+\section{\statusgreen Introduction}
 
 % conclusions from chapter 5:
 % two motivations:
@@ -44,8 +44,8 @@ Our Research Questions are the following:
 \begin{itemize}
     % \item RQ1: How can we optimise the definition of the topic in order to have enough details? 
     % \item RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
-    \item RQ1: How does the detected propaganda change across the topics? Are there major differences when considering ``controversial" topics with respect to more neutral topics?
-    \item RQ2: How does the detected propaganda change across leanings in ``controversial" topics? And how does it change in non-controversial ones?
+    \item RQ1: How does the detected propaganda change across the \emph{topics}? Are there major differences when considering ``controversial" topics with respect to more neutral topics?
+    \item RQ2: How does the detected propaganda change across \emph{leanings} in ``controversial" topics? And how does it change in non-controversial ones?
     % \item RQ3: How does the topic, combined with the propaganda features, affect the classification of leaning?
     \item RQ3: What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
     % \item RQ6: Can we find some topics where propaganda detection is not working as expected?
@@ -80,15 +80,15 @@ Finally, Section~\ref{sec:topic_discussion} includes the discussion of the findi
 % https://github.com/MartinoMensio/textrazor-bulk-annotate which can be used to annotate a dataset.
 % attached the code from a private repository (bcanalytics) which contains some functions to handle the taxonomy (file src/textrazor.py ) and to plot the sunburst diagrams (file experiments/text\_razor.ipynb)
 
-\section{Methodology}
+\section{\statusorange Methodology}
 \label{sec:topic_method}
 
 Being our main goal to understand how propaganda varies across topics and leanings, we first need to decompose it as we are introducing a new factor in our analysis.
-For this reason, this chapter first starts analysing different methods and definitions of topic on their own, and gradually combines it with leaning and propaganda. The result is that we have similar experiments that only differ in the factors included.
+For this reason, this chapter first starts analysing different methods and definitions of topics on their own, and gradually combines them with leaning and propaganda. The result is that we have similar experiments that only differ in the factors included.
 We group the experiments in two broad types:
 \begin{enumerate}
-    \item experiments to select and refine the topic detection methodology: we compare different techniques, and we discuss what we need from the topic; 
-    \item experiments that combine topic and propaganda: here we analyse and answer the Research Questions listed before.
+    \item experiments to select and refine the topic detection methodology: we compare different techniques, and we discuss what we need from the topic (Section~\ref{sec:topic_topic_granularities}); 
+    \item experiments that combine topic and propaganda: here we analyse and answer the Research Questions listed before(Sections~\ref{sec:topic_propaganda}, \ref{sec:topic_propaganda_leaning} and \ref{sec:topic_classifier_propaganda}).
 \end{enumerate}
 
 We can see in Figure~\ref{fig:methodology_mindmap_chapter6} the connections between the different parts of the chapter.
@@ -108,7 +108,7 @@ Across the experiments of this whole chapter, we use the same methodology, that 
 Then in the other subsections of methodology we see why and how we are combining the analysis of the different annotations and then we discuss how the different experiments are linked together~\ref{sec:topic_method_combining}. %~\ref{sec:topic_method_linking}.
 
 
-\subsection{Dataset annotation}
+\subsection{\statusgreen Dataset annotation}
 \label{sec:topic_method_data}
 
 For the experiments, we take, as in the previous chapter, the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}).
@@ -117,16 +117,16 @@ We make use of annotations that cover different dimensions:
 \begin{itemize}
     \item Propaganda: as in the previous chapters, words and techniques of propaganda are extracted using the pre-trained model from~\cite{da2019fine}.
     \item Leaning: this dimension is directly available from the dataset. As mentioned in the previous chapter, the dataset is annotated with the leaning of the author / news source that falls into one of three classes: Left, Center, Right.
-    \item Topic analysis: this is the novelty of this chapter, and therefore we expand on it in the following subsection. %provided by TextRazor, coarse topics, topics, IPTC topics (explain in detail what they are)
+    \item Topic analysis: this is the novelty of this chapter, and therefore we expand on it in the following paragraphs. %provided by TextRazor, coarse topics, topics, IPTC topics (explain in detail what they are)
 \end{itemize}
 
 
 
-\subsubsection{Topic annotation}
+% \subsubsection{Topic annotation}
 We use for the experiments of this chapter different topic annotations. As we discussed in Chapter~\ref{sec:lit_topics_computation}, there are several methods and tools that can be used.
 From the comparison of them, in this chapter we want to compare multiple strategies and choose the one that gives more insights for our goal of comparative analysis (comparing propaganda across topics and leanings).
 
-Therefore, the types of topics that we use are the following
+Therefore, the types of topics that we use are the following:
 
 \begin{enumerate}
     \item native topics given by AllSides, included in the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}); each article is associated with one topic only. There are 108 topic labels and they include very broad labels (e.g. politics) and very narrow ones (e.g. DEA).
@@ -137,28 +137,63 @@ Therefore, the types of topics that we use are the following
     % \item entities with their types.
 \end{enumerate}
 
-\todo{EXAMPLE OF INPUT TEXT AND TOPIC ANNOTATION}
 
 Other methods (e.g. LDA topics, extracting topics from types of entities using Knowledge Base) are out of scope. We want topics that have explicit labels and are already defined.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{\textwidth} % width of left subfigure
+		\includegraphics[width=\textwidth]{figures/article_topic_example.png}
+		\caption{Text} % subcaption
+	\end{subfigure}
+	\vspace{1em} % here you can insert horizontal or vertical space
+	\begin{subfigure}{0.3\textwidth} % width of right subfigure
+		\centering\includegraphics[width=0.5\textwidth]{figures/baly_topics.pdf}
+		\caption{Native Baly topic} % subcaption
+            \label{fig:topic_analysis_different_tools_baly} 
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth} % width of right subfigure
+		\includegraphics[width=\textwidth]{figures/coarse_topics.pdf}
+		\caption{Coarse Topics} % subcaption
+            \label{fig:topic_analysis_different_tools_coarse} 
+	\end{subfigure}
+	\begin{subfigure}{0.8\textwidth} % width of right subfigure
+		\includegraphics[width=\textwidth]{figures/finegrained_topics.pdf}
+		\caption{Fine-grained topics} % subcaption
+            \label{fig:topic_analysis_different_tools_fine} 
+	\end{subfigure}
+	\begin{subfigure}{0.8\textwidth} % width of right subfigure
+		\includegraphics[width=\textwidth]{figures/mediatopics.pdf}
+		\caption{Mediatopics} % subcaption
+            \label{fig:topic_analysis_different_tools_mediatopics} 
+	\end{subfigure}
+    \caption{Different topic analysis}
+    \label{fig:topic_analysis_different_tools} 
+\end{figure}
+
+Figure~\ref{fig:topic_analysis_different_tools} shows an example of these features for an article.\footnote{\url{https://www.newsmax.com/politics/clarence-thomas-daca-illegal-immigrants-dhs/2020/06/18/id/972897/}} We can see that the native topic annotations provided by the dataset have a single topic (supreme court), which is a non-standardised topic. These annotations from the dataset suffer from undefined granularity (it is not stated how coarse each topic is, there are wide topics e.g., politics, together with very narrow ones) and undefined enumeration (it is unclear the set of possible labels, topics not decided a priori).
+Then we have the coarse topics, which are 6 topics that are very broad. Then the fine-grained topics, that here we only display the top 60 but there are 270 for this article. And finally the mediatopics, that are up to 10 for each article and they are part of a taxonomy and therefore we can see how specific / and what the parent topics are.
 
 % , but in this chapter we focus on the results given by TextRazor.
 % TextRazor gives topics in different ways:
 
-In Sections~\ref{sec:topic_topic_granularities} and~\ref{sec:topics_topics_leaning} we use the selected methods to provide statistics of the the \texttt{baly} dataset across topics and across leanings. In this way we also give an insight in the methods themselves. In this way, we decide which of the methods is better for our comparative analysis.
+In Sections~\ref{sec:topic_topic_granularities} (\ref{ssec:topic_topic_granularities_alone} and~\ref{ssec:topics_topics_leaning}) we use the selected methods to provide statistics of the \texttt{baly} dataset across topics and across leanings. In this way, we also give an insight in the methods themselves. In this way, we decide which of the methods is better for our comparative analysis.
 
-\subsection{Combining the analysis of dimensions}
+\subsection{\statusorange Combining the analysis of dimensions}
 \label{sec:topic_method_combining}
+\todo{Methdology, describe better}
 
 Having the annotations related to three different dimensions (propaganda/leaning/topic), the next step is to perform a comparative analysis bringing the dimensions together.
 we compare them to understand what varies between the different topics, combining them gradually with the other two dimensions (propaganda and leaning).
-
 
 
 % \subsection{Linking the experiments together}
 % \label{sec:topic_method_linking}
 % How each of the following experiments is linked together
 
-For each of the experiments, we combine differently the annotations and analyse their relationship. For experiments 1-4, we observe the differences when applying different partitioning of the dataset (based on the chosen annotations). For experiment 5, we instead use the annotations of the topic to break down the results of the political leaning classifier of the previous chapter.
+
+
+For each of the experiments, we combine differently the annotations and analyse their relationship. For the experiments in Sections~\ref{sec:topic_topic_granularities}, \ref{sec:topic_propaganda} and \ref{sec:topic_propaganda_leaning}, we observe the differences when applying different partitioning of the dataset (based on the chosen annotations). For experiment in Section~\ref{sec:topic_classifier_propaganda}, we instead use the annotations of the topic to break down the results of the political leaning classifier of the previous chapter.
 
 % description of each experiment
 TODO: type 1 and type 2, then hierarchically all the experiments
@@ -252,11 +287,35 @@ Breakdown of F1 measure across topics. Not train/test but just looking at the mo
 
 
 
-
-\section{Topic at different granularities}
+\section{\statusorange Topics for Comparative Analysis}
 \label{sec:topic_topic_granularities}
+
+In this section, we use the different topic methodologies listed above, applying them to the \texttt{baly} dataset.
+
+Our goals are many:
+
+\begin{itemize}
+    \item analyse the dataset to understand the topic it contains, using different methodologies;
+    \item compare the information provided by each methodology and understand what are the advantages of using one or the other;
+    \item see which methodologies are able to find differences between Left and Right. The dataset itself is made of triples of articles, so we expect that the high-level topics will be very similar, and instead, we expect some fine-grained differences.
+\end{itemize}
+
+Therefore, we divide this section in two main parts: the first one, Subsection~\ref{ssec:topic_topic_granularities_alone}, contains the analysis of the topics of the dataset, with the different methodologies. The second part, Subsection~\ref{ssec:topics_topics_leaning}, contains a comparative analysis of the topics with respect to political leaning.
+
+We end this section with~\ref{ssec:topic_topic_choice} which recaps and motivates our choice of hierarchical topic methodology for the next sections.
+
+% This contains 3.1 (topic alone) and 3.2 (topic + leaning).
+% This section has to support the need for hierarchical topics.
+% We want to analyse differences across topics and granularity is required to be able to inspect at different levels.
+% Only top-level topics are not good because they don't show good differences.
+
+% Here we take different topic definitions and we try them to show that we need granularity.
+
+\subsection{\statusorange Detected Topics in the Dataset}
+% \subsection{Detected Topics at different granularities}
+\label{ssec:topic_topic_granularities_alone}
 % ONLY TOPIC
-Why: understand which practical definition of topic is better for our analysis. Granularity, type, ...
+% Why: understand which practical definition of topic is better for our analysis. Granularity, type, ...
 
 % How: First we recall the definition of topic that we gave in Chapter~\ref{sec:lit_topics} and the computational approaches that are mostly used.
 
@@ -264,23 +323,31 @@ Why: understand which practical definition of topic is better for our analysis. 
 
 % RQ1 (NO): How can we optimise the definition of the topic in order to have enough details? 
 
-We start with the definition of topics that is contained in the Baly dataset, and then we use the different topic types that we get from TextRazor, starting with simple ones to get to the more complex.
 
-\subsection{Custom topics (AllSides)}
+% GOAL
+Given our goals 1 and 2, we want to compare the information that different methodologies can provide about a selected dataset. Some techniques may be better to provide general information while others may provide very fine-grained topics.
 
-The first topic definition that we apply is the ones that comes directly from the \texttt{baly} dataset.
+% what
+As described in the Methodology section (Section~\ref{sec:topic_method}, we consider the \texttt{baly} dataset and we apply different topic labels.
 
-Pro: defined by the authors, by hand
-Cons: hierarchically disomogeneous, highly imbalanced
+In the following paragraphs we consider:
 
-Original topics
-The dataset is provided together with topic labels but they have a big problem: they are annotated with labels that have very different granularities.
-108 topic labels
-Most frequent topics: elections, politics (very general), white house, immigration, healthcare
-Least frequent topics: dea, capital punishment and death penalty, fda, south corea
-Labels are not uniform:
-In granularity: e.g., elections vs politics, one is a subtopic of the other
-In aspect: e.g. geography (south corea, africa, china, russia) vs more generic and traversal (food, privacy, healthcare, …)
+\begin{enumerate}
+    \item AllSides native topics
+    \item Coarse Topics (TextRazor)
+    \item Fine-Grained Topics (TextRazor)
+    \item Hierarchical Mediatopics (TextRazor)
+\end{enumerate}
+
+% We start with the definition of topics that is contained in the Baly dataset, and then we use the different topic types that we get from TextRazor, starting with simple ones to get to the more complex.
+
+\subsubsection{Custom topics (AllSides)}
+
+The first topic definition that we apply is the ones that comes directly from the \texttt{baly} dataset. Toghether with the triples of articles, available from their website, the AllSides headlines have a manual annotation of the topic, which is given by the editors. In this way, the users can filter by topic and find related information.
+Besides being useful for navigating the website, this is a useful label because it is given directly by the resource creators and not assigned externally.
+This attribute is then collected in the \texttt{baly} dataset and we have it available.
+
+A complete list of the topics can be found on the AllSides website.\footnote{\url{https://www.allsides.com/topics-issues}}
 
 \begin{figure}[!htbp]
     \centering
@@ -289,22 +356,53 @@ In aspect: e.g. geography (south corea, africa, china, russia) vs more generic a
     \label{fig:baly_original_topics}
 \end{figure}
 
+In Figure~\ref{fig:baly_original_topics} we can see a histogram of the topics. We can make several observations:
+
+\begin{itemize}
+    \item the labels of the topics are not uniform in terms of granularity: there are some very wide topics (e.g., politics) and some very narrow ones (e.g., DEA)
+    \item the labels are annotating several aspects and having only one label per article this means that some articles are annotated for the location mentioned (e.g., world, Africa, Russia, Asia, South Corea) while others for more ubiquitous topics (e.g., immigration, healthcare, environment, economic policy, civil rights) % traversal (food, privacy, healthcare, …)
+    \item the distribution are very unbalanced across topics: election has more than 5k articles, while DEA has only a few
+    \item some topics are subtopics of other ones (e.g. electionss is a subtopic of politics) but no information about the relationships is provided
+    \item with 108 flat topic it becomes difficult to compare and organise the topics
+\end{itemize}
+
+An improvement could be done by analysing these labels and manually establishing the relationships, to organise hierarchically the topics.
+
+% Pro: defined by the authors, by hand
+% Cons: hierarchically disomogeneous, highly imbalanced
+
+% Original topics
+% The dataset is provided together with topic labels but they have a big problem: they are annotated with labels that have very different granularities.
+% 108 topic labels
+% Most frequent topics: elections, politics (very general), white house, immigration, healthcare
+% Least frequent topics: dea, capital punishment and death penalty, fda, south corea
+% Labels are not uniform:
+% In granularity: e.g., elections vs politics, one is a subtopic of the other
+% In aspect: e.g. geography (south corea, africa, china, russia) vs more generic and traversal (food, privacy, healthcare, …)
+
+
 These topic labels are given by the AllSides team with an unknown criteria, and the above shows how diverse and not-uniformed they are.
 
+For this reason, the next paragraphs consider standardised topics instead of ad-hoc topics.
 
 
-
-
-\subsection{Coarse Topics}
+\subsubsection{Coarse Topics}
 
 In this section we take into consideration the TextRazor coarseTopics annotations. TextRazor is a commercial API that allows to analyse topics, entities and to perform other NLP-related tasks (e.g. classify documents, …).
-Regarding the topics, it provides coarseTopics, which are 17 very high-level topics (Belief, Business, Culture, Education, Health, Language, Law, Leisure, Mathematics, Nature, Politics, Science, Sports, Technology, Violence, Weather).
-Each document is assigned with the top 5/6 matching coarseTopic, each one with a relevance score which ranges in [0,1]. Those scores don’t sum to 1. Each document is assigned to multiple topic, not a single one.
+Regarding the topics, it provides the Coarse Topics, which are 16 very high-level topics (Belief, Business, Culture, Education, Health, Language, Law, Leisure, Mathematics, Nature, Politics, Science, Sports, Technology, Violence, Weather).
+Each document is assigned with the top 5/6 matching Coarse Topics, each one with a relevance score which ranges in $[0,1]$. Those scores don’t sum to 1. Each document is assigned to multiple topic, not a single one (multiclass).
 
-\subsubsection{Most relevant topic Only}
+For this reason, we explore the topics in two different ways:
 
-Most relevant topic only
-Each article only associated with the first (most important) topic. The topics from the second onwards are discarded.
+\begin{enumerate}
+    \item considering the most important topic for each article: this is simpler, each article corresponds to a single topic.
+    \item considering the topic weights: each topic corresponds to multiple topics with a specific weight.
+\end{enumerate}
+
+\paragraph{Most relevant topic Only}
+
+For this first simplification, each article is associated to its most representative topic. This means that if an article is annotated with a score of $1.0$ to Politics and with $0.9$ to Culture, it will only count for Politics because all the topics from second position onwards are discarded.
+
 
 \begin{figure}[!htbp]
     \centering
@@ -313,10 +411,20 @@ Each article only associated with the first (most important) topic. The topics f
     \label{fig:baly_coarse_first}
 \end{figure}
 
-This shows that the dataset is highly unbalanced on Politics. This makes this topic annotation highly unusable.
+In Figure~\ref{fig:baly_coarse_first} we can see how the articles distribute across topics when only considering the most important one.
 
-\subsubsection{Weighted (multi-topic)}
-If we consider each of the 5/6 topic for each article and not only the first one, we get the following distribution:
+This shows that the dataset is highly unbalanced on Politics. This makes this specific usage of the topic annotations highly unusable.
+
+The main problem is that we can only see that the dataset is centred about politics, but all the secondary topics are suppressed.
+This plot does not give further insights.
+Also, we can see that two of the high-level topics do not even exist for a single article (Language and Mathematics).
+
+This analysis is the result of an oversimplification.
+
+\paragraph{Weighted (multi-topic)}
+
+For this reason, we decide to use all the topics for an article and not only the most important one.
+If we consider each of the 5/6 topic for each article, we can also see topics which are still very important and may have been discarded only because politics was slightly higher.
 
 \begin{figure}[!htbp]
     \centering
@@ -325,110 +433,140 @@ If we consider each of the 5/6 topic for each article and not only the first one
     \label{fig:baly_coarse_weighted}
 \end{figure}
 
-We can see that the distribution is slightly unbalanced towards politics, then culture, law and violence. This looks like the topics are not too unbalanced, but we have to remember that we would like to have a single document to be categorised only with one topic, and this is not the case.
+Figure~\ref{fig:baly_coarse_weighted} shows that the distribution over topics contains more topics other than Politics.
+Still, Politics is the most relevant, but we have as well Culture, Law and Violence that appear in a significant number of articles.
+
+To produce the values displayed in Figure~\ref{fig:baly_coarse_weighted}, we sum the individual scores given to each article and topic. The scores being a value in the $[0,1]$ range, the vertical axis does not represent the number of articles that have a specific topic, but instead represents the sum of the scores. The total number of articles is $37,554$.
+%For example, considering that the total number of articles in the dataset is 37,554, we can see that around 35k 
+
+% We can see that the distribution is slightly unbalanced towards politics, then culture, law and violence. This looks like the topics are not too unbalanced, but we have to remember that we would like to have a single document to be categorised only with one topic, and this is not the case.
+
+With respect with the previous Figure~\ref{fig:baly_coarse_first}, we can understand better the topics that the dataset contains.
+Still, the topics are very high-level and we do not have insights about which political issues are discussed, or which law subtopics are contained.
 
 
-What this means:
-the coarseTopics are not enough granular to be able to split the data in significant groups (across political spectrum)
-Being the percentages across political leaning quite similar, this confirms the underlying grouping of triples of articles in the dataset (expected)
+
+\subsubsection{Fine-Grained Topics}
+
+Moving to the next topic feature, we analyse the annotation that TextRazor provides for Fine-Grained Topics.
+
+As we saw in subfigure~\ref{fig:topic_analysis_different_tools_fine}, the fine-grained topics are very specific and for each input article, the annotations provide a variable number of them, also some hundreds.
+Fine-grained topics are somewhat similar to mentioned entities, given the high number of matches for each of the articles. Differently from entities, they are not bounded to a specific occurrence in the text (for entities we are able to get the character offsets of the article, to know which words evoke the entities) and an article may contain a fine-grained topic even if the topic name is not  mentioned in the article.
+
+Across the whole \texttt{baly} dataset, we have $98,504$ distinct fine-grained topics, and it becomes very difficult to present some statistics or graphical representations given this huge number.
+
+It is good to have fine-grained information that is very specific, but at the same time it is unclear how to link the fine-grained information to the high level topic. What we are missing is some relationship between the two levels, that may possibly be hierarchical with multiple levels.
+With a hierarchy, we can adaptively decide the level of detail and find the optimal one between topics that are too broad (coarse topics for example) and too narrow (fine-grained topics).
+
+% Baly dataset: 99941 fine-grained topics overall
+% Example:
+% TODO FIGURE MONGO TOPICS
+
+% annotated only at the article level (not possible to align with propaganda techniques)
+% Many distinct: 98.504
+% At this point maybe we could directly use the entities which have a word-level annotation 
 
 
-\subsection{Fine-Grained Topics}
+% find some of them that are specific of a political leaning? 
 
-Baly dataset: 99941 fine-grained topics overall
-Example:
-TODO FIGURE MONGO TOPICS
+\paragraph{Potential ways to aggregate and find middle-level topics}
 
-annotated only at the article level (not possible to align with propaganda techniques)
-Many distinct: 98.504
-At this point maybe we could directly use the entities which have a word-level annotation 
+To potentially aggregate the topics and find a slightly higher level of hierarchy, there are different solutions.
 
-They have wikidata\_id → can see their type and do something smart
+The topics have in their attributes the \texttt{wikidata\_id} that is useful to link to Wikidata. Wikidata is useful to see the types of the entity and other relationship types.
 
-find some of them that are specific of a political leaning? 
+For example, the relationships \texttt{instance\_of} and \texttt{subclass\_of} provide links to wider topics. In theory, every type of relationship is important: e.g. ``Trump Wall" Q61989464 is \texttt{named\_after} Donald Trump.
 
-\subsubsection{How to reduce/aggregate?}
+Or by using the \texttt{WikiLink}, it is also possible similarly to use the categories tree (in reality it’s a Graph) of Wikipedia.\footnote{ \href{https://en.wikipedia.org/wiki/Special:CategoryTree?target=Category\%3APolitics&mode=all&namespaces=&title=Special\%3ACategoryTree}{https://en.wikipedia.org/wiki/Special:CategoryTree}}
 
-Reduction to different granularities of topics:
-Wikidata IDs → wikidata embeddings? (too difficult, also to explain the features and analysis / explanation)
-Wikidata ← → link to IPTC topics (offered by IPTC, handmade by them)
-For each entity, navigate its triples to find IPTC topics. Relationships of type:
-Instance\_of
-Subclass\_of
-???
-In theory, every type of relationship is important: e.g. “Trump Wall” Q61989464 is “named after” Donald Trump 
-
-Why not LDA-topics?
-Difficult to label?
-
-Trying to find topics that are not so tight
-https://en.wikipedia.org/wiki/Wikipedia:Contents/Categories 
-This number of topics is too high. How to climb a bit up the topic tree in Wikidata?
-wikidataId → entity. From the entity navigate the relationships instance\_of and subclass\_of. But also other relationships could be useful?
-From WikiLink → wikipedia page. From the page navigate the categories (recursively) to climb up the categories tree (in reality it’s a Graph) of wikipedia \url{https://en.wikipedia.org/wiki/Special:CategoryTree?target=Category\%3APolitics&mode=all&namespaces=&title=Special%3ACategoryTree}
 In both ways, the upper categories are many for each node, and it’s quite difficult to get a clean taxonomy.
-Previous works:
-https://www.academia.edu/download/30772075/ponzetto\_slides.pdf cleaning up relationships to extract pages+categories taxonomy.
-https://aclanthology.org/P14-1089.pdf WiBi taxonomy → http://wibitaxonomy.org/ dead http://ceur-ws.org/Vol-1272/paper\_81.pdf https://aclanthology.org/P14-1089.pdf https://www.diag.uniroma1.it/navigli/pubs/IJCAI\_2009\_Ponzetto\_Navigli.pdf 
-https://dl-acm-org.libezproxy.open.ac.uk/doi/abs/10.1145/3308558.3313519 for fictional domain, cleaning up category graph for fictional domains
+
+There exist some previous works that addressed this problem.
+cleaning up relationships to extract pages+categories taxonomy.
+
+WiBi taxonomy → http://wibitaxonomy.org/ dead Wikipedia Bitaxonomy Explorer
+flati2014wikipedia
+flati2014two
+ponzetto2009large
+
+chu2019tifi for fictional domain, cleaning up category graph for fictional domains
 
 Backlinks? What are they?
 
 Wikipedia categories github experiment? https://github.com/wasiahmad/mining\_wikipedia/tree/master/WikiNomy 
 
+% Reduction to different granularities of topics:
+% Wikidata IDs → wikidata embeddings? (too difficult, also to explain the features and analysis / explanation)
+% Wikidata ← → link to IPTC topics (offered by IPTC, handmade by them)
+% For each entity, navigate its triples to find IPTC topics. Relationships of type:
+% Instance\_of
+% Subclass\_of
+% ???
+% In theory, every type of relationship is important: e.g. “Trump Wall” Q61989464 is “named after” Donald Trump 
 
 
-\subsubsection{With IPTC}
-So let’s take all the relationships and navigate some hops until an IPTC topic comes up (termination).
-Feature building: decay with the number of hops the weight (exponentially? 1, 0.5, 0.25, …) of each entity.
-Table of entities (quite many distinct), with filter on number of appearances
+% Trying to find topics that are not so tight
+% https://en.wikipedia.org/wiki/Wikipedia:Contents/Categories 
+% This number of topics is too high. How to climb a bit up the topic tree in Wikidata?
+% wikidataId → entity. From the entity navigate the relationships instance\_of and subclass\_of. But also other relationships could be useful?
+% From WikiLink → wikipedia page. From the page navigate the categories (recursively) to climb up the categories tree (in reality it’s a Graph) of wikipedia \url{https://en.wikipedia.org/wiki/Special:CategoryTree?target=Category\%3APolitics&mode=all&namespaces=&title=Special%3ACategoryTree}
+% In both ways, the upper categories are many for each node, and it’s quite difficult to get a clean taxonomy.
+% Previous works:
+% https://www.academia.edu/download/30772075/ponzetto\_slides.pdf cleaning up relationships to extract pages+categories taxonomy.
+% https://aclanthology.org/P14-1089.pdf WiBi taxonomy → http://wibitaxonomy.org/ dead http://ceur-ws.org/Vol-1272/paper\_81.pdf https://aclanthology.org/P14-1089.pdf https://www.diag.uniroma1.it/navigli/pubs/IJCAI\_2009\_Ponzetto\_Navigli.pdf 
+% https://dl-acm-org.libezproxy.open.ac.uk/doi/abs/10.1145/3308558.3313519 for fictional domain, cleaning up category graph for fictional domains
 
-\subsubsection{Without IPTC}
+% Backlinks? What are they?
 
-We can just take a look at the fine-grained topics:
-Minimum support filter (to reduce features) or select top-k topics
+% Wikipedia categories github experiment? https://github.com/wasiahmad/mining\_wikipedia/tree/master/WikiNomy 
+\paragraph{A badly structured problem}
 
-Option with linked entities:
-Don’t lose a lot of fine-grained topics/entities which don’t have enough support
-Consider them with the related entities in KB
-How to do this: 
-Navigate hops from each entity (decay weight)
-
-
-
-
-
-\subsection{Derived from Entity types}
-
-Freebase Taxonomy revised by TextRazor
-
-entity propaganda feature computation
-For each entity, compute the total/average propaganda techniques that co-occur in the same sentence %by each political leaning.
-E.g.: “Donald Trump” used a lot of times with “Doubt” % from the Left leaning.
-
-Interesting direction:
-With Entity linking (provided by TextRazor) it is possible to find common attributes of the entities that make them targets of %Left/Right 
-propaganda. E.g., a category of people as repeated target of Propaganda
-
-\subsubsection{filter the entities types}
-
-Using all the entities is too much.
-
-Option 1: choose the types that will be mostly framed differently by Left/Center/Right (related to politics and sensitive topics e.g. Wikipedia list/ Allsides List
-Option 2: automatically discover the types that are featured more differently from L/C/R in the training dataset
+Some sentences here to say that topic taxonomies already exist, and it is better to directly recognise topics using the taxonomies.
 
 
-Analysis of the types listed in FreeBase
-TextRazor: https://www.textrazor.com/blog/2015/10/freebase-type-deduction-with-data.html they took freebase and are continuing to update it.
-FreeBase build taxonomy: path-like. Let’s build the tree from the path pieces (e.g. /Location/Country is a child of /Location)
-Interesting types: religion, military, law, business, organisation, government, location/country, people (how to justify?)
+% \paragraph{With IPTC}
+% So let’s take all the relationships and navigate some hops until an IPTC topic comes up (termination).
+% Feature building: decay with the number of hops the weight (exponentially? 1, 0.5, 0.25, …) of each entity.
+% Table of entities (quite many distinct), with filter on number of appearances
 
-Freebase Taxonomy (revised by TextRazor): https://drive.google.com/file/d/145CpFSFA0\_kuzvNt4z\_H1F2nKi-9-YyF/view?usp=sharing 
-Entities types appearing on the headlines dataset: https://drive.google.com/file/d/166fz78O\_xKesnCQ\_hDGiLSH5jk8WdV86/view?usp=sharing 
+% \paragraph{Without IPTC}
+
+% We can just take a look at the fine-grained topics:
+% Minimum support filter (to reduce features) or select top-k topics
+
+% Option with linked entities:
+% Don’t lose a lot of fine-grained topics/entities which don’t have enough support
+% Consider them with the related entities in KB
+% How to do this: 
+% Navigate hops from each entity (decay weight)
 
 
 
-\subsection{IPTC Topics}
+
+
+% \subsubsection{Derived from Entity types}
+% \todo{remove this?}
+
+% Freebase Taxonomy revised by TextRazor
+
+% entity propaganda feature computation
+% For each entity, compute the total/average propaganda techniques that co-occur in the same sentence %by each political leaning.
+% E.g.: “Donald Trump” used a lot of times with “Doubt” % from the Left leaning.
+
+% Interesting direction:
+% With Entity linking (provided by TextRazor) it is possible to find common attributes of the entities that make them targets of %Left/Right 
+% propaganda. E.g., a category of people as repeated target of Propaganda
+
+% \paragraph{filter the entities types}
+
+% Using all the entities is too much.
+
+% Option 1: choose the types that will be mostly framed differently by Left/Center/Right (related to politics and sensitive topics e.g. Wikipedia list/ Allsides List
+% Option 2: automatically discover the types that are featured more differently from L/C/R in the training dataset
+
+
+
+\subsubsection{IPTC Topics}
 
 Problem: very difficult to group fine-grained topics into more wide ones
 Solution: IPTC NewsCodes Media Topics schema https://cv.iptc.org/newscodes/mediatopic/
@@ -458,7 +596,20 @@ When breaking a dataset of news articles we want to have the possibility to brea
 IPTC mediatopics
 TextRazor gives in response 10 mediatopics for each article, each one with a score
 
-\subsubsection{Most relevant topic only}
+
+\paragraph{IPTC Taxonomy}
+
+FreeBase vs TextRazor \todo{check that this refers to IPTC}
+
+Analysis of the types listed in FreeBase
+TextRazor: https://www.textrazor.com/blog/2015/10/freebase-type-deduction-with-data.html they took freebase and are continuing to update it.
+FreeBase build taxonomy: path-like. Let’s build the tree from the path pieces (e.g. /Location/Country is a child of /Location)
+Interesting types: religion, military, law, business, organisation, government, location/country, people (how to justify?)
+
+Freebase Taxonomy (revised by TextRazor): https://drive.google.com/file/d/145CpFSFA0\_kuzvNt4z\_H1F2nKi-9-YyF/view?usp=sharing 
+Entities types appearing on the headlines dataset: https://drive.google.com/file/d/166fz78O\_xKesnCQ\_hDGiLSH5jk8WdV86/view?usp=sharing 
+
+\paragraph{Most relevant topic only}
 All levels, only pick first one (most important)
 
 TODO figure
@@ -473,7 +624,7 @@ What if, instead of trying dirty ways to select only one topic for each article,
 - If we proceed in this way, we should also do the same analysis with the standard topic distribution (not mediatopics)
 
 
-\subsubsection{Weighted full taxonomy}
+\paragraph{Weighted full taxonomy}
 Each article can belong to multiple categories.
 
 \begin{figure}[!htbp]
@@ -494,24 +645,28 @@ Need model (neural network) on top that can combine the features. Single-layer n
 % \subsection{Results}
 
 
-\section{Topic analysis across political spectrum}
-\label{sec:topics_topics_leaning}
-TOPIC+LEANING
+\subsection{\statusred Topic analysis across political spectrum}
+\label{ssec:topics_topics_leaning}
+TOPIC+LEANING: still to support that we need granularity hierarchical topics, other topics are not enough. This time taking the leaning comparison as a first use case and showing evidence that other topics are not useful to do a comparative analysis.
 
 Coarse topics are very similar across political spectrum
 Fine-grained topics are slightly different (quantity, terms). Which ones? They express the choice of details that we discussed in chapter 3
 
 % RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
 
-\subsection{AllSides topics}
+\subsubsection{AllSides topics}
 
 The distribution from the 3 different leanings is very similar. 
 Very uneven distribution!!!
 Topic merging? How?
 
-\subsection{Coarse Topics}
+\subsubsection{Coarse Topics}
 
-\subsubsection{Which topics are there (Leaning+Topic)}
+what this means
+the coarseTopics are not enough granular to be able to split the data in significant groups (across political spectrum)
+Being the percentages across political leaning quite similar, this confirms the underlying grouping of triples of articles in the dataset (expected)
+
+\paragraph{Which topics are there (Leaning+Topic)}
 
 TODO FIGURE
 
@@ -519,7 +674,7 @@ The most prominent topics are Politics, Culture, Law and Violence.
 Y-axis: the weighted topic count for each article (1=all the articles have the topic, 0=none have the topic)
 The distribution of the topics is very similar between the political sides
 
-\subsection{IPTC Topics}
+\subsubsection{IPTC Topics}
 Topics vs leaning: are there topics that are mostly left/right?
 
 TODO FIGURE
@@ -529,8 +684,19 @@ Topics where there are more articles from:
 Left: Election, legislative body, health, science and technology
 Right: crime law and justice, government, conflict war and peace, society
 
+\subsection{\statusred Selected topic methodology}
+\label{ssec:topic_topic_choice}
 
-\section{Breakdown of propaganda by topics}
+Recap of our decision:
+
+Which one
+
+Why
+
+We only use this one in the next sections
+
+
+\section{\statusred Breakdown of propaganda by topics}
 \label{sec:topic_propaganda}
 
 This section contains analysis of how propaganda is distributed across topics and what differences topics contain in terms of propaganda.
@@ -627,6 +793,7 @@ Categorical data comparison?
 
 
 \subsection{Derived from Entity Types}
+\todo{remove}
 
 entity propaganda feature computation
 For each entity, compute the total/average propaganda techniques that co-occur in the same sentence by each political leaning. E.g.: “Donald Trump” used a lot of times with “Doubt” from the Left leaning.
@@ -672,7 +839,7 @@ Term analysis L/C/R with and without considering propaganda
 
 
 
-\section{Topic+leaning+propaganda}
+\section{\statusred Topic+leaning+propaganda}
 \label{sec:topic_propaganda_leaning}
 
 Assumption: propaganda is used for certain topics in a very recognisable way to push for the ideas of the leaning of the source
@@ -749,12 +916,13 @@ TODO: maybe it’s not the best way to compare distributions (something like vio
 
 
 
-\section{Leaning classifier}
+\section{\statusred Leaning classifier}
+\label{sec:topic_classifier_propaganda}
 
 RQ3: \emph{What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?}
 
 \subsection{Breakdown by topic}
-\label{sec:topic_classifier_propaganda}
+
 
 In this section we aim to analyse the relationship between topics, propaganda and leaning from a different perspective.
 
@@ -776,7 +944,7 @@ In some other topics it is significantly lower.
 
 7: topics+propaganda for political leaning prediction
 
-\section{Discussions}
+\section{\statusred Discussions}
 \label{sec:topic_discussion}
 
 Main findings from this chapter:
