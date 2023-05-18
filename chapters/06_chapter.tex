@@ -311,7 +311,7 @@ We end this section with~\ref{ssec:topic_topic_choice} which recaps and motivate
 
 % Here we take different topic definitions and we try them to show that we need granularity.
 
-\subsection{\statusorange Detected Topics in the Dataset}
+\subsection{\statusgreen Detected Topics in the Dataset}
 % \subsection{Detected Topics at different granularities}
 \label{ssec:topic_topic_granularities_alone}
 % ONLY TOPIC
@@ -341,7 +341,7 @@ In the following paragraphs we consider:
 
 % We start with the definition of topics that is contained in the Baly dataset, and then we use the different topic types that we get from TextRazor, starting with simple ones to get to the more complex.
 
-\subsubsection{Custom topics (AllSides)}
+\subsubsection{\statusgreen Custom topics (AllSides)}
 
 The first topic definition that we apply is the ones that comes directly from the \texttt{baly} dataset. Toghether with the triples of articles, available from their website, the AllSides headlines have a manual annotation of the topic, which is given by the editors. In this way, the users can filter by topic and find related information.
 Besides being useful for navigating the website, this is a useful label because it is given directly by the resource creators and not assigned externally.
@@ -386,7 +386,7 @@ These topic labels are given by the AllSides team with an unknown criteria, and 
 For this reason, the next paragraphs consider standardised topics instead of ad-hoc topics.
 
 
-\subsubsection{Coarse Topics}
+\subsubsection{\statusgreen Coarse Topics}
 
 In this section we take into consideration the TextRazor coarseTopics annotations. TextRazor is a commercial API that allows to analyse topics, entities and to perform other NLP-related tasks (e.g. classify documents, …).
 Regarding the topics, it provides the Coarse Topics, which are 16 very high-level topics (Belief, Business, Culture, Education, Health, Language, Law, Leisure, Mathematics, Nature, Politics, Science, Sports, Technology, Violence, Weather).
@@ -446,7 +446,7 @@ Still, the topics are very high-level and we do not have insights about which po
 
 
 
-\subsubsection{Fine-Grained Topics}
+\subsubsection{\statusorange Fine-Grained Topics}
 
 Moving to the next topic feature, we analyse the annotation that TextRazor provides for Fine-Grained Topics.
 
@@ -469,7 +469,8 @@ With a hierarchy, we can adaptively decide the level of detail and find the opti
 
 % find some of them that are specific of a political leaning? 
 
-\paragraph{Potential ways to aggregate and find middle-level topics}
+\paragraph{\statusred Potential ways to aggregate and find middle-level topics}
+\todo{improve this paragraph}
 
 To potentially aggregate the topics and find a slightly higher level of hierarchy, there are different solutions.
 
@@ -485,15 +486,15 @@ There exist some previous works that addressed this problem.
 cleaning up relationships to extract pages+categories taxonomy.
 
 WiBi taxonomy → http://wibitaxonomy.org/ dead Wikipedia Bitaxonomy Explorer
-flati2014wikipedia
-flati2014two
-ponzetto2009large
+\cite{flati2014wikipedia,flati2014two,ponzetto2009large}
 
-chu2019tifi for fictional domain, cleaning up category graph for fictional domains
+\cite{chu2019tifi} for fictional domain, cleaning up category graph for fictional domains
 
-Backlinks? What are they?
+% Backlinks? What are they?
 
-Wikipedia categories github experiment? https://github.com/wasiahmad/mining\_wikipedia/tree/master/WikiNomy 
+% Wikipedia categories github experiment? https://github.com/wasiahmad/mining\_wikipedia/tree/master/WikiNomy 
+
+
 
 % Reduction to different granularities of topics:
 % Wikidata IDs → wikidata embeddings? (too difficult, also to explain the features and analysis / explanation)
@@ -519,9 +520,10 @@ Wikipedia categories github experiment? https://github.com/wasiahmad/mining\_wik
 % Backlinks? What are they?
 
 % Wikipedia categories github experiment? https://github.com/wasiahmad/mining\_wikipedia/tree/master/WikiNomy 
-\paragraph{A badly structured problem}
+\paragraph{\statusred A badly structured problem}
+\todo{improve this paragraph}
 
-Some sentences here to say that topic taxonomies already exist, and it is better to directly recognise topics using the taxonomies.
+Some sentences here, to say that topic taxonomies already exist, and it is better to directly recognise topics using the taxonomies.
 
 
 % \paragraph{With IPTC}
@@ -564,68 +566,93 @@ Some sentences here to say that topic taxonomies already exist, and it is better
 % Option 1: choose the types that will be mostly framed differently by Left/Center/Right (related to politics and sensitive topics e.g. Wikipedia list/ Allsides List
 % Option 2: automatically discover the types that are featured more differently from L/C/R in the training dataset
 
+% \paragraph{FreeBase Taxonomy and TextRazor}
 
+% FreeBase vs TextRazor
 
-\subsubsection{IPTC Topics}
+% Analysis of the types listed in FreeBase
+% TextRazor: https://www.textrazor.com/blog/2015/10/freebase-type-deduction-with-data.html they took freebase and are continuing to update it.
+% FreeBase build taxonomy: path-like. Let’s build the tree from the path pieces (e.g. /Location/Country is a child of /Location)
+% Interesting types: religion, military, law, business, organisation, government, location/country, people (how to justify?)
 
-Problem: very difficult to group fine-grained topics into more wide ones
-Solution: IPTC NewsCodes Media Topics schema https://cv.iptc.org/newscodes/mediatopic/
-It’s a taxonomy (5-levels categories)
-TextRazor also provides mediatopic if request is performed with appropriate parameters.
-
-https://iptc.org/news/wikidata/ 
-TreeView: \url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}
-
-https://cv.iptc.org/newscodes/mediatopic/
-17 top-level terms
-5-level taxonomy
-Each article is annotated with up to 10 topics (with a weight from 0.0 to 1.0), for each one of them we can see the upper topics in the hierarchy
-Top-level mediatopics in the Baly dataset
-
-
-Expecially developed for news
-Hierarchical
-
-
-Problem: topic is very unbalanced on this dataset (everything about “politics”)
-Breaking down with respect to topic, is not helpful to find differences between L/C/R if the topic splitting is very unbalanced and very generic.
-When breaking a dataset of news articles we want to have the possibility to break down the topic enough to see differences. (e.g. In which topics the Left/Right are enough different in how they use propaganda?)
+% Freebase Taxonomy (revised by TextRazor): https://drive.google.com/file/d/145CpFSFA0\_kuzvNt4z\_H1F2nKi-9-YyF/view?usp=sharing 
+% Entities types appearing on the headlines dataset: https://drive.google.com/file/d/166fz78O\_xKesnCQ\_hDGiLSH5jk8WdV86/view?usp=sharing 
 
 
 
-IPTC mediatopics
-TextRazor gives in response 10 mediatopics for each article, each one with a score
+
+\subsubsection{\statusgreen IPTC Media Topics}
+
+To solve the problems identified (the topics are either too coarse-grained or too fine-grained, without link between them), we decide to analyse the dataset with a topic taxonomy.
+
+Between the many taxonomies for topics (e.g., scientific publications, ...TODO), we focus on the news domain and therefore the most important and used taxonomy is IPTC NewsCodes Media Topics.
+This is a taxonomy especially created to describe the topics of news articles. It is made of 17 top-level terms, that can be expanded up to 5 levels of subcategories.
+The full taxonomy can be seen at \url{https://cv.iptc.org/newscodes/mediatopic} and an interactive display at \url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}.
+
+% Problem: very difficult to group fine-grained topics into more wide ones
+% Solution: IPTC NewsCodes Media Topics schema https://cv.iptc.org/newscodes/mediatopic/
+% It’s a taxonomy (5-levels categories)
+% TextRazor also provides mediatopic if request is performed with appropriate parameters.
+
+% https://iptc.org/news/wikidata/ 
+% TreeView: \url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}
+
+% https://cv.iptc.org/newscodes/mediatopic/
+% 17 top-level terms
+% 5-level taxonomy
+
+TextRazor provides the IPTC Media Topics annotations for submitted texts, if requested with proper parameters.
+As we saw in Subfigure~\ref{fig:topic_analysis_different_tools_mediatopics}, each input text is annotated with up to 10 Media Topics (with a weight from 0.0 to 1.0). For each of the Media Topics, it is possible to see the current node and the parent topics up to the top-level topics.
+Therefore, it is possible to understand the relationship between the topics and get detailed information but still with the context of which more large topics this belongs to.
 
 
-\paragraph{IPTC Taxonomy}
-
-FreeBase vs TextRazor \todo{check that this refers to IPTC}
-
-Analysis of the types listed in FreeBase
-TextRazor: https://www.textrazor.com/blog/2015/10/freebase-type-deduction-with-data.html they took freebase and are continuing to update it.
-FreeBase build taxonomy: path-like. Let’s build the tree from the path pieces (e.g. /Location/Country is a child of /Location)
-Interesting types: religion, military, law, business, organisation, government, location/country, people (how to justify?)
-
-Freebase Taxonomy (revised by TextRazor): https://drive.google.com/file/d/145CpFSFA0\_kuzvNt4z\_H1F2nKi-9-YyF/view?usp=sharing 
-Entities types appearing on the headlines dataset: https://drive.google.com/file/d/166fz78O\_xKesnCQ\_hDGiLSH5jk8WdV86/view?usp=sharing 
-
-\paragraph{Most relevant topic only}
-All levels, only pick first one (most important)
-
-TODO figure
+% Expecially developed for news
+% Hierarchical
 
 
-Problem: only politics and government.
-How to solve: when multiple labels are given, avoid the most broad/common ones. E.g.: politics:1.0, politics>elections: 0.85 → choose elections
-
-What if, instead of trying dirty ways to select only one topic for each article, we keep the multi-topic annotations?
-- Each article instead of having only one topic, is a distribution over a set of topics
-- In the downstream tasks we can use this distribution as the topic description (why should it be only one topic?)
-- If we proceed in this way, we should also do the same analysis with the standard topic distribution (not mediatopics)
+% Problem: topic is very unbalanced on this dataset (everything about “politics”)
 
 
-\paragraph{Weighted full taxonomy}
-Each article can belong to multiple categories.
+
+
+% IPTC mediatopics
+% TextRazor gives in response 10 mediatopics for each article, each one with a score
+
+As in the previous Subsection with Coarse Topics, we consider first a simplified version where only the most relevant MediaTopic is taken, and a second version where each article is considered part of several MediaTopics.
+
+
+\paragraph{Most relevant IPTC mediatopic}
+
+For this first simplified version, each news article in the \texttt{baly} dataset corresponds to a single MediaTopic.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/baly_iptc_only_first.pdf}
+    \caption{IPTC Media Topics of \texttt{Baly} considering only the most important MediaTopic for each article}
+    \label{fig:baly_iptc_only_first}
+\end{figure}
+
+Figure~\ref{fig:baly_iptc_only_first} shows a Sunburst diagram that represents how the most relevant topic of the articles is spread across the IPTC MediaTopic hierarchy.
+In the inner circle, the top-level topic are represented (sorted by size: politics, crime-law-and-justice, conflict-war-and-peace, economy-business-and-finance) and the outer circles represent subcategories (e.g., government is a subcategory of politics, or immigration is a subcategory off society).
+To build this plot, we take the most relevant mediatopic (higher score) and we add its score too the specific node in the tree. Parent nodes also receive the score, since an article that belongs to a certain subtopic, also belongs to the corresponding parent topics (up until the top level topics). The opposite is not true, and this is why summing the size of the subtopics (e.g. government + election + government policy) the total value is still less than the value for the parent topic (in our case, politics).
+
+With respect to the previous figures of this section, we can see not only that politics is the major topic, but we can also get an idea of its main subtopics, as well as very detailed subtopics (5 levels).
+
+However, remembering the difference between Figure~\ref{fig:baly_coarse_first} and \ref{fig:baly_coarse_weighted}, we know that this current plot is a simplification and we need to consider all the MediaTopics of each article.
+We provided it because it is simpler to explain how the values for the Sunburst plot are assigned.
+
+% Problem: only politics and government.
+% How to solve: when multiple labels are given, avoid the most broad/common ones. E.g.: politics:1.0, politics>elections: 0.85 → choose elections
+
+% What if, instead of trying dirty ways to select only one topic for each article, we keep the multi-topic annotations?
+% - Each article instead of having only one topic, is a distribution over a set of topics
+% - In the downstream tasks we can use this distribution as the topic description (why should it be only one topic?)
+% - If we proceed in this way, we should also do the same analysis with the standard topic distribution (not mediatopics)
+
+
+\paragraph{Weighted IPTC mediatopic}
+
+By considering all the MediaTopics of each article, we have the complete picture of topics of the dataset. 
 
 \begin{figure}[!htbp]
     \centering
@@ -634,15 +661,33 @@ Each article can belong to multiple categories.
     \label{fig:baly_iptc_weighted}
 \end{figure}
 
+Figure~\ref{fig:baly_iptc_weighted} shows the Sunburst diagram that is built similarly to the previous case. This time, being each article linked to multiple mediatopics, more subtopics are shown in the figure, that were suppressed by the major topic in the previous case (analogously to Fig~\ref{fig:baly_coarse_first} vs Fig~\ref{fig:baly_coarse_weighted}).
 
-Options:
-Multi-topic weighted complex solution
-Only see what happens in specific topic with the classifier
-Input topics as features and see classifier what produces:
-Need to encode the topics hierarchically
-Need model (neural network) on top that can combine the features. Single-layer neural network cannot, need 2 layers at least
+For example, under Government we see legislative-body and heads-of-state that did not appear before. Or science-and-technology and economics that were not visible before.
+
+
+% Options:
+% Multi-topic weighted complex solution
+% Only see what happens in specific topic with the classifier
+% Input topics as features and see classifier what produces:
+% Need to encode the topics hierarchically
+% Need model (neural network) on top that can combine the features. Single-layer neural network cannot, need 2 layers at least
 
 % \subsection{Results}
+
+\subsubsection{\statusgreen Comparison}
+
+We have seen in the previous paragraphs several methods and definitions of the topic.
+
+Simple high-level topics, show that the majority of articles are about politics. They are able to tell which topics exist, but the labels are very wide and do not provide enough detail.
+On the other hand, fine-grained details can be very specific, but it is very difficult to understand how they relate with wider topics.
+
+We analysed two different ways of using multi-class weighted labels. If we consider only the most important topic for each article, we lose a lot of information. Instead, by using all the topics, we are able to see more topics that would be hidden otherwise.
+
+Overall, the method that gives more details and provides a context around the topic (parent topics) is the hierarchical IPTC MediaTopics considering all the topics.
+
+We will see in the next subsection how the methods are able to provide a comparative analysis over political leaning.
+
 
 
 \subsection{\statusred Topic analysis across political spectrum}
@@ -675,6 +720,10 @@ Y-axis: the weighted topic count for each article (1=all the articles have the t
 The distribution of the topics is very similar between the political sides
 
 \subsubsection{IPTC Topics}
+
+Breaking down with respect to topic, is not helpful to find differences between L/C/R if the topic splitting is very unbalanced and very generic.
+When breaking a dataset of news articles we want to have the possibility to break down the topic enough to see differences. (e.g. In which topics the Left/Right are enough different in how they use propaganda?)
+
 Topics vs leaning: are there topics that are mostly left/right?
 
 TODO FIGURE
