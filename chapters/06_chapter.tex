@@ -627,7 +627,7 @@ For this first simplified version, each news article in the \texttt{baly} datase
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/baly_iptc_only_first.pdf}
+    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_only_first.pdf}
     \caption{IPTC Media Topics of \texttt{Baly} considering only the most important MediaTopic for each article}
     \label{fig:baly_iptc_only_first}
 \end{figure}
@@ -656,7 +656,7 @@ By considering all the MediaTopics of each article, we have the complete picture
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/baly_iptc_weighted.pdf}
+    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted.pdf}
     \caption{IPTC topics weighted of \texttt{Baly} dataset}
     \label{fig:baly_iptc_weighted}
 \end{figure}
@@ -690,57 +690,139 @@ We will see in the next subsection how the methods are able to provide a compara
 
 
 
-\subsection{\statusred Topic analysis across political spectrum}
+\subsection{\statusorange Topic analysis across political spectrum}
 \label{ssec:topics_topics_leaning}
-TOPIC+LEANING: still to support that we need granularity hierarchical topics, other topics are not enough. This time taking the leaning comparison as a first use case and showing evidence that other topics are not useful to do a comparative analysis.
 
-Coarse topics are very similar across political spectrum
-Fine-grained topics are slightly different (quantity, terms). Which ones? They express the choice of details that we discussed in chapter 3
+Having seen in the previous subsection which level of detail the different topic methodologies are able to provide, we want in this subsection to perform a comparative analysis.
+We want to observe which topic differences exist across political leaning, using a dataset that is made of triples of articles.
+Being groups of three articles that describe the same event, we expect that the high-level topics will be quite similar considering an article from the Left compared with an article from the Right coming from the same triple.
+Therefore, also at the dataset level, the statistics at the high-level topics should be quite similar across political leaning.
+
+What we would like to see, is some differences when we consider more narrow topics. This would link with our discussion done in Chapter~\ref{chap:common_ground_search} about the choice of details that individual news sources make, covering different subtopics to support their point of view.
+Together with the leaning labels (taken from Chapter~\ref{chap:political_sides}) we want to analyse the link between the choice of subtopics and the political orientation of the news sources.
+
+% TOPIC+LEANING: still to support that we need granularity hierarchical topics, other topics are not enough. This time taking the leaning comparison as a first use case and showing evidence that other topics are not useful to do a comparative analysis.
+
+% Coarse topics are very similar across political spectrum
+% Fine-grained topics are slightly different (quantity, terms). Which ones? They express the choice of details that we discussed in chapter 3
 
 % RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
 
-\subsubsection{AllSides topics}
+We proceed in this subsection by considering the same methodologies for topic labelling as in the previous subsection.
 
-The distribution from the 3 different leanings is very similar. 
-Very uneven distribution!!!
-Topic merging? How?
+\subsubsection{\statusgreen AllSides topics}
 
-\subsubsection{Coarse Topics}
+First we use the native topics included in the dataset. We simply count the number of articles for each leaning and topic. Our goal is to see how balanced they are across leaning, and if there are some topics which have more articles on a specific leaninig.
 
-what this means
-the coarseTopics are not enough granular to be able to split the data in significant groups (across political spectrum)
-Being the percentages across political leaning quite similar, this confirms the underlying grouping of triples of articles in the dataset (expected)
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/baly_original_topics_by_leaning.pdf}
+    \caption{Original topics of \texttt{Baly} dataset by leaning}
+    \label{fig:baly_original_topics_by_leaning}
+\end{figure}
 
-\paragraph{Which topics are there (Leaning+Topic)}
+Figure~\ref{fig:baly_original_topics_by_leaning} shows that for most of the topics, the quantity does not change significantly across political leaning.
+But for some topics, we see something unexpected: there are more articles on a specific leaning. Being the dataset made of triples of articles, we were expecting that everything would have been balanced.
+However, the unbalance may be caused by two factors:
+\begin{itemize}
+    \item some of the triples are made by the AllSides team with unbalanced articles (e.g., two from Left, one from Right)\footnote{\url{https://www.allsides.com/story/greg-craigs-foreign-lobbying-trial-begins}}
+    \item during the preparation of the dataset (not available to us) some articles may have been removed because of scraping errors
+\end{itemize}
 
-TODO FIGURE
+For example, the topics \texttt{gun-control-and-gun-rights}, \texttt{fbi}, \texttt{free-speech}, \texttt{state-department} has more articles on the Right and fewer in the Center. Or the topics \texttt{republican-party}, \texttt{lgbt-rights}, \texttt{civil-rights} that have more articles on the Left.
 
-The most prominent topics are Politics, Culture, Law and Violence.
-Y-axis: the weighted topic count for each article (1=all the articles have the topic, 0=none have the topic)
-The distribution of the topics is very similar between the political sides
+This confirms that, even though the AllSides team is trying to maintain the balance by displaying all the sides of the news, the imbalance on such topics is so big that in the end they used two articles from the same leaning.
 
-\subsubsection{IPTC Topics}
+For such topics, the news coverage is very unbalanced if we consider datasets that do not come from AllSides.
+One of the main techniques of agenda setting, is deciding what to cover as news and what to ignore. In this way, the perceived importance of issues is manipulated or diverted~\cite{mccombs1972agenda}.
 
-Breaking down with respect to topic, is not helpful to find differences between L/C/R if the topic splitting is very unbalanced and very generic.
-When breaking a dataset of news articles we want to have the possibility to break down the topic enough to see differences. (e.g. In which topics the Left/Right are enough different in how they use propaganda?)
+Besides the positive side of this comparison, we cannot infer from this representation the relationships between the different topics.
+We know that \texttt{lgbt-rights} and \texttt{civil-rights} are related, but the flat representation of topics does not provide this information.
+Furthermore, some topics are too wide and may internally be imbalanced, while some others are very narrow already.
 
-Topics vs leaning: are there topics that are mostly left/right?
+\subsubsection{\statusgreen Coarse Topics}
 
-TODO FIGURE
+Instead of using the AllSides topics, here we use the Coarse Topics from TextRazor, that are very broad but at least they are all at the same level (no detailed topics).
 
-Sunburst diagram shows topics that are more left or right (blue=left, red=right)
-Topics where there are more articles from:
-Left: Election, legislative body, health, science and technology
-Right: crime law and justice, government, conflict war and peace, society
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/baly_coarse_weighted_by_leaning.pdf}
+    \caption{Coarse Topics weighted of \texttt{Baly} dataset by leaning}
+    \label{fig:baly_coarse_weighted_by_leaning}
+\end{figure}
 
-\subsection{\statusred Selected topic methodology}
+Figure~\ref{fig:baly_coarse_weighted_by_leaning} shows the comparison between the different leanings in the dataset with a breakdown by topic.
+
+As in the previous plots representing outputs from TextRazor, we are considering the weights given to the topics of each article (score in the $[0,1]$ interval). The Y-axis is the sum of the topic weights across articles.
+
+With respect to the native topics of AllSides, we have that there are less topics (easier to inspect) but also less differences (does not tell any differences).
+While in the previous figure we managed to find some topics with unbalance, here we do not.
+
+The Coarse Topics are not enough granular to see differences across the political spectrum. The only difference that we see, is that there are slightly less articles for the Center in all the topics.
+
+The most prominent topics are Politics, Culture, Law and Violence for all the leanings.
+
+Therefore, we proceed with methods that have more fine-grained topics.
+
+\subsubsection{\statusred Fine-grained topics}
+
+By using the Fine-grained topics of TextRazor, we have the problem of high dimensionality. There are too many topics, and it is very difficult to represent them graphically to find the ones that have the most differences.
+
+\todo{list the top fine-grained topics sorted by support and difference in \% across left-center-right}
+
+\todo{TF-IDF analysis using topic labels to find if some topic terms are more Left or Right}
+
+Still we have the problem of not being able to group topics together and find topic groups that are unbalanced.
+
+\subsubsection{\statusgreen IPTC Media Topics}
+
+We have seen with the previous topic definitions that, if we have topics that are detailed enough, we can start to see some differences of unbalance across leaning.
+
+Using the IPTC Media Topics, we want to be able to see such differences, but at the same time have an idea of how the topics relate.
+
+% Breaking down with respect to topic, is not helpful to find differences between L/C/R if the topic splitting is very unbalanced and very generic.
+% When breaking a dataset of news articles we want to have the possibility to break down the topic enough to see differences. 
+We want to discover which topics have an unbalanced coverage between Left and Right. In other words, are there topics that are mostly Left or Right?
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_by_leaning.pdf}
+    \caption{IPTC topics weighted of \texttt{Baly} dataset, average leaning (blue=Left, red=Right)}
+    \label{fig:baly_iptc_weighted_by_leaning}
+\end{figure}
+
+Figure~\ref{fig:baly_iptc_weighted_by_leaning} shows a Sunburst diagram.
+As in the previous diagram of the same type, the angular distance of each node corresponds to the quantity of that topic in the dataset.
+Instead, the colour of the edge is computed with the relative proportion of Left and Right. This means that the colours belong to a scale from blue to red, where blue corresponds to Left while red corresponds to Right.
+
+In this way, we can see with a glance that some topics are covered more by a certain leaning. And we have the information about the hierarchy.
+
+With respect to previous representations, we can see for example that while politics has slightly more articles in the Right (as the dataset all together), the subtopics of elections and legislative body instead appear more in the Left.
+
+The main findings from this representation is that the Left is more present in military, crime and war topics. Instead the Left is more centred about health, economy,science, labour, and some very specific subtopics of politics.
+
+
+\subsection{\statusgreen Selected topic methodology}
 \label{ssec:topic_topic_choice}
 
-Recap of our decision:
+We have seen in the previous subsections several methodologies for defining and extracting the topics from news articles.
 
-Which one
+We compared the methodologies by first using the topic information on its own (Subsection~\ref{ssec:topic_topic_granularities_alone}), and then in combination with the political leaning (Subsection~\ref{ssec:topics_topics_leaning}).
 
-Why
+We have identified our main needs for our following comparative analysis that will consider propaganda, leaning and topic:
+
+\begin{itemize}
+    \item fine-grained topics: to be able to identify differences, that at higher levels are not visible;
+    \item finite enumeration: know which labels exist, and not have an infinite number of topics;
+    \item defined granularity: knowledge of how coarse each topic is, there are wide topics, together with very narrow ones
+    \item hierarchical topics: to explore the relationships (parent/child) between topics
+\end{itemize}
+
+% Which one
+Given these needs, we identified the IPTC Media Topics as ideal candidates.
+% Why
+They offer fine-grained topics, that are in finite number (see taxonomy). Furthermore they define the granularity of the topics and it is possible to navigate the relationships and observe during a comparative analysis 
 
 We only use this one in the next sections
 
@@ -903,7 +985,7 @@ Correlation between L/R of Propaganda quantities (18 values for each article) ac
 The hope is to see that in some subtopics the correlation is low, meaning that the propaganda quantities differ significantly between Left and Right for the subtopic.
 On the full dataset, this propaganda feature was not very useful, so let’s see what happens in all the subtopics.
 
-TODO figure
+TODO figure sunburst spearmans and pearsons
 
 Scale: blue=correlation high, red=correlation low, grey=not computable (all 0)
 
