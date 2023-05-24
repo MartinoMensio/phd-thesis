@@ -836,7 +836,7 @@ They offer fine-grained topics, that are in finite number (see taxonomy). Furthe
 In the next sections, we will use only the IPTC Media Topics for carrying our comparative analysis.
 
 
-\section{\statusgreen Breakdown of propaganda by topics}
+\section{\statusgreen Propaganda across Topics}
 \label{sec:topic_propaganda}
 
 With respect to the previous sections, here we bring in the propaganda analysis. As seen in Figure~\ref{fig:methodology_mindmap_chapter6}, the first Research Question (RQ1) is addressing Topics and Propaganda:
@@ -856,7 +856,7 @@ We have the following analysis:
     % \item analysis of the terms of propaganda across Media Topics: to discover term associations with specific topics.
 \end{itemize}
 
-\subsection{Total quantity of propaganda across Media Topics}
+\subsection{\statusgreen Total quantity of propaganda across Media Topics}
 \label{sec:topic_propaganda_tot}
 
 % one sunburst with total quantity
@@ -884,7 +884,7 @@ The topics with most propaganda are: sexism ($9.9\%$) and racism ($9.1\%$), both
 
 Although we already can distinguish some loaded/controversial topics, we would also like to see the breakdown by specific techniques, therefore in the next subsection we consider each technique individually.
 
-\subsection{Quantity of each propaganda technique across Media Topics}
+\subsection{\statusgreen Quantity of each propaganda technique across Media Topics}
 \label{sec:topic_propaganda_tech}
 
 Similarly to what we have done in Chapter~\ref{chap:linguistic_persuasion}, we want to separate the different techniques. Instead of comparing only the total quantity of propaganda across topics, here we want to see how each of the techniques is distributed across the topics. 
@@ -895,10 +895,6 @@ $$ p_{t_{k},m_{l}} = \frac{ \sum_{j} \sum_{i\subseteq k} w_{t_{i},a_{j}} \cdot p
 
 
 \begin{figure}[!htbp]
-    \centering
-    
-    
-
     \centering
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Loaded_Language.pdf}
@@ -973,7 +969,7 @@ These topic-technique associations verify the theoretical aspects of propaganda 
 
 % All three political leanings have very similar profiles, with some exceptions
 
-\subsection{Discussion}
+\subsection{\statusgreen Discussion}
 
 Our RQ1 for this section was \emph{How does the detected propaganda change across the topics?}
 
@@ -985,24 +981,221 @@ With this analysis we still do not have a picture of how the political orientati
 
 
 
-\section{\statusred Topic+leaning+propaganda}
+\section{\statusorange Propaganda across Topics and Leanings}
 \label{sec:topic_propaganda_leaning}
 
-Assumption: propaganda is used for certain topics in a very recognisable way to push for the ideas of the leaning of the source
+In previous Chapter~\ref{chap:political_sides} we observed how propaganda changes across political leanings.
+In this Chapter, we combine that analysis with the analyses across topics (Leaning across Topics, Section~\ref{ssec:topics_topics_leaning}, and Propaganda across Topics~\ref{sec:topic_propaganda}).
+In this way, we have an analysis that considers the three variables (Propaganda, Leaning and Topic) all together to discover associations and major differences across Leanings.
 
-RQ2: How does the detected propaganda change across topics and leanings? 
+This whole analysis is based on the assumption that propaganda is used by news sources (associated with specific leanings) for certain topics in a very recognisable way to push for a certain idea or a certain narrative.
+
+Our RQ2 is: \emph{How does the detected propaganda change across topics and leanings?}
+
+While answering this question, we seek multiple objectives:
+
+\begin{enumerate}
+    % \item discover associations of topic + leaning that have strong propaganda; --> not easy to show and compare
+    % \item discover associations of topic + leaning + techniques that are used frequently together; --> not easy to show and compare
+    \item identify topics where propaganda is very different across political leaning in terms of quantity;
+    \item identify topics where propaganda is very different across political leaning, considering the terms used.
+\end{enumerate}
+
+We tried first to consider the analysis done in Figure~\ref{fig:baly_iptc_weighted_by_leaning} and break it down with respect to the political leaning. But it was not easy to see and compare the results between leanings, so we opted to use difference and correlation. 
 
 
-Experiment 4.3: 
-- topic breakdown: AllSides Topics, IPTC
-- shapes of propaganda/sentiment (leaning)
+
+% Experiment 4.3: 
+% - topic breakdown: AllSides Topics, IPTC
+% - shapes of propaganda/sentiment (leaning)
 
 
-Types of shapes (propaganda)
-(look at purple: propaganda)
+% Types of shapes (propaganda)
+% (look at purple: propaganda)
 
-Blue is sentiment (+ and -) and purple is propaganda. 
-y axis in the fraction of terms marked as sentiment/propaganda.
+% Blue is sentiment (+ and -) and purple is propaganda. 
+% y axis in the fraction of terms marked as sentiment/propaganda.
+
+% \subsection{\statusred Finding associations of Topic and Leaning with Propaganda}
+
+% As for the first objective, we consider the analysis done in Figure~\ref{fig:baly_iptc_weighted_by_leaning} and we break it down with respect to the political leaning.
+% This means that we have the three following 
+
+% - for each leaning, see max propaganda values across topics
+
+% \subsection{\statusred Finding associations of Topic and Leaning with specific Propaganda Techniques}
+
+% - for each leaning, see max propaganda values (by technique) across topics
+
+\subsection{\statusgreen Topics with more Propaganda in Left vs Right}
+\label{ssec:topic_propaganda_leaning_tot_quantity}
+
+% - total quantity: max difference
+% - techniques: correlation analysis
+
+The first comparison that we do is with the total quantity of propaganda. We want to see in which topics Left is using more propaganda than Right.
+The easier way to compare this, is by considering the analysis of Figure~\ref{fig:baly_iptc_weighted_by_leaning} and consider the leaning of the articles. Three separate arrays of values are built (one value for each topic): the first one representing the average propaganda quantity of articles from the Left, the second one from the Center, the third from the Right.
+We then subtract the values from the Left with the values from the Right, and we have a score that represents how much more the Left / Right contain propaganda for each topic.
+
+
+% For the total quantity, it is a single value. So we can only compare if it is greater or smaller. We therefore compute the difference of total propaganda quantity Left - Right.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff.pdf}
+    \caption{Left (Blue) vs Right (red) propaganda: who has more across topics}
+    \label{fig:baly_iptc_weighted_prop_total_leaning_diff}
+\end{figure}
+
+Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff} shows the resulting diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total_leaning_diff.html}}.
+As we can see, the majority of the topics have more Right-leaning propaganda. As we saw in the previous chapters, propaganda is detected more on Right-leaning articles.
+This prevalence can be seen especially on some topics: ethics, discrimination, media and corruption (values higher than 1\%).
+Instead, Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom} shows different zooms on subtopics that have a prevalence of Left-leaning propaganda:
+
+\begin{figure}[!htbp]
+    \centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_economy.pdf}
+		\caption{Economy}
+            \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_labour.pdf}
+		\caption{Labour}
+            \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_labour}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_disaster.pdf}
+		\caption{Disaster}
+            \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_disaster}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_court.pdf}
+		\caption{Court}
+            \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_court}
+	\end{subfigure}
+	
+    \caption{Zoom on specific topics: Left (Blue) vs Right (red) propaganda}
+    \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom}
+\end{figure}
+
+\begin{itemize}
+    \item Economy, business and finance (top-level topic): the subtopics that have more Left-leaning propaganda  are Banking ($+0.4\%$), Investments ($+0.5\%$), Market and exchange ($+0.5\%$). The rest of the subtopics contain more Right-leaning propaganda.
+    \item Labour (top-level topic): Retirement ($+0.8\%$), Pension ($+0.6\%$) and Labour strike/dispute ($+0.5\%$). Also here, the rest is mostly Right-leaning propaganda.
+    \item Disaster, accident and emergency incident: Left-leaning articles contain a significant higher quantity of propaganda on the subtopics of Drought ($+4.4\%$) and Earthquake ($+3.5\%$) when compared to the Right. Also the subtopics of Emergency incidents ($+0.8\%$), Railway incidents ($+1.3\%$) and Maritime incidents ($+1.0\%$) get more propaganda in the Left, while Road accidents get more in the Right ($+1.7\%$).
+    \item Court (Crime, law and justice $\rightarrow$ Judiciary): here most of the propaganda is from the Right, except from Capital Punishment ($+1.0\%$).
+\end{itemize}
+
+From this analysis, we can see that even though the quantity of propaganda is way higher in the Right, we can be able to identify some topics where instead the Left is using quite strong persuasion means.
+And the identified topics with more Left-leaning propaganda are topics where the Left has strongest opinions. For example, in regards to the capital punishment the Left has a strong opposition, while the Right might be less strong with language when covering this topic because it generally accepts more tis practice.
+Or if we consider the types of accidents, it is meaningful that the Right is using more strong language when talking about car accidents, while the Left is more on railway and maritime. Furthermore, the Left has a stronger language when covering natural disasters, as they are usually related to bad environmental practices.
+
+The language contains more propaganda and is stronger when the writer either considers the topic more important, or is criticising the status quo~\citep{rose1992political}. And we confirm this with our analysis.  
+
+
+\subsection{\statusgreen Topic correlation of propaganda quantities across Leaning}
+\label{ssec:topic_propaganda_leaning_tech_quantities}
+
+% Propaganda techniques: difference
+% - techniques: correlation analysis
+
+
+% Propaganda techniques: correlation analysis (how different)
+
+For the next step, we take into consideration the different techniques. We want to study how the usage of propaganda techniques is correlated across leanings on several topics.
+
+First, by studying the correlation of the quantities of each technique. Then, in the next subsection, we will observe the correlation of the TF-IDF features.
+
+The idea is to take for each topic and leaning the 18 values that represent the average quantity of the propaganda techniques for articles of that leaning. And then compute the correlation of the values of the Left with the values of the Right.
+
+As correlation metric, we choose to use Pearson's because it works with normal distributions. We quickly checked, and the distribution of the propaganda scores is half-normal therefore Pearson is the best metric.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr.pdf}
+    \caption{Correlation of quantities of propaganda techniques between Left and Right: light-green (low correlation) to dark green (high correlation)}
+    \label{fig:baly_iptc_weighted_prop_leaning_corr}
+\end{figure}
+
+Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr} shows the resulting diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr.html}}. As we can see, the correlation values are very high for all the topics ($96\% - 100\%$). Even zooming on specific subtopics, the correlation rarely falls under $90\%$: under Economic Sector, Chemicals ($87.2\%$), Air Transport ($84.0\%$) and under Macro Economics, Exports ($50.9\%$). 
+These subtopics, however, are quite small and have a count (keep in mind that belonging to a topic is a floating number) lower than 50. Therefore the results are not anymore significant when restricting to such a small number of articles.
+
+Therefore, the finding is that, even though the total quantity of propaganda may be different across the leaning (as found in the previous subsection), the correlation keeps staying very high also in those topics that showed the difference in the total.
+This means that what changes is the total quantity of propaganda, but not the relative proportions of the techniques used.
+
+\subsection{\statusorange Finding Topic where Propaganda differs across Leaning (terms)}
+\label{ssec:topic_propaganda_leaning_terms}
+
+The last step of this correlation analysis is to see whether the terms of propaganda are correlated between them.
+% We have just seen that the correlation is very high when considering only the quantities of each technique
+
+To analyse this, we take the TF-IDF features already computed in Chapter~\ref{chap:political_sides} and~\ref{chap:linguistic_persuasion}.
+This feature set is made of TF-IDF computed with a feature size of 2000 across the whole dataset together.
+In order to compute the specific TF-IDF feature for each topic and leaning, we iterate over the dataset and we accumulate the TF-IDF of single articles into buckets that are identified by leaning and media topic.
+Alongside, we also accumulate the weights of articles belonging to each bucket (leaning is integer, while topic score is a float), as in the previous subsections, so that we can compute the average TF-IDF vector for each topic and leaning.
+
+We then take the vectors from the Left and the Right, and we compute the Pearson's correlation as in the previous case.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf.pdf}
+    \caption{Correlation of propaganda terms (TFIDF features) between Left and Right: light-green (low correlation) to dark green (high correlation)}
+    \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf}
+\end{figure}
+
+Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr_tfidf} shows the resulting diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr_tfidf.html}}. We can see that, with respect to the previous Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr}, we have some topics where the correlation values are lower than 90\%: court subtopics, for example, have values low as 62\%, or fundamental rights even reach 5\%.
+
+We zoom into some of the topics that present low values of correlation to get a clearer view. In these topics, correlation is low, which means that Left and Right are using significantly different propaganda terms. Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom} shows the most important ones.
+
+\begin{figure}[!htbp]
+    \centering
+	\begin{subfigure}{0.45\textwidth}
+            \centering
+		\includegraphics[trim={0 0 0 0},clip,width=0.8\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_fundamental_rights.pdf}
+		\caption{Fundamental Rights}
+            \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_fundamental_rights}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_religion.pdf}
+		\caption{Religion}
+            \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_religion}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_economy.pdf}
+		\caption{Economy}
+            \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_economy}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_labour.pdf}
+		\caption{Labour}
+            \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_labour}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+            \centering
+		\includegraphics[trim={0 0 0 0},clip,width=0.8\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_disaster.pdf}
+		\caption{Disaster}
+            \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_disaster}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+            \centering
+		\includegraphics[trim={0 0 0 0},clip,width=0.8\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_court.pdf}
+		\caption{Court}
+            \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom_court}
+	\end{subfigure}
+	
+    \caption{Zoom on specific topics: correlation of propaganda terms between Left and Right}
+    \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom}
+\end{figure}
+
+\begin{enumerate}
+    \item Fundamental Rights (subtopic of Politics): on the whole topic, the average correlation is $83.6\%$. The topics where the words differ the most are Freedom of the Press ($5.5\%$ but very small with a sum of topic weights of 4.16 articles, therefore not significant), Freedom of Religion ($30.3\%$), Censorship and Freedom of Speech ($49.6\%$). These subtopics were not emerging in our previous analysis, therefore the quantities of propaganda across leaning are quite similar (Subsection~\ref{ssec:topic_propaganda_leaning_tot_quantity}). Instead, considering the propaganda terms used, they differ quite significantly.
+    \item Religion (top-level topic): we can see here how political leanings use different terminology when talking about many religions. Overall, the correlation for Religion is $83.5\%$. Islam gets a high correlation ($83.6\%$), while the different branches of Christianity ($72.6\%$) are showing less correlation: Roman Catholic ($19.1\%$), Anglican ($21.6\%$), Lutheran ($27.2\%$) are just some examples. This is an interesting finding: when articles are talking about religions through propaganda, we can see that for religions that have been historically more present in the US (main location of the news sources in the \texttt{baly} dataset) we have lower correlation. In other words, for these religions, the debate is more internal and the terms used are more different. Instead, for religions that are generally covered in the news as ``external", the terms used in propaganda are more similar between political leanings.
+    \item Economy, business and finance (top-level topic): these subtopics also were highlighted in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy} where we had more Left-leaning propaganda in Banking, Investments, Market and exchange. Instead here, considering the terms, we can see how the most different topics are specific economic sectors and some macroeconomics categories. For the sectors, the most different are: Agriculture ($17.0\%$), Oil and Gas Industry ($40\%$), Transport ($43.3\%$). For the macroeconomics: Economic Indicator ($19.7\%$), Mortgage ($40.0\%$), Inflation ($53.6\%$), Prices ($57.1\%$). These are mostly topics that had more propaganda on the Right.
+    \item Labour (top-level topic): this subtopic was highlighted previously in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy}. In this case, the topics with lower correlation are the topics that had more propaganda on the Left:  Retirement ($26.1\%$), Pension ($24.8\%$) and Labour strike/dispute ($7\%$).
+    \item Disaster, accident and emergency incident: subtopics of Drought ($14.8\%$) and Earthquake ($23.9\%$). Also the subtopics of Emergency incidents ($+0.8\%$), Railway incidents ($31.5\%$) and Maritime incidents ($16.3\%$) Road accidents in the Right ($10.4\%$). In both (TODO COMPLETE SENTENCES)
+    \item Court (Crime, law and justice $\rightarrow$ Judiciary): here the subtopic with lowest correlation is Capital Punishment ($22.2\%$).
+\end{enumerate}
+
 
 \subsection{Custom Topics (AllSides)}
 \todo{REMOVE this subsection. Just check if the main finding is also found with IPTC: Right using Doubt in Science, Center using Appeal to Authority when talking about DEA}
