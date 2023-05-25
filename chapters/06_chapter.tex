@@ -80,7 +80,7 @@ Finally, Section~\ref{sec:topic_discussion} includes the discussion of the findi
 % https://github.com/MartinoMensio/textrazor-bulk-annotate which can be used to annotate a dataset.
 % attached the code from a private repository (bcanalytics) which contains some functions to handle the taxonomy (file src/textrazor.py ) and to plot the sunburst diagrams (file experiments/text\_razor.ipynb)
 
-\section{\statusorange Methodology}
+\section{\statusgreen Methodology}
 \label{sec:topic_method}
 
 Being our main goal to understand how propaganda varies across topics and leanings, we first need to decompose it as we are introducing a new factor in our analysis.
@@ -287,7 +287,7 @@ Breakdown of F1 measure across topics. Not train/test but just looking at the mo
 
 
 
-\section{\statusorange Topics for Comparative Analysis}
+\section{\statusgreen Topics for Comparative Analysis}
 \label{sec:topic_topic_granularities}
 
 In this section, we use the different topic methodologies listed above, applying them to the \texttt{baly} dataset.
@@ -981,7 +981,7 @@ With this analysis we still do not have a picture of how the political orientati
 
 
 
-\section{\statusorange Propaganda across Topics and Leanings}
+\section{\statusgreen Propaganda across Topics and Leanings}
 \label{sec:topic_propaganda_leaning}
 
 In previous Chapter~\ref{chap:political_sides} we observed how propaganda changes across political leanings.
@@ -1093,7 +1093,7 @@ Or if we consider the types of accidents, it is meaningful that the Right is usi
 The language contains more propaganda and is stronger when the writer either considers the topic more important, or is criticising the status quo~\citep{rose1992political}. And we confirm this with our analysis.  
 
 
-\subsection{\statusgreen Topic correlation of propaganda quantities across Leaning}
+\subsection{\statusgreen Correlation of propaganda quantities between Leanings across Topics}
 \label{ssec:topic_propaganda_leaning_tech_quantities}
 
 % Propaganda techniques: difference
@@ -1123,7 +1123,7 @@ These subtopics, however, are quite small and have a count (keep in mind that be
 Therefore, the finding is that, even though the total quantity of propaganda may be different across the leaning (as found in the previous subsection), the correlation keeps staying very high also in those topics that showed the difference in the total.
 This means that what changes is the total quantity of propaganda, but not the relative proportions of the techniques used.
 
-\subsection{\statusorange Finding Topic where Propaganda differs across Leaning (terms)}
+\subsection{\statusgreen Finding Topics where Propaganda differs across Leaning (terms)}
 \label{ssec:topic_propaganda_leaning_terms}
 
 The last step of this correlation analysis is to see whether the terms of propaganda are correlated between them.
@@ -1192,198 +1192,224 @@ We zoom into some of the topics that present low values of correlation to get a 
     \item Religion (top-level topic): we can see here how political leanings use different terminology when talking about many religions. Overall, the correlation for Religion is $83.5\%$. Islam gets a high correlation ($83.6\%$), while the different branches of Christianity ($72.6\%$) are showing less correlation: Roman Catholic ($19.1\%$), Anglican ($21.6\%$), Lutheran ($27.2\%$) are just some examples. This is an interesting finding: when articles are talking about religions through propaganda, we can see that for religions that have been historically more present in the US (main location of the news sources in the \texttt{baly} dataset) we have lower correlation. In other words, for these religions, the debate is more internal and the terms used are more different. Instead, for religions that are generally covered in the news as ``external", the terms used in propaganda are more similar between political leanings.
     \item Economy, business and finance (top-level topic): these subtopics also were highlighted in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy} where we had more Left-leaning propaganda in Banking, Investments, Market and exchange. Instead here, considering the terms, we can see how the most different topics are specific economic sectors and some macroeconomics categories. For the sectors, the most different are: Agriculture ($17.0\%$), Oil and Gas Industry ($40\%$), Transport ($43.3\%$). For the macroeconomics: Economic Indicator ($19.7\%$), Mortgage ($40.0\%$), Inflation ($53.6\%$), Prices ($57.1\%$). These are mostly topics that had more propaganda on the Right.
     \item Labour (top-level topic): this subtopic was highlighted previously in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy}. In this case, the topics with lower correlation are the topics that had more propaganda on the Left:  Retirement ($26.1\%$), Pension ($24.8\%$) and Labour strike/dispute ($7\%$).
-    \item Disaster, accident and emergency incident: subtopics of Drought ($14.8\%$) and Earthquake ($23.9\%$). Also the subtopics of Emergency incidents ($+0.8\%$), Railway incidents ($31.5\%$) and Maritime incidents ($16.3\%$) Road accidents in the Right ($10.4\%$). In both (TODO COMPLETE SENTENCES)
+    \item Disaster, accident and emergency incident: subtopics of Drought ($14.8\%$) and Earthquake ($23.9\%$). Also the subtopics of Emergency incidents ($+0.8\%$), Railway incidents ($31.5\%$) and Maritime incidents ($16.3\%$) Road accidents in the Right ($10.4\%$). In these cases, the unbalance of propaganda was also high.
     \item Court (Crime, law and justice $\rightarrow$ Judiciary): here the subtopic with lowest correlation is Capital Punishment ($22.2\%$).
 \end{enumerate}
 
+\subsection{\statusgreen Discussion}
 
-\subsection{Custom Topics (AllSides)}
-\todo{REMOVE this subsection. Just check if the main finding is also found with IPTC: Right using Doubt in Science, Center using Appeal to Authority when talking about DEA}
-
-How do they overlap with the propaganda techniques?
-
-Every article is tagged with a topic (AllSides) and with the propaganda techniques (from the tool).
-We want to see which topics occur with specific propaganda techniques.
-For this reason, we build 3 heatmaps (one for each political leaning) with the propaganda techniques on the x-axis and the topics on the y-axis. The value of the cell represents the average quantity of the propaganda technique for that specific topic.
-We want to see differences between the Left/Center/Right heatmaps.
-
-TODO FIGURE: HEATMAP? OR WHAT?
-
-Differences:
-The Right is using Doubt when talking about “science” far more than the other two political leanings (1.2\% Left - 13 articles, 0.9\% Center - 8 articles, 5.2\% Right - 4 articles). Does this mean that the Right is more sceptical about science? Let’s look at the data (4 articles from the Right with the topic “science”):
-https://spectator.org/science-know-it-alls-on-the-march/
-http://www.washingtontimes.com/news/2017/apr/22/march-political-science-earth-day-rally-doubles-la/ 
-http://www.nationalreview.com/article/447048/bill-nye-science-guy-march-science-left-politics-religion
-https://www.foxnews.com/science/we-could-go-to-venus-with-todays-technology-scientists-say 
-The first 3 articles cover the 25 April 2017 march for science, which was labelled by some sources on the Right as “the leftist [...] new religion” (nationalreview article)
-3 articles compared here: https://www.allsides.com/story/earth-day-march-science 
-
-The Center is using Appeal to Authority when talking about “dea” far more than the other two leanings (0\% Left - 3 articles, 1.8\% Center - 1 article, 0\% Right - 1 article). Does the Center appeal more to authority because it is more “moderate” than Left and Right?
-Other cases can be discovered and the classifier can use them (topic+propaganda technique quantity/terms) to recognise political leaning
-
-\subsubsection{Correlation Left vs Right IPTC}
-Exploratory way: observe the correlation between features of the left and features of the right. If correlation is high, it means that the differences are small. Instead if the correlation is low, it means that there exist differences between left and right.
+From these results, we can see that the terms used for propaganda are quite different in specific topics, demonstrated by low correlation values on the TF-IDF features.
+In some cases, the low correlation happens in topics where there exists more Left or Right propaganda across the articles (economy, labour, disasters, court). In some other cases instead, propaganda appears uniformly across the spectrum (Fundamental Rights and Religion) but when we consider the terms we have significant differences (low correlation). Therefore, both the analyses of quantity and terms are necessary.
 
 
-Correlation between L/R of Propaganda quantities (18 values for each article) across topics
-The hope is to see that in some subtopics the correlation is low, meaning that the propaganda quantities differ significantly between Left and Right for the subtopic.
-On the full dataset, this propaganda feature was not very useful, so let’s see what happens in all the subtopics.
+% \subsection{Custom Topics (AllSides)}
+% \todo{REMOVE this subsection. Just check if the main finding is also found with IPTC: Right using Doubt in Science, Center using Appeal to Authority when talking about DEA}
 
-TODO figure sunburst spearmans and pearsons
+% How do they overlap with the propaganda techniques?
 
-Scale: blue=correlation high, red=correlation low, grey=not computable (all 0)
+% Every article is tagged with a topic (AllSides) and with the propaganda techniques (from the tool).
+% We want to see which topics occur with specific propaganda techniques.
+% For this reason, we build 3 heatmaps (one for each political leaning) with the propaganda techniques on the x-axis and the topics on the y-axis. The value of the cell represents the average quantity of the propaganda technique for that specific topic.
+% We want to see differences between the Left/Center/Right heatmaps.
 
-This is clearly a negative result. This means that the propaganda quantities are not useful at all. Let’s check what happens with other features:
+% TODO FIGURE: HEATMAP? OR WHAT?
 
+% Differences:
+% The Right is using Doubt when talking about “science” far more than the other two political leanings (1.2\% Left - 13 articles, 0.9\% Center - 8 articles, 5.2\% Right - 4 articles). Does this mean that the Right is more sceptical about science? Let’s look at the data (4 articles from the Right with the topic “science”):
+% https://spectator.org/science-know-it-alls-on-the-march/
+% http://www.washingtontimes.com/news/2017/apr/22/march-political-science-earth-day-rally-doubles-la/ 
+% http://www.nationalreview.com/article/447048/bill-nye-science-guy-march-science-left-politics-religion
+% https://www.foxnews.com/science/we-could-go-to-venus-with-todays-technology-scientists-say 
+% The first 3 articles cover the 25 April 2017 march for science, which was labelled by some sources on the Right as “the leftist [...] new religion” (nationalreview article)
+% 3 articles compared here: https://www.allsides.com/story/earth-day-march-science 
 
-\subsection{Identifying mediatopics with propaganda differences???}
+% The Center is using Appeal to Authority when talking about “dea” far more than the other two leanings (0\% Left - 3 articles, 1.8\% Center - 1 article, 0\% Right - 1 article). Does the Center appeal more to authority because it is more “moderate” than Left and Right?
+% Other cases can be discovered and the classifier can use them (topic+propaganda technique quantity/terms) to recognise political leaning
 
-Objective: using mediatopics taxonomy, find the correct level of narrow that shows differences in how propaganda is used but at the same time not to narrow to still have enough articles.
-
-Differences (quantities of propaganda techniques across leanings), but with enough support. For the sorting it would be nice to have a formula like: 
-combined\_score = support(topic) * discrepancy
-Or just sort by higher discrepancy, with threshold on support(topic)
-
-Discrepancy computed as correlation?
-Distribution of propaganda quantities from L and distribution from R
-Option 1: links from AllSides to group the articles in triples
-Option 2: average in topic ← selected as doesn’t need info that articles A and B are on the same story. Correlation between quantities of each technique in L vs R
-
-\subsection{Testing on coarseTopic}
-Correlation of propaganda techniques quantities between L and R, for each coarseTopic. This is to prove/quantify that coarse topics don’t have much difference in propaganda across political leaning
-
-TODO FIGURE
-
-CoarseTopics that have no high correlation:
-Mathematics: pearson=-0.0005, spearman=0.60 (GOOD), support is very small [8. 5. 1.] (BAD)
-Language: pearson=0.86, spearman=0.93. Support is [ 83.  48. 109.] articles
-
-Pearson vs Spearman: pearson assumes normal distribution, while Spearman no.
-Verifying distribution:
-
-Histogram of quantity of Loaded Language (most prominent technique) of Left (blue), Center (pink) and Right (red) in all the articles. It looks like a normal distribution, truncated at the 0. Y-axis=percentage (TOO: should verify mathematically how close to normal distribution)
-
-\subsection{Fine-Grained Topics}
-\todo{REMOVE SUBSECTION: using fine-grained topics but no real result}
-
-Compute for each topic and each leaning, the co-occurrence with each propaganda technique. Then compute the differences (OK with 2 categories, how to do with 3 categories? Variance? But leaning is on a continuum scale), and sort by difference descending → obtain topics with more differences in propaganda quantities
-Variance: each observation is the average quantity of propaganda in specific leaning+topic, computed across leaning
+% \subsubsection{Correlation Left vs Right IPTC}
+% Exploratory way: observe the correlation between features of the left and features of the right. If correlation is high, it means that the differences are small. Instead if the correlation is low, it means that there exist differences between left and right.
 
 
-:TODO
-Then filter and keep only topics with minimum support (to be defined)
+% Correlation between L/R of Propaganda quantities (18 values for each article) across topics
+% The hope is to see that in some subtopics the correlation is low, meaning that the propaganda quantities differ significantly between Left and Right for the subtopic.
+% On the full dataset, this propaganda feature was not very useful, so let’s see what happens in all the subtopics.
 
-How to compare / visualise differences between L/C/R across topics?
-Before: heatmaps
-Good only for viewing things from the outside, not too fine-grained
+% TODO figure sunburst spearmans and pearsons
 
-What about finding differences by ranking with a function that expresses how much difference is there?
-We want topics with high support and have big differences between leaning with respect to a feature (e.g. quantity of a certain technique, term frequencies).
+% Scale: blue=correlation high, red=correlation low, grey=not computable (all 0)
 
-combined\_score = support(topic) * discrepancy
-
-Categorical data comparison?
-
-\subsection{Derived from Entity Types}
-\todo{remove}
-
-entity propaganda feature computation
-For each entity, compute the total/average propaganda techniques that co-occur in the same sentence by each political leaning. E.g.: “Donald Trump” used a lot of times with “Doubt” from the Left leaning.
-
-Interesting direction:
-With Entity linking (provided by TextRazor) it is possible to find common attributes of the entities that make them targets of Left/Right propaganda. E.g., a category of people as repeated target of Propaganda.
-
-\subsection{IPTC Topics quantity}
-
-Top-level IPTC Topics analysis:
-Pretty similar to CoarseTopics plot (using native TextRazor 17 categories):
-Politics is the most common top-level topic → But this time we will be able to break it down to subtopics (taxonomy)
-Crime and conflict also quite relevant
-Topics across L/C/R are quite similar → confirmation, the Baly Dataset comes from triples of articles across political spectrum
-
-Then we can cut the hierarchy in any possible way (e.g. top 2 levels)
-
-Right has more propaganda when talking about politics?
-Causal Oversimplification higher values in Right
-Still not informative: let’s look at the fine-grained mediatopics
-
-Politics breakdown:
-politics>fundamental rights + Loaded Language/Slogans: more in Center
-politics>fundamental rights>freedom\_of\_religion + Flag-waving: more in Right
-politics>government>espionage and intelligence + Doubt: Right
-
-2nd level mediatopics (not only politics)
-Plot is not very clear, but shows (topic-technique associations that differ the most):
-Human interest>people shows higher flag-waving in the Left articles
-Human interest + name-calling in Left articles
-Communities + flag-waving in Right
-
-What all this means:
-Specific topics, even if they are covered by both Left and Right, they are treated differently in terms of propaganda techniques
-Fine-grained topics as an approximation of similarity
-Classifier can probably benefit from the interaction between topics and propaganda
-
-Next:
-Refine/quantify differences between political leanings → find more topics with different propaganda usage
-Term analysis L/C/R with and without considering propaganda
+% This is clearly a negative result. This means that the propaganda quantities are not useful at all. Let’s check what happens with other features:
 
 
+% \subsection{Identifying mediatopics with propaganda differences???}
+
+% Objective: using mediatopics taxonomy, find the correct level of narrow that shows differences in how propaganda is used but at the same time not to narrow to still have enough articles.
+
+% Differences (quantities of propaganda techniques across leanings), but with enough support. For the sorting it would be nice to have a formula like: 
+% combined\_score = support(topic) * discrepancy
+% Or just sort by higher discrepancy, with threshold on support(topic)
+
+% Discrepancy computed as correlation?
+% Distribution of propaganda quantities from L and distribution from R
+% Option 1: links from AllSides to group the articles in triples
+% Option 2: average in topic ← selected as doesn’t need info that articles A and B are on the same story. Correlation between quantities of each technique in L vs R
+
+% \subsection{Testing on coarseTopic}
+% Correlation of propaganda techniques quantities between L and R, for each coarseTopic. This is to prove/quantify that coarse topics don’t have much difference in propaganda across political leaning
+
+% TODO FIGURE
+
+% CoarseTopics that have no high correlation:
+% Mathematics: pearson=-0.0005, spearman=0.60 (GOOD), support is very small [8. 5. 1.] (BAD)
+% Language: pearson=0.86, spearman=0.93. Support is [ 83.  48. 109.] articles
+
+% Pearson vs Spearman: pearson assumes normal distribution, while Spearman no.
+% Verifying distribution:
+
+% Histogram of quantity of Loaded Language (most prominent technique) of Left (blue), Center (pink) and Right (red) in all the articles. It looks like a normal distribution, truncated at the 0. Y-axis=percentage (TOO: should verify mathematically how close to normal distribution)
+
+% \subsection{Fine-Grained Topics}
+% \todo{REMOVE SUBSECTION: using fine-grained topics but no real result}
+
+% Compute for each topic and each leaning, the co-occurrence with each propaganda technique. Then compute the differences (OK with 2 categories, how to do with 3 categories? Variance? But leaning is on a continuum scale), and sort by difference descending → obtain topics with more differences in propaganda quantities
+% Variance: each observation is the average quantity of propaganda in specific leaning+topic, computed across leaning
+
+
+% :TODO
+% Then filter and keep only topics with minimum support (to be defined)
+
+% How to compare / visualise differences between L/C/R across topics?
+% Before: heatmaps
+% Good only for viewing things from the outside, not too fine-grained
+
+% What about finding differences by ranking with a function that expresses how much difference is there?
+% We want topics with high support and have big differences between leaning with respect to a feature (e.g. quantity of a certain technique, term frequencies).
+
+% combined\_score = support(topic) * discrepancy
+
+% Categorical data comparison?
+
+% \subsection{Derived from Entity Types}
+% \todo{remove}
+
+% entity propaganda feature computation
+% For each entity, compute the total/average propaganda techniques that co-occur in the same sentence by each political leaning. E.g.: “Donald Trump” used a lot of times with “Doubt” from the Left leaning.
+
+% Interesting direction:
+% With Entity linking (provided by TextRazor) it is possible to find common attributes of the entities that make them targets of Left/Right propaganda. E.g., a category of people as repeated target of Propaganda.
+
+% \subsection{IPTC Topics quantity}
+
+% Top-level IPTC Topics analysis:
+% Pretty similar to CoarseTopics plot (using native TextRazor 17 categories):
+% Politics is the most common top-level topic → But this time we will be able to break it down to subtopics (taxonomy)
+% Crime and conflict also quite relevant
+% Topics across L/C/R are quite similar → confirmation, the Baly Dataset comes from triples of articles across political spectrum
+
+% Then we can cut the hierarchy in any possible way (e.g. top 2 levels)
+
+% Right has more propaganda when talking about politics?
+% Causal Oversimplification higher values in Right
+% Still not informative: let’s look at the fine-grained mediatopics
+
+% Politics breakdown:
+% politics>fundamental rights + Loaded Language/Slogans: more in Center
+% politics>fundamental rights>freedom\_of\_religion + Flag-waving: more in Right
+% politics>government>espionage and intelligence + Doubt: Right
+
+% 2nd level mediatopics (not only politics)
+% Plot is not very clear, but shows (topic-technique associations that differ the most):
+% Human interest>people shows higher flag-waving in the Left articles
+% Human interest + name-calling in Left articles
+% Communities + flag-waving in Right
+
+% What all this means:
+% Specific topics, even if they are covered by both Left and Right, they are treated differently in terms of propaganda techniques
+% Fine-grained topics as an approximation of similarity
+% Classifier can probably benefit from the interaction between topics and propaganda
+
+% Next:
+% Refine/quantify differences between political leanings → find more topics with different propaganda usage
+% Term analysis L/C/R with and without considering propaganda
 
 
 
-\subsection{IPTC Media Topics correlation}
-Idea:
-Find mediaTopics that have differences (Pearson/Spearman below a threshold) and have enough articles for each leaning
-Compare distributions of these topics
-
-Politics subtopics with either Pearson or Spearman below 0.9
-
-TODO create table with figure from terminal
-
-Nice to see coming up topics such as religion, censorship, veteran affairs, government.
-What instead has high correlations? (=is more similar in quantity of propaganda techniques across L/R) → TODO show/represent on the topic tree the areas that are more similar and more different
 
 
-\subsubsection{Freedom of Religion}
-Let’s take an example, e.g. about Freedom of Religion
-9 Articles from the Left, 5 from Center, 21 from Right
-politics>fundamental rights>freedom of religion: p= 0.7831403727439277 s= 0.7222989890906132 [ 9.  5. 21.]
+% \subsection{IPTC Media Topics correlation}
+% Idea:
+% Find mediaTopics that have differences (Pearson/Spearman below a threshold) and have enough articles for each leaning
+% Compare distributions of these topics
 
-Looking at the distributions of these 35 articles:
+% Politics subtopics with either Pearson or Spearman below 0.9
 
-TODO FIGURE
+% TODO create table with figure from terminal
 
-Flag-waving from Right has more flat distribution (higher average too) than Left
-TODO: confusing colors, force to 3 standard colors
-TODO: maybe it’s not the best way to compare distributions (something like violin plot)
+% Nice to see coming up topics such as religion, censorship, veteran affairs, government.
+% What instead has high correlations? (=is more similar in quantity of propaganda techniques across L/R) → TODO show/represent on the topic tree the areas that are more similar and more different
+
+
+% \subsubsection{Freedom of Religion}
+% Let’s take an example, e.g. about Freedom of Religion
+% 9 Articles from the Left, 5 from Center, 21 from Right
+% politics>fundamental rights>freedom of religion: p= 0.7831403727439277 s= 0.7222989890906132 [ 9.  5. 21.]
+
+% Looking at the distributions of these 35 articles:
+
+% TODO FIGURE
+
+% Flag-waving from Right has more flat distribution (higher average too) than Left
+% TODO: confusing colors, force to 3 standard colors
+% TODO: maybe it’s not the best way to compare distributions (something like violin plot)
 
 
 
 \section{\statusred Leaning classifier}
 \label{sec:topic_classifier_propaganda}
 
-RQ3: \emph{What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?}
+The previous sections focused on analysing the dataset by considering different variables (Topics, Leaning, Propaganda).
+For this section we switch to a slightly different formulation: how well can we differentiate the leaning of the articles by considering the propaganda and topics used?
+We take a similar approach as what we used in Chapter~\ref{ssec:ps_leaning_classifier}, but this time we have an additional feature that is the topic.
 
-\subsection{Breakdown by topic}
+Our RQ3 is: \emph{What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?}
+
+We answer this research question with two experiments:
+
+\begin{itemize}
+    \item Observe F1 metric across topics, in the same setting described in~\ref{ssec:ps_leaning_classifier}: a classifier using propaganda features to determine political leaning;
+    \item Using the topic as an input feature and measuring the effects on the classification task.
+\end{itemize}
 
 
-In this section we aim to analyse the relationship between topics, propaganda and leaning from a different perspective.
+
+\subsection{F1 Breakdown by topic}
+\label{sec:topic_classifier_propaganda_f1_across}
 
 First by inspecting F1 across topics, showing which topics are most accurate.
-But this does not perform training again, only breaking down by topic the F1 results (which samples are selected.
+But this does not perform training again, only breaking down by topic the F1 results.
 
-\todo{IMPORT PLOT}
+To implement this, we computed the F1 singularly for each article (micro-F1) and then we averaged them into each topic using the topic weights. Macro-F1 is not possible because each article belongs to the topics with a specific weight.
 
-As figure~\ref{TODO} shows, the F1 metric is very similar across topics.
-Although, in some topics it is much higher than the others: X.
-In some other topics it is significantly lower.
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1.pdf}
+    \caption{F1 across IPTC Media Topics of \texttt{Baly} using BERT features.}
+    \label{fig:baly_iptc_weighted_f1}
+\end{figure}
 
-\todo{INSPECTION OF DATA SAMPLES}
+As Figure~\ref{fig:baly_iptc_weighted_f1} shows,\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1.html}} the F1 measures using the baseline BERT features changes across topics
+
+- topics where it's higher
+- topics where it's lower
+
+Then show also F1 for the model that uses propaganda features alone
+
+Then show where the addition of the features helps (F1-added-features - F1-BERT
 
 
 
 \subsection{Predicting Leaning from topics and propaganda}
-\label{sec:topic_classifier_propaganda_2}
+\label{sec:topic_classifier_propaganda_feature}
 
 7: topics+propaganda for political leaning prediction
 
@@ -1394,7 +1420,9 @@ Main findings from this chapter:
 
 \begin{enumerate}
     \item we need fine-grained topic to be able to see differences. With coarse topics show similar propaganda across topics leaning. The more we use fine-grained topics, the more differences we are able to see. But at the same time we lose support (less articles specific to the topics, too narrow filters). Need of tradeoff between granularity (see good differences) and support (significance of results). A larger dataset could help.
-    \item Topics where propaganda is very different between Left and Right: why is it?
+    \item Topics that have more propaganda in the left / right
+    \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of quantity of techniques)
+    \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar but they differ in the terms used.
     \item Classifier works better in certain topics
 \end{enumerate}
 
