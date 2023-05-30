@@ -22,7 +22,7 @@
     a1 [label="topic"];
     a2 [label="leaning"];
     a3 [label="propaganda"];
-    combination [label="combination"]
+    % combination [label="combination"]
     e_type1 [label="refine topic methodology\gvnewline (Sec. 6.3)"]
     e_type2 [label="answer RQs"]
     e1 [label="topic at different granularities\gvnewline (Sec. 6.3.1)"]
@@ -34,12 +34,15 @@
     annotation -> a1;
     annotation -> a2;
     annotation -> a3;
-    a1 -> combination;
-    a2 -> combination;
-    % a3 -> combination;
+    % a1 -> combination;
+    a1 -> e_type1;
+    a1 -> e_type2;
+    % a2 -> combination;
+    a2 -> e_type1;
+    a2 -> e_type2;
     a3 -> e_type2;
-    combination -> e_type1;
-    combination -> e_type2;
+    % combination -> e_type1;
+    % combination -> e_type2;
     e_type1 -> e1;
     e_type1 -> e2;
     e_type2 -> e3;
