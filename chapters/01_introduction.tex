@@ -1,9 +1,50 @@
-\chapter{\statusred Introduction}
-\acrshort{kmi}
+\chapter{\statusorange Introduction}
+\label{chap:intro}
+
+% PhD Project done across \acrshort{kmi} and Computing\&Communications.
+
+This chapter contains an introduction to the thesis.
+ Section~\ref{sec:intro_problem} contains the Problem Statement, then Section~\ref{sec:intro_motivation} the Motivation, then Section~\ref{sec:intro_rqs} contains all of our Research Questions. Then in Section~\ref{sec:intro_hyp} we present our hypotheses, in Section~\ref{sec:intro_method} the general methodology used. We end the chapter with the main contributions in Section~\ref{sec:intro_contributions}, the structure of the dissertation in Section~\ref{sec:intro_structure} and the publication in Section~\ref{sec:intro_publications}.
+
 
 \section{Problem Statement}
+\label{sec:intro_problem}
+
+
+At the intersection with misinformation, political issues, ...
+Study on propaganda
+
+What makes news articles about the same issue different? Details that are chosen, layers of framing/propaganda on top of the facts described.
+What are the differences in persuasion/propaganda used by different political orientations?
+How can we automatically recognise political leaning from propaganda?
+What is the relationship with the topics discussed?
+
+\subsection{Key concepts}
+
+Parallel News
+
+Similarity / Variations
+
+Persuasion and Propaganda
+
+Political Ideology and Political Leaning
+
+Topic
+
+For a complete list, we suggest to look at the Glossary (TODO ref)
+
+
 
 \section{Motivation}
+\label{sec:intro_motivation}
+
+Who can find this thesis useful?
+- Computational Research people:
+    1) we underline the correlation between multiple variables (similarity / propaganda / leaning / topics) that may be helpful to classify better content (supported by the improvement of F1)
+    2) We highlight the problem of imbalanced dataset for propaganda detection
+- User reading the news: 
+    1) support with a tool to highlight propaganda, link to other documents on how the same topic is covered
+    2) understand better how propaganda distributes across leanings and topics, to be able to recognise more manipulation and be less manipulable.
 
 Motivation/Orientation: multiple narrations of the same events. Driven by multiple factors (selection criteria, point of view of author/publisher, relevance, agenda-setting, …)
 This is linked with Persuasion, but more specifically propaganda. Communication with the goal to persuade. Subtle or more explicit.
@@ -17,78 +58,105 @@ Aims/Goals of this thesis:
 understand how propaganda varies across the political spectrum
 Computational perspective: is propaganda detection ready to work in news independently from the political orientation/leaning of the source?
 
-Hypotheses:
-Propaganda language used by different political leanings is distinguishable
- Current propaganda detection is biased to recognise better right-leaning news
+
 
 
 \section{Research Questions}
+\label{sec:intro_rqs}
 
 RQs:
-What is the relationship between propaganda and political leaning?
-Diffusion
-Does propaganda exist all across political leaning?
-Do existing propaganda datasets represent each leaning well?
-(Why is there this discrepancy between i) and ii)?)
-Term usage
-What terms are used in propaganda?
-Do different leanings use similar propaganda terms?
-Populism
-Is propaganda correlated to populism in literature?
-Does the correlation show up in the data?
-Topics (?)
-How is propaganda spread across topics (overall)?
-Do different leanings use propaganda with different topics?
-Targets of propaganda (?)
-Who are the targets of propaganda (overall)?
-Do different leanings have different targets of propaganda?
-Prediction
-Is it possible to predict the political leaning of an article from its propaganda features?
-By removing propaganda terms from articles? 
 
+\subsection{RQ1: What makes news articles about the same issue different?}
+/ How can we analyze and compare multiple sources to identify unique perspectives, overlapping information, detect omissions, corroborations, and select effective similarity metrics?
+→ Chapter 3
+\begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
+    \item How do different sources present the same events?
+    \item Can we analyse what is unique from each version and what overlaps? 
+    \item How can we automatically detect omission and corroboration across multiple articles?
+    \item How can we select better similarity metrics to empower omission and corroboration detection?
+\end{enumerate}
 
-From the chapters (updated)
-Chapter 3
-\begin{enumerate}
-    \item RQ1.1: How do different sources present the same events?
-    \item RQ1.2: Can we analyse what is unique from each version and what overlaps? 
-    \item RQ1.3: How can we automatically detect omission and corroboration across multiple articles?
-    \item RQ1.4: How can we select better similarity metrics to empower omission and corroboration detection?
+\subsection{RQ2: How can we automate the detection of persuasion techniques used by writers and assess their impact on recognizing related news articles?}
+→ Chapter 4
+\begin{enumerate}[label={\textbf{RQ2.\arabic*:}},leftmargin=2cm]
+    \item How could we automatically detect the persuasion techniques used by writers?
+    \item Which persuasion techniques do we detect most frequently?
+    \item How are the differences between similar articles related to a different use of persuasion techniques?
+    \item how much of an obstacle is persuasion in recognising articles that are related to the same news? (rewrite)
+\end{enumerate}
+
+\subsection{RQ3: How does political persuasion vary across the spectrum, and can we predict a news article's political leaning based on its propaganda techniques?}
+→ Chapter 5
+\begin{enumerate}[label={\textbf{RQ3.\arabic*:}},leftmargin=2cm]
+    \item How does persuasion vary across the political spectrum?
+    \item To what extent can we predict the political leaning of a news article by observing the propaganda it uses?
+    \item Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?
+\end{enumerate}
+
+\subsection{RQ4: How does the detected propaganda vary across topics and political leanings, and what is the impact of combining propaganda and topic features on accurately determining the political leaning of a news article?}
+→ Chapter 6
+\begin{enumerate}[label={\textbf{RQ4.\arabic*:}},leftmargin=2cm]
+    \item How does the detected propaganda change across the topics? Are there major differences when considering “polarised” topics with respect to more neutral topics?
+    \item How does the detected propaganda change across leanings in “polarised” topics? And how does it change in non-polarised ones?
+    \item What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
 \end{enumerate}
 
 
-Chapter 4
-\begin{enumerate}
-    \item RQ2.1: How could we automatically detect the persuasion techniques used by writers?
-    \item RQ2.2: Which persuasion techniques do we detect most frequently? 
-    \item RQ2.3: How are the differences between similar articles related to a different use of persuasion techniques?
-    \item RQ2.4: How much of an obstacle is persuasion in recognising articles that are related to the same news?
-\end{enumerate}
+% What is the relationship between propaganda and political leaning?
+% Diffusion
+% Does propaganda exist all across political leaning?
+% Do existing propaganda datasets represent each leaning well?
+% (Why is there this discrepancy between i) and ii)?)
+% Term usage
+% What terms are used in propaganda?
+% Do different leanings use similar propaganda terms?
+% Populism
+% Is propaganda correlated to populism in literature?
+% Does the correlation show up in the data?
+% Topics (?)
+% How is propaganda spread across topics (overall)?
+% Do different leanings use propaganda with different topics?
+% Targets of propaganda (?)
+% Who are the targets of propaganda (overall)?
+% Do different leanings have different targets of propaganda?
+% Prediction
+% Is it possible to predict the political leaning of an article from its propaganda features?
+% By removing propaganda terms from articles? 
 
-
-Chapter 5
-\begin{enumerate}
-    \item RQ3.1: How does persuasion vary across the political spectrum?
-    \item RQ3.2: Can we predict the political leaning of a news article by observing the propaganda it uses? 
-    \item RQ3.3: Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?
-\end{enumerate}
-
-
-
-Chapter 6
-\begin{enumerate}
-    \item RQ4.1: How can we optimise the definition of topic in order to have enough details?
-    \item RQ4.2 How propaganda changes across topics and leanings?
-    \item RQ4.3 Knowing the topic, does it make classification (prop-->leaning) easier?
-\end{enumerate}
 
 
 \section{Research hypotheses}
+\label{sec:intro_hyp}
+
+We have several hypotheses:
+
+% layers of info and choice of terms
+News articles are made with different layers of information: (i) facts, events (ii) interpretation/persuasion.
+These layers are not separate and are very intertwined. On the word level, we have words that are strictly topical words, or are strictly persuasive words, but we also have words that represent both layers as a specific term is chosen in a multitude of synonyms to push for a certain idea.
+
+% corroboration and choice of details
+News articles are written by choosing which details to include and which ones to skip, and this may be done on purpose to influence the reader.
+
+% propaganda and leaning
+Propaganda language used by different political leanings is distinguishable
+
+% unbalance
+Current propaganda detection recognises better right-leaning propaganda
 
 \section{Research methodology}
+\label{sec:intro_method}
+
+We introduce one factor for each chapter: Similarity, Persuasion, Leaning, Topic.
+
+We use several methodologies:
+\begin{itemize}
+    \item classifier-based: F1 comparison, confusion analysis, significance tests, analysis of the features learned by the models 
+    \item comparative analysis: Chapter 5 and 6 we use one observed variable across one or multiple controlled variables. We extract patterns and observations from statistics compared between the groups.
+\end{itemize}
 
 
 \section{Contributions}
+\label{sec:intro_contributions}
 
 Contributions:
 Identification of imbalance of the main propaganda datasets
@@ -98,6 +166,7 @@ Imbalance is / is-not a problem for propaganda detection
 Propaganda vs populism
 
 \section{Structure of the dissertation}
+\label{sec:intro_structure}
 
 Chapter 3: Common Ground Search
 Chapter 4: Linguistic Proxies of Persuasion
@@ -106,12 +175,15 @@ Chapter 6: Topics
 Chapter 7: ?
 
 \section{Publications}
+\label{sec:intro_publications}
 
 \subsection{Related to this thesis}
 
 Towards a Cross-article Narrative Comparison of News
 M Mensio, H Alani, A Willis
 Proceedings of the Text2Story’20 Workshop
+
+We present an idea for a system to perform cross-article narrative comparison.
 
 \subsection{Other publications during the timeframe}
 
@@ -132,4 +204,11 @@ Piccolo L., Blackwood A., Farrell T., Mensio M. (July 2021) Agents for Fighting 
 
 Denaux R., Mensio M., Gomez-Perez J., Alani H. (August 2021) Weaving a Semantic Web of Credibility Reviews for Explainable Misinformation Detection. In Thirtieth International Joint Conference on Artificial Intelligence (IJCAI-21) [Full text (ORO)] [Full text (IJCAI)]
 
-Reyero Lobo P., Mensio M., Pavon-Perez A., Bayer V., Kwarteng J., Fernandez M., Daga E., Alani H. (June 2022) Estimating Ground Truth in a Low-labelled Data Regime: A Study of Racism Detection in Spanish. In (ICWSM-22) st Workshop on Novel Evaluation Approaches for Text Classification Systems on Social Media (NEATCLasS) [Full text (ICWSM)]
+Reyero Lobo P., Mensio M., Pavon-Perez A., Bayer V., Kwarteng J., Fernandez M., Daga E., Alani H. (June 2022) Estimating Ground Truth in a Low-labelled Data Regime: A Study of Racism Detection in Spanish. In (ICWSM-22) First Workshop on Novel Evaluation Approaches for Text Classification Systems on Social Media (NEATCLasS) [Full text (ICWSM)]
+
+
+MARTINO MENSIO, GRÉGOIRE BUREL, TRACIE FARRELL, and HARITH ALANI. (June 2023) MisinfoMe: A Tool for Longitudinal Assessment of Twitter Accounts’ Sharing of Misinformation. In (UMAP 2023) The 31st ACM Conference On User Modeling, Adaptation And Personalization
+
+Martino Mensio, Grégoire Burel, Youri Peskine, Raphaël Troncy, Paolo Papotti, and Harith Alani. (November 2023).
+MisinfoKG - A Misinformation and Fact-Checks
+Knowledge Graph. In ISWC-2023 Resource Track
