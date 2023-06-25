@@ -1,42 +1,129 @@
 \chapter{\statusorange Introduction}
 \label{chap:intro}
 
+% Orientation: wider context
+
+% situation
+Thousands of articles are published every single day about the latest events happening.
+The usage of specific language, the selection of details and how the narrative is presented, are all different aspects that are unique to each news outlet and author.
+And these peculiarities, at the same time, can influence what the reader perceives about the events described.
+% framing definition
+This whole set of information, whether subtle or explicit, extends the raw facts that happen and are shared as ground truth between multiple sources. This additional set appears with different names, such as\emph{framing}~\cite{gamson1989media,scheufele1999framing}, persuasion, propaganda, with slightly different definitions.
+This additional layer can be created with any subjective statements that are mixed with the description of the event narrated, but does not stop there.
+% TODO reference: ``Various observers have noted how subtle framing subtly and unconsciously [framing] operates'' (Gamson and Modigliani, 1989, p. 7)
+Even selecting which details or features to report greatly affects the message sent to the reader.
+
+% introduce ideology/leaning
+And in this landscape of parallel news, there are multiple factors in play, such as \textit{political orientations} and ideologies, that may influence the writing style of news outlets.
+For example, persuasion may be used to push for political ideologies directly or subtly.
+
+% introduce topics
+And the persuasion used may change with respect to the \emph{topic} of the news. Some topics are more polarising while others are more neutral.
+
+EXAMPLE NEEDED HERE
+
+% % example
+% For example, taking two sentences ``\textit{the black man was shot}'' vs ``\textit{the man was shot}'', they have a different framing because, although the man shot was black, it is a judgement of the reporter whether this detail needs to be emphasised or not, considering the ethnicity of the person who was shot to be important. %implying a form of racism with respect to a race-independent murder.
+
+% Framing can have a big impact on the way readers perceive the content and relevance of the news~\cite{cohen2015press}. %(\textit{Agenda-setting}).
+
+This thesis explores the relationships between persuasion, political orientation and topics.
+These variables are studied independently in the existing literature, and this work aims at understanding the links between them.
+
+
+
+
+
+
+
+
 % PhD Project done across \acrshort{kmi} and Computing\&Communications.
 
 This chapter contains an introduction to the thesis.
- Section~\ref{sec:intro_problem} contains the Problem Statement, then Section~\ref{sec:intro_motivation} the Motivation, then Section~\ref{sec:intro_rqs} contains all of our Research Questions. Then in Section~\ref{sec:intro_hyp} we present our hypotheses, in Section~\ref{sec:intro_method} the general methodology used. We end the chapter with the main contributions in Section~\ref{sec:intro_contributions}, the structure of the dissertation in Section~\ref{sec:intro_structure} and the publication in Section~\ref{sec:intro_publications}.
+Section~\ref{sec:intro_problem} contains the Problem Statement, then Section~\ref{sec:intro_motivation} the Motivation, then Section~\ref{sec:intro_rqs} contains all of our Research Questions. Then in Section~\ref{sec:intro_hyp} we present our hypotheses, in Section~\ref{sec:intro_method} the general methodology used. We end the chapter with the main contributions in Section~\ref{sec:intro_contributions}, the structure of the dissertation in Section~\ref{sec:intro_structure} and the publications in Section~\ref{sec:intro_publications}.
 
 
 \section{Problem Statement}
 \label{sec:intro_problem}
 
 
-At the intersection with misinformation, political issues, ...
-Study on propaganda
+% At the intersection with misinformation, political issues, ...
+% Study on propaganda
 
-What makes news articles about the same issue different? Details that are chosen, layers of framing/propaganda on top of the facts described.
-What are the differences in persuasion/propaganda used by different political orientations?
-How can we automatically recognise political leaning from propaganda?
-What is the relationship with the topics discussed?
+In this thesis we analyse persuasion means, with a focus on propaganda, to understand how they relate to several factors.
+
+The problem is that at the moment, to the best of our knowledge, there is no study that analyses the relationship between persuasion means, leaning, topics and similarity.
+
+What makes news articles about the same issue different? 
+Some studies focus on the surface level, by considering which details are included (corroborated) or omitted~\citep{bountouridis2018explaining}.
+
+Then there is a second branch of research that instead investigates the usage of linguistic means, such as persuasion, propaganda, sentiment and emotions. This second group focuses on single articles analysed on their own, in order to build models to detect such linguistic means over news articles. This set of feature is conssidered as a layers of framing/propaganda on top of the facts described that needs to be recognised.
+
+Then we also see a third group of works which instead sees the problems by considering only the political leaning. In this group, we see approaches to recognise political leaning from news articles~\citep{baly2020we}, to provide balanced news feeds to users (e.g. AllSides, Blue Feed - Red Feed), to label the leanings of news sources (datasets e.g., Media Bias/Fact Check, AllSides).
+
+And then we also see a last group that focuses on topic analysis. This branch of research is usually used to break down result considering the topics, to get more insights.
+TODO: FIND SOME EXAMPLES OF TOPICS ANALYSIS FOR PROPAGANDA, NOT COMPUTATIONAL.
+But we do not find a computational approach or analysis that considers together propaganda or similarity with topics.
+
+
+Between these multiple branches of research, we see potential links that are left unexplored.
+
+For example, regarding the potential connection between propaganda and leaning, we may be interested in knowing \emph{what are the differences in persuasion/propaganda used by different political orientations?} or \emph{how can we automatically recognise political leaning from propaganda?}
+
+% What is the relationship with the topics discussed?
+Or if we consider the relationship between topics and propaganda, it would be really useful to understand which topics contain more propaganda. And adding also the leaning variable, to identify topics where propaganda is more distinguishable between political leaning. This would give insights both on the characteristics of propaganda with respect to topics described and leaning where the articles come from, both in terms of techniques used and specific terminology used. 
 
 \subsection{Key concepts}
 
-Parallel News
+Here we describe the most important concepts that are touched in this thesis. For a complete list, we refer to the Glossary.
 
-Similarity / Variations
+\leftskip=3em
+\parindent=-3em
 
-Persuasion and Propaganda
+\textbf{Event}: \glsdesc*{event}\footnote{\url{https://dictionary.cambridge.org/dictionary/english/event}}.
 
-Political Ideology and Political Leaning
+\textbf{Parallel News}: \glsdesc*{parallel-news}
 
-Topic
+\textbf{Similarity / Variations}: The specific combination of \gls{corroborate}[d] and \gls{omit}[ted] details. Terms that change. Similarity metrics that score how similar/dissimilar articles are.
 
-For a complete list, we suggest to look at the Glossary (TODO ref)
+\textbf{Persuasion}: \glsdesc*{persuasion}
 
+\textbf{Propaganda}: \glsdesc{propaganda}
+
+\textbf{Political Leaning}: \glsdesc{political-leaning}
+
+\textbf{Topic}: \glsdesc{topic}
+
+
+\leftskip=0em
+\parindent 1.5em
 
 
 \section{Motivation}
 \label{sec:intro_motivation}
+
+% % Rationale: create a niche
+% % TODO why spotting is useful: http://faculty.sites.uci.edu/polletta/files/2016/02/22A-Simple-Intervention-to-Reduce-Framing-Effects-in-Perceptions-of-Global-Climate-Change22.pdf
+
+% % need of comparing multiple articles
+% Spotting the occurrence of framing is therefore a very difficult task, even for humans~\cite{morstatter2018identifying}. Something that could help in this situation is looking at different sources and analysing how they present the same event with different framing.
+% By seeing ``the other sides'' of the story, we, as readers, could create a more complete picture and spot the differences at the macro (the perspective of the overall article) and micro-level (specific linguistic cues)~\cite{gamson1989media}.
+% The main problem with this technique is that it requires a lot of time,
+% and many people only read news articles superficially% very lazy while consuming the news
+% ~\cite{pennycook2019lazy}.
+% % to read, compare, track, and differentiate all the small details \todo{any citation to support this statement?}.
+% % tech limitations
+% At the moment, we can see a gap in the tools available to provide this functionality automatically.
+% Some technologies analyse parts of the problem, e.g. by grouping articles together by events (news aggregators), or anti-plagiarism tools that spot sentences occurring in multiple documents, or theoretical studies and conceptualisations analysing framing under different aspects.
+% But to our knowledge, none of them is bringing together different stories to highlight the framing differences automatically.
+
+
+% % Aim: purpose of research
+
+% This PhD aims at creating a methodology to extract and characterise framing differences among news articles.
+% This includes on one side revealing the choices done by the authors, and bring to the light the types of techniques they use to stand their point of view (e.g., selection and emphasis of details, addition of subjective content).
+% And on the other side, to study the information flow between sources and see which relationships exist between them. %(e.g., reusing content).
+
 
 Who can find this thesis useful?
 - Computational Research people:
@@ -63,6 +150,16 @@ Computational perspective: is propaganda detection ready to work in news indepen
 
 \section{Research Questions}
 \label{sec:intro_rqs}
+
+% Given this aim, we target two Research Questions:
+
+% % Research Questions: short
+% \begin{itemize}
+%     \item RQ1: How can we automatically reveal the framing differences in articles presenting the same event?
+%     % \item RQ2: How do stories change between news sources? \todo{more about what}
+%     \item RQ2: How do news sources with different characteristics change stories over time?
+%     %RQ2: How can we identify patterns of information flow between news sources?
+% \end{itemize}
 
 RQs:
 
