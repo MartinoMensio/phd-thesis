@@ -8,7 +8,7 @@ Thousands of articles are published every single day about the latest events hap
 The usage of specific language, the selection of details and how the narrative is presented, are all different aspects that are unique to each news outlet and author.
 And these peculiarities, at the same time, can influence what the reader perceives about the events described.
 % framing definition
-This whole set of information, whether subtle or explicit, extends the raw facts that happen and are shared as ground truth between multiple sources. This additional set appears with different names, such as\emph{framing}~\cite{gamson1989media,scheufele1999framing}, persuasion, propaganda, with slightly different definitions.
+This whole set of information, whether subtle or explicit, extends the raw facts that happen and are shared as ground truth between multiple sources. This additional layer which varies between multiple news appears with different names, such as \emph{framing}~\cite{gamson1989media,scheufele1999framing}, persuasion, propaganda, with slightly different definitions.
 This additional layer can be created with any subjective statements that are mixed with the description of the event narrated, but does not stop there.
 % TODO reference: ``Various observers have noted how subtle framing subtly and unconsciously [framing] operates'' (Gamson and Modigliani, 1989, p. 7)
 Even selecting which details or features to report greatly affects the message sent to the reader.
@@ -40,10 +40,10 @@ These variables are studied independently in the existing literature, and this w
 % PhD Project done across \acrshort{kmi} and Computing\&Communications.
 
 This chapter contains an introduction to the thesis.
-Section~\ref{sec:intro_problem} contains the Problem Statement, then Section~\ref{sec:intro_motivation} the Motivation, then Section~\ref{sec:intro_rqs} contains all of our Research Questions. Then in Section~\ref{sec:intro_hyp} we present our hypotheses, in Section~\ref{sec:intro_method} the general methodology used. We end the chapter with the main contributions in Section~\ref{sec:intro_contributions}, the structure of the dissertation in Section~\ref{sec:intro_structure} and the publications in Section~\ref{sec:intro_publications}.
+Section~\ref{sec:intro_problem} contains the Problem Statement, Section~\ref{sec:intro_motivation} the Motivation, Section~\ref{sec:intro_rqs} contains all of our Research Questions. Then in Section~\ref{sec:intro_hyp} we present our hypotheses, in Section~\ref{sec:intro_method} the general methodology used. We end the chapter with the main contributions in Section~\ref{sec:intro_contributions}, the structure of the dissertation in Section~\ref{sec:intro_structure} and the publications in Section~\ref{sec:intro_publications}.
 
 
-\section{Problem Statement}
+\section{\statusgreen Problem Statement}
 \label{sec:intro_problem}
 
 
@@ -52,18 +52,18 @@ Section~\ref{sec:intro_problem} contains the Problem Statement, then Section~\re
 
 In this thesis we analyse persuasion means, with a focus on propaganda, to understand how they relate to several factors.
 
-The problem is that at the moment, to the best of our knowledge, there is no study that analyses the relationship between persuasion means, leaning, topics and similarity.
+The problem is that at the moment, to the best of our knowledge, there is no computational study that analyses the relationship between persuasion means, leaning, topics and similarity.
 
 What makes news articles about the same issue different? 
 Some studies focus on the surface level, by considering which details are included (corroborated) or omitted~\citep{bountouridis2018explaining}.
 
-Then there is a second branch of research that instead investigates the usage of linguistic means, such as persuasion, propaganda, sentiment and emotions. This second group focuses on single articles analysed on their own, in order to build models to detect such linguistic means over news articles. This set of feature is conssidered as a layers of framing/propaganda on top of the facts described that needs to be recognised.
+Then there is a second branch of research that instead investigates the usage of linguistic means, such as persuasion, propaganda, sentiment and emotions. This second group focuses on single articles analysed on their own, in order to build models to detect such linguistic means over news articles. This set of feature is considered as a layer of framing/propaganda on top of the facts described that needs to be recognised.
 
 Then we also see a third group of works which instead sees the problems by considering only the political leaning. In this group, we see approaches to recognise political leaning from news articles~\citep{baly2020we}, to provide balanced news feeds to users (e.g. AllSides, Blue Feed - Red Feed), to label the leanings of news sources (datasets e.g., Media Bias/Fact Check, AllSides).
 
 And then we also see a last group that focuses on topic analysis. This branch of research is usually used to break down result considering the topics, to get more insights.
 TODO: FIND SOME EXAMPLES OF TOPICS ANALYSIS FOR PROPAGANDA, NOT COMPUTATIONAL.
-But we do not find a computational approach or analysis that considers together propaganda or similarity with topics.
+But we do not find a computational approach or analysis that considers the topic as an additional variable to propaganda or similarity.
 
 
 Between these multiple branches of research, we see potential links that are left unexplored.
@@ -73,9 +73,9 @@ For example, regarding the potential connection between propaganda and leaning, 
 % What is the relationship with the topics discussed?
 Or if we consider the relationship between topics and propaganda, it would be really useful to understand which topics contain more propaganda. And adding also the leaning variable, to identify topics where propaganda is more distinguishable between political leaning. This would give insights both on the characteristics of propaganda with respect to topics described and leaning where the articles come from, both in terms of techniques used and specific terminology used. 
 
-\subsection{Key concepts}
+\subsection{\statusorange Key concepts}
 
-Here we describe the most important concepts that are touched in this thesis. For a complete list, we refer to the Glossary.
+Here we describe the most important concepts that are touched in this thesis. For a complete list, please refer to the Glossary.
 
 \leftskip=3em
 \parindent=-3em
@@ -99,7 +99,7 @@ Here we describe the most important concepts that are touched in this thesis. Fo
 \parindent 1.5em
 
 
-\section{Motivation}
+\section{\statusgreen Motivation}
 \label{sec:intro_motivation}
 
 % % Rationale: create a niche
@@ -125,47 +125,66 @@ Here we describe the most important concepts that are touched in this thesis. Fo
 % And on the other side, to study the information flow between sources and see which relationships exist between them. %(e.g., reusing content).
 
 
-Who can find this thesis useful?
-- Computational Research people:
-    1) we underline the correlation between multiple variables (similarity / propaganda / leaning / topics) that may be helpful to classify better content (supported by the improvement of F1)
-    2) We highlight the problem of imbalanced dataset for propaganda detection
-- User reading the news: 
-    1) support with a tool to highlight propaganda, link to other documents on how the same topic is covered
-    2) understand better how propaganda distributes across leanings and topics, to be able to recognise more manipulation and be less manipulable.
+% Who can find this thesis useful?
+The motivations of this thesis are multiple.
 
-Motivation/Orientation: multiple narrations of the same events. Driven by multiple factors (selection criteria, point of view of author/publisher, relevance, agenda-setting, …)
-This is linked with Persuasion, but more specifically propaganda. Communication with the goal to persuade. Subtle or more explicit.
-What distinguishes one piece of news from the others about the same event? 
+By analysing the relationship between propaganda, political leanings and topics, we aim to understand how strongly they are linked together. There is a wide literature, both theoretical and practical, about each of these factors.
+And on the theoretical level, there are some works that explain and motivate this relationship by taking in case some specific examples.
+But on the practical side, we find a lack of computational approaches that consider these factors together.
 
-Political ideology → writer/editor → news (facts + propaganda(opinion)) → persuasion of reader
+A computational approach, which considers together document similarity, propaganda, leaning and topics, would be of great utility to different groups of stakeholders:
 
-Rationale (niche): computational propaganda detection is at an early stage in the research community. Current detection is based on unbalanced datasets that particularly target right-leaning news.
+\begin{enumerate}
+    \item Computational Researchers:
+    \begin{enumerate}
+        \item Verify / refute the relationship between political leaning and propaganda. The literature assumes that the political ideology of news writers/editors conditions how news articles are written considering economic reasons, unconscious  assumptions and reporters-sources relations that are linked to political leanings~\citep{schudson2002news}. And these factors result in news articles that contain more or less subtle persuasion devices for the reader (one of which is propaganda). By analysing and quantifying these relationships, we can understand their weight. % contribution 1: compute weights of these relationships, understand better the relationships
+        \item By using together these variables, we can try to improve some automated approaches that currently rely on just one input feature, such as political leaning classification using propaganda and topic features. By exploiting the relationship between these features, we can help \acrfull{ml} models to have higher values for the target metrics. % contribution 2: improve F1 using mix of feature
+        \item With an analysis that considers multiple variables, we may discover problematics and inconsistencies that can only be discovered with combined analyses. This is a very important point when using \acrshort{ml}-based approaches, as improving the quality of the data is a key element. % contribution 3: We highlight the problem of imbalanced dataset for propaganda detection
+    \end{enumerate}
+    \item Users reading the news:
+    \begin{enumerate}
+        \item link and show similarities to other documents on how the same topic is covered. Especially articles from other political leanings which may have a different angle.
+        \item support with a tool to highlight propaganda, to be conscious of the techniques used in the articles at the word level. It is crucial for this analysis to be as accurate as possible, and that is why we aim to find insights which may help create or extend datasets (e.g., in the case of unbalanced datasets).
+        \item understand better how propaganda distributes across leanings and topics, to be able to recognise more manipulation and be less manipulable.
+    \end{enumerate}
+\end{enumerate}
 
-Aims/Goals of this thesis: 
-understand how propaganda varies across the political spectrum
-Computational perspective: is propaganda detection ready to work in news independently from the political orientation/leaning of the source?
+
+% Motivation/Orientation: multiple narrations of the same events. Driven by multiple factors (selection criteria, point of view of author/publisher, relevance, agenda-setting, …)
+% This is linked with Persuasion, but more specifically propaganda. Communication with the goal to persuade. Subtle or more explicit.
+% What distinguishes one piece of news from the others about the same event? 
+
+% Political ideology → writer/editor → news (facts + propaganda(opinion)) → persuasion of reader
+
+% Rationale (niche): computational propaganda detection is at an early stage in the research community. Current detection is based on unbalanced datasets that particularly target right-leaning news.
+
+% Aims/Goals of this thesis: 
+% understand how propaganda varies across the political spectrum
+% Computational perspective: is propaganda detection ready to work in news independently from the political orientation/leaning of the source?
 
 
 
 
-\section{Research Questions}
+\section{\statusorange Research Questions}
 \label{sec:intro_rqs}
 
-% Given this aim, we target two Research Questions:
+Given this aim, we build a research path that gradually adds the different variables.
 
-% % Research Questions: short
-% \begin{itemize}
-%     \item RQ1: How can we automatically reveal the framing differences in articles presenting the same event?
-%     % \item RQ2: How do stories change between news sources? \todo{more about what}
-%     \item RQ2: How do news sources with different characteristics change stories over time?
-%     %RQ2: How can we identify patterns of information flow between news sources?
-% \end{itemize}
+\begin{enumerate}
+    \item We start from the first factor of similarity (and differences) between news articles, which is the motivation for our work in the first place. Being able to analyse the similarities and differences enables us to get a grasp on what effectively changes between related articles. Therefore, our first \acrfull{rq} is \emph{RQ1: What makes news articles about the same issue different?}
+    \item Then, we move our focus to the computational detection of persuasion techniques. How they can be detected, and what is the relationship to our first \acrshort{rq}1. This constitutes for us \emph{\acrshort{rq}2: How can we automate the detection of persuasion techniques used by writers and assess their impact on recognizing related news articles?} 
+    \item Afterwards, we introduce the variable of political leaning, to understand how it relates to persuasion. This leads us to \emph{\acrshort{rq}3: How does persuasion vary across the political spectrum, and can we predict a news article's political leaning based on its propaganda techniques?}
+    \item Finally, we introduce the topic as the last variable, to break down the results found in the previous investigation. This is our \emph{\acrshort{rq}4: How does the detected propaganda vary across topics and political leanings, and what is the impact of combining propaganda and topic features on accurately determining the political leaning of a news article?}
+\end{enumerate}
 
-RQs:
+We dedicate an experimental chapter to each of the \acrlong{rq}s: from Chapter~\ref{chap:common_ground_search} to Chapter~\ref{chap:topics}.
+Each of them is split into sub-questions, that we list and describe here to present all of them together.
 
-\subsection{RQ1: What makes news articles about the same issue different?}
-/ How can we analyze and compare multiple sources to identify unique perspectives, overlapping information, detect omissions, corroborations, and select effective similarity metrics?
-→ Chapter 3
+
+\subsection*{RQ1: What makes news articles about the same issue different?}
+
+We are interested in how can we analyse and compare multiple sources to identify unique perspectives and overlapping information, detect omissions and corroborations, and select effective similarity metrics.
+The sub-questions are the following:
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
     \item How do different sources present the same events?
     \item Can we analyse what is unique from each version and what overlaps? 
@@ -173,8 +192,12 @@ RQs:
     \item How can we select better similarity metrics to empower omission and corroboration detection?
 \end{enumerate}
 
-\subsection{RQ2: How can we automate the detection of persuasion techniques used by writers and assess their impact on recognizing related news articles?}
-→ Chapter 4
+These questions are targeted in Chapter~\ref{chap:common_ground_search}.
+
+\subsection*{RQ2: How can we automate the detection of persuasion techniques used by writers and assess their impact on recognizing related news articles?}
+
+This second \acrlong{rq} introduces the variable of persuasion techniques and has the following sub-questions:
+
 \begin{enumerate}[label={\textbf{RQ2.\arabic*:}},leftmargin=2cm]
     \item How could we automatically detect the persuasion techniques used by writers?
     \item Which persuasion techniques do we detect most frequently?
@@ -182,21 +205,31 @@ RQs:
     \item how much of an obstacle is persuasion in recognising articles that are related to the same news? (rewrite)
 \end{enumerate}
 
-\subsection{RQ3: How does political persuasion vary across the spectrum, and can we predict a news article's political leaning based on its propaganda techniques?}
-→ Chapter 5
+These are answered in Chapter~\ref{chap:linguistic_persuasion}.
+
+\subsection*{RQ3: How does persuasion vary across the political spectrum, and can we predict a news article's political leaning based on its propaganda techniques?}
+
+We introduce with this question the political leaning variable, to do a comparative analysis of propaganda with respect to it. The sub-questions are:
+
 \begin{enumerate}[label={\textbf{RQ3.\arabic*:}},leftmargin=2cm]
     \item How does persuasion vary across the political spectrum?
     \item To what extent can we predict the political leaning of a news article by observing the propaganda it uses?
     \item Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?
 \end{enumerate}
 
-\subsection{RQ4: How does the detected propaganda vary across topics and political leanings, and what is the impact of combining propaganda and topic features on accurately determining the political leaning of a news article?}
-→ Chapter 6
+This is analysed in Chapter~\ref{chap:political_sides}.
+
+\subsection*{RQ4: How does the detected propaganda vary across topics and political leanings, and what is the impact of combining propaganda and topic features on accurately determining the political leaning of a news article?}
+
+This last question introduces the political leaning variable, and is split into three sub-questions:
+
 \begin{enumerate}[label={\textbf{RQ4.\arabic*:}},leftmargin=2cm]
     \item How does the detected propaganda change across the topics? Are there major differences when considering “polarised” topics with respect to more neutral topics?
     \item How does the detected propaganda change across leanings in “polarised” topics? And how does it change in non-polarised ones?
     \item What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
 \end{enumerate}
+
+This is answered in Chapter~\ref{chap:topics}.
 
 
 % What is the relationship between propaganda and political leaning?
@@ -222,7 +255,7 @@ RQs:
 
 
 
-\section{Research hypotheses}
+\section{\statusred Research hypotheses}
 \label{sec:intro_hyp}
 
 We have several hypotheses:
@@ -240,7 +273,9 @@ Propaganda language used by different political leanings is distinguishable
 % unbalance
 Current propaganda detection recognises better right-leaning propaganda
 
-\section{Research methodology}
+TODO: add others?
+
+\section{\statusred Research methodology}
 \label{sec:intro_method}
 
 We introduce one factor for each chapter: Similarity, Persuasion, Leaning, Topic.
@@ -252,26 +287,39 @@ We use several methodologies:
 \end{itemize}
 
 
-\section{Contributions}
+\section{\statusred Contributions}
 \label{sec:intro_contributions}
 
 Contributions:
-Identification of imbalance of the main propaganda datasets
-Topics where current automated propaganda detection is more problematic (TODO) 
-Link between propaganda and political leaning is weak (not enough to identify leaning by just looking at the propaganda techniques) → against HYP1
-Imbalance is / is-not a problem for propaganda detection
-Propaganda vs populism
+\begin{enumerate}
+    \item contribution 1: compute weights of these relationships, understand better the relationships
+    \item contribution 2: improve F1 using mix of feature
+    \item contribution 3: We highlight the problem of imbalanced dataset for propaganda detection
+    \item Chapter 4 (TODO):
+    \item Topics where current automated propaganda detection is more problematic (TODO) 
+    \item Link between propaganda and political leaning is weak (not enough to identify leaning by just looking at the propaganda techniques) → against HYP1
+    \item Imbalance is / is-not a problem for propaganda detection
+\end{enumerate}
 
-\section{Structure of the dissertation}
+
+
+
+
+\section{\statusred Structure of the dissertation}
 \label{sec:intro_structure}
 
-Chapter 3: Common Ground Search
-Chapter 4: Linguistic Proxies of Persuasion
-Chapter 5: Perspectives and Political Sides
-Chapter 6: Topics
-Chapter 7: ?
+Chapter~\ref{chap:literature} literature.
 
-\section{Publications}
+Then chapters 3-6 experimental:
+
+Chapter 3: Common Ground Search,
+Chapter 4: Linguistic Proxies of Persuasion,
+Chapter 5: Perspectives and Political Sides,
+Chapter 6: Topics.
+
+Chapter~\ref{chap:discussion}: discussions and conclusions.
+
+\section{\statusorange Publications}
 \label{sec:intro_publications}
 
 \subsection{Related to this thesis}
