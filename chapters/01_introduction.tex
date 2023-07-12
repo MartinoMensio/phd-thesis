@@ -5,20 +5,20 @@
 
 % situation
 Thousands of articles are published every single day about the latest events happening.
-The usage of specific language, the selection of details and how the narrative is presented, are all different aspects that are unique to each news outlet and author.
-And these peculiarities, at the same time, can influence what the reader perceives about the events described.
+The usage of specific language, the selection of details, and how the narrative is presented, are all different aspects that are unique to each news outlet and author.
+These peculiarities, at the same time, can influence what the reader perceives about the events described.
 % framing definition
-This whole set of information, whether subtle or explicit, extends the raw facts that happen and are shared as ground truth between multiple sources. This additional layer, which varies between multiple news, appears with different names, such as \emph{framing}~\cite{gamson1989media,scheufele1999framing}, persuasion, propaganda, with slightly different definitions.
+This whole set of information, whether subtle or explicit, extends the raw facts that happen and are shared as ground truth between multiple sources. This additional layer, which varies between multiple news, appears with different names, such as \emph{framing}~\cite{gamson1989media,scheufele1999framing}, \emph{persuasion}, \emph{propaganda}, with slightly different definitions.
 These persuasion techniques can be conveyed with any subjective statements that are mixed with the description of the event narrated, but it does not stop there.
 % TODO reference: ``Various observers have noted how subtle framing subtly and unconsciously [framing] operates'' (Gamson and Modigliani, 1989, p. 7)
 Even selecting which details or features to report greatly affects the message sent to the reader.
 
 % introduce ideology/leaning
-And in this landscape of parallel news, there are multiple factors in play, such as \textit{political orientations} and ideologies, that may influence the writing style of news outlets.
+In this landscape of parallel news, there are multiple factors in play, such as political orientations and ideologies, that may influence the writing style of news outlets.
 For example, persuasion may be used to push for political ideologies directly or subtly.
 
 % introduce topics
-And the persuasion used may change with respect to the \emph{topic} of the news. Some topics are more polarising while others are more neutral.
+The persuasion used may change with respect to the \emph{topic} of the news. Some topics are more polarising while others are more neutral.
 
 % EXAMPLE NEEDED HERE
 
@@ -40,7 +40,8 @@ These variables are studied independently in the existing literature, and this w
 % PhD Project done across \acrshort{kmi} and Computing\&Communications.
 
 This chapter contains an introduction to the thesis.
-Section~\ref{sec:intro_problem} contains the Problem Statement, Section~\ref{sec:intro_motivation} the Motivation, Section~\ref{sec:intro_rqs} contains all of our Research Questions. Then in Section~\ref{sec:intro_hyp} we present our hypotheses, in Section~\ref{sec:intro_method} the general methodology used. We end the chapter with the main contributions in Section~\ref{sec:intro_contributions}, the structure of the dissertation in Section~\ref{sec:intro_structure} and the publications in Section~\ref{sec:intro_publications}.
+Section~\ref{sec:intro_problem} contains the Problem Statement, Section~\ref{sec:intro_motivation} the Motivation, Section~\ref{sec:intro_rqs} contains all of our Research Questions. Then in Section~\ref{sec:intro_hyp} we present our hypotheses, in Section~\ref{sec:intro_method} the general methodology used. We end the chapter with the main contributions in Section~\ref{sec:intro_contributions}, %the structure of the dissertation in Section~\ref{sec:intro_structure} 
+and the publications in Section~\ref{sec:intro_publications}.
 
 
 \section{\statusgreen Problem Statement}
@@ -50,7 +51,7 @@ Section~\ref{sec:intro_problem} contains the Problem Statement, Section~\ref{sec
 % At the intersection with misinformation, political issues, ...
 % Study on propaganda
 
-In this thesis we analyse persuasion means, with a focus on propaganda, to understand how they relate to several additional dimensions (topic, leaning).
+In this thesis we analyse persuasion means, with a focus on propaganda, to understand how they relate to additional dimensions (topic, leaning, similarity).
 
 The problem is that at the moment, to the best of our knowledge, there is no computational study that analyses the relationship between persuasion means, leaning, topics and similarity.
 
@@ -59,11 +60,11 @@ Some studies focus on the surface level, by considering which details are includ
 
 Then there is a second branch of research that instead investigates the usage of linguistic means, such as persuasion, propaganda, sentiment and emotions. This second group focuses on single articles analysed on their own, in order to build models to detect such linguistic means over news articles. This set of features is considered as a layer of framing/propaganda on top of the facts described, and it needs to be properly recognised.
 
-Then we also see a third group of works which instead sees the problems by considering only the political leaning. In this group, we see approaches to recognise political leaning from news articles~\citep{baly2020we}, to provide balanced news feeds to users (e.g. AllSides, Blue Feed - Red Feed), to label the leanings of news sources (datasets e.g., Media Bias/Fact Check, AllSides).
+Then a third group of works sees the problems by considering only the political leaning. Here we find approaches to recognise political leaning from news articles~\citep{baly2020we}, to provide balanced news feeds to users (e.g. AllSides, Blue Feed - Red Feed), to label the leanings of news sources (datasets e.g., Media Bias/Fact Check, AllSides).
 
-And then we also see a last group that focuses on topic analysis. Researchers usually use this method to break down results based on topics, to get more fine-grained insights.
-TODO: FIND SOME EXAMPLES OF TOPICS ANALYSIS FOR PROPAGANDA, NOT COMPUTATIONAL.
-But we do not find a computational approach or analysis that considers the topic as an additional variable to propaganda or similarity.
+And finally, the last group focuses on topic analysis. Researchers usually use this method to break down results based on topics, to get more fine-grained insights~\citep{zhang2023strategic}.
+% TODO: FIND SOME EXAMPLES OF TOPICS ANALYSIS FOR PROPAGANDA, NOT COMPUTATIONAL.
+But we do not find a computational approach or analysis that considers the topic as an additional variable to propaganda, leaning or similarity.
 
 
 Between these multiple branches of research, we see potential links that are left unexplored.
@@ -73,7 +74,7 @@ For example, regarding the potential connection between propaganda and leaning, 
 % What is the relationship with the topics discussed?
 Or if we consider the relationship between topics and propaganda, it would be really useful to understand which topics contain more propaganda and which topics have  more polarising propaganda. And adding also the leaning variable, to identify topics where propaganda is more distinguishable between political leaning. This would give insights both on the characteristics of propaganda with respect to topics described and leaning where the articles come from, both in terms of techniques used and specific terminology used. 
 
-\subsection{\statusorange Key concepts}
+\subsection{\statusgreen Key concepts}
 
 Here we describe the most important concepts that are touched in this thesis. For a complete list, please refer to the Glossary.
 
@@ -126,7 +127,7 @@ Here we describe the most important concepts that are touched in this thesis. Fo
 
 
 % Who can find this thesis useful?
-The motivations of this thesis are multiple.
+% The motivations of this thesis are multiple.
 
 By analysing the relationship between propaganda, political leanings and topics, we aim to understand how strongly they are linked together. There is a wide literature, both theoretical and practical, about each of these factors.
 And on the theoretical/qualitative research level, there are some works that explain and motivate this relationship by analysing a specific event or timeframe~\citep{pierri2023propaganda,golovchenko2020cross,blumberg1986comparative}.
@@ -165,7 +166,7 @@ A computational approach, which considers together document similarity, propagan
 
 
 
-\section{\statusorange Research Questions}
+\section{\statusgreen Research Questions}
 \label{sec:intro_rqs}
 
 Given this aim, we build a research path that gradually adds the different variables.
@@ -178,7 +179,8 @@ Given this aim, we build a research path that gradually adds the different varia
 \end{enumerate}
 
 We dedicate an experimental chapter to each of the \acrlong{rq}s: from Chapter~\ref{chap:common_ground_search} to Chapter~\ref{chap:topics}.
-Each of them is split into sub-questions, that we list and describe here to present all of them together.
+% Each of them is split into sub-questions, that we list and describe here to present all of them together.
+Each one of them contains several sub-questions that we list here for comprehensiveness.
 
 
 \subsection*{RQ1: What makes news articles about the same issue different?}
@@ -255,13 +257,14 @@ This is answered in Chapter~\ref{chap:topics}.
 
 
 
-\section{\statusred Research hypotheses}
+\section{\statusgreen Research hypotheses}
 \label{sec:intro_hyp}
 
-This thesis is based on several hypotheses. Most of them come from the literature, mixed with common knowledge.
+This thesis is based on several hypotheses coming from the literature analysis.
+% Most of them come from the literature, mixed with common knowledge.
 
 % layers of info and choice of terms
-\emph{HYP1:} News articles are made with different layers of information: (i) facts, events (ii) interpretation/persuasion.
+\emph{HYP1:} News articles are made with different layers of information: (i) facts and events (ii) interpretation/persuasion.
 These layers are not separate and are very intertwined. On the word level, we have words that are strictly topical words, or are strictly persuasive words, but we also have words that represent both layers as a specific term is chosen in a multitude of synonyms to push for a certain idea.
 We find this hypothesis in~\citep{jenkins2013thin,vanderwicken1995news,jang2023proximate}.
 
@@ -276,89 +279,170 @@ We find this hypothesis in~\citep{jenkins2013thin,vanderwicken1995news,jang2023p
 
 % TODO: add others?
 
-We have more specific hypotheses in the following experimental chapters.
+% We have more specific hypotheses in the following experimental chapters.
 
-\section{\statusred Research methodology}
+\section{\statusgreen Research methodology}
 \label{sec:intro_method}
 
-On a broad level ...
+On a broad level, our methodology is a comparative analysis of propaganda across multiple dimensions (leaning, topic).
 
-We introduce one factor for each chapter: Similarity, Persuasion, Leaning, Topic.
+As we described in the previous sections, methodologically we take one concept at a time and we add it to our analysis. For this reason, Chapter~\ref{chap:common_ground_search} treats similarity and overlap between multiple articles, then Chapter~\ref{chap:linguistic_persuasion} moves to linguistic means of persuasion. The chapters afterwards add Leaning (Chapter~\ref{chap:political_sides}) and Topics (Chapter~\ref{chap:topics}) to the comparative analysis. In this way, we start with simpler conditions without many variables into play, and we gradually add the additional variables as we need them to break down the results and find correlations between the factors considered.
 
-More specifically, we use several methodologies:
+
+If we go into more detail about the single experiments done in the thesis, we use several methodologies across the chapters:
 \begin{itemize}
-    \item classifier-based: F1 comparison, confusion analysis, significance tests, analysis of the features learned by the models 
-    \item comparative analysis: Chapter 5 and 6 we use one observed variable across one or multiple controlled variables. We extract patterns and observations from statistics compared between the groups.
+    \item classifier-based: for a big part of our experiments, we use a methodology that is usually employed with classifiers. This is based on the computation of a metric (macro F1 in this case) of how well the classifier is able to predict the correct label for the inputs (in this case news articles). We use this setup with a classifier to understand the impact of multiple input variables (text of the articles, propaganda features, topic labels) on predicting the correct political leaning of the articles (taken as ground truth). In addition, this setup allows doing a \emph{confusion analysis}, to understand the labels that have been wrongly predicted. And depending on the model used, we can also perform a \emph{feature importance} analysis to understand how strongly the features are used to make the prediction (what the model learns). This methodology is usually accompanied by a significance test, which establishes the probability of the observed improvement happening by chance.
+    \item comparative analysis: we have many analyses in Chapter~\ref{chap:political_sides} and \ref{chap:topics} where we use comparative analysis to compare the distribution of one observed variable across multiple controlled variables. This methodology relies on aggregated metrics (such as average, median and standard variation) on a specific variable (e.g. quantity of a propaganda technique) to compare groups of articles and observe differences. We extract patterns of association between variables and observations from statistics compared between the groups.
 \end{itemize}
 
 
-\section{\statusred Contributions}
+\section{\statusgreen Contributions}
 \label{sec:intro_contributions}
 
-Contributions:
+The major contributions of this work are the following:
 \begin{enumerate}
-    \item contribution 1: compute weights of these relationships, understand better the relationships
-    \item contribution 2: improve F1 using mix of feature
-    \item contribution 3: We highlight the problem of imbalanced dataset for propaganda detection
-    \item Chapter 4 (TODO):
-    \item Topics where current automated propaganda detection is more problematic (TODO) 
-    \item Link between propaganda and political leaning is weak (not enough to identify leaning by just looking at the propaganda techniques) → against HYP1
-    \item Imbalance is / is-not a problem for propaganda detection
+    \item contribution 1: computing weights and better understanding the relationships between the multiple dimensions of similarities, propaganda, leaning and topics. This is achieved with:
+    \begin{enumerate}
+        \item Chapter~\ref{sec:lp_relationship} contains an analysis of the relationship between persuasion and the word variations that different news sources produce when reporting events.
+        \item Chapter~\ref{chap:political_sides} shows, by improving the classifier values of F1 metric, that propaganda and political leanings are slightly correlated. If they were not correlated, adding propaganda as input feature would have no effect.
+        \item Chapter~\ref{chap:topics} finds that the topic is highly correlated with propaganda: some topics have very high levels of propaganda, while other ones are less polarizing and contain less of it. And considering the terms of propaganda, we find that for some topics they are very different between political leanings. %This not only means that the correlation between topics, leanings and propaganda is high, but it also means that
+        %Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
+        % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
+        % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
+        % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarised.
+        % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
+        
+    \end{enumerate}
+    \item contribution 2: improving F1 of the political leaning classifier using a mix of features. More specifically:
+    \begin{enumerate}
+        \item Chapter~\ref{ssec:ps_prop_leaning_classifier}  shows that if we add propaganda features on a BERT-based classifier that predicts political leaning, we get slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
+        \item Chapter~\ref{chap:topics}: adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
+    \end{enumerate}
+    \item contribution 3: highlighting the problem of imbalanced dataset for propaganda detection. This emerges from the analysis in different chapters:
+    \begin{enumerate}
+        \item Chapter~\ref{chap:linguistic_persuasion} results in a deeper understanding of the limitations of the current status of this automated detection (of propaganda), and the repercussions it can have when we use these methods in other tasks (e.g. overlap across news articles).
+        % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
+        \item Chapter~\ref{chap:political_sides} analyses and finds a big imbalance of propaganda detection datasets considering political leaning. Almost only Right-leaning articles are used in the current literature.
+        % First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
+        % And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
+        % We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
+        \item Chapter~\ref{chap:topics} expands on this imbalance and finds topics that contain more or less propaganda generally or in a specific political leaning.
+    \end{enumerate}
+
+    
+    % \item Chapter 3: As already denoted by the work of~\citet{bountouridis2018explaining}, we confirm a positive correlation between corroboration and credibility of news outlets and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. 
+    % \item Observing similarities between multiple documents is made very difficult by linguistic variations. We experimented with models (e.g. \acrshort{use}) that are more resistant to words that carry similar meanings and are a better fit for doing this type of analysis.
+
+
+    % \item Chapter 4: chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea of the relationship between persuasion and the variations that different news sources produce when reporting events.
+    % \item On the other side, we have also a deeper understanding of the limitations of the current status of this automated detection, and the repercussions it can have when we use these methods in other tasks.
+    % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
+
+    % \item Chapter 5: % - positive: generalisation quite good considering datasets and results obtained
+    % First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
+    % And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
+    % We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
+
+    % - finding TOPICS where difference is more accentuated
+    % At the same time, this chapter has also helped us to find a direction for more investigation. The results found here represent the whole dataset. We would like to know if we can spot more in details the differences of propaganda when we consider specific topics separately. Propaganda may differ between political leanings more when we select certain topics, and we would like to know both which topics and also the outcomes of such a detailed analysis. And for conducing this experimentation, we need to consider the \emph{topics} of the articles as an additional element.
+
+    % \item Chapter 6: \item We need fine-grained topic to be able to see differences. The coarse topics show similar propaganda across topics and leanings. The more we use fine-grained topics, the more differences we are able to see. But at the same time, we lose support (fewer articles specific to the topics, and the filtering becomes too narrow). We need a tradeoff between granularity (high to see good differences) and support (significance of results).
+    % \item Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
+    % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
+    % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
+    % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarised.
+    % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
+    % \item Encoding the topic information and using it as a feature, helps increase the prediction metrics of a leaning classifier. The improvements are small but significant.
+
+    
+    % \item Topics where current automated propaganda detection is more problematic (TODO) 
+    % \item Link between propaganda and political leaning is weak (not enough to identify leaning by just looking at the propaganda techniques) → against HYP1
+    % \item Imbalance is / is-not a problem for propaganda detection
 \end{enumerate}
 
 
 
 
 
-\section{\statusred Structure of the dissertation}
-\label{sec:intro_structure}
+% \section{\statusred Structure of the dissertation}
+% \label{sec:intro_structure}
 
-Chapter~\ref{chap:literature} literature.
+% ALREADY DONE WITH RQ AND METHODOLOGY, USELESSS TO REPEAT
 
-Then chapters 3-6 experimental:
+% Chapter~\ref{chap:literature} literature.
 
-Chapter 3: Common Ground Search,
-Chapter 4: Linguistic Proxies of Persuasion,
-Chapter 5: Perspectives and Political Sides,
-Chapter 6: Topics.
+% Then chapters 3-6 experimental:
 
-Chapter~\ref{chap:discussion}: discussions and conclusions.
+% Chapter 3: Common Ground Search,
+% Chapter 4: Linguistic Proxies of Persuasion,
+% Chapter 5: Perspectives and Political Sides,
+% Chapter 6: Topics.
 
-\section{\statusorange Publications}
+% Chapter~\ref{chap:discussion}: discussions and conclusions.
+
+\section{\statusgreen Publications}
 \label{sec:intro_publications}
 
-\subsection{Related to this thesis}
+During the timeframe of this PhD, multiple publications have been accepted at workshops and conferences. Some of them are strictly related to the topic of this thesis~\citep{mensio2020towards}, while others are not directly linked to the topics here presented but still in the same broad research area of news analysis, news media and the response of the public to manipulation and misleading information (under the measure of Credibility).
 
-Towards a Cross-article Narrative Comparison of News
-M Mensio, H Alani, A Willis
-Proceedings of the Text2Story’20 Workshop
+% \subsection{Related to this thesis}
 
-We present an idea for a system to perform cross-article narrative comparison.
+% Towards a Cross-article Narrative Comparison of News
+% M Mensio, H Alani, A Willis
+% Proceedings of the Text2Story’20 Workshop
 
-\subsection{Other publications during the timeframe}
+% Mensio M., Willis A., Alani H. (April 2020) Towards a Cross-article Narrative Comparison of News. In Third International Workshop on Narrative Extraction from Texts held in conjunction with the 42nd European Conference on Information Retrieval (Text2Story2020 @ ECIR2020) [Full text (ORO)] [Full text (CEUR)] [Presentation slides]
 
-Mensio M., Alani H. (October 2019) News Source Credibility in the Eyes of Different Assessors. In Conference for Truth and Trust Online (TTO 2019), London, UK [Full text (ORO)] [Full text (Conference)] [Slides]
-
-Mensio M., Alani H. (October 2019) MisinfoMe: Who’s Interacting with Misinformation? In (ISWC 2019) Posters and Demos [Poster] [Full text (ORO)] [Full text (CEUR)]
-
-
-Mensio M., Bastianelli E., Tiddi I., Rizzo G. (March 2020) Mitigating Bias in Deep Nets with Knowledge Bases: the Case of Natural Language Understanding for Robots. In AAAI 2020 Spring Symposium on Combining Machine Learning with Knowledge Engineering [Full text (CEUR)]
-
-Mensio M., Willis A., Alani H. (April 2020) Towards a Cross-article Narrative Comparison of News. In Third International Workshop on Narrative Extraction from Texts held in conjunction with the 42nd European Conference on Information Retrieval (Text2Story2020 @ ECIR2020) [Full text (ORO)] [Full text (CEUR)] [Presentation slides]
-
-Mensio M., Alani H., Willis A. (June 2020) One Event, Different Stories. In Postgraduate Research Poster Competition 2020, The Open University [Multimedia entry (ORO)] [Poster (ORO)]
-
-Burel G., Farrell T., Mensio M., Khare P., Alani H. (October 2020) Co-Spread of Misinformation and Fact-Checking Content during the Covid-19 Pandemic. In (SocInfo 2020) Social Informatics 2020 [Full text (ORO)] [Full text (Springer)]
-
-Piccolo L., Blackwood A., Farrell T., Mensio M. (July 2021) Agents for Fighting Misinformation Spread on Twitter: Design Challenges. In 3rd Conference on Conversational User Interfaces (CUI 2021) [Full text (ORO)] [Full text (ACM)]
-
-Denaux R., Mensio M., Gomez-Perez J., Alani H. (August 2021) Weaving a Semantic Web of Credibility Reviews for Explainable Misinformation Detection. In Thirtieth International Joint Conference on Artificial Intelligence (IJCAI-21) [Full text (ORO)] [Full text (IJCAI)]
-
-Reyero Lobo P., Mensio M., Pavon-Perez A., Bayer V., Kwarteng J., Fernandez M., Daga E., Alani H. (June 2022) Estimating Ground Truth in a Low-labelled Data Regime: A Study of Racism Detection in Spanish. In (ICWSM-22) First Workshop on Novel Evaluation Approaches for Text Classification Systems on Social Media (NEATCLasS) [Full text (ICWSM)]
+% \fullcite{mensio2020towards}
+\begin{itemize}
+    \item \bibentry{mensio2020towards}
+    \item \bibentry{mensio2020one}
+    \item \bibentry{mensio2019news}
+    \item \bibentry{mensio2019misinfome}
+    \item \bibentry{mensio2020mitigating}
+    \item \bibentry{mensio2023misinfome}
+    \item \bibentry{burel2020co}
+    \item \bibentry{piccolo2021agents}
+    \item \bibentry{denaux2021weaving}
+    \item \bibentry{lobo2022estimating}
+    \item \bibentry{mensio2023misinfokg}
+\end{itemize}
 
 
-MARTINO MENSIO, GRÉGOIRE BUREL, TRACIE FARRELL, and HARITH ALANI. (June 2023) MisinfoMe: A Tool for Longitudinal Assessment of Twitter Accounts’ Sharing of Misinformation. In (UMAP 2023) The 31st ACM Conference On User Modeling, Adaptation And Personalization
 
-Martino Mensio, Grégoire Burel, Youri Peskine, Raphaël Troncy, Paolo Papotti, and Harith Alani. (November 2023).
-MisinfoKG - A Misinformation and Fact-Checks
-Knowledge Graph. In ISWC-2023 Resource Track
+
+
+% We present an idea for a system to perform cross-article narrative comparison.
+
+
+% Mensio M., Alani H., Willis A. (June 2020) One Event, Different Stories. In Postgraduate Research Poster Competition 2020, The Open University [Multimedia entry (ORO)] [Poster (ORO)]
+
+
+
+% \subsection{Other publications during the timeframe}
+
+% Mensio M., Alani H. (October 2019) News Source Credibility in the Eyes of Different Assessors. In Conference for Truth and Trust Online (TTO 2019), London, UK [Full text (ORO)] [Full text (Conference)] [Slides]
+
+% Mensio M., Alani H. (October 2019) MisinfoMe: Who’s Interacting with Misinformation? In (ISWC 2019) Posters and Demos [Poster] [Full text (ORO)] [Full text (CEUR)]
+
+
+% Mensio M., Bastianelli E., Tiddi I., Rizzo G. (March 2020) Mitigating Bias in Deep Nets with Knowledge Bases: the Case of Natural Language Understanding for Robots. In AAAI 2020 Spring Symposium on Combining Machine Learning with Knowledge Engineering [Full text (CEUR)]
+
+% Mensio M., Willis A., Alani H. (April 2020) Towards a Cross-article Narrative Comparison of News. In Third International Workshop on Narrative Extraction from Texts held in conjunction with the 42nd European Conference on Information Retrieval (Text2Story2020 @ ECIR2020) [Full text (ORO)] [Full text (CEUR)] [Presentation slides]
+
+% Mensio M., Alani H., Willis A. (June 2020) One Event, Different Stories. In Postgraduate Research Poster Competition 2020, The Open University [Multimedia entry (ORO)] [Poster (ORO)]
+
+% Burel G., Farrell T., Mensio M., Khare P., Alani H. (October 2020) Co-Spread of Misinformation and Fact-Checking Content during the Covid-19 Pandemic. In (SocInfo 2020) Social Informatics 2020 [Full text (ORO)] [Full text (Springer)]
+
+% Piccolo L., Blackwood A., Farrell T., Mensio M. (July 2021) Agents for Fighting Misinformation Spread on Twitter: Design Challenges. In 3rd Conference on Conversational User Interfaces (CUI 2021) [Full text (ORO)] [Full text (ACM)]
+
+% Denaux R., Mensio M., Gomez-Perez J., Alani H. (August 2021) Weaving a Semantic Web of Credibility Reviews for Explainable Misinformation Detection. In Thirtieth International Joint Conference on Artificial Intelligence (IJCAI-21) [Full text (ORO)] [Full text (IJCAI)]
+
+% Reyero Lobo P., Mensio M., Pavon-Perez A., Bayer V., Kwarteng J., Fernandez M., Daga E., Alani H. (June 2022) Estimating Ground Truth in a Low-labelled Data Regime: A Study of Racism Detection in Spanish. In (ICWSM-22) First Workshop on Novel Evaluation Approaches for Text Classification Systems on Social Media (NEATCLasS) [Full text (ICWSM)]
+
+
+% MARTINO MENSIO, GRÉGOIRE BUREL, TRACIE FARRELL, and HARITH ALANI. (June 2023) MisinfoMe: A Tool for Longitudinal Assessment of Twitter Accounts’ Sharing of Misinformation. In (UMAP 2023) The 31st ACM Conference On User Modeling, Adaptation And Personalization
+
+% Martino Mensio, Grégoire Burel, Youri Peskine, Raphaël Troncy, Paolo Papotti, and Harith Alani. (November 2023).
+% MisinfoKG - A Misinformation and Fact-Checks
+% Knowledge Graph. In ISWC-2023 Resource Track
