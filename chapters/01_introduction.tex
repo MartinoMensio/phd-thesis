@@ -179,7 +179,7 @@ A computational approach, which considers together document similarity, propagan
 Given this aim, we build a research path that gradually adds the different variables.
 
 \begin{enumerate}
-    \item We start from the first factor of similarity (and differences) between news articles, which is the motivation for our work in the first place. Being able to analyse the similarities and differences enables us to get a grasp on what effectively changes between related articles. Therefore, our first \acrfull{rq} is \emph{RQ1: To what extent news articles about the same events differ?}
+    \item We start from the first factor of similarity (and differences) between news articles, which is the motivation for our work in the first place. Being able to analyse the similarities and differences enables us to get a grasp on what effectively changes between related articles. Therefore, our first \acrfull{rq} is \emph{RQ1: To what extent do news articles about the same events differ?}
     \item Then, we move our focus to the computational detection of persuasion techniques. How they can be detected, and what is the relationship to our first \acrshort{rq}1. This constitutes for us \emph{\acrshort{rq}2: To what extent can we automatically detect the persuasion techniques used in news articles?} 
     \item Afterwards, we introduce the variable of political leaning, to understand how it relates to persuasion. This leads us to \emph{\acrshort{rq}3: To what extent could the use of persuasion techniques help identify the political leaning of a news article?}
     \item Finally, we introduce the topic as the last variable, to break down the results found in the previous investigation. This is our \emph{\acrshort{rq}4: How does the use of propaganda differ across topics, and to what extent could this help determine the political leaning of articles?}
@@ -190,7 +190,7 @@ We dedicate an experimental chapter to each of the \acrlong{rq}s: from Chapter~\
 Each one of them contains several sub-questions that we list here for comprehensiveness.
 
 
-\subsection*{RQ1: To what extent news articles about the same events differ?}
+\subsection*{RQ1: To what extent do news articles about the same events differ?}
 
 % We are interested in how can we analyse and compare multiple sources to identify unique perspectives and overlapping information, detect omissions and corroborations, and select effective similarity metrics.\todoAW{I don't think this text adds anything; you've already introduced the RQ, and I think the subquestions by themselves do a clearer job of giving the context.}
 The sub-questions are the following:
@@ -233,8 +233,8 @@ This is analysed in Chapter~\ref{chap:political_sides}.
 This last question introduces the topics, and is split into three sub-questions:
 
 \begin{enumerate}[label={\textbf{RQ4.\arabic*:}},leftmargin=2cm]
-    \item How does detected propaganda differ across polarised versus neutral topics?
-    \item How does detected propaganda differ across \emph{political leaning} in polarised and neutral topics?
+    \item How does detected propaganda differ across polarising versus neutral topics?
+    \item How does detected propaganda differ across \emph{political leaning} in polarising and neutral topics?
     \item What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
 \end{enumerate}
 
@@ -316,7 +316,7 @@ The major contributions of this work are the following:
         %Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
         % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
         % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
-        % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarised.
+        % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
         % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
         
     \end{enumerate}
@@ -357,7 +357,7 @@ The major contributions of this work are the following:
     % \item Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
     % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
     % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
-    % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarised.
+    % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
     % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
     % \item Encoding the topic information and using it as a feature, helps increase the prediction metrics of a leaning classifier. The improvements are small but significant.
 

@@ -17,7 +17,7 @@ This chapter aims to analyse how different articles present the same event from 
 And this variety of linguistical forms\todoHA{Articles about same events does not necessarily mean you get a variety of linguistic form} is an excellent opportunity to study the relationship between the bare facts (common ground) and the additional choices that are made to try to persuade the reader of a specific opinion (with phenomena such as framing, interpretation, manipulation, propaganda).\todoAW{How similar are these terms? Framing is much less loaded than Propaganda}\todoHA{Only mention the ones you are studying}
 
 % fit into thesis
-But how does this fit into the overall goal of the thesis? Our overall research questions aim at studying the relationship between propaganda and political leaning (overall RQ1: \textbf{What is the relationship between propaganda and political leaning?}).\todoHA{Unclear how this chapter is connected to this RQ}
+But how does this fit into the overall goal of the thesis? Our overall research questions aim at studying the relationship between propaganda and political leaning (overall \acrshort{rq}1: \textbf{What is the relationship between propaganda and political leaning?}).\todoHA{Unclear how this chapter is connected to this RQ}\todomargin{general goal, and RQ1 is specific: To what extent do news articles about the same events differ?}
 % But, first of all, we need to take awareness that 
 In order to study propaganda as the additional layer on top of information
 (as discussed in the hypothesis done in Section~\ref{ssec:lit_layers_of_info})
@@ -32,17 +32,17 @@ Our first experiments, therefore, are directed at automatically comparing and fi
 
 % RQ of this chapter
 For this reason, we dive into the work of spotting similarities and differences in multiple articles.
-% The overall RQ: \textbf{What is the relationship between propaganda and political leaning?}
+The overall \acrshort{rq}1: \textbf{To what extent do news articles about the same events differ?}
 The Research Questions that we address in this chapter are: 
-\begin{enumerate}
-    \item How do different sources present the same events?
-    \item Can we analyse what is unique from each version and what overlaps? 
-    \item How can we automatically detect omission and corroboration across multiple articles?
-    \item How can we select better similarity metrics to empower omission and corroboration detection?
+\begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
+    \item How news events are reported differently by multiple sources?
+    \item How could we identify what is unique for each version and what is common? 
+    \item To what extent can we automatically detect omission and corroboration across multiple articles?
+    \item Which similarity metrics are best for detecting omission and corroboration?
     % \item What type of document/sentence encoding performs better to detect corroborations and omissions? OR What are the characteristics that allow encoding better documents and sentences?\todoAW{Is this a technical question? (ie. what's the best parser, for example?) "How can we automatically detect...?" and then expand in the main body of the text}
     % Is there a link between the parts that are different and propaganda/loaded language? --> chapter 4
 \end{enumerate}
-
+\todomargin{RQ updated here}
 
 
 
@@ -574,6 +574,18 @@ From this chapter, we achieved to be able to understand and study when informati
 \end{itemize}
 
 % \todo{I need something to link together this chapter and also need strong findings to conclude it.}
+
+\todomargin{answers to RQs is new. See how to fit it}
+\begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
+    \item \emph{How news events are reported differently by multiple sources?} News sources present the same event in different ways, including different details that corroborate with other sources, omitting details that other sources instead report, changing the order of presentation of the details. We studied and measured these phenomena in this chapter, but we deem it necessary to study the choice of terms, by investigating what is the reason and what is the effect of deliberate or involountary choices. We will expand on this in the next Chapter.
+    \item \emph{How could we identify what is unique for each version and what is common?} We reproduced the methodology of~\citet{bountouridis2018explaining} to detect omission and corroboration (Section~\ref{sec:cgs_cross_referencing}), which is based on splitting the articles into sentences and comparing with similarity metrics. We extended the approach to analyse at the word level the variation of terms (Section~\ref{sec:cgs_clustering_and_differences}).
+    \item \emph{To what extent can we automatically detect omission and corroboration across multiple articles?} We found in this chapter that the identified approach works better for detecting small differences between articles that have several parts in common. When the articles are too different, for example, if they consider totally different events or if the overlap of terms is too small, it becomes difficult to align the documents with similarity metrics and the results are less meaningful. We also find that our analysis is able to find terms that change but does not give an interpretation of what these changes mean. For example, we cannot currently distinguish between a loaded term versus a more neutral one. For this to be possible, we need to use in the next chapter the study of persuasion means.
+    \item \emph{Which similarity metrics are best for detecting omission and corroboration?} We underlined in Section~\ref{sec:cgs_similarity} the importance of using semantic similarity metrics that go beyond the binary comparison (equal or different) of terms. In this way, we are more resistant to term changes and can identify better the related sentences across articles.
+\end{enumerate}
+
+Overall RQ1: \emph{To what extent do news articles about the same events differ?}
+After comparing news articles covering the same events, we discovered that they can vary in several ways. Firstly, some articles may omit certain details while others confirm them. Secondly, different terms may be used to express the same detail. While it is relatively straightforward to analyze the first type of difference using similarity metrics, it is not sufficient for understanding the nuances of the second type. We need in this case to analyse the terms involved to go beyond the simple differences.
+
 
 The main findings that we have from this chapter are the following:
 

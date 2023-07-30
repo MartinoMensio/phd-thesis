@@ -23,15 +23,17 @@ Is there a link between the political orientation and the persuasion means used?
 
 % Perspectives and Political Sides. What drives  the variations and propaganda? Which political interests? 
 
-Our Research Questions for this chapter are:
-\begin{itemize}
-    \item RQ1: How does persuasion vary across the political spectrum?
-    \item RQ2: To what extent can we predict the political leaning of a news article by observing the propaganda it uses?
-    \todoHA{Add question: what are you trying to learn? Most datasets out there are imbalanced}
-    \item RQ3: Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?
-\end{itemize}
+Our Research Question for this chapter is:
+RQ3: \emph{To what extent could the use of persuasion techniques help identify the political leaning of a news article?} We can divide it into three sub-questions:
 
-The difference of terminology (persuasion $\rightarrow$ propaganda) between the first RQ and the second RQ is due to the exclusion of sentiment when we reply to the first RQ,\todoHA{unclear what this means} therefore we only indicate propaganda from there onwards.\todoHA{but you are using all three terms below}
+\begin{enumerate}[label={\textbf{RQ3.\arabic*:}},leftmargin=2cm]
+    \item How does persuasion vary across the political spectrum?
+    \item To what extent can we predict the political leaning of a news article by observing the propaganda it uses?
+    \todoHA{Add question: what are you trying to learn? Most datasets out there are imbalanced}
+    \item How balanced are the current propaganda detection methods with regard to political leaning?
+\end{enumerate}
+
+The difference of terminology (persuasion $\rightarrow$ propaganda) between the first subquestion and the second one is due to the exclusion of sentiment when we reply to the first one,\todoHA{unclear what this means} therefore we only indicate propaganda from there onwards.\todoHA{but you are using all three terms below}
 \todoAW{Have you been explicit about defining the difference between your use of terms "persuasion" and "propaganda"? (If so, where?)}
 
 % \todo{list contributions of this chapter}
@@ -579,20 +581,20 @@ we mean the reproduction of the baseline as in \texttt{Baly-baseline}. Using the
 \label{sec:ps_prop_and_leaning}
 
 Here in this Section, we want to study the relationship between Persuasion (studied in the previous Chapter~\ref{ssec:lp_techniques_propaganda} and Political Leaning (just seen in the previous Section~\ref{sec:ps_political_sides}).
-This is the core of this chapter as it analyses the relationship between persuasion and leaning. In the previous Chapter~\ref{chap:linguistic_persuasion} we analysed persuasion on its own, and we urged the need of understanding better the context around news sources. And in this chapter we are considering the political leaning as a major factor to differentiate between news sources.
+This is the core of this chapter as it analyses the relationship between persuasion and leaning. In the previous Chapter~\ref{chap:linguistic_persuasion} we analysed persuasion on its own, and we urged to understand better the context around news sources. In this chapter, we are considering the political leaning as a major factor in differentiating between news sources.
 For this reason, we are combining the two analyses with the following experiments:
 
 \begin{enumerate}
-    \item Analysis of persuasion features across the political spectrum: we want to understand if we can see some difference between the persuasion means of Left, Center and Right (Section~\ref{ssec:ps_prop_leaning_across}, targeting RQ1). We are able to identify some differences both in the quantity of specific techniques, and in the terms used.
-    \item Automated classification of the political leaning using persuasion features. Can machine learning models differentiate between propaganda and sentiment from left and right? (Section~\ref{ssec:ps_prop_leaning_classifier}, targeting RQ2) The motivation of this experiment is that we are able to see some differences from the previous experiment, and therefore we want to see if also machine learning classifiers can differentiate and how well. We find that it is possible to classify the leaning of news articles based on their use of propaganda, but that it is quite hard to be better than classifiers based on the full text of the articles. 
-    \item Are the current propaganda datasets imbalanced? (Section~\ref{ssec:ps_prop_leaning_imbalanced}, targeting RQ3) Given that the results of both previous experiments (manual and automated) are dependent on the quality of the automated propaganda detection, in this last experiment of the chapter we do an analysis of the imbalance of the data that was used to train the propaganda detector. We find that in most of the cases, propaganda examples come from Right-leaning sources and the Left and Center are underrepresented.
+    \item Analysis of persuasion features across the political spectrum: we want to understand if we can see some difference between the persuasion means of Left, Center and Right (Section~\ref{ssec:ps_prop_leaning_across}, targeting \acrshort{rq}3.1). We are able to identify some differences both in the quantity of specific techniques, and in the terms used.
+    \item Automated classification of the political leaning using persuasion features. Can machine learning models differentiate between propaganda and sentiment from left and right? (Section~\ref{ssec:ps_prop_leaning_classifier}, targeting \acrshort{rq}3.2) The motivation of this experiment is that we are able to see some differences from the previous experiment, and therefore we want to see if also machine learning classifiers can differentiate and how well. We find that it is possible to classify the leaning of news articles based on their use of propaganda, but that it is quite hard to be better than classifiers based on the full text of the articles. 
+    \item Are the current propaganda datasets imbalanced? (Section~\ref{ssec:ps_prop_leaning_imbalanced}, targeting \acrshort{rq}3.3) Given that the results of both previous experiments (manual and automated) are dependent on the quality of the automated propaganda detection, in this last experiment of the chapter we do an analysis of the imbalance of the data that was used to train the propaganda detector. We find that in most of the cases, propaganda examples come from Right-leaning sources and the Left and Center are underrepresented.
 \end{enumerate}
 
 \subsection{\statusgreen Persuasion across the political spectrum}
 \label{ssec:ps_prop_leaning_across}
 % From Experiment 4.3: comparison of sentiment/propaganda across political leaning
 
-Our first RQ for this chapter is: \emph{How does persuasion vary across the political spectrum?}
+Our first subquestion for this chapter is RQ3.1: \emph{How does persuasion vary across the political spectrum?}
 
 To answer this question, we perform a comparison across the political leanings to see if we can identify major differences (for example, one leaning could contain more of one specific technique, or differentiate in the terms used).
 For this reason, we perform the comparison by considering both the \emph{amount} of each persuasion technique, and the \emph{term frequencies}.
@@ -992,16 +994,16 @@ Here in this section, we take a different approach.
 In the previous section, we saw how propaganda is slightly different considering the political leanings.
 Taking from that result, we try to reverse the problem: using the features of propaganda extracted from the articles, can we automatically predict the leaning of an article?
 
-This is what our RQ2 asks: \emph{Can we predict the political leaning of a news article by observing the propaganda it uses?}
+This is what our second subquestion asks, RQ3.2: \emph{To what extent can we predict the political leaning of a news article by observing the propaganda it uses?}
 More in detail, we want to see if it is possible to recognise the political leaning of articles from the:
 \begin{enumerate}
-    \item \emph{total amount} of propaganda found in the text (RQ2.1);
+    \item \emph{total amount} of propaganda found in the text (RQ3.2.1);
     %\item RQ2: Is it possible to recognise political leaning of articles from the \emph{amount of each propaganda technique} in the text?
-    \item \emph{amount of each propaganda technique} in the text (RQ2.2);
-    \item \emph{specific words belonging to propaganda techniques} in the article text (RQ2.3).
+    \item \emph{amount of each propaganda technique} in the text (RQ3.2.2);
+    \item \emph{specific words belonging to propaganda techniques} in the article text (RQ3.2.3).
 \end{enumerate}
 
-\todoHAinline{I'm strruggling with this section. Maybe add subsections to help the reader to follow yuor thinking}
+\todoHAinline{I'm struggling with this section. Maybe add subsections to help the reader to follow your thinking}
 
 % reasons
 We have several reasons to think that political leaning and propaganda are related; in other words, that propaganda changes across the political spectrum.
@@ -1033,7 +1035,7 @@ We also experimented briefly with sentiment features, but after seeing the null 
 Therefore from here we switch our terminology from \emph{persuasion} (propaganda+sentiment) to \emph{propaganda}.
 
 % structure of next sections
-The following subsections first describe the general setup of the experiment, then deal with each one of the three sub-research questions that we listed beforee: quantity, quantity by type, terms analysis.% TODO , context.
+The following subsections first describe the general setup of the experiment, then deal with each one of the three sub-research questions that we listed before: quantity, quantity by type, terms analysis.% TODO , context.
 
 
 
@@ -1141,7 +1143,7 @@ This combination is performed by concatenating the inputs to the SoftMax dense l
         
     \end{tabular}
     % }
-    \caption{Results given by the different features. Baselines above, RQ2.1=\texttt{Prop-Total}, RQ2.2=\texttt{Prop-Techniques}, RQ2.3= (\texttt{Prop-Total-Terms} and \texttt{Prop-Techniques-Terms}). The last group shows various combinations of features that in some cases provide improvements over the baseline. \textbf{Bold} means that the score is higher than the baseline. $\star$ denotes the best result for the column.}
+    \caption{Results given by the different features. Baselines above, RQ3.2.1=\texttt{Prop-Total}, RQ3.2.2=\texttt{Prop-Techniques}, RQ3.2.3= (\texttt{Prop-Total-Terms} and \texttt{Prop-Techniques-Terms}). The last group shows various combinations of features that in some cases provide improvements over the baseline. \textbf{Bold} means that the score is higher than the baseline. $\star$ denotes the best result for the column.}
     \label{tab:results_prop_features_classifier}
 \end{table}
 \todoHA{Table~\ref{tab:results_prop_features_classifier} p-values?}
@@ -1149,9 +1151,9 @@ This combination is performed by concatenating the inputs to the SoftMax dense l
 \subsubsection{Total Quantity of Propaganda}
 
 
-Our hypothesis behind RQ2.1 is that the total quantity of propaganda contained in an article helps to recognise its political leaning. 
+Our hypothesis behind RQ3.2.1 is that the total quantity of propaganda contained in an article helps to recognise its political leaning. 
 % definition
-To answer RQ2.1, we\todoHA{first?} consider only the total amount of propaganda detected in each article. For each article, we calculate a single value to represent the percentage of propaganda text inside the article. %Using a percentage compensates for the varying lengths of articles.%These words are the one annotated as propaganda by \cite{da2019fine} (see Section \ref{sec:prop}).
+To answer RQ3.2.1, we\todoHA{first?} consider only the total amount of propaganda detected in each article. For each article, we calculate a single value to represent the percentage of propaganda text inside the article. %Using a percentage compensates for the varying lengths of articles.%These words are the one annotated as propaganda by \cite{da2019fine} (see Section \ref{sec:prop}).
 % how it is computed
 We use a percentage in order to be less biased and independent of the article size.
 This value is computed for each article as the ratio between the number of words detected as propagandist (see previous Section \ref{ssec:ps_prop_leaning_across}) and the total number of words. For example, if an article has 600 words, and propaganda analysis annotated 30 of them as being propagandist, the value of the feature will be 5\%.  
@@ -1162,7 +1164,7 @@ As we saw in the previous Section~\ref{ssec:ps_prop_leaning_across} in Figure~\r
 %Figure~\ref{fig:tot_quantity} shows how this value is distributed across Left, Centre and Right leaning articles. It appears that all three groups have a similar propaganda distribution. The Centre appears to have slightly less propaganda, and the Right sources have the most (could be due to propaganda bias as we highlight later in Section~\ref{sec:discussion}).%, especially looking at the dots that represent the outliers. 
 % TODO better figure
  %Overall, the boxplot shows that the presence of propaganda is similar across the board.%, and the results in Table \ref{tab:results_prop_features_classifier} show that adding this feature lowers our classification accuracy. Hence %mostly overlap so this is a negative sign for our hypothesis.
-%the answer to RQ2.1 is No, the mere presence of propaganda is insufficient to determining the political leaning of articles. 
+%the answer to RQ3.2.1 is No, the mere presence of propaganda is insufficient to determining the political leaning of articles. 
 
 % TODO: rename categories in plot to L/C/R
 % \begin{figure}[!htb]
@@ -1197,14 +1199,14 @@ Table~\ref{tab:results_prop_features_classifier} shows the results of this first
     \centering
     \includegraphics[width=0.75\linewidth]{figures/baly_media_confusion_matrix_propaganda_total_percentage.pdf}
     %\vspace{-1cm}
-    \caption{Confusion matrix of the classifier using the \texttt{Prop-Total} features (RQ2.1).}
+    \caption{Confusion matrix of the classifier using the \texttt{Prop-Total} features (RQ3.2.1).}
     \label{fig:total_prop_confusion}
 \end{figure}
 
 The confusion matrix in Figure~\ref{fig:total_prop_confusion} shows that the classifier is introducing biased predictions towards the Right-leaning class. %From observing that in general right-leaning articles contain more propaganda overall (\texttt{Prop-Total} feature), the results are skewed right. 
 This results in higher recall but lower precision for the Right class, and almost zero accuracy for the Centre label. 
 
-In summary, the answer to RQ2.1 is: \textbf{no, the total amount of propaganda in an article does not seem to be a good indicator of the political leaning of an article}.
+In summary, the answer to RQ3.2.1 is: \textbf{the total amount of propaganda in an article does not seem to be a good indicator of the political leaning of an article}.
 
 % provides a low result overall but a quite good F1 on the Right class.
 
@@ -1261,7 +1263,7 @@ In summary, the answer to RQ2.1 is: \textbf{no, the total amount of propaganda i
 
 \subsubsection{Quantity of Particular Propaganda Techniques}
 
-In this section, we test the hypothesis of RQ2.2, which is that the presence of particular propaganda techniques helps to determine the political-leaning of articles. 
+In this section, we test the hypothesis of RQ3.2.2, which is that the presence of particular propaganda techniques helps to determine the political-leaning of articles. 
 
 %From the negative results to the first research question, we make another step to use more detailed features. 
 Instead of relying on a single value representing the total quantity of propaganda, we now consider the amount of each propaganda technique to train the political-leaning classifier.
@@ -1296,8 +1298,8 @@ but as we noted, there are some techniques which have different shapes (U-shape,
 
 % - Classifier with features: results and significance
 We train the classifiers as the in previous experiment and obtain the result indicated by \texttt{Prop-Techniques (2)} in Table~\ref{tab:results_prop_features_classifier}. Although the results show improvement over the previous experiment, they are still well below the best performing baseline. %This indicates that 
-%As for the previous case, we have generally low scores, slightly improved from RQ1 on both splits.
-The results show that (a) \texttt{Prop-Techniques} alone is insufficient to accurately detect the political leaning of articles (RQ2.2), and (b) when \texttt{Prop-Techniques} is added to \texttt{Baly-baseline} (line \texttt{(0)+(2)} in results table), it brings an improvement on the Media split for both the F1 and accuracy measures. 
+%As for the previous case, we have generally low scores, slightly improved from RQ3.2 on both splits.
+The results show that (a) \texttt{Prop-Techniques} alone is insufficient to accurately detect the political leaning of articles (RQ3.2.2), and (b) when \texttt{Prop-Techniques} is added to \texttt{Baly-baseline} (line \texttt{(0)+(2)} in results table), it brings an improvement on the Media split for both the F1 and accuracy measures. 
 
 
 %\begin{enumerate}
@@ -1382,7 +1384,7 @@ The improved generalisation abilities of this feature is perhaps what is driving
          \caption{Baly media}
          \label{fig:prop_tech_confusion_baly_media}
      \end{subfigure}
-    \caption{Confusion matrix of the classifier using the features of \texttt{Prop-Techniques} (RQ2.2).}
+    \caption{Confusion matrix of the classifier using the features of \texttt{Prop-Techniques} (RQ3.2.2).}
     \label{fig:prop_tech_confusion}
 \end{figure}
 
@@ -1417,10 +1419,10 @@ The conclusion of this experiment is that \textbf{the amount of each propaganda 
 % TODO: keep together propaganda spans instead of tokenizing (e.g., "")
 %Given the results of the two previous experiments, and the room for improvement that is left above the scores shown, we want to have a better understanding of the differences between the propaganda coming from multiple political sides.
 Following on from the previous two experiments, we now aim to reach a better understanding of the differences between how propaganda is portrayed in articles belonging to each political side.
-We need to go beyond the quantification of detected propaganda techniques (previous experiment), and investigate the chosen terminology for expressing these propaganda techniques in articles belonging to Left, Right, or Centre (RQ2.3). %how the techniques differ across the political spectrum with regards to used language. 
+We need to go beyond the quantification of detected propaganda techniques (previous experiment), and investigate the chosen terminology for expressing these propaganda techniques in articles belonging to Left, Right, or Centre (RQ3.2.3). %how the techniques differ across the political spectrum with regards to used language. 
 % to recognise political leaning given by the previous sections, the idea is to take a look at the specific terms picked up by the propaganda analysis. Not only quantity, but which words belong to each technique.
 
-%To this end, the RQ2.3 considers as features the terms that are picked as part of the propaganda techniques.
+%To this end, the RQ3.2.3 considers as features the terms that are picked as part of the propaganda techniques.
 The hypothesis is that, even though propaganda techniques are used with similar percentages (as learnt from the first two experiments), the choice of words and their frequency differ between different-leaning articles, which can improve their classification. 
 %there are some specific words that are used by opposing leanings that are used with different frequency.
 
@@ -1531,7 +1533,7 @@ In Figure~\ref{fig:terms_weights_3b}, we consider each propaganda technique sepa
 
 Further investigation is needed to better capture what each of these words means in the context they are used, to determine how to improve on this term analysis.% could be improved and be able to distinguish political sides more effectively.
 
-With the current analysis, we can say that \textbf{the answer to RQ2.3 is a partial no: using as feature the terms of propaganda achieves a very similar score to the baseline (rows indicated with \texttt{(3a)} and \texttt{(3b)}), and when added to the baseline features, it helps to achieve a small (but not significant, \textit{p-value=0.657}) improvement}. % NOT SIGNIFICANT IMPROVEMENT: p-value=0.657
+With the current analysis, we can say that \textbf{the answer to RQ3.2.3 is that the specific propaganda words can only marginally help to classify the political leaning. Using the terms of propaganda we achieve a very similar score to the baseline (rows indicated with \texttt{(3a)} and \texttt{(3b)}), and when added to the baseline features, it helps to achieve a small (but not significant, \textit{p-value=0.657}) improvement}. % NOT SIGNIFICANT IMPROVEMENT: p-value=0.657
 
 
 \subsubsection{\statusgreen Reproduction on \texttt{NELA} dataset}
@@ -2023,7 +2025,7 @@ Therefore, we want to study how the current datasets of propaganda are distribut
 
 
 
-The research question that we aim to answer in this section is RQ3: \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
+The research question that we aim to answer in this section is RQ3.3: \emph{How balanced are the current propaganda detection methods with regard to political leaning?}
 
 Finding that most of the datasets are focused on Right-leaning propaganda, the next logical question that comes to us is: \emph{Why would propaganda datasets/detection need to be balanced across the political spectrum?} In other words, does propaganda exist from all political leanings?
 We hypothesise that propaganda exists with all political leanings and the detection resources (datasets) should contain examples across the spectrum in order to be able to recognise propaganda better.
@@ -2085,15 +2087,15 @@ Each of these steps is described in one of the following subsections. % contains
 % Our aim is to observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion device.
 
 % % RQ
-% The Research Question RQ3 is \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?}
+% The Research Question RQ3.3 is \emph{How balanced are the current propaganda detection methods with regard to political leaning?}
 % are the following:
 
 % (Why is computational research targeted against right-leaning propaganda? Is it a matter of quantity/context?) → related works
 % Can we detect propaganda also in left and centre leanings? With a tool that is trained on right-leaning propaganda?
 % How different is the detected propaganda across the political spectrum?
 
-% RQ3.1: How different is the detected propaganda across the political spectrum? --> already answered in 5.3.1
-% RQ3.2: Which generalisation problems can arise when applying a propaganda detection tool outside the usually-targeted extreme-right leaning?
+% RQ3.3.1: How different is the detected propaganda across the political spectrum? --> already answered in 5.3.1
+% RQ3.3.2: Which generalisation problems can arise when applying a propaganda detection tool outside the usually-targeted extreme-right leaning?
 
 
 
@@ -2722,7 +2724,7 @@ Considering the previous subsections, we discuss here the main findings of this 
 
 1. Computational NLP resources are quite imbalanced, especially the English based. The main motivation is that most of the works consider as a starting resource MBFC which has a label ``propaganda" that is on the limit of fake news, which is associated with extreme leanings, and it is more common in the extreme-right leaning with fewer sources on the extreme-left leaning. The datasets derived from MBFC, by selecting the news sources, end up in under-representing of left-leaning and centre, with the result of being completely imbalanced.
 At the moment, there are not many datasets available for propaganda detection, and therefore this problem is showing more.
-This answers RQ3 is \emph{no, the propaganda detection is imbalanced. The imbalance comes from the datasets that currently only contain right-leaning examples}.
+The answer to RQ3.3 is that \emph{propaganda detection is highly imbalanced. The imbalance comes from the datasets that currently only contain right-leaning examples}.
 And the results seem to disagree with our H1 where we hypothesise that propaganda exists all across the political spectrum.
 But in reality, what we really observe is that the datasets are imbalanced. Therefore, we want to show some literature that places propaganda all across the political spectrum, to then be able to say that this imbalance should not be there (H1).
 
@@ -2774,12 +2776,15 @@ This chapter introduced the ingredient of Political Leaning that was analysed fi
 Each of the three Research Questions has been analysed, and this is a reminder of the results obtained:
 
 % reminder of the results
-\begin{itemize}
-    \item RQ1: \emph{How does persuasion vary across the political spectrum?} We detect less propaganda in the centre and more in the extremes. This was already hypothesised since more extreme points of view have usually stronger opinions which reflect in the language they use. Between Left and Right, the Right seems to be more propagandistic, especially with some techniques (\texttt{Flag-Waving} and \texttt{Slogans}). With the term analysis, we are able to relate to some contextual elements and for example recognise some slogans and terminology of the Left and Right. We see that different political leanings seem to be quite recognisable by observing the comparison of quantities and terms. This motivates us to proceed with the next RQ.
-    \item RQ2: \emph{Can we predict the political leaning of a news article by observing the propaganda it uses?} We experimented with a classifier trained with different combinations of features, and the result is that propaganda features cannot themselves reach the recognition abilities of the BERT baseline. When combined with the baseline features, we see in some cases some small improvements, that test as significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small. This may be because BERT is already a very powerful model and any improvements over it have to be considered as a win already.
-    \item RQ3: \emph{Is Propaganda Detection balanced? Or is there some imbalance in the datasets used in the literature?} We then performed an analysis of the imbalance of the main datasets that are used for the English language to perform propaganda detection. The results are clearly indicating that most of them are imbalanced. It is not very clear what the effect of this imbalance is, but we can already see some of its effects by analysing the correlation with populism. Indeed, we see that some detected propaganda techniques result as being negatively correlated with populism. In our opinion, this is an indicator that more studies are needed to establish whether our hypotheses are wrong or if propaganda detection is having some problems.
-\end{itemize}
+\begin{enumerate}[label={\textbf{RQ3.\arabic*:}},leftmargin=2cm]
+    \item \emph{How does persuasion vary across the political spectrum?} We detect less propaganda in the centre and more in the extremes. This was already hypothesised since more extreme points of view have usually stronger opinions which reflect in the language they use. Between Left and Right, the Right seems to be more propagandistic, especially with some techniques (\texttt{Flag-Waving} and \texttt{Slogans}). With the term analysis, we are able to relate to some contextual elements and for example recognise some slogans and terminology of the Left and Right. We see that different political leanings seem to be quite recognisable by observing the comparison of quantities and terms. This motivates us to proceed with the next RQ.
+    \item \emph{To what extent can we predict the political leaning of a news article by observing the propaganda it uses?} We experimented with a classifier trained with different combinations of features, and the result is that propaganda features cannot themselves reach the recognition abilities of the BERT baseline. When combined with the baseline features, we see in some cases some small improvements, that test as significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small. This may be because BERT is already a very powerful model and any improvements over it have to be considered as a win already.
+    \item RQ3.3: \emph{How balanced are the current propaganda detection methods with regard to political leaning?} We then performed an analysis of the imbalance of the main datasets that are used for the English language to perform propaganda detection. The results are clearly indicating that most of them are imbalanced. It is not very clear what the effect of this imbalance is, but we can already see some of its effects by analysing the correlation with populism. Indeed, we see that some detected propaganda techniques result in being negatively correlated with populism. In our opinion, this is an indicator that more studies are needed to establish whether our hypotheses are wrong or if propaganda detection is having some problems.
+\end{enumerate}
 
+
+We can then summarise an answer to our overall RQ3: \emph{To what extent could the use of persuasion techniques help identify the political leaning of a news article?}
+We observed and used the potential of persuasion analysis (more specifically, propaganda detection) to recognise the political leaning of news articles. The results are promising but are undermined by a high imbalance in the datasets used for training propaganda detection models.
 
 
 

@@ -30,7 +30,7 @@ This chapter, therefore, introduces the \emph{Topic} as the last ingredient of o
 
 Our hypothesis is that certain topics are highly distinguishable between left and right, when considering the propaganda used in news articles.
 This hypothesis is supported by the work of~\cite{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
-And with this chapter, we aim to analyse how propaganda varies across topics, to potentially find topics that are more polarised and whose propaganda is more unique to one political extreme or the other.
+And with this chapter, we aim to analyse how propaganda varies across topics, to potentially find topics that are more polarising and whose propaganda is more unique to one political extreme or the other.
 % if this controversy is manifesting through the usage of the language of the articles themselves.
 
 %https://hal.archives-ouvertes.fr/hal-03681454/file/umap22adjunct-63.pdf “Given that the topics discussed in the news do not all have the same polarizing effect – they present higher or lower levels of controversy [29] → Kiran Garimella, Gianmarco De Francisci Morales, Aristides Gionis, and Michael Mathioudakis. 2018. Quantifying controversy on social media. ACM Transactions on Social Computing 1, 1 (2018), 1–27
@@ -42,19 +42,28 @@ And with this chapter, we aim to analyse how propaganda varies across topics, to
 
 
 % RQ
+The overall Research Question for this chapter is RQ4: \emph{How does the use of propaganda differ across topics, and to what extent could this help determine the political leaning of articles?}
 
-Our Research Questions are the following: 
-\begin{itemize}
-    % \item RQ1: How can we optimise the definition of the topic in order to have enough details? 
-    % \item RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
-    \item RQ1: How does the detected propaganda change across the \emph{topics}? Are there major differences when considering polarising topics with respect to more neutral topics?
-    \item RQ2: How does the detected propaganda change across \emph{leanings} in ``polarised" topics? And how does it change in non-polarised ones?
-    % \item RQ3: How does the topic, combined with the propaganda features, affect the classification of leaning?
-    \item RQ3: What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
+We can break it down into the following sub-questions:
+
+\begin{enumerate}[label={\textbf{RQ4.\arabic*:}},leftmargin=2cm]
+    \item How does detected propaganda differ across polarising versus neutral topics?
+    \item How does detected propaganda differ across \emph{political leaning} in polarising and neutral topics?
+    \item What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
     \todoAW{Aren't these two questions circular? ie. RQ2 is using leanings to reason about propaganda, and RQ3 is using propaganda to reason about leanings.}
     \todomargin{single rq: what is the relationship between propaganda and leaning, bidirectional relationship}
-    % \item RQ6: Can we find some topics where propaganda detection is not working as expected?
-\end{itemize}
+\end{enumerate}
+
+% Our Research Questions are the following: 
+% \begin{itemize}
+%     % \item RQ1: How can we optimise the definition of the topic in order to have enough details? 
+%     % \item RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
+%     \item RQ1: How does the detected propaganda change across the \emph{topics}? Are there major differences when considering polarising topics with respect to more neutral topics?
+%     \item RQ2: How does the detected propaganda change across \emph{leanings} in ``polarising" topics? And how does it change in non-polarising ones?
+%     % \item RQ3: How does the topic, combined with the propaganda features, affect the classification of leaning?
+%     \item RQ3: What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
+%     % \item RQ6: Can we find some topics where propaganda detection is not working as expected?
+% \end{itemize}
 
 % % How
 % How?
@@ -71,8 +80,8 @@ We find that propaganda changes significantly across topics, and especially when
 We try to use these patterns with a leaning classifier, as in the previous chapter, and the results are promising with significant improvements (tested with McNemar, but only a small increase of just $1.22\%$ with respect to the results of the previous chapter).
 
 The structure of this chapter is the following. First, Section~\ref{sec:topic_method} describes the methodology used. Then in Section~\ref{sec:topic_topic_granularities} we analyse different topic definitions, and we fine-tune the selected method by showing what we need for our comparative analysis across leaning.
-Then in Section~\ref{sec:topic_propaganda} we target our RQ1 by looking how detected propaganda varies across topics.
-In Section~\ref{sec:topic_propaganda_leaning} we do the comparative analysis of how propaganda varies across topics and leanings (RQ2). And in Section~\ref{sec:topic_classifier_propaganda} we analyse the effects on automatic classification of leaning (RQ3).
+Then in Section~\ref{sec:topic_propaganda} we target our RQ4.1 by looking how detected propaganda varies across topics.
+In Section~\ref{sec:topic_propaganda_leaning} we do the comparative analysis of how propaganda varies across topics and leanings (RQ4.2). And in Section~\ref{sec:topic_classifier_propaganda} we analyse the effects on automatic classification of leaning (RQ4.3).
 Finally, Section~\ref{sec:topic_discussion} includes the discussion of the findings.
 
 
@@ -244,7 +253,7 @@ Then, with the other analyses, we take the identified definition of the topic an
 % TODO: type 1 and type 2, then hierarchically all the experiments
 
 % Topic analysis at different granularities:
-% coarse topics, fine-grained, hierarchical. We need hierarchical topic that can go into detail because high-level topics are very broad and distributions are not very meaningful. We need to take a closer look at the details, but as well to understand where these detailed topics stand in the larger picture. (RQ1)
+% coarse topics, fine-grained, hierarchical. We need hierarchical topic that can go into detail because high-level topics are very broad and distributions are not very meaningful. We need to take a closer look at the details, but as well to understand where these detailed topics stand in the larger picture. (RQ4.1)
 
 % Topic analysis across political spectrum:
 % Coarse topics are very similar across political spectrum
@@ -367,7 +376,7 @@ We end this section with~\ref{ssec:topic_topic_choice} which recaps and motivate
 
 % analysis of baly dataset at different granularities
 
-% RQ1 (NO): How can we optimise the definition of the topic in order to have enough details? 
+% RQ4.1 (NO): How can we optimise the definition of the topic in order to have enough details? 
 
 
 % GOAL
@@ -761,7 +770,7 @@ Together with the leaning labels (taken from Chapter~\ref{chap:political_sides})
 % Coarse topics are very similar across political spectrum
 % Fine-grained topics are slightly different (quantity, terms). Which ones? They express the choice of details that we discussed in chapter 3
 
-% RQ2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
+% RQ4.2: How does the topic (at different granularities) change across political leaning on a parallel news corpus?
 
 We proceed in this subsection by considering the same methodologies for topic labelling as in the previous subsection.
 
@@ -894,19 +903,19 @@ In the next sections, we will use only the IPTC Media Topics for carrying out ou
 \section{\statusgreen Propaganda across Topics}
 \label{sec:topic_propaganda}
 
-With respect to the previous sections, in the next ones we are considering the propaganda analysis. As seen in Figure~\ref{fig:methodology_mindmap_chapter6}, the first Research Question (RQ1) is addressing Topics and Propaganda:
-\emph{How does the detected propaganda change across the topics?}
+With respect to the previous sections, in the next ones we are considering the propaganda analysis. As seen in Figure~\ref{fig:methodology_mindmap_chapter6}, the first subquestion (RQ4.1) is addressing Topics and Propaganda:
+\emph{How does detected propaganda differ across polarising versus neutral topics?}
 
-To answer this question, we analyse how propaganda is distributed across the topics, to find out which topics contain more propaganda than others (polarised vs non-polarised topics).
+To answer this question, we analyse how propaganda is distributed across the topics, to find out which topics contain more propaganda than others (polarising vs non-polarising topics).
 
-We do not take in account political leaning, which is added in the next RQ2.
+We do not take in account political leaning, which is added in the next RQ4.2.
 % and what differences topics contain in terms of propaganda.
 % Assumption: propaganda is used for certain topics more than in others
 
 We have the following analysis:
 
 \begin{itemize}
-    \item analysis of the total quantity of propaganda across Media Topics: to discover the most polarised/loaded topics (more propaganda) and the non-polarised/unloaded ones;
+    \item analysis of the total quantity of propaganda across Media Topics: to discover the most polarising/loaded topics (more propaganda) and the non-polarising/unloaded ones;
     \item analysis of the quantity of each propaganda technique across Media Topics: to discover associations of topics and specific techniques;
     % \item analysis of the terms of propaganda across Media Topics: to discover term associations with specific topics.
 \end{itemize}
@@ -938,7 +947,7 @@ We can see that the average value is around $5\%$, with the highest ones going s
 
 The topics with most propaganda are: sexism ($9.9\%$) and racism ($9.1\%$), both part of discrimination ($8.1\%$); mass media ($8.0\%$), corruption ($7.2\%$). The lowest values instead are found in economy ($3.5\%$), health ($3.7\%$), government policy ($4.4\%$) and defence ($4.7\%$).
 
-Although we already can distinguish some loaded/polarised topics, we would also like to see the breakdown by specific techniques, therefore in the next subsection we consider each technique individually.
+Although we already can distinguish some loaded/polarising topics, we would also like to see the breakdown by specific techniques, therefore in the next subsection we consider each technique individually.
 
 \subsection{\statusgreen Quantity of each propaganda technique across Media Topics}
 \label{ssec:topic_propaganda_tech}
@@ -1027,13 +1036,13 @@ These topic-technique associations verify the theoretical aspects of propaganda 
 
 \subsection{\statusgreen Discussion}
 
-Our RQ1 for this section was \emph{How does the detected propaganda change across the topics?}
+Our RQ4.1 for this section was \emph{How does detected propaganda differ across polarising versus neutral topics?}
 
 We have analysed here how propaganda changes across Media Topics, which are our selected methodology from Sec~\ref{sec:topic_topic_granularities}.
 First, we analysed which topics contain more propaganda overall (Subsection~\ref{ssec:topic_propaganda_tot}), finding a group of topics that are very loaded with propaganda (sexism, racism, discrimination, corruption) and as well topics with very low values (economy, health, defence).
 Then we considered the propaganda techniques individually (Subsection~\ref{ssec:topic_propaganda_tech}), and found very specific topic-technique associations.
 
-With this analysis we still do not have a picture of how the political orientation interacts with these loaded areas. Therefore, in the next section / RQ2, we introduce the leaning in the analysis.
+With this analysis we still do not have a picture of how the political orientation interacts with these loaded areas. Therefore, in the next section / RQ4.2, we introduce the leaning in the analysis.
 
 
 
@@ -1046,7 +1055,7 @@ In this way, we have an analysis that considers the three variables (Propaganda,
 
 This whole analysis is based on the assumption that propaganda is used by news sources (associated with specific leanings) for certain topics in a very recognisable way to push for a certain idea or a certain narrative.
 
-Our RQ2 is: \emph{How does the detected propaganda change across topics and leanings?}
+Our RQ4.2 is: \emph{How does detected propaganda differ across political leaning in polarising and neutral topics?}
 
 While answering this question, we seek multiple objectives:
 
@@ -1428,7 +1437,8 @@ The previous sections focused on analysing the dataset by considering different 
 For this section, we switch to a slightly different formulation: how well can we differentiate the leaning of the articles by considering the propaganda and topics used?
 We take a similar approach as what we used in Chapter~\ref{ssec:ps_leaning_classifier} with the classifier, but this time we have an additional feature which is the topic.
 
-Our RQ3 is: \emph{What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?}
+Our RQ4.3 is: \emph{What are the effects of combining the propaganda features with the topic
+features, to recognise the leaning of a news article?}
 
 We answer this research question with two experiments:
 
@@ -1610,10 +1620,22 @@ The main findings of this chapter are:
     \item Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
     \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
     \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
-    \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarised.
+    \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
     \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
     \item Encoding the topic information and using it as a feature, helps increase the prediction metrics of a leaning classifier. The improvements are small but significant.
 \end{enumerate}
+
+
+The answers to the subquestions for this chapter are the following:
+
+\begin{enumerate}[label={\textbf{RQ4.\arabic*:}},leftmargin=2cm]
+    \item \emph{How does detected propaganda differ across polarising versus neutral topics?} We identified topics that contain more propaganda (polarising) than others. What does not change generally is the proportion between the techniques used. Loaded Language is always the most common, and there are a few exceptions where a specific technique is used in a certain topic outside its usual range.
+    \item \emph{How does detected propaganda differ across political leaning in polarising and neutral topics?} When comparing across political leaning, some topics have a higher quantity of propaganda on a specific leaning (finding 2 above). The internal proportion of techniques is preserved (finding 3), but the specific terms have substantial differences (finding 4).
+    \item \textit{What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?} Adding the topic features to the propaganda features is useful to recognise the leaning of news articles, but not for all the topics. The small improvements show statistical significance.
+\end{enumerate}
+
+After this discussion, we can answer our RQ4: \emph{How does the use of propaganda differ across topics, and to what extent could this help determine the political leaning of articles?}
+Propaganda changes significantly across topics, especially when considering the terms used. Using the topic as an input feature for classifying political leaning is beneficial if used together with the propaganda features. The reason is that we can exploit some associations of topics and propaganda that make it easier to recognise the political leaning of news articles.
 
 
 \section{Conclusions}

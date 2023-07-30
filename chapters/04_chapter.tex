@@ -24,12 +24,12 @@ For this reason, this chapter investigates the \emph{linguistic techniques of pe
 % aim
 Our motivation is to analyse whether the terms that change between multiple articles/sentences are correlated with the linguistic techniques of persuasion.
 
-The Research Questions we want to answer are: 
-\begin{enumerate}
-    \item \emph{How could we automatically detect the persuasion techniques used by writers?} % Which are the possible indicators of these differences? // 
-    \item \emph{Which persuasion techniques do we detect most frequently?}
-    \item \emph{How are the differences between similar articles} (extracted in the previous chapter) \emph{related to a different use of persuasion techniques?} % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
-    \item If the same story can be narrated differently depending on the persuasion techniques used, then persuasion is adding variations to the narration. Therefore, \emph{how much of an obstacle is persuasion in recognising articles that are related to the same news?} %(clustering) % how much of an obstacle is persuasion in recognising the events in multiple articles?
+The Research Questions for this chapter is \acrshort{rq}2: \emph{To what extent can we automatically detect the persuasion techniques used in news articles?} It is split into four subquestions:
+\begin{enumerate}[label={\textbf{RQ2.\arabic*:}},leftmargin=2cm]
+    \item To what extent could we automatically detect the persuasion techniques used by writers? % Which are the possible indicators of these differences? // 
+    \item Which persuasion techniques are detected more frequently than others?
+    \item How do similar news articles differ in their use of persuasion techniques? %\emph{How are the differences between similar articles} (extracted in the previous chapter) \emph{related to a different use of persuasion techniques?} % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
+    \item To what extent could persuasion techniques be used to identify related news articles?%If the same story can be narrated differently depending on the persuasion techniques used, then persuasion is adding variations to the narration. Therefore, \emph{how much of an obstacle is persuasion in recognising articles that are related to the same news?} %(clustering) % how much of an obstacle is persuasion in recognising the events in multiple articles?
     %\todoHA{What led to this RQ? Previous text does not lead to this}
 \end{enumerate}
 
@@ -518,7 +518,7 @@ For this experiment, we want to observe how the small changes detected in the pr
 % Having computing methods for sentiment and for fine-grained propaganda detection, we decide not proceed with populism detection,\todoHA{probably move section on populism to the end since it is weak and experiment not thorough}\todoAW{I'm not entirely clear what that decision was based on.} but only keeping as axes for measurements the sentiment ones (strength and polarity) and the 18 propaganda techniques.
 
 % RQ3
-Our RQ3 is \emph{how are the differences between similar articles related to a different use of persuasion techniques?}
+Our \acrshort{rq}2.3 is \emph{How do similar news articles differ in their use of persuasion techniques?}
 So to answer this question, here we take groups of linked sentences (from Chapter~\ref{chap:common_ground_search}) and we see how their variations are related to changes in persuasion.
 
 \subsubsection{Dataset}
@@ -824,7 +824,7 @@ We approach this analysis from the point of view of clustering.
 The previous chapter already analysed the clustering algorithms at the article and sentence level.
 Here, instead, we question whether we can help the clustering of articles by removing the persuasion from the articles.
 
-Our RQ4 is \emph{how much of an obstacle is persuasion in recognising the events\todoHA{so you are considering that clustering can help recognising events? this is unclear or not well described} in multiple articles?} To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned up" from persuasion.
+Our \acrshort{rq}2.4 is \emph{To what extent could persuasion techniques be used to identify related news articles?\todoHA{so you are considering that clustering can help recognising events? this is unclear or not well described}} To answer it, we compare the clustering of the articles when they are complete (not removing anything) against when they have been ``cleaned up" from persuasion.
 %\todoHA{Avoid yes/no type of RQs}
 
 % why
@@ -1114,12 +1114,11 @@ Or also, it could be useful adding the information about the topic of the articl
 This section contains the discussion of all the results of this chapter. We list here the four Research Questions together with the relative responses:
 
 % each RQ
-\begin{enumerate}
-    \item How could we automatically detect the persuasion techniques used by writers? Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.\todoAW{This isn't a discussion, it's a summary.} Answered in Section~\ref{sec:lp_techniques}. \todomargin{this is not a finding/discussion}
-    \item Which persuasion techniques do we detect most frequently? We observed that the most common techniques relate to loaded language (through propaganda and sentiment detection). However, the most common techniques are not the ones that differ the most. More subtle techniques, like Doubt and Appeal to fear, are the ones that emerge more when doing a comparative analysis between multiple versions of the same article.
-    %Different persuasion techniques are used: here we analysed sentiment / emotion manipulation, propaganda and populism\todoAW{Really? My interpretation was that you were using an existing understanding of propaganda techniques, and investigating how common they were in the documents?} (more to denote the actors than the language itself). Answered in Section~\ref{sec:lp_techniques}.
-    \item How are the differences between similar articles related to a different use of persuasion techniques? In some cases the words that change between multiple versions of the same detail, also cause a change in the detected persuasion. We managed to find that techniques like \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition} are the ones that are mostly affected by the variations in expressing the same detail. But in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences.\todoAW{Examples?} Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
-    \item Is persuasion an obstacle in recognising the events in multiple articles? Yes slightly. By removing sentiment and/or propaganda, the clustering metrics improve slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news article are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
+\begin{enumerate}[label={\textbf{RQ2.\arabic*:}},leftmargin=2cm]
+    \item \emph{To what extent could we automatically detect the persuasion techniques used by writers?} Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.\todoAW{This isn't a discussion, it's a summary.} Answered in Section~\ref{sec:lp_techniques}. \todomargin{this is not a finding/discussion}
+    \item \emph{Which persuasion techniques are detected more frequently than others?} We observed that the most common techniques relate to loaded language (through propaganda and sentiment detection). However, the most common techniques are not the ones that differ the most. More subtle techniques, like Doubt and Appeal to fear, are the ones that emerge more when doing a comparative analysis between multiple versions of the same article.
+    \item \emph{How do similar news articles differ in their use of persuasion techniques?} In some cases the words that change between multiple versions of the same detail, also cause a change in the detected persuasion. We managed to find that techniques like \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition} are the ones that are mostly affected by the variations in expressing the same detail. But in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This is due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences.\todoAW{Examples?} Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
+    \item \emph{To what extent could persuasion techniques be used to identify related news articles?} By removing sentiment and/or propaganda, the clustering of related news articles improves slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis presented in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news articles are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
 \end{enumerate}
 
 % Findings:
@@ -1128,7 +1127,9 @@ This section contains the discussion of all the results of this chapter. We list
 %     \item 
 % \end{itemize}
 
-Overall, this chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea of the relationship between persuasion and the variations that different news sources produce when reporting events.
+Therefore, we give here an answer to our comprehensive \acrshort{rq}2: To what extent can we automatically detect the persuasion techniques used in news articles?
+
+This chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea of the relationship between persuasion and the variations that different news sources produce when reporting events.
 On the other side, we have also a deeper understanding of the limitations of the current status of this automated detection, and the repercussions it can have when we use these methods in other tasks.
 Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve.%\todoAW{Big assumption. I'd rephrase.}
 
