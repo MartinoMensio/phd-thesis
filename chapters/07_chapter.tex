@@ -124,28 +124,31 @@ Propaganda changes significantly across topics, especially when considering the 
 \end{enumerate}
 
 
-\subsection{Hypotheses}
 
-\todo{continue cleanup from here}
 
-\emph{HYP1:} News articles are made with different layers of information: (i) facts and events (ii) interpretation/persuasion.
-These layers are not separate and are very intertwined. On the word level, we have words that are strictly topical words, or are strictly persuasive words, but we also have words that represent both layers as a specific term is chosen in a multitude of synonyms to push for a certain idea.
-We find this hypothesis in~\citep{jenkins2013thin,vanderwicken1995news,jang2023proximate}.
+\section{Contributions/Findings}
+% \section{OVERALL CONTRIBUTION / Findings}
+\label{sec:discussion_findings}
 
-% corroboration and choice of details
-\emph{HYP2:} News articles are written by choosing which details to include and which ones to skip, and this may be done on purpose to influence the reader. This assumes that there are multiple details to choose from, and the news outlets (writer/editor) need to do a selection for fitting in the desired length or more directly support a certain position. And everywhere manual selection is done, there is a possible point of bias. This hypothesis is described in~\cite{bountouridis2018explaining} while trying to computationally use it to detect corroborations and omissions.
+The main contribution of this work is to bring more clarity about the relationship between propaganda, similarities across news articles, political leaning and topics. The most important ones come from the last Chapters~\ref{chap:political_sides} and~\ref{chap:topics} where we identify the data imbalance of the propaganda datasets and where we identify topics where the propaganda differs mostly between left and right.
 
-% propaganda and leaning
-\emph{HYP3:} Propaganda language used by different political leanings is distinguishable. This means that Left and Right leaning have specific techniques or wordings that they use for example to target political opponents. Literature shows this~\citep{blumberg1986comparative}, but we want to detect computationally such techniques and wordings.
+% topics that are very loaded with propaganda (sexism, racism, discrimination, corruption) and as well topics with very low values (economy, health, defence)
 
-\subsection{Contributions}
+For example, we find that for some topics there exists more propaganda specifically on one side of the political spectrum: economy, labour, disasters, court. In some other cases instead, propaganda appears uniformly across the spectrum (Fundamental Rights and Religion) but when we consider the terms we have significant differences (low correlation).
+
+
+% A summary of your findings: This should be a clear and concise overview of the main results of your research. Be sure to highlight the most important findings and how they relate to your research questions or objectives.
+
+% ONLY OVERALL. BUT EXPLAIN LINKS TO RQs and point to evidence.
+
+More in details, we have three main contributions:
 
 \begin{enumerate}
     \item contribution 1: computing weights and better understanding the relationships between the multiple dimensions of similarities, propaganda, leaning and topics. This is achieved with:
     \begin{enumerate}
-        \item Chapter~\ref{sec:lp_relationship} contains an analysis of the relationship between persuasion and the word variations that different news sources produce when reporting events.
-        \item Chapter~\ref{chap:political_sides} shows, by improving the classifier values of F1 metric, that propaganda and political leanings are slightly correlated. If they were not correlated, adding propaganda as input feature would have no effect.
-        \item Chapter~\ref{chap:topics} finds that the topic is highly correlated with propaganda: some topics have very high levels of propaganda, while other ones are less polarizing and contain less of it. And considering the terms of propaganda, we find that for some topics they are very different between political leanings. %This not only means that the correlation between topics, leanings and propaganda is high, but it also means that
+        \item Chapter~\ref{sec:lp_relationship} contained an analysis of the relationship between persuasion and the word variations that different news sources produce when reporting events.
+        \item Chapter~\ref{chap:political_sides} showed, by improving the classifier values of F1 metric, that propaganda and political leanings are slightly correlated. If they were not correlated, adding propaganda as input feature would have no effect.
+        \item Chapter~\ref{chap:topics} found that the topic is highly correlated with propaganda: some topics have very high levels of propaganda, while other ones are less polarizing and contain less of it. And considering the terms of propaganda, we find that for some topics they are very different between political leanings. %This not only means that the correlation between topics, leanings and propaganda is high, but it also means that
         %Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
         % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
         % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
@@ -155,18 +158,18 @@ We find this hypothesis in~\citep{jenkins2013thin,vanderwicken1995news,jang2023p
     \end{enumerate}
     \item contribution 2: improving F1 of the political leaning classifier using a mix of features. More specifically:
     \begin{enumerate}
-        \item Chapter~\ref{ssec:ps_prop_leaning_classifier}  shows that if we add propaganda features on a BERT-based classifier that predicts political leaning, we get slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
-        \item Chapter~\ref{chap:topics}: adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
+        \item Chapter~\ref{chap:political_sides} showed that if we add propaganda features on a BERT-based classifier that predicts political leaning, we get slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
+        \item Chapter~\ref{chap:topics}: added the topic and used it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
     \end{enumerate}
     \item contribution 3: highlighting the problem of imbalanced dataset for propaganda detection. This emerges from the analysis in different chapters:
     \begin{enumerate}
-        \item Chapter~\ref{chap:linguistic_persuasion} results in a deeper understanding of the limitations of the current status of this automated detection (of propaganda), and the repercussions it can have when we use these methods in other tasks (e.g. overlap across news articles).
+        \item Chapter~\ref{chap:linguistic_persuasion} resulted in a deeper understanding of the limitations of the current status of this automated detection (of propaganda), and the repercussions it can have when we use these methods in other tasks (e.g. overlap across news articles).
         % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
-        \item Chapter~\ref{chap:political_sides} analyses and finds a big imbalance of propaganda detection datasets considering political leaning. Almost only Right-leaning articles are used in the current literature.
+        \item Chapter~\ref{chap:political_sides} analysed and found a big imbalance of propaganda detection datasets considering political leaning. Almost only Right-leaning articles are used in the current literature.
         % First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
         % And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
         % We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
-        \item Chapter~\ref{chap:topics} expands on this imbalance and finds topics that contain more or less propaganda generally or in a specific political leaning.
+        \item Chapter~\ref{chap:topics} expanded on this imbalance and finds topics that contain more or less propaganda generally or in a specific political leaning.
     \end{enumerate}
 
     
@@ -202,15 +205,11 @@ We find this hypothesis in~\citep{jenkins2013thin,vanderwicken1995news,jang2023p
 
 
 
-\section{OVERALL CONTRIBUTION / Findings}
-\label{sec:discussion_findings}
-
-A summary of your findings: This should be a clear and concise overview of the main results of your research. Be sure to highlight the most important findings and how they relate to your research questions or objectives.
-
-ONLY OVERALL. BUT EXPLAIN LINKS TO RQs and point to evidence.
-
-\section{Implications of the findings}
+\section{Implications of the findings and limitations}
 \label{sec:discussion_findings_implications}
+
+\todo{Continue from here}
+
 A discussion of the implications of your findings: This is where you will interpret your findings and explain their significance. Consider how your findings contribute to the existing body of knowledge in your field. What new insights do they provide? What are the implications for practice or policy?
 
 \begin{enumerate}
@@ -243,7 +242,7 @@ Dataset collection: use news sources from other leanings and other contexts diff
 
 ?
 
-\section{Conclusions}
+\section{Final Remarks}
 \label{sec:discussion_conclusions}
 
 In this dissertation, we presented propaganda together in relationships with multiple dimensions. Our analysis of these relationships was approached from multiple perspectives, which posed significant challenges. Nonetheless, these challenges served to make this doctoral work particularly engaging and rewarding.
