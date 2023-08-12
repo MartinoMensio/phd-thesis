@@ -110,10 +110,8 @@
 
 \begin{document}
 
-\listoftodos
-
-\input{title_page}
-\makefrontmatter
+% \input{title_page} % new style
+\makefrontmatter % old style: maketitlepage is the title page (outhesis.cls)
 
 % \doublespacing
 
@@ -159,5 +157,7 @@
 \appendix
 \chapter{Appendix Title}
 \input{chapters/appendix}
+
+\listoftodos
 
 \end{document}
