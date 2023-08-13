@@ -1,18 +1,89 @@
-\chapter{\statusred Related Work}
+\chapter{\statusorange Related Work}
 \label{chap:literature}
-TODO: write intro here, mentioning the main themes:
 
-Similarity
+In this chapter, we present the state of the art for the different research areas that we plan to use in the next chapters. Each of the sections is related to one of the Research Questions presented in the previous chapter.
 
-\gls{propaganda}
+We start from the literature targeted to analysing similar articles (Section~\ref{sec:lit_relationships}), which considers relationships and similarities between different documents.
+Then we move to the literature about persuasion detection, especially focusing on sentiment and propaganda detection (Section~\ref{sec:lit_persuasion}).
+Next, we describe the literature about political leaning, describing the definitions and the approaches for the automatic classification (Section~\ref{sec:lit_leaning}).
+And finally, we present the works on topic recognition, giving an overview of the existing approaches (Section~\ref{sec:lit_topics}).
 
-Propaganda and misinformation
+\todo{Other related phenomena? Remove or introduce here}
 
-\Gls{political-leaning}: definitions/classification
+After this overview of each of them, we discuss the limitations of not considering these research areas together, and the potential benefits of performing comparative analysis across dimensions (Section~\ref{sec:lit_discussion}).
+
+To conclude, we present the scope of this work in Section~\ref{sec:lit_scope}.
 
 
-\section{Persuasion}
+% Similarity and parallel news
+
+% \gls{propaganda}
+
+% - Propaganda and misinformation
+
+% \Gls{political-leaning}: definitions/classification
+
+% topics
+
+\section{\statusorange Similarity between articles}
+\label{sec:lit_relationships}
+
+Our starting point is to analyse the literature that aims at analysing multiple versions of the same story, across different news sources.
+
+From the enormous multitude of articles that get published every day, several datasets and resources of parallel news have been built (described in Subsection~\ref{ssec:lit_relationships_parallel}.
+We are interested in works that explore what changes between them, and the literature defines and deals with different tasks (Subsection~\ref{ssec:lit_relationships_tasks}). We focus specifically on corroboration and omission detection (Subsection~\ref{ssec:lit_relationships_corr_omiss}.
+
+\subsection{Parallel News}
+\label{ssec:lit_relationships_parallel}
+
+Explain here the concept of parallel news.
+
+\gls{parallel-news}
+
+Corpora: Google News, AllSides. They allow to see articles for the same story.
+
+Hand-curated vs algorithmic datasets
+
+\subsection{Common Tasks}
+\label{ssec:lit_relationships_tasks}
+
+Semantic similarity task: benchmarks~\citep{conneau-kiela-2018-senteval,chandrasekaran2021evolution}.
+Models:
+GloVe word embeddings~\citep{pennington2014glove}
+BERT most popular embeddings provided by Google Research~\citep{devlin2018bert}
+\acrfull{use}~\citep{cer2018universal}
+XLNet~\citep{yang2019xlnet}
+
+Applied to finding related claims~\citep{almeida2020text}
+
+
+Suggest items to read (recommender systems)
+
+
+Plagiarism detection
+
+
+Investigation across multiple sources (corroboration vs omission)
+
+\subsection{Corroboration and Omission Detection}
+\label{ssec:lit_relationships_corr_omiss}
+
+Then some papers that use the concept.
+- \citet{bountouridis2018explaining} to analyse corroboration and omission
+- \citet{ko2023claimdiff} analyses the interrelationship between points of view, dataset derived from AllSides.
+
+\subsection{Limitations}
+
+What is missing?
+
+Fine-grained study of the terms that change $\rightarrow$ our goal to expand
+
+What the term choice may mean (persuasion) $\rightarrow$ using literature on persuasion, considering multiple research areas together 
+
+\section{\statusred Persuasion}
 \label{sec:lit_persuasion}
+
+\todo{Continue here to take all citations from Chapters 4-6 and expand on them}
 
 Persuasion definition~\cite{gass2018persuasion}: \gls{persuasion} can influence a person's beliefs, attitudes, intentions, motivations, or behaviours.
 Umbrella term for many forms: \gls{propaganda} (to indoctrinate a population towards an individual or a particular agenda), sentiment, \gls{populism}, coercion (aggressive threats and the provocation of fear and/or shame to influence a person's behavior.)
@@ -22,8 +93,13 @@ It is linked with sentiment because of its goal to influence the emotional respo
 And the relationship with propaganda comes from the inherent goal of propaganda to influence the view of the public about an idea or a group~\citep{bernays,jowett2018propaganda}.
 
 \cite{jowett2012propaganda}:
-Propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist.Persuasion is interactive and attempts to satisfy the needs of both persuader  and  persuadee.  A  model  of  propaganda  depicts  how  elements of  informative  and  persuasive  communication  may  be  incorporated into  propagandistic  communication,  thus  distinguishing  propaganda as  a  specific  class  of  communication.  References  are  made  to  past theories  of  rhetoric  that  indicate  propaganda  has  had  few  systematic theoretical  treatments  prior  to  the  20th  century.  Public  opinion  and behavioral change can be affected by propaganda.
+Propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist. Persuasion is interactive and attempts to satisfy the needs of both persuader  and  persuadee.  A  model  of  propaganda  depicts  how  elements of  informative  and  persuasive  communication  may  be  incorporated into  propagandistic  communication,  thus  distinguishing  propaganda as  a  specific  class  of  communication.  References  are  made  to  past theories  of  rhetoric  that  indicate  propaganda  has  had  few  systematic theoretical  treatments  prior  to  the  20th  century.  Public  opinion  and behavioral change can be affected by propaganda.
 The terms propaganda and persuasion have been used interchangeably in the literature on propaganda, as well as in everyday speech. Propaganda employs persuasive strategies, but it differs from persuasion in purpose.
+
+\subsection{Sentiment}
+\label{sec:lit_sentiment}
+
+TODO
 
 \subsection{Propaganda}
 \label{sec:lit_propaganda}
@@ -41,7 +117,7 @@ Propaganda can more practically be defined as the usage of a set of techniques. 
 
 Agenda-setting: \cite{Cohen_1964} and \cite{mccombs1972agenda} theory: ability of the news media to influence the importance placed on the topics of the public agenda.
 
-\paragraph{The Propaganda model}
+\subsubsection{The Propaganda Model}
 
 According to the propaganda model, which was developed by~\citet{herman1988manufacturing}, corporate mass media function based on propaganda and systemic biases. It explains how populations are manipulated, and how consent for economic, social, and political policies, both foreign and domestic, is manufactured through propaganda. Media structures that create inherent conflicts of interest (e.g. advertising, media concentration, government sourcing) act as propaganda for anti-democratic forces, according to the theory.
 The theory relies on five \emph{filters} that determine the type of news that is presented in the media:
@@ -57,16 +133,16 @@ The theory relies on five \emph{filters} that determine the type of news that is
 
 These five filters together set what is considered acceptable in the coverage of daily events~\citep{phillips2007left}. ``Newsworthy" criteria influences journalists and editors, and everything that diverges from the ``common sense" is self-disciplined and self-censored.
 
-“Although the model was based mainly on the media of the United States, Chomsky and Herman believe the theory is equally applicable to any country that shares the basic economic structure and organizing principles that the model postulates as the cause of media biases. Their assessment has been confirmed by a number of scholars and the propaganda role of the media has since been empirically assessed in Western Europe and Latin America.”~\cite{herman1996propaganda}
+“Although the model was based mainly on the media of the United States, Chomsky and Herman believe the theory is equally applicable to any country that shares the basic economic structure and organizing principles that the model postulates as the cause of media biases. Their assessment has been confirmed by a number of scholars and the propaganda role of the media has since been empirically assessed in Western Europe and Latin America.”~\citep{herman1996propaganda}
 
 
-\subsubsection{Propaganda techniques}
+\subsubsection{Propaganda techniques (computational)}
 
 If we look at more practical definitions of propaganda, we see that in the literature several works have addressed propaganda as a set of techniques~\citep{torok2015symbiotic,miller1939techniques,weston2018rulebook}. The recent work of~\citet{da2019fine} takes from these works and considers only the techniques that can be found in journalistic articles and that can be judged intrinsically without needing external evidence.
 
 
 
-\subsubsection{Propaganda detection}
+\subsubsection{Propaganda detection (computational)}
 \label{ssec:lit_propaganda_detection}
 
 
@@ -77,7 +153,7 @@ If we look at more practical definitions of propaganda, we see that in the liter
 % In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
 % Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas. However, to the best of our knowledge, current research on political leaning detection largely overlooked the direct inclusion of propaganda as analysis features in their computational models. 
 
-Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination \cite{da2020survey}. Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\cite{rashkin2017truth,barron2019proppy}. More recently, \citet{da2019fine} used a neural network approach to identify the text fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
+Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination \citep{da2020survey}. Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\citep{rashkin2017truth,barron2019proppy}. More recently, \citet{da2019fine} used a neural network approach to identify the text fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
 
 
 %On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
@@ -119,7 +195,7 @@ Propaganda: Communication with the goal to persuade
 
 Hypothesis: we can observe the two layers distinctly?
 
-\section{Political Leaning}
+\section{\statusred Political Leaning}
 \label{sec:lit_leaning}
 
 Here in this section, we focus on the concept of Political Leaning.
@@ -161,7 +237,7 @@ two different aspects~\citep{jost2018political}:
 \end{itemize}
 The most common terms that people from both left and right associate with the right are: “conservative,” “system maintenance,” “order,” “individualism,” “capitalism,” “nationalism,” and “fascism,” and they associated the left with “progressive,” “system change,” “equality,” “solidarity,” “protest,” “opposition,” “radical,” “socialism,” and “communism”~\citep[p.~213-14]{fuchs1990}.
 The two core components of the left-right dimension, attitudes towards change versus stability, and equality versus inequality, are connected due to historical factors, as Western societies have gradually become more egalitarian over the past few centuries in terms of human rights and liberties, economic distribution, and political power distribution.
-Equality has increased in some instances due to revolutionary events, which were frequently resisted or opposed by conservatives and those associated with the right~\cite{nosek2009politics,burke1790reflections}.
+Equality has increased in some instances due to revolutionary events, which were frequently resisted or opposed by conservatives and those associated with the right~\citep{nosek2009politics,burke1790reflections}.
 
 
 
@@ -217,10 +293,10 @@ FROM TTO2020
 %\subsection{Political Leaning}
 % Political leaning classification
 
-Political leaning detection models have been produced for general media sources~\cite{budak} or for 
-specific political corpora such as congressional records~\cite{gentzkow}, political party websites~\cite{yan2017perils}, and political blogs~\cite{ahmed201}.  
-Others focused on inferring the political leaning of Twitter accounts~\cite{Cohen2013ClassifyingPO}, Facebook users~\cite{Bakshy1130}, politicians~\cite{thomas-etal-2006-get}, or political writers~\cite{iyyer-etal-2014-political}. 
-Various analysis methods were used in such studies, such as linguistic analysis \cite{gentzkow}, graph analysis \cite{chen2017opinion}, topic modelling \cite{ahmed201, Cohen2013ClassifyingPO}, support vector machines (SVM) \cite{Bakshy1130,thomas-etal-2006-get}, and neural networks \cite{iyyer-etal-2014-political,baly2020we}. In this paper, we focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (see Section~\ref{sec:dataset}), using a neural network approach fused with propaganda features. %\todo{description ok?} 
+Political leaning detection models have been produced for general media sources~\citep{budak} or for 
+specific political corpora such as congressional records~\citep{gentzkow}, political party websites~\citep{yan2017perils}, and political blogs~\citep{ahmed201}.  
+Others focused on inferring the political leaning of Twitter accounts~\citep{Cohen2013ClassifyingPO}, Facebook users~\citep{Bakshy1130}, politicians~\citep{thomas-etal-2006-get}, or political writers~\citep{iyyer-etal-2014-political}. 
+Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201, Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}. In this paper, we focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (see Section~\ref{sec:dataset}), using a neural network approach fused with propaganda features. %\todo{description ok?} 
 
 %often used supervised or unsupervised models applied to , or on opinion graph mining ~\cite{thomas-etal-2006-get}.
 
@@ -308,22 +384,7 @@ according to the leaning of their source or of their author. %\todo{manually?}
 
 
 
-\section{Similarity between articles}
-\label{sec:lit_relationships}
-
-?? Is this necessary? Or just mention corroboration/omission in framing techniques?
-
-\subsection{Parallel News}
-
-Explain here the concept of parallel news.
-
-Corpora: Google News, AllSides. They allow to see articles for the same story
-
-Then some papers that use the concept.
-- Bountouridis to analyse corroboration and omission
-- https://arxiv.org/pdf/2205.12221.pdf ``Beyond Fact Verification: Comparing and Contrasting Claims on Contentious Topics" to analyse the interrelationship between points of view, dataset derived from AllSides.
-
-\section{Topics}
+\section{\statusred Topics}
 \label{sec:lit_topics}
 
 \subsection{Topic definition}
@@ -386,7 +447,7 @@ TextRazor is the only one that provides already hierarchical topics, the other o
 What it provides
 
 
-\section{Other related phenomena}
+\section{\statusred Other related phenomena}
 \label{sec:lit_related}
 
 TODO: here talk about misinformation, argumentation mining and defend the scope of this thesis: propaganda.
@@ -448,18 +509,40 @@ What is the difference between populism and propaganda?
 % Languages: 265 en (304 es, 148 pt, …),
 % Leaning of the english ones: (36 left, 37 center, 84 right, 106 NA)
 
+TODO: take from Chapter 5 some description of populism across political spectrum
+
 We will use the concept and literature of \gls{populism} in Chapter~\ref{ssec:ps_prop_leaning_imbalanced} to analyse the imbalance of propaganda datasets.
 
 
 \subsection{Opinion and Subjectivity and Manipulation?}
 
-\section{Scope of this work}
+
+\section{\statusred Discussion}
+\label{sec:lit_discussion}
+
+Limitation of literature: fragmented and not considering everything together.
+
+Theoretical works (TODO examples) consider propaganda in different situations (e.g., one nation/context for each paper), but missing a comparative analysis across leanings.
+
+
+
+Consequence: limitation 2:
+
+Existing propaganda datasets may be unbalanced, as it is not completely clear how they select a set of sources. By using external dimensions we may discover that there is imbalance.
+
+\section{\statusred Scope of this work}
+\label{sec:lit_scope}
 
 Main ingredients:
+
 - Propaganda detection
+
 - Political leaning
 
 We see that the two can be related and we want to understand their relationships.
 How does propaganda change across political leaning?
 Can we recognise the political orientation of a piece of news from how it uses propaganda techniques?
 How does propaganda relate to shared/unique information? How do small variations relate to propaganda?
+
+What is outside scope?
+Developing/refining deep learning models to recognise propaganda techniques. We want to combine existing models and use a combination of features.
