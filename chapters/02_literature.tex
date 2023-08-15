@@ -1,7 +1,7 @@
 \chapter{\statusorange Related Work}
 \label{chap:literature}
 
-In this chapter, we present the state of the art for the different research areas that we plan to use in the next chapters. Each of the sections is related to one of the Research Questions presented in the previous chapter.
+In this chapter, we present the state of the art for the different research areas that we plan to touch in the next chapters. Each of the sections is related to one of the Research Questions presented in the previous chapter.
 
 We start from the literature targeted to analysing similar articles (Section~\ref{sec:lit_relationships}), which considers relationships and similarities between different documents.
 Then we move to the literature about persuasion detection, especially focusing on sentiment and propaganda detection (Section~\ref{sec:lit_persuasion}).
@@ -28,45 +28,61 @@ To conclude, we present the scope of this work in Section~\ref{sec:lit_scope}.
 \section{\statusorange Similarity between articles}
 \label{sec:lit_relationships}
 
-Our starting point is to analyse the literature that aims at analysing multiple versions of the same story, across different news sources.
+Our starting point is the literature that aims at analysing multiple versions of the same story, across different news sources.
 
 From the enormous multitude of articles that get published every day, several datasets and resources of parallel news have been built (described in Subsection~\ref{ssec:lit_relationships_parallel}.
-We are interested in works that explore what changes between them, and the literature defines and deals with different tasks (Subsection~\ref{ssec:lit_relationships_tasks}). We focus specifically on corroboration and omission detection (Subsection~\ref{ssec:lit_relationships_corr_omiss}.
+We are interested in works that explore what changes between similar articles, and the literature defines and deals with different tasks (Subsection~\ref{ssec:lit_relationships_tasks}). We focus specifically on corroboration and omission detection (Subsection~\ref{ssec:lit_relationships_corr_omiss}.
 
 \subsection{Parallel News}
 \label{ssec:lit_relationships_parallel}
 
-Explain here the concept of parallel news.
+To talk about similarity between news articles we first need to introduce the concept of \emph{\gls{parallel-news}}
 
-\gls{parallel-news}
+\emph{Parallel corpus} is a term that is frequently utilised when multiple languages are involved.
+These resources, such as the OPUS dataset~\citep{tiedemann2012parallel}, are useful for applications in computational linguistics, translation studies and cross-linguistic corpus studies~\citep{brown1991aligning,ramesh2022samanantar,ziemski2016united,kunchukuttan2017iit,banon2020paracrawl}.
 
-Corpora: Google News, AllSides. They allow to see articles for the same story.
+We take the usage of this term in a monolingual setting, where each document contains a certain number of variations from the others, but still covers the same main events.
+This specific connotation is considered in works that perform sentence-level paraphrase extraction~\citep{dolan2004unsupervised,zhang2013harvesting}.
+More specifically in the news media environment, several datasets and tools have been developed with the aim of exposing the users to several points of view~\citep{bozdag2015breaking}, in order to break the filter bubble~\citep{pariser2011filter} that is built around them.
 
-Hand-curated vs algorithmic datasets
+Some resources just group together news articles that are related, such as news aggregators, like Google News with the feature \emph{Full Coverage},\footnote{\url{https://blog.google/products/news/new-google-news-ai-meets-human-intelligence/}} that presents a collection of articles for each headline.
+There are also resources that try to bring together opposing points of view, such as Allsides Headline Roundup,\footnote{\url{https://www.allsides.com/headline-roundups}} or research works that try to provide a similar result~\citep{trampuvs2015diversinews,park2009newscube}.
+
+
+% \cite{bountouridis2018explaining}
+
+Some of these resources are hand-curated while others are algorithmically synthesised. In the hand-curated groups (e.g., AllSides), there are usually domain experts or editors who manually put together news articles that share the same events and details. With AllSides, the editors select one article from the Left, one from the Center and one from the Right to ensure that different sides of the story are presented.
+Instead, with algorithmic resources (e.g., Google News Full Coverage), there is an automated approach that, based on clustering algorithms, creates groups of articles that cover the same story~\citep{marutho2018determination,alelyani2018feature,karimi2018news}.
 
 \subsection{Common Tasks}
 \label{ssec:lit_relationships_tasks}
 
-Semantic similarity task: benchmarks~\citep{conneau-kiela-2018-senteval,chandrasekaran2021evolution}.
-Models:
-GloVe word embeddings~\citep{pennington2014glove}
-BERT most popular embeddings provided by Google Research~\citep{devlin2018bert}
-\acrfull{use}~\citep{cer2018universal}
-XLNet~\citep{yang2019xlnet}
+With this availability of resources, both in the news domain but also with a wider perspective, the computational linguistics community has identified and targeted several tasks.
 
-Applied to finding related claims~\citep{almeida2020text}
+First of all, we need to mention the \textit{semantic similarity} task.
+Semantic similarity is defined as the likeness of meaning or semantic content as opposed to lexicographical similarity, which instead relies more on the exact terms matching~\citep{harispe2015semantic}.
+The research community has created different benchmarks to evaluate models on their ability to capture the semantic similarity~\citep{conneau-kiela-2018-senteval,chandrasekaran2021evolution}.
+As for what discerns the models, we have had an evolution over the last years, starting from the first generations of word embeddings~\citep{pennington2014glove,mikolov2013efficient}, up to the recent family of transformers-alike models~\citep{devlin2018bert,cer2018universal,yang2019xlnet,reimers2019sentence}.
 
-
-Suggest items to read (recommender systems)
+We then find another task that exploits similar ideas: \emph{finding related claims}~\citep{almeida2020text}.
+This task is extremely useful for works that try to estimate the truthiness of claims, by looking for similar claims that have already been verified or refuted. This process is used as the first step in automated fact-checking~\citep{nakov2021automated,guo2022survey}. This task is particularly challenging because small changes (e.g., a number reported or a negation) can drastically change the truthiness of a sentence.
 
 
-Plagiarism detection
+% Suggest items to read (recommender systems)
+Another task that relies on semantic similarity, is the recommendation of content (e.g., news articles) that is similar to a reference one.
+This opens the immense field of recommender systems~\citep{TODO}, where there may be more than one objective function to satisfy.
+Besides semantic similarity, the alignment with the point of view of the reader is important (but needs to be limited to avoid the filter-bubble effect)~\citep{TODO}.
+Or also the serendipity~\citep{TODO} of recommendations.
 
+Lastly, we can also consider as related the \emph{plagiarism detection} task.
+In this task, the goal is to spot fragments of text that have been copied from others, without reference or with a certain proportion~\citep{TODO}.
 
-Investigation across multiple sources (corroboration vs omission)
 
 \subsection{Corroboration and Omission Detection}
 \label{ssec:lit_relationships_corr_omiss}
+
+\todo{Expand from here, and fill citations in the previous paragraphs}
+Investigation across multiple sources (corroboration vs omission)
 
 Then some papers that use the concept.
 - \citet{bountouridis2018explaining} to analyse corroboration and omission
