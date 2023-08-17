@@ -25,7 +25,7 @@ To conclude, we present the scope of this work in Section~\ref{sec:lit_scope}.
 
 % topics
 
-\section{\statusorange Similarity between articles}
+\section{\statusgreen Similarity between articles}
 \label{sec:lit_relationships}
 
 Our starting point is the literature that aims at analysing multiple versions of the same story, across different news sources.
@@ -70,54 +70,85 @@ This task is extremely useful for works that try to estimate the truthiness of c
 
 % Suggest items to read (recommender systems)
 Another task that relies on semantic similarity, is the recommendation of content (e.g., news articles) that is similar to a reference one.
-This opens the immense field of recommender systems~\citep{TODO}, where there may be more than one objective function to satisfy.
-Besides semantic similarity, the alignment with the point of view of the reader is important (but needs to be limited to avoid the filter-bubble effect)~\citep{TODO}.
-Or also the serendipity~\citep{TODO} of recommendations.
+This opens the immense field of recommender systems~\citep{tintarev2006similarity,karimi2018news,feng2020news}, where there may be more than one objective function to satisfy.
+Besides semantic similarity, the alignment with the point of view of the reader is important (but needs to be limited to avoid the filter-bubble effect)~\citep{lunardi2020metric,nguyen2014exploring,lunardi2019representing}.
+Or also the serendipity~\citep{ziarani2021serendipity,abdollahpouri2021toward,raza2022news} of recommendations.
 
 Lastly, we can also consider as related the \emph{plagiarism detection} task.
-In this task, the goal is to spot fragments of text that have been copied from others, without reference or with a certain proportion~\citep{TODO}.
+In this task, the goal is to spot fragments of text that have been copied from others, without reference or with a certain proportion~\citep{stein2006near,alzahrani2010fuzzy,arabi2022improving}.
 
 
 \subsection{Corroboration and Omission Detection}
 \label{ssec:lit_relationships_corr_omiss}
 
-\todo{Expand from here, and fill citations in the previous paragraphs}
-Investigation across multiple sources (corroboration vs omission)
+The task that instead we focus on with this work, is the investigation of \textit{corroboration and omission} across multiple sources.
+This task focuses on comparing and contrasting similar articles, to find which parts are in common and which ones are omitted~\cite{ehrhardt2021omission,bountouridis2018explaining,ko2023claimdiff}.
+By analysing multiple news articles it becomes possible to understand the interrelationships between multiple points of view.
 
-Then some papers that use the concept.
-- \citet{bountouridis2018explaining} to analyse corroboration and omission
-- \citet{ko2023claimdiff} analyses the interrelationship between points of view, dataset derived from AllSides.
+For example, \cite{bountouridis2018explaining} extracts points of information in all the articles, cross-compares them across groups of related articles, and is able to detect which details are corroborated in multiple sources and which ones instead are omitted.
+Then the authors follow with a source-based aggregation and build indicators of credibility. The rationale is that corroborating a detail with external sources indicates that the detail is more likely to be true.
+Instead, if a news source omits a detail that other sources mention, it is a potential negative sign.
+Therefore, the more corroboration and the less omission a news source contains, the more credible it is.
+The approach is validated by showing a positive correlation between these indicators and the values of credibility retrieved from Media Bias/Fact Check.\footnote{\url{https://mediabiasfactcheck.com/}}
 
 \subsection{Limitations}
+% What is missing?
 
-What is missing?
+% Fine-grained study of the terms that change $\rightarrow$ our goal to expand
+From these works on corroboration and omission detection, we find it limiting that the analysis is performed only considering points of information/details but not the single words involved.
+Once the details are identified across articles, it would be very useful to analyse the slight variations in terms.
+For example, it could be possible to identify terms that are unique and terms that instead are used across multiple sources. By bringing this analysis to the word level, we can be more specific.
+We will expand on this in Chapter~\ref{chap:common_ground_search}, where we address this limitation together with other limitations (e.g., semantic similarity models used, more resistant to term changes).
 
-Fine-grained study of the terms that change $\rightarrow$ our goal to expand
+% What the term choice may mean (persuasion) $\rightarrow$ using literature on persuasion, considering multiple research areas together 
+The next big limitation that we find, is that it would be very important to go beyond the single analysis of similarities, and study what these changes involve.
+For this reason, in our work we also explore other related dimensions, such as persuasion.
+Our aim is to see how the variations between multiple articles (specific term choices) cause changes in detected persuasion. In other words, what is the effect of using one term instead of a synonym that may carry an additional load?
 
-What the term choice may mean (persuasion) $\rightarrow$ using literature on persuasion, considering multiple research areas together 
 
-\section{\statusred Persuasion}
+% From the existing literature, we find that there are certain limitations that come from only analysing similarity
+This type of limitation can be overcome only with a study that involves multiple factors at the same time, like a comparative analysis.
+
+\section{\statusorange Persuasion detection}
 \label{sec:lit_persuasion}
 
-\todo{Continue here to take all citations from Chapters 4-6 and expand on them}
+The next research area that we are touching in our work is \emph{persuasion detection}.
+We are interested in getting an understanding of what words convey, beyond the simple expression of content.
+We want to have an additional study of what specific choices (terms, details, order of presentation) may convey.
 
-Persuasion definition~\cite{gass2018persuasion}: \gls{persuasion} can influence a person's beliefs, attitudes, intentions, motivations, or behaviours.
-Umbrella term for many forms: \gls{propaganda} (to indoctrinate a population towards an individual or a particular agenda), sentiment, \gls{populism}, coercion (aggressive threats and the provocation of fear and/or shame to influence a person's behavior.)
+% Before describing the literature, we need here to present our motivation for introducing this research topic. 
 
-\gls{persuasion} as a term that encompasses both \gls{sentiment} and \gls{propaganda}. % and populism
+
+Contextualising in the current attention economy~\citep{davenport2001attention}, recent literature sees a rise in the race for attention also in news articles, characterised by the emergence of clickbaitness and language that is increasingly more loaded ~\citep{bazaco2019clickbait,davenport2001attention}.
+With the enormous amount of news sources and news articles covering the same events, it is very important for news sources to compete for the clicks and reads of the consumers.
+
+Persuasion is generally defined as a method to ``influence a person's beliefs, attitudes, intentions, motivations, or behaviours"~\cite{gass2018persuasion}.
+We see several related concepts in the literature that can be considered as forms of persuasion:
+\begin{itemize}
+    \item sentiment overloading: using emotional language to convey strong emotions to the reader; % loaded language instead?
+    \item \gls{propaganda}:  information, ideas, opinions, or images, often only giving one part of an argument, that are broadcast, published, or in some other way spread with the intention of influencing people's opinions\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}} % to indoctrinate a population towards an individual or a particular agenda
+    \item \gls{populism}: political ideas and activities that are intended to get the support of ordinary people by giving them what they want\footnote{\url{https://dictionary.cambridge.org/dictionary/english/populism}}
+    \item coercion: the use of force to persuade someone to do something that they are unwilling to do\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
+\end{itemize}
+
+
 It is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
 And the relationship with propaganda comes from the inherent goal of propaganda to influence the view of the public about an idea or a group~\citep{bernays,jowett2018propaganda}.
 
+\todo{continue here}
+
+
+\todo{this may go to propaganda}
 \cite{jowett2012propaganda}:
 Propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist. Persuasion is interactive and attempts to satisfy the needs of both persuader  and  persuadee.  A  model  of  propaganda  depicts  how  elements of  informative  and  persuasive  communication  may  be  incorporated into  propagandistic  communication,  thus  distinguishing  propaganda as  a  specific  class  of  communication.  References  are  made  to  past theories  of  rhetoric  that  indicate  propaganda  has  had  few  systematic theoretical  treatments  prior  to  the  20th  century.  Public  opinion  and behavioral change can be affected by propaganda.
 The terms propaganda and persuasion have been used interchangeably in the literature on propaganda, as well as in everyday speech. Propaganda employs persuasive strategies, but it differs from persuasion in purpose.
 
-\subsection{Sentiment}
+\subsection{\statusred Sentiment}
 \label{sec:lit_sentiment}
 
-TODO
+\todo{take something from chapter 4}
 
-\subsection{Propaganda}
+\subsection{\statusorange Propaganda}
 \label{sec:lit_propaganda}
 TODO propaganda definition in different fields.
 
@@ -198,21 +229,42 @@ Developing computational methods to detect the use of propaganda in text is very
 
 TODO: The datasets for detection: article-level, fine-grained
 
-\subsubsection{Layers of information}
+\subsection{\statusred Limitations}
+HERE?
+
+\subsection{\statusgreen Layers of information}
 \label{ssec:lit_layers_of_info}
+We see this as text conveying two layers of information:
+\begin{enumerate}
+    \item the first layer, the most visible, is the layer of \emph{facts}: entities (what/who is mentioned) and actions (what happens), combined into events
+    \item a second layer of additional and subjective information: choice of terms to use, details to include and exclude, order of presentation, expression of opinion, subjective statements. All these means are used to convey a certain point of view, and therefore we use the umbrella term of \emph{persuasion}.
+\end{enumerate}
 
-Talk here about different layers: 1 facts, 2 persuasion ( propaganda/argumentation/sentiment). Or in other terms: topical and non-topical elements.
-These two elements can be expressed in different words, e.g. name+adjective, where the name is the topical element while the adjective can express the opinion of the writer (commenting, denigrating, complimenting, subjective).
-Or they can also be expressed in the same word together: this is where word selection applies. For example, when the writer needs to find a word for communicating a certain concept ``?", they can choose whether to use X or Y. While these two words have the same underlying concept, they express it quite differently.
 
-Or also called: Topic model and Anti-topic model (expand on this, as discussed during the upgrade)
+% Talk here about different layers: 1 facts, 2 persuasion ( propaganda/argumentation/sentiment). Or in other terms: topical and non-topical elements.
 
-Propaganda: Communication with the goal to persuade
+These two layers can be more or less intertwined, and it can become more difficult to distinguish between them.
+In the easiest cases, they can be identified on the linguistic surface of different words: some words in a sentence that belong to the \emph{facts} layer (e.g., a name) accompanied by other words that belong to the \emph{persuasion} layer (e.g., an adjective).
+In this case, it is conceptually easy to separate the two components in a text and say which word belongs to one or the other.
 
-Hypothesis: we can observe the two layers distinctly?
+But in many other cases, the two components can also coexist within the same word. For example, a term may have been chosen both to communicate a certain concept (facts layer), but between many available terms, the author voluntarily or involuntarily picks one or another term that conveys a different opinion on the concept itself (persuasion layer).
+
+% e.g. name+adjective, where the name is the topical element while the adjective can express the opinion of the writer (commenting, denigrating, complimenting, subjective).
+% Or they can also be expressed in the same word together: this is where word selection applies. For example, when the writer needs to find a word for communicating a certain concept ``?", they can choose whether to use X or Y. While these two words have the same underlying concept, they express it quite differently.
+
+% Or also called: Topic model and Anti-topic model (expand on this, as discussed during the upgrade)
+
+% Propaganda: Communication with the goal to persuade
+
+Our hypothesis is that \emph{we can distinguish between the two layers}.
+
+We will discuss this hypothesis in Chapter~\ref{chap:linguistic_persuasion}
+
 
 \section{\statusred Political Leaning}
 \label{sec:lit_leaning}
+
+\todo{Continue here to take all citations from Chapters 5-6 and expand on them}
 
 Here in this section, we focus on the concept of Political Leaning.
 
