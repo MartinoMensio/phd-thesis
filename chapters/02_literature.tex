@@ -131,62 +131,162 @@ We see several related concepts in the literature that can be considered as form
     \item coercion: the use of force to persuade someone to do something that they are unwilling to do\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
 \end{itemize}
 
+Across these multiple forms, we explore in a more detailed way the first two: sentiment and propaganda.
+Persuasion is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
+Instead, the relationship with propaganda comes from the inherent goal of propaganda to influence the public's view about an idea or a group~\citep{bernays,jowett2018propaganda}.
 
-It is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
-And the relationship with propaganda comes from the inherent goal of propaganda to influence the view of the public about an idea or a group~\citep{bernays,jowett2018propaganda}.
+We dedicate the following two subsections to sentiment and propaganda detection respectively.
 
-\todo{continue here}
-
-
-\todo{this may go to propaganda}
-\cite{jowett2012propaganda}:
-Propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist. Persuasion is interactive and attempts to satisfy the needs of both persuader  and  persuadee.  A  model  of  propaganda  depicts  how  elements of  informative  and  persuasive  communication  may  be  incorporated into  propagandistic  communication,  thus  distinguishing  propaganda as  a  specific  class  of  communication.  References  are  made  to  past theories  of  rhetoric  that  indicate  propaganda  has  had  few  systematic theoretical  treatments  prior  to  the  20th  century.  Public  opinion  and behavioral change can be affected by propaganda.
-The terms propaganda and persuasion have been used interchangeably in the literature on propaganda, as well as in everyday speech. Propaganda employs persuasive strategies, but it differs from persuasion in purpose.
-
-\subsection{\statusred Sentiment}
+\subsection{\statusgreen Sentiment Analysis}
 \label{sec:lit_sentiment}
 
-\todo{take something from chapter 4}
+
+Sentiment analysis is the computational treatment of opinions, sentiments and subjectivity of text~\citep{medhat2014sentiment}.
+Several surveys have been published in the recent years~\citep{liu2010sentiment,medhat2014sentiment,wankhade2022survey}, and we rely on them to examine the tasks and techniques available.
+
+
+% liu2010sentiment,medhat2014sentiment,wankhade2022survey : surveys
+
+The first broad distinction that we need to make, is the granularity of the analysis.
+Starting from the widest, we have \emph{document-level} classification, which means assigning to a whole document a single output.
+Then, other approaches define the \emph{sentence-level} classification, which instead provides for each sentence an output. In this way, it is possible to analyse the evolution of the sentiment across a document, and get more detailed information.
+And the more detailed analyses provide \emph{aspect-level} classification~\citep{zhang2022survey}. In this case, we get an analysis of each aspect mentioned in the document. An aspect can be an entity or even a feature of an object (e.g., colour, shape) and in this way, we can have an output that is very much related to single words.
+
+The second distinction is based on the techniques used for the analysis. There are several techniques that range from simple dictionary-based to advanced deep-learning techniques.
+The ones that have a longer history are the family of \emph{lexicon-based} models~\citep{taboada2011lexicon}. Being the simplest and most intuitive, there are many of them that are still very popular today. Even new models belonging to this family keep being developed, as it is a very powerful technique.
+In this family, there are two subtypes: dictionary-based and corpus-based.
+% https://www.sciencedirect.com/science/article/pii/S2090447914000550
+Dictionary-based models depend on sentiment-carrying words that are used as seeds, and then search the dictionary for their synonyms and antonyms. In this way, large lists of words together with their sentiment are built~\citep{okango2022dictionary,hardeniya2016dictionary}.
+Corpus-based models also start with seed terms, but then do the expansion with a corpus looking for synonyms, using statistical or semantic methods~\citep{darwich2019corpus,rice2021corpus}.
+
+% They are built around a lexicon where each word has a specific score, and some combination rules. But we do not exclude tools that work with a different, more complex approach. It is only required from them to give a score specific to the individual words. 
+
+From this family of approaches, we also have very popular tools that can be used freely, such as Sentistrength\footnote{\url{http://sentistrength.wlv.ac.uk/}}, Vader\footnote{\url{https://github.com/cjhutto/vaderSentiment}} and TextBlob.\footnote{\url{ https://textblob.readthedocs.io/}}
+
+
+Instead, more advanced models are based on machine learning (mostly supervised, but also some unsupervised).
+In the supervised approaches, we find examples of decision trees, SVM, rule-based classifiers, Naive Bayes, Bayesian Networks, and Maximum Entropy approaches~\citep{zharmagambetov2015sentiment,bayhaqy2018sentiment,fitri2019sentiment,rathi2018sentiment,xie2019improved}.
+The more recent ones rely on Deep-Learning models~\citep{zhang2018deep}, where there are multiple combinations considering:
+\begin{itemize}
+    \item document encoding: Bag of Words~\citep{moraes2013document,zhai2016semisupervised}, word embeddings~\citep{tang2015document,chen2016neural}, dense document vectors~\citep{le2014distributed}
+    \item network architectures: feed-forward~\citep{duncan2015neural}, autoencoders~\citep{zhai2016semisupervised,wu2019semi}, CNN~\citep{jianqiang2018deep,sun2019aspect}, recurrent~\citep{chen2017recurrent,xu2016cached}, recursive~\citep{wang2016recursive,nguyen2015phrasernn}, memory networks~\citep{li2017end,lv2021aspect}
+    \item attention mechanism: no attention, hierarchical~\citep{zhou2016attention}, sequence, alignment
+\end{itemize}
+
+
+
+% Techniques of detection: (medhat2014sentiment)
+% - lexicon-based
+%   - dictionary-based
+%   - corpus-based
+%     - statistical
+%     - semantic
+% - ML-based
+%   - supervised
+%     - decision tree classifiers
+%     - linear classifiers (SVM/Neural Networks)
+%     - rule-based classifiers
+%     - probabilistic classifiers (Naive Bayes, Bayesian Network, Maximum Entropy)
+%     - Deep Learning (zhang2018deep survey):
+%       - Document-Level classification
+%         - Document representation: BoW, word embeddings, dense document vector
+%         - Neural Network Model: Feedforward Neural Network, Autoencoder, CNN, Recurrent/LSTM/GRU, Memory Network
+%         - Attention: No, Hierarchical, 
+%       - Sentence-Level Classification
+%         - Same as Document-level
+%         - Adding: parse trees, opinion lexicons, and part-of-speech tags
+%         - CNN/RNN: semantic and syntactic information from word embeddings
+%       - Aspect-based Classification: Context, Target Representation, Sentiment Context (done with attention)
+%   - unsupervised
+%     - game theory
+%     - based on sentiment clustering
+%     - generative-model based: asking GPT-similar models, context of classification
+
+% zhang2018deep : deep learning for sentiment analysis
+% godbole2007large : large scale sentiment analysis
+
+From this large group of publication and approaches, the solutions are less democratised, which means that it is usually very hard to reproduce the models and results, because of non-shared code-bases, datasets and parameters.
+This means that there are less publicly available tools that perform this type of analysis.
+One of the few exceptions is Stanford CoreNLP which is based on a RNN~\citep{socher2013recursive} that accounts for the sequence but also for the dependency tree of the sentence (in other words, discovering the combination rules autonomously). It is based on a dataset that links sentiment scores to a dependency tree (Sentiment Treebank\footnote{\url{https://nlp.stanford.edu/sentiment/treebank.html}}).
+
+If at first glance, the advanced deep learning models may seem more reliable, we find that the most robust and common methods are the simpler ones.
+We have recent examples of lexicon-based approaches~\citep{okango2022dictionary,mitra2020sentiment}.
+And especially in combination with aspect-based detection, we see that the status is yet in an exploratory phase, without major shared tools being built.
 
 \subsection{\statusorange Propaganda}
 \label{sec:lit_propaganda}
-TODO propaganda definition in different fields.
 
-First of all, let us start with a definition of propaganda.
-We can define propaganda as the use of language ``with the intention of influencing people's opinions."\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}}
-It has many points in common with argumentation/rhetorics and is usually associated with deceiving techniques, partial point of views, logical fallacies.
+Moving instead to \emph{propaganda}, we can start with some theoretical definitions.
+According to~\cite{jowett2012propaganda}, ``propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist." This is slightly different from persuasion, which instead is ``interactive and attempts to satisfy the needs of both persuaded and persuadee."  %A  model  of  propaganda  depicts  how  elements of  informative  and  persuasive  communication  may  be  incorporated into  propagandistic  communication,  thus  distinguishing  propaganda as  a  specific  class  of  communication.  References  are  made  to  past theories  of  rhetoric  that  indicate  propaganda  has  had  few  systematic theoretical  treatments  prior  to  the  20th  century.  Public  opinion  and behavioral change can be affected by propaganda.
+% The terms propaganda and persuasion have been used interchangeably in the literature on propaganda, as well as in everyday speech. Propaganda employs persuasive strategies, but it differs from persuasion in purpose.
+
+
+
+
+
+% TODO propaganda definition in different fields.
+
+% First of all, let us start with a definition of propaganda.
+We can then consider the definition from the Cambridge Dictionary, which defines propaganda as the use of language ``with the intention of influencing people's opinions."\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}}
+It has many points in common with argumentation and rhetorics and is usually associated with deceiving techniques, partial point of views, logical fallacies.
 In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
 
-Propaganda has a set of distinctive features beyond its persuasive function. It usually has a sizable target audience, it represents a specific group's agenda, and makes use of faulty reasoning and/or emotional appeals~\cite{miller1939techniques}.
+Propaganda possesses unique characteristics that go beyond its ability to persuade. It typically targets a significant audience, promotes the agenda of a particular group, and employs flawed reasoning and/or emotional appeals~\cite{miller1939techniques}.
 
-Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas.
+Injecting propaganda into the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas.
 Propaganda can more practically be defined as the usage of a set of techniques. These techniques vary from the usage of emotional language (e.g. loaded language, appeal to fear) to logical fallacies (bandwagon, red herring).
 
-Agenda-setting: \cite{Cohen_1964} and \cite{mccombs1972agenda} theory: ability of the news media to influence the importance placed on the topics of the public agenda.
+Propaganda is very related to the agenda-setting theory \citep{Cohen_1964,mccombs1972agenda}, which describes the ability of news media to influence the importance placed on the topics of the public agenda.
+
+Over the next paragraphs, we first give more theoretical background about the \emph{propaganda model}, which describes the way that propaganda acts on society.
+Afterwards, we give an oversight to the most common propaganda techniques.
+To conclude, we present some works that try to detect propaganda at different granularities.
 
 \subsubsection{The Propaganda Model}
 
-According to the propaganda model, which was developed by~\citet{herman1988manufacturing}, corporate mass media function based on propaganda and systemic biases. It explains how populations are manipulated, and how consent for economic, social, and political policies, both foreign and domestic, is manufactured through propaganda. Media structures that create inherent conflicts of interest (e.g. advertising, media concentration, government sourcing) act as propaganda for anti-democratic forces, according to the theory.
+According to the propaganda model, which was developed by~\citet{herman1988manufacturing}, corporate mass media functions based on propaganda and systemic biases. It explains how populations are manipulated, and how consent for economic, social, and political policies is manufactured through propaganda. Media structures that create inherent conflicts of interest (e.g. advertising, media concentration, government sourcing) act as propaganda for anti-democratic forces, according to the theory.
 The theory relies on five \emph{filters} that determine the type of news that is presented in the media:
 
 % the problem is X taken from phillips2007left https://www.projectcensored.org/wp-content/uploads/2010/05/LeftProgressiveMediaInsideth_PropagandaModel.pdf
 \begin{enumerate}
-    \item Ownership: since the mainstream media outlets are usually big conglomerates, there will be some bias towards their interests in the information presented. The problem is the concentrated private ownership
-    \item Advertising: the news is only a ``filler" to post advertisement, and therefore it needs to align with the ``buying mood". The problem is the orientation to profit.
-    \item Sourcing: where first-hand news comes from, mostly from officials and powerful sources, because it is not affordable to have reporters everywhere. The problem is the over-reliance on governmental and corporate sources for news.
+    \item Ownership: since the mainstream media outlets are usually big conglomerates, there will be some bias toward their interests in the information presented. The problem is the concentrated private ownership.
+    \item Advertising: the news is only a ``filler" to post advertisements, and therefore it needs to align with the ``buying mood". The problem is the orientation to profit.
+    \item Sourcing: first-hand news comes mostly from officials and powerful sources, because it is not affordable to have reporters everywhere. The problem is the over-reliance on governmental and corporate sources for news.
     \item Flak: negative responses to the media statements or programs, such as complaints and other actions that are performed by organizations and coalitions, to disagree or to discredit. The problem is the tendency to avoid offending the powerful.
-    \item Fear: anti-ideologies (e.g. anti-communism historically, anti-terrorism) that exploit public fear of groups that are potentially a threat. The problem is religiously following the mainstream ideas, strongly opposing alternative beliefs.
+    \item Fear: anti-ideologies (e.g. anti-communism historically, anti-terrorism) that exploit public fear of groups that are potentially a threat. The problem is religiously following the mainstream ideas, and strongly opposing alternative beliefs.
 \end{enumerate}
 
 These five filters together set what is considered acceptable in the coverage of daily events~\citep{phillips2007left}. ``Newsworthy" criteria influences journalists and editors, and everything that diverges from the ``common sense" is self-disciplined and self-censored.
 
-“Although the model was based mainly on the media of the United States, Chomsky and Herman believe the theory is equally applicable to any country that shares the basic economic structure and organizing principles that the model postulates as the cause of media biases. Their assessment has been confirmed by a number of scholars and the propaganda role of the media has since been empirically assessed in Western Europe and Latin America.”~\citep{herman1996propaganda}
+While the model primarily draws from U.S. media, Chomsky and Herman assert that the theory can be extended to any nation with similar fundamental economic and organizational foundations, as outlined by the model, which contribute to the emergence of media prejudices. This viewpoint has garnered support from various scholars, and investigations into the media's propagandistic functions have subsequently been conducted and validated in Western Europe and Latin America~\citep{herman1996propaganda}.
 
 
 \subsubsection{Propaganda techniques (computational)}
 
 If we look at more practical definitions of propaganda, we see that in the literature several works have addressed propaganda as a set of techniques~\citep{torok2015symbiotic,miller1939techniques,weston2018rulebook}. The recent work of~\citet{da2019fine} takes from these works and considers only the techniques that can be found in journalistic articles and that can be judged intrinsically without needing external evidence.
 
+These techniques are:
+\begin{enumerate}
+    \item Loaded language:
+    \item Name calling or labelling:
+    \item Repetition: Exaggeration or minimisation:
+    \item Doubt:
+    \item Appeal to fear/prejudice:
+    \item Flag-waving
+    \item Causal oversimplification:
+    \item Slogans: 
+    \item Appeal to authority: 
+    \item Black and white fallacy:
+    \item Thought-terminating cliché:
+    \item Whataboutism: 
+    \item Reductio ad Hitlerum: 
+    \item Red herring: 
+    \item Bandwagon: 
+    \item Obfuscation, intentional vagueness, confusion: 
+    \item Straw man: 
+\end{enumerate}
+
+\todo{continue from here, fill description of techniques above}
 
 
 \subsubsection{Propaganda detection (computational)}
