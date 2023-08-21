@@ -643,52 +643,81 @@ This taxonomy can be used as a conceptual method to annotate and compare topics 
 
 % We see across the literature several types of topics
 
-\subsection{\statusorange Computational Approaches}
+\subsection{\statusgreen Computational Approaches}
 \label{sec:lit_topics_computation}
 
 Moving to the computational side, there exist many topic modelling methods~\citep{vayansky2020review,ramage2009topic,churchill2022evolution,kherwa2019topic}.
 We can identify two main groups:
 \begin{enumerate}
-    \item unlabelled: frequency-based, are mostly unsupervised. Do not provide labels for the topics, are clustering algorithms
-    \item labelled: this group instead provides labelled topics in output, that are usually specified a priori (e.g., topology-based) or relate to entity types and custom patterns
+    \item unlabelled: frequency-based, that are mostly unsupervised. This group typically is made of clustering algorithms that, given a number of topics to produce, generate the output clusters. Therefore, they typically do not provide output labels. %We describe briefly the family of LDA approaches below, that belongs to this group.
+    \item labelled: this group instead provides labelled topics in output, that are usually specified a priori (e.g., topology-based) or relate to entity types and custom patterns.
 \end{enumerate}
 
-\todo{continue here}
 
-topic for fine-grained opinion analysis~\cite{stoyanov2008topic}
-
-
-Explain here different tools/methods that provide topics/entities
-
-We have approaches that try to determine the topics without having external knowledge, and approaches that instead an existing taxonomy/list of topics and try to map the input documents to them.
-
-\subsubsection{LDA topics}
-
-One of the most common methods to extract topics is to ``automatically detecting them" from the corpus.
-The idea is to learn from the data and by selecting a specific number of output topics, we get them.
-Problem: difficult to extract labels
-
-The problem of assigning labels: can we really tell what is different about the groups?
-Need to know beforehand how many topics we want in output.
-TODO
-
-Topic identification is a method for identifying hidden subjects in enormous amounts of text1. It can help you find common themes or keywords that represent the main ideas of a document or a collection of documents. For example, if you have a set of news articles, you can use topic identification to find out what are the most discussed topics among them.
-
-One of the techniques for topic identification is called Latent Dirichlet Allocation (LDA)12. It is a statistical model that assumes that each document is composed of a mixture of topics, and each topic is composed of a distribution of words. LDA can learn these topics and words from the data without any prior knowledge or labels. LDA can be implemented using Python’s Gensim package1, which provides various tools for natural language processing.
-
-LDA is a type of topic modeling that uses a latent Dirichlet allocation approach12. Topic modeling is a form of unsupervised learning that can be used for exploring unstructured text data by inferring the relationships that exist between the words in a set of documents23.
-
-LDA assumes that each document is composed of a mixture of topics, and each topic is composed of a distribution of words13. LDA can discover topics that are hidden (latent) in a set of text documents by inferring possible topics based on the words in the documents34. LDA uses a generative probabilistic model and Dirichlet distributions to achieve this4.
-
-Another technique for topic identification is called bag-of-words2. It is a simple way to represent text data as a collection of words and their frequencies. Bag-of-words ignores the order and structure of sentences, but it can capture some basic information about the content and vocabulary of a document. Bag-of-words can be used with simple NLP models such as TF-IDF or Naive Bayes to identify topics from texts.
+% topic for fine-grained opinion analysis~\cite{stoyanov2008topic}
 
 
-\subsubsection{Entity-based / named topics}
-DBPedia spotlight: entity annotation is not very good. It struggles to recognise all the entities in the articles (proof?) → DISCARDED
-BLINK (Facebook): huge (30GB models to fit on RAM), not running on my laptop. On server: no NVIDIA drivers (wants GPU) → DISCARDED
-Spacy-entity-linker https://github.com/egerber/spaCy-entity-linker/ . Not very widely used. → DISCARDED
+% Explain here different tools/methods that provide topics/entities
 
-Then from entities, need ways to derive the topics by navigating knowledge bases (wikidata in most cases)
+We describe in the following paragraphs some example approaches that belong to these two groups.
+
+
+\subsubsection{LDA}
+
+Belonging to the first group of methods of topic modelling, we have \acrfull{lda}.
+%
+% One of the most common methods to extract topics is to ``automatically detecting them" from the corpus.
+% The idea is to learn from the data and by selecting a specific number of output topics, we get them.
+%
+% Topic identification is a method for identifying hidden subjects in enormous amounts of text1. It can help you find common themes or keywords that represent the main ideas of a document or a collection of documents. For example, if you have a set of news articles, you can use topic identification to find out what are the most discussed topics among them.
+%
+% One of the techniques for topic identification is called Latent Dirichlet Allocation (LDA)12. 
+It is a statistical model that assumes that each document is composed of a mixture of topics, and each topic is composed of a distribution of words.
+The approach uses a generative probabilistic model and Dirichlet distributions.
+\acrshort{lda} can learn topics and words from the data without any prior knowledge or labels.
+%LDA can be implemented using Python’s Gensim package1, which provides various tools for natural language processing.
+
+% LDA is a type of topic modeling that uses a latent Dirichlet allocation approach12. 
+% Topic modeling is a form of unsupervised learning that can be used for exploring unstructured text data by inferring the relationships that exist between the words in a set of documents23.
+
+% LDA assumes that each document is composed of a mixture of topics, and each topic is composed of a distribution of words13. LDA can discover topics that are hidden (latent) in a set of text documents by inferring possible topics based on the words in the documents34.
+
+% Another technique for topic identification is called bag-of-words2. It is a simple way to represent text data as a collection of words and their frequencies. Bag-of-words ignores the order and structure of sentences, but it can capture some basic information about the content and vocabulary of a document. Bag-of-words can be used with simple NLP models such as TF-IDF or Naive Bayes to identify topics from texts.
+
+% Problem: difficult to extract labels
+This approach, like the others that belong to the group of unlabelled, has as its main limitation that it is difficult to extract labels for the identified topics.
+The optuts of the model are clusters of documents, and most important words for each of the clusters. But from this information, to have a label for the topic, the process is not easy. Usually in the literature, there is a step of manual revision of the clusters and the important words and then a manual labelling of the clusters.
+During this manual revision, it can emerge the problem that clusters look similar or related, and it may be necessary to join the clusters together or to modify the number of desired clusters and run the method again.
+
+% The problem of assigning labels: can we really tell what is different about the groups?
+
+% Need to know beforehand how many topics we want in output.
+The second big problem is that the number of output topics needs to be inserted as input parameter to the algorithm. This means that multiple runs are necessary and the study of this hyperparameter is something very critical.
+
+Other approaches belonging to the same group of topic modelling approaches, even if they use more advanced features~\citep{wang2012nonnegative,landauer1998introduction,grootendorst2022bertopic}, have the same limitations.
+
+
+\subsubsection{Knowledge-based}
+
+A different approach to topic modelling is instead taken by knowledge-based topic modelling.
+
+This type of approaches~\citep{chen2013leveraging,allahyari2017knowledge,xu2018hierarchical,ali2019transportation} relies on an external source of knowledge that can be a flat list of topics to align with, a taxonomy of topics, or a complete Knowledge Base containing entities and relationships.
+
+With difference to the first group of methods, this family has two phases.
+In the first phase, features are extracted from the documents (entities, term frequencies).
+The second phase, missing in the first type of models, tries to align to the defined topics and estimate the probabilities of belonging to each of them.
+
+With respect to the first group, we have less availability of such methods to the general public, as there is less standardisation of the topics (they change depending on the domain of application).
+We see more commercial tools related to this group of approaches (e.g., TextRazor,\footnote{\url{https://www.textrazor.com/}} which can analyse topics with the taxonomies of IAB content and IPTC mediatopics).
+
+% We have approaches that try to determine the topics without having external knowledge, and approaches that use instead an existing taxonomy/list of topics and try to map the input documents to them.
+
+
+% DBPedia spotlight: entity annotation is not very good. It struggles to recognise all the entities in the articles (proof?) → DISCARDED
+% BLINK (Facebook): huge (30GB models to fit on RAM), not running on my laptop. On server: no NVIDIA drivers (wants GPU) → DISCARDED
+% Spacy-entity-linker https://github.com/egerber/spaCy-entity-linker/ . Not very widely used. → DISCARDED
+
+% Then from entities, need ways to derive the topics by navigating knowledge bases (wikidata in most cases)
 
 % \subsubsection{TextRazor}
 % TextRazor: seems more accurate, industrial, FreeBase taxonomy. Each entity is annotated with wikidata id and a list of FreeBase types. Also provides topics and fine-grained topics
@@ -704,13 +733,19 @@ Then from entities, need ways to derive the topics by navigating knowledge bases
 % What it provides
 
 
-\subsection{\statusred Limitations}
+\subsection{\statusgreen Limitations}
 
-With this section, we have seen several methods to 
+With this section, we have seen several methods to extract and analyse topics.
 
-commercial solutions, labels
+We have on one side approaches that do not provide labels, and on the other side approaches that provide labels but are more commercial.
+% commercial solutions, labels
+Depending on the goals of topic analysis, the first group could be not very useful. For example, if we want to have hierarchical labelled topics, it is crucial that the topic analysis provides topic labels on its own.
+In our case, we want to analyse how persuasion changes across topics, and having the labels is very important. Therefore, we do not want to apply the first type of topic modelling.
 
-Missing analysis of the links between topics and other dimensions (leaning and persuasion)
+% Missing analysis of the links between topics and other dimensions (leaning and persuasion)
+As a second limitation, the topic analysis is usually performed in isolation with respect to other dimensions.
+Instead, we want to analyse topics together with persuasion, political leaning and similarities.
+We see some works that do topic analysis with other factors (e.g., joint topic and opinion analysis in~\cite{stoyanov2008topic}), but not together with propaganda or political leaning.
 
 \section{\statusred Other related phenomena}
 \label{sec:lit_related}
