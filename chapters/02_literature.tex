@@ -33,7 +33,7 @@ Our starting point is the literature that aims at analysing multiple versions of
 From the enormous multitude of articles that get published every day, several datasets and resources of parallel news have been built (described in Subsection~\ref{ssec:lit_relationships_parallel}.
 We are interested in works that explore what changes between similar articles, and the literature defines and deals with different tasks (Subsection~\ref{ssec:lit_relationships_tasks}). We focus specifically on corroboration and omission detection (Subsection~\ref{ssec:lit_relationships_corr_omiss}.
 
-\subsection{Parallel News}
+\subsection{\statusgreen Parallel News}
 \label{ssec:lit_relationships_parallel}
 
 To talk about similarity between news articles we first need to introduce the concept of \emph{\gls{parallel-news}}
@@ -54,7 +54,7 @@ There are also resources that try to bring together opposing points of view, suc
 Some of these resources are hand-curated while others are algorithmically synthesised. In the hand-curated groups (e.g., AllSides), there are usually domain experts or editors who manually put together news articles that share the same events and details. With AllSides, the editors select one article from the Left, one from the Center and one from the Right to ensure that different sides of the story are presented.
 Instead, with algorithmic resources (e.g., Google News Full Coverage), there is an automated approach that, based on clustering algorithms, creates groups of articles that cover the same story~\citep{marutho2018determination,alelyani2018feature,karimi2018news}.
 
-\subsection{Common Tasks}
+\subsection{\statusgreen Common Tasks}
 \label{ssec:lit_relationships_tasks}
 
 With this availability of resources, both in the news domain but also with a wider perspective, the computational linguistics community has identified and targeted several tasks.
@@ -78,7 +78,7 @@ Lastly, we can also consider as related the \emph{plagiarism detection} task.
 In this task, the goal is to spot fragments of text that have been copied from others, without reference or with a certain proportion~\citep{stein2006near,alzahrani2010fuzzy,arabi2022improving}.
 
 
-\subsection{Corroboration and Omission Detection}
+\subsection{\statusgreen Corroboration and Omission Detection}
 \label{ssec:lit_relationships_corr_omiss}
 
 The task that instead we focus on with this work, is the investigation of \textit{corroboration and omission} across multiple sources.
@@ -91,7 +91,7 @@ Instead, if a news source omits a detail that other sources mention, it is a pot
 Therefore, the more corroboration and the less omission a news source contains, the more credible it is.
 The approach is validated by showing a positive correlation between these indicators and the values of credibility retrieved from Media Bias/Fact Check.\footnote{\url{https://mediabiasfactcheck.com/}}
 
-\subsection{Limitations}
+\subsection{\statusgreen Limitations}
 % What is missing?
 
 % Fine-grained study of the terms that change $\rightarrow$ our goal to expand
@@ -109,7 +109,7 @@ Our aim is to see how the variations between multiple articles (specific term ch
 % From the existing literature, we find that there are certain limitations that come from only analysing similarity
 This type of limitation can be overcome only with a study that involves multiple factors at the same time, like a comparative analysis.
 
-\section{\statusorange Persuasion detection}
+\section{\statusgreen Persuasion detection}
 \label{sec:lit_persuasion}
 
 The next research area that we are touching in our work is \emph{persuasion detection}.
@@ -213,7 +213,7 @@ If at first glance, the advanced deep learning models may seem more reliable, we
 We have recent examples of lexicon-based approaches~\citep{okango2022dictionary,mitra2020sentiment}.
 And especially in combination with aspect-based detection, we see that the status is yet in an exploratory phase, without major shared tools being built.
 
-\subsection{\statusorange Propaganda}
+\subsection{\statusgreen Propaganda}
 \label{sec:lit_propaganda}
 
 Moving instead to \emph{propaganda}, we can start with some theoretical definitions.
@@ -261,46 +261,61 @@ These five filters together set what is considered acceptable in the coverage of
 While the model primarily draws from U.S. media, Chomsky and Herman assert that the theory can be extended to any nation with similar fundamental economic and organizational foundations, as outlined by the model, which contribute to the emergence of media prejudices. This viewpoint has garnered support from various scholars, and investigations into the media's propagandistic functions have subsequently been conducted and validated in Western Europe and Latin America~\citep{herman1996propaganda}.
 
 
-\subsubsection{Propaganda techniques (computational)}
+\subsubsection{Propaganda Techniques}
 
 If we look at more practical definitions of propaganda, we see that in the literature several works have addressed propaganda as a set of techniques~\citep{torok2015symbiotic,miller1939techniques,weston2018rulebook}. The recent work of~\citet{da2019fine} takes from these works and considers only the techniques that can be found in journalistic articles and that can be judged intrinsically without needing external evidence.
 
 These techniques are:
 \begin{enumerate}
-    \item Loaded language:
-    \item Name calling or labelling:
-    \item Repetition: Exaggeration or minimisation:
-    \item Doubt:
-    \item Appeal to fear/prejudice:
-    \item Flag-waving
-    \item Causal oversimplification:
-    \item Slogans: 
-    \item Appeal to authority: 
-    \item Black and white fallacy:
-    \item Thought-terminating cliché:
-    \item Whataboutism: 
-    \item Reductio ad Hitlerum: 
-    \item Red herring: 
-    \item Bandwagon: 
-    \item Obfuscation, intentional vagueness, confusion: 
-    \item Straw man: 
+    \item Loaded language: employing language with strong emotional connotations;
+    \item Name calling or labelling: attaching to the object of propaganda labels that trigger a negative (fear, hate, undesirability) or positive (love, praise) reaction;
+    \item Repetition: repeating something multiple times, to make it accepted;
+    \item Exaggeration or minimisation: using excesses to make something more or less important;
+    \item Doubt: questioning the credibility of someone/something;
+    \item Appeal to fear/prejudice: attempting to create support for an idea by increasing fear towards an alternative.
+    \item Flag-waving: justifying an action based on the undue connection to nationalism or patriotism
+    \item Causal oversimplification: assuming that there is a single, simple cause of an outcome;
+    \item Slogans: using a short and striking or memorable phrase;
+    \item Appeal to authority: asserting the truthiness of a claim with the only evidence that someone authoritative supports it;
+    \item Black and white fallacy: considering no middle way between two extremes;
+    \item Thought-terminating cliché: not allowing critical thought using generic words usually from ``folk wisdom"
+    \item Whataboutism: charging the opponent with hypocrisy without disproving their argument;
+    \item Reductio ad Hitlerum: oppose an idea by suggesting it is popular in a group hated by the audience;
+    \item Red herring: diverting the attention with unrelated material of conversation;
+    \item Bandwagon: exploiting the desire of most people to join the crowd or be on the winning side, and avoid winding up the losing side;
+    \item Obfuscation, intentional vagueness, confusion: willingly using unclear words or concepts; 
+    \item Straw man: caricaturing an opponent's position and then attacking it.
 \end{enumerate}
-
-\todo{continue from here, fill description of techniques above}
 
 
 \subsubsection{Propaganda detection (computational)}
 \label{ssec:lit_propaganda_detection}
 
+Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination \citep{da2020survey}.
 
-% FROM TTO21
-%\subsection{Propaganda}
-%\label{ssec:related_prop}
+% related work not granular
+Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\citep{rashkin2017truth,barron2019proppy}.
 
-% In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
-% Injecting propaganda in the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas. However, to the best of our knowledge, current research on political leaning detection largely overlooked the direct inclusion of propaganda as analysis features in their computational models. 
 
-Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination \citep{da2020survey}. Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\citep{rashkin2017truth,barron2019proppy}. More recently, \citet{da2019fine} used a neural network approach to identify the text fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
+Several datasets for document-level detection have been released during the last decade.
+First of all, in the English language:
+TSHP-17~\citep{rashkin2017truth},
+QPROP~\citep{alberto_barron_cedeno_2019_3271522}.
+And then we start to observe replications and additional works in other languages: Hindi~\citep{chaudhari2022h,chaudhari_deptii_2022_5828240}
+and Czech~\citep{baisa2019benchmark}.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{figures/propaganda_example_1_color.png}
+    \caption{Detection of propaganda techniques using~\citet{baly2020we}.% the article comes from NationalReview, a source with Right-leaning bias.
+    }
+    \label{fig:propaganda_example_1}
+\end{figure}
+
+% granular
+More recently, several works~\citep{da2019fine,yoosuf2019fine,vorakitphan2022protect} started doing a more fine-grained analysis, to identify fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
+These approaches use sequence models derived from BERT, allowing us to have a much deeper insight into which parts of the text are propagandistic. Being the output of the models a sequence of tags, each word is labelled with the technique it belongs to (or none).
+They all use the same dataset published in~\cite{da2019fine}, which enabled different research groups to build models and progress on this task.
 
 
 %On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
@@ -312,13 +327,6 @@ Developing computational methods to detect the use of propaganda in text is very
 % \item sentiment usage: loaded language in the articles can reveal strong subjectivity against the mentioned entities. This relates to the subjective part of articles and we want to take this into consideration
 % \item narrative/persuasion and other related analyses?
 
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\linewidth]{figures/propaganda_example_1_color.png}
-    \caption{Detection of propaganda techniques using~\citet{baly2020we}.% the article comes from NationalReview, a source with Right-leaning bias.
-    }
-    \label{fig:propaganda_example_1}
-\end{figure}
 
 
 %For the propaganda analysis, we are focusing on the computational propaganda, defined as the propaganda that has been analysed by computational approaches. 
@@ -327,17 +335,34 @@ Developing computational methods to detect the use of propaganda in text is very
 %Most of the models only classify full articles as being propagandist or not~\cite{barron2019proppy,rashkin2017truth}, and this does not help to understand why.
 %Therefore, another work focuses on fine-grained techniques~\cite{da2019fine}: every article analysed is annotated with labels coming from 18 different techniques, also indicating the spans affected by the techniques. So we can see where propaganda is inside an article and which specific techniques were used. Figure~\ref{fig:propaganda_example_1}
 
-TODO: The datasets for detection: article-level, fine-grained
+% TODO: The datasets for detection: article-level, fine-grained
 
-\subsection{\statusred Limitations}
-HERE?
+\subsection{\statusgreen Limitations}
+
+Sentiment detection has been researched for a long time.
+However, the outputs of the analysis are usually limited to positive/negative.
+Additionally, fine-grained analysis of aspect-based sentiment analysis cannot simply be used ``off the shelf" as resources are not shared and the models do not demonstrate good generalisability strengths.
+Anyways, there are tools available to perform document and sentence analysis, and lexicons can allow a word-level analysis if used properly. For this reason, we deem sentiment analysis to be a good indicator of understanding the persuasion used in the articles.
+
+Propaganda detection, on the other hand, is relatively a young task.
+While there are multiple datasets for document-level detection, only one dataset has been publicly shared for fine-grained analysis.
+Therefore, there are potential limitations of the dataset and of the models trained with it.
+There is, to the best of our knowledge, no study on the unbalance of this dataset. Models trained could be learning unwanted associations or not be comprehensive of propaganda with a context different from the examples contained in the training set.
+Applying propaganda detection in the wild could cause both false positives and false negatives.
+Furthermore, the evaluation metrics of the models generally provide lower-than-optimal values, denoting  this as a quite difficult task.
+However, we find it really interesting and valuable to have an overview of the techniques used.
+
+We will use both sentiment and propaganda analysis in Chapter~\ref{chap:linguistic_persuasion} to see how we can combine this with the analysis of similarities across documents.
+Furthermore, we will evaluate the limitations of the approaches available in our use case.
 
 \subsection{\statusgreen Layers of information}
 \label{ssec:lit_layers_of_info}
-We see this as text conveying two layers of information:
+We end this section with a reflection on persuasion techniques.
+We described the detection of such techniques, but how intertwined are they with the contents and facts described in the news articles?
+The text of articles can be seen as conveying two layers of information:
 \begin{enumerate}
-    \item the first layer, the most visible, is the layer of \emph{facts}: entities (what/who is mentioned) and actions (what happens), combined into events
-    \item a second layer of additional and subjective information: choice of terms to use, details to include and exclude, order of presentation, expression of opinion, subjective statements. All these means are used to convey a certain point of view, and therefore we use the umbrella term of \emph{persuasion}.
+    \item the first layer, the most visible, is the layer of \emph{facts}: entities (what/who is mentioned) and actions (what happens), combined into events. This is usually called \emph{topic} or \emph{topical words};
+    \item a second layer of additional and subjective information: choice of terms to use, details to include and exclude, order of presentation, expression of opinion, subjective statements. All these means are used to convey a certain point of view, and therefore we use the umbrella term of \emph{persuasion}. This may be called \emph{anti-topical} component of the text.
 \end{enumerate}
 
 
@@ -357,20 +382,16 @@ But in many other cases, the two components can also coexist within the same wor
 % Propaganda: Communication with the goal to persuade
 
 Our hypothesis is that \emph{we can distinguish between the two layers}.
-
 We will discuss this hypothesis in Chapter~\ref{chap:linguistic_persuasion}
 
 
-\section{\statusred Political Leaning}
+\section{\statusgreen Political Leaning}
 \label{sec:lit_leaning}
 
-\todo{Continue here to take all citations from Chapters 5-6 and expand on them}
+In this section, we focus on the literature related to political leaning classification.
+First, we give a definition of political leaning, and then we focus on the classification task and how it has been addressed by the literature.
 
-Here in this section, we focus on the concept of Political Leaning.
-
-First, we give a definition, and then we focus on the Political Leaning Classification task and how it has been addressed by the literature.
-
-\subsection{Political Leaning Definition}
+\subsection{\statusgreen Political Leaning Definition}
 
 Political Leaning is a term that is derived from Political Ideology~\citep{jost2009political}.
 Political ideology is defined as a ``set of beliefs about the proper order of society and how it can be achieved"~\citep[p.~64]{erikson2015american}.
@@ -383,8 +404,8 @@ Since only one dimension is considered, it is usually named as a political leani
 
 % https://www.dictionary.com/e/politics/political-spectrum/
 % https://en.wikipedia.org/wiki/Political_spectrum
-Historically, the usage of left and right originate during the 1789 French Revolution. The physical position of the politicians in the French National Assembly was that the revolutionaries were sitting together on the left side, while the aristocracy-favouring was on the right.\footnote{\url{https://www.dictionary.com/e/politics/political-spectrum/}}
-Therefore, the newspapers started using the terms to mention respectively the liberal (left) and the authoritarian on the right.
+Historically, the usage of left and right originated during the 1789 French Revolution. The physical position of the politicians in the French National Assembly was sitting the revolutionaries on the left side, while the aristocracy-favouring was on the right.\footnote{\url{https://www.dictionary.com/e/politics/political-spectrum/}}
+Therefore, the newspapers started using the terms to mention respectively the liberal with ``left" and the authoritarian with ``right".
 
 From originally only two labels, in 1857 we have the first appearance (on the Southern Trade magazine) of the term \emph{political spectrum} to describe the range of political opinions.
 
@@ -392,20 +413,20 @@ From originally only two labels, in 1857 we have the first appearance (on the So
 % US and conservative vs liberal
 % https://pleeps.org/en/wp-content/uploads/Political-Ideology-Its-Structure-Functions-and-Elective-Affinities.pdf (jost2009political)
 The use of ``liberal" and ``conservative" as substitutes for ``left" and ``right" is becoming more prevalent in the United States and other countries.
-This terminology effectively captures the historical ideological division between desires for change and stability.
-These two desires, change vs maintaining the status-quo, are coming from debates that have their roots in age-old disputes regarding the appropriate levels of hierarchy, authority, and inequality~\citep{bobbio1996left}.
+This terminology effectively highlights the historical split between wanting change and desiring stability~\cite{jost2009political}.
+These opposing desires emerge from long-standing discussions about proper levels of hierarchy, authority, and inequality~\citep{bobbio1996left}.
 
 
-% https://pleeps.org/en/wp-content/uploads/Political-Ideology-Its-Structure-Functions-and-Elective-Affinities.pdf (jost2009political)
-This formulation of the distinction between left and right is characterised by
-two different aspects~\citep{jost2018political}:
-\begin{itemize}
-    \item supporting vs opposing social change
-    \item rejecting vs accepting inequality
-\end{itemize}
-The most common terms that people from both left and right associate with the right are: “conservative,” “system maintenance,” “order,” “individualism,” “capitalism,” “nationalism,” and “fascism,” and they associated the left with “progressive,” “system change,” “equality,” “solidarity,” “protest,” “opposition,” “radical,” “socialism,” and “communism”~\citep[p.~213-14]{fuchs1990}.
-The two core components of the left-right dimension, attitudes towards change versus stability, and equality versus inequality, are connected due to historical factors, as Western societies have gradually become more egalitarian over the past few centuries in terms of human rights and liberties, economic distribution, and political power distribution.
-Equality has increased in some instances due to revolutionary events, which were frequently resisted or opposed by conservatives and those associated with the right~\citep{nosek2009politics,burke1790reflections}.
+% % https://pleeps.org/en/wp-content/uploads/Political-Ideology-Its-Structure-Functions-and-Elective-Affinities.pdf (jost2009political)
+% This formulation of the distinction between left and right is characterised by
+% two different aspects~\citep{jost2018political}:
+% \begin{itemize}
+%     \item supporting vs opposing social change
+%     \item rejecting vs accepting inequality
+% \end{itemize}
+% The most common terms that people from both left and right associate with the right are: “conservative,” “system maintenance,” “order,” “individualism,” “capitalism,” “nationalism,” and “fascism,” and they associated the left with “progressive,” “system change,” “equality,” “solidarity,” “protest,” “opposition,” “radical,” “socialism,” and “communism”~\citep[p.~213-14]{fuchs1990}.
+% The two core components of the left-right dimension, attitudes towards change versus stability, and equality versus inequality, are connected due to historical factors, as Western societies have gradually become more egalitarian over the past few centuries in terms of human rights and liberties, economic distribution, and political power distribution.
+% Equality has increased in some instances due to revolutionary events, which were frequently resisted or opposed by conservatives and those associated with the right~\citep{nosek2009politics,burke1790reflections}.
 
 
 
@@ -425,36 +446,40 @@ Similarly, issues such as immigration, trade, and national security may be more 
 
 
 % practical definition: view on issues
-As a more practical and operable definition, we can define political leaning from the common positions that left and right have on issues such as economics, social policies, and governance.
+
 
 % Position of the left and right (wikipedia/allSides):
 
 % https://www.allsides.com/media-bias/rate-your-bias
 \begin{table}[ht]
     \centering
-    \begin{tabular}{p{0.2\linewidth} | p{0.4\linewidth} | p{0.4\linewidth}}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{p{0.25\linewidth} | p{0.55\linewidth} | p{0.55\linewidth}}
       Topic  & Left & Right \\ \hline
-      Social issues & \\
-      Abortion & rights of the mother, ability to have abortion & rights of the fetus, limiting and stopping abortions \\
-      Gay marriages & no difference with opposite-sex couples & marriage between man and woman, gay marriage is different from what God intended \\
-      Family & expanded view on non-traditional families & not encouraging divorced/single/unmarried parents (accepting them may be fine) \\
-      Sexual and Gendered behaviour & accepting and empathetic culture & \\
-      Sexuality & free expression is a right & \\
-      TODO finish
+      % Social issues & \\
+      Abortion & rights of the mother, ability to have abortion & rights of the fetus, limiting or stopping abortions \\ \hline
+      Gay marriages & no difference with opposite-sex couples & sacred marriage between man and woman \\ \hline
+      Family & expanded view on non-traditional families & not encouraging divorced, single, unmarried parents (accepting them may be fine) \\ \hline
+      Taxes & tax increases on the wealthy and more progressive tax systems & decrease taxes for everyone \\
+      % Sex and Gender & accepting and empathetic culture & \\
+      % Sexuality & free expression is a right & \\
     \end{tabular}
-    \caption{Left and Right positions according to AllSides}
+    }
+    \caption{Example of Left and Right positions according to AllSides}
     \label{tab:allsides_leaning_positions}
 \end{table}
 
-Table~\ref{tab:allsides_leaning_positions} shows how AllSides recaps the common positions about different issues.\footnote{\url{https://www.allsides.com/media-bias/rate-your-bias}}.
+As a more practical and operable definition, we can define political leaning from the common positions that left and right have on issues such as economics, social policies, and governance.
+
+Table~\ref{tab:allsides_leaning_positions} shows how AllSides recaps the common positions about different issues\footnote{\url{https://www.allsides.com/media-bias/rate-your-bias}}.
+Perspectives on multiple topics are listed: social issues, economic issues, foreign policy, environment and energy, healthcare, education, social security, and welfare.
 
 
 
 
-\subsection{Political Leaning Classification}
+\subsection{\statusgreen Political Leaning Classification}
 \label{ssec:lit_leaning_classification}
 
-FROM TTO2020
 
 %First we present literature on political leaning prediction, then on propaganda detection, and how the two analyses could be connected. %with the possible points of contact and why the two analysis could benefit from an integration.
 
@@ -464,7 +489,9 @@ FROM TTO2020
 Political leaning detection models have been produced for general media sources~\citep{budak} or for 
 specific political corpora such as congressional records~\citep{gentzkow}, political party websites~\citep{yan2017perils}, and political blogs~\citep{ahmed201}.  
 Others focused on inferring the political leaning of Twitter accounts~\citep{Cohen2013ClassifyingPO}, Facebook users~\citep{Bakshy1130}, politicians~\citep{thomas-etal-2006-get}, or political writers~\citep{iyyer-etal-2014-political}. 
-Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201, Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}. In this paper, we focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (see Section~\ref{sec:dataset}), using a neural network approach fused with propaganda features. %\todo{description ok?} 
+
+Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201, Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}.
+
 
 %often used supervised or unsupervised models applied to , or on opinion graph mining ~\cite{thomas-etal-2006-get}.
 
@@ -484,7 +511,19 @@ Various analysis methods were used in such studies, such as linguistic analysis 
 %As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\cite{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
 
 In~\citet{baly2020we}, authors used a BERT-based model for predicting the political leaning of individual articles. The model takes as input the text of the article and produces one of three labels: Left/Centre/Right. The model is trained with a corpus from AllSides website\footnote{\url{https://www.allsides.com}} which groups articles %with their political leaning 
-according to the leaning of their source or of their author. %\todo{manually?}
+according to the leaning of their source or of their author.
+
+
+The main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases where there is a difference between the political leaning of a particular article from that of its source.
+% Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to the given to their sources (AllSides confirmed that this is due to using author-based leaning labels for some articles). 
+This is a significant difference compared to approaches that only learn the media bias of the source~\citep{baly2020written,biessmann2016automating}.
+
+To achieve this result, the authors use a specially crafted triplet loss~\citep{schroff2015facenet}, where the positive example shares the same political leaning but is published by different media, while the negative one has a different political leaning but is published by the same source. In this way, the encoder will encode more similarly the articles with the same leaning and different source.
+
+Moving to the datasets, there are several resources available.
+Most of them, provide the annotation of the political leaning at the source level. In other words, the annotated data consists of lists of sources for each political leaning. This can be accompanied by a collection of articles with their full text, but there is no direct annotation of the leaning of the articles themselves.
+Between the resources that list the political leaning of sources, we can mention Media Bias/Fact Check\footnote{\url{https://mediabiasfactcheck.com/}} and NELA-GT-2018~\citep{DVN/ULHLCB_2019}.
+In addition, AllSides gives the label to the source level but sometimes also to the author level. This last resource is the origin of the dataset provided together with the paper from~\citet{baly2020we}.
 %Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to that given to their sources (AllSides confirmed that this is due to using author-based leaning). 
 %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
  %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
@@ -550,23 +589,73 @@ according to the leaning of their source or of their author. %\todo{manually?}
 
 % We try in the next sections to see if this is true.
 
+\subsection{\statusgreen Limitations}
+
+For political leaning, we see that the existing approaches are quite good at classifying the proper leaning of articles.
+
+% would be nice to see relationship between leaning and persuasion
+What we find slightly limiting, is that the existing works consider political leaning on its own. It could be very interesting to analyse the interaction between political leaning and persuasion, finding patterns between the two, and this is where we aim to bring our contribution with this thesis.
+We aim to understand which techniques change the most across the political spectrum, both in quantity and in terminology. At the current state of existing works, there is no insight into this.
+
+As a second limitation, we question to what extent we could improve the political leaning classification of news articles by considering propaganda analysis.
+Hypothesising a relationship between the two dimensions, our \acrshort{rq}3 goes in this direction.
 
 
-\section{\statusred Topics}
+
+\section{\statusorange Topics}
 \label{sec:lit_topics}
 
-\subsection{Topic definition}
+The last area of research that we cover in this thesis is the one related to topic analysis.
+As for the other sections, we first present a more theoretical background and then we describe the main techniques used to identify topics.
+
+% \cite{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
+
+\subsection{\statusgreen Topic definition}
 \label{sec:lit_topics_def}
 
-What it is:
-- categories / groups 
+We can start with a definition from the Cambridge Dictionary, which defines topic as ``a subject that is discussed, written about, or studied".\footnote{\url{https://dictionary.cambridge.org/dictionary/english/topic}}
 
-How it relates to concepts described in this thesis:
-- headlines, clusters
-- topic and anti-topic layers/words: refer to Chapter~\ref{ssec:lit_layers_of_info}
+The analysis of the topic aims to understand what the text is about, and what it covers. We find several definitions in dictionaries, and each one of them slightly differs from the other.
+This is true also for definitions from scientific literature, where we find quite significant differences in topic-related publications.
+For instance, %~\citet{jo2007detecting} define topics as semantic units that can function as building blocks for discovering knowledge. For
+~\citet{ding2011community}, views topics as document categories with various aspects, which can be specific to domains, applications, and contexts.
 
-\subsection{Computational Approaches}
+Practical definitions, like those rooted in topic modeling, view topics as groups of closely related words that share a certain probability of occurrence\citep{blei2003latent,blei2006correlated,blei2012probabilistic}, or based on keywords \citep{erten2004exploring,decker2007detection}.
+
+% What it is:
+% - categories / groups 
+
+Strictly related to news media, we have a practical definition that comes from IPTC (global standard body of the News Media) which has a specific standardisation for \emph{media topics}.
+The media topics consist of a taxonomy where there is a hierarchy from course-level topics to more fine-grained ones.
+The taxonomy is specific to news, and it defines 17 top-level topics, which are then expanded with different levels of detail.
+The full hierarchy with all the labels can be seen online.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
+IPTC also makes available an interactive TreeView where topics can be explored and expanded\footnote{\url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}}
+This taxonomy can be used as a conceptual method to annotate and compare topics uniformly.
+
+% Definition IPTC
+% IPTC media topics: hierarchical topics, defined by IPTC (global standard body of the News Media) with a topology.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
+%     The topology is specific to news, and it defines 17 top-level topics, which are then expanded with different levels of detail. TextRazor provides this type of topic, as for the other ones, as a set of 5 for each input article with the relative probability. So for each one of the topics, we can understand where it is placed in the hierarchy and the parent topics.
+
+
+% How it relates to concepts described in this thesis:
+% - headlines, clusters
+% - topic and anti-topic layers/words: refer to Chapter~\ref{ssec:lit_layers_of_info}
+
+% We see across the literature several types of topics
+
+\subsection{\statusorange Computational Approaches}
 \label{sec:lit_topics_computation}
+
+Moving to the computational side, there exist many topic modelling methods~\citep{vayansky2020review,ramage2009topic,churchill2022evolution,kherwa2019topic}.
+We can identify two main groups:
+\begin{enumerate}
+    \item unlabelled: frequency-based, are mostly unsupervised. Do not provide labels for the topics, are clustering algorithms
+    \item labelled: this group instead provides labelled topics in output, that are usually specified a priori (e.g., topology-based) or relate to entity types and custom patterns
+\end{enumerate}
+
+\todo{continue here}
+
+topic for fine-grained opinion analysis~\cite{stoyanov2008topic}
 
 
 Explain here different tools/methods that provide topics/entities
@@ -594,26 +683,34 @@ LDA assumes that each document is composed of a mixture of topics, and each topi
 Another technique for topic identification is called bag-of-words2. It is a simple way to represent text data as a collection of words and their frequencies. Bag-of-words ignores the order and structure of sentences, but it can capture some basic information about the content and vocabulary of a document. Bag-of-words can be used with simple NLP models such as TF-IDF or Naive Bayes to identify topics from texts.
 
 
-\subsubsection{Entity Annotators}
+\subsubsection{Entity-based / named topics}
 DBPedia spotlight: entity annotation is not very good. It struggles to recognise all the entities in the articles (proof?) → DISCARDED
 BLINK (Facebook): huge (30GB models to fit on RAM), not running on my laptop. On server: no NVIDIA drivers (wants GPU) → DISCARDED
 Spacy-entity-linker https://github.com/egerber/spaCy-entity-linker/ . Not very widely used. → DISCARDED
 
 Then from entities, need ways to derive the topics by navigating knowledge bases (wikidata in most cases)
 
-\subsubsection{TextRazor}
-TextRazor: seems more accurate, industrial, FreeBase taxonomy. Each entity is annotated with wikidata id and a list of FreeBase types. Also provides topics and fine-grained topics
+% \subsubsection{TextRazor}
+% TextRazor: seems more accurate, industrial, FreeBase taxonomy. Each entity is annotated with wikidata id and a list of FreeBase types. Also provides topics and fine-grained topics
 
-benchmarks? check that it is better than other tools
+% benchmarks? check that it is better than other tools
 % Regarding the validation of TextRazor, I am not aware of a benchmark done to check if it is better than other tools. It was suggested by Harith to use it, and I find that the data it provides is generally quite good (for topics and entities). But this is qualitative, I didn’t do a benchmark or looked up for benchmarks. The assumption was that it’s a commercial product and it should be good.
-some papers that claim to do benchmarks:
-http://giusepperizzo.github.io/publications/Rizzo\_Erp-LREC2014.pdf for the entities
-https://www.linkedin.com/pulse/google-nli-kill-market-linguistic-apis-review-yuri-kitin/ mentioning that TextRazor is useful because it links to Wikipedia/DBPedia
+% some papers that claim to do benchmarks:
+% http://giusepperizzo.github.io/publications/Rizzo\_Erp-LREC2014.pdf for the entities
+% https://www.linkedin.com/pulse/google-nli-kill-market-linguistic-apis-review-yuri-kitin/ mentioning that TextRazor is useful because it links to Wikipedia/DBPedia
 
-TextRazor is the only one that provides already hierarchical topics, the other ones always give topics that are not hierarchical or can be made hierarchical with external knowledge (e.g. using DBPedia to navigate broader topics).
+% TextRazor is the only one that provides already hierarchical topics, the other ones always give topics that are not hierarchical or can be made hierarchical with external knowledge (e.g. using DBPedia to navigate broader topics).
 
-What it provides
+% What it provides
 
+
+\subsection{\statusred Limitations}
+
+With this section, we have seen several methods to 
+
+commercial solutions, labels
+
+Missing analysis of the links between topics and other dimensions (leaning and persuasion)
 
 \section{\statusred Other related phenomena}
 \label{sec:lit_related}

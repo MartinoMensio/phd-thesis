@@ -153,8 +153,8 @@ Therefore, the types of topics that we use are the following:
     \todoAW{Is there any overlap or hierarchical structure?}
     \item Coarse topics: low-granularity topics, given as a set of probabilities to belong to 17 different topics. We rely on TextRazor to provide them.
     \item fine-grained topics: around 98k different topics, provided by TextRazor. Each topic is linked to wikidata.
-    \item IPTC media topics: hierarchical topics,\todoAW{OK... is there any relationship or potential mapping between IPTC topics and allsides?} defined by IPTC (global standard body of the News Media) with a topology.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
-    The topology is specific to news, and it defines 17 top-level topics, which are then expanded with different levels of detail. TextRazor provides this type of topic, as for the other ones, as a set of 5 for each input article with the relative probability. So for each one of the topics, we can understand where it is placed in the hierarchy and the parent topics.
+    \item IPTC media topics: hierarchical topics,\todoAW{OK... is there any relationship or potential mapping between IPTC topics and allsides?} defined by IPTC (global standard body of the News Media) with a taxonomy.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
+    The taxonomy is specific to news, and it defines 17 top-level topics, which are then expanded with different levels of detail. TextRazor provides this type of topic, as for the other ones, as a set of 5 for each input article with the relative probability. So for each one of the topics, we can understand where it is placed in the hierarchy and the parent topics.
     % \item entities with their types.
 \end{enumerate}
 
@@ -1152,10 +1152,10 @@ Instead, Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom} shows 
 \end{itemize}
 
 From this analysis, we can see that even though the quantity of propaganda is substantially higher in the Right, we can be able to identify some topics where instead the Left is using quite strong persuasion means.
-And the identified topics with more Left-leaning propaganda are topics where the Left has strongest opinions. For example, in regards to the capital punishment the Left has a strong opposition, while the Right might be less strong with language when covering this topic because it generally accepts more this practice.
-Or if we consider the types of accidents, it is meaningful that the Right is using more strong language when talking about car accidents, while the Left is more on railway and maritime. Furthermore, the Left has a stronger language when covering natural disasters, as they are usually related to bad environmental practices, a theme for which the Left usually shows its opposition.
+And the identified topics with more Left-leaning propaganda are topics where the Left has the strongest opinions. For example, in regards to capital punishment the Left has a strong opposition, while the Right might be less strong with language when covering this topic because it generally accepts more this practice.
+Or if we consider the types of accidents, it is meaningful that the Right is using stronger language when talking about car accidents, while the Left is more on railway and maritime. Furthermore, the Left has a stronger language when covering natural disasters, as they are usually related to bad environmental practices, a theme for which the Left usually shows its opposition.
 
-The language contains more propaganda and is stronger when the writer either considers the topic more important, or is criticising the status quo~\citep{rose1992political}. And we confirm this with our analysis.  
+The language contains more propaganda and is stronger when the writer either considers the topic more important, or is criticising the status quo~\citep{rose1992political}. We confirm this with our analysis.  
 
 
 \subsection{\statusgreen Correlation of propaganda quantities between Leanings across Topics}

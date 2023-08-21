@@ -391,15 +391,16 @@ We will use all these subsets in the following Section~\ref{ssec:ps_prop_leaning
 % State of the Art
 
 % Problems: learning the source instead of learning L/R task
-After having described the datasets, in this section we present some of the models that have been used in the literature for the task of \emph{political leaning classification}, and then we proceed to reproduce the baseline.
+After having described the datasets, in this section we present the model that we have chosen from the literature (see Chapter~\ref{sec:lit_leaning}) for the task of \emph{political leaning classification}, and then we proceed to reproduce the baseline.
 
 % FROM TTO2020
 
-Political leaning detection models have been produced for general media sources~\citep{budak} or for 
-specific political corpora such as congressional records~\citep{gentzkow}, political party websites~\citep{yan2017perils}, and political blogs~\citep{ahmed201}.  
-Others focused on inferring the political leaning of Twitter accounts~\citep{Cohen2013ClassifyingPO}, Facebook users~\citep{Bakshy1130}, politicians~\citep{thomas-etal-2006-get}, or political writers~\citep{iyyer-etal-2014-political}. 
-Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201,Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}.
-In this section, we focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (see Section~\ref{ssec:ps_leaning_data}). %, using a neural network approach fused with propaganda features. %\todo{description ok?} 
+% Political leaning detection models have been produced for general media sources~\citep{budak} or for 
+% specific political corpora such as congressional records~\citep{gentzkow}, political party websites~\citep{yan2017perils}, and political blogs~\citep{ahmed201}.  
+% Others focused on inferring the political leaning of Twitter accounts~\citep{Cohen2013ClassifyingPO}, Facebook users~\citep{Bakshy1130}, politicians~\citep{thomas-etal-2006-get}, or political writers~\citep{iyyer-etal-2014-political}. 
+% Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201,Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}.
+
+We focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (see Section~\ref{ssec:ps_leaning_data}). %, using a neural network approach fused with propaganda features. %\todo{description ok?} 
 
 %often used supervised or unsupervised models applied to , or on opinion graph mining ~\cite{thomas-etal-2006-get}.
 
@@ -427,9 +428,9 @@ according to the leaning of their source or of their author. %\todo{manually?}
 
 
 % Problem: learning the source instead of the political leaning
-Main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases were there is a difference between the political leaning of a particular article from that of its source.
+The main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases were there is a difference between the political leaning of a particular article from that of its source.
 % Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to the given to their sources (AllSides confirmed that this is due to using author-based leaning labels for some articles). 
-Other approaches focus on learning the media bias of a the source~\citep{baly2020written,biessmann2016automating}.
+% Other approaches focus on learning the media bias of a the source~\citep{baly2020written,biessmann2016automating}.
 
 
 
