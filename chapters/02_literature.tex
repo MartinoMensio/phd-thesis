@@ -1,13 +1,13 @@
 \chapter{\statusgreen Related Work}
 \label{chap:literature}
 
-In this chapter, we present the state of the art for the different research areas that we plan to touch in the next chapters. Each of the sections is related to one of the Research Questions presented in the previous chapter.
+In this chapter, we present the state of the art for the different research areas that are covered in the next chapters. Each of the sections is related to one of the Research Questions presented in the previous chapter.
 
 We start from the literature targeted to analysing similar articles (Section~\ref{sec:lit_relationships}), which considers relationships and similarities between different documents.
 Then we move to the literature about persuasion detection, especially focusing on sentiment and propaganda detection (Section~\ref{sec:lit_persuasion}).
 Next, we describe the literature about political leaning, describing the definitions and the approaches for the automatic classification (Section~\ref{sec:lit_leaning}).
 And finally, we present the works on topic recognition, giving an overview of the existing approaches (Section~\ref{sec:lit_topics}).
-After this overview of each of them, we present some additional related phenomena (Section~\ref{sec:lit_related}).
+After this overview of each of the areas covered, we present some additional related phenomena (Section~\ref{sec:lit_related}).
 
 Subsequently, we discuss the limitations of not considering these research areas together, and the potential benefits of performing comparative analysis across dimensions (Section~\ref{sec:lit_discussion}).
 
@@ -29,15 +29,15 @@ To conclude, we present the scope of this work in Section~\ref{sec:lit_scope}.
 
 Our starting point is the literature that aims at analysing multiple versions of the same story, across different news sources.
 
-From the enormous multitude of articles that get published every day, several datasets and resources of parallel news have been built (described in Subsection~\ref{ssec:lit_relationships_parallel}.
-We are interested in works that explore what changes between similar articles, and the literature defines and deals with different tasks (Subsection~\ref{ssec:lit_relationships_tasks}). We focus specifically on corroboration and omission detection (Subsection~\ref{ssec:lit_relationships_corr_omiss}.
+From the enormous multitude of articles that get published every day, several datasets and resources of parallel news have been built (described in Subsection~\ref{ssec:lit_relationships_parallel}).
+We are interested in works that explore what changes between similar articles, and the literature which defines and deals with different tasks (Subsection~\ref{ssec:lit_relationships_tasks}). In particular, we focus on corroboration and omission detection (Subsection~\ref{ssec:lit_relationships_corr_omiss}).
 
 \subsection{\statusgreen Parallel News}
 \label{ssec:lit_relationships_parallel}
 
-To talk about similarity between news articles we first need to introduce the concept of \emph{\gls{parallel-news}}
+To talk about similarity between news articles we first need to introduce the concept of \emph{\gls{parallel-news}}.
 
-\emph{Parallel corpus} is a term that is frequently utilised when multiple languages are involved.
+Parallel news is a specific type of \emph{parallel corpus}, a term which is frequently utilised when multiple languages are involved.
 These resources, such as the OPUS dataset~\citep{tiedemann2012parallel}, are useful for applications in computational linguistics, translation studies and cross-linguistic corpus studies~\citep{brown1991aligning,ramesh2022samanantar,ziemski2016united,kunchukuttan2017iit,banon2020paracrawl}.
 
 We take the usage of this term in a monolingual setting, where each document contains a certain number of variations from the others, but still covers the same main events.
@@ -45,12 +45,12 @@ This specific connotation is considered in works that perform sentence-level par
 More specifically in the news media environment, several datasets and tools have been developed with the aim of exposing the users to several points of view~\citep{bozdag2015breaking}, in order to break the filter bubble~\citep{pariser2011filter} that is built around them.
 
 Some resources just group together news articles that are related, such as news aggregators, like Google News with the feature \emph{Full Coverage},\footnote{\url{https://blog.google/products/news/new-google-news-ai-meets-human-intelligence/}} that presents a collection of articles for each headline.
-There are also resources that try to bring together opposing points of view, such as Allsides Headline Roundup,\footnote{\url{https://www.allsides.com/headline-roundups}} or research works that try to provide a similar result~\citep{trampuvs2015diversinews,park2009newscube}.
+There are also resources that try to bring together opposing points of view, such as AllSides Headline Roundup,\footnote{\url{https://www.allsides.com/headline-roundups}} or research works that try to provide a similar result~\citep{trampuvs2015diversinews,park2009newscube}.
 
 
 % \cite{bountouridis2018explaining}
 
-Some of these resources are hand-curated while others are algorithmically synthesised. In the hand-curated groups (e.g., AllSides), there are usually domain experts or editors who manually put together news articles that share the same events and details. With AllSides, the editors select one article from the Left, one from the Center and one from the Right to ensure that different sides of the story are presented.
+Some of these resources are hand-curated while others are algorithmically synthesised. In the hand-curated groups (e.g., AllSides), there are usually domain experts or editors who manually put together news articles that share the same events and details. With AllSides, the editors select the articles from selected news sources to ensure that different sides of the story are presented.
 Instead, with algorithmic resources (e.g., Google News Full Coverage), there is an automated approach that, based on clustering algorithms, creates groups of articles that cover the same story~\citep{marutho2018determination,alelyani2018feature,karimi2018news}.
 
 \subsection{\statusgreen Common Tasks}
@@ -64,14 +64,16 @@ The research community has created different benchmarks to evaluate models on th
 As for what discerns the models, we have had an evolution over the last years, starting from the first generations of word embeddings~\citep{pennington2014glove,mikolov2013efficient}, up to the recent family of transformers-alike models~\citep{devlin2018bert,cer2018universal,yang2019xlnet,reimers2019sentence}.
 
 We then find another task that exploits similar ideas: \emph{finding related claims}~\citep{almeida2020text}.
-This task is extremely useful for works that try to estimate the truthiness of claims, by looking for similar claims that have already been verified or refuted. This process is used as the first step in automated fact-checking~\citep{nakov2021automated,guo2022survey}. This task is particularly challenging because small changes (e.g., a number reported or a negation) can drastically change the truthiness of a sentence.
+This task is extremely useful for works that try to estimate the truthiness of claims, by looking for similar claims that have already been verified or refuted.
+The literature uses it as the first step in automated fact-checking~\citep{nakov2021automated,guo2022survey}.
+This task is particularly challenging because small changes (e.g., a number reported or a negation) can drastically change the truthiness of a sentence.
 
 
 % Suggest items to read (recommender systems)
-Another task that relies on semantic similarity, is the recommendation of content (e.g., news articles) that is similar to a reference one.
+Another task that relies on semantic similarity, is the \emph{recommendation of content} (e.g., news articles) that is similar to a reference one.
 This opens the immense field of recommender systems~\citep{tintarev2006similarity,karimi2018news,feng2020news}, where there may be more than one objective function to satisfy.
 Besides semantic similarity, the alignment with the point of view of the reader is important (but needs to be limited to avoid the filter-bubble effect)~\citep{lunardi2020metric,nguyen2014exploring,lunardi2019representing}.
-Or also the serendipity~\citep{ziarani2021serendipity,abdollahpouri2021toward,raza2022news} of recommendations.
+Or some other approaches additionally consider the serendipity of recommendations~\citep{ziarani2021serendipity,abdollahpouri2021toward,raza2022news}.
 
 Lastly, we can also consider as related the \emph{plagiarism detection} task.
 In this task, the goal is to spot fragments of text that have been copied from others, without reference or with a certain proportion~\citep{stein2006near,alzahrani2010fuzzy,arabi2022improving}.
@@ -80,7 +82,11 @@ In this task, the goal is to spot fragments of text that have been copied from o
 \subsection{\statusgreen Corroboration and Omission Detection}
 \label{ssec:lit_relationships_corr_omiss}
 
-The task that instead we focus on with this work, is the investigation of \textit{corroboration and omission} across multiple sources.
+In addition to the tasks mentioned in the previous paragraphs,
+\textit{corroboration and omission}
+is another task identified by the computational linguistic community.
+With this regard, our work focuses mostly on the investigation of corroboration and omissions
+across multiple sources.
 This task focuses on comparing and contrasting similar articles, to find which parts are in common and which ones are omitted~\cite{ehrhardt2021omission,bountouridis2018explaining,ko2023claimdiff}.
 By analysing multiple news articles it becomes possible to understand the interrelationships between multiple points of view.
 
@@ -94,13 +100,13 @@ The approach is validated by showing a positive correlation between these indica
 % What is missing?
 
 % Fine-grained study of the terms that change $\rightarrow$ our goal to expand
-From these works on corroboration and omission detection, we find it limiting that the analysis is performed only considering points of information/details but not the single words involved.
+From these works on corroboration and omission detection, we find limiting that the analysis is performed only considering points of information/details but not the single words involved.
 Once the details are identified across articles, it would be very useful to analyse the slight variations in terms.
 For example, it could be possible to identify terms that are unique and terms that instead are used across multiple sources. By bringing this analysis to the word level, we can be more specific.
 We will expand on this in Chapter~\ref{chap:common_ground_search}, where we address this limitation together with other limitations (e.g., semantic similarity models used, more resistant to term changes).
 
 % What the term choice may mean (persuasion) $\rightarrow$ using literature on persuasion, considering multiple research areas together 
-The next big limitation that we find, is that it would be very important to go beyond the single analysis of similarities, and study what these changes involve.
+The next big limitation that we find, is stopping at the analysis of similarities, and not studying what these changes involve.
 For this reason, in our work we also explore other related dimensions, such as persuasion.
 Our aim is to see how the variations between multiple articles (specific term choices) cause changes in detected persuasion. In other words, what is the effect of using one term instead of a synonym that may carry an additional load?
 
@@ -113,24 +119,24 @@ This type of limitation can be overcome only with a study that involves multiple
 
 The next research area that we are touching in our work is \emph{persuasion detection}.
 We are interested in getting an understanding of what words convey, beyond the simple expression of content.
-We want to have an additional study of what specific choices (terms, details, order of presentation) may convey.
+Therefore, we want to have an additional study of what specific choices (terms, details, order of presentation) may convey.
 
 % Before describing the literature, we need here to present our motivation for introducing this research topic. 
 
 
-Contextualising in the current attention economy~\citep{davenport2001attention}, recent literature sees a rise in the race for attention also in news articles, characterised by the emergence of clickbaitness and language that is increasingly more loaded ~\citep{bazaco2019clickbait,davenport2001attention}.
+Contextualising in the current attention economy~\citep{davenport2001attention}, recent literature sees a rise in the race for attention also in news articles, characterised by the emergence of clickbaitness and language that is increasingly more popular ~\citep{bazaco2019clickbait,davenport2001attention}.
 With the enormous amount of news sources and news articles covering the same events, it is very important for news sources to compete for the clicks and reads of the consumers.
 
 Persuasion is generally defined as a method to \emph{influence a person's beliefs, attitudes, intentions, motivations, or behaviours}~\cite{gass2018persuasion}.
-We see several related concepts in the literature that can be considered as forms of persuasion:
+We see several related concepts in the literature that can be considered as forms of persuasion. We select to explore two of them:
 \begin{itemize}
-    \item sentiment overloading: using emotional language to convey strong emotions to the reader; % loaded language instead?
+    \item sentiment overloading: use of emotional language to convey strong emotions to the reader; % loaded language instead?
     \item \gls{propaganda}:  information, ideas, opinions, or images, often only giving one part of an argument, that are broadcast, published, or in some other way spread with the intention of influencing people's opinions;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}} % to indoctrinate a population towards an individual or a particular agenda
-    \item \gls{populism}: political ideas and activities that are intended to get the support of ordinary people by giving them what they want;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/populism}}
-    \item coercion: the use of force to persuade someone to do something that they are unwilling to do.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
+    % \item \gls{populism}: political ideas and activities that are intended to get the support of ordinary people by giving them what they want;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/populism}}
+    % \item coercion: use of force to persuade someone to do something that they are unwilling to do.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
 \end{itemize}
 
-Across these multiple forms, we explore in a more detailed way the first two: sentiment and propaganda.
+% Across these multiple forms, we explore in a more detailed way the first two: sentiment and propaganda.
 Persuasion is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
 Instead, the relationship with propaganda comes from the inherent goal of propaganda to influence the public's view about an idea or a group~\citep{bernays,jowett2018propaganda}.
 
@@ -169,7 +175,7 @@ The more recent ones rely on Deep-Learning models~\citep{zhang2018deep}, where t
 \begin{itemize}
     \item document encoding: Bag of Words~\citep{moraes2013document,zhai2016semisupervised}, word embeddings~\citep{tang2015document,chen2016neural}, dense document vectors~\citep{le2014distributed}
     \item network architectures: feed-forward~\citep{duncan2015neural}, autoencoders~\citep{zhai2016semisupervised,wu2019semi}, CNN~\citep{jianqiang2018deep,sun2019aspect}, recurrent~\citep{chen2017recurrent,xu2016cached}, recursive~\citep{wang2016recursive,nguyen2015phrasernn}, memory networks~\citep{li2017end,lv2021aspect}
-    \item attention mechanism: no attention, hierarchical~\citep{zhou2016attention}, sequence, alignment
+    \item attention mechanism: no attention, hierarchical~\citep{zhou2016attention} %, sequence, alignment
 \end{itemize}
 
 
@@ -209,8 +215,8 @@ This means that there are less publicly available tools that perform this type o
 One of the few exceptions is Stanford CoreNLP which is based on a RNN~\citep{socher2013recursive} that accounts for the sequence but also for the dependency tree of the sentence (in other words, discovering the combination rules autonomously). It is based on a dataset that links sentiment scores to a dependency tree (Sentiment Treebank\footnote{\url{https://nlp.stanford.edu/sentiment/treebank.html}}).
 
 If at first glance, the advanced deep learning models may seem more reliable, we find that the most robust and common methods are the simpler ones.
-We have recent examples of lexicon-based approaches~\citep{okango2022dictionary,mitra2020sentiment}.
-And especially in combination with aspect-based detection, we see that the status is yet in an exploratory phase, without major shared tools being built.
+We have recent examples of lexicon-based approaches~\citep{okango2022dictionary,mitra2020sentiment}, as a proof that it is a technique very powerful still today.
+For complex models instead, especially if in combination with aspect-based detection, we see that the status is yet in an exploratory phase, without major shared tools being built.
 
 \subsection{\statusgreen Propaganda}
 \label{sec:lit_propaganda}
@@ -233,8 +239,6 @@ In his book on propaganda, Edward Bernays defines it as a \emph{consistent, endu
 Propaganda possesses unique characteristics that go beyond its ability to persuade. It typically targets a significant audience, promotes the agenda of a particular group, and employs flawed reasoning and/or emotional appeals~\cite{miller1939techniques}.
 
 Injecting propaganda into the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas.
-Propaganda can more practically be defined as the usage of a set of techniques. These techniques vary from the usage of emotional language (e.g. loaded language, appeal to fear) to logical fallacies (bandwagon, red herring).
-
 Propaganda is very related to the agenda-setting theory \citep{Cohen_1964,mccombs1972agenda}, which describes the ability of news media to influence the importance placed on the topics of the public agenda.
 
 It has become very relevant especially in the recent years, affecting the public discourse in more than 80 countries across the globe~\citep{bradshaw2021industrialized}.
@@ -245,6 +249,8 @@ Computational propaganda is defined as \emph{the assemblage of digital platforms
 and increase discoverability of purposefully misleading information across the information
 environment}~\citep{hassan2023}.
 In the framework described in~\citet{hassan2023}, the media has a central position in amplifying propaganda and influencing the audience.
+
+Propaganda can more practically be defined as the usage of a set of techniques. These techniques vary from the usage of emotional language (e.g. loaded language, appeal to fear) to logical fallacies (bandwagon, red herring).
 
 Over the next paragraphs, %we first give more theoretical background about the \emph{propaganda model}, which describes the way that propaganda acts on society.
 %Afterwards, 
@@ -281,13 +287,13 @@ These techniques are:
     \item Repetition: repeating something multiple times, to make it accepted;
     \item Exaggeration or minimisation: using excesses to make something more or less important;
     \item Doubt: questioning the credibility of someone/something;
-    \item Appeal to fear/prejudice: attempting to create support for an idea by increasing fear towards an alternative.
-    \item Flag-waving: justifying an action based on the undue connection to nationalism or patriotism
+    \item Appeal to fear/prejudice: attempting to create support for an idea by increasing fear towards an alternative;
+    \item Flag-waving: justifying an action based on the undue connection to nationalism or patriotism;
     \item Causal oversimplification: assuming that there is a single, simple cause of an outcome;
     \item Slogans: using a short and striking or memorable phrase;
     \item Appeal to authority: asserting the truthiness of a claim with the only evidence that someone authoritative supports it;
     \item Black and white fallacy: considering no middle way between two extremes;
-    \item Thought-terminating cliché: not allowing critical thought using generic words usually from ``folk wisdom"
+    \item Thought-terminating cliché: not allowing critical thought using generic words usually from ``folk wisdom";
     \item Whataboutism: charging the opponent with hypocrisy without disproving their argument;
     \item Reductio ad Hitlerum: oppose an idea by suggesting it is popular in a group hated by the audience;
     \item Red herring: diverting the attention with unrelated material of conversation;
@@ -308,10 +314,10 @@ Most related work is limited to binary detection of propaganda (i.e. propaganda 
 
 Several datasets for document-level detection have been released during the last decade.
 First of all, in the English language:
-TSHP-17~\citep{rashkin2017truth},
+TSHP-17~\citep{rashkin2017truth} and
 QPROP~\citep{alberto_barron_cedeno_2019_3271522}.
-And then we start to observe replications and additional works in other languages: Hindi~\citep{chaudhari2022h,chaudhari_deptii_2022_5828240}
-and Czech~\citep{baisa2019benchmark}.
+We start to observe replications and additional works in other languages: for example in Hindi~\citep{chaudhari2022h,chaudhari_deptii_2022_5828240}
+and in Czech~\citep{baisa2019benchmark}.
 
 \begin{figure}[!htb]
     \centering
@@ -357,7 +363,7 @@ Propaganda detection, on the other hand, is relatively a young task.
 While there are multiple datasets for document-level detection, only one dataset has been publicly shared for fine-grained analysis.
 Therefore, there are potential limitations of the dataset and of the models trained with it.
 There is, to the best of our knowledge, no study on the unbalance of this dataset. Models trained could be learning unwanted associations or not be comprehensive of propaganda with a context different from the examples contained in the training set.
-Applying propaganda detection in the wild could cause both false positives and false negatives.
+Applying propaganda detection ``in the wild" could cause both false positives and false negatives.
 Furthermore, the evaluation metrics of the models generally provide lower-than-optimal values, denoting  this as a quite difficult task.
 However, we find it really interesting and valuable to have an overview of the techniques used.
 
@@ -370,7 +376,7 @@ We end this section with a reflection on persuasion techniques.
 We described the detection of such techniques, but how intertwined are they with the contents and facts described in the news articles?
 The text of articles can be seen as conveying two layers of information:
 \begin{enumerate}
-    \item the first layer, the most visible, is the layer of \emph{facts}: entities (what/who is mentioned) and actions (what happens), combined into events. This is usually called \emph{topic} or \emph{topical words};
+    \item the first layer, the most visible, is the layer of \emph{facts}: entities (what/who is mentioned) and actions (what happens), combined into events. This is usually called \emph{topic} made of \emph{topical words};
     \item a second layer of additional and subjective information: choice of terms to use, details to include and exclude, order of presentation, expression of opinion, subjective statements. All these means are used to convey a certain point of view, and therefore we use the umbrella term of \emph{persuasion}. This may be called \emph{anti-topical} component of the text.
 \end{enumerate}
 
@@ -523,7 +529,7 @@ In~\citet{baly2020we}, authors used a BERT-based model for predicting the politi
 according to the leaning of their source or of their author.
 
 
-The main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases where there is a difference between the political leaning of a particular article from that of its source.
+The main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases where there is a difference between the political leaning of a particular article from the one of its source.
 % Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to the given to their sources (AllSides confirmed that this is due to using author-based leaning labels for some articles). 
 This is a significant difference compared to approaches that only learn the media bias of the source~\citep{baly2020written,biessmann2016automating}.
 
@@ -607,7 +613,7 @@ What we find slightly limiting, is that the existing works consider political le
 We aim to understand which techniques change the most across the political spectrum, both in quantity and in terminology. At the current state of existing works, there is no insight into this.
 
 As a second limitation, we question to what extent we could improve the political leaning classification of news articles by considering propaganda analysis.
-Hypothesising a relationship between the two dimensions, our \acrshort{rq}3 goes in this direction.
+Our \acrshort{rq}3 goes in this direction by hypothesising a relationship between the two dimensions.
 
 
 
@@ -629,7 +635,7 @@ This is true also for definitions from scientific literature, where we find quit
 For instance, %~\citet{jo2007detecting} define topics as semantic units that can function as building blocks for discovering knowledge. For
 ~\citet{ding2011community}, views topics as document categories with various aspects, which can be specific to domains, applications, and contexts.
 
-Practical definitions, like those rooted in topic modeling, view topics as groups of closely related words that share a certain probability of occurrence\citep{blei2003latent,blei2006correlated,blei2012probabilistic}, or based on keywords \citep{erten2004exploring,decker2007detection}.
+Practical definitions, like those rooted in topic modeling, view topics as groups of closely related words that share a certain probability of occurrence~\citep{blei2003latent,blei2006correlated,blei2012probabilistic}, or based on keywords \citep{erten2004exploring,decker2007detection}.
 
 % What it is:
 % - categories / groups 
@@ -695,7 +701,7 @@ The approach uses a generative probabilistic model and Dirichlet distributions.
 
 % Problem: difficult to extract labels
 This approach, like the others that belong to the group of unlabelled, has as its main limitation that it is difficult to extract labels for the identified topics.
-The optuts of the model are clusters of documents, and most important words for each of the clusters. But from this information, to have a label for the topic, the process is not easy. Usually in the literature, there is a step of manual revision of the clusters and the important words and then a manual labelling of the clusters.
+The optuts of the model are clusters of documents, and most important words for each of the clusters. But the process is not easy to have a label for the topic from this information. Usually, in the literature there is a step of manual revision of the clusters and the important words and then a manual labelling of the clusters.
 During this manual revision, it can emerge the problem that clusters look similar or related, and it may be necessary to join the clusters together or to modify the number of desired clusters and run the method again.
 
 % The problem of assigning labels: can we really tell what is different about the groups?
@@ -703,7 +709,7 @@ During this manual revision, it can emerge the problem that clusters look simila
 % Need to know beforehand how many topics we want in output.
 The second big problem is that the number of output topics needs to be inserted as input parameter to the algorithm. This means that multiple runs are necessary and the study of this hyperparameter is something very critical.
 
-Other approaches belonging to the same group of topic modelling approaches, even if they use more advanced features~\citep{wang2012nonnegative,landauer1998introduction,grootendorst2022bertopic}, have the same limitations.
+Also other approaches that belong to the same group of topic modelling, have the same limitations even if they use more advanced features~\citep{wang2012nonnegative,landauer1998introduction,grootendorst2022bertopic}.
 
 
 \subsubsection{Knowledge-based}
@@ -756,12 +762,12 @@ As a second limitation, the topic analysis is usually performed in isolation wit
 Instead, we want to analyse topics together with persuasion, political leaning and similarities.
 We see some works that do topic analysis with other factors (e.g., joint topic and opinion analysis in~\cite{stoyanov2008topic}), but not together with propaganda or political leaning.
 
-\section{\statusorange Related Phenomena}
+\section{\statusgreen Related Phenomena}
 \label{sec:lit_related}
 
 Here we talk about other phenomena that are related but are outside the scope of this thesis.
 We discuss them just to aknowledge the relationship with our research.
-In the following subsections, we cover the relationship with misinformation and populism.
+% In the following subsections, we cover the relationship with misinformation and populism.
 %, argumentation mining and defend the scope of this thesis: propaganda.
 
 % But at the same time mention the relationship with them
@@ -795,21 +801,21 @@ By doing so, our results should be more general, and if needed can be applied to
 \label{sec:lit_related_populism}
 
 Relationship between propaganda and populism:
-~\cite{oates2021rewired,tumber2021routledge,pasquino2008populism}
+% ~\cite{oates2021rewired,tumber2021routledge,pasquino2008populism}
 %https://ebrary.net/177441/sociology/the_routledge_companion_to_media_disinformation_and_populism
-they are very strictly linked.
+% they are very strictly linked.
 % http://www.ask-force.org/web/Fundamentalists/Pasquino-Populism-and-Democrady-2005.pdf 
 
 % % concepts
 On the conceptual level, propaganda and populism are two distinct concepts. The first describes more the persuasion mean used to push for an agenda, while the second one is usually used more together with the actor that wants to push the agenda. Populism is \emph{a type of politics that claims to represent the opinions and wishes of ordinary people}.\footnote{\url{https://www.oxfordlearnersdictionaries.com/definition/english/populism}}
-And to be on the side of ordinary people, it uses propaganda as a mean. So a populistic \emph{actor} uses propaganda \emph{techniques}. Conceptually, they are related.
+And to be on the side of ordinary people, it uses propaganda as a mean. So a populistic \emph{actor} uses propaganda \emph{techniques}. Therefore, even with their distinction, they are related.
 % We need them to be related to demonstrate that propaganda exists across all political leanings.
 
 
-Literature presents propaganda and populism frequently together.
+Literature presents propaganda and populism frequently together~\cite{oates2021rewired,tumber2021routledge,pasquino2008populism}.
 \citet{oates2021rewired} expresses the
 concept of \emph{rewired propaganda} to analyse the interplay of propaganda and populism. Online information, while making citizens more informed, is overshadowed by the internet's ability to spread false information through populist propaganda.
-The idea of "rewired propaganda" is proposed as a way to explain a method of communication that uses false information and campaign strategies, especially evident in how both traditional and social media worked during the 2016 US elections.
+The idea of ``rewired propaganda" is proposed as a way to explain a method of communication that uses false information and campaign strategies, especially evident in how both traditional and social media worked during the 2016 US elections.
 When populism takes over from ideology-based politics, like in the 2016 US elections, rewired propaganda becomes as influential in democracies as it has been in non-free countries like Russia.
 
 While populism detection is outside of the scope of this thesis, we use the relationship between populism and propaganda in Chapter~\ref{ssec:ps_prop_leaning_imbalanced} to support our analysis the imbalance of propaganda datasets.
@@ -824,7 +830,7 @@ While populism detection is outside of the scope of this thesis, we use the rela
 After having presented the different research areas that we relate with, we present here an analysis of the \emph{niche} that we want to fill with this work.
 
 We see that each of the several areas have a strong and wide literature.
-Our main observation is that each one of them is like in a silo and not considering the other ones.
+Our main observation is that each one of them is siloed and does not consider the other ones.
 For example, the literature on propaganda detection does not show meeting points with the literature on political leaning classification.
 Or also, we do not find approaches that tackle together the analysis of propaganda techniques with the study of the topics.
 
@@ -867,6 +873,6 @@ We see that these ingredients could be related, and we want to understand their 
 % How does propaganda relate to shared/unique information? How do small variations relate to propaganda?
 
 We exclude from the scope the related phenomena discussed in Section~\ref{sec:lit_related}. These are interesting additional links that can be explored by future works.
-We also exclude the development or refinement of models that work in one only of the research topics listed above. This work is focused instead on the relationship between these ingredients.
+We also exclude the development or refinement of models that belong to a single research topics listed above. This work is focused instead on the relationship between these ingredients.
 
 The following chapters will start gradually from the first ingredient, adding each time a new one to the mix. 
