@@ -1,10 +1,11 @@
 \chapter{\statusgreen Introduction}
 \label{chap:intro}
 
-\todoHAinline{Of course, at this stage, we’re not looking for perfection, so I focused more on the parts that are not at a ‘good enough’ level. This is mainly the RQs, and Hypotheses. I made suggestions for each RQ so consider those carefully. Wrt Hypotheses, I would expect them to map directly to your RQs, I think your 3rd H does, but the 1st and 2nd Hs seemed off the mark.
-The other weak part is Motivation. If you have time, try to spin the text around what problem you’re trying to solve or what new knowledge you’re trying to create. Current narrative is about what group of stakeholders you’re trying to benefit. This is generally not the point, and more so when the work does not involve any stakeholder groups; ie no user studies.}
-\todoAWinline{I think the basic content here is fine, but it's really verbose. There are points where what you're saying is confusing, and I suspect it's because you're not getting things sorted out in your own head before typing.
-I'd recommend attempting to reduce what you've written by a third, and that process might reveal how you could express your ideas more concisely.}
+% ROUND 1 comments
+% \todoHAinline{Of course, at this stage, we’re not looking for perfection, so I focused more on the parts that are not at a ‘good enough’ level. This is mainly the RQs, and Hypotheses. I made suggestions for each RQ so consider those carefully. Wrt Hypotheses, I would expect them to map directly to your RQs, I think your 3rd H does, but the 1st and 2nd Hs seemed off the mark.
+% The other weak part is Motivation. If you have time, try to spin the text around what problem you’re trying to solve or what new knowledge you’re trying to create. Current narrative is about what group of stakeholders you’re trying to benefit. This is generally not the point, and more so when the work does not involve any stakeholder groups; ie no user studies.}
+% \todoAWinline{I think the basic content here is fine, but it's really verbose. There are points where what you're saying is confusing, and I suspect it's because you're not getting things sorted out in your own head before typing.
+% I'd recommend attempting to reduce what you've written by a third, and that process might reveal how you could express your ideas more concisely.}
 
 % Orientation: wider context
 
@@ -140,9 +141,10 @@ By analysing the relationship between propaganda, political leanings and topics,
 And on the theoretical/qualitative research level, there are some works that explain and motivate this relationship by analysing a specific event or timeframe~\citep{pierri2023propaganda,golovchenko2020cross,blumberg1986comparative}.
 But on the computational side, we find a lack of approaches that consider these factors together.
 
-A computational approach, which considers together document similarity, propaganda, leaning and topics, is likely to benefit different groups of stakeholders:\todoHA{This is ok, but a better narrative would be to focus on where you are advancing knowledge, especially since you did not do any user studies that involved these stakeholders.. if you have time then change the narrative. }
+A computational approach, which considers together document similarity, propaganda, leaning and topics, would contribute to knowledge in several ways:
+% \todoHA{This is ok, but a better narrative would be to focus on where you are advancing knowledge, especially since you did not do any user studies that involved these stakeholders.. if you have time then change the narrative. }
 
-\todo{Motivation: focus more on advancing knowledge, take the points below and rewrite them to put focus on advancing knowledge}
+% \todo{Motivation: focus more on advancing knowledge, take the points below and rewrite them to put focus on advancing knowledge}
 
 % \begin{enumerate}
 %     \item Computational Researchers:
@@ -151,7 +153,8 @@ A computational approach, which considers together document similarity, propagan
         that the political ideology of news writers/editors conditions how news articles are written considering economic reasons, unconscious assumptions and reporter-sources relations that are linked to political leanings~\citep{schudson2002news}. Therefore, these factors result in news articles that contain more or less subtle persuasion devices for the reader (one of which is propaganda). By analysing and quantifying these relationships, we can understand their weight. % contribution 1: compute weights of these relationships, understand better the relationships
         \item By using together these variables, we can try to improve some automated approaches that currently rely on just one input feature, such as political leaning classification using propaganda and topic features. By exploiting the relationship between these features, we can help \acrfull{ml} models to have higher values for the target metrics. % contribution 2: improve F1 using mix of feature
         \item With an analysis that considers multiple variables, we may discover problems and inconsistencies that can only be discovered with combined analyses (e.g., data imbalance). This is a very important point when using \acrshort{ml}-based approaches, as improving the quality of the data is a key element. % contribution 3: We highlight the problem of imbalanced dataset for propaganda detection
-    \end{enumerate}\todoHA{Fits better in a discussion section at the end of the thesis}
+    \end{enumerate}
+    % \todoHA{Fits better in a discussion section at the end of the thesis}
 %     \item Users reading the news:
 %     \begin{enumerate}
 %         \item link and show similarities to other documents on how the same topic is covered.\todoAW{Not a sentence} Especially articles from other political leanings which may have a different angle.\todoAW{Not a sentence}
@@ -267,7 +270,7 @@ This is answered in Chapter~\ref{chap:topics}.
 
 
 
-\section{\statusgreen Research hypotheses}
+\section{\statusgreen Research Hypotheses}
 \label{sec:intro_hyp}
 
 This thesis is based on several hypotheses coming from the literature analysis.
@@ -276,13 +279,21 @@ This thesis is based on several hypotheses coming from the literature analysis.
 % layers of info and choice of terms
 \emph{HYP1:} News articles are made with different layers of information: (i) the facts being reported (ii) the (choice of) language used to report those facts. %\todoAW{Would it be clearer to talk about i/ the facts being reported, and ii/ the (choice of) language used to report those facts?}
 These layers are not separate and are very intertwined. At the word level, we have words that are strictly topical words, or are strictly persuasive words, but we also have words that represent both layers as a specific term is chosen in a multitude of synonyms to push for a certain idea.
-We find this hypothesis in~\citep{jenkins2013thin,vanderwicken1995news,jang2023proximate}.
+We find this hypothesis in~\citet{jenkins2013thin,vanderwicken1995news,jang2023proximate,bountouridis2018explaining}.
+With our \acrshort{rq}1, we aim to understand what changes between multiple articles about the same event. In this scenario, we have layer 1 (facts) that is shared across articles, and layer 2 (choices) that changes. Therefore, if we analyse what changes between articles, we end up with the second layer, and we can verify or refute this hypothesis.
 
 % corroboration and choice of details
-\emph{HYP2:} News articles are written by choosing which details to include and which ones to skip, and this may be done on purpose to influence the reader. This assumes that there are multiple details to choose from, and the news outlets (writer/editor) need to do a selection for fitting in the desired length or more directly support a certain position. And everywhere manual selection is done, there is a possible point of bias. This hypothesis is described in~\cite{bountouridis2018explaining} while trying to computationally detect corroborations and omissions.
+% \emph{HYP2:} News articles are written by choosing which details to include and which ones to skip, and this may be done on purpose to influence the reader. This assumes that there are multiple details to choose from, and the news outlets (writer/editor) need to make a selection for fitting in the desired length or more directly supporting a certain position. And everywhere manual selection is done, there is a possible point of bias. This hypothesis is described in~\cite{bountouridis2018explaining} while trying to computationally detect corroborations and omissions.
+\emph{HYP2:} Some choices are made with the aim of influencing the reader. Language allows great expressiveness and language choices allow to convey different messages. Therefore, the news is not exempt from conveying persuasive messages even when trying to transmit a neutral point of view~\citep{gass2018persuasion}.
+Our \acrshort{rq}2 aims at understanding how well we can detect persuasion techniques. By answering this question, we can recognise attempts to influence and persuade the reader with specific techniques.
 
 % propaganda and leaning
 \emph{HYP3:} Propaganda language used by different political leanings is distinguishable. This means that Left and Right leaning have specific techniques or wordings that they use for example to target political opponents. Literature shows this~\citep{blumberg1986comparative}, but we want to detect computationally such differences in techniques and wordings.
+\acrshort{rq}3 goes in this direction, finding the differences between propaganda used by Left and Right.
+
+% topic
+\emph{HYP4:} Propaganda is stronger with a set of topics. These topics are more polarising and public debate is much more accentuated on them (e.g., elections, immigration, environment). On the other side, there is very little propaganda or none on certain topics (e.g., art, weather).
+With \acrshort{rq}4 we aim to understand how propaganda varies across topics and leanings.
 
 % % unbalance
 % Current propaganda detection recognises better right-leaning propaganda
@@ -291,7 +302,7 @@ We find this hypothesis in~\citep{jenkins2013thin,vanderwicken1995news,jang2023p
 
 % We have more specific hypotheses in the following experimental chapters.
 
-\section{\statusgreen Research methodology}
+\section{\statusgreen Research Methodology}
 \label{sec:intro_method}
 
 On a broad level, our work is about computationally distinguishing propaganda across leanings and topics. Therefore, we use a methodology that is based on comparative analyses of propaganda and on comparing results with different feature sets.
