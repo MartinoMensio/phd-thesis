@@ -11,29 +11,32 @@
 
 % chapter motivation: multiple versions of the same story 
 % This chapter contains the first set of practical experiments that we carried out.
-\todoHA{Run Grammarly on all text}
+% \todoHA{Run Grammarly on all text}
 % general goal
-This chapter aims to analyse how different articles present the same event from different perspectives. For each \gls{event}, a big multitude of articles can be more or less similar between them.
-And this variety of linguistical forms\todoHA{Articles about same events does not necessarily mean you get a variety of linguistic form} is an excellent opportunity to study the relationship between the bare facts (common ground) and the additional choices that are made to try to persuade the reader of a specific opinion (with phenomena such as framing, interpretation, manipulation, propaganda).\todoAW{How similar are these terms? Framing is much less loaded than Propaganda}\todoHA{Only mention the ones you are studying}
+This chapter aims to analyse how different articles present the same event from different perspectives.
+For each \gls{event}, different news sources publish a big multitude of articles.
+These articles can be more or less similar between them, possibly leading to a variety of linguistic forms. %\todoHA{Articles about same events does not necessarily mean you get a variety of linguistic form} 
+Therefore, this is an excellent opportunity to study the relationship between the bare facts (common ground) and the additional choices that are made to try to persuade the reader of a specific opinion (as discussed in Section~\ref{ssec:lit_layers_of_info}). % (with phenomena such as framing, interpretation, manipulation, propaganda).\todoAW{How similar are these terms? Framing is much less loaded than Propaganda}\todoHA{Only mention the ones you are studying}
 
 % fit into thesis
-But how does this fit into the overall goal of the thesis? Our overall research questions aim at studying the relationship between propaganda and political leaning (overall \acrshort{rq}1: \textbf{What is the relationship between propaganda and political leaning?}).\todoHA{Unclear how this chapter is connected to this RQ}\todomargin{general goal, and RQ1 is specific: To what extent do news articles about the same events differ?}
+% But how does this fit into the overall goal of the thesis? Our overall research questions aim at studying the relationship between propaganda and political leaning (overall \acrshort{rq}1: \textbf{What is the relationship between propaganda and political leaning?}).\todoHA{Unclear how this chapter is connected to this RQ}\todomargin{general goal, and RQ1 is specific: To what extent do news articles about the same events differ?}
 % But, first of all, we need to take awareness that 
-In order to study propaganda as the additional layer on top of information
-(as discussed in the hypothesis done in Section~\ref{ssec:lit_layers_of_info})
-we want to exploit the multitude of writings about the same topics. For this reason, this first practical chapter is about parallel news and comparing the shared information between the articles.
-Given that the articles are a mix between raw facts and this additional layer of persuasion/opinion/propaganda,\todoAW{Interesting that you didn't include "framing" here...} % framing not used because it is more difficult to detect agenda setting (e.g. selecting what to include in article? But at the same time this chapter is about omission and corroboration so should be related
-if we take into consideration many of them coming from different points of view (political sides/sources) we can then extract which part is shared and therefore is likely to be more closely related to the base layer of facts.\todoHA{?}
-And at the same time knowing which parts are unique to a specific article, and do not appear in others, may be useful for understanding the point of view of the document and how it differs from others.
+% In order to study persuasion techniques as the additional layer on top of the facts (as discussed in Section~\ref{ssec:lit_layers_of_info}) we want to exploit the multitude of writings about the same topics. 
+For this reason, this first experimental chapter is about parallel news and comparing the shared information between the articles.
+% Given that the articles are a mix between raw facts and this additional layer of persuasion, %/opinion/propaganda,\todoAW{Interesting that you didn't include "framing" here...} % framing not used because it is more difficult to detect agenda setting (e.g. selecting what to include in article? But at the same time this chapter is about omission and corroboration so should be related
+Considering articles coming from different news sources, that have potentially different political ideologies, we aim to extract which parts are shared and which parts are instead unique to each article.
+% which part is shared and therefore is likely to be more closely related to the base layer of facts.\todoHA{?}
+Relying on this analysis, we may understand the point of view of each article and how it differs from others.
 %(TODO: to retake this afterwards and talk about credibility signals from bountouridis corroboration omission).
 % Having this first differentiation between shared, omitted and unique, we also want to assess whether this is correlated to language that wants to persuade (propaganda). --> chapter 4 
 
-Our first experiments, therefore, are directed at automatically comparing and finding differences in similar articles, and trying to understand the reasons for articles to be different or similar.\todoHA{How does this fit with your RQ?}
+Our first experiments, therefore, are directed at automatically comparing and finding differences in similar articles, and trying to understand the reasons for articles to be different or similar.
+%\todoHA{How does this fit with your RQ?}
 
 % RQ of this chapter
-For this reason, we dive into the work of spotting similarities and differences in multiple articles.
-The overall \acrshort{rq}1: \textbf{To what extent do news articles about the same events differ?}
-The Research Questions that we address in this chapter are: 
+For this reason, we dive into the work of spotting similarities and differences between multiple articles.
+Our Research Question for this chapter is \acrshort{rq}1: \emph{To what extent do news articles about the same events differ?}
+We divide it in several sub-questions: 
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
     \item How news events are reported differently by multiple sources?
     \item How could we identify what is unique for each version and what is common? 
@@ -42,7 +45,6 @@ The Research Questions that we address in this chapter are:
     % \item What type of document/sentence encoding performs better to detect corroborations and omissions? OR What are the characteristics that allow encoding better documents and sentences?\todoAW{Is this a technical question? (ie. what's the best parser, for example?) "How can we automatically detect...?" and then expand in the main body of the text}
     % Is there a link between the parts that are different and propaganda/loaded language? --> chapter 4
 \end{enumerate}
-\todomargin{RQ updated here}
 
 
 
@@ -50,7 +52,8 @@ The Research Questions that we address in this chapter are:
 % We take from the work of~\cite{bountouridis} and expand ...
 
 % overview of subsections
-In the following sections, we are starting in Section~\ref{sec:cgs_cross_referencing} by reproducing an experiment\todoHA{Unclear why?} from a paper~\citep{bountouridis2018explaining} that automatically extracts corroborated and omitted information in groups of articles. Then in Section~\ref{sec:cgs_similarity} we explore more the methods to compute document similarity, then in Section~\ref{sec:cgs_clustering_and_differences} how we extract differences. Finally in Section~\ref{sec:cgs_findings} we discuss our findings.
+In the following sections, we first give an overview of the data resources available for this task (Section~\ref{sec:cgs_data}). Next, we
+analyse in Section~\ref{sec:cgs_cross_referencing} an existing approach to detect corroborations and omissions between articles. Then in Section~\ref{sec:cgs_similarity} we explore the methods to compute document similarity, and in Section~\ref{sec:cgs_clustering_and_differences} we describe our method to extract fine-grained differences at the word-level. Finally, in Section~\ref{sec:cgs_findings} we discuss our findings.
 
 % % method
 % Method: 
@@ -83,6 +86,48 @@ In the following sections, we are starting in Section~\ref{sec:cgs_cross_referen
 % And their function within the PhD project has been to lead to the Research Questions that we described earlier.
 % Some other activities have been done to kick start the future experimentation, for example doing data collection of news articles or by beginning to implement some of the stages of the processing pipeline that will be used.
 % % , with the goal to find and formulate proper Research Questions and to prepare the execution of the proposal.
+
+
+\section{\statusgreen Data Resources}
+\label{sec:cgs_data}
+% what
+% We also started collecting, early this year, several types of data that will be useful for the analysis planned.
+% For this first chapter, we have been focusing on parallel news dataset. We started by using existing datasets, and then we started collecting on our own because we wanted specific features.
+To analyse parallel news, we consider here both existing datasets, ready to be used, and also resources that we collected from scraping the web.
+% why
+The reason for this, is that we are interested in specific features.
+First of all, a wide set of articles is needed, dense in time and from a wide variety of news outlets. We need substantial overlap between articles and the more sources we can include, the better we can observe variations of the framing phenomena.
+Another very important feature is to have a good pre-clustered set of articles to help the curation of a dataset, %especially for the first Research Question, 
+by knowing that the articles are well-related.
+% Then, when we will have the document clustering in action, this feature is not anymore required, but still can serve as a benchmark for that stage.
+If we substitute this requirement with a clustering algorithm, we need to ensure a high quality of the clusters. We decided instead to use articles that are already grouped together, to remove an additional source of issues.
+A last desirable feature would be to have articles that come from sources with different opinions, such as different political ideologies. %, that would be beneficial to create examples especially for the user study, where we want to maximise the occurrence of framing techniques. 
+This is because the general goal of this thesis is to study persuasion and propaganda, so if the points of view are different we can see the propaganda easier.
+
+% how
+% - google news (more than 500k articles) daily. Some stats about the number of sources involved  TODO: how is it made? What are its properties? Why useful?
+Given these requirements and after exploring different news aggregators, we found that Google Headlines Full Coverage feature\footnote{\url{https://www.blog.google/products/news/new-google-news-ai-meets-human-intelligence/}} would fit the requirements of covering a big number of news sources (the \texttt{en-GB} version contains articles from more than 10k domains) and being very dense (an average of 9k new articles each day).
+The data comes divided by topics (Latest, United Kingdom, World, Business, Technology, Entertainment, Sports, Science, Health) and inside each topic, the articles are grouped into ``stories''. Each story has articles from the most relevant sources (``Top coverage'') and then also lists articles from other less important sources, for an average of 20 articles inside each story.
+The stories are created automatically by Google News, and this makes available an enormous number of articles and sources updated continuously. %it to be always updated and be diverse in the sources included.
+We captured every day, during the March–September period of 2020, the published set of stories, and managed to retrieve more than 700k articles. Not all the articles listed can be retrieved because of paywalls or other blocks by the publishers.
+
+% - allsides: human-created with interesting framing differences
+Another data source that we actively retrieve is AllSides which provides a curated set of ``headlines''\footnote{\url{https://www.allsides.com/story/admin}} where three articles with different political alignments are put together and compared in their difference.
+The curators describe how the story gets framed by the considered sources, using natural language.
+This description usually contains the usage of terms or themes that get mentioned.
+%At the end of June, we have available 4764 headlines, with 13979 articles linked.
+Differently from Google Headlines which has different versions for each country, this data is US-focused being curated in the US and therefore has a much more limited scope. Also, the discussion of bias and framing is mainly focused on political issues, while other data sources (such as Google News) are more general. %we want to focus also on other types of differences of opinion.
+% role of this specific data
+% This data, although the description of the differences is not directly parsable, will be used to feed the user study and understand the role of comparing different sides.
+
+% - allnews: standard benchmark, wide adopted (find refs)
+
+% scraping is legal for research: https://aballatore.space/2020/04/01/web-scraping-is-legal/
+
+% % role of this
+% The data collection done in these current months will continue across the PhD, and will be used in different stages of the analysis. It will serve as the seed to create the labelled dataset for the first Research Question and also provide a wide set of articles from different news sources to empower the studies of the second Research Question.
+% Having articles from so many different news sources, we can on one side provide some indication of framing for news sources that are not usually targeted by manual framing studies because not enough ``important'', and on the other side be more confident to observe some phenomenon of information re-usage that is the underlying hypothesis for the last sub-question.
+These two data sources are used for this and the next chapter. From Chapter~\ref{chap:political_sides} onward instead we rely mainly on an existing dataset, still coming from AllSides~\citep{baly2020we} because we want to compare our results with other works.
 
 
 \section{\statusgreen Corroboration and omission extraction}
@@ -505,64 +550,6 @@ However, we see that many variations of terms do not seem to carry any differenc
 
 
 
-
-\section{\statusgreen Data used}
-\todoHA{Data needs to be fully described before using in experiments}
-% what
-% We also started collecting, early this year, several types of data that will be useful for the analysis planned.
-For this first chapter, we have been focusing on parallel news dataset. We started by using existing datasets, and then we started collecting on our own because we wanted specific features.
-% why
-When looking for data, we are interested in different features.
-First of all, a wide set of articles is needed, dense in time and from a wide variety of news outlets. We need substantial overlap between articles and the more sources we can include, the better we can observe variations of the framing phenomena.
-Another very important feature is to have a good pre-clustered set of articles to help the curation of a dataset, %especially for the first Research Question, 
-by knowing that the articles are well related.
-Then when we will have the document clustering in action, this feature is not anymore required, but still can serve as a benchmark for that stage.
-And another desirable feature would be to have articles that come from sources with a different opinion. %, that would be beneficial to create examples especially for the user study, where we want to maximise the occurrence of framing techniques. 
-This is because the general goal of this thesis is to study the persuasion and propaganda, so if the points of view are different we can see the propaganda easier.
-
-% how
-% - google news (more than 500k articles) daily. Some stats about the number of sources involved  TODO: how is it made? What are its properties? Why useful?
-Given these requirements and after exploring different news aggregators, we found that Google Headlines Full Coverage feature\footnote{\url{https://www.blog.google/products/news/new-google-news-ai-meets-human-intelligence/}} would fit the requirements of covering a big number of news sources (the \texttt{en-GB} version contains articles from more than 10k domains) and being very dense (an average of 9k new articles each day).
-The data comes divided by topics (Latest, United Kingdom, World, Business, Technology, Entertainment, Sports, Science, Health) and inside each topic, the articles are grouped in ``stories''. Each story has articles from the most relevant sources (``Top coverage'') and then also lists articles from other less important sources, for an average of 21 articles inside each story.
-The stories are created automatically by Google News and this allows it to be always updated and be so diverse in the sources included.
-We have captured during the first year (mid-March to September) every day the published set of stories, and managed to retrieve more than 700k articles (as of the end of June, and not all the articles listed can be retrieved because of paywalls or other filtering techniques by the publishers).
-
-% - allsides: human-created with interesting framing differences
-Another data source that we actively retrieve is AllSides which provides a curated set of ``headlines''\footnote{\url{https://www.allsides.com/story/admin}} where three articles with a different political alignment are put together and compared in their difference.
-The curators describe how the story gets framed by the considered sources, using natural language.
-This description usually contains the usage of terms or themes that get mentioned.
-%At the end of June, we have available 4764 headlines, with 13979 articles linked.
-Differently from Google Headlines which has different versions for each country, this data is US-focused being curated in the US and therefore has a much more limited scope. Also, the discussion of bias and framing is mainly focused on political issues, while we want to focus also on other types of differences of opinion.
-% role of this specific data
-This data, although the description of the differences is not directly parseable, will be used to feed the user study and understand the role of comparing different sides.
-
-% - allnews: standard benchmark, wide adopted (find refs)
-
-% scraping is legal for research: https://aballatore.space/2020/04/01/web-scraping-is-legal/
-
-% % role of this
-% The data collection done in these current months will continue across the PhD, and will be used in different stages of the analysis. It will serve as the seed to create the labelled dataset for the first Research Question and also provide a wide set of articles from different news sources to empower the studies of the second Research Question.
-% Having articles from so many different news sources, we can on one side provide some indication of framing for news sources that are not usually targeted by manual framing studies because not enough ``important'', and on the other side be more confident to observe some phenomenon of information re-usage that is the underlying hypothesis for the last sub-question.
-This data was used for this and the second chapter. From Chapter~\ref{chap:political_sides} onward instead we rely mainly on an existing dataset, still coming from AllSides ~\citep{baly-dataset} because we want to compare our results with other works.
-
-% \section{NO: Formalisation and dissemination}
-% % what
-% The last type of activity carried out during this year has been the presentation of this work to other researchers throughout different events, both internally to the Open University and externally.
-% % why
-% The motivation of this activity has been to get some feedback from both people working inside the same research space and also from other fields.
-% From the first group, we wanted to get an expert opinion and mainly understand if we are missing some related research work that could be helpful.
-% Instead, from the more general-audience group, we wanted to understand if this type of research makes sense to them and try to explain more motivationally and in an easier format.
-
-% % how
-% Belonging to the first group, this work has been presented firstly to an internal seminar in KMi on the 25th March, then to the Text2Story workshop part of the ECIR conference as a position paper which was presented in April\footnote{\url{http://text2story20.inesctec.pt/}}.
-% This position paper~\cite{mensio2020towards} focuses on describing some proposed cross-article signals that would show differences in how stories are narrated.
-% The proposal described completely in this report has also been presented in the CRC PhD Conference, that is an internal conference for PhD students of KMi and C\&C schools.
-
-% For the more wide audience instead, during June we submitted a poster to the OU PhD Poster Competition which, involving a more general audience, focused more on being simple to understand.
-
-% These documents can be found at the end of this file.
-
-
 \section{\statusgreen Discussion}
 \label{sec:cgs_findings}
 
@@ -577,7 +564,7 @@ From this chapter, we achieved to be able to understand and study when informati
 
 \todomargin{answers to RQs is new. See how to fit it}
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
-    \item \emph{How news events are reported differently by multiple sources?} News sources present the same event in different ways, including different details that corroborate with other sources, omitting details that other sources instead report, changing the order of presentation of the details. We studied and measured these phenomena in this chapter, but we deem it necessary to study the choice of terms, by investigating what is the reason and what is the effect of deliberate or involountary choices. We will expand on this in the next Chapter.
+    \item \emph{How news events are reported differently by multiple sources?} News sources present the same event in different ways, including different details that corroborate with other sources, omitting details that other sources instead report, changing the order of presentation of the details. We studied and measured these phenomena in this chapter, but we deem it necessary to study the choice of terms, by investigating what is the reason and what is the effect of deliberate or involuntary choices. We will expand on this in the next Chapter.
     \item \emph{How could we identify what is unique for each version and what is common?} We reproduced the methodology of~\citet{bountouridis2018explaining} to detect omission and corroboration (Section~\ref{sec:cgs_cross_referencing}), which is based on splitting the articles into sentences and comparing with similarity metrics. We extended the approach to analyse at the word level the variation of terms (Section~\ref{sec:cgs_clustering_and_differences}).
     \item \emph{To what extent can we automatically detect omission and corroboration across multiple articles?} We found in this chapter that the identified approach works better for detecting small differences between articles that have several parts in common. When the articles are too different, for example, if they consider totally different events or if the overlap of terms is too small, it becomes difficult to align the documents with similarity metrics and the results are less meaningful. We also find that our analysis is able to find terms that change but does not give an interpretation of what these changes mean. For example, we cannot currently distinguish between a loaded term versus a more neutral one. For this to be possible, we need to use in the next chapter the study of persuasion means.
     \item \emph{Which similarity metrics are best for detecting omission and corroboration?} We underlined in Section~\ref{sec:cgs_similarity} the importance of using semantic similarity metrics that go beyond the binary comparison (equal or different) of terms. In this way, we are more resistant to term changes and can identify better the related sentences across articles.
@@ -611,11 +598,11 @@ This chapter gives us some insights into how similar documents are changed and m
 
 % open for new chapter
 But we still don't have any idea about what these changes \textbf{convey}. It could be that the differences exist for different natures, originating from randomness (each author/source has different jargon, or by casualties).
-Or on another side, there could be a purpose that is subtly manifesting through these small choices. A purpose to influence the readers and persuade or manipulate them.
+On the other hand, there could be a purpose that is subtly manifesting through these small choices. A purpose to influence the readers and persuade or manipulate them.
 
-This chapter arose some questions that need to be answered:
-What changes between the changed parts? What characterises those differences? How can we characterise the differences quantitatively describing how they try to persuade the readers? To give an answer to these questions, we need to include into our analysis some concepts of persuasion.
-\todoAW{The point of reproducing the expt. is to determine how well their technique supports your own research aims. So this section really wants to have some quantification of the results. But also, you're interested in the qualitative question of how well you can identify those sentences which are not the basic statements of fact. So you want this chapter to lead into a discussion of how well you can identify the factual v. manipulative sentences, and the degree to which the non-factual sentences can be used to identify propaganda etc.}
+This chapter raised some questions that need to be answered:
+What changes between the changed parts? What characterises those differences? How can we characterise the differences quantitatively, describing how they try to persuade the readers? To give an answer to these questions, we need to include in our analysis some concepts of persuasion.
+\todoAWinline{The point of reproducing the expt. is to determine how well their technique supports your own research aims. So this section really wants to have some quantification of the results. But also, you're interested in the qualitative question of how well you can identify those sentences which are not the basic statements of fact. So you want this chapter to lead into a discussion of how well you can identify the factual v. manipulative sentences, and the degree to which the non-factual sentences can be used to identify propaganda etc.}
 \todoHA{I agree}
 
 So for the next chapter, we want to investigate persuasive language and how it can be computationally quantified. 
