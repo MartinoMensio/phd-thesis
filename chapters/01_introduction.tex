@@ -341,7 +341,10 @@ The major contributions of this work are the following:
         \item Chapter~\ref{chap:political_sides}  shows that if we add propaganda features on a BERT-based classifier that predicts political leaning, we get slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
         \item Chapter~\ref{chap:topics} adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
     \end{enumerate}
-    \item contribution 3: highlighting the problem of imbalanced dataset\todoAW{Given the extensive coverage of bias in LLMs over the last few months, to what extent is this a contribution? Or how can you phrase it so it's obviously an original contribution?} for propaganda detection. This emerges from the analysis in different chapters:
+    \item contribution 3: highlighting the problem of imbalanced dataset for propaganda detection.
+    % \todoAW{Given the extensive coverage of bias in LLMs over the last few months, to what extent is this a contribution? Or how can you phrase it so it's obviously an original contribution?} 
+    We identify that the current datasets for propaganda detection are under-representing left-leaning propaganda, which is less common but still needs to be considered.
+    This emerges from the analysis in different chapters:
     \begin{enumerate}
         \item Chapter~\ref{chap:linguistic_persuasion} results in a deeper understanding of the limitations of the current status of automated propaganda detection, and the repercussions it can have when we use these methods in other tasks (e.g. overlap across news articles).
         % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
@@ -406,7 +409,7 @@ The major contributions of this work are the following:
 \section{\statusgreen Publications}
 \label{sec:intro_publications}
 
-During the timeframe of this PhD, multiple publications have been accepted at workshops and conferences. Some of them are strictly related to the topic of this thesis~\citep{mensio2020towards}, while others are not directly linked to the topics here presented but still in the same broad research area of news analysis, news media and the response of the public to manipulation and misleading information (under the measure of Credibility).
+During the timeframe of this PhD, multiple publications have been accepted at workshops and conferences. Some of them are strictly related to the topic of this thesis~\citep{mensio2020towards,mensio2020one}, while others are not directly linked to the topics here presented but still in the same broad research area of news analysis, news media and the response of the public to manipulation and misleading information (under the measure of Credibility).
 
 % \subsection{Related to this thesis}
 
