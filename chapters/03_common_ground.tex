@@ -488,7 +488,7 @@ We then use agglomerative hierarchical clustering for different reasons:
     \item we can truncate the clustering when we reach a certain level of distance between the clusters, or a certain number of clusters;
     \item We can see the evolution of many different features (e.g., number of clusters, size, internal cohesion) while performing the clustering step by step;
     \item we have a graphical representation (dendrogram) which helps to inspect and understand what is happening;
-    \item it has widely been used for similar tasks (e.g., finding related claims~\citep{almeida2020text})
+    \item it has widely been used for similar tasks, e.g., finding related claims~\citep{almeida2020text}
 \end{itemize}
 
 % This clustering algorithm has the following parameters:
@@ -498,62 +498,94 @@ We then use agglomerative hierarchical clustering for different reasons:
 % \end{itemize}
 % \todo{describe why ward and cosine look better}
 
-As we can see in Figure~\ref{fig:dendrogram}, we can explore what is the distance required to have different sentences inside the same cluster,\todoHA{How these links were detected? How many sentences processed? Links context? Etc.} and select a certain threshold more consistently.\todo{bigger figure}
+For this experiment, we consider a total of 20 different headlines, with an average size of 70 articles each.
+After splitting the sentences, we have an average of 33 sentences for each article (total of 46373 sentences).
+The agglomerative hierarchical clustering is done for each headline separately.
+
+In Figure~\ref{fig:dendrogram}, we can see how different thresholds for the sentence similarity would affect the generated clusters. The dendrogram on the right shows which sentences get in the same cluster at increasing distance values. Identical sentences are merged at the bottom of the dendrogram, with similarity close to $0$, while totally different groups of sentences get merged with higher values (near $1$ considering cosine distance).
+% what is the distance required to have different sentences inside the same cluster,
+%\todoHA{How these links were detected? How many sentences processed? Links context? Etc.} and select a certain threshold more consistently.
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{figures/dendrogram.png}
+    \includegraphics[width=\linewidth]{figures/dendrogram_high_legend.png}
     \caption{A portion of the dendrogram that shows how different sentences are merged in the clusters by increasing distance values.}
     \label{fig:dendrogram}
 \end{figure}
-\todoHA{Put in a page by itself}
+% \todoHA{Put in a page by itself}
 
-Using this type of inspection, we can decide specific threshold values more consistently:\todoHA{Too strong} we can see what is the required similarity to make two pairs of sentences be in the same cluster.
+Using this type of inspection, we can decide specific threshold values that make ``similar enough" sentences go into the same cluster, while keeping other sentences in other clusters.
+%we can see what is the required similarity to make two pairs of sentences be in the same cluster.
 % \todo{some observations about the distance values and threshold}
 
 % 3. extract degree of uniqueness of words (from pairwise to clusterwise, with bag-of-words or difftool (order matters, duplicates))
 % second motivation: highlight the different words and their uniqueness
-With this method, we can create sentence clusters that are very similar in their semantic content, but at the same time have linguistic changes. This is a joined effect of having models that deliver a better similarity metric and also of applying a weighted-similarity approach when building the clusters and not just a binary approach.
+With this method, we can create sentence clusters that are very similar in their semantic content, but at the same time have linguistic changes. This is a joined effect of having models that deliver a better similarity metric and also of applying a weighted-similarity approach when building the clusters and not just a binary approach (as done instead with a cliquing algorithm instead of clustering ones).
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/clusters_count_by_threshold.png}
-    \caption{Number of clusters (with minimal size of 1,2,3,4) plotted when the distance threshold varies. The blue line counts also for sentences that are on their own, while the others lines are more and more stricter with the number of sentences per group to be counted.}
+    \includegraphics[width=\linewidth]{figures/clusters_count_by_threshold_bigger_2.png}
+    \caption{
+    Number of clusters with different minimal sizes plotted against the distance threshold to cut the dendrograms.
+    %Number of clusters (with minimal size of 1,2,3,4) plotted when the distance threshold varies. The blue line counts also for sentences that are on their own, while the others lines are more and more stricter with the number of sentences per group to be counted.
+    }
     \label{fig:clusers_count_by_threshold}
 \end{figure}
-\todo{improve figure: re-export, set limits, scale}
-In Figure~\ref{fig:clusers_count_by_threshold} we see how the number of clusters evolve when we increase the similarity threshold. First of all, we notice a steep drop at distance \~0: this is denoting that there are lots of sentences that score very similar (identical). Then we also notice that when the euclidean distance is \~0.6, the number of clusters with at least 2/3/4 sentences reaches its peak.
+% \todo{improve figure: re-export, set limits, scale}
+In Figure~\ref{fig:clusers_count_by_threshold} we see how the number of clusters evolves when we increase the similarity threshold. 
+The dark blue line indicates all clusters, counting also clusters with just one sentence inside.
+On the blue line, we notice a steep drop at distance next to $0$: this denotes that there are lots of sentences that are identical or just differ in punctuation.
+A second drop happens around the Euclidean distance of 1.
+Then, with the other lines, we represent clusters that have stricter conditions in terms of the minimal number of sentences per cluster. We only count clusters with 2, 3 and 4 sentences minimum.
+All these lines have a similar behaviour: with the distance increasing, they increase to reach a maximum (because new clusters are formed satisfying the minimum number of sentences) and then decrease again (because the clusters are merged together, so they are less). 
+The peak is reached with Euclidean distance around $1.2$.
+Notice that with respect to the previous dendrogram plot, here we are using Euclidean distance to show values less compacted together.
+The value of $1.2$ Euclidean is observed across the different headlines to consistently provide clusters with a good variation of terms but still having a strong semantic connection (e.g., same details, same entities mentioned).
+Therefore, we use this value in the following Subsection~\ref{sec:cgs_clustering_and_differences_uniqueness}.
 
-By also inspecting several dendrograms, we consistently notice that around that interval, $0.55-0.65$ euclidean distance, we are able to capture good variations on the surface form but the meaning of the sentences keeps similar.
-Therefore, we select the value of $0.6$ as our threshold for the next subsection~\ref{sec:cgs_clustering_and_differences_uniqueness} (the example shown in it have this parameter).
+% By also inspecting several dendrograms, we consistently notice that around that interval, $0.55-0.65$ Euclidean distance, we are able to capture good variations on the surface form but the meaning of the sentences keeps similar.
+% Therefore, we select the value of $0.6$ as our threshold for the next subsection~\ref{sec:cgs_clustering_and_differences_uniqueness} (the example shown in it have this parameter).
 
 
-\todo{How do we know this is better than cliques? Ground truth of clusters is not available. A benchmark test would be required to claim superiority. Do we need to repeat the initial experiment with this clustering instead of cliquing?}
-\todoHA{Important question to be discussed. Need to evaluate, if not quantitatively then qualitatively}
-\todoAW{Does such a benchmark test exist anywhere? eg. for other domains?}
+% \todo{How do we know this is better than cliques? Ground truth of clusters is not available. A benchmark test would be required to claim superiority. Do we need to repeat the initial experiment with this clustering instead of cliquing?}
+% \todoHA{Important question to be discussed. Need to evaluate, if not quantitatively then qualitatively}
+% \todoAW{Does such a benchmark test exist anywhere? eg. for other domains?}
+From a qualitative analysis of the generated clusters, we find that this methodology produces better sentence clusters with respect to the method described in Section~\ref{sec:cgs_cross_referencing}.
+We do not find many examples of sentences belonging to the wrong cluster, and we are able to find word variations that do not cause a major change in meaning.
+
+With the sentence clusters produced, we move to the following Section, where we analyse the variations at the word level.
 
 \subsection{\statusgreen Term uniqueness}
 \label{sec:cgs_clustering_and_differences_uniqueness}
 
-With the outputs of the sentence clustering from the previous section~\ref{sec:cgs_clustering_and_differences_hierarchical}, we want now to take these sentences, that should be similar in the meaning but with some variations on the linguistical form, and analyse how they overlap or not in the terms used.
+With the outputs of the sentence clustering from the previous section~\ref{sec:cgs_clustering_and_differences_hierarchical}, we want now to take these sentences, which should be similar in the meaning but with some variations on the linguistical form, and analyse how they overlap or not in the terms used.
 
-What we want to achieve, is to have a good way to analyse the fine-grained differences between the extracted similar sentences.\todoHA{What? What's the final goal?}
+% What we want to achieve, is to have a good way to analyse the fine-grained differences between the extracted similar sentences.\todoHA{What? What's the final goal?}
+Therefore, our final goal for this experiment is to compute the uniqueness of words across multiple variations of describing the same detail.
+One news source may be using completely different terms from the others, or share with others the same terminology.
+This word-level analysis completes the corroboration and omission analysis, which instead is performed at the sentence level.
+
 To facilitate an analysis of the differences, we experimented with different methods of highlighting the uniqueness of the words in a cluster.
-
-Inspired by software engineering tools, we first tried with algorithms based on \texttt{diff}~\citep{myers1986ano}. Diff (also coming in UNIX distributions under the \texttt{diff} tool) is a great resource for comparing different modified versions of the same document.
-Suddenly we realise that one of the main advantages of diff analysis, the position, is not very important in our analysis, because natural language is more flexible and reordering phrases and sub-phrases should not be accounted for in our analysis. So with the relaxed constraint on the position of the words, we moved to a measure of term uniqueness based merely on the words appearing or not in the considered sentences. For this reason, we named this comparison \texttt{set-based} instead of \texttt{diff-based} because we treat the words for each sentence as a set (unused position of words, repetitions not considered). Although we do not consider repeated words in a sentence as modifying the uniqueness, we think that repetition should not be considered when looking at single sentences and only be looked at when considering whole documents (repetition in an article may carry some persuasion).
+Inspired by software engineering tools, we first tried with algorithms based on \texttt{diff}~\citep{myers1986ano}.
+% Diff (also coming in UNIX distributions under the \texttt{diff} tool)
+\texttt{diff} is a great algorithm and UNIX tool for comparing different modified versions of the same document.
+This algorithm is also able to detect changes in the position or ordering of elements. This aspect is not very important in our analysis, because natural language is more flexible and reordering phrases and sub-phrases should not be accounted for in our analysis. So with the relaxed constraint on the position of the words, we moved to a measure of term uniqueness based merely on the words appearing or not in the considered sentences. For this reason, we named this comparison \texttt{set-based} instead of \texttt{diff-based} because we treat the words for each sentence as a set (without considering the position and repetitions of words).
+Although we do not consider repeated words in a sentence as modifying the uniqueness of terms, we will still take into consideration repetition as a persuasive technique in the next chapter.
 
 We therefore define a scale of uniqueness in the following way:
 $$u_w = 1 - \frac{|\set{s_i | s_i \in S \land w \in s_i}|}{|S|}$$
 where S is the set of sentences considered, $w$ is the word for which to compute the index. The expression compares the sentences of the current cluster where $w$ appears (numerator) with respect to the cluster size.
 A value close to $1$ means that the word is used in just a few sentences in the cluster.
-This gives, in the example below, a higher value of uniqueness to the word ``deceased'' that just appears in one in three sentences\todoHA{You mean overall or in this example?} ($u = 2/3$), while ``surgery'' has $u = 0$.
 
-The application of this metric can be seen in Figure~\ref{fig:words_uniqueness} where we score each of the words with their uniqueness score.
+In Figure~\ref{fig:words_uniqueness} we can see an example of this metric applied to a cluster of three sentences.
+For each word, the uniqueness score is computed, and then we associate the values to a colour scale.
+In this way, we can instantly see the words that are most unique and the ones that instead are repeated across multiple sentences.
+In this case, the word ``deceased'', which just appears in one of three sentences, gets assigned a high value of uniqueness ($u = 2/3$). Instead, the word ``surgery'', which appears in all three sentences, has $u = 0$.
+% \todoHA{You mean overall or in this example?}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\textwidth]{figures/words_uniqueness.png}
-    \caption{A sentence cluster example, where the uniqueness of words in the cluster is highlighted. In this way, we can instantly see the words that are most unique.}
+    \caption{A sentence cluster example, where the uniqueness of words in the cluster is highlighted.}
     \label{fig:words_uniqueness}
 \end{figure}
 
@@ -602,37 +634,41 @@ However, we see that many variations of terms do not seem to carry any differenc
 \section{\statusgreen Discussion}
 \label{sec:cgs_findings}
 
-From this chapter, we achieved to be able to understand and study when information is unique or shared between different news sources, at different granularities:
-\begin{itemize}
-    \item article-level: finding related articles that cover the same events;\todoHA{Which section shows these results?}
-    \item sentence-level: being able to find the sentences that corroborate, the ones that are unique or omitted;
-    \item word-level: computing the degree of uniqueness of single terms, and observing how single words are changed between multiple sources.
-\end{itemize}
+% From this chapter, we achieved to be able to understand and study when information is unique or shared between different news sources, at different granularities:
+% \begin{itemize}
+%     \item article-level: finding related articles that cover the same events;\todoHA{Which section shows these results?}
+%     \item sentence-level: being able to find the sentences that corroborate, the ones that are unique or omitted;
+%     \item word-level: computing the degree of uniqueness of single terms, and observing how single words are changed between multiple sources.
+% \end{itemize}
 
 % \todo{I need something to link together this chapter and also need strong findings to conclude it.}
 
-\todomargin{answers to RQs is new. See how to fit it}
+This chapter had several sub-questions, that we discuss separately here, before discussing the overall RQ1:
+
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
     \item \emph{How news events are reported differently by multiple sources?} News sources present the same event in different ways, including different details that corroborate with other sources, omitting details that other sources instead report, changing the order of presentation of the details. We studied and measured these phenomena in this chapter, but we deem it necessary to study the choice of terms, by investigating what is the reason and what is the effect of deliberate or involuntary choices. We will expand on this in the next Chapter.
-    \item \emph{How could we identify what is unique for each version and what is common?} We reproduced the methodology of~\citet{bountouridis2018explaining} to detect omission and corroboration (Section~\ref{sec:cgs_cross_referencing}), which is based on splitting the articles into sentences and comparing with similarity metrics. We extended the approach to analyse at the word level the variation of terms (Section~\ref{sec:cgs_clustering_and_differences}).
-    \item \emph{To what extent can we automatically detect omission and corroboration across multiple articles?} We found in this chapter that the identified approach works better for detecting small differences between articles that have several parts in common. When the articles are too different, for example, if they consider totally different events or if the overlap of terms is too small, it becomes difficult to align the documents with similarity metrics and the results are less meaningful. We also find that our analysis is able to find terms that change but does not give an interpretation of what these changes mean. For example, we cannot currently distinguish between a loaded term versus a more neutral one. For this to be possible, we need to use in the next chapter the study of persuasion means.
+    \item \emph{How could we identify what is unique for each version and what is common?} To identify what is unique, common or omitted, it is possible to use the methodology of~\citet{bountouridis2018explaining} to detect omission and corroboration, %(Section~\ref{sec:cgs_cross_referencing})
+    which is based on splitting the articles into sentences and comparing them with similarity metrics.
+    % We extended the approach to analyse at the word level the variation of terms across multiple related articles, and compute the relative uniqueness of terms 
+    We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them (Section~\ref{sec:cgs_clustering_and_differences}). We think that this is potentially beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online.
+    \item \emph{To what extent can we automatically detect omission and corroboration across multiple articles?} The approach, identified to answer the previous \acrshort{rq}, works better for detecting small differences between articles that have several parts in common. When the articles are too different, for example, if they consider totally different events or if the overlap of terms is too small, it becomes difficult to align the documents with similarity metrics and the results are less meaningful. We also find that our analysis is able to find terms that change but does not give an interpretation of what these changes mean. For example, we cannot currently distinguish between a loaded term versus a more neutral one. For this to be possible, we need the study of persuasion means (as discussed in RQ2).
     \item \emph{Which similarity metrics are best for detecting omission and corroboration?} We underlined in Section~\ref{sec:cgs_similarity} the importance of using semantic similarity metrics that go beyond the binary comparison (equal or different) of terms. In this way, we are more resistant to term changes and can identify better the related sentences across articles.
 \end{enumerate}
 
-Overall RQ1: \emph{To what extent do news articles about the same events differ?}
+We can now consider our RQ1: \emph{To what extent do news articles about the same events differ?}
 After comparing news articles covering the same events, we discovered that they can vary in several ways. Firstly, some articles may omit certain details while others confirm them. Secondly, different terms may be used to express the same detail. While it is relatively straightforward to analyze the first type of difference using similarity metrics, it is not sufficient for understanding the nuances of the second type. We need in this case to analyse the terms involved to go beyond the simple differences.
 
 
-The main findings that we have from this chapter are the following:
+% The main findings that we have from this chapter are the following:
 
-\begin{itemize}
-    \item As already denoted by the work of~\citet{bountouridis2018explaining}, we confirm a positive correlation between corroboration and credibility of news outlets and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. %: corroboration correlates positively to credibility of news outlets, omission negatively
-    % \item Extreme left and right corroborate less and omit more? (but needs leaning? No if we just take centrality-extremism)
-    % \item Delta Time of publication: more similar articles are published at similar times, instead the further the time delta the more further they are?
-    % these are more limitations
-    \item Observing similarities between multiple documents is made very difficult by linguistic variations. We experimented with models (e.g. \acrshort{use}) that are more resistant to words that carry similar meanings and are a better fit for doing this type of analysis. %It is not only a matter of what is included and what is excluded. The similarity between sentences is also capturing some linguistic variations more than others (more about the surface and less about the intention).
-    \item We do not have any interpretation of what a change in a document conveys. Something may be written differently just because of random choices, or there can be some hidden reasons and some goals to persuade. The similarity computation, necessary to understand how the documents overlap or not, gives no understanding of the persuasion means and the intention behind specific choices. This will be explored in the next Chapter~\ref{chap:linguistic_persuasion}.
-\end{itemize}
+% \begin{itemize}
+%     \item As already denoted by the work of~\citet{bountouridis2018explaining}, we confirm a positive correlation between corroboration and credibility of news outlets and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. %: corroboration correlates positively to credibility of news outlets, omission negatively
+%     % \item Extreme left and right corroborate less and omit more? (but needs leaning? No if we just take centrality-extremism)
+%     % \item Delta Time of publication: more similar articles are published at similar times, instead the further the time delta the more further they are?
+%     % these are more limitations
+%     \item Observing similarities between multiple documents is made very difficult by linguistic variations. We experimented with models (e.g. \acrshort{use}) that are more resistant to words that carry similar meanings and are a better fit for doing this type of analysis. %It is not only a matter of what is included and what is excluded. The similarity between sentences is also capturing some linguistic variations more than others (more about the surface and less about the intention).
+%     \item We do not have any interpretation of what a change in a document conveys. Something may be written differently just because of random choices, or there can be some hidden reasons and some goals to persuade. The similarity computation, necessary to understand how the documents overlap or not, gives no understanding of the persuasion means and the intention behind specific choices. This will be explored in the next Chapter~\ref{chap:linguistic_persuasion}.
+% \end{itemize}
 
 
 
@@ -647,13 +683,14 @@ This chapter gives us some insights into how similar documents are changed and m
 
 % open for new chapter
 But we still don't have any idea about what these changes \textbf{convey}. It could be that the differences exist for different natures, originating from randomness (each author/source has different jargon, or by casualties).
-On the other hand, there could be a purpose that is subtly manifesting through these small choices. A purpose to influence the readers and persuade or manipulate them.
+On the other hand, there could be a purpose that is subtly manifesting through these small choices. This purpose could be to influence the readers, with persuasion or manipulation.
 
 This chapter raised some questions that need to be answered:
 What changes between the changed parts? What characterises those differences? How can we characterise the differences quantitatively, describing how they try to persuade the readers? To give an answer to these questions, we need to include in our analysis some concepts of persuasion.
+
+Therefore, for the next chapter, we want to investigate persuasive language and how it can be computationally quantified. 
+
 \todoAWinline{The point of reproducing the expt. is to determine how well their technique supports your own research aims. So this section really wants to have some quantification of the results. But also, you're interested in the qualitative question of how well you can identify those sentences which are not the basic statements of fact. So you want this chapter to lead into a discussion of how well you can identify the factual v. manipulative sentences, and the degree to which the non-factual sentences can be used to identify propaganda etc.}
 \todoHA{I agree}
-
-So for the next chapter, we want to investigate persuasive language and how it can be computationally quantified. 
 
 \todoHAinline{Overall, I can see a good chapter here, but need a good revision to better link the experiment with the RQs in this thesis, to detail the data used, detail the results and explain them more thoroughly, to describe the steps and rationale of the experiments more clearly (structure). And to more clearly explain the contribution beyond just replicating a previous paper.}
