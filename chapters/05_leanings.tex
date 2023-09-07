@@ -185,7 +185,7 @@ In Figure~\ref{fig:allsides} we can see an example that is displaying how a sour
 % Another data source that we actively retrieve is AllSides which provides a curated set of ``headlines''\footnote{\url{https://www.allsides.com/story/admin}} where
 The three articles with a different political leaning are put together and compared in their difference.
 The curators describe how the story gets framed by the considered sources, using natural language.
-This description usually contains the usage of terms or themes that get mentioned.\todoHA{sentence unclear}
+This summary usually depicts which terms or themes are used. %\todoHA{sentence unclear}
 % At the end of June, we have available 4764 headlines, with 13979 articles linked.
 % Differently from Google Headlines which has different versions for each country, 
 This data is US-focused being curated in the US and therefore has a limited scope. Also, the discussion of the differences is mainly focused on political issues, without giving much space to other topics.
@@ -714,41 +714,42 @@ These techniques may be used with different intents: both for agitate the crowds
 \subsubsection{Comparing propaganda-term importance across leaning}
 We then move to the term analysis, to see if we can find any differences in the specific terms used by each leaning.
 
-One of the first thoughts when comparing terms from different groups, is WordClouds.
-They are a simple and qualitative way to compare distributions of terms.
-Therefore, we computed the WordClouds for the three leanings (Left, Center and Right).
+% One of the first thoughts when comparing terms from different groups, is WordClouds.
+% They are a simple and qualitative way to compare distributions of terms.
+% Therefore, we computed the WordClouds for the three leanings (Left, Center and Right).
 
 
-\begin{figure*}[!htb]
-     \centering
-     \begin{subfigure}[b]{0.3\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/baly_wordclouds_Name_Calling,Labeling_Left.png}
-         \caption{Left}
-         \label{fig:wc_loaded_left}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/baly_wordclouds_Name_Calling,Labeling_Center.png}
-         \caption{Center}
-         \label{fig:wc_loaded_center}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/baly_wordclouds_Name_Calling,Labeling_Right.png}
-         \caption{Right}
-         \label{fig:wc_loaded_right}
-     \end{subfigure}
-        \caption{WordClouds from words belonging to the \texttt{Name\_Calling} propaganda technique}
-        \label{fig:wc_name_calling}
-\end{figure*}
+% \begin{figure*}[!htb]
+%      \centering
+%      \begin{subfigure}[b]{0.3\textwidth}
+%          \centering
+%          \includegraphics[width=\textwidth]{figures/baly_wordclouds_Name_Calling,Labeling_Left.png}
+%          \caption{Left}
+%          \label{fig:wc_loaded_left}
+%      \end{subfigure}
+%      \hfill
+%      \begin{subfigure}[b]{0.3\textwidth}
+%          \centering
+%          \includegraphics[width=\textwidth]{figures/baly_wordclouds_Name_Calling,Labeling_Center.png}
+%          \caption{Center}
+%          \label{fig:wc_loaded_center}
+%      \end{subfigure}
+%      \hfill
+%      \begin{subfigure}[b]{0.3\textwidth}
+%          \centering
+%          \includegraphics[width=\textwidth]{figures/baly_wordclouds_Name_Calling,Labeling_Right.png}
+%          \caption{Right}
+%          \label{fig:wc_loaded_right}
+%      \end{subfigure}
+%         \caption{WordClouds from words belonging to the \texttt{Name\_Calling} propaganda technique}
+%         \label{fig:wc_name_calling}
+% \end{figure*}
 
-% Qualitative term analysis done on the words belonging to the different political leanings in our dataset. 
-\todoHAinline{You can't conduce anything from wordclouds. Think of better analysis techniques.}
-\todo{It was an example to then motivate the choice of TF-IDF analysis}
-As Figure~\ref{fig:wc_name_calling} shows, there are some differences in some of the propaganda techniques (shown from the \texttt{Name\_Calling} technique as an example):
+% % Qualitative term analysis done on the words belonging to the different political leanings in our dataset. 
+% \todoHAinline{You can't conduce anything from wordclouds. Think of better analysis techniques.}
+% \todo{It was an example to then motivate the choice of TF-IDF analysis}
+% As Figure~\ref{fig:wc_name_calling} shows, 
+By doing a simple ranking of the most important terms for each leaning, we can see some differences in some of the propaganda techniques. For example, considering the \texttt{Name\_Calling} technique:
 media sources from the Left appear to frequently use ``republican'' and ``conservative'', while in the Right we can see some unique terms such as ``leftist'' and ``progressive''. Some words are equally used, possibly for different meanings, such as ``partisan''.  
 Although these differences, the most repeated word from all the leanings is the word ``partisan'' which is used as a wildcard and probably is intended with different meanings.
 But the effect is that most of the terms are repeated in all the leanings, and therefore we have to rely on a better concept than simply counting the term occurrences.

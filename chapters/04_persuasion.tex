@@ -42,14 +42,14 @@ The Research Questions for this chapter is \acrshort{rq}2: \emph{To what extent 
 To answer these research questions, we take from Chapter~\ref{sec:lit_persuasion} the most commonly and recently analysed \gls{persuasion} techniques for which computational detection methods exist: \gls{propaganda} and \gls{sentiment}.
 %\todoAW{Slightly weird phrasing here... have you run this through Grammarly?}
 %\todoHA{Any refs that link propaganda and sentiment with persuasion?}
-\todoAW{Harith asks what links propaganda, sentiment and persuasion. I'd ask what separates them. ie. why do you need to study persuasion at all if you can detect the other two cases?}
-\todomargin{MM: Persuasion including both, needed a term to simplify instead of always saying propaganda and sentiment}
+% \todoAW{Harith asks what links propaganda, sentiment and persuasion. I'd ask what separates them. ie. why do you need to study persuasion at all if you can detect the other two cases?}
+% \todomargin{MM: Persuasion including both, needed a term to simplify instead of always saying propaganda and sentiment}
 
 % BEGIN response to HA
 As discussed in Chapter~\ref{sec:lit_persuasion}, we consider here \gls{persuasion} as a term that encompasses both \gls{sentiment} and \gls{propaganda}. % and populism
 It is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
 And the relationship with propaganda comes from the inherent goal of propaganda to influence the view of the public about an idea or a group~\citep{bernays,jowett2018propaganda}.
-\todoAW{Good early citation shows you're aware of the broader literature... do you have others elsewhere in the dissertation? If not, probably worth making sure you're aware of some of the key authors in the area. Three or four should be enough.}
+%\todoAW{Good early citation shows you're aware of the broader literature... do you have others elsewhere in the dissertation? If not, probably worth making sure you're aware of some of the key authors in the area. Three or four should be enough.}
 
 % It is known that persuasion is related to an emotional response from the reader/listener, being related to emotions.
 % Persuasion and Discursive Repertories~\cite{orrumachine}
@@ -61,9 +61,8 @@ And the relationship with propaganda comes from the inherent goal of propaganda 
 
 % carry the following experiment:
 Therefore, we have the first part of this chapter that covers the detection of these persuasion techniques (Section~\ref{sec:lp_techniques}).
-And then, we put this in relationship with the analysis from the previous Chapter~\ref{chap:common_ground_search} in Section~\ref{sec:cgs_clustering_and_differences}.
-In this last part (Section~\ref{sec:lp_relationship}), 
-we extend the study to consider the terms that change between articles, and we analyse whether they are associated with some persuasion techniques, and in what way. %indicate something about the changes in the sentences.
+And then, in Section~\ref{sec:lp_relationship} we put this in relationship with the analysis from the previous Chapter~\ref{sec:cgs_clustering_and_differences} % Chapter~\ref{chap:common_ground_search}
+We extend the study to consider the terms that change between articles, and we analyse whether they are associated with some persuasion techniques, and in what way. %indicate something about the changes in the sentences.
 
 In order to achieve this goal, we consider in this chapter the following processing pipeline:
 \begin{enumerate}
@@ -87,25 +86,12 @@ For this reason, we mainly use propaganda for the experiments of the following c
 % good to tell the reader what steps you’ll be taking and why, before getting into all the detail. 
 % }
 
-Our findings from this chapter include:
-\begin{enumerate}
-    \item The relationship between the changed terms and propaganda language is not very straightforward: different parts do not always contain loaded language or propaganda. A lot of changes are not meaningful in terms of propaganda: multiple wording can be unrelated to persuasion. % linguistic variance.\todoAW{Not sure what you're getting at here.}
-    \item Some techniques, such as \texttt{Doubt} and \texttt{Appeal\_to\_fear-prejudice}, appear less in general but are the ones that differentiate more one version from the other. \texttt{Loaded\_language}, on the other side, is more ubiquitous since news sources are competing for the attention of the reader, and emerges less in a comparative analysis.
-    \item As we hypothesised, the persuasion in the articles is adding terms and concepts that create variations (fitting different persuasion goals). As a consequence, these selected words make it slightly more difficult to recognise groups of articles related to the same event.
-    Removing propaganda and/or sentiment from articles makes related articles slightly easier to group correctly in the case where the ground truth of the group is known.%\todoAW{Not sure what you mean by this. In most cases of cluster analysis, there's no meaningful concept of a "correct cluster"}
-    %\todoHA{For what? Not discussed earlier}
-\end{enumerate}
-\todoAW{All rather detailed and heavyweight for the introductory section.
-Probably need to be more abstract for this section.}
-
-% interpretation
-
-% TODO: Interpretation? Or just pointers to next sections
-The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains the analysis of persuasion techniques: sentiment and propaganda.
-\todoAW{You've already told me this...}
-%some techniques that we identifed being related to persuasion.\todoAW{? I don't know what you mean by "related to" here.}
-We present what they are able to detect on our datasets. %(stage 2 of the pipeline above described).
-Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed.%(stage 3 of the pipeline).
+% pointers to next sections
+% The next sections are organised as follows. Section~\ref{sec:lp_techniques} contains the analysis of persuasion techniques: sentiment and propaganda.
+% \todoAW{You've already told me this...}
+% %some techniques that we identifed being related to persuasion.\todoAW{? I don't know what you mean by "related to" here.}
+% We present what they are able to detect on our datasets. %(stage 2 of the pipeline above described).
+% Then Section~\ref{sec:lp_relationship} contains two experiments aimed at understanding the relationship between these techniques and the words changed.%(stage 3 of the pipeline).
 
 \section{Different Techniques of Persuasion}
 \label{sec:lp_techniques}
@@ -128,7 +114,7 @@ When selecting which techniques to target, we have an important requirement to k
     \label{fig:example_sentiment}
 \end{figure}
 
-For example, Figure~\ref{fig:example_sentiment} shows a pair of sentences where, if we only consider the output scores at the sentence level, we only have the result that the first sentence is more negative than the second one. But we could not compare the single words that are responsible for the scores.
+For example, Figure~\ref{fig:example_sentiment} shows a pair of sentences where, if we only consider the output scores at the sentence level, we just have the result that the first sentence is more negative than the second one. But we could not compare the single words that are responsible for the scores.
 % \todoAW{You really need an example here. I don't understand why you think that a sentence-level analysis is not helpful, nor why a word-level analysis would help.}
 %\todoAW{Not sure what you're getting at here. What information exactly are you hoping for at the word level? And it's not usually single words that persuade; rather, it's usually a sentence or article. So it's fine to want to identify the properties of the words that make them propagandistic, but I'd be wary of suggesting that that means you shouldn't be trying to also do a sentence- or article-level analysis.}
 Having a score on the sentence-level is useful to capture complex cases where no specific word is responsible but it's the context that makes a subset of words responsible (e.g. when using \texttt{Doubt} or \texttt{Repetition}). We need to have in output the responsible words from the analysis tools, because we want to see how persuasion differs when very similar sentences exist. We can already compute which words differ, and we want to see if these words are also expressing persuasion.
@@ -829,7 +815,7 @@ Our \acrshort{rq}2.4 is \emph{To what extent could persuasion techniques be used
 
 % why
 The motivation behind this experiment lies in our hypothesis done in Chapter~\ref{ssec:lit_layers_of_info}. We hypothesise that news articles are made of two ingredients: topical elements, that are related to events, people, things, and non-topical elements that instead express the opinion of the writer. These two ingredients can be contained in different words or in the same word (cf.~\ref{ssec:lit_layers_of_info}). In this experiment, we target only the case where they appear in different words, because it is simpler to separate and see the effect of removal.\todoAW{But does it invalidate your claims?}
-For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning},\todomargin{ChatGPT citation} which is beyond our scope.
+For the case where they appear in the same words, we would need to apply some style-transfer to rewrite the same concepts attenuating/removing persuasion techniques~\citep{bagdasaryan2022spinning}, which is beyond our scope. %\todomargin{ChatGPT citation}
 %\todo{if style-transfer is applied, we can also target the cases where they co-live on the same words. check models, there are some for spinning but what about un-spinning?}
 
 
@@ -875,7 +861,7 @@ Between these two datasets, we want to be using good quality ground truth for do
 
 \subsubsection{Approach}
 
-Since we want to understand whether by removing persuasion we can have better clustering, our approach is to apply a standard clustering pipeline to two different inputs: first, to the raw articles, and then to the articles with the removed persuasion. So the steps that we do are the following:\todoAW{This is good... a clear explanation of how you're going to progress.}
+Since we want to understand whether by removing persuasion we can have better clustering, our approach is to apply a standard clustering pipeline to two different inputs: first, to the raw articles, and then to the articles with the removed persuasion. So the steps that we do are the following: %\todoAW{This is good... a clear explanation of how you're going to progress.}
 \begin{enumerate}
     \item remove persuasion from the article in the first dataset to prepare the second dataset to feed into the pipeline
     \item encode the documents (for both datasets)
@@ -1127,11 +1113,21 @@ This section contains the discussion of all the results of this chapter. We list
 %     \item 
 % \end{itemize}
 
-Therefore, we give here an answer to our comprehensive \acrshort{rq}2: To what extent can we automatically detect the persuasion techniques used in news articles?
+Therefore, we give here an answer to our comprehensive \acrshort{rq}2: \emph{To what extent can we automatically detect the persuasion techniques used in news articles?}
 
 This chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea of the relationship between persuasion and the variations that different news sources produce when reporting events.
 On the other side, we have also a deeper understanding of the limitations of the current status of this automated detection, and the repercussions it can have when we use these methods in other tasks.
 Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve.%\todoAW{Big assumption. I'd rephrase.}
+
+Our findings from this chapter include:
+\begin{enumerate}
+    \item The relationship between the changed terms and propaganda language is not very straightforward: different parts do not always contain loaded language or propaganda. A lot of changes are not meaningful in terms of propaganda: multiple wording can be unrelated to persuasion. % linguistic variance.\todoAW{Not sure what you're getting at here.}
+    \item Some techniques, such as \texttt{Doubt} and \texttt{Appeal\_to\_fear-prejudice}, appear less in general but are the ones that differentiate more one version from the other. \texttt{Loaded\_language}, on the other side, is more ubiquitous since news sources are competing for the attention of the reader, and emerges less in a comparative analysis.
+    \item As we hypothesised, the persuasion in the articles is adding terms and concepts that create variations (fitting different persuasion goals). As a consequence, these selected words make it slightly more difficult to recognise groups of articles related to the same event.
+    Removing propaganda and/or sentiment from articles makes related articles slightly easier to group correctly in the case where the ground truth of the group is known.%\todoAW{Not sure what you mean by this. In most cases of cluster analysis, there's no meaningful concept of a "correct cluster"}
+    %\todoHA{For what? Not discussed earlier}
+\end{enumerate}
+\todo{check if duplicates of replies to RQs}
 
 \section{\statusgreen Next}
 % link to next chapter
