@@ -501,7 +501,12 @@ We present here an analysis of how this model works on the datasets that we use 
 The dataset chosen for this are AllSides and All-the-News
 
 \todo{Finish this subsection, copy from notebooks}
-Stats: definition of word-based percentage, overall word-based percentage of propaganda (any techniques), technique specific percentages. Term analysis: most frequent across techniques, technique-specific terms
+Stats: 
+define metrics for quantities: definition of word-based percentage, overall word-based percentage of propaganda (any techniques), technique specific percentages.
+Then present metric values for quantities.
+
+Term analysis define: most frequent across techniques, technique-specific terms
+Term analysis values.
 
 
 % % criticism
@@ -765,8 +770,6 @@ In the next paragraphs instead, we analyse the variations together with the tech
 How many times the variation of the sentences results in a change over the persuasion scores? And how big is the change in the scores?
 % We answer these question by considering every minimal change in the scores. And then by considering the magnitude of the change.
 
-\todo{continue from here, simplify text and clarify how scores were computed}
-
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{r|rr}
@@ -783,36 +786,49 @@ How many times the variation of the sentences results in a change over the persu
         PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.1\% \\
         PROPAGANDA:Repetition & 1.4\% & 0.1\% \\
     \end{tabular}
-    \caption{The impact on detected persuasion of the variations between the sentence pairs. The column \textit{\% scores changed} is computed by considering whether each sentence pair has different scores (percentage of binary values). The column \textit{avg. magnitude} instead expresses the magnitude of the change, measured in percentage of the allowed interval for each technique.}
+    \caption{The impact of the variations between the sentence pairs on detected persuasion.}
     \label{tab:change_scores_persuasion_in_variations}
 \end{table}
-\todoAW{Although this (sentence pairs) is presumably working at the sentence level, which you said you didn't want to do?}
-\todoAW{What's that? (percentage of the allowed interval)}
+% \todoAW{Although this (sentence pairs) is presumably working at the sentence level, which you said you didn't want to do?}
+% \todoAW{What's that? (percentage of the allowed interval)}
 
-The result of Table~\ref{tab:change_scores_persuasion_in_variations} show that in $98.5\%$ of the cases, we can see a change in the scores of at least one technique.
+For each pair of sentences, we compute the persuasion scores by technique, as defined previously in Section~\ref{sec:lp_techniques}:
+\begin{itemize}
+    \item sentiment score: average of the different sentiment tools, each one normalised to the interval $[-1;1]$;
+    \item propaganda techniques quantity: defined as the word-based percentage of the considered techniques.
+\end{itemize}
+Afterwards, we compare the scores of the sentences belonging to the same pair, and we compute the magnitude of the change (if any).
+Table~\ref{tab:change_scores_persuasion_in_variations} shows the results of this comparison.
+The column \textit{\% scores changed} is computed by considering whether each sentence pair has different scores (any variation counts). The column \textit{avg. magnitude} instead, expresses the magnitude of the change, measured in percentage of the allowed range for each value ($[min;max]$, namely $[-1;1]$ for sentiment score and $[0;100\%]$).
+We can see that in $98.5\%$ of the cases there is a change in the scores of at least one technique.
 Breaking down this result, we have that in all these cases (still $98.5\%$) there is a change in the sentiment score. So the sentiment detection, not only is picking on more terms (with many possible false negatives), but also is very sensible to the terms used (perturbing the output scores).
 Propaganda, on the other side, is detected less and is perturbed less.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/4.3.1_normalised_ratio_scores.pdf}
-    \caption{Normalised ratio between the average variation of the score of each technique, and the average quantity of that technique. On the horizontal axis, we have the different techniques that are detected in the corpus, while on the vertical axis the values represent how affected is the technique by having the same details provided by two different sentences.}
+    \caption{Normalised ratio between the average variation of the score of each technique, and the average quantity of that technique.}
     \label{fig:normalised_ratio_scores_persuasion}
 \end{figure}
 
-We then analyse the ratio between the average magnitude of changes from this table and the average word-based percentage from Table~\ref{tab:detected_persuasion_in_variations} to normalise the results and find the techniques that are mostly affected by this variation.
-Figure~\ref{fig:normalised_ratio_scores_persuasion} shows the results of this normalisation. The most affected techniques are \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}.
-It is important to normalise to discount the effects of the natural disproportion of the techniques used. For example, loaded language is the propaganda technique most used in general, but as we can see in the figure, it is not the one that changes the most between the pairs of sentences. This is due to the fact that\todoAW{why should that apply more to loaded language than to other techniques?} most of the news sources tend to describe with loaded words the same events in their race for attention/clickbaitness~\citep{bazaco2019clickbait,davenport2001attention}.\todoAW{OK, good that you've got some citations, but I think I'd include a quote as well to clarify exactly what point these authors are making. } And using loaded terms is the easiest way to compete and make users read an article. But techniques that are less evident are the ones in which we can see more differences.
+We then analyse the ratio between the average magnitude of changes from this table and the average word-based percentages from Table~\ref{tab:detected_persuasion_in_variations} to normalise the results and find the techniques that are mostly affected by this variation.
+Figure~\ref{fig:normalised_ratio_scores_persuasion} shows the results of this normalisation.
+On the horizontal axis, we have the different techniques that are detected in the corpus, while on the vertical axis the values are computed by dividing the values of Table~\ref{tab:change_scores_persuasion_in_variations} with the values of Table~\ref{tab:detected_persuasion_in_variations}.
+%represent how the technique is affected by having the same details provided by two different sentences.
+The most affected techniques are \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}.
+It is important to normalise to discount the effects of the natural disproportion of the techniques used.
+For example, loaded language is the propaganda technique most used in general, but as we can see in the figure, it is not the one that changes the most between the pairs of sentences. This is due to the fact that
+%\todoAW{why should that apply more to loaded language than to other techniques?} 
+most of the news sources tend to describe with loaded words the same events in their race for attention/clickbaitness~\citep{bazaco2019clickbait,davenport2001attention}.
+%\todoAW{OK, good that you've got some citations, but I think I'd include a quote as well to clarify exactly what point these authors are making. }
+And using loaded terms is the easiest way to compete and make users read an article. But techniques that are less evident are the ones in which we can see more differences.
 
 
-As per the sentence pair in the previous Figure~\ref{fig:annotated_clique_data}, only the first one contains \texttt{Appeal\_to\_fear-prejudice} to communicate the detail. This is the type of variation we are interested in.
-
-
+Going back to the sentence pair in the previous Figure~\ref{fig:annotated_clique_data}, only the first one contains \texttt{Appeal\_to\_fear-prejudice} to communicate the detail. This is the type of variation we are interested in.
 % Overall, on the quantitative side, we see that a portion (\%?) of the variations in the texts is causing a persuasion score change. Out of X couples of sentences with small variations, only for Y we see a change. Among these, Y1 are changes to the sentiment and Y2 to the propaganda score. The breakdown by techniques is illustrated in the blue bars of Figure~\ref{TODO}, which shows the percentages of variations that correspond to a change in the respective technique. (for each technique, for each sentence pair, a boolean yes/no where yes corresponds to ``changed" and no to ``unchanged", then counting the percentages of yes) 
-
-
+%
 %number of changes vs persuasion-loaded terms: how many terms in percentage?
-We also compute a measure based on the words: how many changed words (percentage) are also persuasion related? Some words can be unique for one sentence but not be related to persuasion, while others can be both unique and loaded of one/more persuasion techniques.
+Therefore, we also compute another measure: how many (percentage) changed words are also persuasion related? Some words can be unique for one sentence but not be related to persuasion, while others can be both unique and loaded of one/more persuasion techniques.
 
 \begin{table}[!htbp]
     \centering
@@ -830,11 +846,13 @@ We also compute a measure based on the words: how many changed words (percentage
         PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.6\% \\
         PROPAGANDA:Repetition & 0\% & 0\% \\
     \end{tabular}
-    \caption{Comparison of persuasion words against unique words (unique of only one sentence in the pair). The column \textit{\%pairs} is defined as the ratio between the number of sentences where at least one word of persuasion is also a unique word (not in common) and the number of sentence pairs. The column \textit{\%words} instead is defined as the total number of words that are both persuasion and unique, divided by the total number of unique words.}
+    \caption{Comparison of persuasion words against unique words (unique of only one sentence in the pair).}
     \label{tab:words_persuasion_in_variations}
 \end{table}
 
-Table~\ref{tab:words_persuasion_in_variations} shows that in $86.9\%$ of the pairs, we have words that appear only in one of the two sentences that also contain some persuasion. The proportion word-based is $18.8\%$ as we have 2240 words that have been changed (out of 138 sentence pairs, summing the unique words for each pair), and 422 of them are related to persuasion.
+In Table~\ref{tab:words_persuasion_in_variations} we show the values of this measure.
+The column \textit{\%pairs} is defined as the ratio between the number of sentences where at least one word of persuasion is also a unique word (not in common) and the number of sentence pairs. The column \textit{\%words} instead is defined as the total number of words that are both persuasion and unique, divided by the total number of unique words.
+In $86.9\%$ of the pairs, we have words that appear only in one of the two sentences that also contain some persuasion. The proportion word-based is $18.8\%$ as we have 2240 words that have been changed (out of 138 sentence pairs, summing the unique words for each pair), and 422 of them are related to persuasion.
 We can confirm the results found when using the scores instead of the words. The only differences are in the \texttt{Name\_Calling} and \texttt{Repetition} techniques, that in this case do not overlap with the unique terms.
 
 % All these results are really useful to understand the relationship between the detected persuasion and the variations appearing in multiple versions of the same detail, we have a main limitation which is: does this analysis reflect on what a news consumer would perceive?
@@ -896,15 +914,21 @@ We have been able to find which techniques change mostly due to the changes repr
 Being that some techniques appear more (like 
  sentiment and \texttt{Loaded\_Language}) and some other less, we normalised the variation of the persuasion scores based on the average quantity of each technique.
  By doing that, we discovered that some techniques which are more rare (e.g., \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}), are much more probable to occur only in one of the variations of the same detail.
-This is particularly meaningful when contextualised to the attention economy~\citep{davenport2001attention},\todoAW{I think you need to flesh this out a bit, although a well selected quote from D\&B should be fine for that.} because sentiment and loaded language are the techniques more easy to deploy and therefore are more spread to all the versions of the same story.
+This is particularly meaningful when contextualised to the attention economy~\citep{davenport2001attention}:
+%\todoAW{I think you need to flesh this out a bit, although a well selected quote from D\&B should be fine for that.}
+the easiest way to capture the attention is to use ``emotional triggers".
+Therefore, sentiment and loaded language are the techniques more easy to deploy and we find here that they are more spread to all the versions of the same story.
 
-Instead regarding to the higher level grouping of techniques (sentiment and propaganda, instead of the specific techniques), we found that sentiment detection is providing details that are optimizing recall but not precision. We see a lot of false positives which are disturbing our analysis. This makes harder to distinguish the cases of word change that really matter. For this reason, sentiment detection might not be the best choice and in the next experiments we decide to use less this feature, in favour of propaganda.
+Instead regarding to the higher level grouping of techniques (sentiment and propaganda, instead of the specific techniques), we found that sentiment detection is providing details that are optimizing recall but not precision. We see a lot of false positives which are disturbing our analysis.
+For example, by manually inspecting the samples, we come to the conclusion that not all the changes between the sentences should have resulted in a change of the sentiment score.
+This makes harder to distinguish the cases of word change that really matter. For this reason, sentiment detection might not be the best choice and in the next experiments we decide to use less this feature, in favour of propaganda.
 
 % we have a main limitation which is: does this analysis reflect on what a news consumer would perceive?
 
 % NEED of contextualising the source
-One big limitation of our current analysis is that, once we discover how the techniques are related to the variations in the articles, we still do not have a \emph{context} where to place this analysis. We currently lack the information on how to place a news article considering the news source or the author that wrote it.\todoHA{unclear. 
-what are you trying to say here?}
+One big limitation of our current analysis is that, once we discover how the techniques are related to the variations in the articles, we still do not have a \emph{context} where to place this analysis. We currently lack the information on how to place a news article considering the news source or the author that wrote it.
+%\todoHA{unclear. what are you trying to say here?}
+For example, propaganda techniques may be used with a political goal or coming from a political standpoint.
 We are missing the link between the persuasion used and the original point of view which could motivate such use of techniques.
 This limitation will be targeted in the next chapter, considering the perspectives and the political leanings.
 
@@ -922,6 +946,8 @@ This limitation will be targeted in the next chapter, considering the perspectiv
 % We selected some lexicons: Sentistrength, Vader, and AFINN (TODO description).
 % % problems?
 % The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
+
+\todo{continue here}
 
 \subsection{\statusgreen Removing persuasion to improve clustering}
 \label{ssec:lp_relationship_removing}
