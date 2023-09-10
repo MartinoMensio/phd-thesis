@@ -472,7 +472,7 @@ This section has two goals: 1) to improve the cliquing approach used in Section~
 
 % The next experimentation that we have done regards the usage of the similarity values to group together sentences describing the same details and at the same time study the uniqueness of the words used.
 
-\subsection{\statusgreen Hierarchical sentence clustering}
+\subsection{\statusgreen Hierarchical Sentence Clustering}
 \label{sec:cgs_clustering_and_differences_hierarchical}
 
 
@@ -491,7 +491,7 @@ These documents are processed with the SpaCy NLP Python library\footnote{\url{ht
 Each of the sentences is then passed through a language model which creates a sentence embedding, in this case using \acrshort{use} because it showed to distribute the similarity values more evenly and is specifically trained for sentence similarity.
 
 % 2. hierarchical clustering (example with diagram)
-We then use agglomerative hierarchical clustering for different reasons:
+We then use \acrfull{hac} for different reasons:
 \begin{itemize}
     \item it does not require the specification of the number of clusters wanted, we want to be flexible;
     \item we can truncate the clustering when we reach a certain level of distance between the clusters, or a certain number of clusters;
@@ -509,7 +509,7 @@ We then use agglomerative hierarchical clustering for different reasons:
 
 For this experiment, we consider a total of 20 different headlines, with an average size of 70 articles each.
 After splitting the sentences, we have an average of 33 sentences for each article (total of 46373 sentences).
-The agglomerative hierarchical clustering is done for each headline separately.
+The \acrshort{hac} is done for each headline separately.
 
 In Figure~\ref{fig:dendrogram}, we can see how different thresholds for sentence similarity would affect the generated clusters. The dendrogram on the right shows which sentences get in the same cluster at increasing distance values. Identical sentences are merged at the left of the dendrogram, with similarity close to $0$, while totally different groups of sentences get merged with higher values (near $1$ considering cosine distance).
 % what is the distance required to have different sentences inside the same cluster,
@@ -600,7 +600,7 @@ In this case, the word ``deceased'', which just appears in one of three sentence
 
 
 % not only uniqueness, but how it was used to observe variations of terms
-This uniqueness was used to inspect around 25 sentence-level clusters that were gathered by using the hierarchical clustering as described in Section~\ref{sec:cgs_clustering_and_differences_hierarchical}. Helped by the uniqueness degree of the words, we are able to spot the differences between the sentences faster and classify the main types of singular words that change:
+This uniqueness was used to inspect around 25 sentence-level clusters that were gathered by using the \acrshort{hac} as described in Section~\ref{sec:cgs_clustering_and_differences_hierarchical}. Helped by the uniqueness degree of the words, we are able to spot the differences between the sentences faster and classify the main types of singular words that change:
 \begin{enumerate}
     \item verb tenses: not meaningful in this context
     \item chunks of information at the beginning or end of the sentence. Usually, those pieces are just a matter of segmentation of the sentences (e.g. the reporter actually includes the omitted terms in the next or previous sentence) 
