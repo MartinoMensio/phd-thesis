@@ -15,12 +15,11 @@ Therefore, in order to characterise those differences, this chapter introduces \
 From the last chapter~\ref{chap:common_ground_search}, 
 %we concluded with the need to understand how specific terms are used to persuade the reader. 
 we are able to extract terms that have been changed in related articles, from sentences that are very similar but have still some differences.
-We want now to quantitatively analyse these detected variations to quantify their specific use of persuasion techniques.
+Our aim is here to quantitatively analyse these detected variations to quantify their specific use of persuasion techniques.
 % \todoHA{Why? What is the value of this detection?}
 In this way, we could understand if the specific term choices are in fact done to persuade the reader of a specific idea, or if they are only the manifestation of random choices.
 
 For this reason, this chapter investigates the \emph{linguistic techniques of persuasion}, in other words, how the persuasion manifests itself on the linguistical surface.
-
 % aim
 Our motivation is to analyse whether the terms that change between multiple articles/sentences are correlated with the linguistic techniques of persuasion.
 
@@ -113,9 +112,9 @@ Some of these datasets were already used in the previous chapter, and some of th
 The first dataset that we use, as in the previous chapter, is AllSides.
 This dataset contains articles that are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October 2022) 5124 headlines, for a total of 15050 articles. They are grouped in triples, called \emph{headlines}. Each triple belongs to one of several topics, which can be seen as more loosely-grained clusters. 
 As positive side, it is human-curated, meaning that it is not the result of an algorithm (like Google News) but some curators manually grouped the articles. Therefore, the groups of articles can be considered of high quality.
-Furthermore, this resource is publicly available, as the AllSides website provides the Headline Roundups\footnote{\url{https://www.allsides.com/headline-roundups}}.
+Furthermore, this resource is publicly available, as the AllSides website provides the Headline Roundups.\footnote{\url{https://www.allsides.com/headline-roundups}}
 
-On the negative side, althought the data is public, it is licensed and the articles are just linked and not included.
+On the negative side, althought the data is public, it is licensed and furthermore the articles are just linked and not included.
 This means that for collecting it, we need to manually retrieve the contents of the pages externally linked, which incurs in additional scraping problems and licensing problems.
 Another negative side, is that there are only three articles for each headline, so we do not expect to find a lot of linguistic variations, especially if we are strict on only having highly similar sentences. For this reason, we cannot use it on the experiment detailed in Section~\ref{ssec:lp_relationship_small_variations} that requires fine-grained difference analysis. But we still use on the experiment of Section~\ref{ssec:lp_relationship_removing} that instead works on the article level only.
 % sides: human-curated, public. Negative sides: only 3 articles for each headline. But for each topic, there are 46 articles on average.
@@ -143,7 +142,7 @@ The dataset of origin is Google News Headlines, as it presents clusters of artic
 
 The Google News Headlines that we selected are between 8th September and 14th October 2020,
 %\todoAW{OK, but be prepared to talk about whether you should have done a later version of the experiment. That will be a minimum of 2 1/2 years prior to the viva.} 
-because that is the timespan during which this experiment was conducted. We could repeat the experimentation in other timespans.
+because that is the timespan during which this experiment was conducted, but it could be repeated in other timespans.
 We extracted from them a subset of 138 sentence pairs, by using the approach described in the previous Chapter~\ref{sec:cgs_clustering_and_differences}:
 \begin{enumerate}
     \item Random headlines (groups of articles) are selected. Their articles are segmented into sentences and each sentence is embedded with the \acrshort{use} model.
@@ -296,7 +295,7 @@ Also for Vader, to obtain the single words that are loaded with sentiment, we us
 
 
 \paragraph{TextBlob}
-The next tool is TextBlob\footnote{\url{ https://textblob.readthedocs.io/}}, which instead provides already the words/parts responsible for the sentiment, whithout the need to look at the lexicon separately.
+The next tool is TextBlob,\footnote{\url{ https://textblob.readthedocs.io/}} which instead provides already the words/parts responsible for the sentiment, whithout the need to look at the lexicon separately.
 The lexicon only contains adjectives and adverbs, in total 2918. Each one of them is marked with the \emph{polarity}, \emph{subjectivity}, \emph{intensity} (for the booster words / adverbs) %\todoAW{What's a booster word? "very", for example? If so, that's an adverb, not an adjective.} 
 and with the \emph{confidence}. Having these scores, the tool keeps track of the input text across two dimensions: polarity and subjectivity.
 Therefore, the outputs of the analysis are the two scores of \emph{polarity}, a real value in $[-1;1]$ (-1 negative, 0 neutral, 1 positive), and \emph{subjectivity}, a real value in $[0;1]$ (0 objective, 1 subjective).
@@ -346,69 +345,129 @@ Figure~\ref{fig:parsing_sentiment_tree} shows the input and outputs of this pars
 In this way, we are able to see the sentiment of the single words and not only the overall score for a sentence.
 %\todoAW{Really needs some examples to illustrate this point.}
 
-\todo{
-1. Compare outputs of the tools
-2. Justify combination
-3. Say how combination
-}
+% \todo{
+% 1. Compare outputs of the tools
+% 2. Justify combination
+% 3. Say how combination
+% }
 
-\subsubsection{\statusred Statistics over our datasets}
-\todoAW{This section doesn't appear to have been updated from the previous draft}
-\todo{finish this subsection, copy numbers from notebook and produce plots}
+\subsubsection{\statusgreen Statistics over AllSides Dataset}
+
 % How they perform separately on the dataset (justifying why all of them) and the result of combination.
-In this subsection we provide some statistics about how the described approach for sentiment detection works on the datasets we selected.
+In this subsection we provide some statistics about how the described approach for sentiment detection works on the AllSides dataset.
 
 % average scores
+We compare here the scores and the words provided by the different tools listed above.
+To compare the values, given that each tool has its own scale, we first normalise all of them to the same interval of $[-1;1]$.
+To normalise the scales, we consider two main axes: polarity (used by all of the tools) and strength (provided by SentiStrength, and subjectivity by TextBlob). We map the numerical intervals from the corresponding $[min;max]$ to $[-1;1]$ by means of a linear transformation. The categorical values, instead, are mapped by firstly sorting the output labels from negative to positive, then converting to increasing numerical values (e.g., for 4 labels, $\set{1,2,3,4}$) and then applying the linear transformation as in the other case.
 
 % - Unified scores by each tool (polarity and strength)
-For the output scores, we consider the unified scores discussed previously. For each dataset, we produced the outputs using each tool, and we computed the average over the whole dataset.
-Figure~\ref{TODO} shows the average values across the two main axes considered (polarity and strength). We can see that ???
-% - Correlation between tools
-Then we proceeded to study the correlation between the outputs of the different tools.
-The most correlated are ???
-Instead ??? provides results quite unrelated to the others.
+% For the output scores, we consider the unified scores discussed previously. 
+
+
+\begin{figure}[!htbp]
+     \centering
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_polarity_comparison.pdf}
+         \caption{Sentiment polarity}
+         \label{fig:sentiment_polarity_comparison}
+     \end{subfigure}
+     % \hfill
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_strength_comparison.pdf}
+         \caption{Sentiment strength}
+         \label{fig:sentiment_strength_comparison}
+     \end{subfigure}
+        \caption{Comparison of sentiment polarity and strength provided by different tools.}
+        \label{fig:sentiment_axes_comparison}
+\end{figure}
+
+For each article, we produce the outputs using each tool, and we then aggregate over the whole dataset.
+Figure~\ref{fig:sentiment_axes_comparison} shows the average values across the two main axes considered (polarity and strength).
+The plot shows boxplots that represent the median (line in the middle of the box), first and third quartile (colored box boundaries) for the considered tools (four for polarity, two for strength) and for the arithmetic mean.
+We can see that, even being normalised to the same interval, these tools provide different distributions.
+
+% - polarity
+Starting from the polarity values, that describe how positive or negative is the sentiment, we have some tools that have values more extreme than others.
+Vader, for example, has values that are very spread out
+For example, the values of Vader reach very often the maximum and minimum (first and third quartile).
+TextBlob and CoreNLP instead have a much smaller range, but with a different mean. CoreNLP provides generally more negative results, while TextBlob more positive ones.
+
+% - strength
+For the sentiment strength instead, we only have two of the four considered tools that provide values.
+Also here, the distributions show differences across tools, with Sentistrength providing the higher values.
+
+
+% % - Correlation between tools
+% Then we proceeded to study the correlation between the outputs of the different tools.
+% The most correlated are ???
+% Instead ??? provides results quite unrelated to the others.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_words_comparison.pdf}
+    \caption{Comparison of the amount of sentiment words provided by different tools.}
+    \label{fig:sentiment_words_comparison}
+\end{figure}
 
 % Words:
 % - percentage of words detected by each tool
-For the analysis of the words, we computed the percentages overall the whole datasets of the words detected by each tool.
+For the analysis of the word-level instead, we computed the percentages overall the whole datasets of the words detected by each tool.
+Figure~\ref{fig:sentiment_words_comparison} shows the word-based percentage of sentiment. To get this value, we count the terms that are detected as carrying sentiment for each article.
+For some tools, these are provided natively, while for others we use the lexicon alignment described previously.
+
+We can see from this figure that each tool detects a quite high number of words as related to sentiment ($5-8\%$), and for some outliers we reach values above $50\%$.
 % - percentage of words detected by combination
 
-% - term analysis: most frequent words positive/negative
-We also perform a term analysis to see which words are the most frequent positive/negative. Figure~\ref{TODO} shows that ???
+% % - term analysis: most frequent words positive/negative
+% We also perform a term analysis to see which words are the most frequent positive/negative. Figure~\ref{TODO} shows that ???
 
-% Group by News source:
-We also break down the analysis to the individual news sources.
-% - sources with highest/lowest/strongest
-We find that the sources with the most positive sentiment are ??? while the ones with most negative sentiment are ???.
-Instead on the axis of strength, the news sources that have strongest sentiment are ???
-% - most frequent sentiment words for the most frequent sources
+% % Group by News source:
+% We also break down the analysis to the individual news sources.
+% % - sources with highest/lowest/strongest
+% We find that the sources with the most positive sentiment are ??? while the ones with most negative sentiment are ???.
+% Instead on the axis of strength, the news sources that have strongest sentiment are ???
+% % - most frequent sentiment words for the most frequent sources
 
-\todo{figure by news source}
+% \todo{figure by news source}
 
-Overall, we see that using these tools we have one main limitation: false positive words. Many times by inspecting the results, we see that words that should not be sentiment-related instead are annotated as such. Also by looking the overall percentages, we can see that they are relatively quite high.
+Overall, we see that using these tools we have one main limitation: false positive words. Many times by inspecting the results, we see that words that should not be sentiment-related instead are annotated as such, as also Figure~\ref{fig:sentiment_words_comparison} denotes.
+%Also by looking the overall percentages, we can see that they are relatively quite high.
 % How am I compensating for it?
 We already removed the outputs from some other libraries because they were providing even more wrong results, but this remains a main problem.
 
 % Combined results? Or stop
 
-
-
 \subsubsection{\statusgreen Combination of the tools}
 
-\todoAWinline{So from the previous section, I don't really get a sense of the practical differences between the approaches, as you haven't given a running example that would let me see what the difference between the systems is. Also, you don't seem to have discussed what scope there is for adjusting the lexicons for each system, or what difference that might make to the final analysis.}
-\todoHAinline{deciding to combine upfront is not very good. Better way is to use them individually, then combine. This way you scientifically demonstrate value of each approach.}
+% \todoAWinline{So from the previous section, I don't really get a sense of the practical differences between the approaches, as you haven't given a running example that would let me see what the difference between the systems is. Also, you don't seem to have discussed what scope there is for adjusting the lexicons for each system, or what difference that might make to the final analysis.}
+% \todoHAinline{deciding to combine upfront is not very good. Better way is to use them individually, then combine. This way you scientifically demonstrate value of each approach.}
 % Why combine
 From this list of tools, we decided to combine them together in order to increase the accuracy of the sentiment recognition. %\todoAW{I think you mean that you wanted to improve the accuracy of the sentiment recognition.}
-As each one of them has different\todoHA{what if they contradict each others?} lexicons covering different groups of words (e.g., TextBlob only adjectives), and given that they do not overlap totally,\todoHA{avoid such vague language. This is also not supported by any data. Why not?} the combined lexicon (not correct word, because CoreNLP does not use one) / detection power can be much larger than just considering one of them.
-\todoAW{proof?}
+% As each one of them has different
+%\todoHA{what if they contradict each others?} 
+% lexicons covering different groups of words (e.g., TextBlob only adjectives),
+%and given that they do not overlap totally,
+% \todoHA{avoid such vague language. This is also not supported by any data. Why not?}
+For the sentiment score, we decide to use an arithmetic mean to provide more stable results.
+In case of failure of one of the tools, if we consider the average we have a safer score to provide.
+
+Instead, for the word-level detection, we have the problem of too many words being outputted by each of the tools.
+Therefore, we decide to use a combination rule that annotates a word when at least two of the tools detect it as carrying sentiment.
+In this way, we reduce the amount of false positives.
+% As each tool provides different words in output
+% the combined lexicon (not correct word, because CoreNLP does not use one) / detection power can be much larger than just considering one of them.
+% \todoAW{proof?}
 
 % How combined all of them
-We therefore combine them in the following way:
+We therefore combine the tools in the following way:
 \begin{enumerate}
     \item running the tools in parallel;
     \item collecting the results;
     \item numerical scores: uniforming the scales (each tool has a different one) and averaging the single scores out;
-    \item sentiment words: doing the union of the words outputted by each tool, and for each word computing the average score (again by uniforming the values first).
+    \item sentiment words: doing the union of the words that are recognised by at least two tools, and for each word we compute the average score (again by uniforming the values first).
 \end{enumerate}
 % we run them in parallel for each input text, and then we collect the results.
 % We consider two types of outputs: the score(s) given to the text, and the words responsible for the score.
@@ -420,8 +479,8 @@ We therefore combine them in the following way:
 
 Even if we average and combine the results, we keep the original outputs for each tool in order to backtrack the results and see where the problems come from.
 
-To normalise the scales, we consider two main axes: polarity (used by all of the tools) and strength (provided by SentiStrength, and subjectivity by TextBlob). We map the numerical intervals from $[min;max]$ to $[-1;1]$ by means of a linear transformation. The categorical values, instead, are mapped by firstly sorting the output labels from negative to positive, then converting to increasing numerical values (e.g., for 4 labels, $\set{1,2,3,4}$) and then applying the linear transformation as in the other case.
-\todoAW{Would it have made more sense to combine the lexicons from the different systems and then used them to augment one of the existing models (eg. SentiStrength)? Even if not, you should be prepared to answer that question in your viva.}
+
+% \todoAW{Would it have made more sense to combine the lexicons from the different systems and then used them to augment one of the existing models (eg. SentiStrength)? Even if not, you should be prepared to answer that question in your viva.}
 
 
 % \subsubsection{\statusorange Sentiment variation along articles}
@@ -477,7 +536,7 @@ To normalise the scales, we consider two main axes: polarity (used by all of the
 
 % The conclusion is that when we consider the output scores of the sentiment analysis of sentences, the results may have a bias whether they are analysing a sentence with quotation, showing higher subjectivity and more sentiment, with respect to sentences without quotations.
 
-\subsection{\statusorange Fine-grained Propaganda Analysis}
+\subsection{\statusgreen Fine-grained Propaganda Analysis}
 \label{ssec:lp_techniques_propaganda}
 
 As a second group of persuasion techniques, we consider \gls{propaganda}.
@@ -497,19 +556,56 @@ The classification is performed on the word level, additionally using the left a
 We use this detection algorithm off the shelf,\footnote{\url{https://github.com/qcri/PropagandaTechniquesAnalysisBERT}} only wrapping the code in a client-friendly environment to simplify the integration in our processing pipeline.\footnote{\url{https://github.com/MartinoMensio/PropagandaTechniquesAnalysisBERT}}
 
 
-\subsubsection{\statusred Statistics over our datasets}
+\subsubsection{\statusgreen Statistics over AllSides Dataset}
 \label{ssec:lp_techniques_propaganda_stats}
 
-We present here an analysis of how this model works on the datasets that we use in this chapter.
-The dataset chosen for this are AllSides and All-the-News
+We present here an analysis of how this model works on the dataset that we used mostly in this chapter.
+% The dataset chosen for this are AllSides and All-the-News
+The dataset, presented in Section~\ref{sec:lp_datasets}, is AllSides.
 
-\todo{Finish this subsection, copy from notebooks}
-Stats: 
-define metrics for quantities: definition of word-based percentage, overall word-based percentage of propaganda (any techniques), technique specific percentages.
-Then present metric values for quantities.
+The processing pipeline that we use consists of the following steps:
 
-Term analysis define: most frequent across techniques, technique-specific terms
-Term analysis values.
+\begin{enumerate}
+    \item Load the text of the articles from the dataset.
+    \item Use the model for fine-grained analysis of propaganda techniques: this produces a set of annotated spans in the document, highlighting the words that are detected as containing one of the propaganda techniques, together with the labels of the techniques.
+    \item Compute word-level percentages of each technique for each article: we define this metric as the total number of words belonging to each technique divided by the total number of words in the article.
+    \item Accumulate the frequencies of each word that is detected as containing any propaganda technique.
+    \item Compute the TF-IDF of the propaganda terms counted in the previous step.
+\end{enumerate}
+
+
+% Stats: 
+% define metrics for quantities: definition of word-based percentage, overall word-based percentage of propaganda (any techniques), technique specific percentages.
+% Then present metric values for quantities.
+
+Across the dataset, we have that on average, $5\%$ of the words are detected as being part of any of the 18 propaganda techniques considered.
+The standard deviation is $4\%$, and the maximum value of $56\%$ is caused by an article that is just two sentences long. Except a few outliers caused by partial articles or errors in the scraping, the values are in an acceptable range, as the standard deviation confirms.
+% https://www.nytimes.com/2019/08/06/books/toni-morrison-dead.html
+
+% Overall word-based percentage of propaganda
+% count    36274.000000
+% mean         0.054099
+% std          0.041590
+% min          0.000000
+% 25%          0.023761
+% 50%          0.044807
+% 75%          0.074553
+% max          0.566957
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/prop_tech_detail_baly.pdf}
+    \caption{The average word-based percentage of propaganda techniques in the AllSides dataset.}
+    \label{fig:prop_tech_detail_baly}
+\end{figure}
+
+We then break down the statistics to the single techniques, and we can see in Figure~\ref{fig:prop_tech_detail_baly} that several techniques are detected across the dataset.
+the most frequent one is \texttt{Loaded\_Language}, which appears on $1.6\%$ of the words.
+Successively, we also have other techniques that appear quite frequently (close to $1\%$, such as \texttt{Doubt}, \texttt{Flag-Waving}, \texttt{Name\_Calling}/\texttt{Labeling}. Some techniques instead are hardly ever detected, such as \texttt{Bandwagon}, \texttt{Obfuscation}, \texttt{Red\_Herring} and \texttt{Straw\_Men}.
+
+
+% Term analysis define: most frequent across techniques, technique-specific terms
+% Term analysis values.
 
 
 % % criticism
@@ -754,7 +850,7 @@ meaning that even though persuasion appears in approximately 9 out of 10 sentenc
 Breaking down by type of technique, most of these words are detected as carrying sentiment ($12\%$) while less than $4\%$ relates to propaganda.
 We can see that the propaganda percentages are much smaller than the values provided by the sentiment tools.
 % \todoAW{Is that because of the content of the documents, or the standard of the technology for recognising them?}
-By inspecting the samples, we see that generally sentiment detection finds more terms than the propaganda detection. This means that potentially more words are being recalled, but the precision is much lower because we see lots of false positives.
+By inspecting the samples, we see that generally sentiment detection finds more terms than the propaganda detection. This means that potentially more words are being recalled, but the precision is much lower because we see lots of false positives, despite the combination approach described in Section~\ref{ssec:lp_techniques_sentiment}.
 
 \begin{figure}[!htbp]
     \centering
@@ -1208,7 +1304,8 @@ Having used a quite small number of data samples for this experiment, these two 
 In addition to the analysis of the previous paragraphs, we want to take a closer look into the predictions, to understand better the quantitative results just described.
 
 For simplicity, we consider the case where we have 10 headlines and we use TF-IDF (corresponding to the third row of table~\ref{tab:sentpropnoise_tfidf}). We choose the TF-IDF result because it is easier to analyse the features and see what is happening.
-Let’s consider for inspection the articles belonging to two clusters (IDs given by our experimentation): cluster 0\footnote{\url{https://www.allsides.com/story/biden-leads-vote-count-trump-initiates-legal-challenges}} and cluster 7.\footnote{\url{https://www.allsides.com/story/what-watch-2020-presidential-election}}. They each include three articles, and cover the US elections of 2020. The first one was published on 5th November 2020, while the second on 3rd November 2020. So they are quite similar in the entities mentioned, but the most recent one is centred on the legal challenges initiated for the vote counts while the other headline is still pre-vote (3rd of November was the election day). This means that it is challenging for clustering to differentiate between the two ground truth clusters because a lot of terms in common exist.
+Let’s consider for inspection the articles belonging to two clusters (IDs given by our experimentation): cluster 0\footnote{\url{https://www.allsides.com/story/biden-leads-vote-count-trump-initiates-legal-challenges}} and cluster 7.\footnote{\url{https://www.allsides.com/story/what-watch-2020-presidential-election}}
+They each include three articles, and cover the US elections of 2020. The first one was published on 5th November 2020, while the second on 3rd November 2020. So they are quite similar in the entities mentioned, but the most recent one is centred on the legal challenges initiated for the vote counts while the other headline is still pre-vote (3rd of November was the election day). This means that it is challenging for clustering to differentiate between the two ground truth clusters because a lot of terms in common exist.
 
 \begin{table}[!htbp]
     \centering
