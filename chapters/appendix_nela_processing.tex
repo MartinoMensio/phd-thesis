@@ -1,12 +1,12 @@
 \chapter{NELA-GT-2018 Processing}
 \label{app:nela_processing}
 
-We describe here in the following sections our processing to build an additional second dataset for the political leaning classifier, with random and media splits as the \texttt{Baly} dataset.
+We describe here in this appendix our processing to build an additional second dataset for the political leaning classifier used in Chapter~\ref{chap:political_sides}, with random and media splits as the \texttt{Baly} dataset.
 The source of the data is the full NELA-GT-2018 dataset, provided in~\citet{DVN/ULHLCB_2019}, which contains $713,534$ news articles coming from $194$ news sources.
 Our contribution here is to index it in order to have different splits that can be used then to compare results of political leaning classification.
 
 How a dataset is splitted can greatly affect the results, as we see in~\cite{baly2020we}. Models can learn unwanted patterns and effectively discover shortcuts if the data is not properly segmented.
-We provide here both balanced and unbalanced versions of a subset derived from NELA-GT-2018 in two flavors:
+We provide here both balanced and unbalanced versions of a subset derived from NELA-GT-2018 in two flavours:
 
 \begin{itemize}
     \item random splits: articles from the same news source may appear in all the folds, possibly leading into information leaking;
@@ -34,10 +34,13 @@ Therefore, by testing with this subset, we will see if this becomes a problem or
 \section{Random Splits Imbalanced}
 
 For the random splits it is less difficult as we have less constraints.
+We take the subset identified, and we perform a 5-Folds split, stratified on the leaning.
+This strategy is common in the literature as a middle point for reducing the variance of the performance estimate and allowing to use more data for training, and at the same time to avoid too many iterations that require time and resources~\citep{fushiki2011estimation}.
 
-We take the subset identified, and we perform a 5-Folds split,\todoHA{why no 10-fold?} stratified on the leaning. In this way we keep the proportion between the number of articles of each leaning. We obtain therefore the \texttt{NELA-Random-Imbalanced} subset.
-We decide to perform a 5-Folds split instead of a simpler 80-20\% train-test split, because we want to avoid the problem of which part of the dataset is selected for testing (which leads to less-generalised results).\todoHA{unclear, rewrite}
-Instead, by doing a 5-Folds split, every item of the dataset is used in the test split at different times.
+By using a stratified split, we keep the proportion between the number of articles of each leaning. We obtain therefore the \texttt{NELA-Random-Imbalanced} subset.
+% We decide to perform a 5-Folds split instead of a simpler 80-20\% train-test split, because we want to avoid the problem of which part of the dataset is selected for testing (which leads to less-generalised results).
+% \todoHA{unclear, rewrite}
+Instead, by doing a k-folds split, every item of the dataset is used in the test split at different times.
 The stratification on the leaning makes every fold with the same proportions across leaning, that is imbalanced but constant.
 
 \section{Random Splits Balanced}
@@ -53,9 +56,10 @@ Instead for the media splits, we need to keep the constraint that all the news a
 
 Therefore, the news sources need to be inserted each one in a different fold. At the same time, since there is a big difference between the maximum and minimum number of articles that come from each source, we need to optimize the selection in order to keep the dataset as balanced as possible (even if then we create a balanced version).
 
-\todoHAinline{This section is not very smooth. It describes datasets but also processing, errors, results, etc. Not easy to follow what your methodology and goals are.}
+% \todoHAinline{This section is not very smooth. It describes datasets but also processing, errors, results, etc. Not easy to follow what your methodology and goals are.}
 
-The greedy strategy that we choose is an adaptation of the Longest-processing-time-first (LPT) algorithm~\citep{graham1969bounds}, that is usually applied in the \emph{minimizing the maximum completion time} problem.\todoAW{I'm not really sure what this is about. What are you trying to do?}
+The greedy strategy that we choose is an adaptation of the Longest-processing-time-first (LPT) algorithm~\citep{graham1969bounds}, that is usually applied in the \emph{minimizing the maximum completion time} problem.
+%\todoAW{I'm not really sure what this is about. What are you trying to do?}
 The analogy is that the folds are the processors (fixed in number), the goal is to reduce the size of the largest fold instead of reducing the total processing time (with the addition that we have three classes of items that represent the leaning), and the number of articles for each news source corresponds to the processing time of each task.
 The only modification is that our objective depends on the total size of each fold, but also on the desired balance also across political leaning.
 
@@ -115,4 +119,5 @@ For each fold, we take the minimum number of articles (always the Center) and, a
 Table~\ref{tab:nela_media_balanced} shows the result of the balancing, where the first fold results being the largest one as its limit (number of articles in the Center) is higher.
 We call this subset \texttt{NELA-Media-Balanced}.
 
-We will use all these subsets in the following Section~\ref{ssec:ps_prop_leaning_classifier} in order to see if the results generalise or not to other datasets.
+% We will use all these subsets in the following Section~\ref{ssec:ps_prop_leaning_classifier} in order to see if the results generalise or not to other datasets.
+The splits produced with this methodology are used in Chapter~\ref{ssec:ps_prop_leaning_classifier}.

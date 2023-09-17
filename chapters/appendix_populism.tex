@@ -1,45 +1,62 @@
 \chapter{Propaganda and Populism}
 \label{app:prop_and_populism}
 
-FROM CHAPTER 5:
-Relying on the wider literature about populism, we want to see how these two phenomena are related by performing a correlation analysis.
+In this appendix, we analyse the relationship between propaganda and populism.
+This analysis, while slightly drifting away from the core objectives of this thesis, is still related and helps our analysis in Chapter~\ref{ssec:ps_prop_leaning_classifier_conclusion}.
+
+% We have three main objectives:
+% \begin{enumerate}
+%     \item analyse the conceptual similarities and differences between 
+%     \item showing that populisim exists across different political contexts, belonging to different orientations (Left vs Right)
+%     \item analyse the correlation between propaganda and populism
+% \end{enumerate}
+% Relying on the wider literature about populism, we want to see how these two phenomena are related by performing a correlation analysis.
 % Being automated propaganda detection a quite recent task, we want to perform this correlation analysis to test our hypothesis that they are related. 
 %In this way, we can see if there are some discrepancies between populism existing from all political leanings, an
 % if we find that the propaganda datasets are imbalanced while the populism literature shows that 
-If they show to be related, then both propaganda and populism should be distributed in a similar way across the political spectrum.
+% If they show to be related, then both propaganda and populism should be distributed in a similar way across the political spectrum.
 
 %\item
-[H2:] propaganda is co-occurring to populism. We need to formulate and verify this hypothesis to then prove or confute H1.
+% [H2:] propaganda is co-occurring to populism. We need to formulate and verify this hypothesis to then prove or confute H1.
+
+We have three main objectives:
 
 \begin{enumerate}
-    \item Conceptual similarities and differences between \textit{propaganda and populism}: with the findings of the previous point (high imbalance), and given that not much literature exists considering propaganda and political leaning, we need to rely on the concept of populism. %At the same time, we see a lot of publications that refer to a similar concept, populism, that is being observed and studied across countries and political ideologies. 
-    We show in this subsection the differences and similarities between these two concepts, and why we hypothesise that they are related. This supports H2.
-    \item Populism across many contexts of the left and right: we present some contexts where populism is being studied, belonging to different political ideologies and leanings. This indirectly supports H1, since propaganda is related to populism thanks to the verification of H2, and we show here that populism exists all across the political spectrum.
-    \item Correlation between detected propaganda and populism: with a dataset that contains speeches with leaning and populism information, we analyse the speeches with propaganda analysis to see the correlation between the detected propaganda techniques against the populism annotations. We do a breakdown by leaning and technique to see where the correlation is stronger. This is a different test of H2, and we present it after the previous point because we are considering \textit{detected propaganda} that is based on an imbalanced dataset.
+    \item Analyse the conceptual similarities and differences  between \textit{propaganda} and \textit{populism}: with the findings of the previous point (high imbalance), and given that not much literature exists considering propaganda and political leaning, we need to rely on the concept of populism. %At the same time, we see a lot of publications that refer to a similar concept, populism, that is being observed and studied across countries and political ideologies. 
+    We show in this subsection the differences and similarities between these two concepts, and why we hypothesise that they are related (Section~\ref{ssec:ps_prop_leaning_imbalanced_concepts_populism_propaganda}).
+    %This supports H2.
+    \item Show that populisim exists across different political contexts, belonging to different orientations (Left vs Right).
+    We present some contexts where populism is being studied, belonging to different political ideologies and leanings (Section~\ref{ssec:ps_prop_leaning_imbalanced_populism_across}). 
+    %This indirectly supports H1, since propaganda is related to populism thanks to the verification of H2, and we show here that populism exists all across the political spectrum.
+    \item Analyse the Correlation between detected propaganda and populism: with a dataset that contains speeches with leaning and populism information, we analyse the speeches with propaganda analysis to see the correlation between the detected propaganda techniques against the populism annotations. We do a breakdown by leaning and technique to see where the correlation is stronger (Section~\ref{ssec:ps_prop_leaning_imbalanced_correlation_populism}). 
+    %This is a different test of H2, and we present it after the previous point because we are considering \textit{detected propaganda} that is based on an imbalanced dataset.
 \end{enumerate}
 
 
 
 
 
-In this Appendix we cover the relationship between propaganda and populism.
-This analysis emerged from the analysis of imbalance of Chapter~\ref{chap:political_sides}
-The objectives of this appendix are many:
-\begin{enumerate}
-    \item explain the relationship between populism and propaganda on the conceptual level (Section~\ref{ssec:ps_prop_leaning_imbalanced_concepts_populism_propaganda});
-    \item demonstrate how populism and propaganda are spread around different political context from Left and Right leanings (Section~\ref{ssec:ps_prop_leaning_imbalanced_populism_across});
-    \item study the correlation between populism and detected propaganda (Section~\ref{ssec:ps_prop_leaning_imbalanced_correlation_populism});
-    \item discuss the results and implications of having two related concept, where one of the two (populism) is proved to exist across political leaning and the datasets of the other instead (propaganda) are highly imbalanced (Section~\ref{ssec:ps_prop_leaning_imbalanced_discussion}).
-\end{enumerate}
+% In this Appendix we cover the relationship between propaganda and populism.
+% This analysis emerged from the analysis of imbalance of Chapter~\ref{chap:political_sides}
+% The objectives of this appendix are many:
+% \begin{enumerate}
+%     \item explain the relationship between populism and propaganda on the conceptual level (Section~\ref{ssec:ps_prop_leaning_imbalanced_concepts_populism_propaganda});
+%     \item demonstrate how populism and propaganda are spread around different political context from Left and Right leanings (Section~\ref{ssec:ps_prop_leaning_imbalanced_populism_across});
+%     \item study the correlation between populism and detected propaganda (Section~\ref{ssec:ps_prop_leaning_imbalanced_correlation_populism});
+%     \item discuss the results and implications of having two related concept, where one of the two (populism) is proved to exist across political leaning and the datasets of the other instead (propaganda) are highly imbalanced (Section~\ref{ssec:ps_prop_leaning_imbalanced_discussion}).
+% \end{enumerate}
+
+After facing each of these motivations, we discuss the results and implications of having two related concept, where one of the two (populism) is proved to exist across political leaning and the datasets of the other instead (propaganda) are highly imbalanced (Section~\ref{ssec:ps_prop_leaning_imbalanced_discussion}).
 
 \section{\statusgreen Conceptual Relationship}
 \label{ssec:ps_prop_leaning_imbalanced_concepts_populism_propaganda}
 
 To prove the existence of propaganda all across the political spectrum, the best strategy would be to find literature that links propaganda to different political contexts. But, with a bit of surprise, we do not find a lot of literature using the specific term ``propaganda". We have some examples of contexts listed in~\cite{woolley2018computational}, but
 most of the socio-political literature uses the concept of \emph{\gls{populism}} that has a much wider systematic theoretical treatment~\citep{muller2017populism,jowett2012propaganda,jowett2018propaganda}. % persuasion (but it has a much larger scope and )
-The next Subsection~\ref{ssec:ps_prop_leaning_imbalanced_populism_across} describes therefore the different contexts of propaganda and populism, trying to justify our H1 that propaganda exists in all political leanigs.
+The next Subsection~\ref{ssec:ps_prop_leaning_imbalanced_populism_across} describes therefore the different contexts of propaganda and populism.
+%, trying to justify our H1 that propaganda exists in all political leanings.
 % Populism is described in different contexts all around the political spectrum, and this is what we will discuss in the next .
-But to use the literature of populism for this goal, we need to demonstrate our H2: how propaganda is related to populism. And this is performed with a theoretical and a practical approach.
+But to use the literature of populism for this goal, we need to show how propaganda is related to populism. And this is performed with a theoretical and a practical approach.
 We give some theoretical similarities and differences between the concepts in this subsection, and then we will perform a practical correlation analysis in Subsection~\ref{ssec:ps_prop_leaning_imbalanced_correlation_populism}.
 
 % Populism has a very broad systematic theoretical treatment in the literature~\citep{muller2017populism,}
@@ -47,8 +64,8 @@ We give some theoretical similarities and differences between the concepts in th
 % Populism and propaganda show some similarities and differences, that here in this chapter
 % But at the same time, we have a concept that is very closely related with propaganda, that has a very broad systematic theoretical treatment in the literature, that is Populism.
 
-\todo{duplicate content here and in chapter 2? What is the best place for this?}
-As seen in Chapter~\ref{sec:lit_propaganda} the relationship between populism and propaganda is quite strong~\citep{tumber2021routledge,pasquino2008populism}
+% \todo{duplicate content here and in chapter 2? What is the best place for this?}
+As introduced in Chapter~\ref{sec:lit_propaganda} the relationship between populism and propaganda is quite strong~\citep{tumber2021routledge,pasquino2008populism}.
 
 
 % Definition of Populism
@@ -81,7 +98,7 @@ And given the contemporary digital age, the two concepts are coming closer and c
 \label{ssec:ps_prop_leaning_imbalanced_populism_across}
 
 In this subsection we show how propaganda (and populism) are spread in contexts across all political leanings. We list the contexts considering the countries and the involved political leanings.
-This backs up H1.
+% This backs up H1.
 
 % This subsection’s question: does populism exist in political contexts all across the spectrum?
 
@@ -123,9 +140,9 @@ Even if propaganda here is \textit{detected} using imbalanced datasets, we hypot
 These results may not be highly accurate, but they can help us solve this circular dependency (accurately detect propaganda $\rightarrow$ demonstrate correlation between propaganda and populism $\rightarrow$ demonstrate propaganda datasets should include more left-leaning $\rightarrow$ accurately detect propaganda) and give a first approximative result.
 
 We need to understand the magnitude of this correlation because we are facing a discrepancy between populism (all across leaning) and propaganda datasets (mainly right-leaning).
-We hypothesised the correlation between propaganda and populism (H2), but we need to actually analyse it.
+We hypothesised the correlation between propaganda and populism, but we need to actually analyse it.
 
-We also have a secondary objective for this section: given our H2 for granted, studying where the correlation is stronger and where it is weaker could help us analyse potential areas where propaganda detection is not working well. In other words, if we observe that for a specific leaning and technique, the correlation is low/negative, this could be an indication that the propaganda detection for that leaning and technique is not accurate.
+We also have a secondary objective for this section: studying where the correlation is stronger and where it is weaker could help us analyse potential areas where propaganda detection is not working well. In other words, if we observe that for a specific leaning and technique, the correlation is low/negative, this could be an indication that the propaganda detection for that leaning and technique is not accurate.
 
 % On the experimental side, we need to verify our assumption, that we took from the literature, of \textit{the correlation between propaganda and populism}
 
@@ -229,7 +246,7 @@ By breaking it down to the correlation of populism to each propaganda technique,
 
 % findings
 Propaganda and populism are correlated, but not too strongly.
-The fact that some of the techniques are correlated to populism is a good sign, as it confirms our hypothesis H2. Even though, the correlation scores are still low to be considered as ``strong correlation''. We will expand this experiment in the next Chapter when we take into consideration political leaning.
+The fact that some of the techniques are correlated to populism is a good sign. Even though, the correlation scores are still low to be considered as ``strong correlation''. We will expand this experiment in the next Chapter when we take into consideration political leaning.
 Considering that the current fine-grained propaganda detection is not so accurate (cf. Section~\ref{ssec:lp_techniques_propaganda}), we can say that this weak correlation can still be considered as a signal that the two phenomena are related.
 % In the Right more. This is one point supporting the hypothesis that propaganda detection works better in the Right than in the Left. → imbalanced detection caused by imbalanced data
 
@@ -289,7 +306,10 @@ We then proceed to combine the previous breakdown by propaganda technique with t
 Figure~\ref{fig:populism_propaganda_correlation_by_leaning} shows the breakdown by each technique considering the political leaning of the speeches.
 
 We can see that for some techniques, the values vary a lot across leaning. For example, let us consider the technique \texttt{Exaggeration/Minimisation}. In the right it has a positive value, while in the left it has a negative value. %, and in the center more neutral values.
-In other words, populism is correlated positively with this technique in right-leaning speeches, while it is negatively correlated in left-leaning ones. We have this type of behaviour also with \texttt{Repetition}, \texttt{Slogans} and \texttt{Causal\_Oversimplification}. This means that these techniques correspond more to the populism of the right, while are used in the Left in relatively non-populistic speeches (hypothesis H2 of positive correlation broken). Or it could also mean that the detection of these techniques in the Left is not working as it should (and actually the hypothesis H2 of positive correlation is still valid).
+In other words, populism is correlated positively with this technique in right-leaning speeches, while it is negatively correlated in left-leaning ones. We have this type of behaviour also with \texttt{Repetition}, \texttt{Slogans} and \texttt{Causal\_Oversimplification}. This means that these techniques correspond more to the populism of the right, while are used in the Left in relatively non-populistic speeches.
+%(hypothesis H2 of positive correlation broken).
+Or it could also mean that the detection of these techniques in the Left is not working as it should.
+%(and actually the hypothesis H2 of positive correlation is still valid).
 
 Instead, the techniques \texttt{Name\_Calling/Labeling}, \texttt{Flag-Waving} and \texttt{Doubt} have positive correlations for all political leanings.
 Therefore, the detection of these techniques is probably working more accurately as it reflects the expected behaviour (positive correlation).
@@ -314,18 +334,21 @@ Considering the previous subsections, we discuss here the main findings of this 
 1. Computational NLP resources are quite imbalanced, especially the English based. The main motivation is that most of the works consider as a starting resource MBFC which has a label ``propaganda" that is on the limit of fake news, which is associated with extreme leanings, and it is more common in the extreme-right leaning with fewer sources on the extreme-left leaning. The datasets derived from MBFC, by selecting the news sources, end up in under-representing of left-leaning and centre, with the result of being completely imbalanced.
 At the moment, there are not many datasets available for propaganda detection, and therefore this problem is showing more.
 The answer to RQ3.3 is that \emph{propaganda detection is highly imbalanced. The imbalance comes from the datasets that currently only contain right-leaning examples}.
-And the results seem to disagree with our H1 where we hypothesise that propaganda exists all across the political spectrum.
-But in reality, what we really observe is that the datasets are imbalanced. Therefore, we want to show some literature that places propaganda all across the political spectrum, to then be able to say that this imbalance should not be there (H1).
+And the results seem to disagree with our hypothesis that propaganda exists all across the political spectrum.
+But in reality, what we really observe is that the datasets are imbalanced. Therefore, we want to show some literature that places propaganda all across the political spectrum, to then be able to say that this imbalance should not be there.
 
 
-2. In our digression over literature to verify H1, we find that most of the works use a term that is not propaganda: it is populism. Therefore, we analyse the conceptual similarities and differences, to argue that we can use the literature about populism to derive the distribution of propaganda (H2).
+2. In our digression over literature, we find that most of the works use a term that is not propaganda: it is populism. Therefore, we analyse the conceptual similarities and differences, to argue that we can use the literature about populism to derive the distribution of propaganda.
 % Distinction of terminology: socio-political works tend to use more the populism terminology. 
 We find that the concepts are very strictly linked and the main difference is the role: political figures are labelled as populist and the linguistical means they use are in many case propaganda techniques. The term populism focuses more on public figures, while propaganda is more related on the linguistic means.
-But we only want to use the concept of populism to understand how it (and propaganda) spread across the political leaning, so we are not interested in this difference. We are only interested in their co-occurrence (when one is present, also the other one). And literature supports us and we verify our H2.
+But we only want to use the concept of populism to understand how it (and propaganda) spread across the political leaning, so we are not interested in this difference. We are only interested in their co-occurrence (when one is present, also the other one).
+%And literature supports us and we verify our H2.
 % Focus is less on the linguistic means, it is more about the ideals expressed. And populism is more from the political leaders of a position (political speeches).
 % Instead, on the NLP side, focus has been more on the propaganda terminology, with some references to persuasion. And propaganda is seen more as related to news sources instead of political leaders.
 
-3. We then proceed to the verification of H1 using Populism as an intermediary. We take the socio-political literature and we find examples of populism all across political ideologies and leanings.
+3. %We then proceed to the verification of 
+%using Populism as an intermediary. 
+We take the socio-political literature and we find examples of populism all across political ideologies and leanings.
 
 
 4. We then perform the Correlation analysis and find a weak (but existing) correlation.
