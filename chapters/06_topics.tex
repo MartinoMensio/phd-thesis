@@ -2,6 +2,7 @@
 \label{chap:topics}
 
 \section{\statusgreen Introduction}
+\label{sec:topic_intro}
 
 % conclusions from chapter 5:
 % two motivations:
@@ -24,14 +25,16 @@
 %     % \item analyse the topics to try to locate where the current approach to propaganda detection might have some issues in being accurate. We will perform this analysis and try to find insights that could lead to the development of future propaganda detection resources (e.g., datasets).
 % \end{enumerate}
 
-This chapter in concerned with the analysis of the topics contained in the dataset. In the previous chapter, we underlined the need to find the topics where propaganda varies mostly across the political spectrum. There may be some topics where the discussion is not using many propaganda techniques to drive the reader in a certain direction, or where the use of propaganda may not be very distinctive (e.g., when talking about sports, Left and Right persuasion may be quite difficult to tell apart). 
+% In this chapter we analyse the topics contained in the dataset.
+In the previous chapter, we underlined the need to find the topics where propaganda varies mostly across the political spectrum. There may be some topics where the discussion is not using many propaganda techniques to drive the reader in a certain direction, or where the use of propaganda may not be very distinctive.
+For example, when talking about sports, Left and Right persuasion may be quite difficult to tell apart and not very relevant. 
 
 With an analysis of the topics, we can find the ones where the detected propaganda differs the most, and therefore where we can try to recognise more easily the political leaning of a news article by using the propaganda features.
 This chapter, therefore, introduces the \emph{Topic} as the last ingredient of our analysis.
 
 Our hypothesis is that certain topics are highly distinguishable between left and right, when considering the propaganda used in news articles.
 This hypothesis is supported by the work of~\cite{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
-And with this chapter, we aim to analyse how propaganda varies across topics, to potentially find topics that are more polarising and whose propaganda is more unique to one political extreme or the other.
+With this chapter, we aim to analyse how propaganda varies across topics, to potentially find topics that are more polarising and whose propaganda is more unique to one political extreme or the other.
 % if this controversy is manifesting through the usage of the language of the articles themselves.
 
 %https://hal.archives-ouvertes.fr/hal-03681454/file/umap22adjunct-63.pdf “Given that the topics discussed in the news do not all have the same polarizing effect – they present higher or lower levels of controversy [29] → Kiran Garimella, Gianmarco De Francisci Morales, Aristides Gionis, and Michael Mathioudakis. 2018. Quantifying controversy on social media. ACM Transactions on Social Computing 1, 1 (2018), 1–27
@@ -51,8 +54,8 @@ We can break it down into the following sub-questions:
     \item How does detected propaganda differ across polarising versus neutral topics?
     \item How does detected propaganda differ across \emph{political leaning} in polarising and neutral topics?
     \item What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?
-    \todoAW{Aren't these two questions circular? ie. RQ2 is using leanings to reason about propaganda, and RQ3 is using propaganda to reason about leanings.}
-    \todomargin{single rq: what is the relationship between propaganda and leaning, bidirectional relationship}
+    % \todoAW{Aren't these two questions circular? ie. RQ2 is using leanings to reason about propaganda, and RQ3 is using propaganda to reason about leanings.}
+    % \todomargin{single rq: what is the relationship between propaganda and leaning, bidirectional relationship}
 \end{enumerate}
 
 % Our Research Questions are the following: 
@@ -77,12 +80,13 @@ We can break it down into the following sub-questions:
 % - combination with previous ingredients
 
 % findings
-We find that propaganda changes significantly across topics, and especially when bringing the topic analysis together with leanings and propaganda, we can find some unique combinations that make propaganda from one leaning very different to the propaganda coming from the opposite side of the political spectrum.
+We find that propaganda changes significantly across topics. Especially when the topic analysis is done together with leanings and propaganda, we can find some unique combinations that make propaganda from one leaning very different to the propaganda coming from the opposite side of the political spectrum.
 We try to use these patterns with a leaning classifier, as in the previous chapter, and the results are promising with significant improvements (tested with McNemar, but only a small increase of just $1.22\%$ with respect to the results of the previous chapter).
 
 The structure of this chapter is the following. First, Section~\ref{sec:topic_method} describes the methodology used. Then in Section~\ref{sec:topic_topic_granularities} we analyse different topic definitions, and we fine-tune the selected method by showing what we need for our comparative analysis across leaning.
 Then in Section~\ref{sec:topic_propaganda} we target our RQ4.1 by looking how detected propaganda varies across topics.
-In Section~\ref{sec:topic_propaganda_leaning} we do the comparative analysis of how propaganda varies across topics and leanings (RQ4.2). And in Section~\ref{sec:topic_classifier_propaganda} we analyse the effects on automatic classification of leaning (RQ4.3).
+In Section~\ref{sec:topic_propaganda_leaning} we do the comparative analysis of how propaganda varies across topics and leanings (RQ4.2).
+Afterwards, in Section~\ref{sec:topic_classifier_propaganda} we analyse the effects on automatic classification of leaning (RQ4.3).
 Finally, Section~\ref{sec:topic_discussion} includes the discussion of the findings.
 
 
@@ -95,13 +99,14 @@ Finally, Section~\ref{sec:topic_discussion} includes the discussion of the findi
 
 % For the code, I have two parts:
 % https://github.com/MartinoMensio/textrazor-bulk-annotate which can be used to annotate a dataset.
-% attached the code from a private repository (bcanalytics) which contains some functions to handle the taxonomy (file src/textrazor.py ) and to plot the sunburst diagrams (file experiments/text\_razor.ipynb)
+% attached the code from a private repository (bcanalytics) which contains some functions to handle the taxonomy (file src/textrazor.py ) and to plot the icicle diagrams (file experiments/text\_razor.ipynb)
 
 \section{\statusgreen Methodology}
 \label{sec:topic_method}
 
 Our main goal is to understand how propaganda varies across topics and leanings and to use this information to predict better the political leaning of articles.
-Since our analysis already considers two axes (propaganda and leaning), and here we are adding a third one (topic), we gradually proceed in this chapter, by first considering the new one and adding step by step to the other two.
+Our analysis already considers two axes (propaganda and leaning), and here we are adding a third one (topic).
+Therefore, we gradually proceed in this chapter by first considering the new axis and gradually combining it with the previous two.
 % first need to decompose it as we are introducing a new factor in our analysis.
 For this reason, this chapter first starts analysing different methods and definitions of topics on their own and gradually combines them with leaning and propaganda. The result is that we have similar experiments that only differ in the factors included.
 We group the experiments in two broad types:
@@ -110,32 +115,32 @@ We group the experiments in two broad types:
     \item experiments that combine topic and propaganda (and leaning): here we analyse and answer the Research Questions listed before(Sections~\ref{sec:topic_propaganda}, \ref{sec:topic_propaganda_leaning} and \ref{sec:topic_classifier_propaganda}).
 \end{enumerate}
 
-We can see in Figure~\ref{fig:methodology_mindmap_chapter6} the connections between the different parts of the chapter.
+% We can see in Figure~\ref{fig:methodology_mindmap_chapter6} the connections between the different parts of the chapter.
 
 
-\begin{figure}[!htbp]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \trimbox{2cm 1cm 2cm 1cm}{\input{mindmaps/chapter_6_methodology_mindmap.tex}
-    }}
-    \caption{Structure of Chapter 6}
-    \label{fig:methodology_mindmap_chapter6}
-\end{figure}
-\todoAW{\ref{fig:methodology_mindmap_chapter6}: This all makes it look as though you're talking about your own work, rather than trying to answer an original question. I'd rejig the diagram so that it's about your results, rather than your document.}
-\todomargin{More about the results, what I found out. The distribution of topics across leanings, on the right: what I found out, results. Useful to understand how the parts are linked together, at the end of the chapter, to link key results.}
+% \begin{figure}[!htbp]
+%     \centering
+%     \resizebox{\textwidth}{!}{
+%     \trimbox{2cm 1cm 2cm 1cm}{\input{mindmaps/chapter_6_methodology_mindmap.tex}
+%     }}
+%     \caption{Structure of Chapter 6}
+%     \label{fig:methodology_mindmap_chapter6}
+% \end{figure}
+% \todoAW{\ref{fig:methodology_mindmap_chapter6}: This all makes it look as though you're talking about your own work, rather than trying to answer an original question. I'd rejig the diagram so that it's about your results, rather than your document.}
+% \todomargin{More about the results, what I found out. The distribution of topics across leanings, on the right: what I found out, results. Useful to understand how the parts are linked together, at the end of the chapter, to link key results.}
 
 Across the experiments of this whole chapter, we use the same methodology, that we describe here: dataset annotations (propaganda/topic/leaning, described in the first subsection~\ref{sec:topic_method_data}) and Comparative Analysis~\ref{sec:topic_method_comparative}.
 % Then in the other subsections of methodology we see why and how we are combining the analysis of the different annotations and then we discuss how the different experiments are linked together~\ref{sec:topic_method_comparative}. %~\ref{sec:topic_method_linking}.
 
 
-\subsection{\statusgreen Dataset annotation}
+\subsection{\statusgreen Dataset Annotation}
 \label{sec:topic_method_data}
 
 For the experiments, we take, as in the previous chapter, the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}).
 
 We make use of annotations that cover different dimensions:
 \begin{itemize}
-    \item Propaganda: as in the previous chapters, words and techniques of propaganda are extracted using the pre-trained model from~\cite{da2019fine}. 18 techniques of propaganda are extracted, and we use them to compute different features: total propaganda quantity, the quantity of each technique, terms of propaganda (TF-IDF).
+    \item Propaganda: as in the previous chapters, words and techniques of propaganda are extracted using the pre-trained model from~\cite{da2019fine}. 18 techniques of propaganda are extracted, and we use them to compute different features: total propaganda quantity, quantity of each technique, terms of propaganda (TF-IDF).
     \item Leaning: this dimension is directly available from the dataset. As seen in the previous chapter, the dataset is annotated with the leaning of the author / news source that falls into one of three classes: Left, Center, Right.
     \item Topic analysis: this is the novelty of this chapter, and therefore we expand on it in the following paragraphs. %provided by TextRazor, coarse topics, topics, IPTC topics (explain in detail what they are)
 \end{itemize}
@@ -146,16 +151,23 @@ We make use of annotations that cover different dimensions:
 For the experiments of this chapter, we use different topic annotations. As we discussed in Chapter~\ref{sec:lit_topics_computation}, there are several methods and tools that can be used.
 Our aim is to compare multiple strategies and choose the one that gives more insights for our goal of comparative analysis (comparing propaganda across topics and leanings).
 
-Therefore, the types of topics that we use are the following:
-\todo{before list: a comment about how the key differences between the models: flat, hierarchical, balanced…}
+The topic annotations belong to different types. The most simple ones, give a topic over a flat set of topics. The number of topics may vary between less than 20, usually denoting broad topics, and thousands of topics, that instead are more specific.
+The topics can be exclusive (categorical variable), meaning that each article is associated to only one topic, or the relationship can be to many topics, where each article is annotated with multiple topics. In this case, the relationship can be binary (either not belonging to the topic, or belonging to it), or fuzzy (a weight is associated to the topic).
+Furthermore, we also include hierarchical topic labels, that can be used to have both fine-grained and high-level topics, flexibly on the needs of the analysis.
+
+Therefore, the topics annotations that we use are the following:
+% \todo{before list: a comment about how the key differences between the models: flat, hierarchical, balanced…}
 
 \begin{enumerate}
-    \item native topics given by AllSides, included in the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}); each article is associated with one topic only. There are 108 topic labels and they include very broad labels (e.g. politics) and very narrow ones (e.g. DEA).
-    \todoAW{Is there any overlap or hierarchical structure?}
-    \item Coarse topics: low-granularity topics, given as a set of probabilities to belong to 17 different topics. We rely on TextRazor to provide them.
-    \item fine-grained topics: around 98k different topics, provided by TextRazor. Each topic is linked to wikidata.
-    \item IPTC media topics: hierarchical topics,\todoAW{OK... is there any relationship or potential mapping between IPTC topics and allsides?} defined by IPTC (global standard body of the News Media) with a taxonomy.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
-    The taxonomy is specific to news, and it defines 17 top-level topics, which are then expanded with different levels of detail. TextRazor provides this type of topic, as for the other ones, as a set of 5 for each input article with the relative probability. So for each one of the topics, we can understand where it is placed in the hierarchy and the parent topics.
+    \item native topics given by AllSides, included in the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}); each article is associated with one topic only (categorical, flat). There are 108 topic labels and they include very broad labels (e.g. politics) and very narrow ones (e.g. DEA).
+    %\todoAW{Is there any overlap or hierarchical structure?}
+    \item Coarse topics: low-granularity topics, given as a set of probabilities to belong to 17 different topics (fuzzy non-esclusive, flat). We rely on TextRazor to provide them.
+    \item fine-grained topics: around 98k different topics, provided by TextRazor (fuzzy non-esclusive, flat). Each topic is linked to wikidata.
+    \item IPTC media topics: hierarchical topics (fuzzy non-esclusive),
+    %\todoAW{OK... is there any relationship or potential mapping between IPTC topics and allsides?}
+    defined by IPTC (global standard body of the News Media) with a taxonomy.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
+    The taxonomy is specific to news, and it defines 17 top-level topics, which are then expanded with different levels of detail. TextRazor provides this type of topic, as for the other ones, as a set of 5 for each input article with the relative probability.
+    Therefore, for each one of the topics, we can understand where it is placed in the hierarchy and the parent topics.
     % \item entities with their types.
 \end{enumerate}
 
@@ -167,7 +179,7 @@ Other methods (e.g. LDA topics, extracting topics from types of entities using K
 \begin{figure}
 	\centering
 	\begin{subfigure}{\textwidth} % width of left subfigure
-		\includegraphics[width=\textwidth]{figures/article_topic_example.png}
+		\fbox{\includegraphics[width=\textwidth]{figures/article_topic_example.png}}
 		\caption{Text} % subcaption
 	\end{subfigure}
 	\vspace{1em} % here you can insert horizontal or vertical space
@@ -194,24 +206,30 @@ Other methods (e.g. LDA topics, extracting topics from types of entities using K
     \caption{Different topic analyses for an example document}
     \label{fig:topic_analysis_different_tools} 
 \end{figure}
-\todoAW{Axis labels on all plots}
+%\todoAW{Axis labels on all plots}
 
-Figure~\ref{fig:topic_analysis_different_tools} shows an example of these features for an article.\footnote{\url{https://www.newsmax.com/politics/clarence-thomas-daca-illegal-immigrants-dhs/2020/06/18/id/972897/}} We can see that the native topic annotations provided by the dataset have a single topic (supreme court), which is a non-standardised topic. These annotations from the dataset suffer from undefined granularity (it is not stated how coarse each topic is, there are wide topics e.g., politics, together with very narrow ones) and undefined enumeration (it is unclear the set of possible labels, not a clear list defined in advance).\todoAW{? Not sure what you're getting at here.}
-Then we have the coarse topics, which are 6 topics that are very broad. Then the fine-grained topics, that here we only display the top 60, but there are 270 for this article.
-And finally, the Media Topics, which are up to 10 for each article, and they are part of a taxonomy.  Therefore, we can see how specific they are and what the parent topics are.
+Figure~\ref{fig:topic_analysis_different_tools} shows an example of these features for an article.\footnote{\url{https://www.newsmax.com/politics/clarence-thomas-daca-illegal-immigrants-dhs/2020/06/18/id/972897/}}
+On the vertical axes, we have the topic weights given by the corresponding annotation method, while on the horizontal axis we have the topic labels.
+The native topic annotations provided by the dataset have a single topic (\texttt{supreme court}), which is a non-standardised topic.
+These annotations from the dataset suffer from undefined granularity (it is not stated how coarse each topic is, there are wide topics e.g., politics, together with very narrow ones) and undefined enumeration (it is unclear the set of possible labels, not a clear list defined in advance).
+%\todoAW{? Not sure what you're getting at here.}
+
+Instead the sub-figures (b), (c), (d) and (e) provide the different fuzzy topic annotations from TextRazor.
+We have the coarse topics (c), which are 6 topics that are very broad. Then the fine-grained topics (d), that here we only display the top 60, but there are 270 for this article.
+Finally, the Media Topics (e), which are up to 10 for each article, and they are part of a taxonomy.  Therefore, we can see how specific they are and what the parent topics are.
 
 % , but in this chapter we focus on the results given by TextRazor.
 % TextRazor gives topics in different ways:
 
-In Sections~\ref{sec:topic_topic_granularities} we use the selected methods to provide statistics of the \texttt{baly} dataset across topics (\ref{ssec:topic_topic_granularities_alone}) and across leanings (\ref{ssec:topics_topics_leaning}). In this way, we also give an insight into the methods themselves. In this way, we decide which of the methods is better for our comparative analysis.
+In Sections~\ref{sec:topic_topic_granularities} we use the selected methods to provide statistics of the \texttt{baly} dataset across topics (\ref{ssec:topic_topic_granularities_alone}) and across leanings (\ref{ssec:topics_topics_leaning}). In this way, we also give an insight into the methods themselves and decide which of the methods is better for our comparative analysis.
 
 % \subsection{\statusorange Combining the analysis of dimensions}
 \subsection{\statusgreen Comparative Analysis}
 \label{sec:topic_method_comparative}
 
-Having the annotations related to three different dimensions (propaganda/leaning/topic), the next step is to perform a comparative analysis bringing the dimensions together.
+Having the annotations related to three different dimensions (propaganda, leaning and topic), the next step is to perform a comparative analysis bringing the dimensions together.
 
-In the many comparative analyses contained in the following sections, we always have one observed variable (the objective of the analysis) and one or many partitioning variables (the variables that are used to partition the space of the articles of the dataset). The observed variable is an aggregate function defined over the partitions identified by the partitioning variable(s).
+In the many comparative analyses contained in the following sections, we always have one observed variable (the objective of the analysis) and one or many partitioning variables (the variables that are used to partition the space of the articles of the dataset). The observed variable is an aggregate value computed over the partitions identified by the partitioning variable(s).
 
 \begin{table}[!htbp]
     \centering
@@ -232,7 +250,7 @@ In the many comparative analyses contained in the following sections, we always 
     \label{tab:comparative_analyses}
 \end{table}
 
-Table~\ref{tab:comparative_analyses} shows how the observed and partitioning variables change across the chapter.
+Table~\ref{tab:comparative_analyses} shows the different combinations of observed and partitioning variables considered across the chapter.
 The comparative analysis is then performed by taking the values of the observed variable and comparing it across the partitions.
 In the two first comparative analyses, we are observing how the number of articles changes across topics (and leaning). Our goal for these two experiments is to find an optimal definition of the topic which allows the comparative analysis to have enough insights.
 Then, with the other analyses, we take the identified definition of the topic and apply it to several partitionings to answer the first two Research Questions of this chapter.
@@ -346,19 +364,18 @@ Then, with the other analyses, we take the identified definition of the topic an
 \label{sec:topic_topic_granularities}
 
 In this section, we use the different topic methodologies listed above, applying them to the \texttt{baly} dataset.
+Our goals are:
 
-Our goals are many:
-
-\begin{itemize}
+\begin{enumerate}
     \item analyse the dataset to understand the topic it contains, using different methodologies;
     \item compare the information provided by each methodology and understand what are the advantages of using one or the other;
-    \item see which methodologies are able to find differences between Left and Right. The dataset itself is made of triples of articles, so we expect that the high-level topics will be very similar, and instead, we expect some fine-grained differences.
-\end{itemize}
+    \item see which methodologies we can use to find differences between Left and Right. The dataset itself is made of triples of articles, so we expect that the high-level topics will be very similar, while at the fine-grained level we expect some differences.
+\end{enumerate}
 
-Therefore, we divide this section in two main parts: the first one, Subsection~\ref{ssec:topic_topic_granularities_alone}, contains the analysis of the topics of the dataset, with the different methodologies. The second part, Subsection~\ref{ssec:topics_topics_leaning}, contains a comparative analysis of the topics with respect to political leaning.
-\todoAW{I don't think you need this much description of your document. The outline on p157 is fine.}
+% Therefore, we divide this section in two main parts: the first one, Subsection~\ref{ssec:topic_topic_granularities_alone}, contains the analysis of the topics of the dataset, with the different methodologies. The second part, Subsection~\ref{ssec:topics_topics_leaning}, contains a comparative analysis of the topics with respect to political leaning.
+% \todoAW{I don't think you need this much description of your document. The outline on p157 is fine.}
 
-We end this section with~\ref{ssec:topic_topic_choice} which recaps and motivates our choice of hierarchical topic methodology for the next sections.
+% We end this section with~\ref{ssec:topic_topic_choice} which recaps and motivates our choice of hierarchical topic methodology for the next sections.
 
 % This contains 3.1 (topic alone) and 3.2 (topic + leaning).
 % This section has to support the need for hierarchical topics.
@@ -382,14 +399,15 @@ We end this section with~\ref{ssec:topic_topic_choice} which recaps and motivate
 
 % GOAL
 Given our goals 1 and 2, we want to compare the information that different methodologies can provide about a selected dataset. Some techniques may be better to provide general information while others may provide very fine-grained topics.
-
 % what
-As described in the Methodology section (\ref{sec:topic_method}), we consider the \texttt{baly} dataset and we apply different topic labels.
+As described in the Methodology section (\ref{sec:topic_method}),
+% we consider the \texttt{baly} dataset and
+we apply different topic labels:
 
-In the following paragraphs we consider:
+% In the following paragraphs we consider:
 
 \begin{enumerate}
-    \item AllSides native topics
+    \item AllSides topics
     \item Coarse Topics (TextRazor)
     \item Fine-Grained Topics (TextRazor)
     \item Hierarchical Media Topics (TextRazor)
@@ -397,13 +415,11 @@ In the following paragraphs we consider:
 
 % We start with the definition of topics that is contained in the Baly dataset, and then we use the different topic types that we get from TextRazor, starting with simple ones to get to the more complex.
 
-\subsubsection{\statusgreen Custom topics (AllSides)}
+\subsubsection{\statusgreen Custom Topics (AllSides)}
 
 The first topic definition that we apply is the one that comes directly from the \texttt{baly} dataset. Together with the triples of articles, available from their website, the AllSides headlines have a manual annotation of the topic, which is given by the editors. In this way, on their website, the users can filter by topic and find related information.
 Besides being useful for navigating the website, this is a useful label because it is given directly by the resource creators and not assigned externally.
 This attribute is then collected in the \texttt{baly} dataset and we have it available.
-
-A complete list of the topics can be found on the AllSides website.\footnote{\url{https://www.allsides.com/topics-issues}}
 
 \begin{figure}[!htbp]
     \centering
@@ -412,22 +428,30 @@ A complete list of the topics can be found on the AllSides website.\footnote{\ur
     \label{fig:baly_original_topics}
 \end{figure}
 
-In Figure~\ref{fig:baly_original_topics} \todoHA{From Allsides?!}we can see a bar chart of the topics. We can make several observations:
+A complete list of the topics can be found on the AllSides website.\footnote{\url{https://www.allsides.com/topics-issues}}
+In Figure~\ref{fig:baly_original_topics}
+% \todoHA{From Allsides?!}
+% \todomargin{figure is with allsides dataset, but generated by me}
+we can see a bar chart of the topics.
+On the vertical axis we have the topic labels, and on the horizontal axis we see the number of articles annotated with the corresponding topic.
+We can make several observations:
 
 \begin{itemize}
-    \item The labels of the topics are not uniform in terms of granularity: there are some very high-level topics (e.g., politics) and some very narrow ones (e.g., DEA);
-    \item The labels are annotating several aspects and, having only one label per article, this means that some articles are annotated for the location mentioned (e.g., world, Africa, Russia, Asia, South Korea)\todoAW{Font check for all the topic labels} while others for more ubiquitous topics (e.g., immigration, healthcare, environment, economic policy, civil rights); % traversal (food, privacy, healthcare, …)
-    \item The distribution is very unbalanced across topics: election has more than 5k articles, while DEA has only a few;\todoAW{A bit too informal: give the precise numbers ("...election has more than XXXX articles, while DEA has only YYY").}
-    \item Some topics are subtopics of other ones (e.g. elections is a subtopic of politics) but no information about the relationships is provided;
+    \item The labels of the topics are not uniform in terms of granularity: there are some very high-level topics (e.g., \texttt{politics}) and some very narrow ones (e.g., \texttt{DEA});
+    \item The labels are annotating several aspects and, having only one label per article, this means that some articles are annotated for the location mentioned (e.g., \texttt{world}, \texttt{Africa}, \texttt{Russia}, \texttt{Asia}, \texttt{South Korea}) while others for more ubiquitous topics (e.g., \texttt{immigration}, \texttt{healthcare}, \texttt{environment}, \texttt{economic policy}, \texttt{civil rights}); % traversal (food, privacy, healthcare, …)
+    \item The distribution is very unbalanced across topics: \texttt{elections} has 5540 articles, while \texttt{DEA} has only 5;
+    %\todoAW{A bit too informal: give the precise numbers ("...election has more than XXXX articles, while DEA has only YYY").}
+    \item Some topics are subtopics of other ones (e.g. \texttt{elections} is a subtopic of \texttt{politics}) but no information about the relationships is provided;
     \item With 108 flat topics it becomes difficult to compare and organise the topics.
 \end{itemize}
 
 An improvement could be done by analysing these labels and manually establishing the relationships, to organise hierarchically the topics.
-\todoAW{Didn't you say that this was already done by IPTC?}
-
+% \todoAW{Didn't you say that this was already done by IPTC?}
+This is not made available with the AllSides topics, but as we will see, the IPTC MediaTopics provide this feature. 
+%
 % Pro: defined by the authors, by hand
 % Cons: hierarchically disomogeneous, highly imbalanced
-
+%
 % Original topics
 % The dataset is provided together with topic labels but they have a big problem: they are annotated with labels that have very different granularities.
 % 108 topic labels
@@ -436,17 +460,17 @@ An improvement could be done by analysing these labels and manually establishing
 % Labels are not uniform:
 % In granularity: e.g., elections vs politics, one is a subtopic of the other
 % In aspect: e.g. geography (south corea, africa, china, russia) vs more generic and traversal (food, privacy, healthcare, …)
-
-
+%
 These topic labels are given by the AllSides team with unknown criteria, and the above shows how diverse and not-uniformed they are.
 For this reason, the next paragraphs consider standardised topics instead of ad-hoc topics.
 
 
 \subsubsection{\statusgreen Coarse Topics}
 
-As a next step, we take into consideration the TextRazor Coarse Topics annotations. TextRazor is a commercial API that allows one to analyse topics, entities and to perform other NLP-related tasks (e.g. classify documents, …).
-Regarding the topics, it provides the Coarse Topics, which are 16 very high-level topics (Belief, Business, Culture, Education, Health, Language, Law, Leisure, Mathematics, Nature, Politics, Science, Sports, Technology, Violence, Weather).
-Each document is assigned with the top 5/6 matching Coarse Topics, each one with a relevance score which ranges in $[0,1]$. Those scores don’t sum to 1. Each document is assigned to multiple topics, not a single one (multiclass).
+As a next step, we take into consideration the TextRazor Coarse Topics annotations.
+TextRazor\footnote{\url{https://www.textrazor.com/}} is a commercial API that allows to analyse topics, entities and to perform other NLP-related tasks (e.g. classify documents).
+Regarding the topics, it provides the Coarse Topics, which are 16 very high-level topics (\texttt{Belief}, \texttt{Business}, \texttt{Culture}, \texttt{Education}, \texttt{Health}, \texttt{Language}, \texttt{Law}, \texttt{Leisure}, \texttt{Mathematics}, \texttt{Nature}, \texttt{Politics}, \texttt{Science}, \texttt{Sports}, \texttt{Technology}, \texttt{Violence}, \texttt{Weather}).
+Each document is assigned with the top 5/6 matching Coarse Topics, each one with a relevance score which ranges in $[0,1]$. These scores do not sum to $1$. Each document is assigned to multiple topics (multiclass).
 
 For this reason, we explore the topics in two different ways:
 
@@ -455,7 +479,7 @@ For this reason, we explore the topics in two different ways:
     \item considering the topic weights: each topic corresponds to multiple topics with a specific weight.
 \end{enumerate}
 
-\paragraph{Most relevant topic Only}
+\paragraph{Most Relevant Topic Only}
 
 For this first simplification, each article is associated with its most representative topic. This means that if an article is annotated with a score of $1.0$ to Politics and with $0.9$ to Culture, it will only count for Politics because all the topics from the second position onwards are discarded.
 
@@ -466,22 +490,21 @@ For this first simplification, each article is associated with its most represen
     \caption{Coarse Topics most relevant of \texttt{Baly} dataset}
     \label{fig:baly_coarse_first}
 \end{figure}
-\todoAW{ Label your axes!!!}
+% \todoAW{ Label your axes!!!}
 
-In Figure~\ref{fig:baly_coarse_first} we can see how the articles distribute across topics when only considering the most important one.
+Figure~\ref{fig:baly_coarse_first} shows on the horizontal axis the 16 topic labels, and on the vertical axis the number of articles that have the corresponding topic as the most relevant, discarding all the labels from the second position onwards.
+% We can see how the articles distribute across topics when only considering the most important one.
+In this way, the dataset is highly imbalanced towards \texttt{Politics}. This makes this specific usage of the topic annotations highly unusable.
 
-This shows that the dataset is highly unbalanced on Politics. This makes this specific usage of the topic annotations highly unusable.
-
-While we can see that the dataset is centred on politics, the main problem is that all the secondary topics are suppressed.
+While we can see that the dataset is centred on \texttt{Politics}, the main problem is that all the secondary topics are suppressed.
 This plot does not give further insights.
-Also, we can see that two of the high-level topics do not even exist in a single article (Language and Mathematics).
-
+Also, we can see that two of the high-level topics do not even exist in a single article (\texttt{Language} and \texttt{Mathematics}).
 This analysis is the result of an oversimplification that is too strong.
 
 \paragraph{Weighted (multi-topic)}
 
 For this reason, we decide to use all the topics for an article and not only the most important one.
-If we consider each of the 5/6 topic for each article, we can also see topics which are still very important and may have been discarded only because politics was slightly higher.
+If we consider each of the 5/6 topic for each article, we can also see topics which are still very important and may have been discarded only because \texttt{Politics} was slightly higher.
 
 \begin{figure}[!htbp]
     \centering
@@ -490,9 +513,11 @@ If we consider each of the 5/6 topic for each article, we can also see topics wh
     \label{fig:baly_coarse_weighted}
 \end{figure}
 
-Figure~\ref{fig:baly_coarse_weighted} \todoAW{I can't tell what this diagram is showing, because I don't know what the axes represent.}
-shows that the distribution over topics contains more topics other than Politics.
-Still, Politics is the most relevant, but we have as well Culture, Law and Violence that appear in a significant number of articles.
+Figure~\ref{fig:baly_coarse_weighted} has the similar axes as the previous one (horizontal: topics; vertical: sum of the scores of articles for the corresponding topic).
+% \todoAW{I can't tell what this diagram is showing, because I don't know what the axes represent.}
+In this way we can see that the distribution over topics contains more topics other than \texttt{Politics}.
+The most frequent topic across the dataset is still the same, but we can see a big proportion also on secondary topics: \texttt{Culture}, \texttt{Law} and \texttt{Violence}.
+%that appear in a significant number of articles.
 
 To produce the values displayed in Figure~\ref{fig:baly_coarse_weighted}, we sum the individual scores given to each article and topic. Being the scores in the $[0,1]$ range, the vertical axis does not represent the number of articles that have a specific topic, but instead represents the sum of the scores. The total number of articles is $37,554$.
 %For example, considering that the total number of articles in the dataset is 37,554, we can see that around 35k 
@@ -500,7 +525,7 @@ To produce the values displayed in Figure~\ref{fig:baly_coarse_weighted}, we sum
 % We can see that the distribution is slightly unbalanced towards politics, then culture, law and violence. This looks like the topics are not too unbalanced, but we have to remember that we would like to have a single document to be categorised only with one topic, and this is not the case.
 
 With respect with the previous Figure~\ref{fig:baly_coarse_first}, we can understand better the topics that the dataset contains.
-Still, the topics are very high-level and we have neither insights about which political issues are discussed nor which subtopics are contained.
+Still, the topics are very high-level and we have insights about neither which political issues are discussed, nor which subtopics are contained.
 
 
 
@@ -643,10 +668,9 @@ Still, the topics are very high-level and we have neither insights about which p
 
 To solve the problems identified, %(the topics are either too coarse-grained or too fine-grained, without link between them),
 we decide to analyse the dataset with a topic taxonomy.
-
-Between the many taxonomies for topics (for specific domains e.g., scientific publications\cite{TODO}), we focus on the news domain and therefore the most important and used taxonomy is IPTC NewsCodes Media Topics.
+Between the many taxonomies for topics (for specific domains e.g., scientific publications\cite{vayansky2020review,churchill2022evolution}), we focus on the news domain and therefore the most important and used taxonomy is IPTC NewsCodes Media Topics.
 This is a taxonomy especially created to describe the topics of news articles. It is made of 17 top-level terms, that can be expanded up to 5 levels of subcategories.
-The full taxonomy can be seen at \url{https://cv.iptc.org/newscodes/mediatopic} and interactively displayed at \url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}.
+The full taxonomy can be seen online\footnote{\url{https://cv.iptc.org/newscodes/mediatopic}} and interactively displayed.\footnote{\url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}}
 
 % Problem: very difficult to group fine-grained topics into more wide ones
 % Solution: IPTC NewsCodes Media Topics schema https://cv.iptc.org/newscodes/mediatopic/
@@ -679,32 +703,49 @@ Therefore, it is possible to understand the relationship between the topics and 
 
 As in the previous Subsection with Coarse Topics, we consider first a simplified version where only the most relevant Media Topic is taken, and a second version where each article is considered part of several Media Topics.
 
+To represent this, we need to display different types of information:
 
-\paragraph{Most relevant IPTC Media Topic}
+\begin{itemize}
+    \item the \emph{hierarchy}: we want to see results hierarchically, to be able to see both at the coarse level and at the fine-grained level;
+    \item the \emph{quantity} of articles belonging to a certain node in the hierarchy of topics: in the previous plots we used bar charts that are very easy to read, but cannot be easily displayed with hierarchical categories;
+    \item additionally, present some observed variables for the comparative analysis (e.g., quantity of propaganda, as described in Section~\ref{sec:topic_method_comparative}).
+\end{itemize}
 
-For this first simplified version, each news article in the \texttt{baly} dataset corresponds to a single Media Topic.
+For these reasons, when we present the statistics of hierarchical topics, we make use here of icicle diagrams~\cite{kruskal1983icicle}.
+They allow to display hierarchical data, and can also be displayed in interactive visualisations, where the user can click to expand the visualisation in a specific area.
+However, for a static visualisation they sometimes can present the last levels of granularity with very small nodes, which may be suboptimal.
+Everywhere we use them in this chapter, we truncate the number of levels to 5, even if IPTC Media topics have one layer more.
+Furthermore, we create hyperlinks from each plot to an interactive visualisation (both by clicking on the figure, and in footnotes), allowing to hover to see the values and click to expand on certain sub-topics.
+
+\paragraph{Most Relevant IPTC Media Topic}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_only_first.pdf}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_only_first.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_only_first.pdf}}
     \caption{IPTC Media Topics of \texttt{Baly} considering only the most important Media Topic for each article}
     \label{fig:baly_iptc_only_first}
 \end{figure}
-\todoAW{6.5 vs 6.6 difference, difficult to see on this representation}
+% \todoAW{6.5 vs 6.6 difference, difficult to see on this representation}
 
-Figure~\ref{fig:baly_iptc_only_first} \todoHA{unreadable} \todoAW{Wouldn't it make more sense for this to have the same form as figure 6.4?}
-shows a Sunburst diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_only_first.html}} that represents how the most relevant topic of the articles is spread across the IPTC Media Topic hierarchy.
-In the inner circle, the top-level topics are represented (sorted by size: politics, crime-law-and-justice, conflict-war-and-peace, economy-business-and-finance) and the outer circles represent subcategories (e.g., government is a subcategory of politics, or immigration is a subcategory of society).
-To build this plot, we take the most relevant Media Topic (higher score) and we add its score to the specific node in the tree. Parent nodes also receive the score, since an article that belongs to a certain subtopic, also belongs to the corresponding parent topics (up to the top-level topics). The opposite is not true, and this is why summing the size of the subtopics (e.g. government + election + government policy) the total value is still less than the value for the parent topic (in our case, politics).
+For this first simplified version, we consider for each news article only the most important Media Topic (the one with the highest score for each article).
 
-\todoAW{Sunburst diagrams: weird and too many info in the same graph (hierarchy, size, extra info difficult to see relying on color scale). Separate charts, simpler. E.g., p.183 for each technique, show values on separate bar charts (pag 182 for all the techniques, do not skip some). Better maybe bar chart with dendrogram on the bottom? Or nested bar chart? Does it exist?
-If something is interactive, see if it is possible to store it in ORDO permanently (disable CDN libraries)
-}
+Figure~\ref{fig:baly_iptc_only_first}
+% \todoHA{unreadable}
+% \todoAW{Wouldn't it make more sense for this to have the same form as figure 6.4?}
+shows a icicle diagram\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_only_first.html}} that represents how the most relevant topic of the articles is spread across the IPTC Media Topic hierarchy.
+On the left, the top-level topics are represented (sorted by size: \texttt{politics}, \texttt{crime-law-and-justice}, \texttt{conflict-war-and-peace}, \texttt{economy-business-and-finance}).
+The height of the blocks is proportional to the number of articles that have the specific topic as the primary.
+The blocks to the right instead represent subtopics of the ones on the left. For example, \texttt{government} is a subcategory of \texttt{politics}, or \texttt{immigration} is a subcategory of \texttt{society}.
 
-With respect to the previous figures of this section, we can see not only that politics is the major topic, but we can also get an idea of its main subtopics, as well as very detailed subtopics (5 levels).
+To build this plot, we take the most relevant Media Topic (higher score) and we add its score to the specific node in the tree. Parent nodes also receive the score, since an article that belongs to a certain subtopic also belongs to the corresponding parent topics (up to the top-level topics). The opposite is not true, and this is why summing the size of the subtopics (e.g. \texttt{government} + \texttt{election} + \texttt{government-policy}) the total value is still less than the value for the parent topic (in our case, \texttt{politics}).
 
+% \todoAW{Sunburst diagrams: weird and too many info in the same graph (hierarchy, size, extra info difficult to see relying on color scale). Separate charts, simpler. E.g., p.183 for each technique, show values on separate bar charts (pag 182 for all the techniques, do not skip some). Better maybe bar chart with dendrogram on the bottom? Or nested bar chart? Does it exist?
+% If something is interactive, see if it is possible to store it in ORDO permanently (disable CDN libraries)
+% }
+
+With respect to the previous figures of this section, we can see not only that \texttt{politics} is the major topic, but we can also get an idea of its main subtopics, as well as very detailed subtopics (5 levels).
 However, remembering the difference between Figure~\ref{fig:baly_coarse_first} and \ref{fig:baly_coarse_weighted}, we know that this current plot is a simplification and we need to consider all the Media Topics of each article.
-We provided it because it is simpler to explain how the values for the Sunburst plot are assigned.
+We provided it because it is simpler to explain how the values for the icicle plot are assigned.
 
 % Problem: only politics and government.
 % How to solve: when multiple labels are given, avoid the most broad/common ones. E.g.: politics:1.0, politics>elections: 0.85 → choose elections
@@ -721,14 +762,16 @@ By considering all the Media Topics of each article, we have the complete pictur
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted.pdf}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted.pdf}}
     \caption{IPTC topics weighted of \texttt{Baly} dataset}
     \label{fig:baly_iptc_weighted}
 \end{figure}
 
-Figure~\ref{fig:baly_iptc_weighted} \todoHA{Also unreadable.Use a bar chart you could add this in an appendiz and use a whole pahe for that}shows the Sunburst diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted.html}} that is built similarly to the previous case. This time, being each article linked to multiple Media Topics, we can see more subtopics, that were suppressed by the major topic in the previous case (analogously to Fig~\ref{fig:baly_coarse_first} vs Fig~\ref{fig:baly_coarse_weighted}).
+Figure~\ref{fig:baly_iptc_weighted}
+% \todoHA{Also unreadable. Use a bar chart you could add this in an appendix and use a whole page for that}
+shows the icicle diagram\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted.html}} that is built similarly to the previous case. This time, being each article linked to multiple Media Topics, we can see more subtopics, that were suppressed by the major topic in the previous case (analogously to Fig~\ref{fig:baly_coarse_first} vs Fig~\ref{fig:baly_coarse_weighted}).
 
-For example, under Government we see legislative-body and heads-of-state that did not appear before. Or science-and-technology and economics that were not visible before.
+For example, under \texttt{government} we see \texttt{legislative-bod}y and \texttt{heads-of-state} that did not appear before. Or \texttt{science-and-technology} and \texttt{economics} that were not visible before.
 
 
 % Options:
@@ -744,7 +787,7 @@ For example, under Government we see legislative-body and heads-of-state that di
 
 We have seen in the previous paragraphs several methods and definitions of the topic.
 
-Simple high-level topics, show that the majority of articles are about politics. They are able to tell which topics exist, but the labels are very wide and do not provide enough detail.
+Simple high-level topics show that the majority of articles are about politics. They are able to tell which topics exist, but the labels are very wide and do not provide enough detail.
 On the other hand, fine-grained details can be very specific, but it is very difficult to understand how they relate with wider topics.
 
 We analysed two different ways of using multi-class weighted labels. If we consider only the most important topic for each article, we lose a lot of information. Instead, by using all the topics, we are able to see more topics that would be hidden otherwise.
@@ -781,18 +824,22 @@ First we use the native topics included in the dataset. We simply count the numb
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/baly_original_topics_by_leaning.pdf}
-    \caption{Original topics of \texttt{Baly} dataset by leaning}
+    \includegraphics[width=\linewidth]{figures/baly_original_topics_by_leaning_simple.pdf}
+    \caption{Average leaning across topics for the \texttt{Baly} dataset}
     \label{fig:baly_original_topics_by_leaning}
 \end{figure}
-\todoAW{I can't really read this diagram. You'd be better off isolating the particular cases you mention in the text (lgbt-rights, fbi etc)} \todoHA{?}
+% \todoAW{I can't really read this diagram. You'd be better off isolating the particular cases you mention in the text (lgbt-rights, fbi etc)} \todoHA{?}
 
-Figure~\ref{fig:baly_original_topics_by_leaning} shows that for most of the topics, the quantity does not change significantly across political leaning.
-But for some topics, we see something unexpected: there are more articles on a specific leaning. Being the dataset made of triples of articles, we were expecting that everything would have been balanced.
+In Figure~\ref{fig:baly_original_topics_by_leaning} we show the average leaning for the AllSides topics.
+The values are computed as the count of articles belonging to the Right minus the count of the ones of the Left, normalised with the total of articles for the topic.
+We can see that for most of the topics
+%, the quantity does not change significantly across political leaning.
+%But for some topics, we see something unexpected:
+there are more articles on a specific leaning. Being the dataset made of triples of articles, we were expecting that everything would have been balanced.
 However, the unbalance may be caused by two factors:
 \begin{itemize}
-    \item some of the triples are made by the AllSides team with unbalanced articles (e.g., two from Left, one from Right)\footnote{\url{https://www.allsides.com/story/greg-craigs-foreign-lobbying-trial-begins}}
-    \item during the preparation of the dataset (not available to us) some articles may have been removed because of scraping errors
+    \item some of the triples are made by the AllSides team with unbalanced articles (e.g., two from Left, one from Right);\footnote{\url{https://www.allsides.com/story/greg-craigs-foreign-lobbying-trial-begins}}
+    \item during the preparation of the dataset (not available to us) some articles may have been removed because of scraping errors.
 \end{itemize}
 
 For example, the topics \texttt{gun-control-and-gun-rights}, \texttt{fbi}, \texttt{free-speech}, \texttt{state-department} has more articles on the Right and fewer in the Center. Or the topics \texttt{republican-party}, \texttt{lgbt-rights}, \texttt{civil-rights} that have more articles on the Left.
@@ -844,7 +891,7 @@ Therefore, we proceed with methods that have more fine-grained topics.
 We have seen with the previous topic definitions that, if we have topics that are detailed enough, we can start to see some differences of unbalance across leaning.
 
 Using the IPTC Media Topics, we want to be able to see such differences, but at the same time have an idea of how the topics relate.
-
+%
 % Breaking down with respect to topic, is not helpful to find differences between L/C/R if the topic splitting is very unbalanced and very generic.
 % When breaking a dataset of news articles we want to have the possibility to break down the topic enough to see differences. 
 We want to discover which topics have an unbalanced coverage between Left and Right. In other words, are there topics that are mostly Left or Right?
@@ -852,39 +899,41 @@ We want to discover which topics have an unbalanced coverage between Left and Ri
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_by_leaning.pdf}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_by_leaning.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_by_leaning.pdf}}
     \caption{IPTC topics weighted of \texttt{Baly} dataset, average leaning (blue=Left, red=Right)}
     \label{fig:baly_iptc_weighted_by_leaning}
 \end{figure}
 
-Figure~\ref{fig:baly_iptc_weighted_by_leaning} \todoAW{Why do you use the sunburst diagram for IPTC, but a stacked bar chart for Allsides?}shows a Sunburst diagram.\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_by_leaning.html}}
-As in the previous diagram of the same type, the angular distance of each node corresponds to the quantity of that topic in the dataset.
+Figure~\ref{fig:baly_iptc_weighted_by_leaning}
+% \todoAW{Why do you use the icicle diagram for IPTC, but a stacked bar chart for Allsides?}
+shows an icicle diagram where we display the average leaning across the IPTC media topics.\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_by_leaning.html}}
+As in the previous diagram of the same type, the height of each node is proportional to the quantity of that topic in the dataset.
 Instead, the colour of the edge is computed with the relative proportion of Left and Right. This means that the colours belong to a scale from blue to red, where blue corresponds to Left while red corresponds to Right.
 
-In this way, we can see with a glance that some topics are covered more by a certain leaning. And we have the information about the hierarchy.
-
-With respect to previous representations, we can see for example that while politics has slightly more articles in the Right (as the dataset all together), the subtopics of elections and legislative body instead appear more in the Left.
+In this way, we can see with a glance that some topics are covered more by a certain leaning. Furthermore, we have the information about the hierarchy that instead is lost with other types of visualisations.
+%
+With respect to previous representations, we can see for example that while \texttt{politics} has slightly more articles in the Right (as the dataset all together), the subtopics of \texttt{elections} and \texttt{legislative-body} instead appear more in the Left.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={0 0 0 0},clip,width=0.5\linewidth]{figures/baly_iptc_weighted_by_leaning_zoom_society.pdf}
-    \caption{IPTC topics weighted of \texttt{Baly} dataset, average leaning (blue=Left, red=Right), zoom on Society}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_by_leaning.html}{\includegraphics[trim={0.15cm 19.5cm 5cm 0.15cm},clip,width=\linewidth]{figures/baly_iptc_weighted_by_leaning_zoom_society.pdf}}
+    \caption{IPTC topics weighted of \texttt{Baly} dataset, average leaning (blue=Left, red=Right), zoom on \texttt{society}.}
     \label{fig:baly_iptc_weighted_by_leaning_zoom_society}
 \end{figure}
 
-Or if we interact with \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_by_leaning.html}{the chart} expanding ``society", we can zoom on the subtopics of society and see as in Figure~\ref{fig:baly_iptc_weighted_by_leaning_zoom_society} that immigration and values are covered more by Right leaning, while discrimination, marriage \todoAW{What does "values" mean here? I'd have thought that marriage was one of the values that the right would discuss.} and LGBTQ are covered more by the Left. 
+Or if we interact with \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_by_leaning.html}{the chart} expanding \texttt{society}, we can zoom on its subtopics and, the detailed zoom in Figure~\ref{fig:baly_iptc_weighted_by_leaning_zoom_society} that \texttt{immigration} and \texttt{values} are covered more by Right leaning, while \texttt{discrimination}, \texttt{marriage}
+% \todoAW{What does "values" mean here? I'd have thought that marriage was one of the values that the right would discuss.}
+and \texttt{LGBTQ} are covered more by the Left. 
 
-The main findings from this representation is that the Left is more present in military, crime and war topics. Instead the Left is more centred about health, economy,science, labour, and some very specific subtopics of politics.
+The main findings from this representation is that the Left is more present in \texttt{military}, \texttt{crime} and \texttt{war} topics. Instead the Left is more centred about \texttt{health}, \texttt{economy}, \texttt{science}, \texttt{labour}, and some very specific subtopics of \texttt{politics}.
 
 
 \subsection{\statusgreen Selected topic methodology}
 \label{ssec:topic_topic_choice}
 
 We have seen in the previous subsections several methodologies for defining and extracting the topics from news articles.
-
 We compared the methodologies by first using the topic information on its own (Subsection~\ref{ssec:topic_topic_granularities_alone}), and then in combination with the political leaning (Subsection~\ref{ssec:topics_topics_leaning}).
-
-We have identified our main needs for our following comparative analysis that will consider propaganda, leaning and topic:
+We have identified our main requirements for our comparative analysis that will consider propaganda, leaning and topic:
 
 \begin{itemize}
     \item fine-grained topics: to be able to identify differences, that at higher levels are not visible;
@@ -897,40 +946,38 @@ We have identified our main needs for our following comparative analysis that wi
 Given these needs, we identified the IPTC Media Topics as ideal candidates.
 % Why
 They offer fine-grained topics, that are in finite number (see taxonomy). Furthermore, they define the granularity of the topics, and it is possible to navigate the relationships and observe during a comparative analysis.
-
 In the next sections, we will use only the IPTC Media Topics for carrying out our comparative analyses.
 
 
 \section{\statusgreen Propaganda across Topics}
 \label{sec:topic_propaganda}
 
-With respect to the previous sections, in the next ones we are considering the propaganda analysis. As seen in Figure~\ref{fig:methodology_mindmap_chapter6}, the first subquestion (RQ4.1) is addressing Topics and Propaganda:
+With respect to the previous sections, from this section onwards we are also considering the propaganda analysis.
+As seen in Section~\ref{sec:topic_intro}, the first subquestion (RQ4.1) is addressing Topics and Propaganda:
 \emph{How does detected propaganda differ across polarising versus neutral topics?}
 
 To answer this question, we analyse how propaganda is distributed across the topics, to find out which topics contain more propaganda than others (polarising vs non-polarising topics).
-
 We do not take in account political leaning, which is added in the next RQ4.2.
 % and what differences topics contain in terms of propaganda.
 % Assumption: propaganda is used for certain topics more than in others
-
-We have the following analysis:
+We have the following analyses:
 
 \begin{itemize}
-    \item analysis of the total quantity of propaganda across Media Topics: to discover the most polarising/loaded topics (more propaganda) and the non-polarising/unloaded ones;
-    \item analysis of the quantity of each propaganda technique across Media Topics: to discover associations of topics and specific techniques;
+    \item analysis of the \emph{total quantity} of propaganda across Media Topics: to discover ones that contain more propaganda (polarising topics) and the ones that instead contain less;
+    \item analysis of the \emph{quantity of each propaganda technique} across Media Topics: to discover associations of topics and specific techniques.
     % \item analysis of the terms of propaganda across Media Topics: to discover term associations with specific topics.
 \end{itemize}
 
 \subsection{\statusgreen Total quantity of propaganda across Media Topics}
 \label{ssec:topic_propaganda_tot}
-\todoAW{all red, change. Proof is in the quantitative analysis. What I want to communicate? Then after change representation}
+% \todoAW{all red, change. Proof is in the quantitative analysis. What I want to communicate? Then after change representation}
 
 % one sunburst with total quantity
-From the computed features about each article, here we take the total quantity of propaganda and the Media Topics.
+From the computed features about each article, we consider here the total quantity of propaganda and the Media Topics.
 The total quantity of propaganda is a simple percentage that represents the ratio of words that have been annotated as propagandistic by the model presented in~\citet{da2019fine}.
 Instead, the Media Topics come in a list with label of the topic and value (interval $[0,1]$).
 
-To compute the average quantity, we iterate over the articles, and for each one of them we see the corresponding propaganda value and the topic values. For each of the topics, we aggregate two different measures: the sum of the topic scores $w_{t_{i},a_{j}}$ (acts as a total counter for that specific topic $t_{i}$ across all the articles $a_{j}$, and is computed as before to create the Sunburst diagrams), and the propaganda scores multiplied for the topic scores $w_{t_{i},a_{j}} \cdot p_{a_{j}}$ ($p_{a_{j}}$ stands for the quantity of propaganda for article $a_{j}$).
+To compute the average quantity, we iterate over the articles, and for each one of them we see the corresponding propaganda value and the topic values. For each of the topics, we aggregate two different measures: the sum of the topic scores $w_{t_{i},a_{j}}$ (acts as a total counter for that specific topic $t_{i}$ across all the articles $a_{j}$, and is computed as before to create the icicle diagrams), and the propaganda scores multiplied for the topic scores $w_{t_{i},a_{j}} \cdot p_{a_{j}}$ ($p_{a_{j}}$ stands for the quantity of propaganda for article $a_{j}$).
 For accounting the hierarchy, we propagate these values from the children nodes to their parent nodes, which are summed together ($i\subseteq k$).
 The final average quantity of propaganda for each topic is then computed as:
 
@@ -938,15 +985,18 @@ $$ p_{t_{k}} = \frac{ \sum_{j} \sum_{i\subseteq k} w_{t_{i},a_{j}} \cdot p_{a_{j
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total.pdf}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total.pdf}}
     \caption{Total quantity of propaganda across Media Topics}
     \label{fig:baly_iptc_weighted_prop_total}
 \end{figure}
 
-Figure~\ref{fig:baly_iptc_weighted_prop_total} \todoAW{I don't understand this, and I can't really distinguish between the shades of red.}shows the resulting diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total.html}} that shows on a redscale (dark red means more propaganda, light red means less) the total quantity of propaganda. To see the values, use the interactive figure.
-We can see that the average value is around $5\%$, with the highest ones going slightly above $10\%$.
+Figure~\ref{fig:baly_iptc_weighted_prop_total}
+% \todoAW{I don't understand this, and I can't really distinguish between the shades of red.}
+shows the resulting diagram that shows the total quantity of propaganda on a redscale: dark red means more propaganda, light red means less.
+The precise values, can be seen by interacting with the interactive figure.\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total.html}}
+The average value is around $5\%$, with the highest ones going slightly above $10\%$.
 
-The topics with most propaganda are: sexism ($9.9\%$) and racism ($9.1\%$), both part of discrimination ($8.1\%$); mass media ($8.0\%$), corruption ($7.2\%$). The lowest values instead are found in economy ($3.5\%$), health ($3.7\%$), government policy ($4.4\%$) and defence ($4.7\%$).
+The topics with most propaganda are: \texttt{sexism} ($9.9\%$) and \texttt{racism} ($9.1\%$), both part of \texttt{discrimination} ($8.1\%$); \texttt{mass-media} ($8.0\%$), \texttt{corruption} ($7.2\%$). The lowest values instead are found in \texttt{economy} ($3.5\%$), \texttt{health} ($3.7\%$), \texttt{government-policy} ($4.4\%$) and \texttt{defence} ($4.7\%$).
 
 Although we already can distinguish some loaded/polarising topics, we would also like to see the breakdown by specific techniques, therefore in the next subsection we consider each technique individually.
 
@@ -963,22 +1013,22 @@ $$ p_{t_{k},m_{l}} = \frac{ \sum_{j} \sum_{i\subseteq k} w_{t_{i},a_{j}} \cdot p
 \begin{figure}[!htbp]
     \centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Loaded_Language.pdf}
+		\href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_tech.html#Loaded_Language}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Loaded_Language.pdf}}
 		\caption{Loaded Language}
             \label{fig:baly_iptc_weighted_prop_tech_Loaded_Language}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Doubt.pdf}
+		\href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_tech.html#Doubt}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Doubt.pdf}}
 		\caption{Doubt}
             \label{fig:baly_iptc_weighted_prop_tech_Doubt}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Flag-Waving.pdf}
+		\href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_tech.html#Flag-Waving}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Flag-Waving.pdf}}
 		\caption{Flag-Waving}
             \label{fig:baly_iptc_weighted_prop_tech_Flag-Waving}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Name_Calling-Labeling.pdf}
+		\href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_tech.html#Name_Calling-Labeling}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_tech_Name_Calling-Labeling.pdf}}
 		\caption{Name Calling / Labeling}
             \label{fig:baly_iptc_weighted_prop_tech_Name_Calling-Labeling}
 	\end{subfigure}
@@ -989,16 +1039,17 @@ $$ p_{t_{k},m_{l}} = \frac{ \sum_{j} \sum_{i\subseteq k} w_{t_{i},a_{j}} \cdot p
 
 Figure~\ref{fig:baly_iptc_weighted_prop_tech} shows the four major techniques across Media Topics. We suggest to look at the values on the interactive visualisation\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_tech.html}} where it is possible to select which techniques to visualise, hover on the nodes and see the percentage values, and as well to click on the topics and expand on subtopics.
 
-Here we enumerate, for each technique, the topics where they appear the most:\todoAW{I wonder whether it would make more sense to show a bar chart (or similar) for each of the techniques?}
+Here we enumerate, for each technique, the topics where they appear the most:
+% \todoAW{I wonder whether it would make more sense to show a bar chart (or similar) for each of the techniques?}
 
 \begin{enumerate}
-    \item Loaded Language: it is the most common technique, as seen in Chapter~\ref{ssec:lp_techniques_propaganda_stats}. Specifically, these topics contain the highest values: Racism ($2.4\%$), Discrimination ($2.2\%$), Mass Media ($2.2\%$) and Corruption ($1.9\%$). These are topics where the opinions are strong and the media uses strong terms to describe the events.
-    \item Doubt: as for Loaded Language, Mass Media ($2.2\%$), Corruption ($1.9\%$). Then also Impeachment ($1.65\%$), National Security ($1.5\%$) and Ethics ($1.4\%$). For these topics, we see Doubt as questioning the institutions (especially for Impeachment and National Security).
-    \item Flag-waving: Racism ($2.0\%$) and Discrimination ($1.7\%$) as in the previous cases, but also notably in Religion ($1.3\%$), War ($1.2\%$), Terrorism ($1.3\%$) and Fundamental Rights ($1.3\%$). These are the topics where the nationalism of flag-waving finds the best environment.
-    \item Name Calling / Labelling: some topics that emerged also with the previous techniques, such as Mass Media ($1.6\%$), Discrimination ($1.9\%$), Media ($1.4\%$), and Corruption ($1.3\%$). But also Democracy ($1.3\%$) that did not emerge with other techniques. Name Calling uses resonating and evoking terms that fit with topics related to ethical principles.
-    \item Appeal to fear / prejudice: the values are quite low, only showing some small strength in Armed Conflict ($0.3\%$), Military Equipment ($0.3\%$) and Communicable Diseases ($0.3\%$). Probably the distributions for Diseases would have been higher if the dataset included more recent events.
-    \item Causal Oversimplification: all the values are low, except Discrimination and Racism ($0.4\%$). This makes sense with the nature of the topics, and the news articles treating them may report fallacious reasoning that contains oversimplifications.
-    \item Slogans: all values are low, except Civil Unrest ($0.4\%$), Police ($0.2\%$) and Racism ($0.2\%$)
+    \item \texttt{Loaded\_Language}: it is the most common technique, as seen in Chapter~\ref{ssec:lp_techniques_propaganda_stats}. Specifically, these topics contain the highest values: \texttt{racism} ($2.4\%$), \texttt{discrimination} ($2.2\%$), \texttt{mass-media }($2.2\%$) and \texttt{corruption} ($1.9\%$). These are topics where the opinions are strong and the media uses strong terms to describe the events.
+    \item \texttt{Doubt}: as for \texttt{Loaded\_Language}, \texttt{mass-media} ($2.2\%$), \texttt{corruption} ($1.9\%$). Then also \texttt{impeachment} ($1.65\%$), \texttt{national-security} ($1.5\%$) and \texttt{ethics} ($1.4\%$). For these topics, we see \texttt{Doubt} as questioning the institutions (especially for \texttt{impeachment} and \texttt{national-security}).
+    \item \texttt{Flag-waving}: \texttt{racism} ($2.0\%$) and \texttt{discrimination} ($1.7\%$) as in the previous cases, but also notably in \texttt{religion} ($1.3\%$), \texttt{war} ($1.2\%$), \texttt{terrorism} ($1.3\%$) and \texttt{fundamental-rights} ($1.3\%$). These are the topics where the nationalism of flag-waving finds the best environment.
+    \item \texttt{Name\_Calling/Labelling}: some topics that emerged also with the previous techniques, such as \texttt{mass-media} ($1.6\%$), \texttt{discrimination} ($1.9\%$), \texttt{media} ($1.4\%$), and \texttt{corruption} ($1.3\%$). But also \texttt{Democracy} ($1.3\%$) that did not emerge with other techniques. \texttt{Name\_Calling} uses resonating and evoking terms that fit with topics related to ethical principles.
+    \item \texttt{Appeal\_to\_fear/Prejudice}: the values are quite low, only showing some small strength in \texttt{armed-conflict} ($0.3\%$), \texttt{military-equipment} ($0.3\%$) and \textit{communicable-diseases} ($0.3\%$). Probably the distributions for \texttt{diseases} would have been higher if the dataset included more recent events.
+    \item \texttt{Causal\_Oversimplification}: all the values are low, except in the topics \texttt{discrimination} and \texttt{racism} ($0.4\%$). This makes sense with the nature of the topics, and the news articles treating them may report fallacious reasoning that contains oversimplifications.
+    \item \texttt{Slogans}: all values are low, except in the topics \texttt{civil-unrest} ($0.4\%$), \texttt{police} ($0.2\%$) and \texttt{racism} ($0.2\%$).
 \end{enumerate}
 
 These topic-technique associations verify the theoretical aspects of propaganda and show evidence of patterns that we know from the literature.
@@ -1039,11 +1090,11 @@ These topic-technique associations verify the theoretical aspects of propaganda 
 
 Our RQ4.1 for this section was \emph{How does detected propaganda differ across polarising versus neutral topics?}
 
-We have analysed here how propaganda changes across Media Topics, which are our selected methodology from Sec~\ref{sec:topic_topic_granularities}.
-First, we analysed which topics contain more propaganda overall (Subsection~\ref{ssec:topic_propaganda_tot}), finding a group of topics that are very loaded with propaganda (sexism, racism, discrimination, corruption) and as well topics with very low values (economy, health, defence).
+We have analysed how propaganda changes across Media Topics, which are our selected methodology from Sec~\ref{sec:topic_topic_granularities}.
+First, we analysed which topics contain more propaganda overall (Subsection~\ref{ssec:topic_propaganda_tot}), finding a group of topics that are very loaded with propaganda (\texttt{sexism}, \texttt{racism}, \texttt{discrimination}, \texttt{corruption}) and as well topics with very low values (\texttt{economy}, \texttt{health}, \texttt{defence}).
 Then we considered the propaganda techniques individually (Subsection~\ref{ssec:topic_propaganda_tech}), and found very specific topic-technique associations.
 
-With this analysis we still do not have a picture of how the political orientation interacts with these loaded areas. Therefore, in the next section / RQ4.2, we introduce the leaning in the analysis.
+With this analysis we still do not have a picture of how the political orientation interacts with these loaded areas. Therefore, in the next section, we address RQ4.2, introducing the political leaning in the analysis.
 
 
 
@@ -1051,23 +1102,24 @@ With this analysis we still do not have a picture of how the political orientati
 \label{sec:topic_propaganda_leaning}
 
 In previous Chapter~\ref{chap:political_sides} we observed how propaganda changes across political leanings.
-In this Chapter, we combine that analysis with the analyses across topics (previous Leaning across Topics, Section~\ref{ssec:topics_topics_leaning}, and Propaganda across Topics~\ref{sec:topic_propaganda}).
+In this chapter, we combine that analysis with the analyses across topics (previous Leaning across Topics, Section~\ref{ssec:topics_topics_leaning}, and Propaganda across Topics~\ref{sec:topic_propaganda}).
 In this way, we have an analysis that considers the three variables (Propaganda, Leaning and Topic) all together to discover associations and major differences across Leanings.
 
-This whole analysis is based on the assumption that propaganda is used by news sources (associated with specific leanings) for certain topics in a very recognisable way to push for a certain idea or a certain narrative.
+This analysis aims at verifying whether propaganda is used by news sources (associated with specific leanings) for certain topics in a very recognisable way to push for a certain idea or a certain narrative.
 
 Our RQ4.2 is: \emph{How does detected propaganda differ across political leaning in polarising and neutral topics?}
-
 While answering this question, we seek multiple objectives:
 
 \begin{enumerate}
     % \item discover associations of topic + leaning that have strong propaganda; --> not easy to show and compare
     % \item discover associations of topic + leaning + techniques that are used frequently together; --> not easy to show and compare
-    \item identify topics where propaganda is very different across political leaning considering the quantity;
-    \item identify topics where propaganda is very different across political leaning, considering the terms used.
+    \item identify topics where propaganda is very different across political leaning considering the \emph{quantity};
+    \item identify topics where propaganda is very different across political leaning, considering the \emph{terms} used.
 \end{enumerate}
 
-We tried first to consider the analysis done in Figure~\ref{fig:baly_iptc_weighted_by_leaning} and break it down with respect to the political leaning. But to make it easier to see and compare the results between leanings, we opted to use the difference (total quantity~\ref{ssec:topic_propaganda_leaning_tot_quantity}) and correlation (for the quantities of all the techniques~\ref{ssec:topic_propaganda_leaning_tot_quantity} and the terms~\ref{ssec:topic_propaganda_leaning_terms}). 
+% We tried first to consider the analysis done in Figure~\ref{fig:baly_iptc_weighted_by_leaning} and break it down with respect to the political leaning.
+% But to make it easier t
+To see and compare the results between leanings, we opted to use the difference of the total quantity of propaganda (Subsection~\ref{ssec:topic_propaganda_leaning_tot_quantity}) and the correlation across left and right of the quantities of the techniques (Subsection)~\ref{ssec:topic_propaganda_leaning_tot_quantity} and the correlation of the propaganda terms (Subsection~\ref{ssec:topic_propaganda_leaning_terms}). 
 
 
 
@@ -1101,65 +1153,70 @@ We tried first to consider the analysis done in Figure~\ref{fig:baly_iptc_weight
 
 The first comparison that we do is with the total quantity of propaganda. We want to see in which topics Left is using more propaganda than Right.
 The easier way to compare this, is by considering the analysis of Figure~\ref{fig:baly_iptc_weighted_by_leaning} and consider the leaning of the articles. Three separate arrays of values are built (one value for each topic): the first one representing the average propaganda quantity of articles from the Left, the second one from the Center, the third from the Right.
-We then subtract the values from the Left with the values from the Right, and we have a score that represents how much more the Left / Right contain propaganda for each topic.
+We then subtract the values from the Left with the values from the Right, and we have a score that represents
+the relative difference in quantity of propaganda between the Left and the Right, for each topic.
 
 
 % For the total quantity, it is a single value. So we can only compare if it is greater or smaller. We therefore compute the difference of total propaganda quantity Left - Right.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff.pdf}
-    \caption{Left (Blue) vs Right (red) propaganda: who has more across topics}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total_leaning_diff.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff.pdf}}
+    \caption{Left (blue) vs Right (red) propaganda: who has more across topics}
     \label{fig:baly_iptc_weighted_prop_total_leaning_diff}
 \end{figure}
 
-Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff} \todoAW{All looks red to me.} shows the resulting diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total_leaning_diff.html}}.
-As we can see, the majority of the topics have more Right-leaning propaganda. As we saw in the previous chapters, propaganda is detected more on Right-leaning articles.
-This prevalence can be seen especially on some topics: ethics, discrimination, media and corruption (values higher than 1\%).
-Instead, Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom} shows different zooms on subtopics that have a prevalence of Left-leaning propaganda:
+Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff}
+% \todoAW{All looks red to me.} 
+shows the resulting diagram.\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total_leaning_diff.html}}
+As we can see, the majority of the topics have more Right-leaning propaganda (the figure is almost all red). As we saw in the previous chapters, propaganda is detected more on Right-leaning articles.
+This prevalence can be seen especially on some topics: ethics, discrimination, media and corruption (values higher than $1\%$).
+Instead, Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom} shows that when we zoom on specific subtopics, we also see some that have more Left-leaning propaganda:
+%that have a prevalence of Left-leaning propaganda:
 
 \begin{figure}[!htbp]
     \centering
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_economy.pdf}
-		\caption{Economy}
+	\href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_total_leaning_diff.html}{\begin{subfigure}{0.49\textwidth}
+		\includegraphics[trim={0.15cm 19.5cm 5cm 0.15cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_economy.pdf}
+		\caption{\texttt{economy-business-and-finance}}
             \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_labour.pdf}
-		\caption{Labour}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[trim={0.15cm 19.5cm 5cm 0.15cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_labour.pdf}
+		\caption{\texttt{labour}}
             \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_labour}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_disaster.pdf}
-		\caption{Disaster}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[trim={0.15cm 19.5cm 5cm 0.15cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_disaster.pdf}
+		\caption{\texttt{disaster-accident-and-emergency}}
             \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_disaster}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[trim={0 0 0 0},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_court.pdf}
-		\caption{Court}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[trim={0.15cm 19.5cm 5cm 0.15cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_total_leaning_diff_zoom_court.pdf}
+		\caption{\texttt{court}}
             \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_court}
-	\end{subfigure}
+	\end{subfigure}}
 	
-    \caption{Zoom on specific topics: Left (Blue) vs Right (red) propaganda}
+    \caption{Zoom on specific topics: Left (blue) vs Right (red) propaganda}
     \label{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom}
 \end{figure}
 
 \begin{itemize}
-    \item Economy, business and finance (top-level topic): the subtopics that have more Left-leaning propaganda  are Banking ($+0.4\%$), Investments ($+0.5\%$), Market and exchange ($+0.5\%$). The rest of the subtopics contain more Right-leaning propaganda.
-    \item Labour (top-level topic): Retirement ($+0.8\%$), Pension ($+0.6\%$) and Labour strike/dispute ($+0.5\%$). Also here, the rest is mostly Right-leaning propaganda.
-    \item Disaster, accident and emergency incident: Left-leaning articles contain a significant higher quantity of propaganda on the subtopics of Drought ($+4.4\%$) and Earthquake ($+3.5\%$) when compared to the Right. Also the subtopics of Emergency incidents ($+0.8\%$), Railway incidents ($+1.3\%$) and Maritime incidents ($+1.0\%$) get more propaganda in the Left, while Road accidents get more in the Right ($+1.7\%$).
-    \item Court (Crime, law and justice $\rightarrow$ Judiciary): here most of the propaganda is from the Right, except from Capital Punishment ($+1.0\%$).
+    \item \texttt{economy-business-and-finance} (top-level topic): the subtopics that have more Left-leaning propaganda  are \texttt{banking} ($+0.4\%$), \texttt{investments} ($+0.5\%$), \texttt{market-and-exchange} ($+0.5\%$). The rest of the subtopics contain more Right-leaning propaganda.
+    \item \texttt{labour} (top-level topic): \texttt{retirement} ($+0.8\%$), \texttt{pension} ($+0.6\%$) and \texttt{labour} \texttt{strike-dispute} ($+0.5\%$). Also here, the rest is mostly Right-leaning propaganda.
+    \item \texttt{disaster-accident-and-emergency-incident}: Left-leaning articles contain a significant higher quantity of propaganda on the subtopics of \texttt{drought} ($+4.4\%$) and \texttt{earthquake} ($+3.5\%$) when compared to the Right. Also the subtopics of \texttt{emergency-incidents} ($+0.8\%$), \texttt{railway-incidents} ($+1.3\%$) and \texttt{maritime-incidents} ($+1.0\%$) get more propaganda in the Left, while \texttt{road-accidents} get more in the Right ($+1.7\%$).
+    \item \texttt{court} (\texttt{crime-law-and-justice} $\rightarrow$ \texttt{judiciary}): here most of the propaganda is from the Right, except from \texttt{capital-punishment} ($+1.0\%$).
 \end{itemize}
 
 From this analysis, we can see that even though the quantity of propaganda is substantially higher in the Right, we can be able to identify some topics where instead the Left is using quite strong persuasion means.
-And the identified topics with more Left-leaning propaganda are topics where the Left has the strongest opinions. For example, in regards to capital punishment the Left has a strong opposition, while the Right might be less strong with language when covering this topic because it generally accepts more this practice.
-Or if we consider the types of accidents, it is meaningful that the Right is using stronger language when talking about car accidents, while the Left is more on railway and maritime. Furthermore, the Left has a stronger language when covering natural disasters, as they are usually related to bad environmental practices, a theme for which the Left usually shows its opposition.
+The identified topics with more Left-leaning propaganda are topics where the Left has the strongest opinions. For example, in regards to \texttt{capital-punishment} the Left has a strong opposition, while the Right might be less strong with language when covering this topic because it generally accepts more this practice.
+Or if we consider the types of accidents, it is meaningful that the Right is using stronger language when talking about \texttt{road-accidents}, while the Left is more on \texttt{railway} and \texttt{maritime}. Furthermore, the Left has a stronger language when covering natural disasters (\texttt{earthquake} and \texttt{drought}), as they are usually related to bad environmental practices, a theme for which the Left usually shows its opposition.
 
-The language contains more propaganda and is stronger when the writer either considers the topic more important, or is criticising the status quo~\citep{rose1992political}. We confirm this with our analysis.  
+The language contains more propaganda and is stronger when the writer either considers the topic more important, or is criticising the status quo~\citep{rose1992political}.
+% We confirm this with our analysis.  
 
 
-\subsection{\statusgreen Correlation of propaganda quantities between Leanings across Topics}
+\subsection{\statusgreen Correlation of Propaganda Quantities between Leanings across Topics}
 \label{ssec:topic_propaganda_leaning_tech_quantities}
 
 % Propaganda techniques: difference
@@ -1169,48 +1226,57 @@ The language contains more propaganda and is stronger when the writer either con
 % Propaganda techniques: correlation analysis (how different)
 
 For the next step, we take into consideration the different techniques. We want to study how the usage of propaganda techniques is correlated across leanings on several topics.
+%
+First, by studying the correlation of the \emph{quantities} of each technique. Then, in the next subsection, we will observe the correlation of the TF-IDF features (\emph{terms}).
 
-First, by studying the correlation of the quantities of each technique. Then, in the next subsection, we will observe the correlation of the TF-IDF features.
-
-The idea is to take for each topic and leaning the 18 values that represent the average quantity of the propaganda techniques for articles of that leaning. And then compute the correlation of the values of the Left with the values of the Right.
-
-As correlation metric, we choose to use Pearson's because it works with normal distributions. We quickly checked, and the distribution of the propaganda scores is half-normal therefore Pearson is the best metric.\todoAW{Needs more explanation}
-\todoAW{numbers for the half-normal distribution, more details}
+The idea is to take for each topic and leaning the 18 values that represent the average quantity of the propaganda techniques for articles of that leaning. With these, we compute the correlation of the values of the Left with the values of the Right.
+%
+As correlation metric, we choose to use Pearson because it works with normal and half-normal distributions~\cite{pearson1931analysis}.
+% The distribution of the propaganda scores is half-normal therefore Pearson is the best metric.\todoAW{Needs more explanation}
+% \todoAW{numbers for the half-normal distribution, more details}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr.pdf}
-    \caption{Correlation of quantities of propaganda techniques between Left and Right: light-green (low correlation) to dark green (high correlation)}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr.pdf}}
+    \caption{Correlation of quantities of propaganda techniques between Left and Right: light purple (low correlation) to dark purple (high correlation).}
     \label{fig:baly_iptc_weighted_prop_leaning_corr}
 \end{figure}
 
-Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr} shows the resulting diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr.html}}. As we can see, the correlation values are very high for all the topics ($96\% - 100\%$). Even zooming on specific subtopics, the correlation rarely falls under $90\%$: under Economic Sector, Chemicals ($87.2\%$), Air Transport ($84.0\%$) and under Macro Economics, Exports ($50.9\%$). 
-These subtopics, however, are quite small and have a count (keep in mind that belonging to a topic is a floating number) lower than 50. Therefore the results are no longer significant when restricting to such a small number of articles.
+Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr} shows the resulting diagram.\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr.html}}
+We show on a scale of purples the correlation values between the left and the right values.
+The correlation values are very high for all the topics ($96\% - 100\%$), therefore we select this range to show better the differences in the colour scales.
+Even zooming on specific subtopics, the correlation rarely falls under $90\%$: under \texttt{economic-sector}, \texttt{chemicals} ($87.2\%$) and \texttt{air-transport} ($84.0\%$); under \texttt{macro-economics}, \texttt{exports} ($50.9\%$). 
+These subtopics, however, are quite small and have a count (keep in mind that belonging to a topic is a floating number) lower than $50$. As a consequence of this, the results are no longer significant when restricting to such a small number of articles.
 
-Therefore, the finding is that, even though the total quantity of propaganda may be different across the leaning (as found in the previous subsection), the correlation remains very high also in those topics that showed the difference in the total.\todoHA{??}
+Therefore, even though the total quantity of propaganda may be different across the leaning (as found in the previous subsection), we find that that in these topics the correlation remains very high.
+%also in those topics that showed the difference in the total.\todoHA{??}
 This means that what changes is the total quantity of propaganda, but not the relative proportions of the techniques used.
 
-\subsection{\statusgreen Finding Topics where Propaganda differs across Leaning (terms)}
+\subsection{\statusgreen Term Correlation between Leanings across Topics}
 \label{ssec:topic_propaganda_leaning_terms}
 
-The last step of this correlation analysis is to see whether the terms of propaganda are correlated between them.
+The last step of this correlation analysis is to see whether the \emph{terms} of propaganda are correlated between them.
 % We have just seen that the correlation is very high when considering only the quantities of each technique
 
 To analyse this, we take the TF-IDF features already computed in Chapter~\ref{chap:political_sides} and~\ref{chap:linguistic_persuasion}.
-This feature set is made of TF-IDF computed with a feature size of 2000\todoHA{Any rationale of why 2k?} across the whole dataset together.
-In order to compute the specific TF-IDF feature for each topic and leaning, we iterate over the dataset and we accumulate the TF-IDF of single articles into buckets that are identified by leaning and media topic.
-Alongside, we also accumulate the weights of articles belonging to each bucket (leaning is integer, while topic score is a float), as in the previous subsections, so that we can compute the average TF-IDF vector for each topic and leaning.
+This feature set is made of TF-IDF computed with a feature size of 2000
+% \todoHA{Any rationale of why 2k?}
+across the whole dataset together.
+We choose this number of features to be able to capture enough terms. Over-sizing this value does not have negative effects beyond making the computation longer.
 
+In order to compute the specific TF-IDF feature for each topic and leaning, we iterate over the dataset and we accumulate the TF-IDF of single articles into buckets that are identified by leaning and media topic.
+Alongside, we also accumulate the weights of articles belonging to each bucket (leaning is integer, while topic score is a floating number), as in the previous subsections, so that we can compute the average TF-IDF vector for each topic and leaning.
 We then take the vectors from the Left and the Right, and we compute the Pearson's correlation as in the previous case.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf.pdf}
-    \caption{Correlation of propaganda terms (TFIDF features) between Left and Right: light-green (low correlation) to dark green (high correlation)}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr_tfidf.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_prop_leaning_corr_tfidf.pdf}}
+    \caption{Correlation of propaganda terms (TFIDF features) between Left and Right: light purple (low correlation) to dark purple (high correlation)}
     \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf}
 \end{figure}
 
-Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr_tfidf} shows the resulting diagram\footnote{Interactive chart: \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr_tfidf.html}}. We can see that, with respect to the previous Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr}, we have some topics where the correlation values are lower than 90\%: court subtopics, for example, have values low as 62\%, or fundamental rights even reach 5\%.
+Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr_tfidf} shows the resulting diagram,\footnote{\url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_prop_leaning_corr_tfidf.html}} where this time we did not adjust the colour range, because the values of correlation vary from $5\%$ to $98\%$.
+We can see that, with respect to the previous Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr}, we have some topics where the correlation values are lower than 90\%: subtopics of \texttt{court}, for example, have values as low as $62\%$, or \texttt{fundamental-rights} even reach $5\%$.
 
 We zoom into some of the topics that present low values of correlation to get a clearer view. In these topics, correlation is low, which means that Left and Right are using significantly different propaganda terms. Figure~\ref{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom} shows the most important ones.
 
@@ -1253,20 +1319,21 @@ We zoom into some of the topics that present low values of correlation to get a 
     \caption{Zoom on specific topics: correlation of propaganda terms between Left and Right}
     \label{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom}
 \end{figure}
+\todo{Figure\ref{fig:baly_iptc_weighted_prop_leaning_corr_tfidf_zoom} change colour scale, RE-ZOOM and capture}
 
 \begin{enumerate}
-    \item Fundamental Rights (subtopic of Politics): on the whole topic, the average correlation is $83.6\%$. The topics where the words differ the most are Freedom of the Press ($5.5\%$ but very small with a sum of topic weights of 4.16 articles, therefore not significant), Freedom of Religion ($30.3\%$), Censorship and Freedom of Speech ($49.6\%$). These subtopics were not emerging in our previous analysis, therefore the quantities of propaganda across leaning are quite similar (Subsection~\ref{ssec:topic_propaganda_leaning_tot_quantity}). Instead, considering the propaganda terms used, they differ quite significantly.
-    \item Religion (top-level topic): we can see here how political leanings use different terminology when talking about many religions. Overall, the correlation for Religion is $83.5\%$. Islam gets a high correlation ($83.6\%$), while the different branches of Christianity ($72.6\%$) are showing less correlation: Roman Catholic ($19.1\%$), Anglican ($21.6\%$), Lutheran ($27.2\%$) are just some examples. This is an interesting finding: when articles are talking about religions through propaganda, we can see that for religions that have been historically more present in the US (main location of the news sources in the \texttt{baly} dataset) we have lower correlation. In other words, for these religions, the debate is more internal and the terms used are more different. Instead, for religions that are generally covered in the news as ``external", the terms used in propaganda are more similar between political leanings.
-    \item Economy, business and finance (top-level topic): these subtopics were already highlighted in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy} where we had more Left-leaning propaganda in Banking, Investments, Market and exchange. Instead here, considering the terms, we can see how the most different topics are specific economic sectors and some macroeconomics categories. For the sectors, the most different are: Agriculture ($17.0\%$), Oil and Gas Industry ($40\%$), Transport ($43.3\%$). For the macroeconomics: Economic Indicator ($19.7\%$), Mortgage ($40.0\%$), Inflation ($53.6\%$), Prices ($57.1\%$). These are mostly topics that had more propaganda on the Right.
-    \item Labour (top-level topic): this subtopic was highlighted previously in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy}. In this case, the topics with lower correlation are the topics that had more propaganda on the Left:  Retirement ($26.1\%$), Pension ($24.8\%$) and Labour strike/dispute ($7\%$).
-    \item Disaster, accident and emergency incident: subtopics of Drought ($14.8\%$) and Earthquake ($23.9\%$). Also the subtopics of Emergency incidents ($+0.8\%$), Railway incidents ($31.5\%$) and Maritime incidents ($16.3\%$) Road accidents in the Right ($10.4\%$). In these cases, the unbalance of propaganda was also high.
-    \item Court (Crime, law and justice $\rightarrow$ Judiciary): here the subtopic with lowest correlation is Capital Punishment ($22.2\%$).
+    \item \texttt{fundamental-rights} (subtopic of \texttt{politics}): on the whole topic, the average correlation is $83.6\%$. The topics where the words differ the most are \texttt{freedom-of-the-press} ($5.5\%$ but very small with a sum of topic weights of 4.16 articles, therefore not significant), \texttt{freedom-of-religion} ($30.3\%$), \texttt{censorship-and-freedom-of-speech} ($49.6\%$). These subtopics were not emerging in our previous analysis, therefore the quantities of propaganda across leaning are quite similar (Subsection~\ref{ssec:topic_propaganda_leaning_tot_quantity}). Instead, considering the propaganda terms used, they differ quite significantly.
+    \item \texttt{religion} (top-level topic): we can see here how political leanings use different terminology when talking about many religions. Overall, the correlation for \texttt{religion} is $83.5\%$. \texttt{islam} gets a high correlation ($83.6\%$), while the different branches of \texttt{christianity} ($72.6\%$) are showing less correlation: \texttt{roman-catholic} ($19.1\%$), \texttt{anglican} ($21.6\%$), \texttt{lutheran} ($27.2\%$) are just some examples. This is an interesting finding: when articles are talking about religions through propaganda, we can see that for religions that have been historically more present in the US (main location of the news sources in the \texttt{baly} dataset) we have lower correlation. In other words, for these religions, the debate is more internal and the terms used are more different. Instead, for religions that are generally covered in the news as ``external", the terms used in propaganda are more similar between political leanings.
+    \item \texttt{economy-business-and-finance} (top-level topic): these subtopics were already highlighted in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy} where we have shown more Left-leaning propaganda in \texttt{banking}, \texttt{investments}, \texttt{market-and-exchange}. Instead here, considering the terms, we can see how the most different topics are specific economic sectors and some macroeconomics categories. For the sectors, the most different are: \texttt{agriculture} ($17.0\%$), \texttt{oil-and-gas-industry} ($40\%$), \texttt{transport} ($43.3\%$). For the macroeconomics: \texttt{economic-indicator} ($19.7\%$), \texttt{mortgage} ($40.0\%$), \texttt{inflation} ($53.6\%$), \texttt{prices} ($57.1\%$). These are mostly topics that have more propaganda on the Right.
+    \item \texttt{labour} (top-level topic): this topic was highlighted previously in Figure~\ref{fig:baly_iptc_weighted_prop_total_leaning_diff_zoom_economy}. In this case, the subtopics with lower correlation are the ones that have more propaganda on the Left:  \texttt{retirement} ($26.1\%$), \texttt{pension} ($24.8\%$) and \texttt{labour-strike}/\texttt{dispute} ($7\%$).
+    \item \texttt{disaster-accident-and-emergency-incident}: subtopics of \texttt{drought} ($14.8\%$) and \texttt{earthquake} ($23.9\%$). Also the subtopics of \texttt{emergency-incidents} ($+0.8\%$), \texttt{railway-incidents} ($31.5\%$) and \texttt{maritime-incidents} ($16.3\%$) \texttt{road-accidents} in the Right ($10.4\%$). In these cases, the unbalance of propaganda was also high.
+    \item \texttt{court} (\texttt{crime-law-and-justice} $\rightarrow$ \texttt{judiciary}): here the subtopic with lowest correlation is \texttt{capital-punishment} ($22.2\%$).
 \end{enumerate}
 
 \subsection{\statusgreen Discussion}
 
 From these results, we can see that the terms used for propaganda are quite different in specific topics, demonstrated by low correlation values on the TF-IDF features.
-In some cases, the low correlation happens in topics where there exists more Left or Right propaganda across the articles (economy, labour, disasters, court). In some other cases instead, propaganda appears uniformly across the spectrum (Fundamental Rights and Religion) but when we consider the terms we have significant differences (low correlation). Therefore, both the analyses of quantity and terms are necessary.
+In some cases, the low correlation happens in topics where there exists more Left or Right propaganda across the articles (\texttt{economy}, \texttt{labour}, \texttt{disasters}, \texttt{court}). In some other cases instead, propaganda appears uniformly across the spectrum (\texttt{fundamental-rights} and \texttt{religion}) but when we consider the terms we have significant differences (low correlation). Therefore, both the analyses of quantity and terms are necessary.
 
 
 % \subsection{Custom Topics (AllSides)}
@@ -1445,7 +1512,7 @@ We answer this research question with two experiments:
 
 \begin{itemize}
     \item Observe F1 metric across topics, of the models trained in~\ref{ssec:ps_leaning_classifier}: a classifier using propaganda features to determine political leaning; this is described in Subsection~\ref{sec:topic_classifier_propaganda_f1_across}.
-    \item Using the topic as an input feature and measuring the effects on the classification task; done in Subsection~\ref{sec:topic_classifier_propaganda_feature}
+    \item Using the topic as an input feature and measuring the effects on the classification task; this is presented in Subsection~\ref{sec:topic_classifier_propaganda_feature}.
 \end{itemize}
 
 
@@ -1453,7 +1520,8 @@ We answer this research question with two experiments:
 \subsection{\statusgreen F1 Breakdown by Topic}
 \label{sec:topic_classifier_propaganda_f1_across}
 
-First of all, we want to understand how the models trained in the last chapter perform across topics. In other words, if we compute the prediction metric (F1) across all the topics, for which ones the prediction is more or less accurate?
+The first experimentation that we do in this section aims at understanding how the models trained in the last chapter perform across topics.
+In other words, if we compute the prediction metric (F1) across all the topics, for which ones the prediction is more or less accurate?
 We take the models already trained on the whole training set and we divide the test set according to the topics.
 % which topics are most accurate with the different models presented in the previous chapter.
 % But this does not perform training again, only breaking down by topic the F1 results.
@@ -1464,15 +1532,15 @@ To implement this, we computed the F1 singularly for each article (micro-F1) and
 
 \begin{figure}[!htbp]
     \centering
-	\begin{subfigure}{\textwidth}
+	\begin{subfigure}{0.49\textwidth}
             \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_random_bert.pdf}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_random_bert.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_random_bert.pdf}}
     \caption{Random splits}
     \label{fig:baly_iptc_weighted_f1_random_bert}
 \end{subfigure}
-\begin{subfigure}{\textwidth}
+\begin{subfigure}{0.49\textwidth}
             \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_media_bert.pdf}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_media_bert.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_media_bert.pdf}}
     \caption{Media splits}
     \label{fig:baly_iptc_weighted_f1_media_bert}
 \end{subfigure}
@@ -1480,30 +1548,30 @@ To implement this, we computed the F1 singularly for each article (micro-F1) and
     \label{fig:baly_iptc_weighted_f1_bert}
 \end{figure}
 
-As Figure~\ref{fig:baly_iptc_weighted_f1_bert} shows,\footnote{Interactive charts: Random \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_random_bert.html} and Media \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_media_bert.html }} the F1 measures using the baseline BERT features changes across topics and media splits (compare with Table~\ref{tab:results_prop_features_classifier} from the previous chapter).
-\todoAW{You really need to be presenting these results in a way that's comparable across the dissertation.}
+As Figure~\ref{fig:baly_iptc_weighted_f1_bert} shows,\footnote{Random \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_random_bert.html} and Media \url{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_media_bert.html}} the F1 measures using the baseline BERT features changes across topics and media splits (compare with Table~\ref{tab:results_prop_features_classifier} from the previous chapter).
+% \todoAW{You really need to be presenting these results in a way that's comparable across the dissertation.}
 First of all, we can notice that the size of the topics is different from the previous figures. This is caused by the splits provided with the dataset that instead of containing a k-fold, they just do a train-test split. Therefore, the figure here represents only the distribution of the test set (for which we have the predictions).
 
 The random split has higher results for almost all the topics, as we discussed in the previous chapter, but it suffers from information leaking (articles from a certain source can appear both in the training and test set, and the models take this as a shortcut).
-\todoAW{Why didn't you just modify the training/test set so that there's no overlap?}
-Therefore the more important results are the ones considering the media splits.
+% \todoAW{Why didn't you just modify the training/test set so that there's no overlap?}
+Therefore the more important results are the ones considering the media splits where this problem is solved.
 
-Considering the random splits~\ref{fig:baly_iptc_weighted_f1_random_bert} (macro-F1 $56\%$), the topics where F1 is higher are Corruption ($73\%$), Racism ($70\%$), War ($68\%$), Mass Media ($67\%$), Trial ($66\%$). The ones with the lowest values are Family ($39\%$) and Legislative body ($46\%$).
+Considering the random splits~\ref{fig:baly_iptc_weighted_f1_random_bert} (macro-F1 $56\%$), the topics where F1 is higher are \texttt{corruption} ($73\%$), \texttt{racism} ($70\%$), \texttt{war} ($68\%$), \texttt{mass-media} ($67\%$), \texttt{Trial} ($66\%$). The ones with the lowest values are \texttt{family} ($39\%$) and \texttt{legislative-body} ($46\%$).
 
-Instead, the media splits~\ref{fig:baly_iptc_weighted_f1_media_bert} have generally lower values (Macro-F1 $40\%$), and the model struggles the most with Health ($30\%$), Court ($32\%$) and Law ($41\%$.)
+Instead, the media splits~\ref{fig:baly_iptc_weighted_f1_media_bert} have generally lower values (Macro-F1 $40\%$), and the model struggles the most with \texttt{health} ($30\%$), \texttt{court} ($32\%$) and \texttt{law} ($41\%$.)
 
 \begin{figure}[!htbp]
     \centering
-	\begin{subfigure}{\textwidth}
+	\begin{subfigure}{0.49\textwidth}
             \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_media_propaganda_percentages.pdf}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_media_propaganda_percentages.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_media_propaganda_percentages.pdf}}
     \caption{Propaganda features alone \texttt{(2)}}
     \label{fig:baly_iptc_weighted_f1_media_propaganda_percentages}
 \end{subfigure}
-\begin{subfigure}{\textwidth}
+\begin{subfigure}{0.49\textwidth}
             \centering
-    \includegraphics[trim={2.2cm 2cm 2.2cm 2cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_media_delta.pdf}
-    \caption{Relative improvement of the combined model}
+    \href{https://martinomensio.github.io/phd-project/figures/baly_iptc_weighted_f1_media_delta.html}{\includegraphics[trim={2.65cm 0cm 2.8cm 0cm},clip,width=\linewidth]{figures/baly_iptc_weighted_f1_media_delta.pdf}}
+    \caption{Relative improvement of \texttt{(0)+(2)}}
     \label{fig:baly_iptc_weighted_f1_media_delta}
 \end{subfigure}
 \caption{F1 across IPTC Media Topics of \texttt{Baly} using propaganda features \texttt{(2)}}
@@ -1512,19 +1580,20 @@ Instead, the media splits~\ref{fig:baly_iptc_weighted_f1_media_bert} have genera
 
 % Then show also F1 for the model that uses propaganda features alone
 Then we analyse with the same methodology the F1 across topics of the models trained with the propaganda features.
-Figure~\ref{fig:baly_iptc_weighted_f1_media_prop} shows the results with two different plots. In~\ref{fig:baly_iptc_weighted_f1_media_propaganda_percentages}, we see that the propaganda features alone have bad results across topics, especially for Court ($26\%$). In general, the results are very similar to~\ref{fig:baly_iptc_weighted_f1_media_bert} but all with lower scores.
+Figure~\ref{fig:baly_iptc_weighted_f1_media_prop} shows the results with two different plots. In~\ref{fig:baly_iptc_weighted_f1_media_propaganda_percentages}, we see that the propaganda features alone have bad results across topics, especially for \texttt{court} ($26\%$). In general, the results are very similar to~\ref{fig:baly_iptc_weighted_f1_media_bert} but all with lower scores.
 
-Instead,~\ref{fig:baly_iptc_weighted_f1_media_delta} shows the relative difference between the rows \texttt{(0)+(2)} and \texttt{(0)} (cfr.~\ref{tab:results_prop_features_classifier}). In other words, it is measuring the effect of adding the propaganda features to the baseline features. Green colour means a relative improvement, while red colour means a degradation of the score for the specific topic.
-The overall improvement of $1.37\%$ F1, is focused mostly on Politics ($1.2\%$ increase), Economy business and finance ($1.9\%$ increase), Conflict war and peace ($2.2\%$ increase), Science and technology ($3.3\%$ increase) and Health ($2.0\%$ increase). Instead, some topics are penalised by the addition, such as Court ($0.6\%$ decrease), Belief systems ($0.2\%$ decrease).
+Instead,~\ref{fig:baly_iptc_weighted_f1_media_delta} shows the relative difference between the rows \texttt{(0)+(2)} and \texttt{(0)} (cfr.Table~\ref{tab:results_prop_features_classifier}).
+In other words, it is measuring the effect of adding the propaganda features to the baseline features. Green colour means a relative improvement, while red colour means a degradation of the score for the specific topic.
+The overall improvement of $1.37\%$ F1, is focused mostly on \texttt{politics} ($1.2\%$ increase), \texttt{economy-business-and-finance} ($1.9\%$ increase), \texttt{conflict-war-and-peace} ($2.2\%$ increase), \texttt{science-and-technology} ($3.3\%$ increase) and \texttt{health} ($2.0\%$ increase). Instead, some topics are penalised by the addition, such as \texttt{court} ($0.6\%$ decrease), \texttt{belief-systems} ($0.2\%$ decrease).
 
-These results mean that the propaganda features are quite useful to differentiate between Left and Right leaning in topics such as Politics, Economy, Conflict and Science. For these topics, we saw in the previous sections significant differences between left and right propaganda.
-But at the same time, in some topics such as Court and Belief Systems, which were showing promising statistical differences across leaning, the classifier is not able to use this information to improve the prediction.
+These results mean that the propaganda features are quite useful to differentiate between Left and Right leaning in topics such as \texttt{politics}, \texttt{economy}, \texttt{conflict-and-science}. For these topics, we saw in the previous sections significant differences between left and right propaganda.
+But at the same time, in some topics such as \texttt{court} and \texttt{belief-systems}, which were showing promising statistical differences across leaning, the classifier is not able to use this information to improve the prediction.
 
 \subsection{\statusgreen Predicting Leaning from topics and propaganda}
 \label{sec:topic_classifier_propaganda_feature}
 
 For this last experiment, we use the topic as an input feature to try to predict the political leaning of news articles.
-
+%
 The idea is that, by using the current topics in the article, the classifier may be able to recognise topic-propaganda associations that we discussed in this chapter, and possibly improve the result of classification.
 
 % - encoding topics
@@ -1584,7 +1653,7 @@ We experiment with different features sets, combining topic, propaganda and base
     \caption{Results Media Topics}
     \label{tab:results_classifier_with_mediatopics}
 \end{table}
-\todoAW{I'm not sure what this shows me. More details needed in the text}
+% \todoAW{Table~\ref{tab:results_classifier_with_mediatopics}: I'm not sure what this shows me. More details needed in the text}
 
 % - results
 Table~\ref{tab:results_classifier_with_mediatopics} show the results of the feature sets.
@@ -1593,8 +1662,7 @@ Instead, with the media splits, we are able to improve that result by using the 
 The best result is achieved in \texttt{(0)+(2)+(3a)+(4b)} which is a combination of BERT baseline \texttt{(0)}, propaganda quantities \texttt{(2)}, propaganda terms \texttt{(3a)} and topic labels \texttt{(4b)}.
 
 The size of the TF-IDF only changes minimally the results, but the size 1000 is better than 500.
-
-The improvement with respect to \texttt{(0)+(2)} is of $1.22\%$, and results significant with a p-value of $1.03e-6$.
+The improvement with respect to \texttt{(0)+(2)} is of $1.22\%$, and results significant with a p-value of $1.03 \times 10^{-6}$.
 
 % with respect to baseline
 % [18133.  4288.]
@@ -1608,7 +1676,7 @@ The improvement with respect to \texttt{(0)+(2)} is of $1.22\%$, and results sig
 % statistic=3803.000, p-value=0.0000010373 
 
 The significance of these results means that \emph{using the topics in addition to propaganda features is useful to classify political leaning}. The many topic-techniques associations that we discovered previously enable the classifier to improve slightly the predictions.
-
+%
 We have, although, the limitation that the net increase of F1 is still minimal ($1.22\%$).
 
 \section{\statusgreen Discussions}
@@ -1617,20 +1685,23 @@ We have, although, the limitation that the net increase of F1 is still minimal (
 The main findings of this chapter are:
 
 \begin{enumerate}
-    \item We need fine-grained topic to be more able to see differences. The coarse topics show similar propaganda across topics and leanings. The more we use fine-grained topics, the more differences we are able to see. But at the same time, we lose support\todoHA{??} (fewer articles specific to the topics, and the filtering becomes too narrow). We need a tradeoff between granularity (high, to see good differences) and support (significance of results).
+    \item We need fine-grained topic to be more able to see differences. The coarse topics show similar propaganda across topics and leanings. The more we use fine-grained topics, the more differences we are able to see.
+    Although, the more we use specific and narrow topics, the less articles we have into each group. This causes the results to lose statistical significance when the topics are too narrow.
+    % we lose support\todoHA{??} (fewer articles specific to the topics, and the filtering becomes too narrow).
+    We need a tradeoff between granularity (high, to see good differences) and number of articles per topic (significance of results).
     \item Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
-    \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
-    \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
-    \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
+    \item The distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
+    \item The terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
+    \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics for recognising the leaning are the ones that are more polarising.
     \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
-    \item Encoding the topic information and using it as a feature, helps increase the prediction metrics of a leaning classifier. The improvements are small but significant.
+    \item Encoding the topic information and using it as a feature helps to increase the prediction metrics of a leaning classifier. The improvements are small but significant.
 \end{enumerate}
 
 
 The answers to the subquestions for this chapter are the following:
 
 \begin{enumerate}[label={\textbf{RQ4.\arabic*:}},leftmargin=2cm]
-    \item \emph{How does detected propaganda differ across polarising versus neutral topics?} We identified topics that contain more propaganda (polarising) than others. What does not change generally is the proportion between the techniques used. Loaded Language is always the most common, and there are a few exceptions where a specific technique is used in a certain topic outside its usual range.
+    \item \emph{How does detected propaganda differ across polarising versus neutral topics?} We identified topics that contain more propaganda (polarising) than others. What does not change generally is the proportion between the techniques used. \texttt{Loaded\_Language} is always the most common, and there are a few exceptions where a specific technique is used in a certain topic outside its usual range.
     \item \emph{How does detected propaganda differ across political leaning in polarising and neutral topics?} When comparing across political leaning, some topics have a higher quantity of propaganda on a specific leaning (finding 2 above). The internal proportion of techniques is preserved (finding 3), but the specific terms have substantial differences (finding 4).
     \item \textit{What are the effects of combining the propaganda features with the topic features, to recognise the leaning of a news article?} Adding the topic features to the propaganda features is useful to recognise the leaning of news articles, but not for all the topics. The small improvements show statistical significance.
 \end{enumerate}
@@ -1644,7 +1715,11 @@ Propaganda changes significantly across topics, especially when considering the 
 
 This chapter investigated the importance of the topics in our work about propaganda.
 First of all, we have been able to refine and select a methodology to perform a comparative analysis across topics and leanings. With hierarchical topics we are able to find interesting results at multiple levels of granularity.
-We discovered several associations of topics and propaganda, and we have a much clearer view of how these different variables interconnect with each other.\todoHA{What else can we use this knowledge for?}
+We discovered several associations of topics and propaganda, and we have a much clearer view of how these different variables interconnect with each other.
+% \todoHA{What else can we use this knowledge for?}
+This knowledge can be used for refining classification models for certain topics, or also to
+% explore the connections with other phenomena such as
+investigate and possibly improve the detection of propaganda in specific topics, to create more diverse datasets.
 
 As possible limitations of the methods used, we have external factors, such as the propaganda detection model or the topic detection model (TextRazor). But we have as well internal factors, such as the specific usage of the topic scores, or the encoding of the labels with TF-IDF that could have been done differently.
 
