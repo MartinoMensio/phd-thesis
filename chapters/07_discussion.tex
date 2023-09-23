@@ -265,21 +265,37 @@ During this research path that lasted more than 3 years, we have encountered man
 The first limitation, that comes from the datasets used, is that we use news articles that come from the US. While this is a relevant country for the English language, we think that it is limiting that the news articles do not come from other English-speaking countries %\todoHA{what about non-English? isn’t this another limitation?} 
 such as the UK or international news.
 This implies that most of the events covered by the articles in the dataset are specific to the US (e.g. Trump, elections).
+\todoHA{also, US propaganda usage might differ from UK and other places}
 Furthermore, this also means that the computational approaches considered are targeting only the English language. %While we see that some datasets start to be created in other languages, 
-We acknowledge that, as with many other tasks in computational linguistics, we first see an introduction of resources for the English language and then gradually to other languages. We already see some datasets emerging for Hindi and Czech (ref Section~\ref{ssec:ps_prop_leaning_imbalanced_datasets}) but only for document-level analysis.
-This limitation applies to the datasets of political leaning (AllSides \texttt{baly}, \texttt{nela-gt}) and even to the propaganda datasets (TSHP-17, QProp and PTC). In Chapter~\ref{chap:common_ground_search} we made use of the Google News dataset, which instead we collected from Google News UK. This dataset did not have this limitation. However, it had many other problems such as the difficulty in retrieving data with scraping, and also possible licensing issues with sharing the articles (scraping for research is allowed by law, but sharing the content may not be, making it difficult to create reproducible research outputs). Instead, we continued to use already public datasets to avoid these issues.
+We acknowledge that, as with many other tasks in computational linguistics, we first see an introduction of resources for the English language and then gradually to other languages.\todoHA{odd sentence}
+We already see some datasets emerging for Hindi and Czech (ref Section~\ref{ssec:ps_prop_leaning_imbalanced}) but only for document-level analysis.
+This limitation applies to the datasets of political leaning (AllSides \texttt{baly}, \texttt{nela-gt}) and even to the propaganda datasets (TSHP-17, QProp and PTC). 
 
-This limitation can be addressed by future works, collecting articles from different nations and building a more global dataset both for political leaning and for propaganda detection. In both cases, behind the technical difficulty of retrieving cleaned articles, there is a need to annotate the data and therefore manual effort is required. For political leaning, researchers can rely on distant supervision: using the leaning of the news source as the label for the articles. But for fine-grained propaganda detection, the articles need to be analysed by trained expert annotators, who need to correctly identify the propaganda techniques. The annotations need to pass quality checks by computing properly inter-annotator agreement. With such comprehensive datasets, more comparative analysis would be possible across nations.
+In Chapter~\ref{chap:common_ground_search} we made use of the Google News dataset, which instead we collected from Google News UK. This dataset did not have this limitation.
+However, it had many other issues such as the difficulty in retrieving data with scraping, and also possible licensing issues with sharing the articles (scraping publicly accessible copyright-protected material for research purposes is allowed by law,\footnote{\url{https://www.gov.uk/guidance/exceptions-to-copyright} \\ \url{https://aballatore.space/2020/04/01/web-scraping-is-legal/}} but sharing the content may not be, making it difficult to create reproducible research outputs).
+Instead, this thesis makes use of existing published datasets to avoid these issues.
 
-The second big limitation of this work is that we are not training cutting-edge models to perform propaganda detection or political leaning classification.
-For fine-grained propaganda detection, we are instead relying on pre-trained models~\citep{da2019fine}.
-Instead, for political leaning, we are training a neural network that has 2 layers maximum. We use this network with pre-computed features (BERT encodings, TF-IDF of different subsets of terms, numerical features representing quantity of propaganda techniques) and therefore the training times are reduced significantly.
+This limitation can be addressed by future works, collecting articles from different nations and building a more global dataset both for political leaning and for propaganda detection. In both cases, behind the technical difficulty of retrieving cleaned articles, there is a need to annotate the data and therefore manual effort is required. For political leaning, researchers can rely on distant supervision: using the leaning of the news source as the label for the articles. However, for fine-grained propaganda detection, the articles need to be analysed by trained expert annotators, who need to correctly identify the propaganda techniques. The annotations need to pass quality checks by computing properly inter-annotator agreement. With such comprehensive datasets, more comparative analysis would be possible across nations.
+
+Another limitation of this work is that we are 
+%not training cutting-edge models to perform propaganda detection or political leaning classification.
+%For fine-grained propaganda detection, we are instead 
+relying on pre-trained models~\citep{da2019fine} for fine-grained propaganda detection, and 
+%Instead, 
+for political leaning, we are training a neural network that has 2 layers. We use this network with pre-computed features (BERT encodings, TF-IDF of different subsets of terms, numerical features representing quantity of propaganda techniques) and therefore the training times are reduced significantly.
 In the past years, there has been a race to deploy huge and complex networks, that require significant amounts of computational power, besides the cost and time to run experiments (and environmental consequences).
-We stick to relatively simple models, applying Occam's principle: we need to observe improvements on simple models first.
+We stick to relatively simpler models, applying Occam's principle: we need to observe improvements on simpler models first.
 Our goal is to demonstrate the relationship between the involved features, and not primarily to get results that compete with the state of the art.
 %\todoAW{That's fine, but be prepared to be challenged about this aspect in your viva.}
 
 This limitation can quite simply be faced using more recent and complex models, potentially involving generative models such as GPT-4~\citep{openai2023gpt4} to generate training data or even to classify documents and terms.
+
+\todoHAinline{
+One issue I can think about is wrt your topic analysis. It is possible that the use of propaganda in topics change with time and the nature of unfolding events. Eg articles on sports could become propagandistic if some political or ideological issues crop up (does happen).
+Also you have cross-over topics that could raise other challenges.
+Another issue is determining what the propaganda language was used for. If left and right used the same propaganda types to talk about the same event then it’s possible that they used them for different purposes or in association with different points of parts of the event. So what should the next phd students do to analyse this further?
+How could future students use your work to study impact of persuasive techniques on readers?
+}
 
 
 

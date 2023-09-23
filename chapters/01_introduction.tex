@@ -10,17 +10,17 @@
 % Orientation: wider context
 
 % situation
-Thousands of articles are published every day about the latest events happening.
+Thousands of news articles are published every day about the latest events around the world.
 The use of specific language, the selection of details, and how the narrative is presented, are all different aspects that are unique to each news outlet and author.
 These peculiarities, at the same time, can influence what the reader perceives about the events described.
 % framing definition
 This whole set of information, whether implicit or explicit, extends the raw facts of the events covered by news articles.
 % and are shared as ground truth between multiple sources.
-This additional layer, which varies between multiple news, appears with different names, such as \emph{framing}~\cite{gamson1989media,scheufele1999framing} or 
+This additional layer, which varies between multiple news, comes under different names, such as \emph{framing}~\cite{gamson1989media,scheufele1999framing} or 
 %\emph{persuasion}, 
 \emph{propaganda}, with slightly different definitions.
 For conciseness, in this work we denote these techniques with the term \emph{persuasion}.
-These techniques can be conveyed with most subjective statements, mixed with the description of the event narrated, but not only.
+These techniques can be conveyed with most subjective statements, mixed with the description of the event narrated.%, but not only.
 %it does not stop there.
 % TODO reference: ``Various observers have noted how subtle framing subtly and unconsciously [framing] operates'' (Gamson and Modigliani, 1989, p. 7)
 Even selecting which details or features to report greatly affects the message sent to the reader.
@@ -64,8 +64,8 @@ and our publications in Section~\ref{sec:intro_publications}.
 
 In this thesis, we analyse persuasion techniques, with a focus on propaganda, to understand how they relate to additional dimensions (topic, leaning, similarity).
 
-To the best of our knowledge, there are hardly any computational study that analyses the relationship between persuasion means, leaning, topics and similarity.
-This is not a problem on its own, but what is missing is an understanding of how these dimensions interact.
+To the best of our knowledge, there are hardly any computational studies that analyse the relationship between persuasion means, leaning, topics and similarity.
+% This is not a problem on its own, but what is missing is an understanding of how these dimensions interact.
 % Acquiring this missing knowledge, we could be able to 
 
 What makes news articles about the same issue different? 
@@ -352,7 +352,7 @@ The major contributions of this work are the following:
     \end{enumerate}
     \item contribution 2: improving F1 of the political leaning classifier using a mix of features. More specifically:
     \begin{enumerate}
-        \item Chapter~\ref{chap:political_sides}  shows that if we add propaganda features on a BERT-based classifier that predicts political leaning, we get slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
+        \item Chapter~\ref{chap:political_sides}  shows that if we add propaganda features on a BERT-based classifier that predicts political leaning, we produce slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
         \item Chapter~\ref{chap:topics} adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
     \end{enumerate}
     \item contribution 3: highlighting the problem of imbalanced dataset for propaganda detection.
