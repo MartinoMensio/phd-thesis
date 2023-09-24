@@ -11,12 +11,11 @@ In this chapter, we present the state of the art for the different research area
 
 We start from the literature targeted to analysing similar articles (Section~\ref{sec:lit_relationships}), which considers relationships and similarities between different documents.
 Then we move to the literature about persuasion detection, especially focusing on sentiment and propaganda detection (Section~\ref{sec:lit_persuasion}).
-Next, we describe the literature about political leaning, describing the definitions and the approaches for the automatic classification (Section~\ref{sec:lit_leaning}).
+Next, we describe the literature about political leaning, illustrating the definitions and the approaches for the automatic classification (Section~\ref{sec:lit_leaning}).
 And finally, we present the works on topic recognition, giving an overview of the existing approaches (Section~\ref{sec:lit_topics}).
 After this overview of each of the areas covered, we present some additional related phenomena (Section~\ref{sec:lit_related}).
 
 Subsequently, we discuss the limitations of not considering these research areas together, and the potential benefits of performing comparative analysis across dimensions (Section~\ref{sec:lit_discussion}).
-
 To conclude, we present the scope of this work in Section~\ref{sec:lit_scope}.
 
 
@@ -34,23 +33,25 @@ To conclude, we present the scope of this work in Section~\ref{sec:lit_scope}.
 \label{sec:lit_relationships}
 
 Our starting point is the literature that aims to analyse multiple versions of the same story, across different news sources.
-
-From the enormous multitude of articles that get published every day, several datasets and resources of parallel news have been built (described in Subsection~\ref{ssec:lit_relationships_parallel}).
-We are interested in works that explore what changes between similar articles, and the literature which defines and deals with different tasks (Subsection~\ref{ssec:lit_relationships_tasks}). In particular, we focus on corroboration and omission detection (Subsection~\ref{ssec:lit_relationships_corr_omiss}).
+From the enormous multitude of articles that get published every day, several datasets and resources of parallel news have been built (described in~\ref{ssec:lit_relationships_parallel}).
+We are interested in works that explore what changes between similar articles, and the literature which defines and deals with different tasks (\ref{ssec:lit_relationships_tasks}). In particular, we focus on corroboration and omission detection (\ref{ssec:lit_relationships_corr_omiss}).
 
 \subsection{\statusgreen Parallel News}
 \label{ssec:lit_relationships_parallel}
 
 To talk about similarity between news articles, we first need to introduce the concept of \emph{\gls{parallel-news}}.
-
+%
 Parallel news is a specific type of \emph{parallel corpus}, a term that is frequently used when multiple languages are involved.
 These resources, such as the OPUS dataset~\citep{tiedemann2012parallel}, are useful for applications in computational linguistics, translation studies and cross-linguistic corpus studies~\citep{brown1991aligning,ramesh2022samanantar,ziemski2016united,kunchukuttan2017iit,banon2020paracrawl}.
 
 We take the use of this term in a monolingual setting, where each document contains a certain number of variations from the others, but still covers the same main events.
 This specific interpretation is considered in works that perform sentence-level paraphrase extraction~\citep{dolan2004unsupervised,zhang2013harvesting}.
-More specifically in the news media environment, several datasets and tools have been developed with the aim of exposing the users to several points of view~\citep{bozdag2015breaking}, in order to break the filter bubble~\citep{pariser2011filter}\todoAW{use eco chamber?}\todomargin{ better filter bubble https://medium.com/@nicklum/the-surprising-difference-between-filter-bubble-and-echo-chamber-b909ef2542cc} that is built around them.
+More specifically in the news media environment, several datasets and tools have been developed with the aim of exposing the users to several points of view~\citep{bozdag2015breaking}, in order to break the filter bubble~\citep{pariser2011filter}
+%\todoAW{use eco chamber?}\todomargin{ better filter bubble https://medium.com/@nicklum/the-surprising-difference-between-filter-bubble-and-echo-chamber-b909ef2542cc}
+that is built around them.
 
-Some resources just group together news articles that are related, such as news aggregators, like Google News with the feature \emph{Full Coverage},\footnote{\url{https://blog.google/products/news/new-google-news-ai-meets-human-intelligence/}} that presents a collection of articles for each headline.
+Some resources just group together news articles that are related, commonly known as news aggregators.
+One example is Google News with the feature \emph{Full Coverage},\footnote{\url{https://blog.google/products/news/new-google-news-ai-meets-human-intelligence/}} that presents a collection of articles for each headline.
 There are also resources that try to bring together opposing points of view, such as AllSides Headline Roundup,\footnote{\url{https://www.allsides.com/headline-roundups}} or research works that try to provide a similar result~\citep{trampuvs2015diversinews,park2009newscube}.
 
 
@@ -62,7 +63,7 @@ Instead, with algorithmic resources (e.g., Google News Full Coverage), there is 
 \subsection{\statusgreen Common Tasks}
 \label{ssec:lit_relationships_tasks}
 
-With this availability of resources, both in the news domain but also with a wider perspective, the computational linguistics community has addressed several tasks.
+With this availability of resources, specifically in the news domain but also more generally, the computational linguistics community has addressed several tasks.
 
 First of all, we need to mention the \textit{semantic similarity} task.
 Semantic similarity is defined as the likeness of meaning or semantic content as opposed to lexical similarity, which instead relies more on the exact terms matching~\citep{harispe2015semantic}.
@@ -76,14 +77,16 @@ This task is particularly challenging because small changes (e.g., a number repo
 
 
 % Suggest items to read (recommender systems)
-Another task that relies on semantic similarity, is the \emph{recommendation of content} (e.g., news articles) that is similar to a reference one.
+Another task that relies on semantic similarity, is the \emph{recommendation of content} (e.g., news articles) that is similar to a given reference.
 This opens the immense field of recommender systems~\citep{tintarev2006similarity,karimi2018news,feng2020news}, where there may be more than one objective function to satisfy.
 Besides semantic similarity, the alignment with the point of view of the reader is important (but needs to be limited to avoid the filter-bubble effect)~\citep{lunardi2020metric,nguyen2014exploring,lunardi2019representing}.
-Or some other approaches additionally consider the serendipity of recommendations~\citep{ziarani2021serendipity,abdollahpouri2021toward,raza2022news}.
+For example, some approaches additionally consider the serendipity of recommendations as a secondary objective function~\citep{ziarani2021serendipity,abdollahpouri2021toward,raza2022news}.
 
 Lastly, we can also consider as related the \emph{plagiarism detection} task.
 In this task, the goal is to spot fragments of text that have been copied from others, without reference or with a certain proportion~\citep{stein2006near,alzahrani2010fuzzy,arabi2022improving}.
-This is a research area that is particularly relevant and challenging nowadays given the incredible rise of generative models~\cite{openai2023gpt4}. In recent months, the detection of plagiarism has drastically changed with tools that detect generated contents\footnote{\url{https://gptzero.me/}}\footnote{\url{https://www.zerogpt.com/}}.
+This is a research area that is particularly relevant and challenging nowadays given the incredible rise of generative models~\cite{openai2023gpt4}.
+In recent months, the generation and detection of plagiarism have drastically changed, shifting from more literal matching to more advanced and less interpretable techniques.\footnote{e.g., \url{https://gptzero.me/} and \url{https://www.zerogpt.com/}}
+%with tools that detect generated contents
 
 
 \subsection{\statusgreen Corroboration and Omission Detection}
@@ -95,22 +98,22 @@ is another task identified by the computational linguistic community.
 With this regard, our work focuses mostly on the investigation of corroboration and omissions
 across multiple sources.
 This task focuses on comparing and contrasting similar articles, to find which parts are in common and which ones are omitted~\cite{ehrhardt2021omission,bountouridis2018explaining,ko2023claimdiff}.
-By analysing multiple news articles it becomes possible to understand the interrelationships between multiple points of view.
+By analysing multiple news articles it becomes possible to understand the inter-relationships between multiple points of view.
 
-For example, \cite{bountouridis2018explaining} extracts points of information from articles, and cross-compares them across groups of related articles. In this way, it is possible to detect which details are corroborated in multiple sources and which ones are omitted.
+For example, \cite{bountouridis2018explaining} extracts points of information (sentences) from articles, and cross-compares them across groups of related articles. In this way, it is possible to detect which details are corroborated in multiple sources and which ones are omitted.
 Then the authors count the omissions and corroboration for each news source, and build an aggregated metric that is defined as the count of corroborations minus the count of omissions.
 The rationale is that corroborating a detail with external sources indicates that the detail is more likely to be true.
 Instead, if a news source omits a detail that other sources mention, it is considered as a negative indication.
 Therefore, the more corroboration and the fewer omissions a news source contains, the more this metric is high.
-The approach is validated by showing a positive correlation between these indicators and the values of credibility retrieved from Media Bias/Fact Check.\footnote{\url{https://mediabiasfactcheck.com/}}
-The scores of credibility come from a computation derived from manually labelled features (e.g., factual reporting, bias).\footnote{\url{https://mediabiasfactcheck.com/methodology/}}
+The approach is validated by showing a positive correlation between these indicators and the values of credibility retrieved from Media Bias/Fact Check (MBFC).\footnote{\url{https://mediabiasfactcheck.com/}}
+The scores of credibility of MBFC come from a computation derived from manually labelled features (e.g., factual reporting, bias).\footnote{\url{https://mediabiasfactcheck.com/methodology/}}
 
 \subsection{\statusgreen Limitations}
 % What is missing?
 
 % Fine-grained study of the terms that change $\rightarrow$ our goal to expand
-From these works on corroboration and omission detection, we consider. a limitation that the analysis is performed only considering points of information/details but not the single words involved.
-Once the details are identified across articles, it would be very useful to analyse the slight variations in terms.
+From these works on corroboration and omission detection, a limitation is that the analysis is performed only considering sentences but not the single words involved.
+Once the related sentences are identified across articles, it would be very useful to analyse the slight variations in terms.
 For example, it could be possible to identify terms that are unique and terms that instead are used across multiple sources. By bringing this analysis to the word level, we can be more specific about the variations and the commonalities between articles.
 We will expand on this in Chapter~\ref{chap:common_ground_search}, where we address this limitation together with other limitations (e.g., semantic similarity models used, more resistant to term changes).
 
@@ -133,18 +136,19 @@ Therefore, we want to have an additional study of what specific choices (terms, 
 % Before describing the literature, we need here to present our motivation for introducing this research topic. 
 
 
-Contextualising in the current attention economy~\citep{davenport2001attention}, recent literature sees a rise in the race for attention also in news articles, characterised by the emergence of clickbaitness and language that is increasingly more popular ~\citep{bazaco2019clickbait,davenport2001attention}.
+Contextualising in the current attention economy~\citep{davenport2001attention}, recent literature sees a rise in the race for attention also in news articles, with the emergence of clickbaitness and language that needs to be increasingly captivating~\citep{bazaco2019clickbait,davenport2001attention}.
 With the enormous amount of news sources and news articles covering the same events, it is very important for news sources to compete for the clicks and reads of the consumers.
 
 \cite{gass2018persuasion} defines persuasion as a method to ``influence a person's beliefs, attitudes, intentions, motivations, or behaviours".
 We see several related concepts in the literature that can be considered as forms of persuasion. We select to explore two of them:
 \begin{itemize}
-    \item sentiment overloading: use of emotional language to convey strong emotions to the reader; % loaded language instead?
-    \item \gls{propaganda}:  information, ideas, opinions, or images, often only giving one part of an argument, that are broadcast, published, or in some other way spread with the intention of influencing people's opinions;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}} % to indoctrinate a population towards an individual or a particular agenda
+    \item appeal to emotion / sentiment: use of emotional language to convey strong emotions to the reader~\cite{ginosar2019patriotic}; % loaded language instead?
+    \item \gls{propaganda}:  information, ideas, opinions, or images, often only giving one part of an argument, that are broadcast, published, or in some other way spread with the intention of influencing people's opinions.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}}.
+    The signature feature of propaganda is that it employs ``intentionally or unintentionally, flawed ideologies to cut off rational deliberation and discussion"~\cite{stanley2015propaganda}. % to indoctrinate a population towards an individual or a particular agenda
     % \item \gls{populism}: political ideas and activities that are intended to get the support of ordinary people by giving them what they want;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/populism}}
     % \item coercion: use of force to persuade someone to do something that they are unwilling to do.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
 \end{itemize}
-\todoAW{Put in specific citations for these two cases.}
+% \todoAW{Put in specific citations for these two cases.}
 
 % Across these multiple forms, we explore in a more detailed way the first two: sentiment and propaganda.
 Persuasion is linked with sentiment because of its goal to influence the emotional response~\citep{gatti2014sentiment,rocklage2018persuasion,petty2015emotion,desteno2004discrete}.
@@ -165,7 +169,7 @@ Several surveys have been published in the recent years~\citep{liu2010sentiment,
 The first broad distinction that we need to make, is the granularity of the analysis.
 Starting from the widest, we have \emph{document-level} classification, which means assigning to a whole document a single output.
 Then, other approaches define the \emph{sentence-level} classification, which instead provides for each sentence an output. In this way, it is possible to analyse the evolution of the sentiment across a document, and get more detailed information.
-And the more detailed analyses provide \emph{aspect-level} classification~\citep{zhang2022survey}. In this case, we get an analysis of each aspect mentioned in the document. An aspect can be an entity or even a feature of an object (e.g., colour, shape) and in this way, we can have an output that is very much related to single words.
+And the more detailed analyses provide \emph{aspect-level} classification~\citep{zhang2022survey}. In this case, we get an analysis of each aspect mentioned in the document. An aspect can be an entity or even a feature of an object (e.g., colour, shape) and in this way, the outputs are related to individual words or noun phrases.
 
 The second distinction is based on the techniques used for the analysis. There are several techniques that range from simple dictionary-based to advanced deep-learning techniques.
 The ones that have a longer history are the family of \emph{lexicon-based} models~\citep{taboada2011lexicon}. Being the simplest and most intuitive, there are many of them that are still very popular today. Even new models belonging to this family keep being developed, as it is a very powerful technique.
@@ -224,16 +228,18 @@ From this large group of publication and approaches, the solutions are less demo
 This means that there are less publicly available tools that perform this type of analysis.
 One of the few exceptions is Stanford CoreNLP which is based on a Recurrent Neural Network~\citep{socher2013recursive} that accounts for the sequence but also for the dependency tree of the sentence (in other words, discovering the combination rules autonomously). It is based on a dataset that links sentiment scores to a dependency tree (Sentiment Treebank\footnote{\url{https://nlp.stanford.edu/sentiment/treebank.html}}).
 
-If at first glance, the advanced deep learning models may seem more reliable,\todoAW{You've not said anything about their performance, so I don't know whether they seem more reliable or not.} we find that the most robust and common methods are the simpler ones.
-We have recent examples of lexicon-based approaches~\citep{okango2022dictionary,mitra2020sentiment}, as a proof that it is a technique very powerful still today.
-For complex models instead, especially if in combination with aspect-based detection, we see that the status is yet in an exploratory phase, without major shared tools being built.
+% If at first glance, the advanced deep learning models may seem more reliable,\todoAW{You've not said anything about their performance, so I don't know whether they seem more reliable or not.} we find that the most robust and common methods are the simpler ones.
+Given the recent trend of using deep learning ubiquitously, we may be persuaded that it is better to use big and complex models.
+However, we have recent examples of lexicon-based approaches~\citep{okango2022dictionary,mitra2020sentiment}, as a proof that it is a technique very powerful still today.
+For complex models instead, especially if in combination with aspect-based detection, we see that the status is yet in an exploratory phase, without major public tools made available ``off the shelf".
 
 \subsection{\statusgreen Propaganda}
 \label{sec:lit_propaganda}
 
 Moving instead to \emph{propaganda}, we can start with some definitions.
-According to~\cite{jowett2012propaganda}, ``propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist". This is slightly different from persuasion, which instead is ``interactive and attempts to satisfy the needs of both persuaded and persuaded".\todoAW{I'm finding both your definitions of propaganda and persuasion to be a bit woolly.
-Also: do you have a citation for this definition of persuasion?}
+According to~\citet{jowett2012propaganda}, ``propaganda  is  a  form  of  communication  that  attempts  to  achieve a  response  that  furthers  the  desired  intent  of  the  propagandist". This is slightly different from persuasion, which instead is ``interactive and attempts to satisfy the needs of both persuaded and persuaded"~\citep{jowett2018propaganda}.
+% \todoAW{I'm finding both your definitions of propaganda and persuasion to be a bit woolly.
+% Also: do you have a citation for this definition of persuasion?}
 %A  model  of  propaganda  depicts  how  elements of  informative  and  persuasive  communication  may  be  incorporated into  propagandistic  communication,  thus  distinguishing  propaganda as  a  specific  class  of  communication.  References  are  made  to  past theories  of  rhetoric  that  indicate  propaganda  has  had  few  systematic theoretical  treatments  prior  to  the  20th  century.  Public  opinion  and behavioral change can be affected by propaganda.
 % The terms propaganda and persuasion have been used interchangeably in the literature on propaganda, as well as in everyday speech. Propaganda employs persuasive strategies, but it differs from persuasion in purpose.
 
@@ -246,24 +252,24 @@ Also: do you have a citation for this definition of persuasion?}
 % First of all, let us start with a definition of propaganda.
 We can then consider the definition from the Cambridge Dictionary, which defines propaganda as the use of language ``with the intention of influencing people's opinions".\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}}
 It has many points in common with argumentation and rhetorics and is usually associated with deceiving techniques, partial point of views, logical fallacies.
-In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group"~\cite{bernays}.
+In his book on propaganda, Edward Bernays defines it as a ``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group"~\citep{bernays}.
 
-Propaganda possesses unique characteristics that go beyond its intention to persuade. It typically targets a significant audience, promotes the agenda of a particular group, and employs flawed reasoning and/or emotional appeals~\cite{miller1939techniques}.
+Propaganda possesses unique characteristics that go beyond its intention to persuade. It typically targets a significant audience, promotes the agenda of a particular group, and employs flawed reasoning and/or emotional appeals~\citep{miller1939techniques}.
 
 Injecting propaganda into the political narrative is an old and common tactic to influence opinions and push certain ideologies or agendas.
 Propaganda is very related to the agenda-setting theory \citep{Cohen_1964,mccombs1972agenda}, which describes the ability of news media to influence the importance placed on the topics of the public agenda.
 
-It has become very relevant especially in the recent years, affecting the public discourse in more than 80 countries across the globe~\citep{bradshaw2021industrialized}.
+It has become very relevant, especially in recent years, affecting the public discourse in more than 80 countries across the globe~\citep{bradshaw2021industrialized}.
 It is not a recent phenomenon by itself, but it received a boost in diffusion thanks to the advance of technology.
 For this reason, many works talk about \emph{computational propaganda} which underlines the strong relationship with technology and computational approaches.
 
-\citep{hassan2023} defines computational propaganda as ``the assemblage of digital platforms, algorithms, surplus data, and automation to curate, disseminate, amplify,
+\cite{hassan2023} define computational propaganda as ``the assemblage of digital platforms, algorithms, surplus data, and automation to curate, disseminate, amplify,
 and increase discoverability of purposefully misleading information across the information
 environment".
 In the framework described by~\citet{hassan2023}, the media has a central position in amplifying propaganda and influencing the audience.
 
 Propaganda can more practically be defined as the usage of a set of techniques. These techniques vary from the usage of emotional language (e.g. loaded language, appeal to fear) to logical fallacies (bandwagon, red herring).
-
+%
 Over the next paragraphs, %we first give more theoretical background about the \emph{propaganda model}, which describes the way that propaganda acts on society.
 %Afterwards, 
 we give an oversight to the most common propaganda techniques.
@@ -321,7 +327,7 @@ These techniques are:
 Developing computational methods to detect the use of propaganda in text is very recent, and is primarily fuelled by the increased use of propaganda in misinformation dissemination~\citep{da2020survey}.
 
 % related work not granular
-Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods ~\citep{rashkin2017truth,barron2019proppy}. This is performed at the document level only, without insights on which technique is used and where it is used in the text.
+Most related work is limited to binary detection of propaganda (i.e. propaganda exists/does not exist) in general (i.e. regardless of propaganda technique), using n-gram logistic regression and SVM methods~\citep{rashkin2017truth,barron2019proppy}. This is performed at the document level only, without insights on which technique is used and where it is used in the text.
 
 
 Several datasets for document-level detection have been released during the last decade.
@@ -341,8 +347,8 @@ and in Czech~\citep{baisa2019benchmark}.
 
 % granular
 More recently, several works~\citep{da2019fine,yoosuf2019fine,vorakitphan2022protect} started doing a more fine-grained analysis, to identify fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
-These approaches use sequence models derived from BERT, allowing us to have a much deeper insight into which parts of the text are propagandistic. Being the output of the models a sequence of tags, each word is labelled with the technique it belongs to (or none).
-They all use the same dataset published in~\cite{da2019fine}, which enabled different research groups to build models and progress on this task.
+These approaches use sequence models derived from BERT~\citep{devlin2018bert}, allowing us to have a much deeper insight into which parts of the text are propagandistic. Being the output of the models a sequence of tags, each word is labelled with the technique it belongs to (or none).
+They all use the same dataset published in~\cite{da2019fine}, which enables different research groups to build models and progress on this task.
 
 
 %On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
@@ -366,19 +372,34 @@ They all use the same dataset published in~\cite{da2019fine}, which enabled diff
 
 \subsection{\statusgreen Limitations}
 
-Sentiment detection has been researched for a long time.\todoAW{evidence/citation?}
+Sentiment detection has been researched extensively in the last twenty years~\citep{medhat2014sentiment}.
+%for a long time.\todoAW{evidence/citation?}
 However, the outputs of the analysis are usually limited to positive/negative.
-Additionally, fine-grained analysis of aspect-based sentiment analysis cannot simply be used \emph{off the shelf} as resources are not shared and the models do not demonstrate good generalisability strengths.\todoAW{evidence/citation?}
-Anyways, there are tools available to perform document and sentence analysis, and lexicons can allow a word-level analysis if used properly.\todoAW{Too informal.}
-For this reason, we deem sentiment analysis to be a good indicator of understanding the persuasion used in the articles.\todoAW{I don't see how this follows. Needs a bit more explanation.}
+Additionally, fine-grained analysis of aspect-based sentiment analysis cannot simply be used \emph{off the shelf} as pretrained models are typically not shared and the training requires large amounts of computational resources~\cite{brauwers2022survey}.
+%do not demonstrate good generalisability strengths.
+%\todoAW{evidence/citation?}
+Nonetheless, there are tools available to perform document and sentence analysis, which can be used for word-level analysis by exploiting their lexicons.
+%can allow a word-level analysis if used properly.\todoAW{Too informal.}
+% For this reason, we deem sentiment analysis to be a good indicator of understanding the persuasion used in the articles.\todoAW{I don't see how this follows. Needs a bit more explanation.}
 
 Propaganda detection, on the other hand, is relatively a young task.
 While there are multiple datasets for document-level detection, only one dataset has been publicly shared for fine-grained (word+technique) analysis.
 Therefore, there are potential limitations of the dataset and of the models trained with it.
 There is, to the best of our knowledge, no study on the unbalance of this dataset. Models trained could be learning unwanted associations or not be comprehensive of propaganda with a context different from the examples contained in the training set.
-Applying propaganda detection ``in the wild" could cause both false positives and false negatives.\todoAW{That's true of all systems (including humans). The important question is probably what's to be done about it.}
-Furthermore, the evaluation metrics of the models generally provide lower-than-optimal values,\todoAW{"optimal" being what? 100\% accuracy? Equivalent to a human? etc?} denoting  this as a quite difficult task.
-However, we find it really interesting and valuable to have an overview of the techniques used.\todoAW{Tighten up a bit... maybe comment on the SOTA to quantify "lower than optimal", and then use that to justify the claim for the difficulty of the task. Then be more precise about the value of the overview of the techniques "We give an overview of the techniques used, as this allows us to.../as this explains how..."}
+% Applying propaganda detection ``in the wild" could cause both false positives and false negatives.\todoAW{That's true of all systems (including humans). The important question is probably what's to be done about it.}
+Furthermore, the evaluation metrics of the existing models generally do not perform greatly.
+For example, the work presented in~\citep{da2019fine} reports a span-level F1 of $22.5\%$.
+This means that the task can be considered as difficult and with much room for improvements.
+% provide lower-than-optimal values,\todoAW{"optimal" being what? 100\% accuracy? Equivalent to a human? etc?} denoting  this as a quite difficult task.
+% explanation of lower than optimal
+% From its publication paper~\citep{da2019fine}, we can see in table 6 and 7 that this model has been evaluated in two ways:
+% \begin{itemize}
+%     \item sentence-level: binary classification, whether the sentence contains propaganda or not. For this task the reported F1 is around $60\%$
+%     \item span-level (full task): whether the corrects words have been identified with the correct technique or not, so accounting both for position/boundaries and for the label. For this task the reported F1 is slightly above $22.5\%$
+% \end{itemize}
+However, we use the outputs from this model to have an overview of the techniques used.
+%\todoAW{Tighten up a bit... maybe comment on the SOTA to quantify "lower than optimal", and then use that to justify the claim for the difficulty of the task. Then be more precise about the value of the overview of the techniques "We give an overview of the techniques used, as this allows us to.../as this explains how..."}
+
 
 We will use both sentiment and propaganda analysis in Chapter~\ref{chap:linguistic_persuasion} to see how we can combine this with the analysis of similarities across documents.
 Furthermore, we will evaluate the limitations of the approaches available in our use case.
@@ -390,17 +411,21 @@ We described the detection of such techniques, but how intertwined are they with
 As the literature shows~\citep{jenkins2013thin,vanderwicken1995news,jang2023proximate}, text of articles can be seen as conveying two layers of information:
 \begin{enumerate}
     \item the first layer, the most visible, is the layer of \emph{facts}: entities (what/who is mentioned) and actions (what happens), combined into events. This is usually called \emph{topic} made of \emph{topical words};
-    \item a second layer of additional and subjective information: choice of terms to use, details to include and exclude, order of presentation, expression of opinion, subjective statements. All these means are used to convey a certain point of view, and therefore we use the umbrella term of \emph{persuasion}. This may be called \emph{anti-topical} component of the text.\todoAW{I'm not clear what the difference is between propaganda and persuasion. And because of that, I'm generally unclear how you're using each term in the document.}
+    \item a second layer of additional and subjective information: choice of terms to use, details to include and exclude, order of presentation, expression of opinion, subjective statements. All these means are used to convey a certain point of view, and therefore we use the umbrella term of \emph{persuasion} to include both sentiment and propaganda. This may be called \emph{anti-topical} component of the text.
+    %\todoAW{I'm not clear what the difference is between propaganda and persuasion. And because of that, I'm generally unclear how you're using each term in the document.}
 \end{enumerate}
 
 
 % Talk here about different layers: 1 facts, 2 persuasion ( propaganda/argumentation/sentiment). Or in other terms: topical and non-topical elements.
 
 These two layers can be more or less intertwined, and it can become more difficult to distinguish between them.
-In the easiest cases, they can be identified on the linguistic surface of different words: some words in a sentence that belong to the \emph{facts} layer (e.g., a name) accompanied by other words that belong to the \emph{persuasion} layer (e.g., an adjective).
+In the easiest cases, they can be identified on the linguistic surface of different words: some words in a sentence that belong to the \emph{facts} layer (e.g., a noun) accompanied by other words that belong to the \emph{persuasion} layer (e.g., an adjective).
 In this case, it is conceptually easy to separate the two components in a text and say which word belongs to one or the other.
+This is usually the case with adjectives, for example adding ``dreadful" next to a noun. We can recognise the adjective and separate it from the noun it accompanies.
 
-But in many other cases, the two components can also coexist within the same word. For example, a term may have been chosen both to communicate a certain concept (facts layer), but between many available terms, the author voluntarily or involuntarily picks one or another term that conveys a different opinion on the concept itself (persuasion layer).\todoAW{For example?}
+But in many other cases, the two components can also coexist within the same word. A term may have been chosen both to communicate a certain concept (facts layer), but between many available terms, the author voluntarily or involuntarily picks one or another term that conveys a different opinion on the concept itself (persuasion layer).
+For example, ``infanticide" compared to ``abortion" gives a very different connotation, and if we want to remove it we need to substitute the word with a more neutral synonym.
+% \todoAW{For example?}
 
 % e.g. name+adjective, where the name is the topical element while the adjective can express the opinion of the writer (commenting, denigrating, complimenting, subjective).
 % Or they can also be expressed in the same word together: this is where word selection applies. For example, when the writer needs to find a word for communicating a certain concept ``?", they can choose whether to use X or Y. While these two words have the same underlying concept, they express it quite differently.
@@ -424,7 +449,9 @@ First, we give a definition of political leaning, and then we focus on the class
 Political Leaning is a term that is derived from Political Ideology~\citep{jost2009political}.
 Political ideology is defined as a ``set of beliefs about the proper order of society and how it can be achieved"~\citep[p.~64]{erikson2015american}.
 
-From the multi-dimensional diversities\todoAW{What does this mean?} in political ideologies, there is a historical tendency to consider only the Left-Right dimension~\citep{jost2009political}.
+% From the multi-dimensional diversities\todoAW{What does this mean?} in political ideologies 
+Political ideologies can be described with multiple independent dimensions (e.g., %goals in different fields such as economy, and methods as authoritarian vs libertarian
+Collectivism vs Individualism, Progressivism vs Conservatism, Libertarianism vs Totalitarianism), but there is a historical tendency to consider only the Left-Right dimension~\citep{jost2009political}.
 Although this simplification does not capture completely the complexity of determining one's political ideology, it is the most common way of describing political orientation.
 Since only one dimension is considered, it is usually named as a political leaning or political spectrum.
 
@@ -435,14 +462,15 @@ Since only one dimension is considered, it is usually named as a political leani
 Historically, the usage of left and right originated during the 1789 French Revolution. The physical position of the politicians in the French National Assembly was sitting the revolutionaries on the left side, while the aristocracy-favouring was on the right.\footnote{\url{https://www.dictionary.com/e/politics/political-spectrum/}}
 Therefore, the newspapers started using the terms to mention respectively the liberal with ``left" and the authoritarian with ``right".
 
-From originally only two labels, in 1857 we have the first appearance (on the Southern Trade magazine) of the term \emph{political spectrum} to describe the range of political opinions.\todoAW{Can you add a citation?}
+% From originally only two labels, in 1857 we have the first appearance (on the Southern Trade magazine) of the term \emph{political spectrum} to describe the range of political opinions.\todoAW{Can you add a citation?}
 
 
 % US and conservative vs liberal
 % https://pleeps.org/en/wp-content/uploads/Political-Ideology-Its-Structure-Functions-and-Elective-Affinities.pdf (jost2009political)
 The use of ``liberal" and ``conservative" as substitutes for ``left" and ``right" is becoming more prevalent in the United States and other countries.
 This terminology effectively highlights the historical split between wanting change and desiring stability~\cite{jost2009political}.
-These opposing desires emerge from long-standing discussions about proper levels of hierarchy, authority, and inequality~\citep{bobbio1996left}.\todoAW{I'm not sure where this is going...}
+These opposing desires emerge from long-standing discussions about proper levels of hierarchy, authority, and inequality~\citep{bobbio1996left}.
+%\todoAW{I'm not sure where this is going...}
 
 
 % % https://pleeps.org/en/wp-content/uploads/Political-Ideology-Its-Structure-Functions-and-Elective-Affinities.pdf (jost2009political)
@@ -499,8 +527,9 @@ Similarly, issues such as immigration, trade, and national security may be more 
 
 As a more practical and operable definition, we can define political leaning from the common positions that left and right have on issues such as economics, social policies, and governance.
 
-Table~\ref{tab:allsides_leaning_positions} shows how AllSides recaps the common positions about different issues.\footnote{\url{https://www.allsides.com/media-bias/rate-your-bias}}
-Perspectives on multiple topics are listed: social issues, economic issues, foreign policy, environment and energy, healthcare, education, social security, and welfare.\todoAW{I think there's too much here on left/right politics, but maybe there's no need to remove it. But I think I'd put a bit more in on AllSides, such as how it's curated, and that sort of thing.}
+Table~\ref{tab:allsides_leaning_positions} shows an example of how AllSides recaps the common positions about different issues, but the complete list is larger.\footnote{\url{https://www.allsides.com/media-bias/rate-your-bias}}
+Perspectives on multiple topics are listed: social issues, economic issues, foreign policy, environment and energy, healthcare, education, social security, and welfare.
+%\todoAW{I think there's too much here on left/right politics, but maybe there's no need to remove it. But I think I'd put a bit more in on AllSides, such as how it's curated, and that sort of thing.}
 
 
 
@@ -538,7 +567,7 @@ Various analysis methods were used in such studies, such as linguistic analysis 
 %underlined that most of the approaches do not generalise well across domains. 
 %As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\cite{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
 
-In~\citet{baly2020we}, authors used a BERT-based model\todoAW{What's that?} for predicting the political leaning of individual articles. The model takes as input the text of the article and produces one of three labels: Left/Centre/Right. The model is trained with a corpus from AllSides website,\footnote{\url{https://www.allsides.com}} which groups articles %with their political leaning 
+In~\citet{baly2020we}, authors used a BERT-based~\citep{devlin2018bert} model for predicting the political leaning of individual articles. The model takes as input the text of the article and produces one of three labels: Left/Centre/Right. The model is trained with a corpus from AllSides website,\footnote{\url{https://www.allsides.com}} which groups articles %with their political leaning 
 according to the leaning of their source or of their author.
 
 
@@ -619,13 +648,17 @@ In addition, AllSides gives the label to the source level but sometimes also to 
 
 \subsection{\statusgreen Limitations}
 
-For political leaning, we see that\todoAW{where?} the existing approaches are quite good at classifying the proper leaning of articles.\todoAW{Are they? Don't put statements like this in without quantifying them. How good are the existing approaches at classifying the leaning of articles? And where do you demonstrate it in the document?}
-
+For political leaning, we found a large literature that
+%the existing approaches are quite good at 
+classifies the leaning of articles.
+%\todoAW{Are they? Don't put statements like this in without quantifying them. How good are the existing approaches at classifying the leaning of articles? And where do you demonstrate it in the document?}
+%
 % would be nice to see relationship between leaning and persuasion
 What we find slightly limiting, is that the existing works consider political leaning on its own. It could be very interesting to analyse the interaction between political leaning and persuasion, finding patterns between the two. This is where we aim to bring our contribution with this thesis.
 We aim to understand which techniques change the most across the political spectrum, both in quantity and in terminology. At the current state of existing works, there is no insight into this.
 
-As a second limitation,\todoAW{It's not a limitation, it's a question. Either re-express the second part of the sentence as a limitation, or re-express the first part as a goal.} we question to what extent we could improve the political leaning classification of news articles by considering propaganda analysis.
+%As a second limitation,\todoAW{It's not a limitation, it's a question. Either re-express the second part of the sentence as a limitation, or re-express the first part as a goal.} we question to what extent we could improve the political leaning classification of news articles by considering propaganda analysis.
+Considering political leaning and propaganda computational studies jointly could bring improvements in the current state of the art in tasks such as political leaning classification. These models could try to use propaganda features to make better predictions.
 Our \acrshort{rq}3 goes in this direction by hypothesising a relationship between the two dimensions.
 
 
@@ -713,9 +746,13 @@ The approach uses a generative probabilistic model and Dirichlet distributions.
 % Another technique for topic identification is called bag-of-words2. It is a simple way to represent text data as a collection of words and their frequencies. Bag-of-words ignores the order and structure of sentences, but it can capture some basic information about the content and vocabulary of a document. Bag-of-words can be used with simple NLP models such as TF-IDF or Naive Bayes to identify topics from texts.
 
 % Problem: difficult to extract labels
-This approach, like the others that belong to the group of unlabelled, has as its main limitation that it is difficult to extract labels for the identified topics.
-The outputs of the model are clusters of documents, and most important words for each of the clusters. But the process is not easy to have a label for the topic from this information. Usually, in the literature there is a step of manual revision of the clusters and the important words and then a manual labelling of the clusters.
-During this manual revision, it can emerge the problem that clusters look similar or related, and it may be necessary to join the clusters together or to modify the number of desired clusters and run the method again.\todoAW{from ``the outputs" onwards: Feels a bit clumsy, and not evidenced. Find a suitable citation, and use it to help rephrase.}
+This method, like other unlabelled approaches, has a major drawback: it is difficult to extract topic labels.
+%The outputs of the model are clusters of documents, and most important words for each of the clusters. But the process is not easy to have a label for the topic from this information. Usually, in the literature there is a step of manual revision of the clusters and the important words and then a manual labelling of the clusters.
+%During this manual revision, it can emerge the problem that clusters look similar or related, and it may be necessary to join the clusters together or to modify the number of desired clusters and run the method again.\todoAW{from ``the outputs" onwards: Feels a bit clumsy, and not evidenced. Find a suitable citation, and use it to help rephrase.}
+These models produce in output clusters of documents and the most important words for each of the clusters.
+However, it is quite difficult to assign meaningful labels to the produced clusters, as the identified words usually overlap and may be quite diverse for a single cluster.
+Therefore, there is usually need for a manual labelling step which may involve joining existing clusters together because they are similar.
+Being this process not completely automatised, we prefer to use approaches that assign topic labels that are known beforehand.
 
 % The problem of assigning labels: can we really tell what is different about the groups?
 
@@ -728,7 +765,7 @@ Also other approaches that belong to the same group of topic modelling, have the
 \subsubsection{Knowledge-based}
 
 A different approach to topic modelling is instead taken by knowledge-based topic modelling.
-
+%
 This type of approach~\citep{chen2013leveraging,allahyari2017knowledge,xu2018hierarchical,ali2019transportation} relies on an external source of knowledge that can be a flat list of topics to align with, a taxonomy of topics, or a complete Knowledge Base containing entities and relationships.
 
 With difference to the first group of methods, this family has two phases.
@@ -771,15 +808,15 @@ Depending on the goals of topic analysis, the first group could be not very usef
 In our case, we want to analyse how persuasion changes across topics, and having the labels is very important. Therefore, we do not want to apply the first type of topic modelling.
 
 % Missing analysis of the links between topics and other dimensions (leaning and persuasion)
-As a second limitation, the topic analysis is usually performed in isolation with respect to other dimensions.
+As main limitation of both types of approaches, the topic analysis is usually performed in isolation with respect to other dimensions.
 Instead, we want to analyse topics together with persuasion, political leaning and similarities.
 We see some works that do topic analysis with other factors (e.g., joint topic and opinion analysis in~\cite{stoyanov2008topic}), but not together with propaganda or political leaning.
 
 \section{\statusgreen Related Phenomena}
 \label{sec:lit_related}
 
-Here we talk about other phenomena that are related but are outside the scope of this thesis.
-We discuss them just to aknowledge the relationship with our research.
+In this section we cover other phenomena that are related but are outside the scope of this thesis.
+We discuss them to acknowledge their existence and their relationship with our research.
 % In the following subsections, we cover the relationship with misinformation and populism.
 %, argumentation mining and defend the scope of this thesis: propaganda.
 
@@ -812,7 +849,7 @@ By doing so, our results should be more general, and if needed can be applied to
 
 \subsection{Propaganda and Populism}
 \label{sec:lit_related_populism}
-\todoAW{You want some evidence/citation to demonstrate that this is an actual area of research}
+% \todoAW{You want some evidence/citation to demonstrate that this is an actual area of research}
 % Relationship between propaganda and populism:
 % ~\cite{oates2021rewired,tumber2021routledge,pasquino2008populism}
 %https://ebrary.net/177441/sociology/the_routledge_companion_to_media_disinformation_and_populism
@@ -820,7 +857,7 @@ By doing so, our results should be more general, and if needed can be applied to
 % http://www.ask-force.org/web/Fundamentalists/Pasquino-Populism-and-Democrady-2005.pdf 
 
 % % concepts
-On the conceptual level, propaganda and populism are two distinct concepts. The first describes more the persuasion mean used to push for an agenda, while the second one is usually used more together with the actor that wants to push the agenda. Populism is ``a type of politics that claims to represent the opinions and wishes of ordinary people".\footnote{\url{https://www.oxfordlearnersdictionaries.com/definition/english/populism}}
+On the conceptual level, propaganda and populism are two distinct concepts. The first describes more the persuasion mean used to push for an agenda, while the second one is typically used more in association with the actor that wants to push the agenda. Populism is ``a type of politics that claims to represent the opinions and wishes of ordinary people".\footnote{\url{https://www.oxfordlearnersdictionaries.com/definition/english/populism}}
 And to be on the side of ordinary people, it uses propaganda as a mean. So a populistic \emph{actor} uses propaganda \emph{techniques}. Therefore, even with their distinction, they are related.
 % We need them to be related to demonstrate that propaganda exists across all political leanings.
 
@@ -831,7 +868,7 @@ concept of \emph{rewired propaganda} to analyse the interplay of propaganda and 
 The idea of ``rewired propaganda" is proposed as a way to explain a method of communication that uses false information and campaign strategies, especially evident in how both traditional and social media worked during the 2016 US elections.
 When populism takes over from ideology-based politics, like in the 2016 US elections, rewired propaganda becomes as influential in democracies as it has been in non-free countries like Russia.
 
-While populism detection is outside of the scope of this thesis, we use the relationship between populism and propaganda in Appendix~\ref{app:prop_and_populism} to support our analysis the imbalance of propaganda datasets.
+While populism detection is outside of the scope of this thesis, we use the relationship between populism and propaganda in Appendix~\ref{app:prop_and_populism} to support our analysis of the imbalance of propaganda datasets.
 
 
 % \subsection{Opinion and Subjectivity and Manipulation?}
@@ -859,15 +896,17 @@ Instead, in the example of propaganda techniques and topics, it could be possibl
 
 % Consequence: limitation 2:
 
-As a consequence of this main limitation, we have another issue that could be impeding.
-Being all the research topics not much explored together, there is the possibility that some of the existing approaches or resources could be highly imbalanced considering another one of the mentioned topics.
-This is something that is currently not explored.\todoAW{A bit confused, and I'm not sure what you're trying to say. Needs rephrasing.}
+As a consequence of this main limitation, we have potentially some issues that could be unexplored.
+% another issue that could be impeding.
+Being these research topics not much explored jointly, some of the existing approaches or resources could be highly imbalanced considering another one of the mentioned topics.
+If a comparative analysis of the available resources is not performed mixing and experimenting with multiple dimensions together (e.g., leaning and propaganda), we may not be able to find possible imbalances.
+% This is something that is currently not explored.\todoAW{A bit confused, and I'm not sure what you're trying to say. Needs rephrasing.}
 
 % Existing propaganda datasets may be unbalanced, as it is not completely clear how they select a set of sources. By using external dimensions we may discover that there is imbalance.
 
 For these two main reasons, we structure our work as a comparative analysis that uses multiple dimensions to understand links between the topics presented in this chapter.
 Each time, a comparative analysis has one observed variable across one or multiple controlled variables.
-A comparative analysis allows on one side to understand the relationships between variables, and on the other side makes possible to find imbalances.
+A comparative analysis allows on one side to understand the relationships between variables, and on the other side makes it possible to find imbalances.
 
 \section{\statusgreen Scope of this work}
 \label{sec:lit_scope}
@@ -885,7 +924,7 @@ We see that these ingredients could be related, and we want to understand their 
 % Can we recognise the political orientation of a piece of news from how it uses propaganda techniques?
 % How does propaganda relate to shared/unique information? How do small variations relate to propaganda?
 
-We exclude from the scope the related phenomena discussed in Section~\ref{sec:lit_related}. These are interesting additional links that can be explored by future works.
-We also exclude the development or refinement of models that belong to a single research topics listed above. This work is focused instead on the relationship between these ingredients.
+We exclude from our scope the related phenomena discussed in Section~\ref{sec:lit_related}. These are interesting additional links that can be explored by future works.
+We also exclude the development or refinement of models that belong to a single research topic listed above. This work is focused instead on the relationship between these ingredients.
 
 The following chapters will start gradually from the first ingredient, adding each time a new one to the mix. 
