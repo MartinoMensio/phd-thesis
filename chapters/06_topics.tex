@@ -33,7 +33,7 @@ With an analysis of the topics, we can find the ones where the detected propagan
 This chapter, therefore, introduces the \emph{Topic} as the last ingredient of our analysis.
 
 Our hypothesis is that certain topics are highly distinguishable between left and right, when considering the propaganda used in news articles.
-This hypothesis is supported by the work of~\cite{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
+This hypothesis is supported by the work of~\citet{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
 With this chapter, we aim to analyse how propaganda varies across topics, to potentially find topics that are more polarising and whose propaganda is more unique to one political extreme or the other.
 % if this controversy is manifesting through the usage of the language of the articles themselves.
 
@@ -140,7 +140,7 @@ For the experiments, we take, as in the previous chapter, the \texttt{baly} data
 
 We make use of annotations that cover different dimensions:
 \begin{itemize}
-    \item Propaganda: as in the previous chapters, words and techniques of propaganda are extracted using the pre-trained model from~\cite{da2019fine}. 18 techniques of propaganda are extracted, and we use them to compute different features: total propaganda quantity, quantity of each technique, terms of propaganda (TF-IDF).
+    \item Propaganda: as in the previous chapters, words and techniques of propaganda are extracted using the pre-trained model from~\citet{da2019fine}. 18 techniques of propaganda are extracted, and we use them to compute different features: total propaganda quantity, quantity of each technique, terms of propaganda (TF-IDF).
     \item Leaning: this dimension is directly available from the dataset. As seen in the previous chapter, the dataset is annotated with the leaning of the author / news source that falls into one of three classes: Left, Center, Right.
     \item Topic analysis: this is the novelty of this chapter, and therefore we expand on it in the following paragraphs. %provided by TextRazor, coarse topics, topics, IPTC topics (explain in detail what they are)
 \end{itemize}
@@ -569,9 +569,9 @@ Nevertheless, the topics are very high-level and we have insights about neither 
 % cleaning up relationships to extract pages+categories taxonomy.
 
 % WiBi taxonomy → http://wibitaxonomy.org/ dead Wikipedia Bitaxonomy Explorer
-% \cite{flati2014wikipedia,flati2014two,ponzetto2009large}
+% \citep{flati2014wikipedia,flati2014two,ponzetto2009large}
 
-% \cite{chu2019tifi} for fictional domain, cleaning up category graph for fictional domains
+% \citet{chu2019tifi} for fictional domain, cleaning up category graph for fictional domains
 
 % % Backlinks? What are they?
 
@@ -668,7 +668,7 @@ Nevertheless, the topics are very high-level and we have insights about neither 
 
 To address the problems identified, %(the topics are either too coarse-grained or too fine-grained, without link between them),
 we chose to analyse the dataset with a topic taxonomy.
-Between the many taxonomies for topics (for specific domains e.g., scientific publications\cite{vayansky2020review,churchill2022evolution}), we focus on the news domain and therefore the most important and used taxonomy is IPTC NewsCodes Media Topics.
+Between the many taxonomies for topics (for specific domains e.g., scientific publications~\citep{vayansky2020review,churchill2022evolution}), we focus on the news domain and therefore the most important and used taxonomy is IPTC NewsCodes Media Topics.
 This is a taxonomy especially created to describe the topics of news articles. It is made of 17 top-level terms, that can be expanded up to 5 levels of subcategories (total 6 levels).
 The full taxonomy can be seen online\footnote{\url{https://cv.iptc.org/newscodes/mediatopic}} and interactively displayed.\footnote{\url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}}
 
@@ -711,7 +711,7 @@ To represent this, we need to display different types of information:
     \item additionally, present some observed variables for the comparative analysis (e.g., quantity of propaganda, as described in Section~\ref{sec:topic_method_comparative}).
 \end{itemize}
 
-For these reasons, when we present the statistics of hierarchical topics, we make use here of icicle diagrams~\cite{kruskal1983icicle}.
+For these reasons, when we present the statistics of hierarchical topics, we make use here of icicle diagrams~\citep{kruskal1983icicle}.
 They allow to display hierarchical data, and can also be displayed in interactive visualisations, where the user can click to expand the visualisation in a specific area.
 However, for a static visualisation they sometimes can present the last levels of granularity with very small nodes, which may be suboptimal.
 % Everywhere we use them in this chapter, we truncate the number of levels to 5, even if IPTC Media topics have one layer more.
@@ -848,7 +848,7 @@ For example, the topics \texttt{gun-control-and-gun-rights}, \texttt{fbi}, \text
 This confirms that, even though the AllSides team is trying to maintain the balance by displaying all the sides of the news, the imbalance on such topics is so big that in the end they used two articles from the same leaning.
 
 For such topics, the news coverage is very unbalanced if we consider datasets that do not come from AllSides.
-One of the main techniques of agenda setting, is deciding what to cover as news and what to ignore. In this way, the perceived importance of issues is manipulated or diverted~\cite{mccombs1972agenda}.
+One of the main techniques of agenda setting, is deciding what to cover as news and what to ignore. In this way, the perceived importance of issues is manipulated or diverted~\citep{mccombs1972agenda}.
 
 Besides the positive side of this comparison, we cannot infer from this representation the relationships between the different topics.
 We know that \texttt{lgbt-rights} and \texttt{civil-rights} are related, but the flat representation of topics does not provide this information.
@@ -1235,7 +1235,7 @@ First, by studying the correlation of the \emph{quantities} of each technique. T
 
 The idea is to take for each topic and leaning the 18 values that represent the average quantity of the propaganda techniques for articles of that leaning. With these, we compute the correlation of the values of the Left against the values of the Right.
 %
-As correlation metric, we choose to use Pearson because it works with normal and half-normal distributions~\cite{pearson1931analysis}.
+As correlation metric, we choose to use Pearson because it works with normal and half-normal distributions~\citep{pearson1931analysis}.
 % The distribution of the propaganda scores is half-normal therefore Pearson is the best metric.\todoAW{Needs more explanation}
 % \todoAW{numbers for the half-normal distribution, more details}
 

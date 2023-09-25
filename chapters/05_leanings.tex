@@ -242,7 +242,7 @@ This data is US-focused being curated in the US and therefore has a limited scop
 % This data, although the description of the differences is not directly parseable, will be used to feed the user study and understand the role of comparing different sides.
 
 
-% The work by~\cite{baly2020we} mentions that the annotations are defined on the article level. But in reality, we found that from the dataset all the articles from a specific source have the same leaning annotation. ??? TRUE? OR author level?
+% The work by~\citet{baly2020we} mentions that the annotations are defined on the article level. But in reality, we found that from the dataset all the articles from a specific source have the same leaning annotation. ??? TRUE? OR author level?
 
 % STATS
 
@@ -353,7 +353,7 @@ After having described the datasets, in this section we present the model that w
 
 We focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (from the previous Section~\ref{ssec:ps_leaning_data}). %, using a neural network approach fused with propaganda features. %\todo{description ok?} 
 
-%often used supervised or unsupervised models applied to , or on opinion graph mining ~\cite{thomas-etal-2006-get}.
+%often used supervised or unsupervised models applied to , or on opinion graph mining~\citep{thomas-etal-2006-get}.
 
 %gentzkow - linguistic analysis 
 %yan2017perils - regression models and neural networks
@@ -368,7 +368,7 @@ We focus on detecting political learning of articles in a corpus of general news
 %Most models use supervised or unsupervised machine learning algorithms, trained using source annotations or crowdsourced articles annotations  
  
 %underlined that most of the approaches do not generalise well across domains. 
-%As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\cite{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
+%As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\citep{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
 
 In~\citet{baly2020we}, authors used a BERT-based model for predicting the political leaning of individual articles. The model takes as input the text of the article and produces one of three labels: Left/Centre/Right. The model is trained with a corpus from AllSides  (the previously described \texttt{Baly} dataset) which groups articles %with their political leaning 
 according to the leaning of their source or of their author. %\todo{manually?}
@@ -403,7 +403,7 @@ we present here the reproduction of the baseline of the political leaning classi
 Our baseline for article-level political leaning is~\citet{baly2020we}, which is the current state of the art for general purpose political leaning classification.
 % Authors of this paper publicly provide a dataset, collected from AllSides, where individual articles are labelled for their political leaning.\footnote{\url{https://github.com/ramybaly/Article-Bias-Prediction}}
 Since the source code for this work has not been released, we reproduced the architecture of the model by following the details provided by the authors. %in~\citet{baly2020we}. 
-According to the details provided, we embed the articles in the dataset with a pre-trained BERT model (110M parameters, uncased\footnote{\url{https://huggingface.co/google/bert_uncased_L-12_H-768_A-12}}) and use the vectors from the second-to-last layer, as in \citet{baly2020we}. %\todo{unclear} %The model is made of a single dense layer (softmax activation function) which is trained and tested with the splits provided with the dataset in~\cite{baly2020we}.
+According to the details provided, we embed the articles in the dataset with a pre-trained BERT model (110M parameters, uncased\footnote{\url{https://huggingface.co/google/bert_uncased_L-12_H-768_A-12}}) and use the vectors from the second-to-last layer, as in \citet{baly2020we}. %\todo{unclear} %The model is made of a single dense layer (softmax activation function) which is trained and tested with the splits provided with the dataset in~\citet{baly2020we}.
 
 \begin{table}[!htbp]
     \centering
@@ -479,7 +479,7 @@ we mean the reproduction of the baseline as in \texttt{Baly-baseline}. Using the
 
 
 
-% Now, by comparing the two different datasets collected with the dataset from~\cite{baly2020we}, Figure~\ref{fig:venn} shows that the 13k and Baly are mostly balanced subsets of the 60k.
+% Now, by comparing the two different datasets collected with the dataset from~\citet{baly2020we}, Figure~\ref{fig:venn} shows that the 13k and Baly are mostly balanced subsets of the 60k.
 % Although the URLs of the articles in the Baly dataset are a subset of the URLs of the articles in our datasets (13k and 60k), the texts of the articles do not match: the data cleaning of \texttt{Baly} is different and better than our data cleaning (e.g. removing non-article content), and having different texts makes the propaganda annotations differ slightly.
 
 % The last dataset considered is derived from the 60k, by keeping it balanced between target labels. Since the smaller group (Center) has 11309 articles, we limited the articles from the Left and Right to contain 11309 articles too, through random selection. We will compare the results of the imbalanced 60k with the balanced 60k.
@@ -524,7 +524,7 @@ we mean the reproduction of the baseline as in \texttt{Baly-baseline}. Using the
 % \end{itemize}
 % Instead, for the second big issue of comparability (the model), we need to have their model implementation to compare our results. While the dataset was not shared with us, this was the only possible way to compare: feed our dataset to our models and theirs and compare fairly the scores. We found that their API exposes a political leaning prediction endpoint that accepts sending text and provides the probability of the article to belong to left/center/right. We don't know if this implementation is the one behind the paper (the prediction belongs to the same project at QCRI) but we assume it is.
 % Therefore we sent all the articles that we have in our datasets to that endpoint and took the argmax of that prediction. The results collected with this method are annotated here with \texttt{Baly-API}.
-% From the description given in their paper~\cite{baly2020we} we tried to reproduce locally the same model. We will observe how much this is the same with the results of \texttt{Baly-API}. These results are annotated with \texttt{Baly-baseline}.
+% From the description given in their paper~\citep{baly2020we} we tried to reproduce locally the same model. We will observe how much this is the same with the results of \texttt{Baly-API}. These results are annotated with \texttt{Baly-baseline}.
 % As soon as the implementation of the model will be shared by the authors, this confusion will be removed.
 % \\
 
@@ -997,7 +997,7 @@ If there are enough differences in the propaganda features considered, it means 
 
 % intro of TTO2020
 There exist also reasons coming from the field of automated news analysis, where there is growing interest in understanding and classifying news articles based on their political ideology.
-Various automated approaches have been recently proposed for the classification of articles with regards to political leaning~\cite{baly2020we} or credibility~\cite{horne2018assessing}. Others focused on capturing the usage of various propaganda techniques~\cite{da2019fine} or argumentation techniques~\cite{lippi2016argumentation}. However, the role that propaganda could play in automatically determining the leaning of articles has not been thoroughly investigated.
+Various automated approaches have been recently proposed for the classification of articles with regards to political leaning~\citep{baly2020we} or credibility~\citep{horne2018assessing}. Others focused on capturing the usage of various propaganda techniques~\citep{da2019fine} or argumentation techniques~\citep{lippi2016argumentation}. However, the role that propaganda could play in automatically determining the leaning of articles has not been thoroughly investigated.
 Propaganda is usually directly linked to the ideology of articles by having the ``intention of influencing people's opinions''.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}} To this end, we aim to better understand the relationship between propaganda analysis and the identification of political leaning of articles, simplified to three categories: \textit{Left}, \textit{Centre}, and \textit{Right}.
 
 % Then, we also have a last reason.\todoHA{?} 
@@ -1049,7 +1049,7 @@ Therefore, we use the following steps to achieve this goal:
     \item Extract propaganda for each article using the tool from~\citet{da2019fine}.
     \item Add propaganda-related features to the BERT model, by injecting the values in the neural network using the (a) total presence of propaganda as a feature, (b) percentage of each propaganda technique, and (c) words that appear in the detected propaganda text.
     \item Train and test the model under different configurations with two splits, one totally random, and one less biased to media source.
-    \item Compare our results with two baselines; the majority class (where the political leaning is assumed to be that of the most popular leaning in the dataset), and the results from our re-implementation of the model in step 1. %of \cite{baly2020we}.
+    \item Compare our results with two baselines; the majority class (where the political leaning is assumed to be that of the most popular leaning in the dataset), and the results from our re-implementation of the model in step 1. %of \citet{baly2020we}.
 \end{enumerate}
 
 % \paragraph{Political Leaning Model}
@@ -1161,7 +1161,7 @@ Our hypothesis behind RQ3.2.1 is that the total quantity of propaganda contained
 % definition
 To answer RQ3.2.1, we
 % \todoHA{first?}\todomargin{no, only. more features in other subsections}
-consider only the total amount of propaganda detected in each article. For each article, we calculate a single value to represent the percentage of propaganda text inside the article. %Using a percentage compensates for the varying lengths of articles.%These words are the one annotated as propaganda by \cite{da2019fine} (see Section \ref{sec:prop}).
+consider only the total amount of propaganda detected in each article. For each article, we calculate a single value to represent the percentage of propaganda text inside the article. %Using a percentage compensates for the varying lengths of articles.%These words are the one annotated as propaganda by \citet{da2019fine} (see Section \ref{sec:prop}).
 % how it is computed
 We use a percentage in order to be less biased and independent of the article size.
 This value is computed for each article as the ratio between the number of words detected as propagandist (see previous Section \ref{ssec:ps_prop_leaning_across}) and the total number of words. For example, if an article has 600 words, and propaganda analysis annotated 30 of them as being propagandist, the value of the feature will be 5\%.  
@@ -1198,7 +1198,7 @@ Table~\ref{tab:results_prop_features_classifier} shows the results of this first
 
 % % confusion matrix
 % Looking at the confusion matrix of the 60k dataset in Figure~\ref{fig:total_prop_confusion_60k}, we can see that the model learned to predict the class with most articles, with a few exceptions that are classified as Right (probably the articles with a lot of propagandistic content, TODO compare with learned weights). A similar result can be seen in the 13k dataset. If instead we look at the balanced dataset, Figure~\ref{fig:total_prop_confusion_60k_balanced}, the models shifts to predicting random labels between Centre and Right.
-% This means that, removing the shortcut~\cite{geirhos2020shortcut} of ``everything belongs to the Left'', the model cannot pick any relevant information from the feature described above.
+% This means that, removing the shortcut~\citep{geirhos2020shortcut} of ``everything belongs to the Left'', the model cannot pick any relevant information from the feature described above.
 % For the \texttt{baly} dataset instead,
 
 \subsubsection{Confusion Analysis}
@@ -1456,7 +1456,7 @@ While the objective of (3a) is to learn distinctive propaganda terms, (3b) inste
 % \todoHA{You have to add examples whenever and wherever you can}
 
 To obtain the feature vectors of the propaganda words, we use TF-IDF 
-because its numerical values directly represent single terms. Instead with other embedding methods (e.g., GloVe~\cite{pennington2014glove}, FastText~\cite{joulin2016fasttext}) this correspondence with single terms would be more difficult to extract. By considering the features which get assigned the biggest values in the final SoftMax layer, we can directly say which terms are the most discriminative for the task of political leaning classification.
+because its numerical values directly represent single terms. Instead with other embedding methods (e.g., GloVe~\citep{pennington2014glove}, FastText~\citep{joulin2016fasttext}) this correspondence with single terms would be more difficult to extract. By considering the features which get assigned the biggest values in the final SoftMax layer, we can directly say which terms are the most discriminative for the task of political leaning classification.
 % since it is easier to link the results to specific terms: the TF-IDF weights that vary the most between political sides are labelled with their feature name (term). 
 % the results produced can be easily interpreted. Using State of the Art word embeddings could provide better results but it would be more difficult to understand the importance of specific terms.
 
@@ -1917,7 +1917,7 @@ Current work in automated propaganda analysis does not take into consideration p
 The results of this bias can be seen in the dataset collected by~\citet{baly2020we} (as noted in Section~\ref{ssec:related_prop}, the training of the propaganda tool is performed against right-leaning sources) and reflects on the annotations that are provided by the tool we are using. 
 
 We acknowledge the intrinsic complexity of distinguishing left and right propaganda usage (dictated by the limitations listed above), especially if we consider that the differences we are talking about may be very subtle and challenging to pick.
-For example, the same words can be used with different meaning/targets (e.g. ``enemies of the people'', ``people's will'', ...)~\cite{seargeant2020art}. This results in the same propaganda techniques used with the same words.
+For example, the same words can be used with different meaning/targets (e.g. ``enemies of the people'', ``people's will'', ...)~\citep{seargeant2020art}. This results in the same propaganda techniques used with the same words.
 % % reported speech problem
 % When inspecting the annotations of propaganda, we can see that a representative proportion of propaganda belongs to reported speech from public figures. In this case propaganda is not used by the reporter so we should have a method that accounts for this difference. Reported speech is (should be) the same (does not depend on the news, but on the politician involved), exception of selection bias on what to be reported.
 
@@ -1939,17 +1939,17 @@ For example, the same words can be used with different meaning/targets (e.g. ``e
 
 % Limitations
 \subsubsection{Imbalance in Propaganda Detection}
-One limitation is that only articles from the Right political spectrum were used for training the propaganda detection tool provided in \cite{da2019fine}. %, which we use in our analysis. 
+One limitation is that only articles from the Right political spectrum were used for training the propaganda detection tool provided in \citet{da2019fine}. %, which we use in our analysis. 
 As we saw in our first experiment, propaganda is not limited to any particular political leaning. Therefore, propaganda annotations and model training should be less biased to a particular political leaning, and propaganda from all political directions should be used to train such models in the future, which is likely to enhance our results given our balanced dataset. We analyse this limitation in the next experiment in Section~\ref{ssec:ps_prop_leaning_imbalanced}.
 
-\subsubsection{Baseline Incomparability} %with the real baseline of~\cite{baly2020we}.
+\subsubsection{Baseline Incomparability} %with the real baseline of~\citet{baly2020we}.
 As noted in Section~\ref{ssec:ps_leaning_data}, the shared dataset by \citet{baly2020we} differs from the one described in their paper, producing incompatibility issues between our results and theirs. %the ones they report.
 Additionally, re-implementing their model could have introduced other minor differences. Therefore, we believe that comparing the results from our models with those we obtained from re-implementing the model of \citet{baly2020we} offers a fairer approach. %We will repeat our tests if their model becomes available, and will continue to seek other compatible baselines once other article-specific political leaning detection models become available. 
 
 Also related to comparabilty, we have to underline that the splits shared with the \texttt{baly} dataset (especially the media splits) may not be the best strategy, as we have seen across the cross-validation performed on the media splits of the \texttt{Nela} dataset, results change quite significantly across the folds because very different news sources are used for training/testing. Therefore, using cross-validation provides results that are way more meaningful and representative of the whole dataset.
 
 \subsubsection{Meaning and Context}
-As shown in experiment 3, some terminologies are common to Left, Right, and Centre articles. In political narrative, many words tend to be used frequently by different political-leaning groups, but for different meanings or to refer to different groups \cite{seargeant2020art}. For example, the word ``Elite'' is used by the Left to refer to people holding economic and political powers, and by the Right to point to those in the cultural and knowledge sector \cite{seargeant2020art}.  
+As shown in experiment 3, some terminologies are common to Left, Right, and Centre articles. In political narrative, many words tend to be used frequently by different political-leaning groups, but for different meanings or to refer to different groups \citep{seargeant2020art}. For example, the word ``Elite'' is used by the Left to refer to people holding economic and political powers, and by the Right to point to those in the cultural and knowledge sector \citep{seargeant2020art}.  
 Figure~\ref{fig:propaganda_example_2} shows a sentence where the \texttt{Loaded\_Language} propaganda technique was detected.
 The target of displayed technique are the Democrats even though the Republicans are surrounded by loaded terms.
 In such complex examples, the structure of the discourse and framing of arguments take an essential role in discerning political leaning. 
@@ -2152,7 +2152,7 @@ This is the case because we are analysing the task of propaganda detection and n
 We introduced propaganda in the previous chapter~\ref{chap:linguistic_persuasion}, but at that moment we had not yet introduced leanings into the analysis.
 We present here the analysis of the propaganda detection datasets, showing how they distribute across political leanings.
 
-% TSHP-17, QProp and PTC are mentioned in \cite{da2020survey}.
+% TSHP-17, QProp and PTC are mentioned in \citet{da2020survey}.
 
 
 \subsection{TSHP-17}
@@ -2216,7 +2216,7 @@ This dataset includes propaganda from both political-leanings and therefore we c
 
 \subsection{QPROP Corpus}
 
-This second dataset~\citep{alberto_barron_cedeno_2019_3271522}, comes from the work of~\cite{barron2019proppy}, and also in this case we have a collection of articles coming from a set of sources. These sources have source-level annotations coming from MBFC, from which the authors selected the two classes: \emph{propaganda} and \emph{trustworthy}.
+This second dataset~\citep{alberto_barron_cedeno_2019_3271522}, comes from the work of~\citet{barron2019proppy}, and also in this case we have a collection of articles coming from a set of sources. These sources have source-level annotations coming from MBFC, from which the authors selected the two classes: \emph{propaganda} and \emph{trustworthy}.
 For the \textit{trustworty} class we only know that they come from 94 sources with different leanings (left, left-center, center, right-center, right) and that in total there are 45.6k articles.
 For the propaganda class instead, we have the breakdown of the sources considered, that is shown in Table~\ref{tab:qprop_across_leaning}.
 

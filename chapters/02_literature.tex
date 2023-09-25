@@ -55,7 +55,7 @@ One example is Google News with the feature \emph{Full Coverage},\footnote{\url{
 There are also resources that try to bring together opposing points of view, such as AllSides Headline Roundup,\footnote{\url{https://www.allsides.com/headline-roundups}} or research works that try to provide a similar result~\citep{trampuvs2015diversinews,park2009newscube}.
 
 
-% \cite{bountouridis2018explaining}
+% \citet{bountouridis2018explaining}
 
 Some of these resources are hand-curated while others are algorithmically synthesised. In the hand-curated groups (e.g., AllSides), there are usually domain experts or editors who manually put together news articles that share the same events and details. With AllSides, the editors select the articles from selected news sources to ensure that different sides of the story are presented.
 Instead, with algorithmic resources (e.g., Google News Full Coverage), there is an automated approach that, based on clustering algorithms, creates groups of articles that cover the same story~\citep{marutho2018determination,alelyani2018feature,karimi2018news}.
@@ -84,7 +84,7 @@ For example, some approaches additionally consider the serendipity of recommenda
 
 Lastly, we can also consider as related the \emph{plagiarism detection} task.
 In this task, the goal is to spot fragments of text that have been copied from others, without reference or with a certain proportion~\citep{stein2006near,alzahrani2010fuzzy,arabi2022improving}.
-This is a research area that is particularly relevant and challenging nowadays given the incredible rise of generative models~\cite{openai2023gpt4}.
+This is a research area that is particularly relevant and challenging nowadays given the incredible rise of generative models~\citep{openai2023gpt4}.
 In recent months, the generation and detection of plagiarism have drastically changed, shifting from more literal matching to more advanced and less interpretable techniques.\footnote{e.g., \url{https://gptzero.me/} and \url{https://www.zerogpt.com/}}
 %with tools that detect generated contents
 
@@ -97,10 +97,10 @@ In addition to the tasks mentioned in the previous paragraphs,
 is another task identified by the computational linguistic community.
 With this regard, our work focuses mostly on the investigation of corroboration and omissions
 across multiple sources.
-This task focuses on comparing and contrasting similar articles, to find which parts are in common and which ones are omitted~\cite{ehrhardt2021omission,bountouridis2018explaining,ko2023claimdiff}.
+This task focuses on comparing and contrasting similar articles, to find which parts are in common and which ones are omitted~\citep{ehrhardt2021omission,bountouridis2018explaining,ko2023claimdiff}.
 By analysing multiple news articles it becomes possible to understand the inter-relationships between multiple points of view.
 
-For example, \cite{bountouridis2018explaining} extracts points of information (sentences) from articles, and cross-compares them across groups of related articles. In this way, it is possible to detect which details are corroborated in multiple sources and which ones are omitted.
+For example, \citet{bountouridis2018explaining} extracts points of information (sentences) from articles, and cross-compares them across groups of related articles. In this way, it is possible to detect which details are corroborated in multiple sources and which ones are omitted.
 Then the authors count the omissions and corroboration for each news source, and build an aggregated metric that is defined as the count of corroborations minus the count of omissions.
 The rationale is that corroborating a detail with external sources indicates that the detail is more likely to be true.
 Instead, if a news source omits a detail that other sources mention, it is considered as a negative indication.
@@ -139,12 +139,12 @@ Therefore, we want to have an additional study of what specific choices (terms, 
 Contextualising in the current attention economy~\citep{davenport2001attention}, recent literature sees a rise in the race for attention also in news articles, with the emergence of clickbaitness and language that needs to be increasingly captivating~\citep{bazaco2019clickbait,davenport2001attention}.
 With the enormous amount of news sources and news articles covering the same events, it is very important for news sources to compete for the clicks and reads of the consumers.
 
-\cite{gass2018persuasion} defines persuasion as a method to ``influence a person's beliefs, attitudes, intentions, motivations, or behaviours".
+\citet{gass2018persuasion} defines persuasion as a method to ``influence a person's beliefs, attitudes, intentions, motivations, or behaviours".
 We see several related concepts in the literature that can be considered as forms of persuasion. We select to explore two of them:
 \begin{itemize}
-    \item appeal to emotion / sentiment: use of emotional language to convey strong emotions to the reader~\cite{ginosar2019patriotic}; % loaded language instead?
+    \item appeal to emotion / sentiment: use of emotional language to convey strong emotions to the reader~\citep{ginosar2019patriotic}; % loaded language instead?
     \item \gls{propaganda}:  information, ideas, opinions, or images, often only giving one part of an argument, that are broadcast, published, or in some other way spread with the intention of influencing people's opinions.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}}.
-    The signature feature of propaganda is that it employs ``intentionally or unintentionally, flawed ideologies to cut off rational deliberation and discussion"~\cite{stanley2015propaganda}. % to indoctrinate a population towards an individual or a particular agenda
+    The signature feature of propaganda is that it employs ``intentionally or unintentionally, flawed ideologies to cut off rational deliberation and discussion"~\citep{stanley2015propaganda}. % to indoctrinate a population towards an individual or a particular agenda
     % \item \gls{populism}: political ideas and activities that are intended to get the support of ordinary people by giving them what they want;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/populism}}
     % \item coercion: use of force to persuade someone to do something that they are unwilling to do.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
 \end{itemize}
@@ -263,7 +263,7 @@ It has become very relevant, especially in recent years, affecting the public di
 It is not a recent phenomenon by itself, but it received a boost in diffusion thanks to the advance of technology.
 For this reason, many works talk about \emph{computational propaganda} which underlines the strong relationship with technology and computational approaches.
 
-\cite{hassan2023} define computational propaganda as ``the assemblage of digital platforms, algorithms, surplus data, and automation to curate, disseminate, amplify,
+\citet{hassan2023} define computational propaganda as ``the assemblage of digital platforms, algorithms, surplus data, and automation to curate, disseminate, amplify,
 and increase discoverability of purposefully misleading information across the information
 environment".
 In the framework described by~\citet{hassan2023}, the media has a central position in amplifying propaganda and influencing the audience.
@@ -348,7 +348,7 @@ and in Czech~\citep{baisa2019benchmark}.
 % granular
 More recently, several works~\citep{da2019fine,yoosuf2019fine,vorakitphan2022protect} started doing a more fine-grained analysis, to identify fragments that contain propaganda, and the particular propaganda techniques used (Figure~\ref{fig:propaganda_example_1}).
 These approaches use sequence models derived from BERT~\citep{devlin2018bert}, allowing us to have a much deeper insight into which parts of the text are propagandistic. Being the output of the models a sequence of tags, each word is labelled with the technique it belongs to (or none).
-They all use the same dataset published in~\cite{da2019fine}, which enables different research groups to build models and progress on this task.
+They all use the same dataset published in~\citet{da2019fine}, which enables different research groups to build models and progress on this task.
 
 
 %On this, we have our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
@@ -356,7 +356,7 @@ They all use the same dataset published in~\cite{da2019fine}, which enables diff
 
 
 %On the other side, we are considering the use of language that is targeted to push for a certain political view. There are many linguistic choices and devices, along with how the narrative is structured, that are used to promote a specific viewpoint.
-%Propaganda is defined as something that can be recognised by its persuasive function, sizeable target audience, the representation of a specific group’s agenda, and the use of faulty reasoning and/or emotional appeals~\cite{miller1939techniques}. The list of such techniques is very long\footnote{\url{https://en.wikipedia.org/wiki/Propaganda_techniques}}, and here we are considering the ones that have been analysed automatically by~\citet{da2019fine}. The propaganda is the most persuasive/loaded part of an article.
+%Propaganda is defined as something that can be recognised by its persuasive function, sizeable target audience, the representation of a specific group’s agenda, and the use of faulty reasoning and/or emotional appeals~\citep{miller1939techniques}. The list of such techniques is very long\footnote{\url{https://en.wikipedia.org/wiki/Propaganda_techniques}}, and here we are considering the ones that have been analysed automatically by~\citet{da2019fine}. The propaganda is the most persuasive/loaded part of an article.
 % \item sentiment usage: loaded language in the articles can reveal strong subjectivity against the mentioned entities. This relates to the subjective part of articles and we want to take this into consideration
 % \item narrative/persuasion and other related analyses?
 
@@ -365,8 +365,8 @@ They all use the same dataset published in~\cite{da2019fine}, which enables diff
 %For the propaganda analysis, we are focusing on the computational propaganda, defined as the propaganda that has been analysed by computational approaches. 
 %The survey conducted by~\citet{da2020survey} displays the most important works, and also underlines the main limitation of current methods.
 %The biggest limitation that we see, is that \emph{explainability is a desirable feature} but current approaches do not provide it.
-%Most of the models only classify full articles as being propagandist or not~\cite{barron2019proppy,rashkin2017truth}, and this does not help to understand why.
-%Therefore, another work focuses on fine-grained techniques~\cite{da2019fine}: every article analysed is annotated with labels coming from 18 different techniques, also indicating the spans affected by the techniques. So we can see where propaganda is inside an article and which specific techniques were used. Figure~\ref{fig:propaganda_example_1}
+%Most of the models only classify full articles as being propagandist or not~\citep{barron2019proppy,rashkin2017truth}, and this does not help to understand why.
+%Therefore, another work focuses on fine-grained techniques~\citep{da2019fine}: every article analysed is annotated with labels coming from 18 different techniques, also indicating the spans affected by the techniques. So we can see where propaganda is inside an article and which specific techniques were used. Figure~\ref{fig:propaganda_example_1}
 
 % TODO: The datasets for detection: article-level, fine-grained
 
@@ -375,7 +375,7 @@ They all use the same dataset published in~\cite{da2019fine}, which enables diff
 Sentiment detection has been researched extensively in the last twenty years~\citep{medhat2014sentiment}.
 %for a long time.\todoAW{evidence/citation?}
 However, the outputs of the analysis are usually limited to positive/negative.
-Additionally, fine-grained analysis of aspect-based sentiment analysis cannot simply be used \emph{off the shelf} as pretrained models are typically not shared and the training requires large amounts of computational resources~\cite{brauwers2022survey}.
+Additionally, fine-grained analysis of aspect-based sentiment analysis cannot simply be used \emph{off the shelf} as pretrained models are typically not shared and the training requires large amounts of computational resources~\citep{brauwers2022survey}.
 %do not demonstrate good generalisability strengths.
 %\todoAW{evidence/citation?}
 Nonetheless, there are tools available to perform document and sentence analysis, which can be used for word-level analysis by exploiting their lexicons.
@@ -468,7 +468,7 @@ Therefore, the newspapers started using the terms to mention respectively the li
 % US and conservative vs liberal
 % https://pleeps.org/en/wp-content/uploads/Political-Ideology-Its-Structure-Functions-and-Elective-Affinities.pdf (jost2009political)
 The use of ``liberal" and ``conservative" as substitutes for ``left" and ``right" is becoming more prevalent in the United States and other countries.
-This terminology effectively highlights the historical split between wanting change and desiring stability~\cite{jost2009political}.
+This terminology effectively highlights the historical split between wanting change and desiring stability~\citep{jost2009political}.
 These opposing desires emerge from long-standing discussions about proper levels of hierarchy, authority, and inequality~\citep{bobbio1996left}.
 %\todoAW{I'm not sure where this is going...}
 
@@ -550,7 +550,7 @@ Others focused on inferring the political leaning of Twitter accounts~\citep{Coh
 Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201, Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}.
 
 
-%often used supervised or unsupervised models applied to , or on opinion graph mining ~\cite{thomas-etal-2006-get}.
+%often used supervised or unsupervised models applied to , or on opinion graph mining ~\citep{thomas-etal-2006-get}.
 
 %gentzkow - linguistic analysis 
 %yan2017perils - regression models and neural networks
@@ -565,7 +565,7 @@ Various analysis methods were used in such studies, such as linguistic analysis 
 %Most models use supervised or unsupervised machine learning algorithms, trained using source annotations or crowdsourced articles annotations  
  
 %underlined that most of the approaches do not generalise well across domains. 
-%As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\cite{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
+%As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\citep{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
 
 In~\citet{baly2020we}, authors used a BERT-based~\citep{devlin2018bert} model for predicting the political leaning of individual articles. The model takes as input the text of the article and produces one of three labels: Left/Centre/Right. The model is trained with a corpus from AllSides website,\footnote{\url{https://www.allsides.com}} which groups articles %with their political leaning 
 according to the leaning of their source or of their author.
@@ -584,14 +584,14 @@ In addition, AllSides gives the label to the source level but sometimes also to 
 %Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to that given to their sources (AllSides confirmed that this is due to using author-based leaning). 
 %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
  %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
- % Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. However, %unlike ~\cite{baly2020we}, 
+ % Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. However, %unlike ~\citep{baly2020we}, 
  % unlike previous work, we use propaganda features in the political learning prediction model.   
 
 % - Problem: learning the source instead of the political leaning
 %Main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases were there is a difference between the political leaning of a particular article from that of its source. Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to the given to their sources (AllSides confirmed that this is due to using author-based leaning labels for some articles). 
 
 
-%Other approaches focus on learning the media bias of a the source~\cite{baly2020written,biessmann2016automating}.
+%Other approaches focus on learning the media bias of a the source~\citep{baly2020written,biessmann2016automating}.
 %This is based on the observation that in their dataset (collected from AllSides) there are some articles (1,080 individual articles, 3.11\% on a total of 34737) having a leaning different from their source leaning.
 
 %To clarify this point, we personally asked to the AllSides team about this discrepancy between article-level bias and source bias, and we understood that there are two types of annotation:
@@ -608,8 +608,8 @@ In addition, AllSides gives the label to the source level but sometimes also to 
 
 % TODO: Is this really a consequence of the previous paragraph?
 %Because of this lack of generalisability, 
-%Other models focused on identifying political leaning using opinion graphs that represent how (positive/neutral/negative) the political leaning sees a set of extracted entities~\cite{chen2017opinion}. The prediction of the classifier, after extracting the entities in the text, compares the orientation towards the entities and picks the most similar side.
-%The task of topical stance is also explored in other works in relationship to the political leaning of a whole news source~\cite{stefanov2020predicting}.
+%Other models focused on identifying political leaning using opinion graphs that represent how (positive/neutral/negative) the political leaning sees a set of extracted entities~\citep{chen2017opinion}. The prediction of the classifier, after extracting the entities in the text, compares the orientation towards the entities and picks the most similar side.
+%The task of topical stance is also explored in other works in relationship to the political leaning of a whole news source~\citep{stefanov2020predicting}.
 %A similar approach is described in~\citet{jiang2008political}, where instead of opinion the term used is subjectivities. The authors show how, by using the same model (Bag of Words) on the subjective sentences only, it is actually easier to classify political leaning. Furthermore, they mine Opinion Expressions which represent the orientation towards specific expressions (e.g., the liberal political leaning usually refers to ``democratic party'' using a positive subjectivity).
 %These models rely on the fact that political leanings often have a stable view on some topics\footnote{\url{https://en.wikipedia.org/wiki/Right-wing_politics}}\footnote{\url{https://en.wikipedia.org/wiki/Left-wing_politics}}.
 
@@ -669,7 +669,7 @@ Our \acrshort{rq}3 goes in this direction by hypothesising a relationship betwee
 The last area of research that we cover in this thesis is the one related to topic analysis.
 As for the other sections, we first present a more theoretical background and then we describe the main techniques used to identify topics.
 
-% \cite{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
+% \citet{garimella2018quantifying,treuillier2022being} that state that some topics have more polarizing effects because they present higher or lower levels of controversy.
 
 \subsection{\statusgreen Topic Definition}
 \label{sec:lit_topics_def}
@@ -715,7 +715,7 @@ We can identify two main groups:
 \end{enumerate}
 
 
-% topic for fine-grained opinion analysis~\cite{stoyanov2008topic}
+% topic for fine-grained opinion analysis~\citep{stoyanov2008topic}
 
 
 % Explain here different tools/methods that provide topics/entities
@@ -810,7 +810,7 @@ In our case, we want to analyse how persuasion changes across topics, and having
 % Missing analysis of the links between topics and other dimensions (leaning and persuasion)
 As main limitation of both types of approaches, the topic analysis is usually performed in isolation with respect to other dimensions.
 Instead, we want to analyse topics together with persuasion, political leaning and similarities.
-We see some works that do topic analysis with other factors (e.g., joint topic and opinion analysis in~\cite{stoyanov2008topic}), but not together with propaganda or political leaning.
+We see some works that do topic analysis with other factors (e.g., joint topic and opinion analysis in~\citet{stoyanov2008topic}), but not together with propaganda or political leaning.
 
 \section{\statusgreen Related Phenomena}
 \label{sec:lit_related}
@@ -851,7 +851,7 @@ By doing so, our results should be more general, and if needed can be applied to
 \label{sec:lit_related_populism}
 % \todoAW{You want some evidence/citation to demonstrate that this is an actual area of research}
 % Relationship between propaganda and populism:
-% ~\cite{oates2021rewired,tumber2021routledge,pasquino2008populism}
+% ~\citep{oates2021rewired,tumber2021routledge,pasquino2008populism}
 %https://ebrary.net/177441/sociology/the_routledge_companion_to_media_disinformation_and_populism
 % they are very strictly linked.
 % http://www.ask-force.org/web/Fundamentalists/Pasquino-Populism-and-Democrady-2005.pdf 
@@ -862,7 +862,7 @@ And to be on the side of ordinary people, it uses propaganda as a mean. So a pop
 % We need them to be related to demonstrate that propaganda exists across all political leanings.
 
 
-Literature presents propaganda and populism frequently together~\cite{oates2021rewired,tumber2021routledge,pasquino2008populism}.
+Literature presents propaganda and populism frequently together~\citep{oates2021rewired,tumber2021routledge,pasquino2008populism}.
 \citet{oates2021rewired} expresses the
 concept of \emph{rewired propaganda} to analyse the interplay of propaganda and populism. Online information, while making citizens more informed, is overshadowed by the internet's ability to spread false information through populist propaganda.
 The idea of ``rewired propaganda" is proposed as a way to explain a method of communication that uses false information and campaign strategies, especially evident in how both traditional and social media worked during the 2016 US elections.

@@ -52,9 +52,9 @@ The relationship with propaganda comes from the inherent goal of propaganda to i
 %\todoAW{Good early citation shows you're aware of the broader literature... do you have others elsewhere in the dissertation? If not, probably worth making sure you're aware of some of the key authors in the area. Three or four should be enough.}
 
 % It is known that persuasion is related to an emotional response from the reader/listener, being related to emotions.
-% Persuasion and Discursive Repertories~\cite{orrumachine}
-% propaganda is a``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\cite{bernays}.
-% Persuasion and Propaganda: ~\cite{jowett2018propaganda}.
+% Persuasion and Discursive Repertories~\citep{orrumachine}
+% propaganda is a``consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group''~\citep{bernays}.
+% Persuasion and Propaganda: ~\citet{jowett2018propaganda}.
 %, populism.
 % END response to HA
 
@@ -557,7 +557,7 @@ Knowing which techniques have been used helps us to have a more distinctive pers
 
 Our main goal in this chapter is to describe the differences between multiple versions of the same detail, and if we have more dimensions, it is better.
 For this reason, we need to have fine-grained detection of propaganda, that produces as output the specific techniques used and which words are responsible for it.
-Taking from the literature described in~\ref{sec:lit_propaganda}, we consider the recent work of~\cite{da2019fine} as it is able to provide fine-grained detection. This method uses a neural network to annotate text articles and to see which words belong to specific propaganda techniques (Figure~\ref{fig:propaganda_example_1}).
+Taking from the literature described in~\ref{sec:lit_propaganda}, we consider the recent work of~\citet{da2019fine} as it is able to provide fine-grained detection. This method uses a neural network to annotate text articles and to see which words belong to specific propaganda techniques (Figure~\ref{fig:propaganda_example_1}).
 The model is a sequence model based on BERT. It is based on the PTC dataset that is part of the same paper. This dataset contains articles annotated at the span level (specific words are highlighted and assigned to a specific technique). The model then learns to reproduce these annotations by looking at words in their context (sequence model).
 
 The classification is performed on the word level, additionally using the left and right context of the text. Each word is classified as being one of 18 different techniques or none of them.
@@ -617,7 +617,7 @@ Successively, we also have other techniques that appear quite frequently (close 
 
 
 % % criticism
-% From its publication paper~\cite{da2019fine}, we can see in table 6 and 7 that this model has been evaluated in two ways:\todoAW{Did you attempt to reproduce this evaluation?}
+% From its publication paper~\citep{da2019fine}, we can see in table 6 and 7 that this model has been evaluated in two ways:\todoAW{Did you attempt to reproduce this evaluation?}
 
 % \begin{itemize}
 %     \item sentence-level: binary classification, whether the sentence contains propaganda or not. For this task the reported F1 is around $60\%$\todoHA{reported dataset? clarify}
@@ -1164,7 +1164,7 @@ In a controlled experiment like ours, we know this parameter from the ground tru
 % STEP 4
 For step 4, clustering evaluation, we need to find suitable metrics that can describe how well the produced clusters correspond to the ground truth.
 By looking at the literature~\citep{romano2016adjusting,warrens2022understanding}, it emerged that the most used metrics for comparing clusters are \acrfull{ari} and \acrfull{ami}.
-The difference between the two is that they are based on different theories. The former is based on pair counting (counting the pairs that appear or not in the same cluster in the reference and in the evaluation), while the latter is based on Shannon Information Theory. In practice, \acrshort{ari} works better when ground truth clustering has large equal sized clusters, while \acrshort{ami} is better when there exist small clusters and ground truth clustering may be unbalanced~\cite{warrens2022understanding}.
+The difference between the two is that they are based on different theories. The former is based on pair counting (counting the pairs that appear or not in the same cluster in the reference and in the evaluation), while the latter is based on Shannon Information Theory. In practice, \acrshort{ari} works better when ground truth clustering has large equal sized clusters, while \acrshort{ami} is better when there exist small clusters and ground truth clustering may be unbalanced~\citep{warrens2022understanding}.
 % \todoAW{citation?}
 Given the statistics of our datasets, we know that \acrshort{ari} will be better to measure the clustering at the \emph{headline} level (reference clusters are always with $size=3$), while \acrshort{ami} will be better for the clustering at the topic level (very different in size, unbalanced).
 % \todoAW{I think you need to be more explicit in showing how you come to these conclusions.}
@@ -1375,7 +1375,7 @@ There are some limitations to this experiment. Some of them are a direct consequ
     %\todoAW{What exactly is the problem, and how does it affect your analysis?}
     \item Since some words belong both to persuasion and to the topic, by removing them it becomes more difficult to form the correct cluster.
     %\todoAW{As my comments have suggested, I think this is a pretty fundamental issue. Even if you don't do any more experiments, I think you probably need a unpick the issues a bit more.}
-    This is why using generative models to perform non-persuasive rephrasing~\cite{bagdasaryan2022spinning} could be worth exploring in future works. However, we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
+    This is why using generative models to perform non-persuasive rephrasing~\citep{bagdasaryan2022spinning} could be worth exploring in future works. However, we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
 %\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 \end{enumerate}
 
