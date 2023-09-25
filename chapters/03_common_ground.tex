@@ -43,8 +43,8 @@ For this reason, we dive into the work of spotting similarities and differences 
 Our Research Question for this chapter is \acrshort{rq}1: \emph{To what extent do news articles about the same events differ?}
 We divide it in several sub-questions: 
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
-    \item How news events are reported differently by multiple sources?
-    \item How could we identify what is unique for each version and what is common? 
+    \item How are new events reported differently by multiple sources?
+    \item How could we identify what is unique for each report and what is common? 
     \item To what extent can we automatically detect omission and corroboration across multiple articles?
     \item Which similarity metrics are best for detecting omission and corroboration?
     % \item What type of document/sentence encoding performs better to detect corroborations and omissions? OR What are the characteristics that allow encoding better documents and sentences?\todoAW{Is this a technical question? (ie. what's the best parser, for example?) "How can we automatically detect...?" and then expand in the main body of the text}
@@ -659,8 +659,8 @@ However, we see that many variations of terms do not seem to carry any differenc
 This chapter had several sub-questions, that we discuss separately here, before discussing the overall RQ1:
 
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
-    \item \emph{How news events are reported differently by multiple sources?} News sources present the same event in different ways, including different details that corroborate with other sources, omitting details that other sources instead report, changing the order of presentation of the details. We studied and measured these phenomena in this chapter, but we deem it necessary to study the choice of terms, by investigating what is the reason and what is the effect of deliberate or involuntary choices. We will expand on this in the next Chapter.
-    \item \emph{How could we identify what is unique for each version and what is common?} To identify what is unique, common or omitted, it is possible to use the methodology of~\citet{bountouridis2018explaining} to detect omission and corroboration, %(Section~\ref{sec:cgs_cross_referencing})
+    \item \emph{How are new events reported differently by multiple sources?} News sources present the same event in different ways, including different details that corroborate with other sources, omitting details that other sources instead report, changing the order of presentation of the details. We studied and measured these phenomena in this chapter, but we deem it necessary to study the choice of terms, by investigating what is the reason and what is the effect of deliberate or involuntary choices. We will expand on this in the next Chapter.
+    \item \emph{How could we identify what is unique for each report and what is common?} To identify what is unique, common or omitted, it is possible to use the methodology of~\citet{bountouridis2018explaining} to detect omission and corroboration, %(Section~\ref{sec:cgs_cross_referencing})
     which is based on splitting the articles into sentences and comparing them with similarity metrics.
     % We extended the approach to analyse at the word level the variation of terms across multiple related articles, and compute the relative uniqueness of terms 
     We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them (Section~\ref{sec:cgs_clustering_and_differences}). We think that this is potentially beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online.
