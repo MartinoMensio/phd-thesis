@@ -159,10 +159,10 @@ Therefore, the topics annotations that we use are the following:
 % \todo{before list: a comment about how the key differences between the models: flat, hierarchical, balanced…}
 
 \begin{enumerate}
-    \item native topics given by AllSides, included in the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}); each article is associated with one topic only (categorical, flat). There are 108 topic labels and they include very broad labels (e.g. politics) and very narrow ones (e.g. DEA).
+    \item Native topics given by AllSides, included in the \texttt{baly} dataset (cfr. Chapter~\ref{ssec:ps_leaning_data}); each article is associated with one topic only (categorical, flat). There are 108 topic labels and they include very broad labels (e.g. politics) and very narrow ones (e.g. DEA).
     %\todoAW{Is there any overlap or hierarchical structure?}
-    \item Coarse topics: low-granularity topics, given as a set of probabilities to belong to 17 different topics (fuzzy non-esclusive, flat). We rely on TextRazor to provide them.
-    \item fine-grained topics: around 98k different topics, provided by TextRazor (fuzzy non-esclusive, flat). Each topic is linked to wikidata.
+    \item Coarse topics: low-granularity topics, given as a set of probabilities to belong to 17 different topics (fuzzy non-esclusive, flat, cfr~\ref{ssec:topic_topic_granularities_alone}). We rely on TextRazor\footnote{\url{https://www.textrazor.com/}} to provide them.
+    \item Fine-grained topics: around 98k different topics, provided by TextRazor (fuzzy non-esclusive, flat). Each topic is linked to wikidata.
     \item IPTC media topics: hierarchical topics (fuzzy non-esclusive),
     %\todoAW{OK... is there any relationship or potential mapping between IPTC topics and allsides?}
     defined by IPTC (global standard body of the News Media) with a taxonomy.\footnote{\url{https://www.iptc.org/std/NewsCodes/treeview/mediatopic/mediatopic-en-GB.html}}
@@ -190,20 +190,20 @@ Other methods (e.g. LDA topics, extracting topics from types of entities using K
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth} % width of right subfigure
 		\centering\includegraphics[width=0.6\textwidth]{figures/coarse_topics.pdf}
-		\caption{Coarse Topics} % subcaption
+		\caption{Coarse Topics from TextRazor} % subcaption
             \label{fig:topic_analysis_different_tools_coarse} 
 	\end{subfigure}
 	\begin{subfigure}{\textwidth} % width of right subfigure
 		\centering\includegraphics[width=0.7\textwidth]{figures/finegrained_topics.pdf}
-		\caption{60 top Fine-grained topics} % subcaption
+		\caption{60 top Fine-grained topics from TextRazor} % subcaption
             \label{fig:topic_analysis_different_tools_fine} 
 	\end{subfigure}
 	\begin{subfigure}{\textwidth} % width of right subfigure
 		\centering\includegraphics[width=0.7\textwidth]{figures/mediatopics.pdf}
-		\caption{Media Topics} % subcaption
+		\caption{Media Topics from TextRazor} % subcaption
             \label{fig:topic_analysis_different_tools_mediatopics} 
 	\end{subfigure}
-    \caption{Different topic analyses for an example document}
+    \caption{Different topic analyses for an example document.}
     \label{fig:topic_analysis_different_tools} 
 \end{figure}
 %\todoAW{Axis labels on all plots}
@@ -251,7 +251,7 @@ In the many comparative analyses contained in the following sections, we always 
 \end{table}
 
 Table~\ref{tab:comparative_analyses} shows the different combinations of observed and partitioning variables considered across the chapter.
-The comparative analysis is then performed by taking the values of the observed variable and comparing it across the partitions.
+The comparative analysis is then performed by taking the values of the observed variable and comparing them across the partitions.
 In the first two comparative analyses, we are observing how the number of articles changes across topics (and leaning). Our goal for these two experiments is to find an optimal definition of the topic which allows the comparative analysis to have enough insights.
 Then, with the other analyses, we take the identified definition of the topic and apply it to several partitionings to answer the first two Research Questions of this chapter.
 
@@ -525,7 +525,7 @@ To produce the values displayed in Figure~\ref{fig:baly_coarse_weighted}, we sum
 % We can see that the distribution is slightly unbalanced towards politics, then culture, law and violence. This looks like the topics are not too unbalanced, but we have to remember that we would like to have a single document to be categorised only with one topic, and this is not the case.
 
 With respect with the previous Figure~\ref{fig:baly_coarse_first}, we can understand better the topics that the dataset contains.
-Still, the topics are very high-level and we have insights about neither which political issues are discussed, nor which subtopics are contained.
+Nevertheless, the topics are very high-level and we have insights about neither which political issues are discussed, nor which subtopics are contained.
 
 
 
@@ -666,8 +666,8 @@ Still, the topics are very high-level and we have insights about neither which p
 
 \subsubsection{\statusgreen IPTC Media Topics}
 
-To solve the problems identified, %(the topics are either too coarse-grained or too fine-grained, without link between them),
-we decide to analyse the dataset with a topic taxonomy.
+To address the problems identified, %(the topics are either too coarse-grained or too fine-grained, without link between them),
+we chose to analyse the dataset with a topic taxonomy.
 Between the many taxonomies for topics (for specific domains e.g., scientific publications\cite{vayansky2020review,churchill2022evolution}), we focus on the news domain and therefore the most important and used taxonomy is IPTC NewsCodes Media Topics.
 This is a taxonomy especially created to describe the topics of news articles. It is made of 17 top-level terms, that can be expanded up to 5 levels of subcategories (total 6 levels).
 The full taxonomy can be seen online\footnote{\url{https://cv.iptc.org/newscodes/mediatopic}} and interactively displayed.\footnote{\url{https://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show}}
@@ -788,7 +788,7 @@ For example, under \texttt{government} we see \texttt{legislative-bod}y and \tex
 
 We have seen in the previous paragraphs several methods and definitions of the topic.
 
-Simple high-level topics show that the majority of articles are about politics. They are able to tell which topics exist, but the labels are very wide and do not provide enough detail.
+Simple high-level topics show that the majority of articles are about politics. They are able to tell which topics exist, but the labels are very generic and do not provide enough detail.
 On the other hand, fine-grained details can be very specific, but it is very difficult to understand how they relate with wider topics.
 
 We analysed two different ways of using multi-class weighted labels. If we consider only the most important topic for each article, we lose a lot of information. Instead, by using all the topics, we are able to see more topics that would be hidden otherwise.
@@ -807,7 +807,7 @@ We want to observe which topic differences exist across political leaning, using
 Being groups of three articles that describe the same event, we expect that the high-level topics will be quite similar considering an article from the Left compared with an article from the Right coming from the same triple.
 Therefore, also at the dataset level, the statistics at the high-level topics should be quite similar across political leaning.
 
-We would interested in finding some differences when we consider more narrow topics. This would link with our discussion done in Chapter~\ref{chap:common_ground_search} about the choice of details that individual news sources make, covering different subtopics to support their point of view.
+We are interested in finding some differences when we consider more narrow topics. This would link with our discussion done in Chapter~\ref{chap:common_ground_search} about the choice of details that individual news sources make, covering different subtopics to support their point of view.
 Together with the leaning labels (taken from Chapter~\ref{chap:political_sides}) we want to analyse the link between the choice of subtopics and the political orientation of the news sources.
 
 % TOPIC+LEANING: still to support that we need granularity hierarchical topics, other topics are not enough. This time taking the leaning comparison as a first use case and showing evidence that other topics are not useful to do a comparative analysis.
@@ -959,7 +959,7 @@ As seen in Section~\ref{sec:topic_intro}, the first subquestion (RQ4.1) is addre
 \emph{How does detected propaganda differ across polarising versus neutral topics?}
 
 To answer this question, we analyse how propaganda is distributed across the topics, to find out which topics contain more propaganda than others (polarising vs non-polarising topics).
-We do not take in account political leaning, which is added in the next RQ4.2.
+We do not take into account political leaning, which is added in the next RQ4.2.
 % and what differences topics contain in terms of propaganda.
 % Assumption: propaganda is used for certain topics more than in others
 We have the following analyses:
@@ -1103,7 +1103,7 @@ With this analysis we still do not have a picture of how the political orientati
 \section{\statusgreen Propaganda across Topics and Leanings}
 \label{sec:topic_propaganda_leaning}
 
-In previous Chapter~\ref{chap:political_sides} we observed how propaganda changes across political leanings.
+In Chapter~\ref{chap:political_sides} we observed how propaganda changes across political leanings.
 In this chapter, we combine that analysis with the analyses across topics (previous Leaning across Topics, Section~\ref{ssec:topics_topics_leaning}, and Propaganda across Topics~\ref{sec:topic_propaganda}).
 In this way, we have an analysis that considers the three variables (Propaganda, Leaning and Topic) all together to discover associations and major differences across Leanings.
 
