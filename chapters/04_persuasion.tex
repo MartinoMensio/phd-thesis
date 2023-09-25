@@ -6,7 +6,7 @@
 
 % what (orientation)
 In this second experimental chapter, we introduce a new ingredient in our analysis: persuasion techniques.
-\todoHA{wasn’t this already introduced in chapter 3?}
+% \todoHA{wasn’t this already introduced in chapter 3?}
 With the previous Chapter~\ref{chap:common_ground_search}, we underlined our need to understand how different terms, that are used to describe the same details, can effectively convey a different message to the readers.
 Therefore, in order to characterise those differences, this chapter introduces \gls{persuasion} as an umbrella term that encompasses several techniques where the writer of a piece of text is trying to push to the reader a certain point of view.
 % In this chapter, we add our second ingredient: persuasion.\todoAW{abrupt start}
@@ -113,17 +113,21 @@ Some of these datasets were already used in the previous chapter, and some of th
 The first dataset that we use, as in the previous chapter, is AllSides.
 % \todoHA{so not all datasets here are different. you. may want to change the earlier statement then to be more accurate}
 This dataset contains articles that are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October 2022) 5124 headlines, for a total of 15050 articles. They are grouped in triples, called \emph{headlines}. Each triple belongs to one of several topics, which can be seen as more loosely-grained clusters. 
-As positive side, it is human-curated,\todoHA{rewrite more clearly}
-meaning that it is not the result of an algorithm (like Google News) but some curators manually grouped the articles. Therefore, the groups of articles could be considered of high quality.
-\todoHAinline{note that we can't say for sure since we know nothing about who these curators are, how many contributed to the grouping, did they disagree or not, etc. We assume quality since this is a public and known website but we need to do some evaluation to be more certain. This could go into your discussion section.}
+As positive side,
+%it ishuman-curated,\todoHA{rewrite more clearly}
+%meaning that 
+it is not the result of an algorithm (like Google News) but some curators manually grouped the articles.
+% Therefore, the groups of articles could be considered of high quality.
+% \todoHAinline{note that we can't say for sure since we know nothing about who these curators are, how many contributed to the grouping, did they disagree or not, etc. We assume quality since this is a public and known website but we need to do some evaluation to be more certain. This could go into your discussion section.}
 Furthermore, this resource is publicly available, as the AllSides website provides the Headline Roundups.\footnote{\url{https://www.allsides.com/headline-roundups}}
 
-On the negative side, although the data is public, it is licensed and furthermore the articles are just linked and not included.
-This means that for collecting it, we need to manually retrieve the contents of the pages externally linked, which incurs in additional scraping problems and licensing problems.
-\todoHAinline{the license issue is not related to this analysis, so move it to the discussion section. As for the need to collect the articles, again, this is not a negative side. It's just a task you need to do. Try not to throw negativity into your work so early on. Rewrite}
-Another negative side,\todoHA{this is a limitation, not a negative side}
-is that there are only three articles for each headline, so we do not expect to find a lot of linguistic variations, especially if we are strict on only having highly similar sentences. For this reason, it would be difficult to use it on the experiment detailed in Section~\ref{ssec:lp_relationship_small_variations} that requires fine-grained difference analysis.
-Instead, we use it on the experiment of Section~\ref{ssec:lp_relationship_removing} that works on the article level only.
+% On the negative side, although the data is public, it is licensed and furthermore the articles are just linked and not included.
+% This means that for collecting it, we need to manually retrieve the contents of the pages externally linked, which incurs in additional scraping problems and licensing problems.
+% \todoHAinline{the license issue is not related to this analysis, so move it to the discussion section. As for the need to collect the articles, again, this is not a negative side. It's just a task you need to do. Try not to throw negativity into your work so early on. Rewrite}
+
+% Another negative side,\todoHA{this is a limitation, not a negative side}
+As a limitation, there are only three articles for each headline, so we do not expect to find a lot of linguistic variations, especially if we are strict on only having highly similar sentences. For this reason, it would be difficult to use it in the experiment detailed in Section~\ref{ssec:lp_relationship_small_variations} that requires fine-grained difference analysis.
+Instead, we use it in the experiment of Section~\ref{ssec:lp_relationship_removing} that works on the article level only.
 % sides: human-curated, public. Negative sides: only 3 articles for each headline. But for each topic, there are 46 articles on average.
 
 \subsection{All-the-News}
@@ -800,9 +804,6 @@ Furthermore, we also want to analyse if the words changed are also loaded with t
 % Instead on the validation side with human annotations, we want to check if the results we are getting are 
 % \todo{finish sentence}
 
-There could be also an approach based on additional manual annotations, to check the validity of the results with human-based judgement (e.g. to validate whether the extracted persuasion is perceived as different in sentence pairs or not).
-However, in the scope of this thesis, we choose to compute the results using only automated approaches.
-\todoHA{this paragraph is odd. It doesn't explain what was your rationale for your choices. Perhaps move it to discussions, or justify your choices more clearly}
 
 
 % Results
@@ -1039,6 +1040,11 @@ One big limitation of our current analysis is that, once we discover how the tec
 For example, propaganda techniques may be used with a political goal or coming from a political standpoint.
 We are missing the link between the persuasion used and the original point of view which could motivate such use of techniques.
 This limitation will be targeted in the next chapter, considering the perspectives and the political leanings.
+
+Another limitation is that we choose to compute the results using only automated approaches.
+To extend this work, we could collect and compare additional manual annotations, to check the validity of the results with human-based judgement (e.g. to validate whether the extracted persuasion is perceived as different in sentence pairs or not).
+% However, in the scope of this thesis, we choose to compute the results using only automated approaches.
+% \todoHA{this paragraph is odd. It doesn't explain what was your rationale for your choices. Perhaps move it to discussions, or justify your choices more clearly}
 
 % % qualitative
 % We then have a set of sentence pairs that only looks like a re-wording with no persuasion changes, and persuasion/propaganda.
