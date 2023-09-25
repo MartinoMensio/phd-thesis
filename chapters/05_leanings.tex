@@ -166,7 +166,7 @@ The \texttt{MBFC} dataset contains more than 5600 sources, that are mainly class
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/mbfc_bbc.png}
-    \caption{Example of rating from MBFC}
+    \caption{Example of rating from MBFC.}
     \label{fig:mbfc_bbc}
 \end{figure}
 
@@ -222,11 +222,11 @@ The other collection that is very useful from AllSides is the Headline Roundups\
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{figures/allsides.png}
-    \caption{Example of AllSides Headline Roundup \url{https://www.allsides.com/story/trump-tweets-about-protesters-ahead-saturday-tulsa-rally}}
+    \caption{Example of AllSides Headline Roundup.}
     \label{fig:allsides}
 \end{figure}
 
-In Figure~\ref{fig:allsides} we can see an example that is displaying how a source from the left, one from the centre and one from the right present the story of Trump tweeting about his rally in Tulsa.
+In Figure~\ref{fig:allsides} we can see an example that displays how a source from the left, one from the centre and one from the right present the story of Trump tweeting about his rally in Tulsa.\footnote{\url{https://www.allsides.com/story/trump-tweets-about-protesters-ahead-saturday-tulsa-rally}}
 
 
 
@@ -593,7 +593,7 @@ First we compare the higher-level of propaganda vs sentiment, and then we break 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/prop_sent_tech_across_leaning_headlines_mod.pdf} % features_by_bias_box_cleaned_all.pdf
-    \caption{Word-based percentage of detected sentiment and propaganda across political leaning.}
+    \caption{Percentage of detected sentiment and propaganda across political leaning.}
     \label{fig:prop_sent_across_leaning}
 \end{figure}
 % \todoAWinline{Fig~\ref{fig:prop_sent_across_leaning} axis label?}
@@ -736,7 +736,7 @@ We can then say that these terms are the most distinguishable propaganda terms a
 \begin{figure}[!htbp]
     \centering
     \includegraphics[trim={0 0 0 2cm},clip,width=\linewidth]{figures/baly_prop_tech_words_all_across_leaning_simple.pdf}
-    \caption{Propaganda terms with the maximum difference in TF-IDF importance across political leaning.}
+    \caption{Most distinguishable Propaganda terms across political leaning.}
     \label{fig:baly_prop_tech_words_all_across_leaning}
 \end{figure}
 
@@ -1058,11 +1058,11 @@ Therefore, we use the following steps to achieve this goal:
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{figures/methodology-Page-1.pdf}
-    \caption{The model architecture. Baseline model on the left. On the right are our propaganda-based models.}
+    \caption{The architecture of the model to classify political leaning.}
     \label{fig:model_classifier}
 \end{figure}
 
-The setup for the classifier is represented in Figure~\ref{fig:model_classifier}. We can see on the left that we are encoding the articles with a pre-trained BERT model (cf. Section~\ref{ssec:ps_leaning_classifier}). On the right, instead, we are computing the propaganda features and then we inject them in the last layer of our neural network.
+The setup for the classifier is represented in Figure~\ref{fig:model_classifier}. We can see on the left that we are encoding the articles with a pre-trained BERT model (cf. Section~\ref{ssec:ps_leaning_classifier}). On the right, instead, we are computing the propaganda features and then we inject them into the last layer of our neural network.
 
 
 \subsubsection{Propaganda Features}
@@ -1207,7 +1207,7 @@ Table~\ref{tab:results_prop_features_classifier} shows the results of this first
     \centering
     \includegraphics[width=0.75\linewidth]{figures/baly_media_confusion_matrix_propaganda_total_percentage.pdf}
     %\vspace{-1cm}
-    \caption{Confusion matrix of the classifier using the \texttt{Prop-Total} features (RQ3.2.1).}
+    \caption{Confusion matrix using the \texttt{Prop-Total} features (RQ3.2.1).}
     \label{fig:total_prop_confusion}
 \end{figure}
 
@@ -1383,17 +1383,17 @@ The improved generalisation abilities of this feature is perhaps what is driving
      \begin{subfigure}[b]{0.48\linewidth}
          \centering
          \includegraphics[width=\linewidth]{figures/baly_random_confusion_matrix_propaganda_percentages-small.pdf}
-         \caption{Baly random}
+         \caption{Baly random.}
          \label{fig:prop_tech_confusion_baly_random}
      \end{subfigure}
     %  \hfill
     \begin{subfigure}[b]{0.48\linewidth}
          \centering 
          \includegraphics[width=\linewidth]{figures/baly_media_confusion_matrix_propaganda_percentages-small.pdf}
-         \caption{Baly media}
+         \caption{Baly media.}
          \label{fig:prop_tech_confusion_baly_media}
      \end{subfigure}
-    \caption{Confusion matrix of the classifier using the features of \texttt{Prop-Techniques} (RQ3.2.2).}
+    \caption{Confusion matrix using the features of \texttt{Prop-Techniques} (RQ3.2.2).}
     \label{fig:prop_tech_confusion}
 \end{figure}
 
@@ -1533,7 +1533,7 @@ We can see the term ``fit'' emerging as a very representative term of the Centre
      \begin{subfigure}[b]{\linewidth}
          \centering
          \includegraphics[width=0.75\linewidth]{figures/baly_media_weights_propaganda_tf_idf-small.pdf}
-         \caption{\texttt{Prop-Total-Terms}(3a): propaganda terms}
+         \caption{\texttt{Prop-Total-Terms}(3a): propaganda terms.}
          \label{fig:terms_weights_3a}
      \end{subfigure}
     %  \hfill
@@ -1615,7 +1615,7 @@ For computing the F1 and accuracy metrics, we accumulate over the 5 folds the va
         
     \end{tabular}
     }
-    \caption{Results NELA}
+    \caption{Results NELA.}
     \label{tab:results_prop_features_classifier_nela}
 \end{table}
 
@@ -1673,7 +1673,7 @@ We then tested for statistical significance all the values that are denoted in \
         \texttt{(0)+(1)+(2)+(3b)} & & & & \textbf{2.77e-9}
     \end{tabular}
     }
-    \caption{p-values of features set that have improvements in NELA dataset}
+    \caption{p-values of features set that have improvements in NELA dataset.}
     \label{tab:pvalues_nela_classifier}
 \end{table}
 
@@ -1789,7 +1789,7 @@ We want to understand with this dataset what the models learn. Here we analyse t
      \begin{subfigure}[b]{0.48\linewidth}
          \centering
          \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert.pdf}
-         \caption{\texttt{Baly-baseline (0)}}
+         \caption{Baseline: \texttt{Baly-baseline (0)}.}
          \label{fig:nela_confusion_bert}
      \end{subfigure}
     %  \hfill
@@ -1802,16 +1802,16 @@ We want to understand with this dataset what the models learn. Here we analyse t
     \begin{subfigure}[b]{0.48\linewidth}
          \centering 
          \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_propaganda_techniques_tf_idf.pdf}
-         \caption{\texttt{Prop-Techniques-Terms (3b)}}
+         \caption{\texttt{Prop-Techniques-Terms (3b)}.}
          \label{fig:nela_confusion_prop}
      \end{subfigure}
     \begin{subfigure}[b]{0.48\linewidth}
          \centering 
          \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert,propaganda_total_percentage,propaganda_percentages,propaganda_techniques_tf_idf.pdf}
-         \caption{\texttt{(0)+(1)+(2)+(3b)}}
+         \caption{Combination: \texttt{(0)+(1)+(2)+(3b)}.}
          \label{fig:nela_confusion_combined}
      \end{subfigure}
-    \caption{Confusion matrix NELA dataset: baseline, propaganda feature, combination}
+    \caption{Confusion matrix with different features on NELA dataset.}
     \label{fig:nela_confusion}
 \end{figure}
 
@@ -1846,7 +1846,7 @@ For the propaganda terms, we analyse here the weights given to the \texttt{Prop-
 \begin{figure}[!htbp]
     \centering
     \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{figures/nela_allsides_subset_media_balanced_weights_propaganda_techniques_tf_idf_2-simple.pdf}
-    \caption{Feature weights of the \texttt{Prop-Techniques-Terms (3b)} features on NELA dataset}
+    \caption{Feature weights of \texttt{Prop-Techniques-Terms (3b)} on NELA dataset.}
     \label{fig:nela_weights_prop_tech_terms}
 \end{figure}
 % \todo{barchart like in \ref{fig:baly_prop_tech_words_all_across_leaning}}
@@ -1964,7 +1964,7 @@ All this suggests the need for a more advanced analysis on the use of certain pr
     \centering
     \fbox{\includegraphics[width=\linewidth]{figures/propaganda_example_2.png}}
     \vspace{-20px}
-    \caption{An example where a propaganda technique is connected with many surrounding entities.}
+    \caption{Example of a propaganda technique surrounded by multiple entities.}
     \vspace{-8px}
     \label{fig:propaganda_example_2}
 \end{figure}
@@ -2185,7 +2185,7 @@ The first dataset is TSHP-17, which was published in the work of~\citet{rashkin2
         % \multirow{}{*}{trusted news} & Natural News & 15,580 & far right & \href{https://mediabiasfactcheck.com/natural-news/}{natural-news} \\
         %                         & Activist Report & 17,869 & far left & \href{https://mediabiasfactcheck.com/activist-post/}{activist-post} \\
     \end{tabular}
-    \caption{TSHP-17 dataset analysis across leaning}
+    \caption{TSHP-17 dataset analysis across leaning.}
     \label{tab:tshp17_across_leaning}
 \end{table}
 
@@ -2244,7 +2244,7 @@ For the propaganda class instead, we have the breakdown of the sources considere
         clashdaily.com & 12 & extreme right & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily} \\     
     \end{tabular}
 }
-    \caption{QPROP dataset analysis across leaning}
+    \caption{QPROP dataset analysis across leaning.}
     \label{tab:qprop_across_leaning}
 \end{table}
 
@@ -2282,7 +2282,7 @@ Table~\ref{tab:ptc_across_leaning} shows the sources that were used to build thi
         clashdaily.com & 1 & extreme right & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily} \\     
     \end{tabular}
 }
-    \caption{PTC dataset analysis across leaning}
+    \caption{PTC dataset analysis across leaning.}
     \label{tab:ptc_across_leaning}
 \end{table}
 
@@ -2299,7 +2299,7 @@ We retrieved the details of these sources, and discovered that 85\% of the sourc
 \begin{figure}[!htb]
    \centering
    \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
-   \caption{MBFC dataset analysis: sources across leaning}
+   \caption{MBFC dataset analysis: sources across leaning.}
    \label{fig:mbfc_across_leaning}
 \end{figure}
 
@@ -2397,7 +2397,7 @@ H-Prop-News instead is scraped from 30+ prominent Hindi News websites. The label
         
     \end{tabular}
 }
-    \caption{H-Prop-News dataset analysis across leaning}
+    \caption{H-Prop-News dataset analysis across leaning.}
     \label{tab:hpropnews_across_leaning}
 \end{table}
 
