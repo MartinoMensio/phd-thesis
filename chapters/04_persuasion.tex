@@ -191,7 +191,7 @@ When selecting which techniques to target, we have an important requirement to k
 \begin{figure}[!htbp]
     \centering
     \fbox{\includegraphics[width=\linewidth]{figures/updated_annotation_212_sentiment_cropped.pdf}}
-    \caption{Sentence-level and word-level sentiment detection (valence) on a pair of similar sentences.}
+    \caption{Sentence-level and word-level sentiment detection on a sentence pair.}
     \label{fig:example_sentiment}
 \end{figure}
 
@@ -210,7 +210,7 @@ In the following subsections, we illustrate the models that we are using to perf
 
 % Then in Subsection~\ref{ssec:lp_techniques_populism_vs_propaganda} we show some work done on populism. Even though we don't have computational detection of populism, we wanted to see the relationship that it has with propaganda.\todoAW{Not sure this para is necessary}
 
-\subsection{\statusorange Sentiment detection}
+\subsection{\statusorange Sentiment Detection}
 \label{ssec:lp_techniques_sentiment}
 
 First of all, we start with sentiment detection.
@@ -219,7 +219,7 @@ As we have seen in Chapter~\ref{chap:literature}, persuasion is very often relat
 % The main difference of only using sentiment detection instead of emotions\todoAW{I don't know what difference you're trying to draw between sentiment and emotion.} is that it usually gives an output on 1 or 2 axes:\todoHA{this not a good enough reason to ditch emotion analysis altogether. 
 % might be best to only talk about sentiment here, and leave the mention of emotions to the end of the chapter in the discussions section, and again in the Discussions chapter for the whole thesis.} %\todoAW{Wouldn't a 2-dimensional analysis be more fine grained than a 5-bucket "big emotion" analysis? In which case, it's an advantage of using sentiment rather than emotions.}
 % valence (positive or negative) and strength (from neutral to strong). %But for an initial analysis, we deem\todoAW{How?} that sentiment is enough.
-We have seen that sentiment detection gives outputs over two different axes: valence (positive or negative) and strength (from neutral to strong).
+We have seen that sentiment detection gives outputs over two different axes: polarity (positive or negative) and strength (from neutral to strong).
 
 For the reasons introduced above, we focus here on term-based analyses that
 % For detecting the sentiment, we decide to use term-based analyses. % that, despite being less accurate than huge deep-learning models, \todoAW{How much less? If they're doing different tasks (word-based v. document based), how can their relative accuracy be measured?}
@@ -232,7 +232,7 @@ to find words that are loaded with sentiment. %If the score of sentiment is not 
 In the next paragraphs, first we describe the chosen detection tools, then we describe how we combined them together and what they are able to extract on the considered datasets. Finally, we conclude with some findings that we discovered while applying sentiment detection to news articles. % (big variations of sentiment across the articles, correlation with quotation).
 %\todoAW{If you're using OTS sentiment analysers, you don't really need to justify their lack of accuracy. Rather, you should focus on what it means for your own results, and whether the (lack of) performance of the sentiment analyser will excessively impact your work.}
 
-\subsubsection{\statusgreen Sentiment analysis tools}
+\subsubsection{\statusgreen Sentiment Analysis Tools}
 
 Being our main goal to get the words responsible for sentiment scores, we primarily focus on lexicon-based methods.
 % For detection, most of the methods that we pick are lexicon-based. This happens because of our focus on getting the words responsible for the scores.
@@ -388,7 +388,7 @@ To normalise the scales, we consider two main axes: polarity (used by all of the
          \caption{Sentiment strength}
          \label{fig:sentiment_strength_comparison}
      \end{subfigure}
-        \caption{Comparison of sentiment polarity and strength provided by different tools.}
+        \caption{Sentiment polarity and strength provided by different tools.}
         \label{fig:sentiment_axes_comparison}
 \end{figure}
 
@@ -416,7 +416,7 @@ The distributions show differences across tools, with Sentistrength providing th
 \begin{figure}
     \centering
     \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_words_comparison.pdf}
-    \caption{Comparison of the amount of sentiment words provided by different tools.}
+    \caption{Percentage of sentiment words provided by different tools.}
     \label{fig:sentiment_words_comparison}
 \end{figure}
 
@@ -448,7 +448,7 @@ We already removed the outputs from some other libraries because they were provi
 
 % Combined results? Or stop
 
-\subsubsection{\statusgreen Combination of the tools}
+\subsubsection{\statusgreen Combination of the Tools}
 
 % \todoAWinline{So from the previous section, I don't really get a sense of the practical differences between the approaches, as you haven't given a running example that would let me see what the difference between the systems is. Also, you don't seem to have discussed what scope there is for adjusting the lexicons for each system, or what difference that might make to the final analysis.}
 % \todoHAinline{deciding to combine upfront is not very good. Better way is to use them individually, then combine. This way you scientifically demonstrate value of each approach.}
@@ -603,7 +603,7 @@ The standard deviation is $4\%$, and the maximum value of $56\%$ is caused by an
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/prop_tech_detail_baly.pdf}
-    \caption{The average word-based percentage of propaganda techniques in the AllSides dataset.}
+    \caption{Word-based percentage of propaganda techniques in the AllSides dataset.}
     \label{fig:prop_tech_detail_baly}
 \end{figure}
 
@@ -726,7 +726,7 @@ To analyse this relationship, we have two different experiments:
     \item Removing persuasion to see the effects on document clustering: what is the effect of persuasion when we want to cluster news articles? We want to test what happens when we remove persuasive words from the articles. Does this improve or worsen the clustering abilities? This is analysed in Subsection~\ref{ssec:lp_relationship_removing}. %\todoHA{why assuming it might be noise?}
 \end{enumerate}
 
-\subsection{\statusgreen The effects of small variations on detected persuasion}
+\subsection{\statusgreen The Effects of Small Variations on Detected Persuasion}
 \label{ssec:lp_relationship_small_variations}
 
 %\todoAWinline{It all starts getting very choppy from here. In general, I think the main thing in this chapter is that your experiments need to be presented more formally. You have interesting looking results, but I don't really see where they come from.
@@ -774,7 +774,7 @@ The comparison is done in different ways:
 \begin{figure}[!htbp]
     \centering
     \fbox{\includegraphics[width=\linewidth]{figures/annotation_212_annotated.png}}
-    \caption{Example of a pair of sentences that has been annotated by the uniqueness analysis and the persuasion analysis.}
+    \caption{Pair of sentences annotated by the uniqueness and persuasion analysis.}
     \label{fig:annotated_clique_data}
 \end{figure}
 % \todoAW{I've missed something, I think... where do you discuss how the detected technique is classified?}
@@ -895,7 +895,7 @@ How many times the variation of the sentences results in a change over the persu
         PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.1\% \\
         PROPAGANDA:Repetition & 1.4\% & 0.1\% \\
     \end{tabular}
-    \caption{The impact of the variations between the sentence pairs on detected persuasion.}
+    \caption{The impact of sentence-pairs variations on detected persuasion.}
     \label{tab:change_scores_persuasion_in_variations}
 \end{table}
 % \todoAW{Although this (sentence pairs) is presumably working at the sentence level, which you said you didn't want to do?}
@@ -955,12 +955,12 @@ Therefore, we also compute another measure: how many (percentage) changed words 
         PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.6\% \\
         PROPAGANDA:Repetition & 0\% & 0\% \\
     \end{tabular}
-    \caption{Comparison of persuasion words against unique words (unique of only one sentence in the pair).}
+    \caption{Comparison of persuasion words against unique words.}
     \label{tab:words_persuasion_in_variations}
 \end{table}
 
 In Table~\ref{tab:words_persuasion_in_variations} we show the values of this measure.
-The column \textit{\%pairs} is defined as the ratio between the number of sentences where at least one word of persuasion is also a unique word (not in common) and the number of sentence pairs. The column \textit{\%words} instead is defined as the total number of words that are both persuasion and unique, divided by the total number of unique words.
+The column \textit{\%pairs} is defined as the ratio between the number of sentences where at least one word of persuasion is also a unique word (not in common with the other sentence in the pair) and the number of sentence pairs. The column \textit{\%words} instead is defined as the total number of words that are both persuasion and unique, divided by the total number of unique words.
 In $86.9\%$ of the pairs, we have words that appear only in one of the two sentences that also contain some persuasion. The proportion word-based is $18.8\%$ as we have 2240 words that have been changed (out of 138 sentence pairs, summing the unique words for each pair), and 422 of them are related to persuasion.
 We can confirm the results found when using the scores instead of the words. The only differences are in the \texttt{Name\_Calling} and \texttt{Repetition} techniques, that in this case do not overlap with the unique terms.
 
@@ -1056,7 +1056,7 @@ This limitation will be targeted in the next chapter, considering the perspectiv
 % The problem of doing sentiment analysis in this way is that the lexicon is recognised without accounting for other constraints (e.g. POS): we needed to remove some tools because they detected the word "Trump" as being positively loaded (trump as trumpet instead of Donald Trump).
 
 
-\subsection{\statusgreen Removing persuasion to improve clustering}
+\subsection{\statusgreen Removing Persuasion to Improve Clustering}
 \label{ssec:lp_relationship_removing}
 
 The last experiment of this chapter tackles the challenge of analysing the relationship between persuasion and variations in news articles from another perspective.
@@ -1324,7 +1324,7 @@ They each include three articles, and cover the US elections of 2020. The first 
         Full article & 0 0 7 & 7 0 7 \\
         Without propaganda & 0 0 7 & 7 7 7
     \end{tabular}
-    \caption{Inspection of how the articles belonging to two headlines get clustered when considered in full (first row) and when propaganda is removed (second row).}
+    \caption{Inspection of how clustering changes when removing propaganda.}
     \label{tab:sentpropnoise_inspection}
 \end{table}
 
@@ -1334,7 +1334,8 @@ They each include three articles, and cover the US elections of 2020. The first 
 % The ground truth for cluster 0 is here https://www.allsides.com/story/trump-mounts-legal-challenges-biden-gains-ground-vote-count and for cluster 7 here https://www.allsides.com/story/what-watch-2020-presidential-election . They are both about US elections (3 November and 5 November)
 
 % what happened
-From Table~\ref{tab:sentpropnoise_inspection}, we can see that one article from the headline 7 (the middle one), in the first row is clustered together with the ones from headline 0, while when propaganda is removed, it is correctly clustered together with its companions.
+Table~\ref{tab:sentpropnoise_inspection} shows how the articles belonging to two headlines get clustered when considered in full (first row) and when propaganda is removed (second row).
+We can see that one article from headline 7 (the middle one) is clustered together with the ones from headline 0 (first row), while when propaganda is removed, it is correctly clustered together with its companions (second row).
 
 % Term importance
 Looking at the TF-IDF features for the articles, we see that when we consider the version without propaganda, terms like \emph{win} (win, winner, ..) are removed. These terms are in common between the two clusters and act as noise for the clustering.

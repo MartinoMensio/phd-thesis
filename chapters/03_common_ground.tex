@@ -141,7 +141,7 @@ The articles are not balanced across news sources, as some sources were more pro
 The topics of the news are not limited to anything specific, and therefore the news articles include very different topics.
 
 
-\section{\statusgreen Corroboration and omission extraction}
+\section{\statusgreen Corroboration and Omission Extraction}
 \label{sec:cgs_cross_referencing}
 % Experiment 1
 % what
@@ -173,7 +173,7 @@ publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/cluster_similar_sentences_amiri.png}
-    \caption{Example of sentence corroboration between Vox, Fox News and Washington Post.}
+    \caption{Corroboration example between Vox, Fox News and Washington Post.}
     \label{fig:cluster_similar_sentences_amiri}
 \end{figure}%\todoHA{Good to have an example. But unclear what is the output, what did you get when processed these examples?}
 
@@ -242,7 +242,7 @@ This opens up for further work:
 This method of comparison has its main limitations in the similarity metric chosen. So we opted for doing some further research on the similarity metrics, in a way that accounts more for semantic similarity instead of just being term-based.
 
 
-\section{\statusgreen Models for similarity analysis}
+\section{\statusgreen Models for Similarity Analysis}
 \label{sec:cgs_similarity}
 % Experiment 2
 % what
@@ -262,7 +262,7 @@ To study the similarity metrics, we perform an experiment in Subsection~\ref{sse
 We conclude with some observations in Subsection~\ref{ssec:cgs_similarity_conclusion}.
 
 
-\subsection{\statusgreen Qualitative differences benchmark}
+\subsection{\statusgreen Qualitative Differences Benchmark}
 \label{ssec:cgs_similarity_qualitative}
 % how?
 % Specifically on the sentence level, we experimented to see how different models were able to pick similar sentences, by setting up a small benchmark.
@@ -347,7 +347,7 @@ The data follows this processing:
         12 & 10 & \tiny{Delegation of who said it: “according to those who one her best” in the first sentence and then the quotation marks. “Advocate” vs “activist”+”advocate”: the first one does not say “activist”. Sentence 2 adds the incise “who lived with her partner Sara Canning”. Quoted part “believed passionately in social and religious tolerance” vs “advocate of a new and more tolerant Northern Ireland”: (First is stronger “believed passionately”, Second is narrower “Northern Ireland”, “Social and religious tolerance” vs “more tolerant”)} & & 7th 0.9282 & 6th 0.8538 & 8th 0.5863
 
         \end{tabular}
-        \caption{Differences and relative rankings from models}
+        \caption{Differences and relative rankings from models.}
         \label{tab:relative_ordering}
      % \end{subtable}
      % \caption{Example of quantification of qualitative analysis
@@ -375,7 +375,7 @@ We created a visualisation to help compare the word-level similarity and alignme
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/lyra.pdf}
-    \caption{The comparison between two sentences, one from the BBC and the other from Sky News, where multiple differences exist.}
+    \caption{Difference analysis across similar sentences from BBC and Sky News.}
     \label{fig:lyra}
 \end{figure}
 % \todoHA{Table 3.2 and 3.3 refer to from text and explain}
@@ -440,7 +440,7 @@ when inspecting the cliques, we see that
 \todo{need an example}
 \end{comment}
 
-\subsection{\statusgreen Similarity analysis Findings}
+\subsection{\statusgreen Similarity Analysis Findings}
 \label{ssec:cgs_similarity_conclusion}
 % \todo{rename subsection or remove?}
 
@@ -463,7 +463,7 @@ For this reason, our following experiments use the USE model instead of the late
 % Purpose: implementation and building of the pipeline.
 
 
-\section{\statusgreen Fine-grained differences extraction}
+\section{\statusgreen Fine-grained Differences Extraction}
 \label{sec:cgs_clustering_and_differences}
 
 % Experiment 3
@@ -517,7 +517,7 @@ In Figure~\ref{fig:dendrogram}, we can see how different thresholds for sentence
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{figures/dendrogram_high_legend.png}
-    \caption{A portion of the dendrogram that shows how different sentences are merged in the clusters by increasing distance values.}
+    \caption{Partial dendrogram showing sentences merged by increasing distance.}
     \label{fig:dendrogram}
 \end{figure}
 % \todoHA{Put in a page by itself}
@@ -534,7 +534,7 @@ With this method, we can create sentence clusters that are very similar in their
     \centering
     \includegraphics[width=\linewidth]{figures/clusters_count_by_threshold_bigger_2.png}
     \caption{
-    Number of clusters with different minimal sizes plotted against the distance threshold to cut the dendrograms.
+    Clusters of different minimal sizes with increasing distance thresholds.
     %Number of clusters (with minimal size of 1,2,3,4) plotted when the distance threshold varies. The blue line counts also for sentences that are on their own, while the others lines are more and more stricter with the number of sentences per group to be counted.
     }
     \label{fig:clusers_count_by_threshold}
@@ -563,7 +563,7 @@ We do not find many examples of sentences belonging to the wrong cluster, and we
 
 With the sentence clusters produced, we move to the following Section, where we analyse the variations at the word level.
 
-\subsection{\statusgreen Term uniqueness}
+\subsection{\statusgreen Term Uniqueness}
 \label{sec:cgs_clustering_and_differences_uniqueness}
 
 With the outputs of the sentence clustering from the previous section~\ref{sec:cgs_clustering_and_differences_hierarchical}, we want now to take these sentences, which should be similar in the meaning but with some variations on the linguistical form, and analyse how they overlap or not in the terms used.
@@ -594,7 +594,7 @@ In this case, the word ``deceased'', which just appears in one of three sentence
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\textwidth]{figures/words_uniqueness.png}
-    \caption{A sentence cluster example, where the uniqueness of words in the cluster is highlighted.}
+    \caption{A sentence cluster example highlighting the uniqueness of words.}
     \label{fig:words_uniqueness}
 \end{figure}
 
@@ -612,7 +612,7 @@ This uniqueness was used to inspect around 25 sentence-level clusters that were 
 Across these types of changes, we are particularly interested in the term choices (verbs, substantive, adjectives) as they are the details that may mostly change the message transmitted to the reader.
 With this methodology that is only based on similarity and overlap analysis, we are not able to tell more about these term choices. We need external analysis that will be faced in the next Chapter.
 
-\subsection{\statusgreen Meaning of fine-grained differences?}
+\subsection{\statusgreen Meaning of Fine-grained Differences}
 % TODO: findings?
 The experimentations shown in this section have two directions that seem to be opposing: 
 \begin{itemize}

@@ -315,7 +315,7 @@ Instead of making the models exploit this information, the \texttt{media} split 
        Paper random & 26,828 & 6,709 & 1,200 \\
        GitHub random & 27,978 & 6,996 & 1,300
    \end{tabular}
-   \caption{Some of the differences between the publicly available dataset and the statistics reported in~\citet{baly2020we}}
+   \caption{Differences between statistics from in~\citet{baly2020we} and GitHub.}
    \label{tab:baly_size}
 \end{table}
 
@@ -420,7 +420,7 @@ According to the details provided, we embed the articles in the dataset with a p
         \texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
     \end{tabular}
     % }
-    \caption{Results given by two different baselines and the measure reported in~\citet{baly2020we}.}
+    \caption{Baselines results compared with~\citet{baly2020we}.}
     \label{tab:results_baselines_classifier}
 \end{table}
 
@@ -756,7 +756,6 @@ Instead in the Left, we see terms such as ``white" and ``black" (emerging from a
 However, from this analysis, it is not clear how the terms found relate to the specific propaganda techniques. For this reason, we decide to perform again this analysis, but for each propaganda technique separately.
 This means that we build the term frequencies for each of the 18 techniques, by collecting the terms that have been used in the specific technique by each leaning, and then building the TF-IDF feature separately and sorting again by the $(max - min)$ criterion.
 
-With this method, we collect the most important words for each technique and leaning in Table~\ref{tab:prop_words_by_technique_and_leaning}.
 
 \begin{table}[!htbp]
 % \Rotatebox{90}{%
@@ -802,10 +801,12 @@ With this method, we collect the most important words for each technique and lea
          \texttt{Whataboutism} & control, prison, & point, system, news, real, democrat, care  & apartheid, people, law, American, make, worse, contain \\
     \end{tabular}
 }
-    \caption{Terms with higher difference in TF-IDF weights for each propaganda technique across leaning.}
+    \caption{Most recognisable propaganda terms for each technique across leaning.}
     \label{tab:prop_words_by_technique_and_leaning}
 \end{table}
 
+With this method, we collect the most important words for each technique and leaning in Table~\ref{tab:prop_words_by_technique_and_leaning}.
+%
 As we can see, for each propaganda techniques there are different terms that are more or less important for each leaning.
 While for some of these techniques, the terms shown by our analysis may not be very straightforward to interpret,
 %are not very talkative,\todoHA{?} we can see
@@ -817,7 +818,7 @@ Also in the \texttt{Appeal\_to\_fear-prejudice}, we can see how thematically the
 For the \texttt{Appeal\_to\_Authority}, the left has more use of the term \emph{news}, the Center instead with \emph{intelligence} and the Right with terms related to writing (\emph{written/note}).
 And still in the \texttt{Slogans} technique, the center outlets emerges with the repetition of \emph{make America great again}, while the Left is repeating more the slogan \emph{Black lives matter}.
 
-\subsection{Findings and discussion}
+\subsection{Findings and Discussion}
 
 The results from this experiment show that propaganda is used quite differently across the political leaning.
 % We see significant\todoHA{Were the differences significant?}\todoAW{Very loaded word. Have you done a significance test?}
@@ -1554,7 +1555,7 @@ Further investigation is needed to better capture what each of these words means
 With the current analysis, we can say that \textbf{the answer to RQ3.2.3 is that the specific propaganda words can only marginally help to classify the political leaning. Using the terms of propaganda we achieve a very similar score to the baseline (rows indicated with \texttt{(3a)} and \texttt{(3b)}), and when added to the baseline features, it helps to achieve a small (but not significant, \textit{p-value=0.657}) improvement}. % NOT SIGNIFICANT IMPROVEMENT: p-value=0.657
 
 
-\subsection{\statusgreen Reproduction on \texttt{NELA-GT-2018} dataset}
+\subsection{\statusgreen Reproduction on \texttt{NELA-GT-2018} Dataset}
 \label{ssec:ps_prop_leaning_classifier_nela}
 
 % \todo{take from experiment 6 document}
@@ -1937,7 +1938,7 @@ For example, the same words can be used with different meaning/targets (e.g. ``e
 
 
 % Limitations
-\subsubsection{Imbalance in propaganda detection}
+\subsubsection{Imbalance in Propaganda Detection}
 One limitation is that only articles from the Right political spectrum were used for training the propaganda detection tool provided in \cite{da2019fine}. %, which we use in our analysis. 
 As we saw in our first experiment, propaganda is not limited to any particular political leaning. Therefore, propaganda annotations and model training should be less biased to a particular political leaning, and propaganda from all political directions should be used to train such models in the future, which is likely to enhance our results given our balanced dataset. We analyse this limitation in the next experiment in Section~\ref{ssec:ps_prop_leaning_imbalanced}.
 
@@ -2011,7 +2012,7 @@ In the next Chapter~\ref{chap:topics}, we are going to focus on studying the eff
 
 
 
-\section{\statusgreen Imbalance of Propaganda datasets}
+\section{\statusgreen Imbalance of Propaganda Datasets}
 \label{ssec:ps_prop_leaning_imbalanced}
 
 % exp 8: propaganda datasets are imbalanced
@@ -2342,7 +2343,7 @@ So the resulting models that use these imbalanced datasets, are \textbf{being tr
 % True Activist https://mediabiasfactcheck.com/true-activist/ : 370 articles in NELA
 % Bipartisan Report: 4060 articles in NELA
 
-\subsection{In other languages}
+\subsection{In Other Languages}
 
 We also analysed other datasets of propaganda that we found occurring for other languages, to see if this imbalance also exists in other countries and languages.
 

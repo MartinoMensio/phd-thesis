@@ -799,7 +799,7 @@ We will see in the next subsection how the methods are able to provide a compara
 
 
 
-\subsection{\statusgreen Topic analysis across political spectrum}
+\subsection{\statusgreen Topic Analysis across Political Spectrum}
 \label{ssec:topics_topics_leaning}
 
 Having seen in the previous subsection which level of detail the different topic methodologies are able to provide, we want in this subsection to perform a comparative analysis with respect to political leaning.
@@ -819,7 +819,7 @@ Together with the leaning labels (taken from Chapter~\ref{chap:political_sides})
 
 We proceed in this subsection by considering the same methodologies for topic labelling as in the previous subsection.
 
-\subsubsection{\statusgreen AllSides topics}
+\subsubsection{\statusgreen AllSides Topics}
 
 First we use the native topics included in the dataset. We simply count the number of articles for each leaning and topic. Our goal is to see how balanced they are across leaning, and if there are some topics which have more articles on a specific leaninig.
 
@@ -930,7 +930,7 @@ and \texttt{LGBTQ} are covered more by the Left ($3\%$, $12\%$ and $10\%$).
 The main findings from this representation is that the Left is more present in \texttt{defence} ($8\%$), \texttt{crime-law-and-justice} ($9\%$), \texttt{religion} ($12\%$) and \texttt{conflict-war-\\and-peace} ($6\%$) topics. Instead the Left is more centred about \texttt{health} ($4\%$), \texttt{economy} ($1\%$), \texttt{science} ($2\%$), \texttt{environment} ($11\%$), and some very specific subtopics of \texttt{politics}.
 
 
-\subsection{\statusgreen Selected topic methodology}
+\subsection{\statusgreen Selected Topic Methodology}
 \label{ssec:topic_topic_choice}
 
 We have seen in the previous subsections several methodologies for defining and extracting the topics from news articles.
@@ -970,7 +970,7 @@ We have the following analyses:
     % \item analysis of the terms of propaganda across Media Topics: to discover term associations with specific topics.
 \end{itemize}
 
-\subsection{\statusgreen Total quantity of propaganda across Media Topics}
+\subsection{\statusgreen Total Quantity of Propaganda across Media Topics}
 \label{ssec:topic_propaganda_tot}
 % \todoAW{all red, change. Proof is in the quantitative analysis. What I want to communicate? Then after change representation}
 
@@ -1001,7 +1001,7 @@ The topics with most propaganda are: \texttt{sexism} ($9.9\%$) and \texttt{racis
 
 Although we can already distinguish some loaded/polarising topics, we would also like to see the breakdown by specific techniques, therefore in the next subsection we consider each technique individually.
 
-\subsection{\statusgreen Quantity of each propaganda technique across Media Topics}
+\subsection{\statusgreen Quantity of each Propaganda Technique across Media Topics}
 \label{ssec:topic_propaganda_tech}
 
 Similarly to what we have done in Chapter~\ref{chap:linguistic_persuasion}, we want to separate the different techniques. Instead of comparing only the total quantity of propaganda across topics, here we want to see how each of the techniques is distributed across the topics. 
@@ -1220,7 +1220,7 @@ The language contains more propaganda and is stronger when the writer either con
 % We confirm this with our analysis.  
 
 
-\subsection{\statusgreen Correlation of Propaganda Quantities between Leanings across Topics}
+\subsection{\statusgreen Propaganda Quantities Correlation of Leanings across Topics}
 \label{ssec:topic_propaganda_leaning_tech_quantities}
 
 % Propaganda techniques: difference
@@ -1256,7 +1256,7 @@ Therefore, even though the total quantity of propaganda may be different across 
 %also in those topics that showed the difference in the total.\todoHA{??}
 This means that what changes is the total quantity of propaganda, but not the relative proportions of the techniques used.
 
-\subsection{\statusgreen Term Correlation between Leanings across Topics}
+\subsection{\statusgreen Term Correlation of Leanings across Topics}
 \label{ssec:topic_propaganda_leaning_terms}
 
 The last step of this correlation analysis is to see whether the \emph{terms} of propaganda are correlated between them.
@@ -1600,7 +1600,7 @@ The overall improvement of $1.37\%$ F1 is focused mostly on \texttt{politics} ($
 These results mean that the propaganda features are quite useful to differentiate between Left and Right leaning in topics such as \texttt{politics}, \texttt{economy}, \texttt{conflict-and-science}. For these topics, we saw in the previous sections significant differences between left and right propaganda.
 But at the same time, in some topics such as \texttt{court} and \texttt{belief-systems}, which were showing promising statistical differences across leaning, the classifier is not able to use this information to improve the prediction.
 
-\subsection{\statusgreen Predicting Leaning from topics and propaganda}
+\subsection{\statusgreen Predicting Leaning from Topics and Propaganda}
 \label{sec:topic_classifier_propaganda_feature}
 
 For this last experiment, we use the topic as an input feature to try to predict the political leaning of news articles.
