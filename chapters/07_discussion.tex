@@ -1,10 +1,10 @@
 \chapter{\statusgreen Discussions and Conclusions}
 \label{chap:discussion}
 
-\todoAWinline{
-1. When you list your contributions, put the most saleable ones first. In your case, I think that’s the improvement to the automation. Not necessarily because it’s the best, but because it’s a very concrete contribution, whereas understanding the relationship between propaganda and political leaning is much more speculative. The latter is (much) more interesting, but from the perspective of getting a PhD, I’d lead with the concrete.
-2. You probably want to emphasise your own achievement more. In section 7.4, you describe the implications of your contributions as being “the potential to build applications”. That’s very speculative and rather vague. Could you identify some specific tasks and state that your techniques would improve them? Such tasks might be an existing system, or a news report of an approach where your work would help. Just something to ground it a bit more. At the moment, you sound very apologetic for your work!
-}
+% \todoAWinline{
+% % 1. When you list your contributions, put the most saleable ones first. In your case, I think that’s the improvement to the automation. Not necessarily because it’s the best, but because it’s a very concrete contribution, whereas understanding the relationship between propaganda and political leaning is much more speculative. The latter is (much) more interesting, but from the perspective of getting a PhD, I’d lead with the concrete.
+% 2. You probably want to emphasise your own achievement more. In section 7.4, you describe the implications of your contributions as being “the potential to build applications”. That’s very speculative and rather vague. Could you identify some specific tasks and state that your techniques would improve them? Such tasks might be an existing system, or a news report of an approach where your work would help. Just something to ground it a bit more. At the moment, you sound very apologetic for your work!
+% }
 
 This last chapter contains the final discussions and conclusions of this work.
 % We\todoHA{“we” or “I”? what have you been using in your thesis?} 
@@ -171,6 +171,12 @@ For example, we find that some topics contain more propaganda specifically on on
 In more detail, we have three main contributions:
 
 \begin{enumerate}
+    \item We improved F1 of the political leaning classifier using a mix of features.
+    More specifically:
+    \begin{enumerate}
+        \item Chapter~\ref{chap:political_sides} showed that if we add propaganda features on a BERT-based classifier that predicts political leaning, we get slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is relatively small.
+        \item Chapter~\ref{chap:topics}: added the topic and used it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
+    \end{enumerate}
     \item We computed weights and cleared the relationships between the multiple dimensions of similarities, propaganda, leaning and topics. This is achieved with:
     \begin{enumerate}
         \item Analysing the relationship between persuasion and the word variations that different news sources produce when reporting events (Chapter~\ref{chap:linguistic_persuasion}).
@@ -182,13 +188,6 @@ In more detail, we have three main contributions:
         % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
         % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
         
-    \end{enumerate}
-    \item We improved F1 of the political leaning classifier using a mix of features.
-    \todoAW{This is probably the strongest contribution. Put it first, to emphasise your "significant contribution to knowledge".}
-    More specifically:
-    \begin{enumerate}
-        \item Chapter~\ref{chap:political_sides} showed that if we add propaganda features on a BERT-based classifier that predicts political leaning, we get slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is relatively small.
-        \item Chapter~\ref{chap:topics}: added the topic and used it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
     \end{enumerate}
     \item We highlighted the problem of imbalanced dataset for propaganda detection. This emerges from the analysis in different chapters:
     \begin{enumerate}
@@ -244,10 +243,9 @@ Our contributions have implications for two groups of potential shareholders:
 \begin{enumerate}
     \item Computational Researchers:
     \begin{enumerate}
+        \item By using together these multiple variables, we improved some automated approaches that currently rely on just one input feature, such as political leaning classification using propaganda and topic features. By exploiting the relationship between these features, we can help \acrshort{ml} models to have higher values for the target metrics in other applications.
         \item We verify the relationship between political leaning and propaganda with comparative analysis, correlation analysis and the work on features for the classifier of political leaning. By proving that this relationship exists, we bring into focus that more interdisciplinary research is needed between these two research topics (propaganda detection and political leaning classification), to understand the interaction between them further.  
         %The literature assumes that the political ideology of news writers/editors conditions how news articles are written considering economic reasons, unconscious assumptions and reporters-sources relations that are linked to political leanings~\citep{schudson2002news}. And these factors result in news articles that contain more or less subtle persuasion devices for the reader (one of which is propaganda). By analysing and quantifying these relationships, we can understand their weight. % contribution 1: compute weights of these relationships, understand better the relationships
-        \item By using together these multiple variables, we improved some automated approaches that currently rely on just one input feature, such as political leaning classification using propaganda and topic features. By exploiting the relationship between these features, we can help \acrshort{ml} models to have higher values for the target metrics in other applications.
-        \todoAW{Again, put this first so that you draw attention to your main contributions.}
         % contribution 2: improve F1 using mix of feature
         \item %We discovered a big problem\todoHA{downplay this a bit. if this is a big problem then your other results are at a greater risk} of data imbalance on 
         We discovered that the datasets, used for training propaganda detection models, is imbalanced. This implies that the next studies should tackle this problem with more balanced datasets in order to reduce this problem.
@@ -257,11 +255,11 @@ Our contributions have implications for two groups of potential shareholders:
     \end{enumerate}%\todoHA{Fits better in a discussion section at the end of the thesis}
     \item Users reading the news:
     \begin{enumerate}
-        \item By using the methodologies explored in this thesis, there is the potential to build applications that link and show similarities to other articles on how a certain event is covered.
-        \todoAW{I don't like this phrasing at all. This section should be about what you have achieved, not speculation about what someone else could possibly do in the future. Try rephrasing to emphasise your achievements. This is not the time for modesty!}
-        This becomes extremely important when we compare with articles from other political leanings which may have a different angle on the events described.
+        \item By using the methodologies explored in this thesis, future works can build applications that show how a certain event is covered by multiple articles, highlighting similarities and differences across articles.% and persuasion techniques used.
+        % \todoAW{I don't like this phrasing at all. This section should be about what you have achieved, not speculation about what someone else could possibly do in the future. Try rephrasing to emphasise your achievements. This is not the time for modesty!}
+        % For example, it would be extremely useful to build a tool that compares articles from opposing political leanings with different angles on the events described. In this case, by displaying and analysing the different persuasion means, the user would gain a deep understanding of how the reports are trying to influence the reader.
         \item Similar tools can be built to highlight propaganda, to make the users conscious of the techniques used in the articles at the word level. It is crucial for this analysis to be as accurate as possible, and that is why the insights from this thesis should drive the development of balanced datasets as noted above. 
-        \item Show to the user, with the help of tools, how the propaganda of the news articles varies across news sources when describing the same events. With this analysis, we hope to make the users more informed about the manipulation they are faced with and be less manipulable.
+        \item Combine the two previous analyses to show how the propaganda of the news articles varies across news sources when describing the same events. With this analysis, we hope to make the users more informed about the manipulation they are faced with and be less manipulable.
     \end{enumerate}
 \end{enumerate}
 
@@ -276,9 +274,11 @@ During this research path, we have encountered many limitations, both technical 
 The first limitation, that comes from the datasets used, is that we use news articles that come from the US. While this is a relevant country for the English language, we think that it is limiting that the news articles do not come from other English-speaking countries %\todoHA{what about non-English? isn’t this another limitation?} 
 such as the UK or international news.
 This implies that most of the events covered by the articles in the dataset are specific to the US (e.g. Trump, elections).
-\todoHA{also, US propaganda usage might differ from UK and other places}
+% \todoHA{also, US propaganda usage might differ from UK and other places}
+Other English-speaking countries, such as the UK, may have different propaganda than the US even if they use the same language.
 Furthermore, this also means that the computational approaches considered are targeting only the English language. %While we see that some datasets start to be created in other languages, 
-We acknowledge that, as with many other tasks in computational linguistics, we first see an introduction of resources for the English language and then gradually to other languages.\todoHA{odd sentence}
+As with many other tasks in computational linguistics, we see resources being first introduced for the English language and then gradually to other languages.
+%\todoHA{odd sentence}
 We already see some datasets emerging for Hindi and Czech (ref Section~\ref{ssec:ps_prop_leaning_imbalanced}) but only for document-level analysis.
 This limitation applies to the datasets of political leaning (AllSides \texttt{baly}, \texttt{nela-gt}) and even to the propaganda datasets (TSHP-17, QProp and PTC). 
 
@@ -301,12 +301,15 @@ Our goal is to demonstrate the relationship between the involved features, and n
 
 This limitation can quite simply be faced using more recent and complex models, potentially involving generative models such as GPT-4~\citep{openai2023gpt4} to generate training data or even to classify documents and terms.
 
-\todoHAinline{
-One issue I can think about is wrt your topic analysis. It is possible that the use of propaganda in topics change with time and the nature of unfolding events. Eg articles on sports could become propagandistic if some political or ideological issues crop up (does happen).
-Also you have cross-over topics that could raise other challenges.
-Another issue is determining what the propaganda language was used for. If left and right used the same propaganda types to talk about the same event then it’s possible that they used them for different purposes or in association with different points of parts of the event. So what should the next phd students do to analyse this further?
-How could future students use your work to study impact of persuasive techniques on readers?
-}
+Related to the topic analysis, we have a limitation that comes from the fact that the use of propaganda in topics could change with time. % and the nature of unfolding events. 
+For example, articles on sports could become propagandistic if some political or ideological issues intersect. %crop up (does happen).
+The current results may not be valid with future events.
+However, the presented methodology could be used to compute new results in different time frames.
+In this way, it would become possible to do an analysis of how the interaction between propaganda and topics evolves across time.
+% Also you have cross-over topics that could raise other challenges.
+% Another issue is determining what the propaganda language was used for. If left and right used the same propaganda types to talk about the same event then it’s possible that they used them for different purposes or in association with different points of parts of the event. So what should the next phd students do to analyse this further?
+% How could future students use your work to study impact of persuasive techniques on readers?
+% }
 
 
 
@@ -315,4 +318,4 @@ How could future students use your work to study impact of persuasive techniques
 
 In this dissertation, we presented propaganda in relationships with multiple dimensions, such as political leaning, similarities across documents, and topics. Our analysis of these relationships was approached from multiple perspectives, which posed significant challenges. Nonetheless, these challenges served to make this doctoral work particularly engaging and rewarding.
 
-From our contribution, we hope that the communities of researchers working on several computational news analysis tasks (e.g., propaganda detection, parallel news analysis and political leaning classification) can join their efforts and proceed in a research direction that would exploit the relationships that we described here in this work.
+From our contribution, we hope that the communities of researchers working on several computational news analysis tasks (e.g., propaganda detection, parallel news reports analysis and political leaning classification) can join their efforts and proceed in a research direction that would exploit the relationships that we described here in this work.

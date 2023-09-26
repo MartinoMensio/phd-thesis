@@ -2,10 +2,10 @@
 \label{chap:intro}
 
 % ROUND 2 comments AW
-\todoAWinline{
-You say at the beginning that you’re going to talk about “persuasion” rather than “propaganda” or “framing”. And then you talk about “propaganda” a lot. Does that need tweaking?
-You give your 4 research hypotheses, but they’re all stated as straight facts, so I can’t work out what the actual hypothesis is. These want rephrasing so that it’s clear what is your hypothesis, and what are the facts which led to the hypothesis. “The first hypothesis is that… . This is based on Bloggs’ (1836) observation that…”
-}
+% \todoAWinline{
+% You say at the beginning that you’re going to talk about “persuasion” rather than “propaganda” or “framing”. And then you talk about “propaganda” a lot. Does that need tweaking?
+% You give your 4 research hypotheses, but they’re all stated as straight facts, so I can’t work out what the actual hypothesis is. These want rephrasing so that it’s clear what is your hypothesis, and what are the facts which led to the hypothesis. “The first hypothesis is that… . This is based on Bloggs’ (1836) observation that…”
+% }
 
 
 % ROUND 1 comments
@@ -156,7 +156,8 @@ This would give insights into how propaganda changes across topics and leanings,
 % The motivations of this thesis are multiple.
 
 By analysing the relationship between propaganda, political leanings and topics, we aim to understand how strongly they are linked together.
-\todoHA{And what is the motivation behind you need to understand this relationship? What would this lead to, potentially?}
+Modelling these factors together could be beneficial in improving the results of tasks that are considered in isolation.
+% \todoHA{And what is the motivation behind your need to understand this relationship? What would this lead to, potentially?}
 There is a wide literature, both theoretical and practical, about each of these factors.
 And on the theoretical/qualitative research level, there are some works that explain and motivate this relationship by analysing a specific event or timeframe~\citep{pierri2023propaganda,golovchenko2020cross,blumberg1986comparative}.
 However, on the computational side, we find a lack of approaches that consider these factors together.
@@ -174,7 +175,7 @@ A computational approach, which considers together document similarity, propagan
         We find examples in the literature~\citep{schudson2002news} that explain how the political ideology of news writers/editors conditions writing news articles, considering economic reasons, unconscious assumptions and reporter-sources relations that are linked to political leanings. Therefore, these factors result in news articles that contain more or less subtle persuasion devices for the reader (one of which is propaganda). By analysing and quantifying these relationships, we can understand their importance.
         % contribution 1: compute weights of these relationships, understand better the relationships
         \item By using together these variables, we can try to improve some automated approaches that currently rely on just one input feature, such as political leaning classification
-        \todoHA{so this is the type of value added that I was looking for. If you reach a better understanding of X, then you can improve Y. This could go earlier in this section.}
+        % \todoHA{so this is the type of value added that I was looking for. If you reach a better understanding of X, then you can improve Y. This could go earlier in this section.}
         using propaganda and topic features. By exploiting the relationship between these features, we can help \acrfull{ml} models to have higher values for the target metrics. % contribution 2: improve F1 using mix of feature
         \item With an analysis that considers multiple variables, we may identify problems and inconsistencies that can only be discovered with combined analyses (e.g., data imbalance). This is a valuable point when using \acrshort{ml}-based approaches, as improving the quality of the data is a key element. % contribution 3: We highlight the problem of imbalanced dataset for propaganda detection
     \end{enumerate}
@@ -305,28 +306,28 @@ This thesis is based on several hypotheses inspired by the literature analysis.
 % Most of them come from the literature, mixed with common knowledge.
 
 % layers of info and choice of terms
-\emph{HYP1:} News articles are created with different layers of information: (i) the facts being reported, and (ii) the (choice of) language used to report those facts.
-\todoAW{Hard to read. Use enumerate. Don't run enumerations into the main text!}
+\emph{HYP1:} The first hypothesis is that news articles are created with different layers of information: (i) the facts being reported, and (ii) the (choice of) language used to report those facts.
+% \todoAW{Hard to read. Use enumerate. Don't run enumerations into the main text!}
 %\todoAW{Would it be clearer to talk about i/ the facts being reported, and ii/ the (choice of) language used to report those facts?}
 These layers are not separate and are very intertwined. At the word level, we may have words that are strictly topical words or are strictly persuasive words. However, we may also have words that represent both layers, with specific terms chosen from a multitude of synonyms to push for a certain idea.
-We find this hypothesis in~\citet{jenkins2013thin,vanderwicken1995news,jang2023proximate,bountouridis2018explaining}.
+This hypothesis has grounds in the works of~\citet{jenkins2013thin,vanderwicken1995news,jang2023proximate,bountouridis2018explaining}.
 With our \acrshort{rq}1, we aim to understand what changes between multiple articles about the same event. In this scenario, we have the layer of facts that is shared across articles, and the layer of choices that changes. Therefore, if we analyse what changes between articles, we end up with the second layer, and we can verify or refute this hypothesis.
 
 % corroboration and choice of details
 % \emph{HYP2:} News articles are written by choosing which details to include and which ones to skip, and this may be done on purpose to influence the reader. This assumes that there are multiple details to choose from, and the news outlets (writer/editor) need to make a selection for fitting in the desired length or more directly supporting a certain position. And everywhere manual selection is done, there is a possible point of bias. This hypothesis is described in~\citet{bountouridis2018explaining} while trying to computationally detect corroborations and omissions.
-\emph{HYP2:} Some choices are made with the aim of influencing the reader. Language allows great expressiveness and language choices allow very different messages to be conveyed. Therefore, the news is not exempt from conveying persuasive messages even when trying to transmit a neutral point of view~\citep{gass2018persuasion}.
+\emph{HYP2:} The second hypothesis is that some choices are made with the aim of influencing the reader. Language allows great expressiveness and language choices allow very different messages to be conveyed. This is based on the work of~\citet{gass2018persuasion} that observes that the news is not exempt from conveying persuasive messages even when trying to transmit a neutral point of view.
 Our \acrshort{rq}2 aims at understanding how well we can detect persuasion techniques. By answering this question, we can recognise attempts to influence and persuade the reader with specific techniques.
 
 % propaganda and leaning
-\emph{HYP3:} Propaganda language used by different political leanings is distinguishable. This means that Left and Right leaning have specific techniques or wordings that they use for example to target political opponents. Literature shows this~\citep{blumberg1986comparative}, but we want to detect computationally such differences in techniques and wordings.
+\emph{HYP3:} The third hypothesis is that propaganda language used by different political leanings is distinguishable. This would mean that Left and Right leaning have specific techniques or wordings that they use for example to target political opponents. The hypothesis is based on theoretical works from the literature that compare specific cases~\citep{blumberg1986comparative}, but we want to see if we can detect computationally such differences in techniques and wordings.
 \acrshort{rq}3 goes in this direction, finding the differences between propaganda used by Left and Right.
 
 % topic
-\emph{HYP4:} Propaganda is more strongly present in articles about certain topics than others. These topics are more polarising and public debate is much more accentuated on them (e.g., elections, immigration, environment). On the other side, there is very little propaganda or none on certain topics (e.g., art, weather).
+\emph{HYP4:} Our last hypothesis is that propaganda is more strongly present in articles about certain topics than others. This could happen on topics that are more polarising and public debate is much more accentuated on them (e.g., elections, immigration, environment). On the other side, there may be very little propaganda or none on certain topics (e.g., art, weather).
 With \acrshort{rq}4 we aim to understand how propaganda varies across topics and leanings.
-\todoAWinline{
-You haven't really phrased this (or any of the previous three) as a hypothesis. Particularly when you get onto "These topics are more polarising and public debate is more accentuated...", I don't know whether that is part of your hypothesis, or whether it's a fact on which you've built the hypothesis. Similarly, you say "On the other side, there is very little propaganda or none on certain topics": is that a hypothesis or a fact? Need to rephrase all the research hypotheses so that it's clear what is a hypothesis, and what is a supporting fact.
-}
+% \todoAWinline{
+% You haven't really phrased this (or any of the previous three) as a hypothesis. Particularly when you get onto "These topics are more polarising and public debate is more accentuated...", I don't know whether that is part of your hypothesis, or whether it's a fact on which you've built the hypothesis. Similarly, you say "On the other side, there is very little propaganda or none on certain topics": is that a hypothesis or a fact? Need to rephrase all the research hypotheses so that it's clear what is a hypothesis, and what is a supporting fact.
+% }
 
 % % unbalance
 % Current propaganda detection recognises better right-leaning propaganda
@@ -348,9 +349,11 @@ As we described in the previous sections, methodologically we take one concept a
 If we go into more detail about the single experiments done in the thesis, we use several methodologies across the chapters:
 \begin{itemize}
     \item classifier-based: for a big part of our experiments, we use a methodology that is usually employed with classifiers. This is based on the computation of a metric (macro F1 in this case) of how well the classifier is able to predict the correct label for the inputs (in this case news articles). We use this setup with a classifier to understand the impact of multiple input variables (text of the articles, propaganda features, topic labels) on predicting the correct political leaning of the articles (compared with ground truth labels).
-    \todoAW{I'd put a nod here to the dataset you've used, and a forward pointer to teh relevant section.}
+    % \todoAW{I'd put a nod here to the dataset you've used, and a forward pointer to the relevant section.}
     In addition, this setup allows performing a \emph{confusion analysis}, to understand the labels that were predicted incorrectly. Depending on the model used, we can also perform a \emph{feature importance} analysis to evaluate the strength of the features to make the prediction, to understand what the model learns. This methodology is performed together with a significance test, which establishes the probability of the observed improvement happening by chance.
-    \item comparative analysis: in Chapters~\ref{chap:political_sides} and \ref{chap:topics} we use comparative analysis\todoAW{What's that? Give a citation.} to compare the distribution of one observed variable across multiple controlled variables. This methodology relies on aggregated metrics (such as average, median and standard variation) on a specific variable (e.g. quantity of a propaganda technique) to compare groups of articles and observe differences. We extract patterns of association between variables and observations from statistics across the groups.
+    \item comparative analysis: in Chapters~\ref{chap:political_sides} and \ref{chap:topics} we use quantitative comparative analysis
+    % \todoAW{What's that? Give a citation.}
+    to compare the distribution of one observed variable across multiple controlled variables. This methodology relies on aggregated metrics (such as average, median and standard variation) on a specific variable (e.g. quantity of a propaganda technique) to compare groups of articles and observe differences. We extract patterns of association between variables and observations from statistics across the groups.
 \end{itemize}
 
 
@@ -359,6 +362,11 @@ If we go into more detail about the single experiments done in the thesis, we us
 
 The major contributions of this work are the following:
 \begin{enumerate}
+    \item improving F1 of the political leaning classifier using a mix of features. More specifically:
+    \begin{enumerate}
+        \item Chapter~\ref{chap:political_sides}  shows that if we add propaganda features on a BERT-based~\citep{devlin2018bert} classifier that predicts political leaning, we produce slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
+        \item Chapter~\ref{chap:topics} adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
+    \end{enumerate}
     \item computing weights and better understanding the relationships between the multiple dimensions of similarities, propaganda, leaning and topics. This is achieved with:
     \begin{enumerate}
         \item Chapter~\ref{chap:linguistic_persuasion} contains an analysis of the relationship between persuasion and the word variations that different news sources produce when reporting events.
@@ -370,11 +378,6 @@ The major contributions of this work are the following:
         % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
         % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
         
-    \end{enumerate}
-    \item improving F1 of the political leaning classifier using a mix of features. More specifically:
-    \begin{enumerate}
-        \item Chapter~\ref{chap:political_sides}  shows that if we add propaganda features on a BERT-based~\citep{devlin2018bert} classifier that predicts political leaning, we produce slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
-        \item Chapter~\ref{chap:topics} adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
     \end{enumerate}
     \item highlighting the problem of imbalanced dataset for propaganda detection.
     % \todoAW{Given the extensive coverage of bias in LLMs over the last few months, to what extent is this a contribution? Or how can you phrase it so it's obviously an original contribution?} 

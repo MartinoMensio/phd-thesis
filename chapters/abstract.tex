@@ -5,40 +5,47 @@
 % that can be distinguished with different degrees of difficulty.
 % This phenomenon is called \emph{framing} and different works have analysed it.
 In recent years, computational studies started analysing several aspects of News Media.
-Both researchers and private companies, driven by the need to understand and keep a healthy environment around public discussion, began developing models to extract and classify news articles in multiple dimensions: parallel news analysis, propaganda techniques detection, political leaning recognition and topic detection.
+% Both researchers and private companies, driven by the need to understand and keep a healthy environment around public discussion, began
+The research community began
+developing models to extract and classify news articles in multiple dimensions: parallel news reports analysis, persuasion techniques detection, political leaning recognition and topic detection.
 
 % RATIONALE: create a niche
-While there is a lot of computational research on propaganda detection, we find that it has not been studied together with the other factors of 
+While there is a lot of computational research on persuasion detection, we find that it has not been studied together with the other factors of 
 %But computational studies lack a study of the relationships between these multiple factors of 
-parallel news, political leaning, and topics.
-It is important to study the relationship between these factors in order to have a much clearer understanding of propaganda in different conditions.
+parallel news reports, political leaning, and topics.
+% It is important to study the relationship between these factors in order to have a much clearer understanding of propaganda in different conditions.
 % With this PhD, we want to tackle instances of framing that are difficult to recognise.
 % These can manifest subtly through word choices and selection of what to include or exclude from the narrative line.
-
-
+%
+%
 % AIM: purpose of research
-This PhD aims to analyse the relationship between propaganda and parallel news, political leaning and topics. We want to understand how propaganda changes across political leaning and topics.
+% This PhD aims to analyse the relationship between propaganda and parallel news reports, political leaning and topics. We want to understand how propaganda changes across political leaning and topics.
+This PhD analyses the use of language in parallel news articles to understand how persuasion changes across political leaning and topics.
 
 
 % METHOD: methodology and theoretical framework 
 We use two methodologies in our work:
 (i) comparative analysis: we study one observed dimension across one or more partitioning variables;
 (ii) classifier-based: we combine different variables as features for a classifier that needs to predict one additional variable.
-With these two methodologies, we analyse how propaganda changes across leanings and topics, and we see what is the effect of using propaganda and topics to predict the political leaning of news articles. 
+With these two methodologies, we analyse how persuasion changes across leanings and topics, and we see what is the effect of using persuasion and topics to predict the political leaning of news articles. 
 
 
 % contributions
 % FINDINGS: outline of the findings
 Our work has three main contributions.
-(i) We quantify the relationships between propaganda and similarities, political leaning and topics. We discover that for specific topics, news sources use very different propaganda terms across the political spectrum.
-(ii) We improve the F1 of a political leaning classifier using the features of propaganda and topic.
-(iii) We discover an important imbalance in the datasets used for propaganda detection: most of the articles come from right-leaning sources.
+(i) We improve the F1 of a political leaning classifier using the features of propaganda and topic.
+(ii)
+%We quantify the relationships between propaganda and similarities, political leaning and topics. 
+We discover that for specific topics, news sources use very different propaganda terms across the political spectrum, while still using the same techniques.
+% The same persuasion techniques are used for each topic, even when the political leaning of the article is different.
+(iii) We discover an imbalance in the standard datasets for propaganda detection, which raises questions about the generality of results in the literature.
 % We present a method that could help both human readers and automated approaches to find more easily when such framing techniques occur in the news.
 % We want to provide an analysis of articles, by exploiting the differences in how information is presented by different sources.
 % We can then analyse how different sources in the media landscape are using framing in different ways.  
 
 
 % INTERPRETATION: general significance of the findings 
-We are convinced that the results found in this work can be useful both for computational researchers and users reading the news.
+We believe that the results of this work can be useful both for computational researchers and users reading the news.
 For the first group, we emphasise the need to exploit the relationships discovered to improve models (using mixed features) and datasets (making them more representative of the news as a whole).
-For the second group, our work can be applied to build tools to empower the reasoning of users, by letting them compare multiple articles on the same topic and highlighting the propaganda techniques used.
+% For the second group, our work can be applied to build tools to empower the reasoning of users, by letting them compare multiple articles on the same topic and highlighting the techniques used.
+For the second group, our work can be applied to build tools to help users compare multiple articles on the same topic, to highlight any techniques used.
