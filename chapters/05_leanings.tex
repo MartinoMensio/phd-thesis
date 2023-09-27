@@ -11,7 +11,7 @@
 % For this reason, the next chapter will consider perspectives and political sides. In this way we will try to understand if the persuasion of each political side is similar or which are the differences. If a different goal for the persuasion also can be observed on the persuasion itself.
 
 % In this chapter, we introduce a new factor in our analysis.
-In the previous Chapter, %covered persuasion and propaganda,
+In the previous chapter, %covered persuasion and propaganda,
 we demonstrated the need to understand the context around the source of an article in order to interpret the persuasion techniques it contains.
 %\todoAW{What are an articles' "persuasion means"?}
 
@@ -133,7 +133,7 @@ For our analysis on the leaning, we have selected resources based on the followi
     \item publicly available, possibly containing the full text of the articles. If the full text is not available, they may refer to a list of news sources (with political leaning) and therefore we can join this information with datasets that contain full text and news source;
     %\todoHA{not very clear}
     \item relatively large: we need a good number of articles (e.g. $\sim$10k) in order to apply machine learning models;
-    \item directly indicate the political leaning of the source/articles. This means that we do not conider datasets that only annotate the news source without asssigning a leaning to the source (e.g., All-the-News or Google News Headlines used in the previous chapters).
+    \item directly indicate the political leaning of the source/articles. This means that we do not consider datasets that only annotate the news source without assigning a leaning to the source (e.g., All-the-News or Google News Headlines used in the previous chapters).
     %\todoHA{meaning what?}
 \end{enumerate}
 
@@ -286,7 +286,7 @@ This dataset is derived from \emph{Allsides Headline Roundup\texttrademark}, as 
 The dataset therefore 
 % % FROM TTO2020
 % The dataset we use is from~\citet{baly2020we}, and
-consists of articles in English language from over 800 sources (majority from the US), labelled for their political leaning (Left, Centre or Right).\footnote{\url{https://github.com/ramybaly/Article-Bias-Prediction}}
+consists of articles in English language from over 800 sources (majority from the US), labelled for their political leaning (Left, Centre or Right).
 This dataset contains several attributes for each article: full text (collected from several news websites and cleaned), political leaning, topic, news source, and author name (attributes from AllSides).
 % However, in our models and experiments, we only use the text of the articles to avoid bias associated with the other attributes.
 The topic distribution of the articles is uniform across the political leanings, because the dataset comes from triples of articles, one from each political leaning, about the same issue. 
@@ -324,7 +324,7 @@ The dataset described in ~\citet{baly2020we} contains 34,737 articles, whereas i
 
 \subsubsection{NELA-GT-2018}
 
-This dataset, published in~\citet{DVN/ULHLCB_2019}, contains $713,534$ news articles coming from $194$ news sources (most frequents, in descending order: The Sun, The Telegraph, The Russophile, Sputnik, New York Post, The Independent, Drudge Report, Evening Standard, The Guardian, BBC, Instapundit, OANN, TruePundit, Daily Mirror, Daily Caller).
+This dataset, published in~\citet{DVN/ULHLCB_2019}, contains $713,534$ news articles coming from $194$ news sources (most frequent, in descending order: The Sun, The Telegraph, The Russophile, Sputnik, New York Post, The Independent, Drudge Report, Evening Standard, The Guardian, BBC, Instapundit, OANN, TruePundit, Daily Mirror, Daily Caller).
 
 For each article, the available attributes are: publishing date, source, title and content.
 Furthermore, for each source, there are many attributes that come from MBFC, AllSides, NewsGuard, Pew Research Center, Open Sources, BuzzFeed. Out of these many attributes, the one that refer to the political leaning are: MBFC, AllSides and BuzzFeed. Out of these three classifications, we find that in the majority of the cases, the labels agree and the only cases where they do not agree are between the Center label (by AllSides) and the Center-Left and Center-Right of MBFC. In other words, the systems only differ in the thresholds around the Center.
@@ -351,7 +351,7 @@ After having described the datasets, in this section we present the model that w
 % Others focused on inferring the political leaning of Twitter accounts~\citep{Cohen2013ClassifyingPO}, Facebook users~\citep{Bakshy1130}, politicians~\citep{thomas-etal-2006-get}, or political writers~\citep{iyyer-etal-2014-political}. 
 % Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201,Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}.
 
-We focus on detecting political learning of articles in a corpus of general news from a wide variety of sources (from the previous Section~\ref{ssec:ps_leaning_data}). %, using a neural network approach fused with propaganda features. %\todo{description ok?} 
+% We focus on detecting the political leaning of articles in a corpus of general news from a wide variety of sources. %, using a neural network approach fused with propaganda features. %\todo{description ok?} 
 
 %often used supervised or unsupervised models applied to , or on opinion graph mining~\citep{thomas-etal-2006-get}.
 
@@ -425,19 +425,16 @@ According to the details provided, we embed the articles in the dataset with a p
 \end{table}
 
 Table~\ref{tab:results_baselines_classifier} shows the baseline results.
+The row denoted with \texttt{Majority} represents a simple baseline that always provides in output the most common class. It has quite low results and is considered here just as a lower threshold for the values of the other models.
 The row indicated with \texttt{Baly-paper} corresponds to the numbers reported in~\citet{baly2020we} (in their table~3, while \texttt{Baly-baseline} represents the results that we got from reproducing the experiments.
 
-The difference is a quite significant drop ($\sim80\% \rightarrow 56\%)$ with the random splits while outperforming ($\sim30\% \rightarrow 40\%$) with the media splits.
-\texttt{Majority} baseline, just providing the most common class as output, has quite low results and is considered here just as lower threshold on the other values.
-
-
+The difference is a significant drop for the random splits ($\sim80\% \rightarrow 56\%)$  while an increased value for the media splits ($\sim30\% \rightarrow 40\%$).
 % Note, however, that the results we reproduced differ from those reported in their paper.
 This quite big difference could be because of possible slight re-implementation discrepancies, and of the difference between the dataset reported in their paper and the one they shared on GitHub, as discussed previously in Section~\ref{ssec:ps_leaning_data}.%, which is likely to be due to later updates to the dataset. 
 % Table~\ref{tab:results_baselines_classifier} shows the results we reproduced, which form our baseline (\texttt{Baly-baseline}). %For reference, we also include the results reported in the baseline model paper (\texttt{Baly-paper}).%, which are significant drop with the random splits while outperforming with the media splits.
 
 Differences in the data and not sharing the implementation make it impossible to reproduce their baseline exactly.
 Therefore, \texttt{Baly-baseline} represents our best effort in reproducing it.
-
 In the next experiments, when we refer to the baseline
 we mean the reproduction of the baseline as in \texttt{Baly-baseline}. Using the numbers from \texttt{Baly-paper} would not be fair, as the dataset used is different, and we want to exclude any other factors in the comparison of the results.
 
@@ -1192,7 +1189,7 @@ As we saw in the previous Section~\ref{ssec:ps_prop_leaning_across} in Figure~\r
 % \end{itemize}
 
 \subsubsection{Results}
-Table~\ref{tab:results_prop_features_classifier} shows the results of this first feature set under the name \texttt{Prop-Total}. The low values, just above the \texttt{Majority} baseline, indicate that the feature is unsuitable for determining which side an article belongs to. Both F1 and accuracy are below the values of \texttt{Baly-baseline} for both Random and Media splits. Even combining this feature with the baseline (i.e. adding propaganda percentage as features to the BERT model) does not provide an improvement, as shown by the row denoted by (0) + (1).
+Table~\ref{tab:results_prop_features_classifier} shows the results of this first feature set under the name \texttt{Prop-Total}. The low values, just above the \texttt{Majority} baseline, indicate that the feature is unsuitable for determining which side an article belongs to. Both F1 and accuracy are below the values of \texttt{Baly-baseline} for both Random and Media splits. Even combining this feature with the baseline (i.e. adding propaganda percentage as features to the BERT model) does not provide an improvement, as shown by the row denoted by \texttt{(0)+(1)}.
 
 
 
