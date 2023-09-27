@@ -1201,15 +1201,16 @@ Table~\ref{tab:results_prop_features_classifier} shows the results of this first
 % This means that, removing the shortcut~\citep{geirhos2020shortcut} of ``everything belongs to the Left'', the model cannot pick any relevant information from the feature described above.
 % For the \texttt{baly} dataset instead,
 
-\subsubsection{Confusion Analysis}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.75\linewidth]{figures/baly_media_confusion_matrix_propaganda_total_percentage.pdf}
+    \includegraphics[trim={0.9cm 2cm 0.9cm 1cm},clip,width=0.75\linewidth]{figures/baly_media_confusion_matrix_propaganda_total_percentage.pdf}
     %\vspace{-1cm}
     \caption{Confusion matrix using the \texttt{Prop-Total} features (RQ3.2.1).}
     \label{fig:total_prop_confusion}
 \end{figure}
+
+\subsubsection{Confusion Analysis}
 
 The confusion matrix in Figure~\ref{fig:total_prop_confusion} shows that the classifier is introducing biased predictions towards the Right-leaning class. %From observing that in general right-leaning articles contain more propaganda overall (\texttt{Prop-Total} feature), the results are skewed right. 
 This results in higher recall but lower precision for the Right class, and almost zero accuracy for the Centre label. 
@@ -1403,15 +1404,15 @@ Figure~\ref{fig:prop_tech_confusion} is the confusion matrix for the classifier 
 % From the imbalanced situation in \ref{fig:prop_tech_confusion_60k}, where the articles were generally predicted to be Left leaning, the subfigure \ref{fig:prop_tech_confusion_60k_balanced} shows that after the correction most of the articles are classified on the Centre.
 If we compare the subfigures~\ref{fig:prop_tech_confusion_baly_random} and~\ref{fig:prop_tech_confusion_baly_media}, we see that they are quite similar (F1 and accuracy are very similar too). The only difference is that the Media split predictions are more Right-leaning biased, resulting in lower local F1 for Left and Centre.
 
-\subsubsection{Feature Importance Analysis}
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{figures/nodes_stratifiedbalanced_weights_propaganda_percentages-small-simple.pdf}
+    \includegraphics[trim={0cm 0.9cm 2cm 2.5cm},clip,width=\linewidth]{figures/nodes_stratifiedbalanced_weights_propaganda_percentages-small-simple.pdf}
     \caption{Weights for the \texttt{Prop-Techniques} features on the balanced dataset.}
     \label{fig:prop_tech_weights}
 \end{figure}
 
+\subsubsection{Feature Importance Analysis}
 % features learned
 To understand what the model has learnt, we investigate the weights assigned by the neural layer part of the model.
 The values are retrieved from the neural network by analysing the weights of the SoftMax layer described before.
@@ -1784,9 +1785,9 @@ We want to understand with this dataset what the models learn. Here we analyse t
 % - prop quantities Right/Center bias
 % - combined: drifting a bit to the Right (and problems? what is better? still unbalanced to Left)
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
     \centering
-     \begin{subfigure}[b]{0.48\linewidth}
+     \begin{subfigure}[b]{0.7\linewidth}
          \centering
          \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert.pdf}
          \caption{Baseline: \texttt{Baly-baseline (0)}.}
@@ -1799,13 +1800,13 @@ We want to understand with this dataset what the models learn. Here we analyse t
     %      \caption{\texttt{Prop-Techniques (2)}}
     %      \label{fig:nela_confusion_prop_quantities}
     %  \end{subfigure}
-    \begin{subfigure}[b]{0.48\linewidth}
+    \begin{subfigure}[b]{0.7\linewidth}
          \centering 
          \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_propaganda_techniques_tf_idf.pdf}
          \caption{\texttt{Prop-Techniques-Terms (3b)}.}
          \label{fig:nela_confusion_prop}
      \end{subfigure}
-    \begin{subfigure}[b]{0.48\linewidth}
+    \begin{subfigure}[b]{0.7\linewidth}
          \centering 
          \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert,propaganda_total_percentage,propaganda_percentages,propaganda_techniques_tf_idf.pdf}
          \caption{Combination: \texttt{(0)+(1)+(2)+(3b)}.}

@@ -37,7 +37,9 @@
 \newcommand*{\extravspace}[1]{\vspace{0in}}
 %% Setup a command to set spacing for body text; also used to restore spacing after long tables in document
 \newcommand*{\bodyspacing}{
-  \doublespacing
+  % \doublespacing
+  % \singlespacing
+  \onehalfspacing
 }
 %% Setup a command to set spacing for long tables, to be used manually in document
 \newcommand*{\tablespacing}{
