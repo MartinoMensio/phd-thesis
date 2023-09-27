@@ -193,7 +193,7 @@ This dataset does not provide any articles, but it is used as reference by many 
 
 We use this dataset in two different places in this chapter.
 The first one, when experimenting with the political leaning classifier based on propaganda features, in Section~\ref{ssec:ps_prop_leaning_classifier}, as its leaning labels are used in the \texttt{NELA-GT18} dataset that we use as a secondary dataset to confirm our findings.
-And the second place where we use this dataset is in Section~\ref{ssec:ps_prop_leaning_imbalanced} to analyse the imbalance of the datasets across political leaning and we need its information to place news sources across the political spectrum.
+The second place where we use this dataset is in Section~\ref{ssec:ps_prop_leaning_imbalanced} to analyse the imbalance of the datasets across political leaning and we need its information to place news sources across the political spectrum.
 
 \subsubsection{AllSides Dataset}
 % stats updated 15/02/2023
@@ -219,7 +219,7 @@ The other collection that is very useful from AllSides is the Headline Roundups\
 
 % is a platform that collects articles from different news sources providing a hand-curated set of stories where articles with opposing political bias are put together, with also a brief textual introduction of the framing differences.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/allsides.png}
     \caption{Example of AllSides Headline Roundup.}
@@ -327,7 +327,7 @@ The dataset described in ~\citet{baly2020we} contains 34,737 articles, whereas i
 This dataset, published in~\citet{DVN/ULHLCB_2019}, contains $713,534$ news articles coming from $194$ news sources (most frequents, in descending order: The Sun, The Telegraph, The Russophile, Sputnik, New York Post, The Independent, Drudge Report, Evening Standard, The Guardian, BBC, Instapundit, OANN, TruePundit, Daily Mirror, Daily Caller).
 
 For each article, the available attributes are: publishing date, source, title and content.
-And then, for each source, there are many attributes that come from MBFC, AllSides, NewsGuard, Pew Research Center, Open Sources, BuzzFeed. Out of these many attributes, the one that refer to the political leaning are: MBFC, AllSides and BuzzFeed. Out of these three classifications, we find that in the majority of the cases, the labels agree and the only cases where they do not agree are between the Center label (by AllSides) and the Center-Left and Center-Right of MBFC. In other words, the systems only differ in the thresholds around the Center.
+Furthermore, for each source, there are many attributes that come from MBFC, AllSides, NewsGuard, Pew Research Center, Open Sources, BuzzFeed. Out of these many attributes, the one that refer to the political leaning are: MBFC, AllSides and BuzzFeed. Out of these three classifications, we find that in the majority of the cases, the labels agree and the only cases where they do not agree are between the Center label (by AllSides) and the Center-Left and Center-Right of MBFC. In other words, the systems only differ in the thresholds around the Center.
 Instead, the labels from BuzzFeed cover a significantly lower number of sources, and they only have two values (Left and Right), without a Center category.
 
 In Appendix~\ref{app:nela_processing} we present the processing that we have done on this dataset, to create balanced and unbalanced versions of both random and media splits for it.
@@ -816,7 +816,7 @@ For example, in the \texttt{Name\_Calling/Labeling} technique we can see how the
 Or for the \texttt{Flag-Waving} technique, we see how \emph{we the people} emerges from the Right, while the Left is more about \emph{white/black} and \emph{life/society}.
 Also in the \texttt{Appeal\_to\_fear-prejudice}, we can see how thematically the Right is more recognisable for terms related to invasion/attack/destruction, while the Left emerges uniquely with \emph{climate}.
 For the \texttt{Appeal\_to\_Authority}, the left has more use of the term \emph{news}, the Center instead with \emph{intelligence} and the Right with terms related to writing (\emph{written/note}).
-And still in the \texttt{Slogans} technique, the center outlets emerges with the repetition of \emph{make America great again}, while the Left is repeating more the slogan \emph{Black lives matter}.
+Still in the \texttt{Slogans} technique, the center outlets emerges with the repetition of \emph{make America great again}, while the Left is repeating more the slogan \emph{Black lives matter}.
 
 \subsection{Findings and Discussion}
 
@@ -842,7 +842,7 @@ Instead, for the term analysis, we were able for some techniques to interpret th
 Recognising these features in the text can give a higher probability of belonging to one leaning than to the others.
 
 % discussion
-The quantity analysis provided quite useful insights over the preferred techniques from news sources coming from different political leanings. And the term analysis provided us with important terms that occur more in one leaning than in the others.
+The quantity analysis provided quite useful insights into the preferred techniques from news sources coming from different political leanings. Instead, the term analysis provided us with important terms that occur more in one leaning than in the others.
 We have a much better understanding of how propaganda differs across the political spectrum.
 
 % limitations
@@ -854,7 +854,7 @@ This is the own limitation of the current detection technique, which we took as 
 Furthermore, we would need to capture a bit more around the context of the propaganda techniques in order to understand what is their intent. We think that by analysing the topics of the articles more in details we could understand better the targets of propaganda and how propaganda is used as a mean to persuade in a certain direction about the topics. We will investigate the topics in the next Chapter~\ref{chap:topics}.
 
 % link to next experiment
-And as the last limitation, we extracted these insights, but we do not know to what extent they reflect in an immediate and definitive indication of the leaning of the articles.
+As the last limitation, we extracted these insights, but we do not know to what extent they reflect in an immediate and definitive indication of the leaning of the articles.
 The weightings of the TF-IDF show, in many cases, very similar scores. Therefore, it is unclear for now how easy or hard would it be to use these features to automatically recognise the leaning of one article. %(more in the next Subsection~\ref{ssec:ps_prop_leaning_classifier})
 % it is not clear whether these features can be used to automatically differentiate between the propaganda of the left and the one from the right.
 We experiment in this direction with the following Section~\ref{ssec:ps_prop_leaning_classifier}.
@@ -1055,7 +1055,7 @@ Therefore, we use the following steps to achieve this goal:
 % \paragraph{Political Leaning Model}
 % Our baseline is the same as described in the previous Section~\ref{ssec:ps_leaning_classifier}.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{figures/methodology-Page-1.pdf}
     \caption{The architecture of the model to classify political leaning.}
@@ -1339,7 +1339,7 @@ Table~\ref{tab:contingency2}.
 %     \label{tab:contingency}
 % \end{table}
 
-\begin{table}[]
+\begin{table}[!htbp]
     \centering
 %    \scriptsize
 \small
@@ -1366,7 +1366,7 @@ The improved generalisation abilities of this feature is perhaps what is driving
 
 \subsubsection{Confusion Analysis}
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
     \centering
     %  \begin{subfigure}[b]{0.45\linewidth}
     %      \centering
@@ -1405,7 +1405,7 @@ Figure~\ref{fig:prop_tech_confusion} is the confusion matrix for the classifier 
 If we compare the subfigures~\ref{fig:prop_tech_confusion_baly_random} and~\ref{fig:prop_tech_confusion_baly_media}, we see that they are quite similar (F1 and accuracy are very similar too). The only difference is that the Media split predictions are more Right-leaning biased, resulting in lower local F1 for Left and Centre.
 
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[trim={0cm 0.9cm 2cm 2.5cm},clip,width=\linewidth]{figures/nodes_stratifiedbalanced_weights_propaganda_percentages-small-simple.pdf}
     \caption{Weights for the \texttt{Prop-Techniques} features on the balanced dataset.}
@@ -1529,7 +1529,7 @@ We can see the term ``fit'' emerging as a very representative term of the Centre
 
 
 % TODO: make clearer distinction between propaganda label and word
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
     \centering
      \begin{subfigure}[b]{\linewidth}
          \centering
@@ -1816,10 +1816,10 @@ We want to understand with this dataset what the models learn. Here we analyse t
     \label{fig:nela_confusion}
 \end{figure}
 
-Figure~\ref{fig:nela_confusion} shows the inspection of the confusion matrix from three features sets on the \texttt{Media-Balanced} splits.
+Figure~\ref{fig:nela_confusion} shows the inspection of the confusion matrix from three feature sets on the \texttt{Media-Balanced} splits.
 In Subfigure~\ref{fig:nela_confusion_bert} we can see that the baseline is having problems with the Left.
 On one side, articles that are actually from the Left are being predicted as being from the Center and Right.
-At the same time, articles from Center and Right are being predicted as being from the Left. And this results in the model to be biased towards the Left (56018 articles, with respect to the actual 50105).
+At the same time, articles from Center and Right are being predicted as being from the Left. This results in the model being biased towards the Left (56018 articles, with respect to the actual 50105).
 
 In Subfigure~\ref{fig:nela_confusion_prop} instead, we see that the considered propaganda feature has a strong bias towards the Right, as it predicts mostly Right and Center classes (65728 articles, compared to the actual 50105).
 
@@ -1961,7 +1961,7 @@ All this suggests the need for a more advanced analysis on the use of certain pr
 %Annotations are costly and require experts. Automated fine-grained propaganda analysis is still at the beginning, and many issues usually come up when tools such as this are used in downstream tasks (e.g. political classification). This may be only a problem of training or it could also be a problem of different techniques that are not significant in the Right propaganda but are more prominent on the Left propaganda. More analysis on Left leaning propaganda should be done.
 
 
-\begin{figure}[!tb]
+\begin{figure}[!hbtp]
     \centering
     \fbox{\includegraphics[width=\linewidth]{figures/propaganda_example_2.png}}
     \vspace{-20px}
@@ -2042,7 +2042,7 @@ With the best of our knowledge, there is no current study of how balanced or imb
 % Aim
 Therefore, we want to study how the current datasets of propaganda are distributed across political leaning, and see if there is some imbalance in the datasets. 
 %
-% Our aim is to analyse how observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion device.
+% Our aim is to analyse how observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion technique.
 % And also to 
 %
 The research question that we aim to answer in this section is RQ3.3: \emph{How balanced are the current propaganda detection methods with regard to political leaning?}
@@ -2098,7 +2098,7 @@ The research question that we aim to answer in this section is RQ3.3: \emph{How 
 
 
 % % Aim
-% Our aim is to observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion device.
+% Our aim is to observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion technique.
 
 % % RQ
 % The Research Question RQ3.3 is \emph{How balanced are the current propaganda detection methods with regard to political leaning?}
@@ -2297,7 +2297,7 @@ As both the previous QPROP and PTC are derived from a subset of MBFC propaganda 
 “Propagandist sources” (also selected from here for Qprop and PTC), are listed in the MBFC under the name ``questionable sources".\footnote{\url{https://mediabiasfactcheck.com/fake-news/}}
 We retrieved the details of these sources, and discovered that 85\% of the sources that have ``propaganda" in the label are from the Right.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
    \centering
    \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
    \caption{MBFC dataset analysis: sources across leaning.}
@@ -2445,9 +2445,9 @@ We also found other datasets related to China or to the Russo-Ukrainian conflict
 
 \subsection{Overall Trend}
 From this view on the computational detection resources, we recognise a quite strong skew over right-leaning sources that is happening in the English-based datasets.
-The main reason is that the corpora are based on the already-imbalanced MBFC propaganda collection. And they push the imbalance even more, resulting in being completely imbalanced.
+The main reason is that the corpora are based on the already-imbalanced MBFC propaganda collection. The imbalance is pushed even more during the sampling of news sources, resulting in datasets being completely imbalanced.
 This happens especially for the PTC corpus, which is the only one that provides fine-grained annotation of techniques.
-For other languages we do not have enough information to draw conclusions.
+For other languages, we do not have enough information to draw conclusions.
 % \todoHAinline{Exactly. So I'm struggling with this section and what to do with it.}
 
 % This finding of imbalanced datasets clashes with our hypothesis H1.
@@ -2523,15 +2523,15 @@ We observed and used the potential of persuasion analysis (more specifically, pr
 These findings are quite meaningful for us.
 % - positive: generalisation quite good considering datasets and results obtained
 First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
-And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
+If we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
 We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
 
 % - finding TOPICS where difference is more accentuated
-At the same time, this chapter has also helped us to find a direction for more investigation. The results found here represent the whole dataset. We would like to know if we can spot more in details the differences of propaganda when we consider specific topics separately. Propaganda may differ between political leanings more when we select certain topics, and we would like to know both which topics and also the outcomes of such a detailed analysis. And for conducing this experimentation, we need to consider the \emph{topics} of the articles as an additional element.
+At the same time, this chapter has also helped us to find a direction for more investigation. The results found here represent the whole dataset. We would like to know if we can spot more in detail the differences of propaganda when we consider specific topics separately. Propaganda may differ between political leanings more when we select certain topics, and we would like to know both which topics and also the outcomes of such a detailed analysis. For conducting this experimentation, we need to consider the \emph{topics} of the articles as an additional element.
 
 % limitation
 Unfortunately, the experiment conducted also revealed possible limitations of automated fine-grained propaganda detection.
-We have some observations that go against our hypotheses (e.g., some propaganda techniques in certain leanings, where we observed negative correlation with populism), and we observed also on some samples some problems in detecting the edges of propaganda spans in the text.
+We have some observations that go against our hypotheses (e.g., some propaganda techniques in certain leanings, where we observed a negative correlation with populism), and we observed also on some samples some problems in detecting the edges of propaganda spans in the text.
 These limitations come from a quite recent task (fine-grained detection of techniques) and indicate that more experimentation is needed. The current resources may be improved with more data annotated by humans, and the current findings need to be validated or confuted with more resources.
 
 % finding TOPICS where propaganda works better/worse
@@ -2553,7 +2553,7 @@ With an analysis of the topics, we can find the ones where the detected propagan
 % Need to break down by topic and see whether for some of them, propaganda of one leaning is very different from the one of the others.
 
 % Motivation 2
-And another strong motivation to analyse the topics is to try to locate where the current approach to propaganda detection might have some issues in being accurate.
+Another strong motivation to analyse the topics is to try to locate where the current approach to propaganda detection might have some issues in being accurate.
 % Find topics where propaganda detection might have some problems
 We will perform this analysis and try to find insights that could lead to the development of future propaganda detection resources (e.g., datasets) that are less subject to the imbalance problems that we found in this chapter.
 
