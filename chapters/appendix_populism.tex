@@ -23,13 +23,13 @@ We have three main objectives:
 
 \begin{enumerate}
     \item Analyse the conceptual similarities and differences  between \textit{propaganda} and \textit{populism}: with the findings of the previous point (high imbalance), and given that not much literature exists considering propaganda and political leaning, we need to rely on the concept of populism. %At the same time, we see a lot of publications that refer to a similar concept, populism, that is being observed and studied across countries and political ideologies. 
-    We show in this subsection the differences and similarities between these two concepts, and why we hypothesise that they are related (Section~\ref{ssec:ps_prop_leaning_imbalanced_concepts_populism_propaganda}).
-    %This supports H2.
+          We show in this subsection the differences and similarities between these two concepts, and why we hypothesise that they are related (Section~\ref{ssec:ps_prop_leaning_imbalanced_concepts_populism_propaganda}).
+          %This supports H2.
     \item Show that populisim exists across different political contexts, belonging to different orientations (Left vs Right).
-    We present some contexts where populism is being studied, belonging to different political ideologies and leanings (Section~\ref{ssec:ps_prop_leaning_imbalanced_populism_across}). 
-    %This indirectly supports H1, since propaganda is related to populism thanks to the verification of H2, and we show here that populism exists all across the political spectrum.
-    \item Analyse the Correlation between detected propaganda and populism: with a dataset that contains speeches with leaning and populism information, we analyse the speeches with propaganda analysis to see the correlation between the detected propaganda techniques against the populism annotations. We do a breakdown by leaning and technique to see where the correlation is stronger (Section~\ref{ssec:ps_prop_leaning_imbalanced_correlation_populism}). 
-    %This is a different test of H2, and we present it after the previous point because we are considering \textit{detected propaganda} that is based on an imbalanced dataset.
+          We present some contexts where populism is being studied, belonging to different political ideologies and leanings (Section~\ref{ssec:ps_prop_leaning_imbalanced_populism_across}).
+          %This indirectly supports H1, since propaganda is related to populism thanks to the verification of H2, and we show here that populism exists all across the political spectrum.
+    \item Analyse the Correlation between detected propaganda and populism: with a dataset that contains speeches with leaning and populism information, we analyse the speeches with propaganda analysis to see the correlation between the detected propaganda techniques against the populism annotations. We do a breakdown by leaning and technique to see where the correlation is stronger (Section~\ref{ssec:ps_prop_leaning_imbalanced_correlation_populism}).
+          %This is a different test of H2, and we present it after the previous point because we are considering \textit{detected propaganda} that is based on an imbalanced dataset.
 \end{enumerate}
 
 
@@ -79,7 +79,7 @@ As an example, we see that~\citet{hawkins2019global} implements populism as a nu
 
 
 % relationship
-On the conceptual level, propaganda and populism are two separate concepts. The first describes more the persuasion means used to push for an agenda, while the second one is usually used more together with the actor that wants to push the agenda. 
+On the conceptual level, propaganda and populism are two separate concepts. The first describes more the persuasion means used to push for an agenda, while the second one is usually used more together with the actor that wants to push the agenda.
 % And to be on the side of ordinary people, it uses propaganda as a mean to persuade. So a populistic \emph{actor} uses propaganda \emph{techniques}. % Conceptually, they are related.
 %
 %
@@ -171,7 +171,7 @@ We run this dataset through the propaganda annotation tool~\citep{da2019fine}, t
 We rely on two metrics that we already used in the previous sections: the total quantity of propaganda in each article and the quantity of each propaganda technique, as word-based percentages. We exclude the term analysis because the populism annotations are only at the speech level and not at the word-level. % Not words? Term analysis?
 
 % correlation as Spearman's correlation
-For the correlation, we want to compute how much propaganda and populism are strictly related. So we take each speech in the corpus and we proceed to compute the Spearman's correlation~\citep{spearman1910correlation} between the  populism averaged out between the annotators and different propaganda metrics: total word-based percentage of propaganda, and word-based percentage of each of the propaganda techniques. 
+For the correlation, we want to compute how much propaganda and populism are strictly related. So we take each speech in the corpus and we proceed to compute the Spearman's correlation~\citep{spearman1910correlation} between the  populism averaged out between the annotators and different propaganda metrics: total word-based percentage of propaganda, and word-based percentage of each of the propaganda techniques.
 
 % first overall
 % then breakdown by political leaning
