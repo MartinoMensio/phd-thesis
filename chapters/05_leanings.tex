@@ -33,7 +33,7 @@ RQ3: \emph{To what extent could the use of persuasion techniques help identify t
 \begin{enumerate}[label={\textbf{RQ3.\arabic*:}},leftmargin=2cm]
     \item How does persuasion vary across the political spectrum?
     \item To what extent can we predict the political leaning of a news article by observing the propaganda it uses?
-    % \todoHA{Add question: what are you trying to learn? Most datasets out there are imbalanced}
+          % \todoHA{Add question: what are you trying to learn? Most datasets out there are imbalanced}
     \item How balanced are the current propaganda detection methods with regard to political leaning?
 \end{enumerate}
 
@@ -75,20 +75,20 @@ For this reason, we are combining the two analyses with the following experiment
 
 \begin{enumerate}
     \item Analysis of persuasion features across the political spectrum: we want to understand if we can see some difference between the persuasion techniques of Left, Center and Right (Section~\ref{ssec:ps_prop_leaning_across}, targeting \acrshort{rq}3.1).
-    % We are able to identify some differences both in the quantity of specific techniques, and in the terms used.
-    With sentiment, it is more difficult to find differences as it appears with similar distributions across political leanings.
-    %\todoHA{unclear}
-    Furthermore, in the previous chapter we have seen how the detection of sentiment-carrying terms produces a high number of false positives.
-    With propaganda instead, we see different quantities of techniques used in the articles, and also some term differences between left and right leaning articles.
-    Therefore, we decide to discard sentiment analysis from our next experiments
-    This is the reason behind using the specific term \emph{propaganda} instead of \emph{persuasion} in the sub-questions 3.1 and 3.2. 
+          % We are able to identify some differences both in the quantity of specific techniques, and in the terms used.
+          With sentiment, it is more difficult to find differences as it appears with similar distributions across political leanings.
+          %\todoHA{unclear}
+          Furthermore, in the previous chapter we have seen how the detection of sentiment-carrying terms produces a high number of false positives.
+          With propaganda instead, we see different quantities of techniques used in the articles, and also some term differences between left and right leaning articles.
+          Therefore, we decide to discard sentiment analysis from our next experiments
+          This is the reason behind using the specific term \emph{propaganda} instead of \emph{persuasion} in the sub-questions 3.1 and 3.2.
     \item Automated classification of the political leaning using persuasion features. Can machine learning models differentiate between propaganda and sentiment from left and right? (Section~\ref{ssec:ps_prop_leaning_classifier}, targeting \acrshort{rq}3.2) The motivation of this experiment is that we are able to see some differences from the previous experiment, and therefore we want to see if also machine learning classifiers can differentiate and how well. We find that it is possible to classify the leaning of news articles based on their use of propaganda, but that it is quite hard to be better than classifiers based on the full text of the articles.
-    However, when combining the propaganda features together with the features from the State of the Art, we can improve slightly the results (small but statistically significant).
+          However, when combining the propaganda features together with the features from the State of the Art, we can improve slightly the results (small but statistically significant).
     \item Are the current propaganda datasets imbalanced? (Section~\ref{ssec:ps_prop_leaning_imbalanced}, targeting \acrshort{rq}3.3) Given that the results of both previous experiments (manual and automated) are dependent on the quality of the automated propaganda detection, in this last experiment of the chapter we do an analysis of the imbalance of the data that was used to train the propaganda detector.
-    We find that in most of the cases, propaganda examples come from Right-leaning sources and the Left and Center are underrepresented.
-    % Most of the annotated sources and articles are coming from the political right.
-    This may cause problems in the detection of left-leaning propaganda, because during the training no instances of leftist propaganda are being used.
-    This may cause inaccuracies in predicting certain techniques and term usages typical of left-leaning propaganda.
+          We find that in most of the cases, propaganda examples come from Right-leaning sources and the Left and Center are underrepresented.
+          % Most of the annotated sources and articles are coming from the political right.
+          This may cause problems in the detection of left-leaning propaganda, because during the training no instances of leftist propaganda are being used.
+          This may cause inaccuracies in predicting certain techniques and term usages typical of left-leaning propaganda.
 \end{enumerate}
 
 
@@ -131,10 +131,10 @@ For our analysis on the leaning, we have selected resources based on the followi
 
 \begin{enumerate}
     \item publicly available, possibly containing the full text of the articles. If the full text is not available, they may refer to a list of news sources (with political leaning) and therefore we can join this information with datasets that contain full text and news source;
-    %\todoHA{not very clear}
+          %\todoHA{not very clear}
     \item relatively large: we need a good number of articles (e.g. $\sim$10k) in order to apply machine learning models;
     \item directly indicate the political leaning of the source/articles. This means that we do not consider datasets that only annotate the news source without assigning a leaning to the source (e.g., All-the-News or Google News Headlines used in the previous chapters).
-    %\todoHA{meaning what?}
+          %\todoHA{meaning what?}
 \end{enumerate}
 
 We found two broad categories of datasets: the first annotating the news sources, and the second providing collections of articles.
@@ -210,7 +210,7 @@ Another very useful resource is AllSides\footnote{\url{https://www.allsides.com/
 As mentioned above, AllSides provides leaning annotations that differ from  the ones given only at the source-level.
 As can be seen from the Media Bias Ratings published on their website,\footnote{\url{https://www.allsides.com/media-bias/ratings}} they have leaning ratings for different categories: Author (500), News Media (894), Think Tank / Policy Group (108), Reference (25) and Fact-Check (20).
 
-This allows to know the leaning of specific articles written by authors even if they are published on news outlets with a different political leaning. 
+This allows to know the leaning of specific articles written by authors even if they are published on news outlets with a different political leaning.
 
 
 \paragraph{Headline Roundups\texttrademark}
@@ -260,8 +260,8 @@ Therefore, we use always the most detailed annotations available: political lean
 
 %To clarify this point, we personally asked to the AllSides team about this discrepancy between article-level bias and source bias, and we understood that there are two types of annotation:
 %\begin{itemize}
- %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
- %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be different from the media bias\footnote{\url{https://www.allsides.com/media-bias/media-bias-ratings\#ratings}}
+%   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
+%   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be different from the media bias\footnote{\url{https://www.allsides.com/media-bias/media-bias-ratings\#ratings}}
 %\end{itemize}
 
 %Therefore the 3.11\% is due to the author-level annotation. We want to underline that in this way, the annotation of the political leaning is not specifically assigned to the single article but instead it is assigned to the author. It is still a "distant supervision" in some extent.
@@ -283,17 +283,17 @@ Therefore, to obtain the text, the hyperlinks need to be followed to scrape the 
 
 This dataset is derived from \emph{Allsides Headline Roundup\texttrademark}, as it was built in the work of~\citet{baly2020we} by downloading and cleaning from AllSides and from the respective news outlets all the articles (dataset including headlines until 21 July 2020).
 
-The dataset therefore 
+The dataset therefore
 % % FROM TTO2020
 % The dataset we use is from~\citet{baly2020we}, and
 consists of articles in English language from over 800 sources (majority from the US), labelled for their political leaning (Left, Centre or Right).
 This dataset contains several attributes for each article: full text (collected from several news websites and cleaned), political leaning, topic, news source, and author name (attributes from AllSides).
 % However, in our models and experiments, we only use the text of the articles to avoid bias associated with the other attributes.
-The topic distribution of the articles is uniform across the political leanings, because the dataset comes from triples of articles, one from each political leaning, about the same issue. 
+The topic distribution of the articles is uniform across the political leanings, because the dataset comes from triples of articles, one from each political leaning, about the same issue.
 % Authors of this paper publicly provide a dataset, collected from AllSides, where individual articles are labelled for their political leaning.
 The dataset contains two pre-splitted folds for training and testing:
 \begin{itemize}
-    \item \texttt{Random}: where splits are randomly generated. Articles from the same media source may be contained both in the training and testing sets. 
+    \item \texttt{Random}: where splits are randomly generated. Articles from the same media source may be contained both in the training and testing sets.
     \item \texttt{Media}; where the articles in the test set are from media sources that do not occur in the training set. %, which is more appropriate for article-based political leaning analysis. 
 \end{itemize}
 
@@ -305,18 +305,18 @@ Instead of making the models exploit this information, the \texttt{media} split 
 %and alignment.
 
 \begin{table}[!htbp]
-   \centering
-   \begin{tabular}{r|c|c|c}
-       & train & validation & test \\
-       \hline
-       Paper media & 22,969 & 5,098 & 1,200 \\
-       GitHub media & 26,590 & 2,356 & 1,300 \\
-       \hline
-       Paper random & 26,828 & 6,709 & 1,200 \\
-       GitHub random & 27,978 & 6,996 & 1,300
-   \end{tabular}
-   \caption{Differences between statistics from in~\citet{baly2020we} and GitHub.}
-   \label{tab:baly_size}
+    \centering
+    \begin{tabular}{r|c|c|c}
+                      & train  & validation & test  \\
+        \hline
+        Paper media   & 22,969 & 5,098      & 1,200 \\
+        GitHub media  & 26,590 & 2,356      & 1,300 \\
+        \hline
+        Paper random  & 26,828 & 6,709      & 1,200 \\
+        GitHub random & 27,978 & 6,996      & 1,300
+    \end{tabular}
+    \caption{Differences between statistics from in~\citet{baly2020we} and GitHub.}
+    \label{tab:baly_size}
 \end{table}
 
 Note that there is a discrepancy between the description of the dataset contained in its reference paper and the dataset made publicly available by the authors on GitHub.
@@ -366,7 +366,7 @@ After having described the datasets, in this section we present the model that w
 %chen - SVM, LDA
 
 %Most models use supervised or unsupervised machine learning algorithms, trained using source annotations or crowdsourced articles annotations  
- 
+
 %underlined that most of the approaches do not generalise well across domains. 
 %As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\citep{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
 
@@ -374,8 +374,8 @@ In~\citet{baly2020we}, authors used a BERT-based model for predicting the politi
 according to the leaning of their source or of their author. %\todo{manually?}
 %Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to that given to their sources (AllSides confirmed that this is due to using author-based leaning). 
 %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
- %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
- % Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. 
+%   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
+% Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. 
 
 
 % Problem: learning the source instead of the political leaning
@@ -407,17 +407,17 @@ According to the details provided, we embed the articles in the dataset with a p
 
 \begin{table}[!htbp]
     \centering
-   \scriptsize
-  %\small
+    \scriptsize
+    %\small
     % \resizebox{\textwidth}{!}{
     \begin{tabular}{l|rr|rr}
-        & \multicolumn{2}{c}{Random} & \multicolumn{2}{c}{Media} \\
-        Model & F1-Macro & Accuracy & F1-Macro & Accuracy \\
+                                   & \multicolumn{2}{c}{Random} & \multicolumn{2}{c}{Media}                       \\
+        Model                      & F1-Macro                   & Accuracy                  & F1-Macro & Accuracy \\
         \hline
-        \texttt{Majority} & 21.0286 & 46.0769 & 21.0286 & 46.0769 \\
+        \texttt{Majority}          & 21.0286                    & 46.0769                   & 21.0286  & 46.0769  \\
         % \texttt{Baly-API} & 42.3355 & 43.8356 & 42.0523 & 43.6910 & 41.6863 & 41.7993 & & & & \\
-        \texttt{Baly-baseline} (0) & 56.4447 & 58.6153 & 40.8647 & 46.2307 \\
-        \texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
+        \texttt{Baly-baseline} (0) & 56.4447                    & 58.6153                   & 40.8647  & 46.2307  \\
+        \texttt{Baly-paper} (*)    & 80.19                      & 79.83                     & 35.53    & 36.75    \\
     \end{tabular}
     % }
     \caption{Baselines results compared with~\citet{baly2020we}.}
@@ -560,7 +560,7 @@ Therefore, we take a dataset, we run it through automated persuasion annotation 
 
 % dataset
 The dataset used is \texttt{baly}~\citep{baly2020we}, as described previously in~\ref{ssec:ps_leaning_data}.
-We take from it the text of the articles and the label for the leaning, expressed over 3 distinct values: Left Center, Right.
+We take from it the text of the articles and the label for the leaning, expressed over 3 distinct values: Left, Center and Right.
 %, Mixed, Not Rated. The first 5 values are properly placed across the spectrum, from left to right. The last values instead are for data that is not clearly aligned with one leaning.
 It is important to note that the articles in this dataset are grouped in triples covering the same story, and this grouping makes the topic perfectly balanced across the dataset. For each article belonging to one leaning, there exist two other articles that belong to the other two leanings.
 In this way, we do not need to consider the fact that some topics may naturally be more subject to persuasion (e.g. political issues) while other topics may be less (e.g. sports or technology, where the writing style could be less loaded).
@@ -585,7 +585,7 @@ We also aggregate the term distributions to compute the term relative importance
 \subsection{Quantities of Persuasion Techniques across Leaning}
 
 Here in this section we show the comparison across leanings of the \emph{quantities} of persuasion techniques.
-First we compare the higher-level of propaganda vs sentiment, and then we break down the propaganda techniques, that provide a much more detailed picture. 
+First we compare the higher-level of propaganda vs sentiment, and then we break down the propaganda techniques, that provide a much more detailed picture.
 
 \begin{figure}[!htbp]
     \centering
@@ -698,7 +698,7 @@ We then move to the term analysis, to see if we can find any differences in the 
 % \todo{It was an example to then motivate the choice of TF-IDF analysis}
 % As Figure~\ref{fig:wc_name_calling} shows, 
 By doing a simple ranking of the most important terms for each leaning, we can see some differences in some of the propaganda techniques. For example, considering the \texttt{Name\_Calling} technique:
-media sources from the Left appear to frequently use ``republican'' and ``conservative'', while in the Right we can see some unique terms such as ``leftist'' and ``progressive''. Some words are equally used, possibly for different meanings, such as ``partisan''.  
+media sources from the Left appear to frequently use ``republican'' and ``conservative'', while in the Right we can see some unique terms such as ``leftist'' and ``progressive''. Some words are equally used, possibly for different meanings, such as ``partisan''.
 Although these differences, the most repeated word from all the leanings is the word ``partisan'' which is used as a wildcard and probably is intended with different meanings.
 But the effect is that most of the terms are repeated in all the leanings, and therefore we have to rely on a better concept than simply counting the term occurrences.
 
@@ -716,7 +716,7 @@ We perform this analysis first with all the propaganda techniques together, and 
 For the term importance across all the propaganda techniques, we process each article and select the detected words of propaganda that belong to any of the 18 techniques. Then we collect all these words in 3 buckets, one for each leaning.
 We apply on these 3 groups the standard TF-IDF as provided by the \texttt{gensim} library. %(applied on lemmatised words).
 This produces a matrix of weights with a shape of $[n_{features}, 3]$ (feature size x number of classes), together with the features names.
-Afterwards, we 
+Afterwards, we
 computed for each term the difference of the TF-IDF scores between Right and Left.
 These values then are used in absolute value to rank the features (words) that differ the most.
 This ranking index formulation is therefore:
@@ -745,7 +745,7 @@ For example ``american", ``left", ``leftist", ``nation", ``law" and ``border" th
 % like ``we the people" which is a Right-leaning expression of populism.
 that relate more with the identity  (american and nation) and protection  (law and border) of the country.
 We also see the terms used to indicate the political opponents: ``leftist" and ``left".
-Instead in the Left, we see terms such as ``white" and ``black" (emerging from articles about discrimination), ``partisan" ``republican" and ``conservative" (propaganda talking about the political opponents). 
+Instead in the Left, we see terms such as ``white" and ``black" (emerging from articles about discrimination), ``partisan" ``republican" and ``conservative" (propaganda talking about the political opponents).
 % Then we notice some terms that are more related to the center: ``country", ``trump", ``nation", ``partisan", ``whistleblower", ``great".
 
 \subsubsection{Propaganda Terms by Technique}
@@ -755,49 +755,49 @@ This means that we build the term frequencies for each of the 18 techniques, by 
 
 
 \begin{table}[!htbp]
-% \Rotatebox{90}{%
-\resizebox{\textwidth}{!}{
-    \centering
-    \begin{tabular}{p{0.30\textwidth}|p{0.40\textwidth}|p{0.40\textwidth}|p{0.40\textwidth}}
-        technique & Left & Center & Right \\
-        \hline
-         \texttt{Loaded\_Language} & in, that, into, self, devastating, hell & balk, more, very, whistleblower, hit, expose, batten, out, badgering, divisive, blast, circus, dramatic, chaos, severe & evil, blasted  \\
-         \hline
-         \texttt{Doubt} & just & trump, inadequate, transparency, grapple, will  & why, FBI, if \\
-         \hline
-         \texttt{Flag-Waving} & America, \textbf{white}, \textbf{black}, \textbf{life}, \textbf{society}  & democracy, state, security, family, value & \textbf{people}, \textbf{we}, \textbf{freedom}, \textbf{law}, \textbf{liberty} \\
-         \hline
-         \texttt{Name\_Calling/ Labeling} & party, \textbf{republican}, \textbf{right}, \textbf{conservative}, wing, real   & \textbf{partisan}, trump, witch, hunt, dems, whistleblower, innovator, dreamer, \textbf{centrist}, president, \textbf{democratic}, hoax  & \textbf{leftist}, racist, hating, law, \textbf{liberal}, \textbf{progressive}   \\
-         \hline
-         \texttt{Appeal\_to\_fear- prejudice} & \textbf{threat}, \textbf{climate}, difficult, death, die, disproportionate   & risk, backfire, credible, dangerous, confidence   & all, \textbf{destroy}, \textbf{attack}, fight, economically, racism, \textbf{invade}  \\
-         \hline
-         \texttt{Exaggeration/ Minimisation} & best, more, incredible, impossible, biggest, could, dramatically  & history, deadliest, big, unprecedented, life, degradation  & worst, absolutely, great, ever  \\
-         \hline
-         \texttt{Appeal\_to\_Authority} & medium, wisdom, \textbf{news}, know  & transparent, \textbf{intelligence}, official  & \textbf{note}, lie, open, \textbf{written}, accurate, fair, reflect   \\
-         \hline
-         \texttt{Reductio\_ad\_ hitlerum} & Stalinist, communism, partisan, & gestapo, nazi, eagle, religion, blame,   & hitler, Donald, tactic, propaganda, resurgent, science, death, gay \\
-         \hline
-         \texttt{Bandwagon} & find, common & say & taken, some, leave, future \\
-         \hline
-         \texttt{Black-and-White\_ Fallacy} & evolution, bible, proof, fall,  & impeachable, wall, good, strength, punch, military, justice, democratic, deal & my, live, change, amendment, senate \\
-         \hline
-         \texttt{Causal\_ Oversimplification} & plot, think & all, say, \textbf{reality}, reason, political & member, \textbf{leftist}, life, left  \\
-         \hline
-         \texttt{Obfuscation/ Intentional\_ Vagueness/ Confusion} & suggest, wrong, impossible, guide, evil, efficacy, anything & power, right, answer, excuse, truth, simply  & wing, meaning, rule, master, magic, fiction \\
-         \hline
-         \texttt{Red\_Herring} & love, pay, believe, anymore, like & & life, think, family, adulterous, America, republican, statement  \\
-         \hline
-         \texttt{Repetition} & jealous, blind, ObamaCare, bully, poison, lie  & more, temple, satanic, breathe & trump, obama, abiding, careless, law, pray, rigged, extremely  \\
-         \hline
-         \texttt{Slogans} & survival, fight, \textbf{matter}, \textbf{life}, face, \textbf{lives} & \textbf{America}, first, \textbf{great}, win, \textbf{make}, anchor, hero  & learn, amid, hearing, over, call, tax, race  \\
-         \hline
-         \texttt{Straw\_Men} & read, vote, opposition, trump & love, rule, poll & lie, news, god, want \\
-         \hline
-         \texttt{Thought-terminating\_ Cliches} & give, follow, lie  & wasting, time, drama & enough, break, evidence \\
-         \hline
-         \texttt{Whataboutism} & control, prison, & point, system, news, real, democrat, care  & apartheid, people, law, American, make, worse, contain \\
-    \end{tabular}
-}
+    % \Rotatebox{90}{%
+    \resizebox{\textwidth}{!}{
+        \centering
+        \begin{tabular}{p{0.30\textwidth}|p{0.40\textwidth}|p{0.40\textwidth}|p{0.40\textwidth}}
+            technique                                                & Left                                                                          & Center                                                                                                                                  & Right                                                                                \\
+            \hline
+            \texttt{Loaded\_Language}                                & in, that, into, self, devastating, hell                                       & balk, more, very, whistleblower, hit, expose, batten, out, badgering, divisive, blast, circus, dramatic, chaos, severe                  & evil, blasted                                                                        \\
+            \hline
+            \texttt{Doubt}                                           & just                                                                          & trump, inadequate, transparency, grapple, will                                                                                          & why, FBI, if                                                                         \\
+            \hline
+            \texttt{Flag-Waving}                                     & America, \textbf{white}, \textbf{black}, \textbf{life}, \textbf{society}      & democracy, state, security, family, value                                                                                               & \textbf{people}, \textbf{we}, \textbf{freedom}, \textbf{law}, \textbf{liberty}       \\
+            \hline
+            \texttt{Name\_Calling/ Labeling}                         & party, \textbf{republican}, \textbf{right}, \textbf{conservative}, wing, real & \textbf{partisan}, trump, witch, hunt, dems, whistleblower, innovator, dreamer, \textbf{centrist}, president, \textbf{democratic}, hoax & \textbf{leftist}, racist, hating, law, \textbf{liberal}, \textbf{progressive}        \\
+            \hline
+            \texttt{Appeal\_to\_fear- prejudice}                     & \textbf{threat}, \textbf{climate}, difficult, death, die, disproportionate    & risk, backfire, credible, dangerous, confidence                                                                                         & all, \textbf{destroy}, \textbf{attack}, fight, economically, racism, \textbf{invade} \\
+            \hline
+            \texttt{Exaggeration/ Minimisation}                      & best, more, incredible, impossible, biggest, could, dramatically              & history, deadliest, big, unprecedented, life, degradation                                                                               & worst, absolutely, great, ever                                                       \\
+            \hline
+            \texttt{Appeal\_to\_Authority}                           & medium, wisdom, \textbf{news}, know                                           & transparent, \textbf{intelligence}, official                                                                                            & \textbf{note}, lie, open, \textbf{written}, accurate, fair, reflect                  \\
+            \hline
+            \texttt{Reductio\_ad\_ hitlerum}                         & Stalinist, communism, partisan,                                               & gestapo, nazi, eagle, religion, blame,                                                                                                  & hitler, Donald, tactic, propaganda, resurgent, science, death, gay                   \\
+            \hline
+            \texttt{Bandwagon}                                       & find, common                                                                  & say                                                                                                                                     & taken, some, leave, future                                                           \\
+            \hline
+            \texttt{Black-and-White\_ Fallacy}                       & evolution, bible, proof, fall,                                                & impeachable, wall, good, strength, punch, military, justice, democratic, deal                                                           & my, live, change, amendment, senate                                                  \\
+            \hline
+            \texttt{Causal\_ Oversimplification}                     & plot, think                                                                   & all, say, \textbf{reality}, reason, political                                                                                           & member, \textbf{leftist}, life, left                                                 \\
+            \hline
+            \texttt{Obfuscation/ Intentional\_ Vagueness/ Confusion} & suggest, wrong, impossible, guide, evil, efficacy, anything                   & power, right, answer, excuse, truth, simply                                                                                             & wing, meaning, rule, master, magic, fiction                                          \\
+            \hline
+            \texttt{Red\_Herring}                                    & love, pay, believe, anymore, like                                             &                                                                                                                                         & life, think, family, adulterous, America, republican, statement                      \\
+            \hline
+            \texttt{Repetition}                                      & jealous, blind, ObamaCare, bully, poison, lie                                 & more, temple, satanic, breathe                                                                                                          & trump, obama, abiding, careless, law, pray, rigged, extremely                        \\
+            \hline
+            \texttt{Slogans}                                         & survival, fight, \textbf{matter}, \textbf{life}, face, \textbf{lives}         & \textbf{America}, first, \textbf{great}, win, \textbf{make}, anchor, hero                                                               & learn, amid, hearing, over, call, tax, race                                          \\
+            \hline
+            \texttt{Straw\_Men}                                      & read, vote, opposition, trump                                                 & love, rule, poll                                                                                                                        & lie, news, god, want                                                                 \\
+            \hline
+            \texttt{Thought-terminating\_ Cliches}                   & give, follow, lie                                                             & wasting, time, drama                                                                                                                    & enough, break, evidence                                                              \\
+            \hline
+            \texttt{Whataboutism}                                    & control, prison,                                                              & point, system, news, real, democrat, care                                                                                               & apartheid, people, law, American, make, worse, contain                               \\
+        \end{tabular}
+    }
     \caption{Most recognisable propaganda terms for each technique across leaning.}
     \label{tab:prop_words_by_technique_and_leaning}
 \end{table}
@@ -831,7 +831,7 @@ But as well, this could be a consequence of the detection method, that may be bi
 At the same time, we see that the sentiment analysis is showing similar distributions across the political leanings.
 %\todoAW{Again, have you done a significance test?}
 
-To go more in detail, we differentiated our analysis by considering the different propaganda techniques separately, and we have been able to find techniques that follow the general trend (\emph{U-shape}) across the leaning: \texttt{Loaded\_Language}, \texttt{Name\_Calling/Labeling}, \texttt{Exaggeration/Minimisation} and \texttt{Causal\_Oversimplification} with their polarising characteristics (extremes more, center less). Other techniques instead are more proper of one of the two leanings (\emph{triangular shape}): \texttt{Flag-Waving} and \texttt{Slogans} mostly on the Right. 
+To go more in detail, we differentiated our analysis by considering the different propaganda techniques separately, and we have been able to find techniques that follow the general trend (\emph{U-shape}) across the leaning: \texttt{Loaded\_Language}, \texttt{Name\_Calling/Labeling}, \texttt{Exaggeration/Minimisation} and \texttt{Causal\_Oversimplification} with their polarising characteristics (extremes more, center less). Other techniques instead are more proper of one of the two leanings (\emph{triangular shape}): \texttt{Flag-Waving} and \texttt{Slogans} mostly on the Right.
 
 
 % Terms findings, motivations and implications
@@ -852,13 +852,13 @@ Furthermore, we would need to capture a bit more around the context of the propa
 
 % link to next experiment
 As the last limitation, we extracted these insights, but we do not know to what extent they reflect in an immediate and definitive indication of the leaning of the articles.
-The weightings of the TF-IDF show, in many cases, very similar scores. Therefore, it is unclear for now how easy or hard would it be to use these features to automatically recognise the leaning of one article. %(more in the next Subsection~\ref{ssec:ps_prop_leaning_classifier})
+The weightings of the TF-IDF show, in many cases, very similar scores. Therefore, it is unclear for now how easy or hard it would be to use these features to automatically recognise the leaning of one article. %(more in the next Subsection~\ref{ssec:ps_prop_leaning_classifier})
 % it is not clear whether these features can be used to automatically differentiate between the propaganda of the left and the one from the right.
 We experiment in this direction with the following Section~\ref{ssec:ps_prop_leaning_classifier}.
 
 
 % \subsubsection{REMOVE: this subsubsection is about removing propaganda to increase similarity across leanings}
-% \todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda acrosss spectrum}
+% \todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda across spectrum}
 % Instead of measuring the effect of removing the “framing” pieces on clustering algorithms, here we want to observe what is the effect on document similarity between different sources.
 % Given articles from the left/center/right, we want to compare if there is a change in similarity when we remove sentiment and propaganda terms (e.g., articles are more similar than before).
 % Hypothesis
@@ -972,7 +972,7 @@ This is what our second subquestion asks, RQ3.2: \emph{To what extent can we pre
 More in detail, we want to see if it is possible to recognise the political leaning of articles from the:
 \begin{enumerate}
     \item \emph{total amount} of propaganda found in the text (RQ3.2.1);
-    %\item RQ2: Is it possible to recognise political leaning of articles from the \emph{amount of each propaganda technique} in the text?
+          %\item RQ2: Is it possible to recognise political leaning of articles from the \emph{amount of each propaganda technique} in the text?
     \item \emph{amount of each propaganda technique} in the text (RQ3.2.2);
     \item \emph{specific words belonging to propaganda techniques} in the article text (RQ3.2.3).
 \end{enumerate}
@@ -1005,7 +1005,7 @@ Also in this chapter we are considering articles that cover the same stories (as
 Therefore, the facts that are being narrated are the same (except for the inclusion/exclusion of details). The main difference between an article from the left to one from the right is their point of view, with subjective and persuasive components.
 Indeed, propaganda analysis is specifically focused on analysing this component of the articles.
 As we discussed in Chapter~\ref{ssec:lit_layers_of_info}, we can think of news articles as a composition of two elements: the topical element (facts, entities, events) and the anti-topical element (how things are narrated, persuasion).
-The topical elements need to be similar across the articles that narrate the same events (constraint of the dataset), and therefore we have a good setting for studying how the anti-topical elements vary across political leanings. 
+The topical elements need to be similar across the articles that narrate the same events (constraint of the dataset), and therefore we have a good setting for studying how the anti-topical elements vary across political leanings.
 
 % hypothesis
 On top of this reasoning, we build our hypothesis that \emph{we can recognise the political leaning of an article by using the features provided by the propaganda analysis}.
@@ -1013,11 +1013,11 @@ On top of this reasoning, we build our hypothesis that \emph{we can recognise th
 % advantages
 With respect to the State of the Art classifier presented in Section~\ref{ssec:ps_leaning_classifier}, whose results cannot be easily interpreted (black-box BERT-based classifier),
 % \todoHA{why not?}
-we could understand better why a certain article is classified as being left/right. We can get the relationship with the features and see which ones (quantities and terms) influenced more the classification outputs. 
+we could understand better why a certain article is classified as being left/right. We can get the relationship with the features and see which ones (quantities and terms) influenced more the classification outputs.
 
 
 
-Unlike previous work on political leaning detection, in this experiment we use the propaganda detection method (as in previous experiments, from \citet{da2019fine}) to identify the existence of propaganda and its type of techniques in given articles, and incorporate this information directly as additional features into the training and testing of the model.  
+Unlike previous work on political leaning detection, in this experiment we use the propaganda detection method (as in previous experiments, from \citet{da2019fine}) to identify the existence of propaganda and its type of techniques in given articles, and incorporate this information directly as additional features into the training and testing of the model.
 
 % what about sentiment?
 We also experimented briefly with sentiment features, but after seeing the null results (and also the results from the previous experiment), we decided not to proceed with sentiment but only with propaganda.
@@ -1039,10 +1039,10 @@ As already mentioned, in this experiment we want to understand the impact of usi
 % Our experiments are designed to test the role of propaganda features in detecting the political leaning of articles. 
 Therefore, we use the following steps to achieve this goal:
 \begin{enumerate}
- %   \item ... ?collect data from AllSides ...
+    %   \item ... ?collect data from AllSides ...
     \item Use the BERT-based political-leaning classifier baseline as described in the previous Section~\ref{ssec:ps_leaning_classifier}.
-    % \todo{Why this baseline in particular?} 
-    %~\citet{baly2020we} and apply it to the dataset to detect the political leaning of each article to reproduce the baseline results.
+          % \todo{Why this baseline in particular?} 
+          %~\citet{baly2020we} and apply it to the dataset to detect the political leaning of each article to reproduce the baseline results.
     \item Extract propaganda for each article using the tool from~\citet{da2019fine}.
     \item Add propaganda-related features to the BERT model, by injecting the values in the neural network using the (a) total presence of propaganda as a feature, (b) percentage of each propaganda technique, and (c) words that appear in the detected propaganda text.
     \item Train and test the model under different configurations with two splits, one totally random, and one less biased to media source.
@@ -1065,16 +1065,16 @@ The setup for the classifier is represented in Figure~\ref{fig:model_classifier}
 \subsubsection{Propaganda Features}
 
 
-As mentioned earlier, for the propaganda analysis, we use the state of the art approach provided in~\citet{da2019fine}.\footnote{\url{https://huggingface.co/QCRI/PropagandaTechniquesAnalysis-en-BERT}} Their tool extracts 18 propaganda techniques. We apply this tool to the articles in our dataset to obtain these propaganda annotations. 
+As mentioned earlier, for the propaganda analysis, we use the state of the art approach provided in~\citet{da2019fine}.\footnote{\url{https://huggingface.co/QCRI/PropagandaTechniquesAnalysis-en-BERT}} Their tool extracts 18 propaganda techniques. We apply this tool to the articles in our dataset to obtain these propaganda annotations.
 %and we gather the annotation for the articles in the dataset by using the official model released.
 %API.\footnote{\url{https://app.swaggerhub.com/apis-docs/yifan2019/Tanbih/}}
 %This model provides as result a set of spans from the text with a label corresponding to one of the 18 techniques.
 % In addition to the propaganda techniques, we also run lexicon-based sentiment analysers to obtain a set of words loaded with sentiment with their polarity value (positive vs negative).
 We use these annotations to calculate several numerical features that we employ in the following three sections to answer the three research questions introduced before.
 %\begin{enumerate}
- %   \item the total quantity of propaganda (first
- %   \item the quantity of each propaganda technique
- %   \item the frequency of words that have been annotated for each propaganda technique
+%   \item the total quantity of propaganda (first
+%   \item the quantity of each propaganda technique
+%   \item the frequency of words that have been annotated for each propaganda technique
 %\end{enumerate}
 
 % The extracted features are then fed to a classifier that can be \sout{a SVM or} a Neural Network (single dense layer with softmax activation function).
@@ -1100,39 +1100,38 @@ This combination is performed by concatenating the inputs to the SoftMax dense l
 
 \begin{table}[!htbp]
     \centering
-   \scriptsize
-  %\small
+    \scriptsize
+    %\small
     % \resizebox{\textwidth}{!}{
     \begin{tabular}{l|rr|rr}
-        & \multicolumn{2}{c}{Random} & \multicolumn{2}{c}{Media} \\
-        Model & F1-Macro & Accuracy & F1-Macro & Accuracy \\
+                                            & \multicolumn{2}{c}{Random} & \multicolumn{2}{c}{Media}                                                     \\
+        Model                               & F1-Macro                   & Accuracy                  & F1-Macro                & Accuracy                \\
         \hline
-        \texttt{Majority} & 21.0286 & 46.0769 & 21.0286 & 46.0769 \\
+        \texttt{Majority}                   & 21.0286                    & 46.0769                   & 21.0286                 & 46.0769                 \\
         % \texttt{Baly-API} & 42.3355 & 43.8356 & 42.0523 & 43.6910 & 41.6863 & 41.7993 & & & & \\
-        \texttt{Baly-baseline (0)} & $\star$56.4447 & $\star$58.6153 & 40.8647 & 46.2307 \\
+        \texttt{Baly-baseline (0)}          & $\star$56.4447             & $\star$58.6153            & 40.8647                 & 46.2307                 \\
         %\texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
         \hline
-        \texttt{Prop-Total (1)} & 36.2966 & 42.3076 & 28.8285 & 41.5384 \\
-        \texttt{Prop-Techniques (2)} & 36.7166 & 40.6153 & 33.0682 & 40.5384 \\
-        \texttt{Prop-Total-Terms (3a)} & 42.0261 & 43.5384 & 41.5915 & 43.3076 \\
-        \texttt{Prop-Techniques-Terms (3b)} & 42.4357 & 43.2307 & 40.8192 & 41.9230 \\
+        \texttt{Prop-Total (1)}             & 36.2966                    & 42.3076                   & 28.8285                 & 41.5384                 \\
+        \texttt{Prop-Techniques (2)}        & 36.7166                    & 40.6153                   & 33.0682                 & 40.5384                 \\
+        \texttt{Prop-Total-Terms (3a)}      & 42.0261                    & 43.5384                   & 41.5915                 & 43.3076                 \\
+        \texttt{Prop-Techniques-Terms (3b)} & 42.4357                    & 43.2307                   & 40.8192                 & 41.9230                 \\
         % \texttt{Prop-words-BERT} (3) & 35.4718 & 48.2387 & 35.4718 & 48.2387 \\
         \hline
-        \texttt{(0)+(1)} & 55.7786 & 57.7692 & \textbf{42.1847} & \textbf{47.5384} \\
-        \texttt{(0)+(2)} & 54.9714 & 56.9999 & \textbf{42.4362} & \textbf{$\star$47.6153} \\
-        \texttt{(1)+(2)} & 36.5217 & 40.4615 & 33.6202 & 41.0000 \\
-        \texttt{(0)+(1)+(2)} & 55.2121 & 57.1538 & \textbf{42.2102} & \textbf{47.3846} \\
-        \texttt{(0)+(3a)} & 54.6287 & 56.6923 & \textbf{41.9766} & \textbf{46.5384} \\
-        \texttt{(0)+(3b)} & 54.8004 & 56.3076 & \textbf{41.9965} & 46.2307 \\
-        \texttt{(3a)+(3b)} & 44.3506 & 46.3076 & \textbf{41.8725} & 44.3076 \\
-        \texttt{(0)+(3a)+(3b)} & 53.2549 & 54.7692 & \textbf{42.0576} & 45.92307 \\
-        \texttt{(1)+(2)+(3a)} & 42.0611 & 43.8461 & \textbf{42.5401} & 44.5384 \\
-        \texttt{(0)+(1)+(2)+(3a)} & 54.0515 & 56.0769 & \textbf{42.2358} & \textbf{46.8461} \\
-        \texttt{(1)+(2)+(3b)} & 44.3166 & 45.6153 & \textbf{41.9613} & 44.0000 \\
-        \texttt{(0)+(1)+(2)+(3b)} & 45.6153 & 45.6153 & \textbf{41.9292} & 46.2307 \\
-        \texttt{(1)+(2)+(3a)+(3b)} & 45.0456 & 47.2307 & \textbf{$\star$43.4564} & 45.9230 \\
-        \texttt{(0)+(1)+(2)+(3a)+(3b)} & 53.6459 & 53.6459 & \textbf{42.5509} & \textbf{46.5384} \\
-        
+        \texttt{(0)+(1)}                    & 55.7786                    & 57.7692                   & \textbf{42.1847}        & \textbf{47.5384}        \\
+        \texttt{(0)+(2)}                    & 54.9714                    & 56.9999                   & \textbf{42.4362}        & \textbf{$\star$47.6153} \\
+        \texttt{(1)+(2)}                    & 36.5217                    & 40.4615                   & 33.6202                 & 41.0000                 \\
+        \texttt{(0)+(1)+(2)}                & 55.2121                    & 57.1538                   & \textbf{42.2102}        & \textbf{47.3846}        \\
+        \texttt{(0)+(3a)}                   & 54.6287                    & 56.6923                   & \textbf{41.9766}        & \textbf{46.5384}        \\
+        \texttt{(0)+(3b)}                   & 54.8004                    & 56.3076                   & \textbf{41.9965}        & 46.2307                 \\
+        \texttt{(3a)+(3b)}                  & 44.3506                    & 46.3076                   & \textbf{41.8725}        & 44.3076                 \\
+        \texttt{(0)+(3a)+(3b)}              & 53.2549                    & 54.7692                   & \textbf{42.0576}        & 45.92307                \\
+        \texttt{(1)+(2)+(3a)}               & 42.0611                    & 43.8461                   & \textbf{42.5401}        & 44.5384                 \\
+        \texttt{(0)+(1)+(2)+(3a)}           & 54.0515                    & 56.0769                   & \textbf{42.2358}        & \textbf{46.8461}        \\
+        \texttt{(1)+(2)+(3b)}               & 44.3166                    & 45.6153                   & \textbf{41.9613}        & 44.0000                 \\
+        \texttt{(0)+(1)+(2)+(3b)}           & 45.6153                    & 45.6153                   & \textbf{41.9292}        & 46.2307                 \\
+        \texttt{(1)+(2)+(3a)+(3b)}          & 45.0456                    & 47.2307                   & \textbf{$\star$43.4564} & 45.9230                 \\
+        \texttt{(0)+(1)+(2)+(3a)+(3b)}      & 53.6459                    & 53.6459                   & \textbf{42.5509}        & \textbf{46.5384}        \\
     \end{tabular}
     % }
     \caption{Results given by the different features and combinations of features.}
@@ -1154,21 +1153,21 @@ Below, in the last group of the table, we can see various combinations of featur
 \label{ssec:ps_prop_leaning_classifier_total}
 
 
-Our hypothesis behind RQ3.2.1 is that the total quantity of propaganda contained in an article helps to recognise its political leaning. 
+Our hypothesis behind RQ3.2.1 is that the total quantity of propaganda contained in an article helps to recognise its political leaning.
 % definition
 To answer RQ3.2.1, we
 % \todoHA{first?}\todomargin{no, only. more features in other subsections}
 consider only the total amount of propaganda detected in each article. For each article, we calculate a single value to represent the percentage of propaganda text inside the article. %Using a percentage compensates for the varying lengths of articles.%These words are the one annotated as propaganda by \citet{da2019fine} (see Section \ref{sec:prop}).
 % how it is computed
 We use a percentage in order to be less biased and independent of the article size.
-This value is computed for each article as the ratio between the number of words detected as propagandist (see previous Section \ref{ssec:ps_prop_leaning_across}) and the total number of words. For example, if an article has 600 words, and propaganda analysis annotated 30 of them as being propagandist, the value of the feature will be 5\%.  
+This value is computed for each article as the ratio between the number of words detected as propagandist (see previous Section \ref{ssec:ps_prop_leaning_across}) and the total number of words. For example, if an article has 600 words, and propaganda analysis annotated 30 of them as being propagandist, the value of the feature will be 5\%.
 % hypothesis
 %The hypothesis is that by observing the total quantity of propaganda contained in an article, we can recognise its political leaning.
 % stats
 As we saw in the previous Section~\ref{ssec:ps_prop_leaning_across} in Figure~\ref{fig:prop_sent_across_leaning}, the distributions of the total quantity of propaganda is quite similar across political leaning, but it has lower values in the Center and higher values in the Right.
 %Figure~\ref{fig:tot_quantity} shows how this value is distributed across Left, Centre and Right leaning articles. It appears that all three groups have a similar propaganda distribution. The Centre appears to have slightly less propaganda, and the Right sources have the most (could be due to propaganda bias as we highlight later in Section~\ref{sec:discussion}).%, especially looking at the dots that represent the outliers. 
 % TODO better figure
- %Overall, the boxplot shows that the presence of propaganda is similar across the board.%, and the results in Table \ref{tab:results_prop_features_classifier} show that adding this feature lowers our classification accuracy. Hence %mostly overlap so this is a negative sign for our hypothesis.
+%Overall, the boxplot shows that the presence of propaganda is similar across the board.%, and the results in Table \ref{tab:results_prop_features_classifier} show that adding this feature lowers our classification accuracy. Hence %mostly overlap so this is a negative sign for our hypothesis.
 %the answer to RQ3.2.1 is No, the mere presence of propaganda is insufficient to determining the political leaning of articles. 
 
 % TODO: rename categories in plot to L/C/R
@@ -1210,7 +1209,7 @@ Table~\ref{tab:results_prop_features_classifier} shows the results of this first
 \subsubsection{Confusion Analysis}
 
 The confusion matrix in Figure~\ref{fig:total_prop_confusion} shows that the classifier is introducing biased predictions towards the Right-leaning class. %From observing that in general right-leaning articles contain more propaganda overall (\texttt{Prop-Total} feature), the results are skewed right. 
-This results in higher recall but lower precision for the Right class, and almost zero accuracy for the Centre label. 
+This results in higher recall but lower precision for the Right class, and almost zero accuracy for the Centre label.
 
 In summary, the answer to RQ3.2.1 is: \textbf{the total amount of propaganda in an article does not seem to be a good indicator of the political leaning of an article}.
 
@@ -1270,7 +1269,7 @@ In summary, the answer to RQ3.2.1 is: \textbf{the total amount of propaganda in 
 \subsection{Quantity of Particular Propaganda Techniques}
 \label{ssec:ps_prop_leaning_classifier_techniques}
 
-In this section, we test the hypothesis of RQ3.2.2, which is that the presence of particular propaganda techniques helps to determine the political-leaning of articles. 
+In this section, we test the hypothesis of RQ3.2.2, which is that the presence of particular propaganda techniques helps to determine the political-leaning of articles.
 
 %From the negative results to the first research question, we make another step to use more detailed features. 
 Instead of relying on a single value representing the total quantity of propaganda, we now consider the amount of each propaganda technique to train the political-leaning classifier.
@@ -1294,7 +1293,7 @@ We compute the word-based percentage of each technique inside each article. This
 %To give an idea of the computed percentages, we grouped the articles according to their political leaning \textcolor{red}{as determined by AllSides}. 
 As we have seen in the previous Section~\ref{ssec:ps_prop_leaning_across},  Figure~\ref{fig:prop_tech_details_across_leaning} was showing that the amount of propaganda techniques detected on this dataset is generally low. The most prominent one is the \texttt{Loaded\_Language} with an average word-based percentage of $1.5\%$.
 As in the previous subsection, we observe that articles from the Centre appear to be using less most of the propaganda techniques, %, while Left and Right have higher percentages. This is expected given the overall propaganda use pattern found in the previous experiment.   %However, the difference seems minimal overall. 
-but as we noted, there are some techniques which have different shapes (U-shape, triangular shape). Our hope is that an automated classifier is able to pick these different patterns and use them to differentiate the political leaning. 
+but as we noted, there are some techniques which have different shapes (U-shape, triangular shape). Our hope is that an automated classifier is able to pick these different patterns and use them to differentiate the political leaning.
 
 
 % A similar procedure has been done for the sentiment analysis. First, sentiment words have been extracted by several lexicons (TODO list). In this way every sentiment-loaded term in the articles analysed is associated with its polarity value (positive or negative).
@@ -1306,20 +1305,20 @@ but as we noted, there are some techniques which have different shapes (U-shape,
 % - Classifier with features: results and significance
 We train the classifiers as the in previous case and obtain the result indicated by \texttt{Prop-Techniques (2)} in Table~\ref{tab:results_prop_features_classifier}. Although the results show improvement over the previous feature considered, they are still well below the best performing baseline. %This indicates that 
 %As for the previous case, we have generally low scores, slightly improved from RQ3.2 on both splits.
-The results show that (a) \texttt{Prop-Techniques} alone is insufficient to accurately detect the political leaning of articles (RQ3.2.2), and (b) when \texttt{Prop-Techniques} is added to \texttt{Baly-baseline} (line \texttt{(0)+(2)} in results table), it brings an improvement on the Media split for both the F1 and accuracy measures. 
+The results show that (a) \texttt{Prop-Techniques} alone is insufficient to accurately detect the political leaning of articles (RQ3.2.2), and (b) when \texttt{Prop-Techniques} is added to \texttt{Baly-baseline} (line \texttt{(0)+(2)} in results table), it brings an improvement on the Media split for both the F1 and accuracy measures.
 
 
 %\begin{enumerate}
 %    \item \texttt{Prop-Techniques} alone does not provide good results;
 %    \item When \texttt{Prop-Techniques} is added to \texttt{Baly-baseline} in line (0) + (2), it does bring an improvement on the media split for both the F1 and accuracy measures.%, which is even bigger when added to the feature from the previous section.
-    % \item When \texttt{Prop-Techniques} is added to \texttt{Baly-baseline} on the \texttt{Baly} dataset, it has a big improvement on both F1 and Accuracy
+% \item When \texttt{Prop-Techniques} is added to \texttt{Baly-baseline} on the \texttt{Baly} dataset, it has a big improvement on both F1 and Accuracy
 %\end{enumerate}
 
 \subsubsection{Significance Test}
 
-Given the improvements in some cases, we perform an additional test following the approach in~\citet{mcnemar1947note} 
+Given the improvements in some cases, we perform an additional test following the approach in~\citet{mcnemar1947note}
 to better understand the significance of these results. %if this is just a small effect or if it is something significant.
-To perform this test, we build a contingency table by considering two arrays: the first shows when the \texttt{Baly-baseline} produced the correct result on the test set, and the second one shows when the line \texttt{(0)+(2)} (baseline+propaganda techniques quantity) produced the correct result on the Media split. The contingency table, therefore, is the 2x2 matrix as shown in 
+To perform this test, we build a contingency table by considering two arrays: the first shows when the \texttt{Baly-baseline} produced the correct result on the test set, and the second one shows when the line \texttt{(0)+(2)} (baseline+propaganda techniques quantity) produced the correct result on the Media split. The contingency table, therefore, is the 2x2 matrix as shown in
 % Table~\ref{tab:contingency} and 
 Table~\ref{tab:contingency2}.
 
@@ -1338,14 +1337,14 @@ Table~\ref{tab:contingency2}.
 
 \begin{table}[!htbp]
     \centering
-%    \scriptsize
-\small
+    %    \scriptsize
+    \small
     \begin{tabular}{rr|c|c}
-        & & \multicolumn{2}{c}{\texttt{(0)+(2)}} \\
-         & & incorrect & correct \\
-         \hline
-        \multirow{2}{*}{\texttt{(0)}} & incorrect & 672 & 27 \\
-        & correct & 10 & 591
+                                      &           & \multicolumn{2}{c}{\texttt{(0)+(2)}}           \\
+                                      &           & incorrect                            & correct \\
+        \hline
+        \multirow{2}{*}{\texttt{(0)}} & incorrect & 672                                  & 27      \\
+                                      & correct   & 10                                   & 591
     \end{tabular}
     \caption{Contingency table on Media splits.}
     \label{tab:contingency2}
@@ -1358,7 +1357,7 @@ Table~\ref{tab:contingency2}.
 % TODO move this in a more visible section, like final discussion? This applies to all the propaganda features
 Using the predicted labels of the selected rows on the Media split (last two columns of Table~\ref{tab:results_prop_features_classifier}), the \texttt{(0)+(2)} against baseline resulted in a \textbf{p-value=$0.008$}, which means that the \textbf{improvement is significant}.
 Remember that the \textbf{Media split is less biased than the Random split}, since in the Media split the sources of the articles in the test set are not overlapping with the sources of the articles in the training set. If we compare the Random vs Media split results, we can see that while the \texttt{Baly-baseline} drops significantly (more than 15\% F1 and 12\% accuracy), the models based on the features of propaganda have a much smaller drop in these measures (less than 8\% F1 and less than 1\% accuracy).
-This means that our models with propaganda features are coping better with articles from ``new sources'' that are unseen in the training set. 
+This means that our models with propaganda features are coping better with articles from ``new sources'' that are unseen in the training set.
 The improved generalisation abilities of this feature is perhaps what is driving the significant improvement described above. %can be seen when put in combination with the features of the baseline with the significant improvement described just above \textcolor{red}{(sentence unclear)}. 
 
 \subsubsection{Confusion Analysis}
@@ -1378,19 +1377,19 @@ The improved generalisation abilities of this feature is perhaps what is driving
     %      \caption{Balanced 60k}
     %      \label{fig:prop_tech_confusion_60k_balanced}
     %  \end{subfigure}
-     \begin{subfigure}[b]{0.48\linewidth}
-         \centering
-         \includegraphics[width=\linewidth]{figures/baly_random_confusion_matrix_propaganda_percentages-small.pdf}
-         \caption{Baly random.}
-         \label{fig:prop_tech_confusion_baly_random}
-     \end{subfigure}
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/baly_random_confusion_matrix_propaganda_percentages-small.pdf}
+        \caption{Baly random.}
+        \label{fig:prop_tech_confusion_baly_random}
+    \end{subfigure}
     %  \hfill
     \begin{subfigure}[b]{0.48\linewidth}
-         \centering 
-         \includegraphics[width=\linewidth]{figures/baly_media_confusion_matrix_propaganda_percentages-small.pdf}
-         \caption{Baly media.}
-         \label{fig:prop_tech_confusion_baly_media}
-     \end{subfigure}
+        \centering
+        \includegraphics[width=\linewidth]{figures/baly_media_confusion_matrix_propaganda_percentages-small.pdf}
+        \caption{Baly media.}
+        \label{fig:prop_tech_confusion_baly_media}
+    \end{subfigure}
     \caption{Confusion matrix using the features of \texttt{Prop-Techniques} (RQ3.2.2).}
     \label{fig:prop_tech_confusion}
 \end{figure}
@@ -1414,7 +1413,7 @@ If we compare the subfigures~\ref{fig:prop_tech_confusion_baly_random} and~\ref{
 To understand what the model has learnt, we investigate the weights assigned by the neural layer part of the model.
 The values are retrieved from the neural network by analysing the weights of the SoftMax layer described before.
 For each feature, we have three weightss that respectively affect the probabilities assigned to the three output classes (Left, Center, Right).
-From these three weights, we compute the difference between the ones for the Right class and the one for the Left class. This computed value represents the association between the specific technique and the output leaning. 
+From these three weights, we compute the difference between the ones for the Right class and the one for the Left class. This computed value represents the association between the specific technique and the output leaning.
 We can see in Figure~\ref{fig:prop_tech_weights} the associations learned by the model for the eighteen techniques considered.
 Positive values correspond to higher weights for the Right class, while negative values mean that the classifier recognises the appearance of the technique as a sign of being from the Left.
 
@@ -1440,20 +1439,20 @@ We need to go beyond the quantification of detected propaganda techniques (RQ3.2
 % to recognise political leaning given by the previous sections, the idea is to take a look at the specific terms picked up by the propaganda analysis. Not only quantity, but which words belong to each technique.
 
 %To this end, the RQ3.2.3 considers as features the terms that are picked as part of the propaganda techniques.
-The hypothesis is that, even though propaganda techniques are used with similar percentages (as learnt from the first two feature sets), the choice of words and their frequency differ between different-leaning articles, which can improve their classification. 
+The hypothesis is that, even though propaganda techniques are used with similar percentages (as learnt from the first two feature sets), the choice of words and their frequency differ between different-leaning articles, which can improve their classification.
 %there are some specific words that are used by opposing leanings that are used with different frequency.
 %
 In this third part, we proceed with the analysis of terms in two different ways:
 \begin{itemize}
-    \item (3a) all the propaganda words taken together: non-propaganda annotated words are filtered out. The classifier will then use the remaining propaganda words to learn any differences between political leanings. 
-    %this acts as an attention mask between the classifier and the articles, filtering out the words that are not propagandist. The classifier will then use the propaganda words to learn any difference between political leanings. 
+    \item (3a) all the propaganda words taken together: non-propaganda annotated words are filtered out. The classifier will then use the remaining propaganda words to learn any differences between political leanings.
+          %this acts as an attention mask between the classifier and the articles, filtering out the words that are not propagandist. The classifier will then use the propaganda words to learn any difference between political leanings. 
     \item (3b) propaganda words grouped by propaganda technique: there are 18 groups, one for each propaganda technique. The classifier will use the words, grouped by the technique to which they belong, to recognise the political leaning.
 \end{itemize}
 
 While the objective of (3a) is to learn distinctive propaganda terms, (3b) instead focuses on the terms of the 18 individual techniques (e.g. Slogans from the Right might contain different words from the Slogans from the Left).
 % \todoHA{You have to add examples whenever and wherever you can}
 
-To obtain the feature vectors of the propaganda words, we use TF-IDF 
+To obtain the feature vectors of the propaganda words, we use TF-IDF
 because its numerical values directly represent single terms. Instead with other embedding methods (e.g., GloVe~\citep{pennington2014glove}, FastText~\citep{joulin2016fasttext}) this correspondence with single terms would be more difficult to extract. By considering the features which get assigned the biggest values in the final SoftMax layer, we can directly say which terms are the most discriminative for the task of political leaning classification.
 % since it is easier to link the results to specific terms: the TF-IDF weights that vary the most between political sides are labelled with their feature name (term). 
 % the results produced can be easily interpreted. Using State of the Art word embeddings could provide better results but it would be more difficult to understand the importance of specific terms.
@@ -1528,19 +1527,19 @@ We can see the term ``fit'' emerging as a very representative term of the Centre
 % TODO: make clearer distinction between propaganda label and word
 \begin{figure}[!htbp]
     \centering
-     \begin{subfigure}[b]{\linewidth}
-         \centering
-         \includegraphics[width=0.75\linewidth]{figures/baly_media_weights_propaganda_tf_idf-small.pdf}
-         \caption{\texttt{Prop-Total-Terms}(3a): propaganda terms.}
-         \label{fig:terms_weights_3a}
-     \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/baly_media_weights_propaganda_tf_idf-small.pdf}
+        \caption{\texttt{Prop-Total-Terms}(3a): propaganda terms.}
+        \label{fig:terms_weights_3a}
+    \end{subfigure}
     %  \hfill
     \begin{subfigure}[b]{\linewidth}
-         \centering 
-         \includegraphics[width=0.75\linewidth]{figures/baly_media_weights_propaganda_techniques_tf_idf-small.pdf}
-         \caption{\texttt{Prop-Techniques-Terms} (3b): propaganda terms together with their propaganda technique.}
-         \label{fig:terms_weights_3b}
-     \end{subfigure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/baly_media_weights_propaganda_techniques_tf_idf-small.pdf}
+        \caption{\texttt{Prop-Techniques-Terms} (3b): propaganda terms together with their propaganda technique.}
+        \label{fig:terms_weights_3b}
+    \end{subfigure}
     \caption{The 30 most important terms learned by the classifier.}
     \label{fig:terms_weights}
 \end{figure}
@@ -1568,7 +1567,7 @@ We have seen in the previous sections that the results of the classifier based o
 The feature combination \texttt{(0)+(2)} (baseline and quantity of propaganda techniques), when tested for with McNemar test, resulted significant (p-value $=0.008$).
 But we still question whether the results, with such a small margin (F1 and Accuracy) would generalise to other datasets.
 
-For this reason, in this subsection, we take the \texttt{NELA} dataset from Section~\ref{app:nela_processing} and we perform the same analysis. In specific, we test on the built subsets denoted with \texttt{NELA-Random-Imbalanced}, \texttt{NELA-Random-Balanced}, \texttt{NELA-Media-Imbalanced} and \texttt{NELA-Media-Balanced}.
+For this reason, in this subsection, we take the \texttt{NELA} dataset from Appendix~\ref{app:nela_processing} and we perform the same analysis. In specific, we test on the built subsets denoted with \texttt{NELA-Random-Imbalanced}, \texttt{NELA-Random-Balanced}, \texttt{NELA-Media-Imbalanced} and \texttt{NELA-Media-Balanced}.
 
 
 The only difference in the experimental setup is that here we are performing a 5-Folds cross-validation instead of a simple train-test.
@@ -1578,40 +1577,39 @@ For computing the F1 and accuracy metrics, we accumulate over the 5 folds the va
 
 \begin{table}[!htbp]
     \centering
-   \scriptsize
-  %\small
+    \scriptsize
+    %\small
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|rr|rr|rr|rr}
-        & \multicolumn{2}{c}{\texttt{Random-Imbalanced}} & \multicolumn{2}{c}{\texttt{Random-Balanced}} & \multicolumn{2}{c}{\texttt{Media-Imbalanced}} & \multicolumn{2}{c}{\texttt{Media-Balanced}} \\
-        Model & F1-Macro & Accuracy & F1-Macro & Accuracy & F1-Macro & Accuracy & F1-Macro & Accuracy \\
-        \hline
-        \texttt{Majority} & 21.5632 & 47.8086 & 16.6666 & 33.3333 & 21.5632 & 47.8086 & 16.6666 & 33.3333 \\
-        % \texttt{Baly-API} & 42.3355 & 43.8356 & 42.0523 & 43.6910 & 41.6863 & 41.7993 & & & & \\
-        \texttt{Baly-baseline} (0) & 69.2076 & 71.2211 & 70.9808 & 70.8977 & 45.1628 & 50.5888 & 46.2165 & 46.0180 \\
-        %\texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
-        \hline
-        \texttt{Prop-Total (1)} & 21.5632 & 47.8086 & 29.5603 & 35.2938 & 21.7242 & 47.8372 & 32.4953 & 33.0485 \\
-        \texttt{Prop-Techniques (2)} & 25.6280 & 47.8404 & 38.4605 & 39.7791 & 24.2318 & 46.1973 & 36.3153 & 37.5012 \\
-        \texttt{Prop-Total-Terms (3a)} & 41.3193 & 49.6682 & 41.8435 & 42.3996 & 37.0437 & 45.3760 & 36.8032 & 36.8067 \\
-        \texttt{Prop-Techniques-Terms (3b)} & 38.3522 & 50.3530 & 39.3319 & 41.0597 & 35.3254 & 47.3457 & 35.6495 & 35.8892 \\
-        % \texttt{Prop-words-BERT} (3) & 35.4718 & 48.2387 & 35.4718 & 48.2387 \\
-        \hline
-        \texttt{(0)+(1)} & \textbf{69.2085} & \textbf{71.2271} & \textbf{70.9899} & \textbf{70.9057} & 45.1531 & \textbf{50.6024} & \textbf{46.2288} & \textbf{46.0346}  \\
-        \texttt{(0)+(2)} & \textbf{69.2905} & \textbf{71.2991} & \textbf{71.0331} & \textbf{70.9510} & \textbf{45.1835} & \textbf{50.6412} & \textbf{46.3481} & \textbf{46.1550} \\
-        \texttt{(1)+(2)} & 25.7629 & 47.8299 & 38.5816 & 39.8064 & 24.4286 & 46.2459 & 36.2956 & 37.1280 \\
-        \texttt{(0)+(1)+(2)} & \textbf{$\star$69.2994} & \textbf{$\star$71.3019} & \textbf{$\star$71.0358} & \textbf{$\star$70.9529} & \textbf{$\star$45.1998} & \textbf{$\star$50.6524} & \textbf{46.3457} & \textbf{46.1517} \\
-        \texttt{(0)+(3a)} & 65.7886 & 68.5003 & 68.5460 & 68.4628 & 44.7002 & 49.4820 & 46.1694 & 46.1916 \\
-        \texttt{(0)+(3b)} & 66.1823 & 68.7194 & 68.5074 & 68.4349 & 45.0300 & 49.8181 & \textbf{46.4617} & \textbf{46.4431} \\
-        \texttt{(3a)+(3b)} & 41.4558 & 49.5529 & 42.5407 & 42.6677 & 37.0566 & 45.1370 & 36.5396 & 36.5419 \\
-        \texttt{(0)+(3a)+(3b)} & 65.0796 & 67.8463 & 67.4347 & 67.3705 & 44.4791 & 49.1030 & 45.9924 & 46.0147  \\
-        \texttt{(1)+(2)+(3a)} & 41.6843 & 49.9994 & 42.2068 & 42.7608 & 36.9627 & 45.4902 & 36.4236 & 36.4208   \\
-        \texttt{(0)+(1)+(2)+(3a)} & 65.7779 & 68.4993 & 68.5715 & 68.4921 & 44.8164 & 49.5117 & \textbf{46.2871} & \textbf{46.3227}  \\
-        \texttt{(1)+(2)+(3b)} & 38.8414 & 50.4508 & 39.6869 & 41.3132 & 35.7261 & 47.4435 & 35.8977 & 36.0895  \\
-        \texttt{(0)+(1)+(2)+(3b)} & 66.1066 & 68.6778 & 68.5074 & 68.4376 & 45.0148 & 49.8192 & \textbf{$\star$46.6062} & \textbf{$\star$46.6054} \\
-        \texttt{(1)+(2)+(3a)+(3b)} & 41.7298 & 49.8055 & 42.6323 & 42.7555 & 36.8644 & 45.1150 & 36.7762 & 36.8838 \\
-        \texttt{(0)+(1)+(2)+(3a)+(3b)} & 65.0692 & 67.8439 & 67.4353 & 67.3718 & 44.5016 & 49.1166 & 46.05313 & 46.0858  \\
-        
-    \end{tabular}
+        \begin{tabular}{l|rr|rr|rr|rr}
+                                                & \multicolumn{2}{c}{\texttt{Random-Imbalanced}} & \multicolumn{2}{c}{\texttt{Random-Balanced}} & \multicolumn{2}{c}{\texttt{Media-Imbalanced}} & \multicolumn{2}{c}{\texttt{Media-Balanced}}                                                                                                         \\
+            Model                               & F1-Macro                                       & Accuracy                                     & F1-Macro                                      & Accuracy                                    & F1-Macro                & Accuracy                & F1-Macro                & Accuracy                \\
+            \hline
+            \texttt{Majority}                   & 21.5632                                        & 47.8086                                      & 16.6666                                       & 33.3333                                     & 21.5632                 & 47.8086                 & 16.6666                 & 33.3333                 \\
+            % \texttt{Baly-API} & 42.3355 & 43.8356 & 42.0523 & 43.6910 & 41.6863 & 41.7993 & & & & \\
+            \texttt{Baly-baseline} (0)          & 69.2076                                        & 71.2211                                      & 70.9808                                       & 70.8977                                     & 45.1628                 & 50.5888                 & 46.2165                 & 46.0180                 \\
+            %\texttt{Baly-paper} (*) & 80.19 & 79.83 & 35.53 & 36.75 \\
+            \hline
+            \texttt{Prop-Total (1)}             & 21.5632                                        & 47.8086                                      & 29.5603                                       & 35.2938                                     & 21.7242                 & 47.8372                 & 32.4953                 & 33.0485                 \\
+            \texttt{Prop-Techniques (2)}        & 25.6280                                        & 47.8404                                      & 38.4605                                       & 39.7791                                     & 24.2318                 & 46.1973                 & 36.3153                 & 37.5012                 \\
+            \texttt{Prop-Total-Terms (3a)}      & 41.3193                                        & 49.6682                                      & 41.8435                                       & 42.3996                                     & 37.0437                 & 45.3760                 & 36.8032                 & 36.8067                 \\
+            \texttt{Prop-Techniques-Terms (3b)} & 38.3522                                        & 50.3530                                      & 39.3319                                       & 41.0597                                     & 35.3254                 & 47.3457                 & 35.6495                 & 35.8892                 \\
+            % \texttt{Prop-words-BERT} (3) & 35.4718 & 48.2387 & 35.4718 & 48.2387 \\
+            \hline
+            \texttt{(0)+(1)}                    & \textbf{69.2085}                               & \textbf{71.2271}                             & \textbf{70.9899}                              & \textbf{70.9057}                            & 45.1531                 & \textbf{50.6024}        & \textbf{46.2288}        & \textbf{46.0346}        \\
+            \texttt{(0)+(2)}                    & \textbf{69.2905}                               & \textbf{71.2991}                             & \textbf{71.0331}                              & \textbf{70.9510}                            & \textbf{45.1835}        & \textbf{50.6412}        & \textbf{46.3481}        & \textbf{46.1550}        \\
+            \texttt{(1)+(2)}                    & 25.7629                                        & 47.8299                                      & 38.5816                                       & 39.8064                                     & 24.4286                 & 46.2459                 & 36.2956                 & 37.1280                 \\
+            \texttt{(0)+(1)+(2)}                & \textbf{$\star$69.2994}                        & \textbf{$\star$71.3019}                      & \textbf{$\star$71.0358}                       & \textbf{$\star$70.9529}                     & \textbf{$\star$45.1998} & \textbf{$\star$50.6524} & \textbf{46.3457}        & \textbf{46.1517}        \\
+            \texttt{(0)+(3a)}                   & 65.7886                                        & 68.5003                                      & 68.5460                                       & 68.4628                                     & 44.7002                 & 49.4820                 & 46.1694                 & 46.1916                 \\
+            \texttt{(0)+(3b)}                   & 66.1823                                        & 68.7194                                      & 68.5074                                       & 68.4349                                     & 45.0300                 & 49.8181                 & \textbf{46.4617}        & \textbf{46.4431}        \\
+            \texttt{(3a)+(3b)}                  & 41.4558                                        & 49.5529                                      & 42.5407                                       & 42.6677                                     & 37.0566                 & 45.1370                 & 36.5396                 & 36.5419                 \\
+            \texttt{(0)+(3a)+(3b)}              & 65.0796                                        & 67.8463                                      & 67.4347                                       & 67.3705                                     & 44.4791                 & 49.1030                 & 45.9924                 & 46.0147                 \\
+            \texttt{(1)+(2)+(3a)}               & 41.6843                                        & 49.9994                                      & 42.2068                                       & 42.7608                                     & 36.9627                 & 45.4902                 & 36.4236                 & 36.4208                 \\
+            \texttt{(0)+(1)+(2)+(3a)}           & 65.7779                                        & 68.4993                                      & 68.5715                                       & 68.4921                                     & 44.8164                 & 49.5117                 & \textbf{46.2871}        & \textbf{46.3227}        \\
+            \texttt{(1)+(2)+(3b)}               & 38.8414                                        & 50.4508                                      & 39.6869                                       & 41.3132                                     & 35.7261                 & 47.4435                 & 35.8977                 & 36.0895                 \\
+            \texttt{(0)+(1)+(2)+(3b)}           & 66.1066                                        & 68.6778                                      & 68.5074                                       & 68.4376                                     & 45.0148                 & 49.8192                 & \textbf{$\star$46.6062} & \textbf{$\star$46.6054} \\
+            \texttt{(1)+(2)+(3a)+(3b)}          & 41.7298                                        & 49.8055                                      & 42.6323                                       & 42.7555                                     & 36.8644                 & 45.1150                 & 36.7762                 & 36.8838                 \\
+            \texttt{(0)+(1)+(2)+(3a)+(3b)}      & 65.0692                                        & 67.8439                                      & 67.4353                                       & 67.3718                                     & 44.5016                 & 49.1166                 & 46.05313                & 46.0858                 \\
+        \end{tabular}
     }
     \caption{Results NELA.}
     \label{tab:results_prop_features_classifier_nela}
@@ -1651,7 +1649,7 @@ Instead, Balanced and Imbalanced splits have very similar results when consideri
 % But we can see that the gap between the baseline and propaganda features on their own is smaller
 
 Compared to the results over the \texttt{Baly} dataset, we can see that we have far more consistent results (the row of the table that has overall best results is \texttt{(0)+(1)+(2)}, only surpassed in \texttt{Media-Balanced} by better combinations).
-This may be the result of the cross-validation process that provides more stable results with respect to a single train-test scenario. 
+This may be the result of the cross-validation process that provides more stable results with respect to a single train-test scenario.
 
 \subsubsection{Significance}
 % which results are significant
@@ -1659,17 +1657,17 @@ We then tested for statistical significance all the values that are denoted in \
 
 \begin{table}[!htbp]
     \centering
-        \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|r|r|r|r}
-        Model & \texttt{Random-Imbalanced} & \texttt{Random-Balanced} & \texttt{Media-Imbalanced} & \texttt{Media-Balanced} \\
-        \hline
-        \texttt{(0)+(1)} & .741 & .717 & .457 & .408 \\
-        \texttt{(0)+(2)} & \textbf{.003} & .088 & .055 & \textbf{1.15e-5}\\
-        \texttt{(0)+(1)+(2)} & \textbf{.001} & .069 & \textbf{.015} & \textbf{1.68e-5} \\
-        \texttt{(0)+(3b)} & & & & \textbf{1.45e-5} \\
-        \texttt{(0)+(1)+(2)+(3a)} & & & & \textbf{.004} \\
-        \texttt{(0)+(1)+(2)+(3b)} & & & & \textbf{2.77e-9}
-    \end{tabular}
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{l|r|r|r|r}
+            Model                     & \texttt{Random-Imbalanced} & \texttt{Random-Balanced} & \texttt{Media-Imbalanced} & \texttt{Media-Balanced} \\
+            \hline
+            \texttt{(0)+(1)}          & .741                       & .717                     & .457                      & .408                    \\
+            \texttt{(0)+(2)}          & \textbf{.003}              & .088                     & .055                      & \textbf{1.15e-5}        \\
+            \texttt{(0)+(1)+(2)}      & \textbf{.001}              & .069                     & \textbf{.015}             & \textbf{1.68e-5}        \\
+            \texttt{(0)+(3b)}         &                            &                          &                           & \textbf{1.45e-5}        \\
+            \texttt{(0)+(1)+(2)+(3a)} &                            &                          &                           & \textbf{.004}           \\
+            \texttt{(0)+(1)+(2)+(3b)} &                            &                          &                           & \textbf{2.77e-9}
+        \end{tabular}
     }
     \caption{p-values of features set that have improvements in NELA dataset.}
     \label{tab:pvalues_nela_classifier}
@@ -1677,7 +1675,7 @@ We then tested for statistical significance all the values that are denoted in \
 
 The results are shown in Table~\ref{tab:pvalues_nela_classifier}, that is showing the p-values. We indicate in \textbf{bold} the values that satisfy the threshold of significance (0.05) and are therefore significant. Some cells are not shown because the corresponding F1/Accuracy values are lower than the baseline.
 
-We can see that only some of the results pass the significance test. The \texttt{Media-Balanced} passes it for almost all the feature sets, with very low p-values. 
+We can see that only some of the results pass the significance test. The \texttt{Media-Balanced} passes it for almost all the feature sets, with very low p-values.
 
 % \texttt{(0)+(1)}
 % - random imbalanced: statistic=1166.000, p-value=0.741 --> non-significant
@@ -1723,7 +1721,7 @@ We can see that only some of the results pass the significance test. The \texttt
 % [[67978. 13165.]
 %  [12707. 56465.]]
 %  statistic=12707.000, p-value=0.0044935554 --> significant
- 
+
 % \texttt{(0)+(1)+(2)+(3b)}:
 % [[69691. 11452.]
 %  [10569. 58603.]]
@@ -1784,12 +1782,12 @@ We want to understand with this dataset what the models learn. Here we analyse t
 
 \begin{figure}[!htbp]
     \centering
-     \begin{subfigure}[b]{0.7\linewidth}
-         \centering
-         \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert.pdf}
-         \caption{Baseline: \texttt{Baly-baseline (0)}.}
-         \label{fig:nela_confusion_bert}
-     \end{subfigure}
+    \begin{subfigure}[b]{0.7\linewidth}
+        \centering
+        \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert.pdf}
+        \caption{Baseline: \texttt{Baly-baseline (0)}.}
+        \label{fig:nela_confusion_bert}
+    \end{subfigure}
     %  \hfill
     % \begin{subfigure}[b]{0.48\linewidth}
     %      \centering 
@@ -1798,17 +1796,17 @@ We want to understand with this dataset what the models learn. Here we analyse t
     %      \label{fig:nela_confusion_prop_quantities}
     %  \end{subfigure}
     \begin{subfigure}[b]{0.7\linewidth}
-         \centering 
-         \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_propaganda_techniques_tf_idf.pdf}
-         \caption{\texttt{Prop-Techniques-Terms (3b)}.}
-         \label{fig:nela_confusion_prop}
-     \end{subfigure}
+        \centering
+        \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_propaganda_techniques_tf_idf.pdf}
+        \caption{\texttt{Prop-Techniques-Terms (3b)}.}
+        \label{fig:nela_confusion_prop}
+    \end{subfigure}
     \begin{subfigure}[b]{0.7\linewidth}
-         \centering 
-         \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert,propaganda_total_percentage,propaganda_percentages,propaganda_techniques_tf_idf.pdf}
-         \caption{Combination: \texttt{(0)+(1)+(2)+(3b)}.}
-         \label{fig:nela_confusion_combined}
-     \end{subfigure}
+        \centering
+        \includegraphics[trim={0 2cm 2cm 1cm},clip,width=\linewidth]{figures/nela_allsides_subset_media_balanced_confusion_matrix_bert,propaganda_total_percentage,propaganda_percentages,propaganda_techniques_tf_idf.pdf}
+        \caption{Combination: \texttt{(0)+(1)+(2)+(3b)}.}
+        \label{fig:nela_confusion_combined}
+    \end{subfigure}
     \caption{Confusion matrix with different features on NELA dataset.}
     \label{fig:nela_confusion}
 \end{figure}
@@ -1824,7 +1822,7 @@ By combining the baseline feature with many propaganda features (\texttt{(0)+(1)
 Subfigure~\ref{fig:nela_confusion_combined} shows what happens in details. The overall bias of the BERT baseline is compensated with the bias of the propaganda features (predictions: 50039 Left, 50854 Center, 49422 Right).
 The values on the main diagonal are higher for the Right (+1553) and the Center (+689), while they are lower for the Left (-1359).
 
-In the other splits we have a similar when comparing \texttt{(0)+(1)+(2)} to the baseline. We selected this example because it has the highest delta in F1 and Accuracy, and highest significance. 
+In the other splits we have a similar when comparing \texttt{(0)+(1)+(2)} to the baseline. We selected this example because it has the highest delta in F1 and Accuracy, and highest significance.
 
 % media balanced:
 % - bert left bias in prediction
@@ -1912,7 +1910,7 @@ On the side of automated propaganda analysis, we need to clarify that we are usi
 % propaganda issues
 Current work in automated propaganda analysis does not take into consideration political leaning, and seems to be focusing on Right-leaning propaganda mostly.
 % Right-leaning propaganda is easier to spot because it is usually stronger and it is easier to see from the Left-perspective as opposed. There may be a bit of left-leaning in academia that facilitates this.
-The results of this bias can be seen in the dataset collected by~\citet{baly2020we} (as noted in Section~\ref{ssec:related_prop}, the training of the propaganda tool is performed against right-leaning sources) and reflects on the annotations that are provided by the tool we are using. 
+The results of this bias can be seen in the dataset collected by~\citet{baly2020we} (as noted in Section~\ref{ssec:related_prop}, the training of the propaganda tool is performed against right-leaning sources) and reflects on the annotations that are provided by the tool we are using.
 
 We acknowledge the intrinsic complexity of distinguishing left and right propaganda usage (dictated by the limitations listed above), especially if we consider that the differences we are talking about may be very subtle and challenging to pick.
 For example, the same words can be used with different meaning/targets (e.g. ``enemies of the people'', ``people's will'', ...)~\citep{seargeant2020art}. This results in the same propaganda techniques used with the same words.
@@ -1947,12 +1945,12 @@ Additionally, re-implementing their model could have introduced other minor diff
 Also related to comparabilty, we have to underline that the splits shared with the \texttt{baly} dataset (especially the media splits) may not be the best strategy, as we have seen across the cross-validation performed on the media splits of the \texttt{Nela} dataset, results change quite significantly across the folds because very different news sources are used for training/testing. Therefore, using cross-validation provides results that are way more meaningful and representative of the whole dataset.
 
 \subsubsection{Meaning and Context}
-As shown in experiment 3, some terminologies are common to Left, Right, and Centre articles. In political narrative, many words tend to be used frequently by different political-leaning groups, but for different meanings or to refer to different groups \citep{seargeant2020art}. For example, the word ``Elite'' is used by the Left to refer to people holding economic and political powers, and by the Right to point to those in the cultural and knowledge sector \citep{seargeant2020art}.  
+As shown in experiment 3, some terminologies are common to Left, Right, and Centre articles. In political narrative, many words tend to be used frequently by different political-leaning groups, but for different meanings or to refer to different groups \citep{seargeant2020art}. For example, the word ``Elite'' is used by the Left to refer to people holding economic and political powers, and by the Right to point to those in the cultural and knowledge sector \citep{seargeant2020art}.
 Figure~\ref{fig:propaganda_example_2} shows a sentence where the \texttt{Loaded\_Language} propaganda technique was detected.
 The target of displayed technique are the Democrats even though the Republicans are surrounded by loaded terms.
-In such complex examples, the structure of the discourse and framing of arguments take an essential role in discerning political leaning. 
+In such complex examples, the structure of the discourse and framing of arguments take an essential role in discerning political leaning.
 
-In such cases, it might be helpful to consider propaganda techniques in relation to the surrounding context, similarly to the idea proposed in~\citet{chen2017opinion} where semantic entity analysis was used to determine opinion targets. 
+In such cases, it might be helpful to consider propaganda techniques in relation to the surrounding context, similarly to the idea proposed in~\citet{chen2017opinion} where semantic entity analysis was used to determine opinion targets.
 All this suggests the need for a more advanced analysis on the use of certain propagandistic words by different leaning groups, to associate politically-ambiguous words with their implicit meaning, and with surrounding semantic contexts and topics.
 
 %Annotations are costly and require experts. Automated fine-grained propaganda analysis is still at the beginning, and many issues usually come up when tools such as this are used in downstream tasks (e.g. political classification). This may be only a problem of training or it could also be a problem of different techniques that are not significant in the Right propaganda but are more prominent on the Left propaganda. More analysis on Left leaning propaganda should be done.
@@ -2037,7 +2035,7 @@ With the best of our knowledge, there is no current study of how balanced or imb
 % This view is linked to the US context of recent years and therefore it’s manifesting in the link between propaganda and far-right ideology (JUSTIFY THIS).
 
 % Aim
-Therefore, we want to study how the current datasets of propaganda are distributed across political leaning, and see if there is some imbalance in the datasets. 
+Therefore, we want to study how the current datasets of propaganda are distributed across political leaning, and see if there is some imbalance in the datasets.
 %
 % Our aim is to analyse how observe how propaganda actually exists all over the political spectrum: not only in far-right media, but also in other leanings: left and also more moderate news sources use propaganda as a persuasion technique.
 % And also to 
@@ -2060,7 +2058,7 @@ The research question that we aim to answer in this section is RQ3.3: \emph{How 
 % We have one hypotheses:
 % \begin{itemize}
 %     \item[H1:] propaganda exists all across the political spectrum;
-    
+
 % \end{itemize}
 % \todoAW{Again, your terminology is a bit awry... I think you want to say that your null hypothesis (H0) is that propaganda exists across the spectrum and th alternative hypothesis is that propaganda co-0ccurs with populism.}
 
@@ -2146,7 +2144,7 @@ Our goal is to find if there are some overall trends, for example a big imbalanc
 
 Note that the datasets that we consider are not the the ones used for political leaning that have been described in the previous Section~\ref{ssec:ps_leaning_data}.
 % \todoHA{So why are we using them here?}
-This is the case because we are analysing the task of propaganda detection and not to the task of political leaning classification and, as we have seen in Chapter~\ref{chap:literature}, the literature is quite well separated between the two tasks.
+This is the case because we are analysing the task of propaganda detection and not the task of political leaning classification and, as we have seen in Chapter~\ref{chap:literature}, the literature is quite well separated between the two tasks.
 We introduced propaganda in the previous chapter~\ref{chap:linguistic_persuasion}, but at that moment we had not yet introduced leanings into the analysis.
 We present here the analysis of the propaganda detection datasets, showing how they distribute across political leanings.
 
@@ -2160,26 +2158,26 @@ The first dataset is TSHP-17, which was published in the work of~\citet{rashkin2
 \begin{itemize}
     \item Satire: The Onion, Borowitz Report, Clickhole
     \item Hoax: American News, DC Gazette
-    \item Propaganda: Natural News, Activist Report (Activist News and Activist Report
+    \item Propaganda: Natural News, Activist Report (Activist News and Activist Report)
     \item Trusted news: from Gigaword News corups. Articles come from several sources, including AFP (Agence France Press), Associated Press, New York Times, The Xinhua News Agency. The dataset is not including these articles.
 \end{itemize}
 
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{c|c|r|c|c}
-        label & source & \#articles & MBFC leaning & MBFC link \\
+        label                       & source               & \#articles & MBFC leaning  & MBFC link                                                                        \\
         \hline
-        \multirow{3}{*}{satire} & The Onion & 14,170 & ? & \href{https://mediabiasfactcheck.com/the-onion/}{the-onion} \\
-                                & The Borrowitz Report & 627 & left & \href{https://mediabiasfactcheck.com/borowitz-report/}{borowitz-report} \\
-                                & Clickhole & 188 & ? & \href{https://mediabiasfactcheck.com/clickhole/}{clickhole} \\
+        \multirow{3}{*}{satire}     & The Onion            & 14,170     & ?             & \href{https://mediabiasfactcheck.com/the-onion/}{the-onion}                      \\
+                                    & The Borrowitz Report & 627        & left          & \href{https://mediabiasfactcheck.com/borowitz-report/}{borowitz-report}          \\
+                                    & Clickhole            & 188        & ?             & \href{https://mediabiasfactcheck.com/clickhole/}{clickhole}                      \\
         \hline
-        \multirow{2}{*}{hoax} & American News & 6,914 & extreme right & \href{https://mediabiasfactcheck.com/anews-24-com-american-news/}{american-news} \\
-                                & DC Gazette & 5,133 & extreme right & \href{https://mediabiasfactcheck.com/dc-gazette/}{dc-gazette} \\
+        \multirow{2}{*}{hoax}       & American News        & 6,914      & extreme right & \href{https://mediabiasfactcheck.com/anews-24-com-american-news/}{american-news} \\
+                                    & DC Gazette           & 5,133      & extreme right & \href{https://mediabiasfactcheck.com/dc-gazette/}{dc-gazette}                    \\
         \hline
-        \multirow{2}{*}{propaganda} & Natural News & 15,580 & far right & \href{https://mediabiasfactcheck.com/natural-news/}{natural-news} \\
-                                & Activist Report & 17,869 & left & \href{https://mediabiasfactcheck.com/activist-post/}{activist-post} \\
+        \multirow{2}{*}{propaganda} & Natural News         & 15,580     & far right     & \href{https://mediabiasfactcheck.com/natural-news/}{natural-news}                \\
+                                    & Activist Report      & 17,869     & left          & \href{https://mediabiasfactcheck.com/activist-post/}{activist-post}              \\
         \hline
-        trusted news & Gigaword News & 13.995 & ? & 
+        trusted news                & Gigaword News        & 13.995     & ?             &
         % \multirow{}{*}{trusted news} & Natural News & 15,580 & far right & \href{https://mediabiasfactcheck.com/natural-news/}{natural-news} \\
         %                         & Activist Report & 17,869 & far left & \href{https://mediabiasfactcheck.com/activist-post/}{activist-post} \\
     \end{tabular}
@@ -2227,21 +2225,21 @@ For the propaganda class instead, we have the breakdown of the sources considere
 \begin{table}[!htbp]
     \centering
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{c|r|c|c}
-        source & \#articles & MBFC leaning & MBFC link \\
-        \hline
-        freedomoutpost.com & 1,638 & ? & \href{https://mediabiasfactcheck.com/freedom-outpost/}{freedom-outpost} \\
-        frontpagemag.com & 1,259 & extreme right & \href{https://mediabiasfactcheck.com/frontpage-magazine/}{frontpage-magazine} \\
-        lewrockwell.com & 821 & extreme right & \href{https://mediabiasfactcheck.com/lew-rockwell/}{lew-rockwell} \\
-        shtfplan.com & 778 & extreme right & \href{https://mediabiasfactcheck.com/shtfplan-com/}{shtfplan-com} \\
-        vdare.com & 468 & extreme right & \href{https://mediabiasfactcheck.com/vdare/}{vdare} \\
-        personalliberty.com & 434 & extreme right & \href{https://mediabiasfactcheck.com/personal-liberty/}{personal-liberty} \\
-        remnantnewspaper.com & 139 & extreme right & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
-        thewashingtonstandard.com & 115 & ? &  \\
-        breaking911.com & 73 & ? (82\%~MBFC viewers rate it~Right)  & \href{https://mediabiasfactcheck.com/breaking911/}{breaking911} \\
-        clashdaily.com & 12 & extreme right & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily} \\     
-    \end{tabular}
-}
+        \begin{tabular}{c|r|c|c}
+            source                    & \#articles & MBFC leaning                        & MBFC link                                                                         \\
+            \hline
+            freedomoutpost.com        & 1,638      & ?                                   & \href{https://mediabiasfactcheck.com/freedom-outpost/}{freedom-outpost}           \\
+            frontpagemag.com          & 1,259      & extreme right                       & \href{https://mediabiasfactcheck.com/frontpage-magazine/}{frontpage-magazine}     \\
+            lewrockwell.com           & 821        & extreme right                       & \href{https://mediabiasfactcheck.com/lew-rockwell/}{lew-rockwell}                 \\
+            shtfplan.com              & 778        & extreme right                       & \href{https://mediabiasfactcheck.com/shtfplan-com/}{shtfplan-com}                 \\
+            vdare.com                 & 468        & extreme right                       & \href{https://mediabiasfactcheck.com/vdare/}{vdare}                               \\
+            personalliberty.com       & 434        & extreme right                       & \href{https://mediabiasfactcheck.com/personal-liberty/}{personal-liberty}         \\
+            remnantnewspaper.com      & 139        & extreme right                       & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
+            thewashingtonstandard.com & 115        & ?                                   &                                                                                   \\
+            breaking911.com           & 73         & ? (82\%~MBFC viewers rate it~Right) & \href{https://mediabiasfactcheck.com/breaking911/}{breaking911}                   \\
+            clashdaily.com            & 12         & extreme right                       & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily}                   \\
+        \end{tabular}
+    }
     \caption{QPROP dataset analysis across leaning.}
     \label{tab:qprop_across_leaning}
 \end{table}
@@ -2262,24 +2260,24 @@ Table~\ref{tab:ptc_across_leaning} shows the sources that were used to build thi
 \begin{table}[!htbp]
     \centering
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{c|r|c|c}
-        source & \#articles & MBFC leaning & MBFC link \\
-        \hline
-        freedomoutpost.com & 133 & ? & \href{https://mediabiasfactcheck.com/freedom-outpost/}{freedom-outpost} \\
-        frontpagemag.com & 56 & extreme right & \href{https://mediabiasfactcheck.com/frontpage-magazine/}{frontpage-magazine} \\
-        shtfplan.com & 55 & extreme right & \href{https://mediabiasfactcheck.com/shtfplan-com/}{shtfplan-com} \\
-        lewrockwell.com & 26 & extreme right & \href{https://mediabiasfactcheck.com/lew-rockwell/}{lew-rockwell} \\
-        vdare.com & 20 & extreme right & \href{https://mediabiasfactcheck.com/vdare/}{vdare} \\
-        remnantnewspaper.com & 19 & extreme right & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
-        personalliberty.com & 18 & extreme right & \href{https://mediabiasfactcheck.com/personal-liberty/}{personal-liberty} \\
-        Remnant Magazine & 14 & extreme right & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
-        breaking911.com & 11 & ? (82\%~MBFC viewers rate it~Right)  & \href{https://mediabiasfactcheck.com/breaking911/}{breaking911} \\
-        truthuncensored.net & 8 & extreme right  & \href{https://mediabiasfactcheck.com/truth-uncensored/}{truth-uncensored} \\
-        thewashingtonstandard.com & 6 & ? &  \\
-        www.unz.com & 5 & extreme right & \href{https://mediabiasfactcheck.com/the-unz-report/}{the-unz-report} \\     
-        clashdaily.com & 1 & extreme right & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily} \\     
-    \end{tabular}
-}
+        \begin{tabular}{c|r|c|c}
+            source                    & \#articles & MBFC leaning                        & MBFC link                                                                         \\
+            \hline
+            freedomoutpost.com        & 133        & ?                                   & \href{https://mediabiasfactcheck.com/freedom-outpost/}{freedom-outpost}           \\
+            frontpagemag.com          & 56         & extreme right                       & \href{https://mediabiasfactcheck.com/frontpage-magazine/}{frontpage-magazine}     \\
+            shtfplan.com              & 55         & extreme right                       & \href{https://mediabiasfactcheck.com/shtfplan-com/}{shtfplan-com}                 \\
+            lewrockwell.com           & 26         & extreme right                       & \href{https://mediabiasfactcheck.com/lew-rockwell/}{lew-rockwell}                 \\
+            vdare.com                 & 20         & extreme right                       & \href{https://mediabiasfactcheck.com/vdare/}{vdare}                               \\
+            remnantnewspaper.com      & 19         & extreme right                       & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
+            personalliberty.com       & 18         & extreme right                       & \href{https://mediabiasfactcheck.com/personal-liberty/}{personal-liberty}         \\
+            Remnant Magazine          & 14         & extreme right                       & \href{https://mediabiasfactcheck.com/the-remnant-magazine/}{the-remnant-magazine} \\
+            breaking911.com           & 11         & ? (82\%~MBFC viewers rate it~Right) & \href{https://mediabiasfactcheck.com/breaking911/}{breaking911}                   \\
+            truthuncensored.net       & 8          & extreme right                       & \href{https://mediabiasfactcheck.com/truth-uncensored/}{truth-uncensored}         \\
+            thewashingtonstandard.com & 6          & ?                                   &                                                                                   \\
+            www.unz.com               & 5          & extreme right                       & \href{https://mediabiasfactcheck.com/the-unz-report/}{the-unz-report}             \\
+            clashdaily.com            & 1          & extreme right                       & \href{https://mediabiasfactcheck.com/clash-daily/}{clash-daily}                   \\
+        \end{tabular}
+    }
     \caption{PTC dataset analysis across leaning.}
     \label{tab:ptc_across_leaning}
 \end{table}
@@ -2295,10 +2293,10 @@ As both the previous QPROP and PTC are derived from a subset of MBFC propaganda 
 We retrieved the details of these sources, and discovered that 85\% of the sources that have ``propaganda" in the label are from the Right.
 
 \begin{figure}[!htbp]
-   \centering
-   \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
-   \caption{MBFC dataset analysis: sources across leaning.}
-   \label{fig:mbfc_across_leaning}
+    \centering
+    \includegraphics[width=\linewidth]{figures/leaning_questionable.png}
+    \caption{MBFC dataset analysis: sources across leaning.}
+    \label{fig:mbfc_across_leaning}
 \end{figure}
 
 % imbalance analysis
@@ -2308,7 +2306,7 @@ As we can see in Figure~\ref{fig:mbfc_across_leaning}, this dataset is very imba
 % - Possible problems?
 % A possible problem of this approach %that is not defended in the paper, 
 % is the choice of articles that have been annotated by experts. They have been selected from sources "propagandistic by Media Bias/Fact Check", in other words from the page \url{https://mediabiasfactcheck.com/fake-news/}. The propagandistic sources listed in this page, as Figure~\ref{fig:mbfc_leaning} shows, are mostly on the extreme-right side of the spectrum. Furthermore, the selection done by the authors (table 3 of that paper) results in all the sources of the articles to lean on the right.
-So the resulting models that use these imbalanced datasets, are \textbf{being trained on very propagandistic sources from the right only}. The models may have some problems in detecting correctly left-leaning propaganda because they never saw it in the training phase. This may manifest in different expressions or even different techniques, that become very difficult to detect with an imbalanced training. 
+So the resulting models that use these imbalanced datasets, are \textbf{being trained on very propagandistic sources from the right only}. The models may have some problems in detecting correctly left-leaning propaganda because they never saw it in the training phase. This may manifest in different expressions or even different techniques, that become very difficult to detect with an imbalanced training.
 
 % Most of them are from the far-right, but these are from Left (also there were some from the center)x2:
 % https://mediabiasfactcheck.com/basnews-agency/
@@ -2356,45 +2354,44 @@ H-Prop-News instead is scraped from 30+ prominent Hindi News websites. The label
 \begin{table}[!htbp]
     \centering
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{c|r|r|P{0.23\textwidth}|c}
-        source & \#non-prop articles & \#prop articles & MBFC leaning & MBFC link \\
-        \hline
-        Amar Ujala & 360 & 244 & \multirow{3}{=}{\setlength\parskip{\baselineskip}Right? in the top 4 controlling Indian media (right)} & \multirow{3}{*}{\href{https://mediabiasfactcheck.com/india-media-profile/}{india-media-profile}} \\
-        Bhaskar & 293 & 204 &  &  \\
-        Dainik Jagran & 269 & 238 &  &  \\
-        \hline
-        One India & 166 & 120 & Left-center & \href{https://mediabiasfactcheck.com/oneindia/}{oneindia}  \\
-        Zee News & 150 & 85 & ? & \\
-        Patrika & 133 & 347 & ? & \\
-        News On AIR & 131 & 20 & ? & \\
-        India & 130 & 78 & right-center & \href{https://mediabiasfactcheck.com/india-com/}{india-com}  \\
-        Punjab Kesari & 121 & 78 & ? & \\
-        Dainik Tribune & 114 & 79 & ? & \\
-        Khas Khabar & 111 & 63 & ? & \\
-        TV9 Hindi & 111 & 99 & ? & \\
-        Samay Live & 107 & 111 & ? & \\
-        Lokmat News & 95 & 52 & ? & \\
-        Tehelka Hindi & 77 & 156 & ? & \\
-        ABP Live & 76 & 40 & ? & \\
-        Dainik Navjyoti & 78 & 56 & ? & \\
-        Pratahkal & 63 & 85 & ? & \\
-        Jansatta & 61 & 93 & ? & \\
-        Asianet News & 51 & 21 & ? & \\
-        BBC Hindi & 36 & 21 & ? & \\
-        Nai Duniya & 32 & 15 & ? & \\
-        Oulook Hindi & 25 & 54 & ? & \\
-        Univarta & 16 & 3 & ? & \\
-        The Quint & 15 & 28 & left-center &\href{https://mediabiasfactcheck.com/the-quint/}{the-quint} \\
-        Bebak Post & 12 & 16 & ? & \\
-        The Wire & 12 & 34 & left-center &\href{https://mediabiasfactcheck.com/the-wire-india/}{the-wire-india} \\
-        Live Hindustan & 11 & 8 & ? & \\
-        Aaj Tak & 10 & 168 & ? & \\
-        DW & 9 & 1 & ? & \\
-        Times Now & 5 & 8 & ? & \\
-        India TV & 0 & 5 & right-center &\href{https://mediabiasfactcheck.com/india-tv/}{india-tv} \\
-        
-    \end{tabular}
-}
+        \begin{tabular}{c|r|r|P{0.23\textwidth}|c}
+            source          & \#non-prop articles & \#prop articles & MBFC leaning                                                                                           & MBFC link                                                                                        \\
+            \hline
+            Amar Ujala      & 360                 & 244             & \multirow{3}{=}{\setlength\parskip{\baselineskip}Right? in the top 4 controlling Indian media (right)} & \multirow{3}{*}{\href{https://mediabiasfactcheck.com/india-media-profile/}{india-media-profile}} \\
+            Bhaskar         & 293                 & 204             &                                                                                                        &                                                                                                  \\
+            Dainik Jagran   & 269                 & 238             &                                                                                                        &                                                                                                  \\
+            \hline
+            One India       & 166                 & 120             & Left-center                                                                                            & \href{https://mediabiasfactcheck.com/oneindia/}{oneindia}                                        \\
+            Zee News        & 150                 & 85              & ?                                                                                                      &                                                                                                  \\
+            Patrika         & 133                 & 347             & ?                                                                                                      &                                                                                                  \\
+            News On AIR     & 131                 & 20              & ?                                                                                                      &                                                                                                  \\
+            India           & 130                 & 78              & right-center                                                                                           & \href{https://mediabiasfactcheck.com/india-com/}{india-com}                                      \\
+            Punjab Kesari   & 121                 & 78              & ?                                                                                                      &                                                                                                  \\
+            Dainik Tribune  & 114                 & 79              & ?                                                                                                      &                                                                                                  \\
+            Khas Khabar     & 111                 & 63              & ?                                                                                                      &                                                                                                  \\
+            TV9 Hindi       & 111                 & 99              & ?                                                                                                      &                                                                                                  \\
+            Samay Live      & 107                 & 111             & ?                                                                                                      &                                                                                                  \\
+            Lokmat News     & 95                  & 52              & ?                                                                                                      &                                                                                                  \\
+            Tehelka Hindi   & 77                  & 156             & ?                                                                                                      &                                                                                                  \\
+            ABP Live        & 76                  & 40              & ?                                                                                                      &                                                                                                  \\
+            Dainik Navjyoti & 78                  & 56              & ?                                                                                                      &                                                                                                  \\
+            Pratahkal       & 63                  & 85              & ?                                                                                                      &                                                                                                  \\
+            Jansatta        & 61                  & 93              & ?                                                                                                      &                                                                                                  \\
+            Asianet News    & 51                  & 21              & ?                                                                                                      &                                                                                                  \\
+            BBC Hindi       & 36                  & 21              & ?                                                                                                      &                                                                                                  \\
+            Nai Duniya      & 32                  & 15              & ?                                                                                                      &                                                                                                  \\
+            Oulook Hindi    & 25                  & 54              & ?                                                                                                      &                                                                                                  \\
+            Univarta        & 16                  & 3               & ?                                                                                                      &                                                                                                  \\
+            The Quint       & 15                  & 28              & left-center                                                                                            & \href{https://mediabiasfactcheck.com/the-quint/}{the-quint}                                      \\
+            Bebak Post      & 12                  & 16              & ?                                                                                                      &                                                                                                  \\
+            The Wire        & 12                  & 34              & left-center                                                                                            & \href{https://mediabiasfactcheck.com/the-wire-india/}{the-wire-india}                            \\
+            Live Hindustan  & 11                  & 8               & ?                                                                                                      &                                                                                                  \\
+            Aaj Tak         & 10                  & 168             & ?                                                                                                      &                                                                                                  \\
+            DW              & 9                   & 1               & ?                                                                                                      &                                                                                                  \\
+            Times Now       & 5                   & 8               & ?                                                                                                      &                                                                                                  \\
+            India TV        & 0                   & 5               & right-center                                                                                           & \href{https://mediabiasfactcheck.com/india-tv/}{india-tv}                                        \\
+        \end{tabular}
+    }
     \caption{H-Prop-News dataset analysis across leaning.}
     \label{tab:hpropnews_across_leaning}
 \end{table}
@@ -2453,14 +2450,14 @@ Finding this imbalance in the data makes us question which of the two following 
 \begin{enumerate}
     \item Propaganda is mainly linked to Right-leaning. Although this relationship is not found in the literature anywhere, it might be the case. Being in this case would mean that Left-leaning would be less prone to use propaganda, and we find this highly improbable. We know from the literature that for example many slogans exist in the Left (e.g. ``Black Lives Matter", ``Defund the Police", ``Stronger, Safer and Better Off" (UK)) and slogans is only the easiest propaganda technique to think about. This case, therefore, is not very likely to be true.
     \item Propaganda is spread all around political leanings, as a mean of persuasion. Its different techniques may be used differently depending on the political orientation, but it is traversal to the political spectrum. In this case
-    % H1 would be true, and 
-    the problem of imbalance of the existing propaganda datasets becomes a real problem, with possible implications (not being able to detect accurately left-leaning propaganda).
+          % H1 would be true, and 
+          the problem of imbalance of the existing propaganda datasets becomes a real problem, with possible implications (not being able to detect accurately left-leaning propaganda).
 \end{enumerate}
 
 \subsection{Discussion}
 % Appendix~\ref{app:prop_and_populism} where we analyse propaganda and populism
 % \todo{properly link appendix to this discussion}
-We analysed the imbalance of propaganda datasets, showing how the majority of them is derived from MBFC that is already imbalanced and during the sampling some categories of leanings disappear completely. 
+We analysed the imbalance of propaganda datasets, showing how the majority of them is derived from MBFC that is already imbalanced and during the sampling some categories of leanings disappear completely.
 
 Finding that most of the datasets are focused on Right-leaning propaganda, the next logical question that comes to us is: \emph{Why would propaganda datasets/detection need to be more balanced across the political spectrum?} In other words, does propaganda exist from all political leanings?
 I propaganda exists with all political leanings, this means that the detection resources (datasets) should contain examples across the spectrum in order to be able to recognise propaganda better.

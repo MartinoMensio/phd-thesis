@@ -41,14 +41,14 @@ Our experiments, therefore, are directed at automatically comparing and finding 
 % RQ of this chapter
 For this reason, we dive into the work of spotting similarities and differences between multiple articles.
 Our Research Question for this chapter is \acrshort{rq}1: \emph{To what extent do news articles about the same events differ?}
-We divide it in several sub-questions: 
+We divide it in several sub-questions:
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
     \item How are new events reported differently by multiple sources?
-    \item How could we identify what is unique for each report and what is common? 
+    \item How could we identify what is unique for each report and what is common?
     \item To what extent can we automatically detect omission and corroboration across multiple articles?
     \item Which similarity metrics are best for detecting omission and corroboration?
-    % \item What type of document/sentence encoding performs better to detect corroborations and omissions? OR What are the characteristics that allow encoding better documents and sentences?\todoAW{Is this a technical question? (ie. what's the best parser, for example?) "How can we automatically detect...?" and then expand in the main body of the text}
-    % Is there a link between the parts that are different and propaganda/loaded language? --> chapter 4
+          % \item What type of document/sentence encoding performs better to detect corroborations and omissions? OR What are the characteristics that allow encoding better documents and sentences?\todoAW{Is this a technical question? (ie. what's the best parser, for example?) "How can we automatically detect...?" and then expand in the main body of the text}
+          % Is there a link between the parts that are different and propaganda/loaded language? --> chapter 4
 \end{enumerate}
 
 
@@ -157,13 +157,13 @@ Instead, the sources that \gls{omit} the most are the ones which get a lower sco
 The approach used by the authors is the following:
 \begin{enumerate}
     \item building document-level \gls{clique}[s]: documents are encoded (using TF-IDF), the matrix of their similarity is computed, then a threshold is applied to prune the similarity relationships. Afterwards, a graph is produced where the nodes are documents and the edges are the similarity relationships that satisfy the minimum threshold. This graph is then processed to identify the cliques and the outputs are then filtered to enforce that every document only belongs to one clique. Each clique represents a story that was covered by multiple documents (because they are similar between them). Not all the documents belong to a clique, they can be left out;
-    \item building sentence-level \gls{clique}[s]: starting from the document-level cliques of the previous step (same story), each one of them is considered on its own, and the articles are split into sentences. Then, all the sentences are processed as in the previous step (encoding representation, similarity computation, similarity threshold, cliquing algorithm, clique post-processing). The outputs are sentence-level cliques that represent a piece of specific information that appears in multiple documents; 
+    \item building sentence-level \gls{clique}[s]: starting from the document-level cliques of the previous step (same story), each one of them is considered on its own, and the articles are split into sentences. Then, all the sentences are processed as in the previous step (encoding representation, similarity computation, similarity threshold, cliquing algorithm, clique post-processing). The outputs are sentence-level cliques that represent a piece of specific information that appears in multiple documents;
     \item computing outlet-related corroboration and omission: sentence-level cliques are grouped by publishing outlet; then omitted cliques (appearing in other outlets but not in the considered one) and corroborated cliques (also appearing in other outlets) are counted;
     \item analysing correlation with factuality scores: the ratios of omitted cliques and corroborated cliques are compared with the scores coming from Media Bias/Fact Check for each outlet, and the hypothesis of correlation is verified: corroboration appears more in factual sources, while omission appears more in non-credible sources.
 \end{enumerate}
 
 % dataset
-The dataset used is the \emph{All-the-news}\footnote{\url{https://www.kaggle.com/datasets/snapcrack/all-the-news}} which includes more than 140k articles published by fifteen major US outlets. To have the same results as the reference paper~\citep{bountouridis2018explaining}, we reproduce the paper by using only articles from 2016. This brings the analysis to work with 203 document-level cliques. 
+The dataset used is the \emph{All-the-news}\footnote{\url{https://www.kaggle.com/datasets/snapcrack/all-the-news}} which includes more than 140k articles published by fifteen major US outlets. To have the same results as the reference paper~\citep{bountouridis2018explaining}, we reproduce the paper by using only articles from 2016. This brings the analysis to work with 203 document-level cliques.
 
 % how
 We analysed and reproduced this paper to get a deep understanding of how it works, and to extend its methodology to analyse the word-level differences. %\todoHA{Expand: anything else to be discovered?} 
@@ -180,7 +180,7 @@ publicly provided by the authors,\footnote{\url{https://github.com/dbountouridis
 An example of the reproduced analysis can be seen in Figure~\ref{fig:cluster_similar_sentences_amiri}.
 In this example, the step 1 identified an article-level clique of 3 articles (Vox, Fox News, Washington Post) that cover the connection between Hillary Clinton's email and Amiri Shahram being executed.\footnote{\url{https://www.vox.com/2016/8/9/12410882/clinton-emails-trump-iranian-scientist-executed-amiri}}
 The step 2 instead, identifies the three specific sentences that cover the detail of Amiri at the Pakistani Embassy in Washington.
-Step 3 counts these sentences as corroboration between Vox, Fox News and Washington Post. 
+Step 3 counts these sentences as corroboration between Vox, Fox News and Washington Post.
 
 \begin{figure}[!htbp]
     \centering
@@ -203,12 +203,12 @@ We identified the following limitations:
 \begin{itemize}
     % \item Their demo\footnote{\url{http://fairnews.ewi.tudelft.nl/InCredible/}} just shows one specific article as main and one specific clique (not very interesting)
     \item The \emph{document cliquing}
-    %\todoAW{You've jumped very suddenly into the use of particular algorithms. What are these algorithms doing? How do you interpret their output? Are they your implementation or Bountouridis et al's? etc} 
-    sometimes splits similar articles over different groups, or in some cases has different stories that talk about a different detail within the same clique (e.g., when a news story re-emerges because further details are discovered).
-    This can be a consequence of having TF-IDF as the underlying method to represent the documents.
-    This method is fast and efficient for coarse topic detection because, being based on bag-of-words, works well with specific terms that distinguish the topics.
-    But when we need to have a finer-grained clustering such as in this case, the limitation of this method may surface: the terms of two political events with the same entities mentioned result in having similar feature vectors.
-    It is not enough to change the thresholds to obtain better document cliques.
+          %\todoAW{You've jumped very suddenly into the use of particular algorithms. What are these algorithms doing? How do you interpret their output? Are they your implementation or Bountouridis et al's? etc} 
+          sometimes splits similar articles over different groups, or in some cases has different stories that talk about a different detail within the same clique (e.g., when a news story re-emerges because further details are discovered).
+          This can be a consequence of having TF-IDF as the underlying method to represent the documents.
+          This method is fast and efficient for coarse topic detection because, being based on bag-of-words, works well with specific terms that distinguish the topics.
+          But when we need to have a finer-grained clustering such as in this case, the limitation of this method may surface: the terms of two political events with the same entities mentioned result in having similar feature vectors.
+          It is not enough to change the thresholds to obtain better document cliques.
     \item The \emph{sentence cliquing} method provided just uses the degree of similarity between two sentences but does not point to which specific words are responsible for the similarities and differences. This would require a fine-grained analysis that in this paper is not included. Furthermore, sentences in a clique are very similar, and no significant differences have been observed because the similarity metrics are based again on TF-IDF. This method is not robust enough to the usage of synonyms and other variations on the linguistic surface, while at the same time is unable to distinguish two sentences that use the same words but have different meanings. These different meanings may be caused by the sentence structure or the role of the words. Therefore, selecting a threshold value becomes very difficult.
     \item The \emph{clique algorithms} are not the best choice for grouping when we have the information of how much similar two items are (a real-value instead of a binary-value is available from the similarity metric). The approach considers an unweighted version of the similarity graph by using a threshold (weights are just used to select the most appropriate clique during their creation). Instead, if we use the original weighted graph, we can use better and more flexible clustering techniques (e.g., agglomerative clustering). %, like agglomerative clustering
 \end{itemize}
@@ -231,9 +231,9 @@ This opens up for further work:
 \begin{enumerate}
     \item investigate how to represent the documents better to provide meaningful similarity metrics at the document and sentence level (Section~\ref{sec:cgs_similarity}); %\todoHA{Similarity of what? Why need it?}
     \item experiment with document and sentence clustering to bring up fine-grained differences. To understand the choice of terms, we first need to be able to identify how uniquely or commonly the terms are used across news articles that cover the same story(Section~\ref{sec:cgs_clustering_and_differences}); %e.g. how specific terms are chosen\todoHA{Where? Why?} (Section~\ref{sec:cgs_clustering_and_differences});
-    % \item investigate the works that analyse framing theories and detection;
+          % \item investigate the works that analyse framing theories and detection;
     \item investigate the reason for such differences to exist. This will be done in the next Chapter~\ref{chap:linguistic_persuasion} about detecting linguistic means of persuasion.
-    % \item collect data from more recent articles that would be more relevant and interesting.
+          % \item collect data from more recent articles that would be more relevant and interesting.
 \end{enumerate}
 % \emph{i)} , \emph{ii)} , \emph{iii)} , and \emph{iv)} g.
 
@@ -247,7 +247,7 @@ This method of comparison has its main limitations in the similarity metric chos
 % Experiment 2
 % what
 Since our biggest problem is representing documents and sentences in a way that captures more semantic similarity, we decided to analyse the existing works, including word embeddings and language models.
-We wanted to see in practice how the usage of different representation models would affect the measurements of similarity, experimenting with a small set of articles. 
+We wanted to see in practice how the usage of different representation models would affect the measurements of similarity, experimenting with a small set of articles.
 % finding and exploring more advanced methods to find the similarity between texts by using language models, we experimented on how to use these methods.
 
 % why?
@@ -256,7 +256,7 @@ To compare different articles, we need to have a
 solid base for computing the distances between them as a whole or more detailed to the sentence level.
 The applications of similarity range from document clustering to the identification of omitted pieces of information in a cluster, therefore it is very important to use a method that is properly not deceived by the usage of synonyms and other linguistic variations in communicating the same information. To study the differences, we first need to be able to tell whether two pieces of text are discussing the same information, and distinguish degrees of similarity properly.
 
-To study the similarity metrics, we perform an experiment in Subsection~\ref{ssec:cgs_similarity_qualitative}, where we observe qualitatively the effects of using one similarity metric or others when comparing sentences. 
+To study the similarity metrics, we perform an experiment in Subsection~\ref{ssec:cgs_similarity_qualitative}, where we observe qualitatively the effects of using one similarity metric or others when comparing sentences.
 % To study the similarity metrics, we use two different experiments. The first is detailed in Subsection~\ref{ssec:cgs_similarity_qualitative}, where we observe qualitatively the effects of using one similarity metric or others when comparing sentences. 
 %The second instead, in Subsection~\ref{ssec:cgs_similarity_cliques}, observes the effect of such choice on the downstream task of corroboration and omission extraction.
 We conclude with some observations in Subsection~\ref{ssec:cgs_similarity_conclusion}.
@@ -298,31 +298,31 @@ The data follows this processing:
 
 \begin{table}[!htbp]
     % \begin{subtable}[h]{\textwidth}
-        \centering
-        \begin{tabular}{r | p{0.4\linewidth} | p{0.4\linewidth} }
-        Index & Article 1 (BBC) & article 2 (Sky News) \\
+    \centering
+    \begin{tabular}{r | p{0.4\linewidth} | p{0.4\linewidth} }
+        Index           & Article 1 (BBC)                                                                                                                                                                                   & article 2 (Sky News)                                                                                                                                                                                 \\
         \hline
-        0\vspace{-2px} & \tiny{A 52-year-old man has been charged with the murder of journalist Lyra McKee in Londonderry.}\vspace{-2px} & \tiny{A man has been charged with the murder of journalist Lyra McKee in Northern Ireland.}\vspace{-2px}\\
-        1\vspace{-2px} & \tiny{He is also charged with possession of a firearm with intent to endanger life and professing to be a member of a proscribed organisation.}\vspace{-2px} & \tiny{Ms McKee, 29, was shot dead by dissident republicans as she observed rioting in Derry/Londonderry last year.}\vspace{-2px}\\
-        2\vspace{-2px} & \tiny{Ms McKee, who was 29, was observing rioting in Derry's Creggan estate when she was shot on 18 April 2019. }\vspace{-2px}& \tiny{She was standing near a police vehicle when she was hit by a bullet fired by a masked gunman towards officers.}\vspace{-2px}\\
-        3\vspace{-2px} & \tiny{The 52-year-old, who is from Derry, is due to appear at Londonderry Magistrates' Court on Thursday.}\vspace{-2px} & \tiny{The so-called New IRA said it carried out the killing, which took place on the Creggan estate on 18 April.}\vspace{-2px}\\
-        4\vspace{-2px} & \tiny{Det Supt Jason Murphy said a number of individuals were involved with the gunman on the night Ms McKee was killed.}\vspace{-2px} & \tiny{It said Ms McKee was caught in the line of fire while standing with what the organisation called "the enemy".}\vspace{-2px}\\
-        5\vspace{-2px} & \tiny{"And while today is significant for the investigation the quest for the evidence to bring the gunman to justice remains active and ongoing," he added.}\vspace{-2px} & \tiny{The 52-year-old suspect was arrested on Tuesday and taken to Musgrave Serious Crime Suite in Belfast.}\vspace{-2px}\\
-        6\vspace{-2px} & \tiny{Ms McKee was a writer and campaigner from Belfast who had only recently moved to Derry when she was killed.}\vspace{-2px}& \tiny{He has also been charged with possession of a firearm with intent to endanger life and professing to be a member of a proscribed organisation.}\vspace{-2px}\\
-        7\vspace{-2px} & \tiny{She was standing near a police 4x4 vehicle on the night of 18 April 2019 when a masked gunman fired towards officers and onlookers.}\vspace{-2px} & \tiny{The Police Service of Northern Ireland said the man, who comes from the city, is due to appear at Londonderry Magistrates' Court on Thursday.}\vspace{-2px} \\
-        8\vspace{-2px} & \tiny{Regarded by many as a rising star in Northern Ireland media circles, she had written for many publications, including Buzzfeed, Private Eye, the Atlantic and Mosaic Science.}\vspace{-2px} & \tiny{Detective Superintendent Jason Murphy said: "I have always said a number of individuals were involved with the gunman on the night Lyra was killed.}\vspace{-2px} \\
-        9\vspace{-2px} & \tiny{She was named Sky News young journalist of the year in 2006 and Forbes Magazine named her as one of their 30 under 30 in media in Europe in 2016.}\vspace{-2px} & \tiny{"And while today is significant for the investigation the quest for the evidence to bring the gunman to justice remains active and ongoing."}\vspace{-2px} \\
-        10\vspace{-2px} & \tiny{The Belfast woman had signed a two-book deal with the publisher Faber and Faber, with her forthcoming book The Lost Boys due out this year.}\vspace{-2px} & \tiny{The gay rights activist, who lived with her partner Sara Canning, was an advocate of a new and more tolerant Northern Ireland.}\vspace{-2px} \\
-        11\vspace{-2px} & \tiny{According to those who knew her best, the gay rights advocate was someone who "believed passionately in social and religious tolerance".}\vspace{-2px} & \tiny{Ms McKee's death sparked widespread revulsion and a renewed effort to restore a power-sharing agreement in Stormont following years of political instability in the country.}\vspace{-2px} \\
-        12\vspace{-2px} & \tiny{Her death caused widespread revulsion in Northern Ireland and further afield.}\vspace{-2px} & \tiny{Her funeral was attended by then prime minister Theresa May, Irish PM Leo Varadkar and Irish President Michael D Higgins at St Anne's Cathedral in Belfast.}\vspace{-2px} \\
-        13\vspace{-2px} &  & \tiny{At her service in April last year, the priest confronted politicians, saying: "Today we grieve but tomorrow let us fill that hole by adopting Lyra's spirit, example and vision.}\vspace{-2px} \\
-        14\vspace{-2px} &  & \tiny{"Let us put false starts behind us and once and for all build an alternative Ulster that we, and especially our children, can be proud of.}\vspace{-2px} \\
-        15\vspace{-2px} &  & \tiny{"Let us make the lasting legacy of Lyra McKee that peace."}\vspace{-2px} \\
-        16\vspace{-2px} &  & \tiny{Days later, the British and Irish governments announced a new talks process aimed at restoring devolution.}\vspace{-2px} \\
-        17\vspace{-2px} &  & \tiny{Power-sharing was restored at Stormont last month and the first same-sex marriage in Northern Ireland took place this week.} \vspace{-2px}
-       \end{tabular}
-       \caption{Sentences from two reference articles.}
-       \label{tab:sentences}
+        0\vspace{-2px}  & \tiny{A 52-year-old man has been charged with the murder of journalist Lyra McKee in Londonderry.}\vspace{-2px}                                                                                   & \tiny{A man has been charged with the murder of journalist Lyra McKee in Northern Ireland.}\vspace{-2px}                                                                                             \\
+        1\vspace{-2px}  & \tiny{He is also charged with possession of a firearm with intent to endanger life and professing to be a member of a proscribed organisation.}\vspace{-2px}                                      & \tiny{Ms McKee, 29, was shot dead by dissident republicans as she observed rioting in Derry/Londonderry last year.}\vspace{-2px}                                                                     \\
+        2\vspace{-2px}  & \tiny{Ms McKee, who was 29, was observing rioting in Derry's Creggan estate when she was shot on 18 April 2019. }\vspace{-2px}                                                                    & \tiny{She was standing near a police vehicle when she was hit by a bullet fired by a masked gunman towards officers.}\vspace{-2px}                                                                   \\
+        3\vspace{-2px}  & \tiny{The 52-year-old, who is from Derry, is due to appear at Londonderry Magistrates' Court on Thursday.}\vspace{-2px}                                                                           & \tiny{The so-called New IRA said it carried out the killing, which took place on the Creggan estate on 18 April.}\vspace{-2px}                                                                       \\
+        4\vspace{-2px}  & \tiny{Det Supt Jason Murphy said a number of individuals were involved with the gunman on the night Ms McKee was killed.}\vspace{-2px}                                                            & \tiny{It said Ms McKee was caught in the line of fire while standing with what the organisation called "the enemy".}\vspace{-2px}                                                                    \\
+        5\vspace{-2px}  & \tiny{"And while today is significant for the investigation the quest for the evidence to bring the gunman to justice remains active and ongoing," he added.}\vspace{-2px}                        & \tiny{The 52-year-old suspect was arrested on Tuesday and taken to Musgrave Serious Crime Suite in Belfast.}\vspace{-2px}                                                                            \\
+        6\vspace{-2px}  & \tiny{Ms McKee was a writer and campaigner from Belfast who had only recently moved to Derry when she was killed.}\vspace{-2px}                                                                   & \tiny{He has also been charged with possession of a firearm with intent to endanger life and professing to be a member of a proscribed organisation.}\vspace{-2px}                                   \\
+        7\vspace{-2px}  & \tiny{She was standing near a police 4x4 vehicle on the night of 18 April 2019 when a masked gunman fired towards officers and onlookers.}\vspace{-2px}                                           & \tiny{The Police Service of Northern Ireland said the man, who comes from the city, is due to appear at Londonderry Magistrates' Court on Thursday.}\vspace{-2px}                                    \\
+        8\vspace{-2px}  & \tiny{Regarded by many as a rising star in Northern Ireland media circles, she had written for many publications, including Buzzfeed, Private Eye, the Atlantic and Mosaic Science.}\vspace{-2px} & \tiny{Detective Superintendent Jason Murphy said: "I have always said a number of individuals were involved with the gunman on the night Lyra was killed.}\vspace{-2px}                              \\
+        9\vspace{-2px}  & \tiny{She was named Sky News young journalist of the year in 2006 and Forbes Magazine named her as one of their 30 under 30 in media in Europe in 2016.}\vspace{-2px}                             & \tiny{"And while today is significant for the investigation the quest for the evidence to bring the gunman to justice remains active and ongoing."}\vspace{-2px}                                     \\
+        10\vspace{-2px} & \tiny{The Belfast woman had signed a two-book deal with the publisher Faber and Faber, with her forthcoming book The Lost Boys due out this year.}\vspace{-2px}                                   & \tiny{The gay rights activist, who lived with her partner Sara Canning, was an advocate of a new and more tolerant Northern Ireland.}\vspace{-2px}                                                   \\
+        11\vspace{-2px} & \tiny{According to those who knew her best, the gay rights advocate was someone who "believed passionately in social and religious tolerance".}\vspace{-2px}                                      & \tiny{Ms McKee's death sparked widespread revulsion and a renewed effort to restore a power-sharing agreement in Stormont following years of political instability in the country.}\vspace{-2px}     \\
+        12\vspace{-2px} & \tiny{Her death caused widespread revulsion in Northern Ireland and further afield.}\vspace{-2px}                                                                                                 & \tiny{Her funeral was attended by then prime minister Theresa May, Irish PM Leo Varadkar and Irish President Michael D Higgins at St Anne's Cathedral in Belfast.}\vspace{-2px}                      \\
+        13\vspace{-2px} &                                                                                                                                                                                                   & \tiny{At her service in April last year, the priest confronted politicians, saying: "Today we grieve but tomorrow let us fill that hole by adopting Lyra's spirit, example and vision.}\vspace{-2px} \\
+        14\vspace{-2px} &                                                                                                                                                                                                   & \tiny{"Let us put false starts behind us and once and for all build an alternative Ulster that we, and especially our children, can be proud of.}\vspace{-2px}                                       \\
+        15\vspace{-2px} &                                                                                                                                                                                                   & \tiny{"Let us make the lasting legacy of Lyra McKee that peace."}\vspace{-2px}                                                                                                                       \\
+        16\vspace{-2px} &                                                                                                                                                                                                   & \tiny{Days later, the British and Irish governments announced a new talks process aimed at restoring devolution.}\vspace{-2px}                                                                       \\
+        17\vspace{-2px} &                                                                                                                                                                                                   & \tiny{Power-sharing was restored at Stormont last month and the first same-sex marriage in Northern Ireland took place this week.} \vspace{-2px}
+    \end{tabular}
+    \caption{Sentences from two reference articles.}
+    \label{tab:sentences}
     % \end{subtable}
 \end{table}
 % \todoHA{How found?}
@@ -333,27 +333,26 @@ The data follows this processing:
     % \hfill
     % \pagebreak
     % \begin{subtable}[h]{\textwidth}
-        \centering
-        \begin{tabular}{@{\hspace{-2cm}}r | r | p{0.55\linewidth} |p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}}
-        id\_1 & id\_2 & Qualitative description of differences & TF-IDF & GloVe & BERT & USE \\
+    \centering
+    \begin{tabular}{@{\hspace{-2cm}}r | r | p{0.55\linewidth} |p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}}
+        id\_1 & id\_2 & Qualitative description of differences                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 & TF-IDF     & GloVe      & BERT        & USE        \\
         \hline
-        1 & 6 & \tiny{Verb tense} & 1st 0.9707 & 1st 0.9973 & 1st 0.9835 & 1st 0.9668 \\
-        5 & 9 & \tiny{“He added” at the end} & 2nd 0.9638 & 2nd 0.9954 & 2nd 0.9563 & 2nd 0.9581\\
-        0 & 0 & \tiny{Details just on one article (52-year-old). Different level of detail (Londonderry vs Northern Ireland)} & 3rd 0.6858 & 4th 0.9535 & 4th 0.8972 & 3rd 0.9141\\
-        4 & 8 & \tiny{Abbreviations (Dept Supt vs Detective Superintendent). Direct reporting vs paraphrasing: quotation marks and colon. “I have always said” just on one article. “Ms McKee” vs “Lyra”} & & 6th 0.9463 & 3rd 0.9244 & 4th 0.8279\\
-        3 & 7 & \tiny{Subject of reporting just on sent\_2 “The Police Service of Northern Ireland said”. Detail on the man “the 52-year-old” vs “the man”. “Is” vs “comes” from. “Derry” vs “the city”} & & 5th 0.9509 & 7th 0.8533 & 5th 0.7490\\
-        7 & 2 & \tiny{Detail “4x4” just on first one. Detail “on the night of 18 April 2019”. Active vs passive sentence “a masked gunman fired towards” vs “she was hit by a bullet fired by a masked gunman towards”. Detail “a bullet” vs just the “fired” verb. “Towards officers and onlookers” vs “towards officers”: in the second, the target of the gunman are just officers.} & 6th 0.6557 & 3rd 0.9550 & 12th 0.8313 & 6th 0.7254\\
-        2 & 1 & \tiny{Age reporting a bit different “who was 29” vs “29”: the first has emphasis on the past tense (underlines she is dead now). Inversion of parts of the sentence: “was observing rioting when she was shot” vs “was shot as she observed rioting”. Verb tense “was observing rioting” vs “she observed rioting”. Place details “Derry’s Creggan estate” vs “Derry/Londonderry”. Shooter declared in the second one “dissident republicans”. Date details “18 April 2019” vs “last year”} & 4th 0.6782 & 9th 0.9180 & 9th 0.8487 & 7th 0.6009 \\
-        12 & 10 & \tiny{Delegation of who said it: “according to those who one her best” in the first sentence and then the quotation marks. “Advocate” vs “activist”+”advocate”: the first one does not say “activist”. Sentence 2 adds the incise “who lived with her partner Sara Canning”. Quoted part “believed passionately in social and religious tolerance” vs “advocate of a new and more tolerant Northern Ireland”: (First is stronger “believed passionately”, Second is narrower “Northern Ireland”, “Social and religious tolerance” vs “more tolerant”)} & & 7th 0.9282 & 6th 0.8538 & 8th 0.5863
-
-        \end{tabular}
-        \caption{Differences and relative rankings from models.}
-        \label{tab:relative_ordering}
-     % \end{subtable}
-     % \caption{Example of quantification of qualitative analysis
-     % table with example sentences and ranking showing USE is better
-     % }
-     % \label{tab:temps}
+        1     & 6     & \tiny{Verb tense}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      & 1st 0.9707 & 1st 0.9973 & 1st 0.9835  & 1st 0.9668 \\
+        5     & 9     & \tiny{“He added” at the end}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           & 2nd 0.9638 & 2nd 0.9954 & 2nd 0.9563  & 2nd 0.9581 \\
+        0     & 0     & \tiny{Details just on one article (52-year-old). Different level of detail (Londonderry vs Northern Ireland)}                                                                                                                                                                                                                                                                                                                                                                                                                                          & 3rd 0.6858 & 4th 0.9535 & 4th 0.8972  & 3rd 0.9141 \\
+        4     & 8     & \tiny{Abbreviations (Dept Supt vs Detective Superintendent). Direct reporting vs paraphrasing: quotation marks and colon. “I have always said” just on one article. “Ms McKee” vs “Lyra”}                                                                                                                                                                                                                                                                                                                                                              &            & 6th 0.9463 & 3rd 0.9244  & 4th 0.8279 \\
+        3     & 7     & \tiny{Subject of reporting just on sent\_2 “The Police Service of Northern Ireland said”. Detail on the man “the 52-year-old” vs “the man”. “Is” vs “comes” from. “Derry” vs “the city”}                                                                                                                                                                                                                                                                                                                                                               &            & 5th 0.9509 & 7th 0.8533  & 5th 0.7490 \\
+        7     & 2     & \tiny{Detail “4x4” just on first one. Detail “on the night of 18 April 2019”. Active vs passive sentence “a masked gunman fired towards” vs “she was hit by a bullet fired by a masked gunman towards”. Detail “a bullet” vs just the “fired” verb. “Towards officers and onlookers” vs “towards officers”: in the second, the target of the gunman are just officers.}                                                                                                                                                                                & 6th 0.6557 & 3rd 0.9550 & 12th 0.8313 & 6th 0.7254 \\
+        2     & 1     & \tiny{Age reporting a bit different “who was 29” vs “29”: the first has emphasis on the past tense (underlines she is dead now). Inversion of parts of the sentence: “was observing rioting when she was shot” vs “was shot as she observed rioting”. Verb tense “was observing rioting” vs “she observed rioting”. Place details “Derry’s Creggan estate” vs “Derry/Londonderry”. Shooter declared in the second one “dissident republicans”. Date details “18 April 2019” vs “last year”}                                                            & 4th 0.6782 & 9th 0.9180 & 9th 0.8487  & 7th 0.6009 \\
+        12    & 10    & \tiny{Delegation of who said it: “according to those who one her best” in the first sentence and then the quotation marks. “Advocate” vs “activist”+”advocate”: the first one does not say “activist”. Sentence 2 adds the incise “who lived with her partner Sara Canning”. Quoted part “believed passionately in social and religious tolerance” vs “advocate of a new and more tolerant Northern Ireland”: (First is stronger “believed passionately”, Second is narrower “Northern Ireland”, “Social and religious tolerance” vs “more tolerant”)} &            & 7th 0.9282 & 6th 0.8538  & 8th 0.5863
+    \end{tabular}
+    \caption{Differences and relative rankings from models.}
+    \label{tab:relative_ordering}
+    % \end{subtable}
+    % \caption{Example of quantification of qualitative analysis
+    % table with example sentences and ranking showing USE is better
+    % }
+    % \label{tab:temps}
 \end{table}
 
 Table~\ref{tab:sentences} shows an example of article-pair where each article has been split into sentences.
@@ -407,7 +406,7 @@ There exist already different benchmarks that are performed on the semantic simi
 % a big improvement\todoAW{I'm not entirely sure at this point how you're evaluating the various methods} in the pairs of sentences that come as more similar.
 % The values provided are very similar. This per-se is not a problem if some geometric properties are valid (ordering, proportions)
 % We observe\todoHA{Many "observations" made here, but unclear how. Add some details if you can} that \acrshort{use} provides values less skewed to the higher end, distributing the similarity values more evenly.
-Between USE and BERT, Table~\ref{tab:relative_ordering} shows that USE provides values less skewed to the higher end, distributing the similarity values more evenly. 
+Between USE and BERT, Table~\ref{tab:relative_ordering} shows that USE provides values less skewed to the higher end, distributing the similarity values more evenly.
 This is something very positive, because we want a metric that is able to tell degrees of similarity with a good granularity in all of the range.
 % The numbers make more sense without any re-scaling technique, and therefore the heatmaps shown in this document\todoHA{?} come from this model.
 We can directly use the values to produce heatmaps, without the need to re-scale the values. With BERT, it would be necessary as the values are all compressed in the higher end (near 100\% similarity).
@@ -435,7 +434,7 @@ In figure\ref{fig:usebetter}, we can see that when we compare the base model TF-
 % OR: we get unclear results.
 % However, 
 Show cliques inspection quality
-when inspecting the cliques, we see that 
+when inspecting the cliques, we see that
 
 \todo{need an example}
 \end{comment}
@@ -534,18 +533,18 @@ With this method, we can create sentence clusters that are very similar in their
     \centering
     \includegraphics[width=\linewidth]{figures/clusters_count_by_threshold_bigger_2.png}
     \caption{
-    Clusters of different minimal sizes with increasing distance thresholds.
-    %Number of clusters (with minimal size of 1,2,3,4) plotted when the distance threshold varies. The blue line counts also for sentences that are on their own, while the others lines are more and more stricter with the number of sentences per group to be counted.
+        Clusters of different minimal sizes with increasing distance thresholds.
+        %Number of clusters (with minimal size of 1,2,3,4) plotted when the distance threshold varies. The blue line counts also for sentences that are on their own, while the others lines are more and more stricter with the number of sentences per group to be counted.
     }
     \label{fig:clusers_count_by_threshold}
 \end{figure}
 % \todo{improve figure: re-export, set limits, scale}
-In Figure~\ref{fig:clusers_count_by_threshold} we see how the number of clusters evolves when we increase the similarity threshold. 
+In Figure~\ref{fig:clusers_count_by_threshold} we see how the number of clusters evolves when we increase the similarity threshold.
 The dark blue line indicates all clusters, counting also clusters with just one sentence inside.
 On the blue line, we notice a steep drop at distance next to $0$: this denotes that there are lots of sentences that are identical or just differ in punctuation.
 A second drop happens around the Euclidean distance of 1.
 Then, with the other lines, we represent clusters that have stricter conditions in terms of the minimal number of sentences per cluster. We respectively only count clusters with 2, 3 and 4 sentences minimum.
-All these lines have a similar behaviour: with the distance increasing, they increase to reach a maximum (because new clusters are formed satisfying the minimum number of sentences) and then decrease again (because the clusters are merged together, so they are less). 
+All these lines have a similar behaviour: with the distance increasing, they increase to reach a maximum (because new clusters are formed satisfying the minimum number of sentences) and then decrease again (because the clusters are merged together, so they are less).
 The peak is reached with Euclidean distance around $1.2$.
 Notice that with respect to the previous dendrogram plot, here we are using Euclidean distance to show values less compacted together.
 The value of $1.2$ Euclidean is observed across the different headlines to consistently provide clusters with a good variation of terms but still having a strong semantic connection (e.g., same details, same entities mentioned).
@@ -603,7 +602,7 @@ In this case, the word ``deceased'', which just appears in one of three sentence
 This uniqueness was used to inspect around 25 sentence-level clusters that were gathered by using the \acrshort{hac} as described in Section~\ref{sec:cgs_clustering_and_differences_hierarchical}. Helped by the uniqueness degree of the words, we are able to spot the differences between the sentences faster and classify the main types of singular words that change:
 \begin{enumerate}
     \item verb tenses: not meaningful in this context
-    \item chunks of information at the beginning or end of the sentence. Usually, those pieces are just a matter of segmentation of the sentences (e.g. the reporter actually includes the omitted terms in the next or previous sentence) 
+    \item chunks of information at the beginning or end of the sentence. Usually, those pieces are just a matter of segmentation of the sentences (e.g. the reporter actually includes the omitted terms in the next or previous sentence)
     \item details that are present in some articles and omitted in others (e.g. Figure~\ref{fig:words_uniqueness})
     \item verb choices across synonyms
     \item substantive/adjective choices across synonyms
@@ -614,7 +613,7 @@ With this methodology that is only based on similarity and overlap analysis, we 
 
 \subsection{\statusgreen Meaning of Fine-grained Differences}
 % TODO: findings?
-The experimentations shown in this section have two directions that seem to be opposing: 
+The experimentations shown in this section have two directions that seem to be opposing:
 \begin{itemize}
     \item On one side (similarity), create clusters of sentences accordingly to their semantic similarity using a more flexible hierarchical clustering (to capture similar-enough sentences). %(more broad and resistant to changes in the linguistical surface)
     \item On the other side (differences/uniqueness), to be able to extract and see how the word-level details change.
@@ -661,9 +660,9 @@ This chapter had several sub-questions, that we discuss separately here, before 
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
     \item \emph{How are new events reported differently by multiple sources?} News sources present the same event in different ways, including different details that corroborate with other sources, omitting details that other sources instead report, changing the order of presentation of the details. We studied and measured these phenomena in this chapter, but we deem it necessary to study the choice of terms, by investigating what is the reason and what is the effect of deliberate or involuntary choices. We will expand on this in the next Chapter.
     \item \emph{How could we identify what is unique for each report and what is common?} To identify what is unique, common or omitted, it is possible to use the methodology of~\citet{bountouridis2018explaining} to detect omission and corroboration, %(Section~\ref{sec:cgs_cross_referencing})
-    which is based on splitting the articles into sentences and comparing them with similarity metrics.
-    % We extended the approach to analyse at the word level the variation of terms across multiple related articles, and compute the relative uniqueness of terms 
-    We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them (Section~\ref{sec:cgs_clustering_and_differences}). We think that this is potentially beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online.
+          which is based on splitting the articles into sentences and comparing them with similarity metrics.
+          % We extended the approach to analyse at the word level the variation of terms across multiple related articles, and compute the relative uniqueness of terms 
+          We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them (Section~\ref{sec:cgs_clustering_and_differences}). We think that this is potentially beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online.
     \item \emph{To what extent can we automatically detect omission and corroboration across multiple articles?} The approach, identified to answer the previous \acrshort{rq}, works better for detecting small differences between articles that have several parts in common. When the articles are too different, for example, if they consider totally different events or if the overlap of terms is too small, it becomes difficult to align the documents with similarity metrics and the results are less meaningful. We also find that our analysis is able to find terms that change but does not give an interpretation of what these changes mean. For example, we cannot currently distinguish between a loaded term versus a more neutral one. For this to be possible, we need the study of persuasion means (as discussed in RQ2).
     \item \emph{Which similarity metrics are best for detecting omission and corroboration?} We underlined in Section~\ref{sec:cgs_similarity} the importance of using semantic similarity metrics that go beyond the binary comparison (equal or different) of terms. In this way, we are more resistant to term changes and can identify better the related sentences across articles.
 \end{enumerate}
@@ -703,4 +702,4 @@ On the other hand, there could be a purpose that is subtly manifesting through t
 This chapter raised some questions that need to be answered:
 What changes between the changed parts? What characterises those differences? How can we characterise the differences quantitatively, describing how they try to persuade the readers? To give an answer to these questions, we need to include in our analysis some concepts of persuasion.
 
-Therefore, in the next chapter we will investigate persuasive language and how it can be computationally quantified. 
+Therefore, in the next chapter we will investigate persuasive language and how it can be computationally quantified.

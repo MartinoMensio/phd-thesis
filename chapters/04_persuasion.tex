@@ -13,7 +13,7 @@ Therefore, in order to characterise those differences, this chapter introduces \
 % We intend persuasion as a general umbrella that encompasses several techniques where the writer of a piece of text is trying to persuade the reader of a certain point of view.
 
 % why (rationale)
-From the last chapter~\ref{chap:common_ground_search}, 
+From the last chapter~\ref{chap:common_ground_search},
 %we concluded with the need to understand how specific terms are used to persuade the reader. 
 we are able to extract terms that have been changed in related articles, from sentences that are very similar but have still some differences.
 Our aim is here to quantitatively analyse these detected variations to quantify their specific use of persuasion techniques.
@@ -30,7 +30,7 @@ The Research Questions for this chapter is \acrshort{rq}2: \emph{To what extent 
     \item Which persuasion techniques are detected more frequently than others?
     \item How do similar news articles differ in their use of persuasion techniques? %\emph{How are the differences between similar articles} (extracted in the previous chapter) \emph{related to a different use of persuasion techniques?} % Is there a link between the parts that are different and persuasion techniques (propaganda/loaded language)? // 
     \item To what extent could persuasion techniques be used to identify related news articles?%If the same story can be narrated differently depending on the persuasion techniques used, then persuasion is adding variations to the narration. Therefore, \emph{how much of an obstacle is persuasion in recognising articles that are related to the same news?} %(clustering) % how much of an obstacle is persuasion in recognising the events in multiple articles?
-    %\todoHA{What led to this RQ? Previous text does not lead to this}
+          %\todoHA{What led to this RQ? Previous text does not lead to this}
 \end{enumerate}
 
 
@@ -80,7 +80,7 @@ Fine-grained propaganda analysis gives a multidimensional result because it prov
 % Sentiment is (cor)related to the specific propaganda technique of \texttt{Loaded\_language}, and having one technique instead of $18$ is only a disadvantage.
 % does not provide useful insights when observed together with the changes occurring in the articles. 
 The multi-dimensionality of propaganda across the techniques is much more useful and also more precise.
-For this reason, we mainly use propaganda for the experiments of the following chapters. 
+For this reason, we mainly use propaganda for the experiments of the following chapters.
 % \todoHA{I agree with AW. 
 % also, you had a pipeline in the previous version. why removed? 
 % good to tell the reader what steps you’ll be taking and why, before getting into all the detail. 
@@ -96,7 +96,7 @@ For this reason, we mainly use propaganda for the experiments of the following c
 \section{Datasets}
 \label{sec:lp_datasets}
 
-In this chapter, we make use of several datasets. 
+In this chapter, we make use of several datasets.
 First, we use them to understand how the detection of persuasion techiques works: Section~\ref{sec:lp_techniques} covers sentiment and propaganda detection, and we use different datasets to get some statistics about the detection itself.
 
 Then, in Section~\ref{sec:lp_relationship}, we have two different experiments that cover the relationship between persuasion techniques and variations between similar articles.
@@ -112,7 +112,7 @@ Some of these datasets were already used in the previous chapter, and some of th
 
 The first dataset that we use, as in the previous chapter, is AllSides.
 % \todoHA{so not all datasets here are different. you. may want to change the earlier statement then to be more accurate}
-This dataset contains articles that are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October 2022) 5124 headlines, for a total of 15050 articles. They are grouped in triples, called \emph{headlines}. Each triple belongs to one of several topics, which can be seen as more loosely-grained clusters. 
+This dataset contains articles that are grouped in “headlines” (3 articles for each headline) and each headline belongs to one of the 326 topics (almost all political-related). There are (updated 26th October 2022) 5124 headlines, for a total of 15050 articles. They are grouped in triples, called \emph{headlines}. Each triple belongs to one of several topics, which can be seen as more loosely-grained clusters.
 As positive side,
 %it ishuman-curated,\todoHA{rewrite more clearly}
 %meaning that 
@@ -160,7 +160,7 @@ We extracted from them a subset of 138 sentence pairs, by using the approach des
     \item Groups of sentences are extracted using \acrfull{hac}, to be able to use a similarity threshold to cut the dendrograms at any point. The features are the embeddings of point 1.
     \item We select thresholds for the clusters: minimal of $80\%$ and maximum of $98\%$ cosine similarity. In this way we select sentences that are related to the same detail (discarding sentences that are too different), but at the same time we discard sentences that are almost identical and only differ by punctuation.
     \item We randomly select a small subset of sentence pairs. From each cluster of sentences (containing three or more), only two sentences are selected in order to avoid having three-way comparisons (or even higher grade).
-    %\item Manual annotation of whether the differences in the sentence pairs are making use of different persuasion or relate to a different opinion / point of view. This specific data is used for the experiments ``comparison with manual annotations" at the end of this Section~\ref{ssec:lp_relationship_small_variations_qual}
+          %\item Manual annotation of whether the differences in the sentence pairs are making use of different persuasion or relate to a different opinion / point of view. This specific data is used for the experiments ``comparison with manual annotations" at the end of this Section~\ref{ssec:lp_relationship_small_variations_qual}
 \end{enumerate}
 
 Figure~\ref{fig:raw_clique_data} shows an example drawn from our dataset. We can see how the same detail has been phrased differently by different news articles.
@@ -184,7 +184,7 @@ The last sentence was removed because it was $100\%$ similar to the third one, a
 % TODO preamble to different techniques: sentiment, propaganda, populism, ...
 
 From all the different methods and approaches described in Chapter~\ref{sec:lit_propaganda}, in this section, we are using a set of methods to detect phenomena related to persuasion. % and do that at the word-level.
-In other words, we are detecting several techniques that are considered 
+In other words, we are detecting several techniques that are considered
 %\todoHA{Assume? No references to support this assumption} 
 to be related to persuasion~\citep{gass2018persuasion}: sentiment and 18 different propaganda techniques.% and populism.
 %\todoAW{I imagine that there's probably quite a lot of linguistics literature in this area that you should look at, if only to pin down your terminology. → easier to work out the terminology. At the moment I have persuasion (as top) then prop/sentiment/ that are subclasses. Look in literature.}
@@ -319,7 +319,7 @@ Therefore, if used in combination with other tools, it will provide more adjecti
 
 \paragraph{Stanford CoreNLP}
 Finally we consider Stanford CoreNLP, which is a tool that performs several NLP tasks, and one of them is sentiment analysis.
-Differently from the previous tools presented here, this tool is based on a more elaborated approach involving a special RNN which relates to the parse tree. 
+Differently from the previous tools presented here, this tool is based on a more elaborated approach involving a special RNN which relates to the parse tree.
 The dataset used to train this sentiment analysis model is Sentiment Treebank\footnote{\url{https://nlp.stanford.edu/sentiment/treebank.html}} which contains sentiment scores linked to dependency trees.
 
 The outputs of the sentiment analysis module are dual. There is an overall score of sentiment to the full sentences. It also generates a SentimentTree which is a representation of how the sentiment is conveyed from the leaves (the single words) to the full sentence, following the dependency tree.
@@ -333,22 +333,22 @@ The scores in output (both total and parts of the tree) have an integer value in
 % \end{figure}
 
 \begin{figure}[!htbp]
-     \centering
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/sentiment_tree_2.png}
-         \caption{SentimentTree generated by CoreNLP.}
-         \label{fig:raw_sentiment_tree}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/parse_tree.png}
-         \caption{SentimentTree parsed.}
-         \label{fig:parsed_sentiment_tree}
-     \end{subfigure}
-        \caption{Inputs and outputs of the parser for SentimentTree.}
-        \label{fig:parsing_sentiment_tree}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/sentiment_tree_2.png}
+        \caption{SentimentTree generated by CoreNLP.}
+        \label{fig:raw_sentiment_tree}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/parse_tree.png}
+        \caption{SentimentTree parsed.}
+        \label{fig:parsed_sentiment_tree}
+    \end{subfigure}
+    \caption{Inputs and outputs of the parser for SentimentTree.}
+    \label{fig:parsing_sentiment_tree}
 \end{figure}
 
 From the SentimentTree, we wrote a parser that parses its syntax and extracts the scores to the single words.\footnote{\url{https://github.com/MartinoMensio/corenlp-sentiment-tree-parser}}
@@ -378,22 +378,22 @@ To normalise the scales, we consider two main axes: polarity (used by all of the
 
 
 \begin{figure}[!htbp]
-     \centering
-     \begin{subfigure}[b]{\textwidth}
-         \centering
-         \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_polarity_comparison.pdf}
-         \caption{Sentiment polarity.}
-         \label{fig:sentiment_polarity_comparison}
-     \end{subfigure}
-     % \hfill
-     \begin{subfigure}[b]{\textwidth}
-         \centering
-         \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_strength_comparison.pdf}
-         \caption{Sentiment strength.}
-         \label{fig:sentiment_strength_comparison}
-     \end{subfigure}
-        \caption{Sentiment polarity and strength provided by different tools.}
-        \label{fig:sentiment_axes_comparison}
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_polarity_comparison.pdf}
+        \caption{Sentiment polarity.}
+        \label{fig:sentiment_polarity_comparison}
+    \end{subfigure}
+    % \hfill
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[trim={0 1.5cm 0 2cm},clip,width=\textwidth]{figures/sentiment_strength_comparison.pdf}
+        \caption{Sentiment strength.}
+        \label{fig:sentiment_strength_comparison}
+    \end{subfigure}
+    \caption{Sentiment polarity and strength provided by different tools.}
+    \label{fig:sentiment_axes_comparison}
 \end{figure}
 
 For each article, we produce the outputs using each tool, and we then aggregate over the whole dataset.
@@ -718,7 +718,7 @@ After having described in the previous sections the detection of the \emph{lingu
 %\todoHA{why combine? what are you hoping to find or learn? always make your thoughts and rationale very clear upfront }
 Our motivation is that we want to quantify with persuasion indicators what changes between related articles.
 % , from the difference analysis of the previous chapter (from a group of related articles, analyse the differences in terms of omissions, corroborations, fine-grained term differences), 
-In the previous chapter, we described a methodology to analyse the differences (omisssions, corroborations, fine-grained term analysis) from a group of related articles.
+In the previous chapter, we described a methodology to analyse the differences (omissions, corroborations, fine-grained term analysis) from a group of related articles.
 Now that we have here described how we can quantify persuasion with several detection techniques (sentiment and propaganda), we want to combine the two analyses together.
 
 In other words, we want to analyse the relationship between the linguistic techniques of persuasion, and the variations across the articles (from previous Chapter~\ref{chap:common_ground_search}).
@@ -830,18 +830,18 @@ Across the 138 samples included in the dataset, we have on average $32\%$ of the
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{r|rr}
-         Technique & sentence-based \% & word-based \% \\
-         \hline
-         any & 89.8\% & 14.8\% \\
-        sentiment\_total & 89.8\% & 12.5\% \\
-        propaganda\_any & 10.1\% & 3.2\% \\
-        PROPAGANDA:Loaded\_Language & 4.3\% & 0.8\% \\
-        PROPAGANDA:Doubt & 0.7\% & 0.5\% \\
-        PROPAGANDA:Flag-Waving & 1.4\% & 0.6\% \\
-        PROPAGANDA:Name\_Calling/Labeling & 1.4\% & 0.3\% \\
-        PROPAGANDA:Appeal\_to\_fear-prejudice & 1.4\% & 0.3\% \\
-        PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.6\% \\
-        PROPAGANDA:Repetition & 0.7\% & 0.1\% \\
+        Technique                             & sentence-based \% & word-based \% \\
+        \hline
+        any                                   & 89.8\%            & 14.8\%        \\
+        sentiment\_total                      & 89.8\%            & 12.5\%        \\
+        propaganda\_any                       & 10.1\%            & 3.2\%         \\
+        PROPAGANDA:Loaded\_Language           & 4.3\%             & 0.8\%         \\
+        PROPAGANDA:Doubt                      & 0.7\%             & 0.5\%         \\
+        PROPAGANDA:Flag-Waving                & 1.4\%             & 0.6\%         \\
+        PROPAGANDA:Name\_Calling/Labeling     & 1.4\%             & 0.3\%         \\
+        PROPAGANDA:Appeal\_to\_fear-prejudice & 1.4\%             & 0.3\%         \\
+        PROPAGANDA:Exaggeration/Minimisation  & 1.4\%             & 0.6\%         \\
+        PROPAGANDA:Repetition                 & 0.7\%             & 0.1\%         \\
     \end{tabular}
     \caption{Amount of detected persuasion techniques across sentence pairs.}
     \label{tab:detected_persuasion_in_variations}
@@ -883,18 +883,18 @@ How many times the variation of the sentences results in a change over the persu
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{r|rr}
-         Technique & \% scores changed & avg. magnitude \\
-         \hline
-         any & 98.5\% & N/A \\
-        sentiment\_total & 98.5\% & 9.3\% \\
-        propaganda\_any & 14.4\% & 3.4\% \\
-        PROPAGANDA:Loaded\_Language & 7.2\% & 1.0\% \\
-        PROPAGANDA:Doubt & 1.4\% & 1.1\% \\
-        PROPAGANDA:Flag-Waving & 1.4\% & 0.4\% \\
-        PROPAGANDA:Name\_Calling/Labeling & 1.4\% & 0.1\% \\
-        PROPAGANDA:Appeal\_to\_fear-prejudice & 2.8\% & 0.6\% \\
-        PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.1\% \\
-        PROPAGANDA:Repetition & 1.4\% & 0.1\% \\
+        Technique                             & \% scores changed & avg. magnitude \\
+        \hline
+        any                                   & 98.5\%            & N/A            \\
+        sentiment\_total                      & 98.5\%            & 9.3\%          \\
+        propaganda\_any                       & 14.4\%            & 3.4\%          \\
+        PROPAGANDA:Loaded\_Language           & 7.2\%             & 1.0\%          \\
+        PROPAGANDA:Doubt                      & 1.4\%             & 1.1\%          \\
+        PROPAGANDA:Flag-Waving                & 1.4\%             & 0.4\%          \\
+        PROPAGANDA:Name\_Calling/Labeling     & 1.4\%             & 0.1\%          \\
+        PROPAGANDA:Appeal\_to\_fear-prejudice & 2.8\%             & 0.6\%          \\
+        PROPAGANDA:Exaggeration/Minimisation  & 1.4\%             & 0.1\%          \\
+        PROPAGANDA:Repetition                 & 1.4\%             & 0.1\%          \\
     \end{tabular}
     \caption{The impact of sentence-pairs variations on detected persuasion.}
     \label{tab:change_scores_persuasion_in_variations}
@@ -943,18 +943,18 @@ Therefore, we also compute another measure: how many (percentage) changed words 
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{r|rr}
-         Technique & \%pairs & \%words \\
-         \hline
-         any & 86.9\% & 18.8\% \\
-        sentiment\_total & 85.5\% & 17.0\% \\
-        propaganda\_any & 10.1\% & 2.9\% \\
-        PROPAGANDA:Loaded\_Language & 5.7\% & 1.0\% \\
-        PROPAGANDA:Doubt & 1.4\% & 0.4\% \\
-        PROPAGANDA:Flag-Waving & 1.4\% & 0.1\% \\
-        PROPAGANDA:Name\_Calling/Labeling & 0\% & 0\% \\
-        PROPAGANDA:Appeal\_to\_fear-prejudice & 1.4\% & 0.7\% \\
-        PROPAGANDA:Exaggeration/Minimisation & 1.4\% & 0.6\% \\
-        PROPAGANDA:Repetition & 0\% & 0\% \\
+        Technique                             & \%pairs & \%words \\
+        \hline
+        any                                   & 86.9\%  & 18.8\%  \\
+        sentiment\_total                      & 85.5\%  & 17.0\%  \\
+        propaganda\_any                       & 10.1\%  & 2.9\%   \\
+        PROPAGANDA:Loaded\_Language           & 5.7\%   & 1.0\%   \\
+        PROPAGANDA:Doubt                      & 1.4\%   & 0.4\%   \\
+        PROPAGANDA:Flag-Waving                & 1.4\%   & 0.1\%   \\
+        PROPAGANDA:Name\_Calling/Labeling     & 0\%     & 0\%     \\
+        PROPAGANDA:Appeal\_to\_fear-prejudice & 1.4\%   & 0.7\%   \\
+        PROPAGANDA:Exaggeration/Minimisation  & 1.4\%   & 0.6\%   \\
+        PROPAGANDA:Repetition                 & 0\%     & 0\%     \\
     \end{tabular}
     \caption{Comparison of persuasion words against unique words.}
     \label{tab:words_persuasion_in_variations}
@@ -1022,7 +1022,7 @@ All the results are really useful to understand the relationship between the det
 % quantitative
 We have been able to find which techniques change mostly due to the changes represented in our corpus. Furthermore, we understand how a detail may be rephrased to express persuasion.
 Being that some techniques appear more (such as sentiment and \texttt{Loaded\_Language}) and some other less, we normalised the variation of the persuasion scores based on the average quantity of each technique.
- By doing that, we discovered that some techniques which are more rare (e.g., \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}), are much more probable to occur only in one of the variations of the same detail.
+By doing that, we discovered that some techniques which are more rare (e.g., \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition}), are much more probable to occur only in one of the variations of the same detail.
 This is particularly meaningful when contextualised to the attention economy~\citep{davenport2001attention}:
 %\todoAW{I think you need to flesh this out a bit, although a well selected quote from D\&B should be fine for that.}
 the easiest way to capture the attention is to use ``emotional triggers".
@@ -1123,13 +1123,13 @@ Since we want to understand whether by removing persuasion we can have better cl
     \item run the clustering algorithm (both datasets)
     \item measure the quality of the clusters with the ground truth labels (both datasets)
     \item compare the two cases to determine which one is better
-    % \item decide one clustering approach: it needs to be customisable in terms of numbers of clusters
-    % \item test the clustering on the articles from the dataset
-    % \item measure the accuracy of the clustering with respect to the ground truth
-    % \item remove the persuasion terms
-    % \item run the clustering on the ``cleaned'' articles, with the same clustering algorithm and parameters
-    % \item measure again the predicted clusters with the same metric
-    % \item compare the scores and determine which case is better
+          % \item decide one clustering approach: it needs to be customisable in terms of numbers of clusters
+          % \item test the clustering on the articles from the dataset
+          % \item measure the accuracy of the clustering with respect to the ground truth
+          % \item remove the persuasion terms
+          % \item run the clustering on the ``cleaned'' articles, with the same clustering algorithm and parameters
+          % \item measure again the predicted clusters with the same metric
+          % \item compare the scores and determine which case is better
 \end{enumerate}
 
 We carry out this procedure with different number of ground truth clusters, increasing the dataset from an initially small subset.%\todomargin{say this after the description of each step}
@@ -1150,7 +1150,7 @@ Additionally, we also have the datasets without only sentiment or propaganda, wh
 % and propaganda spans (from https://www.tanbih.org/prta).
 
 % STEP 2
-For the Step 2, document encoding, we take the approaches 
+For the Step 2, document encoding, we take the approaches
 also used in the previous Chapter~\ref{chap:common_ground_search}: we use for comparison both TF-IDF and \acrshort{use}. The first one is selected to represent simpler approaches while the second one stands for more recent and complex ones. The aim of the comparison is to understand whether there is any advantage of using more sophisticated approaches for this task.
 While USE is expected to have better results for complete sentences, we are also conscious that using it with possibly incomplete sentences (removing persuasion terms is not guaranteed to build grammatically complete sentences) could bring to slightly worsened results.
 % With both models, output for each document is a numerical representation.
@@ -1228,7 +1228,7 @@ At the center it is more similar to the ground truth, so both the \acrshort{ari}
 scores are higher.
 
 % The interpretation of this curve is that, when the hierarchical clustering begins to raise the threshold, the clusters match more with the gold clusters, until a certain point where distinct clusters are merging together and therefore lowering the scores.
-At this point we do the comparison with the other collections of articles where each one of them has been cleaned from sentiment and/or propaganda words. We see in this figure that, while sentiment does not seem to have much impact on clustering, removing propaganda increases the ability to cluster more similarly to the reference. 
+At this point we do the comparison with the other collections of articles where each one of them has been cleaned from sentiment and/or propaganda words. We see in this figure that, while sentiment does not seem to have much impact on clustering, removing propaganda increases the ability to cluster more similarly to the reference.
 
 % We can compare the behaviour of this curve between the full text and the text without the loaded/propaganda pieces.
 The comparison can be performed at the maximum point, where the threshold is optimal, % (we should truncate the clustering there)
@@ -1245,18 +1245,18 @@ For evaluating the effects with different sizes of datasets, we show here some r
 
 % \todoAW{Don't have huge captions like this... move the description of the table into the body of the text.}
 \begin{table}[!htbp]
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{r|r|r|llll|llll}
- &  &  & \multicolumn{4}{c|}{Headlines clustering} & \multicolumn{4}{c}{Topic clustering} \\ \cline{4-11} 
-\multirow{-2}{*}{\#headlines} & \multirow{-2}{*}{\# articles} & \multirow{-2}{*}{\# topics} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} \\ \hline
-2 & 6 & 2 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 \\ \hline
-4 & 12 & 3 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}} & \cellcolor{green}1.0 & \cellcolor{green}1.0 \\ \hline
-10 & 30 & 6 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.634R\\ \cellcolor{green}.771M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.634R\\ \cellcolor{green}.771M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.558R\\ \cellcolor{green}.730M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.558R\\ \cellcolor{green}.730M\end{tabular}} \\ \hline
-100 & 300 & 35 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .585M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.455R\\ .584M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .581M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.467R\\ \cellcolor{green}.599M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.271R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{red!50}.260R\\ \cellcolor{green}.516M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.274R\\ \cellcolor{green}.514M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red!50}.263R\\ \cellcolor{green}.515M\end{tabular}
-\end{tabular}%
-}
-\caption{Results of clustering applied to TF-IDF features with K-means.}
-\label{tab:sentpropnoise_tfidf}
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{r|r|r|llll|llll}
+                                          &                               &                             & \multicolumn{4}{c|}{Headlines clustering}                                  & \multicolumn{4}{c}{Topic clustering}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  \\ \cline{4-11}
+            \multirow{-2}{*}{\#headlines} & \multirow{-2}{*}{\# articles} & \multirow{-2}{*}{\# topics} & \multicolumn{1}{l|}{Full text}                                             & \multicolumn{1}{l|}{No sentiment}                                          & \multicolumn{1}{l|}{No propaganda}                                                                           & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}}                & \multicolumn{1}{l|}{Full text}                                             & \multicolumn{1}{l|}{No sentiment}                                                                              & \multicolumn{1}{l|}{No propaganda}                                                                            & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}}                 \\ \hline
+            2                             & 6                             & 2                           & \multicolumn{1}{l|}{1.0}                                                   & \multicolumn{1}{l|}{1.0}                                                   & \multicolumn{1}{l|}{1.0}                                                                                     & 1.0                                                                                                          & \multicolumn{1}{l|}{1.0}                                                   & \multicolumn{1}{l|}{1.0}                                                                                       & \multicolumn{1}{l|}{1.0}                                                                                      & 1.0                                                                                                          \\ \hline
+            4                             & 12                            & 3                           & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.390R\\ .553M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular}} & \begin{tabular}[c]{@{}l@{}}\cellcolor{green}.645R\\ \cellcolor{green}.798M\end{tabular}                      & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.734R\\ .742M\end{tabular}}                                     & \cellcolor{green}1.0                                                                                          & \cellcolor{green}1.0                                                                                         \\ \hline
+            10                            & 30                            & 6                           & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.616R\\ .765M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.634R\\ \cellcolor{green}.771M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.634R\\ \cellcolor{green}.771M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.547R\\ .724M\end{tabular}}                                     & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.558R\\ \cellcolor{green}.730M\end{tabular}}  & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.558R\\ \cellcolor{green}.730M\end{tabular}} \\ \hline
+            100                           & 300                           & 35                          & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .585M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.455R\\ .584M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.461R\\ .581M\end{tabular}}                                   & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.467R\\ \cellcolor{green}.599M\end{tabular}                     & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.271R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{red!50}.260R\\ \cellcolor{green}.516M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.274R\\ \cellcolor{green}.514M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red!50}.263R\\ \cellcolor{green}.515M\end{tabular}
+        \end{tabular}%
+    }
+    \caption{Results of clustering applied to TF-IDF features with K-means.}
+    \label{tab:sentpropnoise_tfidf}
 \end{table}
 
 
@@ -1278,18 +1278,18 @@ Finally, in the fourth row with the biggest subset of data made of 100 headlines
 For comparison, we compute the same metrics with the same clustering method but this time with a more complex model for document embedding (\acrshort{use}). This sequence model has two main differences with respect to count-based models (e.g. TF-IDF): it accounts for the order of the words, because it is a sequence model, and it can make use of synonyms because it is based on the distributional semantics (semantic similarity based on the context)~\citep{firth1957synopsis}. Since this model accounts for the sequence of words, and since we may remove words and break the semantics of the articles when cleaning from sentiment or propaganda, we need to have this comparison.
 
 \begin{table}[!htbp]
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{r|r|r|llll|llll}
- &  &  & \multicolumn{4}{c|}{Headlines clustering} & \multicolumn{4}{c}{Topic clustering} \\ \cline{4-11} 
-\multirow{-2}{*}{\#headlines} & \multirow{-2}{*}{\# articles} & \multirow{-2}{*}{\# topics} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} & \multicolumn{1}{l|}{Full text} & \multicolumn{1}{l|}{No sentiment} & \multicolumn{1}{l|}{No propaganda} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}} \\ \hline
-2 & 6 & 2 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & \multicolumn{1}{l|}{1.0} & 1.0 \\ \hline
-4 & 12 & 3 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.287R\\ .403M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.543R\\ \cellcolor{green}.641M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.287R\\ .403M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.543R\\ \cellcolor{green}.641M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.566R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.713R\\ \cellcolor{green}.750M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.566R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.713R\\ \cellcolor{green}.750M\end{tabular}} \\ \hline
-10 & 30 & 6 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.313R\\ .416M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.408R\\ \cellcolor{green}.509M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.313R\\ .416M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.343R\\ \cellcolor{green}.434M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.301R\\ .479M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.331R\\ \cellcolor{green}.507M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.301R\\ .479M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.436R\\ \cellcolor{green}.533M\end{tabular}} \\ \hline
-100 & 300 & 35 & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.250R\\ .362M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{red!50}.240R\\ \cellcolor{green}.367M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.251R\\ \cellcolor{green}.372M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red!50}.234R\\ .362M\end{tabular} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.185R\\ .420M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.191R\\ \cellcolor{red!50}.408M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.210R\\ \cellcolor{red!50}.418M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.223R\\ \cellcolor{red!50}.418M\end{tabular}
-\end{tabular}%
-}
- \caption{Results of the clustering applied to USE features with K-Means.}
- \label{tab:sentpropnoise_use}
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{r|r|r|llll|llll}
+                                          &                               &                             & \multicolumn{4}{c|}{Headlines clustering}                                  & \multicolumn{4}{c}{Topic clustering}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      \\ \cline{4-11}
+            \multirow{-2}{*}{\#headlines} & \multirow{-2}{*}{\# articles} & \multirow{-2}{*}{\# topics} & \multicolumn{1}{l|}{Full text}                                             & \multicolumn{1}{l|}{No sentiment}                                                                             & \multicolumn{1}{l|}{No propaganda}                                                                           & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}}                & \multicolumn{1}{l|}{Full text}                                             & \multicolumn{1}{l|}{No sentiment}                                                                              & \multicolumn{1}{l|}{No propaganda}                                                                             & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No propaganda\\ and no sentiment\end{tabular}}                 \\ \hline
+            2                             & 6                             & 2                           & \multicolumn{1}{l|}{1.0}                                                   & \multicolumn{1}{l|}{1.0}                                                                                      & \multicolumn{1}{l|}{1.0}                                                                                     & 1.0                                                                                                          & \multicolumn{1}{l|}{1.0}                                                   & \multicolumn{1}{l|}{1.0}                                                                                       & \multicolumn{1}{l|}{1.0}                                                                                       & 1.0                                                                                                          \\ \hline
+            4                             & 12                            & 3                           & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.287R\\ .403M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.543R\\ \cellcolor{green}.641M\end{tabular}}  & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.287R\\ .403M\end{tabular}}                                   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.543R\\ \cellcolor{green}.641M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.566R\\ .513M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.713R\\ \cellcolor{green}.750M\end{tabular}}   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.566R\\ .513M\end{tabular}}                                     & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.713R\\ \cellcolor{green}.750M\end{tabular}} \\ \hline
+            10                            & 30                            & 6                           & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.313R\\ .416M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.408R\\ \cellcolor{green}.509M\end{tabular}}  & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.313R\\ .416M\end{tabular}}                                   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.343R\\ \cellcolor{green}.434M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.301R\\ .479M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.331R\\ \cellcolor{green}.507M\end{tabular}}   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.301R\\ .479M\end{tabular}}                                     & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.436R\\ \cellcolor{green}.533M\end{tabular}} \\ \hline
+            100                           & 300                           & 35                          & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.250R\\ .362M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{red!50}.240R\\ \cellcolor{green}.367M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}\cellcolor{green}.251R\\ \cellcolor{green}.372M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{red!50}.234R\\ .362M\end{tabular}                                     & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}.185R\\ .420M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.191R\\ \cellcolor{red!50}.408M\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}} \cellcolor{green}.210R\\ \cellcolor{red!50}.418M\end{tabular}} & \begin{tabular}[c]{@{}l@{}} \cellcolor{green}.223R\\ \cellcolor{red!50}.418M\end{tabular}
+        \end{tabular}%
+    }
+    \caption{Results of the clustering applied to USE features with K-Means.}
+    \label{tab:sentpropnoise_use}
 \end{table}
 
 
@@ -1325,10 +1325,10 @@ They each include three articles, and cover the US elections of 2020. The first 
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{c|c|c}
-         & Articles from headline 0 & Articles from headline 7 \\
-         \hline
-        Full article & 0 0 7 & 7 0 7 \\
-        Without propaganda & 0 0 7 & 7 7 7
+                           & Articles from headline 0 & Articles from headline 7 \\
+        \hline
+        Full article       & 0 0 7                    & 7 0 7                    \\
+        Without propaganda & 0 0 7                    & 7 7 7
     \end{tabular}
     \caption{Inspection of how clustering changes when removing propaganda.}
     \label{tab:sentpropnoise_inspection}
@@ -1346,7 +1346,7 @@ We can see that one article from headline 7 (the middle one) is clustered togeth
 % Term importance
 Looking at the TF-IDF features for the articles, we see that when we consider the version without propaganda, terms like \emph{win} (win, winner, ..) are removed. These terms are in common between the two clusters and act as noise for the clustering.
 In this way, the distinguishing terms of each headline are able to emerge and have more importance:
-\emph{Lead} in cluster 0 (5th November), 
+\emph{Lead} in cluster 0 (5th November),
 \emph{Patience}, \emph{legal}, \emph{wait} in cluster 7 (3 November).
 
 The removal of these terms helps in the fine-grained differentiation of the stories.
@@ -1361,9 +1361,9 @@ However, when there are many different headlines to identify, these removals can
 From this whole experiment, we have the overall finding that removing persuasion from news articles helps to recognise clusters, but only in specific conditions:
 \begin{enumerate}
     \item The clusters have to be not too many (less than 100).
-    % \todoAW{Is that figure of 100 absolute? Looks very close to your figure of 138 articles. How did you arrive at this number?}
-    % \todomargin{138 is for the Small Variations Dataset, here experimental setup is article-level and not sentence-level}
-    Increasing the number of ground truth clusters reduces the effect of the removal. This happens because the removal of persuasion words causes also a removal of some topical terms. When the number of clusters considered increases, it increases also the possibility to have more similar clusters. As a consequence, the clustering is penalysed because some topical words have been removed, and the \acrshort{ari} and \acrshort{ami} measures decrease.
+          % \todoAW{Is that figure of 100 absolute? Looks very close to your figure of 138 articles. How did you arrive at this number?}
+          % \todomargin{138 is for the Small Variations Dataset, here experimental setup is article-level and not sentence-level}
+          Increasing the number of ground truth clusters reduces the effect of the removal. This happens because the removal of persuasion words causes also a removal of some topical terms. When the number of clusters considered increases, it increases also the possibility to have more similar clusters. As a consequence, the clustering is penalysed because some topical words have been removed, and the \acrshort{ari} and \acrshort{ami} measures decrease.
     \item For count-based models, the improvements are better when propaganda is removed. These terms act as noise and it is better to remove them to allow the topical words to have higher weights.
     \item For language models like USE, removing propaganda can in some cases be detrimental because the sentences lose the semantics on which these models work.
     \item The findings are analogous both for \acrshort{hac} and for K-means.
@@ -1376,13 +1376,13 @@ There are some limitations to this experiment. Some of them are a direct consequ
 
 \begin{enumerate}
     \item When increasing the size, the difference on the metrics used become smaller and smaller. This means that this approach does not scale well to thousands of headlines. This is, as explained above, a consequence of the topical words being accidentally removed when removing the persuasion words.
-    % \todoAW{Is this a consequence of the curse of dimensionality? If so, it's worth being explicit about it. It's worth being explicit if it isn't, come to that...}
+          % \todoAW{Is this a consequence of the curse of dimensionality? If so, it's worth being explicit about it. It's worth being explicit if it isn't, come to that...}
     \item Removing terms from articles makes them incorrect grammatically. For TF-IDF encoding, this is not a problem. Instead, for USE it becomes problem, as this language model encodes the sentence based on the sequence of words received. If the sentences do not make sense, their encoding diverges and we cannot use successfully these representations to cluster the articles together.
-    %\todoAW{What exactly is the problem, and how does it affect your analysis?}
+          %\todoAW{What exactly is the problem, and how does it affect your analysis?}
     \item Since some words belong both to persuasion and to the topic, by removing them it becomes more difficult to form the correct cluster.
-    %\todoAW{As my comments have suggested, I think this is a pretty fundamental issue. Even if you don't do any more experiments, I think you probably need a unpick the issues a bit more.}
-    This is why using generative models to perform non-persuasive rephrasing~\citep{bagdasaryan2022spinning} could be worth exploring in future works. However, we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
-%\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
+          %\todoAW{As my comments have suggested, I think this is a pretty fundamental issue. Even if you don't do any more experiments, I think you probably need a unpick the issues a bit more.}
+          This is why using generative models to perform non-persuasive rephrasing~\citep{bagdasaryan2022spinning} could be worth exploring in future works. However, we leave this out of scope as such a model would introduce too many variations difficult to control. %(choice of terms, but still some meaning).
+          %\todo{There exists some model that rephrase propagandistic content in non-propagandistic style. What about applying them and compare?}
 \end{enumerate}
 
 In addition, we could benefit from knowing more information about the sources of the pieces of text included. This information could contextualise the articles and potentially allow us to find groups of sources that are easier to cluster together than others. This will be considered in the next Chapter~\ref{chap:political_sides}.
@@ -1395,15 +1395,16 @@ This section contains the discussion of all the results of this chapter. We star
 
 % each RQ
 \begin{enumerate}[label={\textbf{RQ2.\arabic*:}},leftmargin=2cm]
-    \item \emph{To what extent could we automatically detect the persuasion techniques used by writers?} Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.
-    %\todoAW{This isn't a discussion, it's a summary.}
-    Answered in Section~\ref{sec:lp_techniques}. %\todomargin{this is not a finding/discussion}
+    \item \emph{To what extent could we automatically detect the persuasion techniques used by writers?} Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$).
+          % For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.
+          %\todoAW{This isn't a discussion, it's a summary.}
+          Answered in Section~\ref{sec:lp_techniques}. %\todomargin{this is not a finding/discussion}
     \item \emph{Which persuasion techniques are detected more frequently than others?} We observed that the most common techniques relate to loaded language (through propaganda and sentiment detection). However, the most common techniques are not the ones that differ the most. More subtle techniques, like Doubt and Appeal to fear, are the ones that emerge more when doing a comparative analysis between multiple versions of the same article.
     \item \emph{How do similar news articles differ in their use of persuasion techniques?} In some cases the words that change between multiple versions of the same detail, also cause a change in the detected persuasion. We managed to find that techniques like \texttt{Doubt}, \texttt{Appeal\_to\_fear-prejudice} and \texttt{Repetition} are the ones that are mostly affected by the variations in expressing the same detail.
-    \texttt{Loaded\_anguage}, on the other side, is more ubiquitous since news sources are competing for the attention of the reader, and emerges less in a comparative analysis.
-    However, in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This could be due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences.
-    %\todoAW{Examples?}
-    Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
+          \texttt{Loaded\_anguage}, on the other side, is more ubiquitous since news sources are competing for the attention of the reader, and emerges less in a comparative analysis.
+          However, in many cases, the differences between the articles cannot be described in terms of differences in detected sentiment or propaganda. This could be due to other types of variation: word choices/synonyms that are not the same word and do not apparently bring persuasion differences.
+          %\todoAW{Examples?}
+          Or also we have false positives in the detection (especially sentiment) that make it more difficult to see the changed persuasion. Answered in Section~\ref{ssec:lp_relationship_small_variations}.
     \item \emph{To what extent could persuasion techniques be used to identify related news articles?} By removing sentiment and/or propaganda, the clustering of related news articles improves slightly. This improvement is small but it is a sign that the non-topical layer is acting as noise/obstacle in recognising the topical layer. This is a weak verification of our hypothesis presented in Chapter~\ref{ssec:lit_layers_of_info} where we assumed that the news articles are a mix between two layers of topical and non-topical words.  We answered this question in Section~\ref{ssec:lp_relationship_removing}.
 \end{enumerate}
 

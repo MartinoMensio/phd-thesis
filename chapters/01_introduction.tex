@@ -23,7 +23,7 @@ These peculiarities, at the same time, can influence what the reader perceives a
 % framing definition
 This whole set of information, whether implicit or explicit, extends the raw facts of the events covered by news articles.
 % and are shared as ground truth between multiple sources.
-This additional layer, which varies across multiple news reports, comes under different names, such as \emph{framing}~\citep{gamson1989media,scheufele1999framing} or 
+This additional layer, which varies across multiple news reports, comes under different names, such as \emph{framing}~\citep{gamson1989media,scheufele1999framing} or
 %\emph{persuasion}, 
 \emph{propaganda}, with slightly different definitions.
 For conciseness, in this work we denote these techniques with the single term \emph{persuasion}.
@@ -77,7 +77,7 @@ To the best of our knowledge, there are hardly any computational studies that an
 % This is not a problem on its own, but what is missing is an understanding of how these dimensions interact.
 % Acquiring this missing knowledge, we could be able to 
 
-What makes news articles about the same issue different? 
+What makes news articles about the same issue different?
 Some studies focus on the information level, by considering which details are included (corroborated) or omitted~\citep{bountouridis2018explaining}.
 This is done by comparing multiple parallel articles that cover the same story, and studying what overlaps and what is unique.
 
@@ -94,7 +94,7 @@ Between these multiple branches of research, we see potential links that are lef
 For example, regarding the potential connection between propaganda and leaning, there is a lack in knowledge on \emph{what are the differences in persuasion/propaganda used by different political orientations?} or \emph{How can we automatically recognise political leaning from propaganda?}
 
 % What is the relationship with the topics discussed?
-Furthermore, if we consider the relationship between topics and propaganda, it would be useful to understand \emph{which topics tend to attract more propaganda} and \emph{which ones are targets for polarised propaganda}. Adding also the leaning, to \emph{identify topics where propaganda is more distinguishable between political leanings}. 
+Furthermore, if we consider the relationship between topics and propaganda, it would be useful to understand \emph{which topics tend to attract more propaganda} and \emph{which ones are targets for polarised propaganda}. Adding also the leaning, to \emph{identify topics where propaganda is more distinguishable between political leanings}.
 This would give insights into how propaganda changes across topics and leanings, considering both the quantity and the specific terminology used.
 %This would on one side give insights about how the quantity of propaganda changes across topics and leanings, and on the other side about how the terminology used changes across techniques, leanings topics for the specific techniques of techniques used and specific terminology used. 
 
@@ -124,7 +124,6 @@ This would give insights into how propaganda changes across topics and leanings,
 
 % \leftskip=0em
 % \parindent 1.5em
-
 
 \section{\statusgreen Motivation}
 \label{sec:intro_motivation}
@@ -169,17 +168,17 @@ A computational approach, which considers together document similarity, propagan
 
 % \begin{enumerate}
 %     \item Computational Researchers:
-    \begin{enumerate}
-        \item Quantify the relationship between political leaning and propaganda. 
-        %The literature assumes %\todoAW{Very vague and sweeping. How would you justify this? (Or refute it?)}
-        We find examples in the literature~\citep{schudson2002news} that explain how the political ideology of news writers/editors conditions writing news articles, considering economic reasons, unconscious assumptions and reporter-sources relations that are linked to political leanings. Therefore, these factors result in news articles that contain more or less subtle persuasion techniques for the reader (one of which is propaganda). By analysing and quantifying these relationships, we can understand their importance.
-        % contribution 1: compute weights of these relationships, understand better the relationships
-        \item By using together these variables, we can try to improve some automated approaches that currently rely on just one input feature, such as political leaning classification
-        % \todoHA{so this is the type of value added that I was looking for. If you reach a better understanding of X, then you can improve Y. This could go earlier in this section.}
-        using propaganda and topic features. By exploiting the relationship between these features, we can help \acrfull{ml} models to have higher values for the target metrics. % contribution 2: improve F1 using mix of feature
-        \item With an analysis that considers multiple variables, we may identify problems and inconsistencies that can only be discovered with combined analyses (e.g., data imbalance). This is a valuable point when using \acrshort{ml}-based approaches, as improving the quality of the data is a key element. % contribution 3: We highlight the problem of imbalanced dataset for propaganda detection
-    \end{enumerate}
-    % \todoHA{Fits better in a discussion section at the end of the thesis}
+\begin{enumerate}
+    \item Quantify the relationship between political leaning and propaganda.
+          %The literature assumes %\todoAW{Very vague and sweeping. How would you justify this? (Or refute it?)}
+          We find examples in the literature~\citep{schudson2002news} that explain how the political ideology of news writers/editors conditions writing news articles, considering economic reasons, unconscious assumptions and reporter-sources relations that are linked to political leanings. Therefore, these factors result in news articles that contain more or less subtle persuasion techniques for the reader (one of which is propaganda). By analysing and quantifying these relationships, we can understand their importance.
+          % contribution 1: compute weights of these relationships, understand better the relationships
+    \item By using together these variables, we can try to improve some automated approaches that currently rely on just one input feature, such as political leaning classification
+          % \todoHA{so this is the type of value added that I was looking for. If you reach a better understanding of X, then you can improve Y. This could go earlier in this section.}
+          using propaganda and topic features. By exploiting the relationship between these features, we can help \acrfull{ml} models to have higher values for the target metrics. % contribution 2: improve F1 using mix of feature
+    \item With an analysis that considers multiple variables, we may identify problems and inconsistencies that can only be discovered with combined analyses (e.g., data imbalance). This is a valuable point when using \acrshort{ml}-based approaches, as improving the quality of the data is a key element. % contribution 3: We highlight the problem of imbalanced dataset for propaganda detection
+\end{enumerate}
+% \todoHA{Fits better in a discussion section at the end of the thesis}
 %     \item Users reading the news:
 %     \begin{enumerate}
 %         \item link and show similarities to other documents on how the same topic is covered.\todoAW{Not a sentence} Especially articles from other political leanings which may have a different angle.\todoAW{Not a sentence}
@@ -211,13 +210,13 @@ Given this aim, we build a research path that gradually adds the different varia
 
 \begin{enumerate}
     \item We start from the first factor of similarity (and difference) between news articles, which is the motivation for our work in the first place. Being able to analyse the similarities and differences enables us to get a grasp on what effectively changes between related articles. Therefore, our first \acrfull{rq} is:\\
-    \emph{RQ1: To what extent do news articles about the same events differ?}
+          \emph{RQ1: To what extent do news articles about the same events differ?}
     \item Then, we move our focus to the computational detection of persuasion techniques. How they can be detected, and what is the relationship to our first \acrshort{rq}1. This prepares us for the second research question: \\
-    \emph{\acrshort{rq}2: To what extent can we automatically detect the persuasion techniques used in news articles?} 
+          \emph{\acrshort{rq}2: To what extent can we automatically detect the persuasion techniques used in news articles?}
     \item Afterwards, we introduce the variable of political leaning, to understand how it relates to persuasion. This leads us to the third research question:\\
-    \emph{\acrshort{rq}3: To what extent could the use of persuasion techniques help identify the political leaning of a news article?}
+          \emph{\acrshort{rq}3: To what extent could the use of persuasion techniques help identify the political leaning of a news article?}
     \item Finally, we introduce the topic as the last variable, to break down the results found in the previous investigation. This is our last research question:\\
-    \emph{\acrshort{rq}4: How does the use of propaganda differ across topics, and to what extent could this help determine the political leaning of articles?}
+          \emph{\acrshort{rq}4: How does the use of propaganda differ across topics, and to what extent could this help determine the political leaning of articles?}
 \end{enumerate}
 
 We dedicate an experimental chapter to each of the \acrlong{rq}s: from Chapter~\ref{chap:common_ground_search} to Chapter~\ref{chap:topics}.
@@ -231,7 +230,7 @@ Each one of them contains several sub-questions that we list here for comprehens
 The sub-questions are the following:
 \begin{enumerate}[label={\textbf{RQ1.\arabic*:}},leftmargin=2cm]
     \item How are new events reported differently by multiple sources?
-    \item How could we identify what is unique for each report and what is common? 
+    \item How could we identify what is unique for each report and what is common?
     \item To what extent can we automatically detect omission and corroboration across multiple articles?
     \item Which similarity metrics are best for detecting omission and corroboration?
 \end{enumerate}
@@ -349,11 +348,11 @@ As we described in the previous sections, methodologically we take one concept a
 If we go into more detail about the single experiments done in the thesis, we use several methodologies across the chapters:
 \begin{itemize}
     \item classifier-based: for a big part of our experiments, we use a methodology that is usually employed with classifiers. This is based on the computation of a metric (macro F1 in this case) of how well the classifier is able to predict the correct label for the inputs (in this case news articles). We use this setup with a classifier to understand the impact of multiple input variables (text of the articles, propaganda features, topic labels) on predicting the correct political leaning of the articles (compared with ground truth labels).
-    % \todoAW{I'd put a nod here to the dataset you've used, and a forward pointer to the relevant section.}
-    In addition, this setup allows performing a \emph{confusion analysis}, to understand the labels that were predicted incorrectly. Depending on the model used, we can also perform a \emph{feature importance} analysis to evaluate the strength of the features to make the prediction, to understand what the model learns. This methodology is performed together with a significance test, which establishes the probability of the observed improvement happening by chance.
+          % \todoAW{I'd put a nod here to the dataset you've used, and a forward pointer to the relevant section.}
+          In addition, this setup allows performing a \emph{confusion analysis}, to understand the labels that were predicted incorrectly. Depending on the model used, we can also perform a \emph{feature importance} analysis to evaluate the strength of the features to make the prediction, to understand what the model learns. This methodology is performed together with a significance test, which establishes the probability of the observed improvement happening by chance.
     \item comparative analysis: in Chapters~\ref{chap:political_sides} and \ref{chap:topics} we use quantitative comparative analysis
-    % \todoAW{What's that? Give a citation.}
-    to compare the distribution of one observed variable across multiple controlled variables. This methodology relies on aggregated metrics (such as average, median and standard variation) on a specific variable (e.g. quantity of a propaganda technique) to compare groups of articles and observe differences. We extract patterns of association between variables and observations from statistics across the groups.
+          % \todoAW{What's that? Give a citation.}
+          to compare the distribution of one observed variable across multiple controlled variables. This methodology relies on aggregated metrics (such as average, median and standard variation) on a specific variable (e.g. quantity of a propaganda technique) to compare groups of articles and observe differences. We extract patterns of association between variables and observations from statistics across the groups.
 \end{itemize}
 
 
@@ -363,65 +362,65 @@ If we go into more detail about the single experiments done in the thesis, we us
 The major contributions of this work are the following:
 \begin{enumerate}
     \item Improving F1 of the political leaning classifier using a mix of features. More specifically:
-    \begin{enumerate}
-        \item Chapter~\ref{chap:political_sides}  shows that if we add propaganda features on a BERT-based~\citep{devlin2018bert} classifier that predicts political leaning, we produce slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
-        \item Chapter~\ref{chap:topics} adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
-    \end{enumerate}
+          \begin{enumerate}
+              \item Chapter~\ref{chap:political_sides}  shows that if we add propaganda features on a BERT-based~\citep{devlin2018bert} classifier that predicts political leaning, we produce slightly better results that are significant according to McNemar tests. In these cases, the propaganda features help to correct some imbalances of the baseline classifier. However, the number of samples affected is quite small.
+              \item Chapter~\ref{chap:topics} adds the topic and uses it as a feature for the classifier. The result is an increase in the prediction metrics, small but significant.
+          \end{enumerate}
     \item Computing weights and better understanding the relationships between the multiple dimensions of similarities, propaganda, leaning and topics. This is achieved with:
-    \begin{enumerate}
-        \item Chapter~\ref{chap:linguistic_persuasion} contains an analysis of the relationship between persuasion and the word variations that different news sources produce when reporting events.
-        \item Chapter~\ref{chap:political_sides} investigates the correlation between propaganda and political leaning, demonstrated with an improvement of the F1 metric on the political leaning classification task. If they were not correlated, adding propaganda as an input feature would have no effect.
-        \item Chapter~\ref{chap:topics} finds that the topic of the articles is correlated with propaganda: some topics have very high levels of propaganda, while other ones are less polarizing and contain less of it. Furthermore, we find that the terms of propaganda are very different across political leanings for specific topics. %This not only means that the correlation between topics, leanings and propaganda is high, but it also means that
-        %Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
-        % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
-        % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
-        % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
-        % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
-        
-    \end{enumerate}
+          \begin{enumerate}
+              \item Chapter~\ref{chap:linguistic_persuasion} contains an analysis of the relationship between persuasion and the word variations that different news sources produce when reporting events.
+              \item Chapter~\ref{chap:political_sides} investigates the correlation between propaganda and political leaning, demonstrated with an improvement of the F1 metric on the political leaning classification task. If they were not correlated, adding propaganda as an input feature would have no effect.
+              \item Chapter~\ref{chap:topics} finds that the topic of the articles is correlated with propaganda: some topics have very high levels of propaganda, while other ones are less polarizing and contain less of it. Furthermore, we find that the terms of propaganda are very different across political leanings for specific topics. %This not only means that the correlation between topics, leanings and propaganda is high, but it also means that
+                    %Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
+                    % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
+                    % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
+                    % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
+                    % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
+
+          \end{enumerate}
     \item Highlighting the problem of imbalanced dataset for propaganda detection.
-    % \todoAW{Given the extensive coverage of bias in LLMs over the last few months, to what extent is this a contribution? Or how can you phrase it so it's obviously an original contribution?} 
-    We identify that the current datasets for propaganda detection are under-representing left-leaning propaganda, which is less common but still needs to be considered.
-    This emerges from the analysis in different chapters:
-    \begin{enumerate}
-        \item Chapter~\ref{chap:linguistic_persuasion} results in a deeper understanding of the limitations of the current status of automated propaganda detection, and the repercussions it can have when we use these methods in other tasks (e.g. overlap across news articles).
-        % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
-        \item Chapter~\ref{chap:political_sides} analyses and finds a big imbalance of propaganda detection datasets considering political leaning. Almost only right-leaning articles are used in the current literature.
-        % First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
-        % And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
-        % We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
-        \item Chapter~\ref{chap:topics} expands on this imbalance and finds topics that contain more or less propaganda generally or in a specific political leaning.
-    \end{enumerate}
-
-    
-    % \item Chapter 3: As already denoted by the work of~\citet{bountouridis2018explaining}, we confirm a positive correlation between corroboration and credibility of news outlets and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. 
-    % \item Observing similarities between multiple documents is made very difficult by linguistic variations. We experimented with models (e.g. \acrshort{use}) that are more resistant to words that carry similar meanings and are a better fit for doing this type of analysis.
+          % \todoAW{Given the extensive coverage of bias in LLMs over the last few months, to what extent is this a contribution? Or how can you phrase it so it's obviously an original contribution?} 
+          We identify that the current datasets for propaganda detection are under-representing left-leaning propaganda, which is less common but still needs to be considered.
+          This emerges from the analysis in different chapters:
+          \begin{enumerate}
+              \item Chapter~\ref{chap:linguistic_persuasion} results in a deeper understanding of the limitations of the current status of automated propaganda detection, and the repercussions it can have when we use these methods in other tasks (e.g. overlap across news articles).
+                    % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
+              \item Chapter~\ref{chap:political_sides} analyses and finds a big imbalance of propaganda detection datasets considering political leaning. Almost only right-leaning articles are used in the current literature.
+                    % First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
+                    % And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
+                    % We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
+              \item Chapter~\ref{chap:topics} expands on this imbalance and finds topics that contain more or less propaganda generally or in a specific political leaning.
+          \end{enumerate}
 
 
-    % \item Chapter 4: chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea of the relationship between persuasion and the variations that different news sources produce when reporting events.
-    % \item On the other side, we have also a deeper understanding of the limitations of the current status of this automated detection, and the repercussions it can have when we use these methods in other tasks.
-    % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
+          % \item Chapter 3: As already denoted by the work of~\citet{bountouridis2018explaining}, we confirm a positive correlation between corroboration and credibility of news outlets and a negative correlation between omission and credibility. We went one step further, by being able to automatically find the specific words that change between multiple news articles, and identify the degree of uniqueness of them. We think that this is beneficial for many downstream tasks, such as showing to the user during annotation tasks or even when consuming news online. 
+          % \item Observing similarities between multiple documents is made very difficult by linguistic variations. We experimented with models (e.g. \acrshort{use}) that are more resistant to words that carry similar meanings and are a better fit for doing this type of analysis.
 
-    % \item Chapter 5: % - positive: generalisation quite good considering datasets and results obtained
-    % First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
-    % And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
-    % We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
 
-    % - finding TOPICS where difference is more accentuated
-    % At the same time, this chapter has also helped us to find a direction for more investigation. The results found here represent the whole dataset. We would like to know if we can spot more in details the differences of propaganda when we consider specific topics separately. Propaganda may differ between political leanings more when we select certain topics, and we would like to know both which topics and also the outcomes of such a detailed analysis. And for conducing this experimentation, we need to consider the \emph{topics} of the articles as an additional element.
+          % \item Chapter 4: chapter highlighted how, by integrating the automated detection of persuasion in news articles, we have on one side a clearer idea of the relationship between persuasion and the variations that different news sources produce when reporting events.
+          % \item On the other side, we have also a deeper understanding of the limitations of the current status of this automated detection, and the repercussions it can have when we use these methods in other tasks.
+          % Computational detection of persuasion means is quite a recent research area, and with time and more resources (datasets and models) it could clearly improve
 
-    % \item Chapter 6: \item We need fine-grained topic to be able to see differences. The coarse topics show similar propaganda across topics and leanings. The more we use fine-grained topics, the more differences we are able to see. But at the same time, we lose support (fewer articles specific to the topics, and the filtering becomes too narrow). We need a tradeoff between granularity (high to see good differences) and support (significance of results).
-    % \item Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
-    % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
-    % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
-    % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
-    % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
-    % \item Encoding the topic information and using it as a feature, helps increase the prediction metrics of a leaning classifier. The improvements are small but significant.
+          % \item Chapter 5: % - positive: generalisation quite good considering datasets and results obtained
+          % First of all, they show how current propaganda detection is able to work with articles coming from very different political orientations. We think that the results here found are demonstrating quite good abilities to generalise from the relatively small datasets used for training propaganda.
+          % And if we consider that a big proportion of the news used in our experiments comes from a different political leaning, we think that these are very promising results.
+          % We were able to extract, analyse and link to our external knowledge of the events and ideologies. This is a very positive outcome.
 
-    
-    % \item Topics where current automated propaganda detection is more problematic (TODO) 
-    % \item Link between propaganda and political leaning is weak (not enough to identify leaning by just looking at the propaganda techniques) → against HYP1
-    % \item Imbalance is / is-not a problem for propaganda detection
+          % - finding TOPICS where difference is more accentuated
+          % At the same time, this chapter has also helped us to find a direction for more investigation. The results found here represent the whole dataset. We would like to know if we can spot more in details the differences of propaganda when we consider specific topics separately. Propaganda may differ between political leanings more when we select certain topics, and we would like to know both which topics and also the outcomes of such a detailed analysis. And for conducing this experimentation, we need to consider the \emph{topics} of the articles as an additional element.
+
+          % \item Chapter 6: \item We need fine-grained topic to be able to see differences. The coarse topics show similar propaganda across topics and leanings. The more we use fine-grained topics, the more differences we are able to see. But at the same time, we lose support (fewer articles specific to the topics, and the filtering becomes too narrow). We need a tradeoff between granularity (high to see good differences) and support (significance of results).
+          % \item Certain topics have more propaganda on a specific leaning. This happens with topics that are more important from the considered point of view, or where the considered leaning is currently against the status quo.
+          % \item Distribution of propaganda techniques is very similar across leanings for most of the topics (relative ratio of the quantity of techniques between themselves). Combined with the previous finding, it means that the quantities of the techniques scale proportionally across leanings in most of the topics.
+          % \item Terms of propaganda can be quite different across political leaning in certain topics. For some of these topics, they already have an imbalance of total quantity (e.g. Left has more propaganda than Right), for some others, the quantity is very similar, but they differ in the terms used.
+          % \item For a set of topics, it is easier to classify correctly the political leaning than in others. The easiest topics are the ones that are more polarising.
+          % \item Adding propaganda features to the baseline model has a positive impact on prediction metrics on major topics, while for some topics instead, it has negative impacts.
+          % \item Encoding the topic information and using it as a feature, helps increase the prediction metrics of a leaning classifier. The improvements are small but significant.
+
+
+          % \item Topics where current automated propaganda detection is more problematic (TODO) 
+          % \item Link between propaganda and political leaning is weak (not enough to identify leaning by just looking at the propaganda techniques) → against HYP1
+          % \item Imbalance is / is-not a problem for propaganda detection
 \end{enumerate}
 
 
@@ -431,7 +430,7 @@ The major contributions of this work are the following:
 % \section{\statusred Structure of the dissertation}
 % \label{sec:intro_structure}
 
-% ALREADY DONE WITH RQ AND METHODOLOGY, USELESSS TO REPEAT
+% ALREADY DONE WITH RQ AND METHODOLOGY, USELESS TO REPEAT
 
 % Chapter~\ref{chap:literature} literature.
 
@@ -469,7 +468,7 @@ During the timeframe of this PhD, multiple publications have been accepted at wo
     \item \bibentry{piccolo2021agents}
     \item \bibentry{denaux2021weaving}
     \item \bibentry{lobo2022estimating}
-    % \item \bibentry{mensio2023misinfokg}
+          % \item \bibentry{mensio2023misinfokg}
 \end{itemize}
 
 
