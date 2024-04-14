@@ -10,7 +10,7 @@ We provide here both balanced and unbalanced versions of a subset derived from N
 
 \begin{itemize}
     \item random splits: articles from the same news source may appear in all the folds, possibly leading into information leaking;
-    \item media splits: articles from a certain news source can only appear in one fold. 
+    \item media splits: articles from a certain news source can only appear in one fold.
 \end{itemize}
 
 \section{Sources Selection}
@@ -47,7 +47,7 @@ The stratification on the leaning makes every fold with the same proportions acr
 
 From the \texttt{NELA-Random-Imbalanced} we then derive a balanced version with respect to the leaning. We first identify the leaning that has less articles (center) for each fold, and we cap the number of articles in the other two leanings.
 We cannot simply select randomly the articles to remain, because we may lose some of the news sources completely (because the dataset is very unbalanced across news sources).
-Therefore, we compute a reduction factor for the Left and one for the Right for each fold (e.g. for $L$=Left and fold=1, $\alpha_{L,1} = \frac{\#articles_{L,1}}{\#articles_{C,1}}$) and we scale proportionally with them the number of articles allowed for each news source in the Left and in the Right. When all these source-based caps have been computed, we then perform a random selection for the articles of each news source.  
+Therefore, we compute a reduction factor for the Left and one for the Right for each fold (e.g. for $L$=Left and fold=1, $\alpha_{L,1} = \frac{\#articles_{L,1}}{\#articles_{C,1}}$) and we scale proportionally with them the number of articles allowed for each news source in the Left and in the Right. When all these source-based caps have been computed, we then perform a random selection for the articles of each news source.
 We call this subset \texttt{NELA-Random-Balanced}, and it contains $150,315$ articles ($10021$ articles for each fold and leaning).
 
 \section{Media Splits Imbalanced}
@@ -78,14 +78,14 @@ We prioritize the intra-fold balance across leaning to the inter-fold balance.
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{l|rrr|rrr}
-        \multirow{2}{*}{Fold} & \multicolumn{3}{c}{\#Articles} & \multicolumn{3}{c}{\#Sources} \\
-         & Left & Center & Right & Left & Center & Right \\
+        \multirow{2}{*}{Fold} & \multicolumn{3}{c}{\#Articles} & \multicolumn{3}{c}{\#Sources}                                 \\
+                              & Left                           & Center                        & Right & Left & Center & Right \\
         \hline
-        Fold 1 & 19887 & 16416 & 33763 & 6 & 1 & 1 \\
-        Fold 2 & 19669 & 8360 & 25786 & 6 & 2 & 2 \\
-        Fold 3 & 19737 & 8492 & 25764 & 6 & 3 & 6 \\
-        Fold 4 & 19792 & 8386 & 25805 & 6 & 3 & 7 \\
-        Fold 5 & 20200 & 8451 & 25727 & 6 & 2 & 8 \\
+        Fold 1                & 19887                          & 16416                         & 33763 & 6    & 1      & 1     \\
+        Fold 2                & 19669                          & 8360                          & 25786 & 6    & 2      & 2     \\
+        Fold 3                & 19737                          & 8492                          & 25764 & 6    & 3      & 6     \\
+        Fold 4                & 19792                          & 8386                          & 25805 & 6    & 3      & 7     \\
+        Fold 5                & 20200                          & 8451                          & 25727 & 6    & 2      & 8     \\
     \end{tabular}
     \caption{\texttt{NELA-Media-Imbalanced} across leanings and folds.}
     \label{tab:nela_media_imbalanced}
@@ -98,19 +98,19 @@ We see that overall the folds are quite balanced, with this exception of the Rig
 \section{Media Splits Balanced}
 
 The last splitting subset that we create is derived from \texttt{NELA-Media-Imbalanced}, but adding the constraint of being balanced across leaning.
-For each fold, we take the minimum number of articles (always the Center) and, as in \texttt{NELA-Media-Balanced}, we compute a reduction factor for the Left and one for the Right for each fold. Then we scale proportionally with these factors the number of articles allowed for each news source in the Left and in the Right. When all these source-based caps have been computed, we then perform a random selection for the articles of each news source.  
+For each fold, we take the minimum number of articles (always the Center) and, as in \texttt{NELA-Media-Balanced}, we compute a reduction factor for the Left and one for the Right for each fold. Then we scale proportionally with these factors the number of articles allowed for each news source in the Left and in the Right. When all these source-based caps have been computed, we then perform a random selection for the articles of each news source.
 
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{l|rrr|rrr}
-        \multirow{2}{*}{Fold} & \multicolumn{3}{c}{\#Articles} & \multicolumn{3}{c}{\#Sources} \\
-         & Left & Center & Right & Left & Center & Right \\
+        \multirow{2}{*}{Fold} & \multicolumn{3}{c}{\#Articles} & \multicolumn{3}{c}{\#Sources}                                 \\
+                              & Left                           & Center                        & Right & Left & Center & Right \\
         \hline
-        Fold 1 & 16416 & 16416 & 16416 & 6 & 1 & 1 \\
-        Fold 2 & 8360 & 8360 & 8360 & 6 & 2 & 2 \\
-        Fold 3 & 8492 & 8492 & 8492 & 6 & 3 & 6 \\
-        Fold 4 & 8386 & 8386 & 8386 & 6 & 3 & 7 \\
-        Fold 5 & 8451 & 8451 & 8451 & 6 & 2 & 8 \\
+        Fold 1                & 16416                          & 16416                         & 16416 & 6    & 1      & 1     \\
+        Fold 2                & 8360                           & 8360                          & 8360  & 6    & 2      & 2     \\
+        Fold 3                & 8492                           & 8492                          & 8492  & 6    & 3      & 6     \\
+        Fold 4                & 8386                           & 8386                          & 8386  & 6    & 3      & 7     \\
+        Fold 5                & 8451                           & 8451                          & 8451  & 6    & 2      & 8     \\
     \end{tabular}
     \caption{\texttt{NELA-Media-Balanced} across leanings and folds.}
     \label{tab:nela_media_balanced}

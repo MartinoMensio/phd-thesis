@@ -144,9 +144,9 @@ We see several related concepts in the literature that can be considered as form
 \begin{itemize}
     \item appeal to emotion / sentiment: use of emotional language to convey strong emotions to the reader~\citep{ginosar2019patriotic}; % loaded language instead?
     \item \gls{propaganda}:  information, ideas, opinions, or images, often only giving one part of an argument, that are broadcast, published, or in some other way spread with the intention of influencing people's opinions.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/propaganda}}.
-    The signature feature of propaganda is that it employs ``intentionally or unintentionally, flawed ideologies to cut off rational deliberation and discussion"~\citep{stanley2015propaganda}. % to indoctrinate a population towards an individual or a particular agenda
-    % \item \gls{populism}: political ideas and activities that are intended to get the support of ordinary people by giving them what they want;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/populism}}
-    % \item coercion: use of force to persuade someone to do something that they are unwilling to do.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
+          The signature feature of propaganda is that it employs ``intentionally or unintentionally, flawed ideologies to cut off rational deliberation and discussion"~\citep{stanley2015propaganda}. % to indoctrinate a population towards an individual or a particular agenda
+          % \item \gls{populism}: political ideas and activities that are intended to get the support of ordinary people by giving them what they want;\footnote{\url{https://dictionary.cambridge.org/dictionary/english/populism}}
+          % \item coercion: use of force to persuade someone to do something that they are unwilling to do.\footnote{\url{https://dictionary.cambridge.org/dictionary/english/coercion}} % aggressive threats and the provocation of fear and/or shame to influence a person's behavior.
 \end{itemize}
 % \todoAW{Put in specific citations for these two cases.}
 
@@ -316,7 +316,7 @@ These techniques are:
     \item Reductio ad Hitlerum: oppose an idea by suggesting it is popular in a group hated by the audience;
     \item Red herring: diverting the attention with unrelated material of conversation;
     \item Bandwagon: exploiting the desire of most people to join the crowd or be on the winning side, and avoid winding up the losing side;
-    \item Obfuscation, intentional vagueness, confusion: willingly using unclear words or concepts; 
+    \item Obfuscation, intentional vagueness, confusion: willingly using unclear words or concepts;
     \item Straw man: caricaturing an opponent's position and then attacking it.
 \end{enumerate}
 
@@ -412,7 +412,7 @@ As the literature shows~\citep{jenkins2013thin,vanderwicken1995news,jang2023prox
 \begin{enumerate}
     \item the first layer, the most visible, is the layer of \emph{facts}: entities (what/who is mentioned) and actions (what happens), combined into events. This is usually called \emph{topic} made of \emph{topical words};
     \item a second layer of additional and subjective information: choice of terms to use, details to include and exclude, order of presentation, expression of opinion, subjective statements. All these means are used to convey a certain point of view, and therefore we use the umbrella term of \emph{persuasion} to include both sentiment and propaganda. This may be called \emph{anti-topical} component of the text.
-    %\todoAW{I'm not clear what the difference is between propaganda and persuasion. And because of that, I'm generally unclear how you're using each term in the document.}
+          %\todoAW{I'm not clear what the difference is between propaganda and persuasion. And because of that, I'm generally unclear how you're using each term in the document.}
 \end{enumerate}
 
 
@@ -510,16 +510,16 @@ Similarly, issues such as immigration, trade, and national security may be more 
 \begin{table}[ht]
     \centering
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{p{0.25\linewidth} | p{0.55\linewidth} | p{0.55\linewidth}}
-      Topic  & Left & Right \\ \hline
-      % Social issues & \\
-      Abortion & rights of the mother, ability to have abortion & rights of the fetus, limiting or stopping abortions \\ \hline
-      Gay marriages & no difference with opposite-sex couples & sacred marriage between man and woman \\ \hline
-      Family & expanded view on non-traditional families & not encouraging divorced, single, unmarried parents (accepting them may be fine) \\ \hline
-      Taxes & tax increases on the wealthy and more progressive tax systems & decrease taxes for everyone \\
-      % Sex and Gender & accepting and empathetic culture & \\
-      % Sexuality & free expression is a right & \\
-    \end{tabular}
+        \begin{tabular}{p{0.25\linewidth} | p{0.55\linewidth} | p{0.55\linewidth}}
+            Topic         & Left                                                          & Right                                                                            \\ \hline
+            % Social issues & \\
+            Abortion      & rights of the mother, ability to have abortion                & rights of the fetus, limiting or stopping abortions                              \\ \hline
+            Gay marriages & no difference with opposite-sex couples                       & sacred marriage between man and woman                                            \\ \hline
+            Family        & expanded view on non-traditional families                     & not encouraging divorced, single, unmarried parents (accepting them may be fine) \\ \hline
+            Taxes         & tax increases on the wealthy and more progressive tax systems & decrease taxes for everyone                                                      \\
+            % Sex and Gender & accepting and empathetic culture & \\
+            % Sexuality & free expression is a right & \\
+        \end{tabular}
     }
     \caption{Example of Left and Right positions according to AllSides.}
     \label{tab:allsides_leaning_positions}
@@ -543,9 +543,9 @@ Perspectives on multiple topics are listed: social issues, economic issues, fore
 %\subsection{Political Leaning}
 % Political leaning classification
 
-Political leaning detection models have been produced for general media sources~\citep{budak} or for 
-specific political corpora such as congressional records~\citep{gentzkow}, political party websites~\citep{yan2017perils}, and political blogs~\citep{ahmed201}.  
-Others focused on inferring the political leaning of Twitter accounts~\citep{Cohen2013ClassifyingPO}, Facebook users~\citep{Bakshy1130}, politicians~\citep{thomas-etal-2006-get}, or political writers~\citep{iyyer-etal-2014-political}. 
+Political leaning detection models have been produced for general media sources~\citep{budak} or for
+specific political corpora such as congressional records~\citep{gentzkow}, political party websites~\citep{yan2017perils}, and political blogs~\citep{ahmed201}.
+Others focused on inferring the political leaning of Twitter accounts~\citep{Cohen2013ClassifyingPO}, Facebook users~\citep{Bakshy1130}, politicians~\citep{thomas-etal-2006-get}, or political writers~\citep{iyyer-etal-2014-political}.
 
 Various analysis methods were used in such studies, such as linguistic analysis \citep{gentzkow}, graph analysis \citep{chen2017opinion}, topic modelling \citep{ahmed201, Cohen2013ClassifyingPO}, support vector machines (SVM) \citep{Bakshy1130,thomas-etal-2006-get}, and neural networks \citep{iyyer-etal-2014-political,baly2020we}.
 
@@ -563,7 +563,7 @@ Various analysis methods were used in such studies, such as linguistic analysis 
 %chen - SVM, LDA
 
 %Most models use supervised or unsupervised machine learning algorithms, trained using source annotations or crowdsourced articles annotations  
- 
+
 %underlined that most of the approaches do not generalise well across domains. 
 %As~\citet{yan2017perils} underline, three different classifiers trained on different types of texts (domains: congressional records~\citep{gentzkow}, political websites, wiki) result in lack of cross-domain generalisability (classifier trained on different domain struggles to find correct label on another domain, and mixing the training data reduces performance confusing the models).
 
@@ -583,9 +583,9 @@ Between the resources that list the political leaning of sources, we can mention
 In addition, AllSides gives the label to the source level but sometimes also to the author level. This last resource is the origin of the dataset provided together with the paper from~\citet{baly2020we}.
 %Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to that given to their sources (AllSides confirmed that this is due to using author-based leaning). 
 %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
- %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
- % Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. However, %unlike ~\citep{baly2020we}, 
- % unlike previous work, we use propaganda features in the political learning prediction model.   
+%   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be
+% Similarly to \citet{baly2020we}, in this paper we also focus on classifying articles, regardless of their source and authorship. However, %unlike ~\citep{baly2020we}, 
+% unlike previous work, we use propaganda features in the political learning prediction model.   
 
 % - Problem: learning the source instead of the political leaning
 %Main focus in~\citet{baly2020we} is to classify individual articles regardless of the source or author. This generalises better with unseen sources, and with cases were there is a difference between the political leaning of a particular article from that of its source. Authors found that 3.11\% of their 34737 articles from AllSides has a different leaning to the given to their sources (AllSides confirmed that this is due to using author-based leaning labels for some articles). 
@@ -596,8 +596,8 @@ In addition, AllSides gives the label to the source level but sometimes also to 
 
 %To clarify this point, we personally asked to the AllSides team about this discrepancy between article-level bias and source bias, and we understood that there are two types of annotation:
 %\begin{itemize}
- %   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
- %   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be different from the media bias\footnote{\url{https://www.allsides.com/media-bias/media-bias-ratings\#ratings}}
+%   \item source-level annotation: in most of the cases, the articles are annotated with the bias of the media outlet
+%   \item author-level annotation: sometimes, the articles are annotated with the bias of the specific writer, which can be different from the media bias\footnote{\url{https://www.allsides.com/media-bias/media-bias-ratings\#ratings}}
 %\end{itemize}
 
 %Therefore the 3.11\% is due to the author-level annotation. We want to underline that in this way, the annotation of the political leaning is not specifically assigned to the single article but instead it is assigned to the author. It is still a "distant supervision" in some extent.
@@ -845,7 +845,7 @@ we saw that propagandistic sources are usually considered as part of misinformat
 
 % CONCLUSION:
 As general observation, misinformation typically uses propaganda, but the relationship is not bidirectional. In this work we do not investigate on the accuracy of the news, but we focus on the linguistic means of persuasion (propaganda).
-By doing so, our results should be more general, and if needed can be applied to misinformation (with appropriate adaptations). 
+By doing so, our results should be more general, and if needed can be applied to misinformation (with appropriate adaptations).
 
 \subsection{Propaganda and Populism}
 \label{sec:lit_related_populism}
@@ -886,7 +886,7 @@ Or also, we do not find approaches that tackle together the analysis of propagan
 
 Considering together two or more of these research topics together could be very beneficial.
 In the example of propaganda detection and political leaning, a joint analysis could explore if there are some techniques that are used more in the left or in the right, and if the terminology used is shared or unique across leanings (both analysed by our RQ3).
-Instead, in the example of propaganda techniques and topics, it could be possible to study in which topics propaganda is more used. Or adding also the leaning, to study the topics which have most different propaganda between left and right (our RQ4). 
+Instead, in the example of propaganda techniques and topics, it could be possible to study in which topics propaganda is more used. Or adding also the leaning, to study the topics which have most different propaganda between left and right (our RQ4).
 
 % Limitation of literature: fragmented and not considering everything together.
 
@@ -927,4 +927,4 @@ We see that these ingredients could be related, and we want to understand their 
 We exclude from our scope the related phenomena discussed in Section~\ref{sec:lit_related}. These are interesting additional links that can be explored by future works.
 We also exclude the development or refinement of models that belong to a single research topic listed above. This work is focused instead on the relationship between these ingredients.
 
-The following chapters will start gradually from the first ingredient, adding each time a new one to the mix. 
+The following chapters will start gradually from the first ingredient, adding each time a new one to the mix.
