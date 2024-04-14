@@ -2,6 +2,9 @@
 main.pdf
 
 ## Core latex/pdflatex auxiliary files:
+*.dot
+*.ist
+*.toc
 *.aux
 *.lof
 *.log
