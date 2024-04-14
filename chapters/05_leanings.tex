@@ -560,7 +560,7 @@ Therefore, we take a dataset, we run it through automated persuasion annotation 
 
 % dataset
 The dataset used is \texttt{baly}~\citep{baly2020we}, as described previously in~\ref{ssec:ps_leaning_data}.
-We take from it the text of the articles and the label for the leaning, expressed over 3 distinct values: Left Center, Right.
+We take from it the text of the articles and the label for the leaning, expressed over 3 distinct values: Left, Center and Right.
 %, Mixed, Not Rated. The first 5 values are properly placed across the spectrum, from left to right. The last values instead are for data that is not clearly aligned with one leaning.
 It is important to note that the articles in this dataset are grouped in triples covering the same story, and this grouping makes the topic perfectly balanced across the dataset. For each article belonging to one leaning, there exist two other articles that belong to the other two leanings.
 In this way, we do not need to consider the fact that some topics may naturally be more subject to persuasion (e.g. political issues) while other topics may be less (e.g. sports or technology, where the writing style could be less loaded).
@@ -852,13 +852,13 @@ Furthermore, we would need to capture a bit more around the context of the propa
 
 % link to next experiment
 As the last limitation, we extracted these insights, but we do not know to what extent they reflect in an immediate and definitive indication of the leaning of the articles.
-The weightings of the TF-IDF show, in many cases, very similar scores. Therefore, it is unclear for now how easy or hard would it be to use these features to automatically recognise the leaning of one article. %(more in the next Subsection~\ref{ssec:ps_prop_leaning_classifier})
+The weightings of the TF-IDF show, in many cases, very similar scores. Therefore, it is unclear for now how easy or hard it would be to use these features to automatically recognise the leaning of one article. %(more in the next Subsection~\ref{ssec:ps_prop_leaning_classifier})
 % it is not clear whether these features can be used to automatically differentiate between the propaganda of the left and the one from the right.
 We experiment in this direction with the following Section~\ref{ssec:ps_prop_leaning_classifier}.
 
 
 % \subsubsection{REMOVE: this subsubsection is about removing propaganda to increase similarity across leanings}
-% \todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda acrosss spectrum}
+% \todo{This is describing another dubious experiment: removing propaganda to increase similarity of articles that refer to the same story. Instead here I want to talk about the analysis of propaganda across spectrum}
 % Instead of measuring the effect of removing the “framing” pieces on clustering algorithms, here we want to observe what is the effect on document similarity between different sources.
 % Given articles from the left/center/right, we want to compare if there is a change in similarity when we remove sentiment and propaganda terms (e.g., articles are more similar than before).
 % Hypothesis
@@ -1413,7 +1413,7 @@ If we compare the subfigures~\ref{fig:prop_tech_confusion_baly_random} and~\ref{
 % features learned
 To understand what the model has learnt, we investigate the weights assigned by the neural layer part of the model.
 The values are retrieved from the neural network by analysing the weights of the SoftMax layer described before.
-For each feature, we have three weightss that respectively affect the probabilities assigned to the three output classes (Left, Center, Right).
+For each feature, we have three weights that respectively affect the probabilities assigned to the three output classes (Left, Center, Right).
 From these three weights, we compute the difference between the ones for the Right class and the one for the Left class. This computed value represents the association between the specific technique and the output leaning. 
 We can see in Figure~\ref{fig:prop_tech_weights} the associations learned by the model for the eighteen techniques considered.
 Positive values correspond to higher weights for the Right class, while negative values mean that the classifier recognises the appearance of the technique as a sign of being from the Left.
@@ -1568,7 +1568,7 @@ We have seen in the previous sections that the results of the classifier based o
 The feature combination \texttt{(0)+(2)} (baseline and quantity of propaganda techniques), when tested for with McNemar test, resulted significant (p-value $=0.008$).
 But we still question whether the results, with such a small margin (F1 and Accuracy) would generalise to other datasets.
 
-For this reason, in this subsection, we take the \texttt{NELA} dataset from Section~\ref{app:nela_processing} and we perform the same analysis. In specific, we test on the built subsets denoted with \texttt{NELA-Random-Imbalanced}, \texttt{NELA-Random-Balanced}, \texttt{NELA-Media-Imbalanced} and \texttt{NELA-Media-Balanced}.
+For this reason, in this subsection, we take the \texttt{NELA} dataset from Appendix~\ref{app:nela_processing} and we perform the same analysis. In specific, we test on the built subsets denoted with \texttt{NELA-Random-Imbalanced}, \texttt{NELA-Random-Balanced}, \texttt{NELA-Media-Imbalanced} and \texttt{NELA-Media-Balanced}.
 
 
 The only difference in the experimental setup is that here we are performing a 5-Folds cross-validation instead of a simple train-test.
@@ -1824,7 +1824,7 @@ By combining the baseline feature with many propaganda features (\texttt{(0)+(1)
 Subfigure~\ref{fig:nela_confusion_combined} shows what happens in details. The overall bias of the BERT baseline is compensated with the bias of the propaganda features (predictions: 50039 Left, 50854 Center, 49422 Right).
 The values on the main diagonal are higher for the Right (+1553) and the Center (+689), while they are lower for the Left (-1359).
 
-In the other splits we have a similar when comparing \texttt{(0)+(1)+(2)} to the baseline. We selected this example because it has the highest delta in F1 and Accuracy, and highest significance. 
+In the other splits we have a similar behaviour when comparing \texttt{(0)+(1)+(2)} to the baseline. We selected this example because it has the highest delta in F1 and Accuracy, and highest significance. 
 
 % media balanced:
 % - bert left bias in prediction
@@ -2146,7 +2146,7 @@ Our goal is to find if there are some overall trends, for example a big imbalanc
 
 Note that the datasets that we consider are not the the ones used for political leaning that have been described in the previous Section~\ref{ssec:ps_leaning_data}.
 % \todoHA{So why are we using them here?}
-This is the case because we are analysing the task of propaganda detection and not to the task of political leaning classification and, as we have seen in Chapter~\ref{chap:literature}, the literature is quite well separated between the two tasks.
+This is the case because we are analysing the task of propaganda detection and not the task of political leaning classification and, as we have seen in Chapter~\ref{chap:literature}, the literature is quite well separated between the two tasks.
 We introduced propaganda in the previous chapter~\ref{chap:linguistic_persuasion}, but at that moment we had not yet introduced leanings into the analysis.
 We present here the analysis of the propaganda detection datasets, showing how they distribute across political leanings.
 
@@ -2160,7 +2160,7 @@ The first dataset is TSHP-17, which was published in the work of~\citet{rashkin2
 \begin{itemize}
     \item Satire: The Onion, Borowitz Report, Clickhole
     \item Hoax: American News, DC Gazette
-    \item Propaganda: Natural News, Activist Report (Activist News and Activist Report
+    \item Propaganda: Natural News, Activist Report (Activist News and Activist Report)
     \item Trusted news: from Gigaword News corups. Articles come from several sources, including AFP (Agence France Press), Associated Press, New York Times, The Xinhua News Agency. The dataset is not including these articles.
 \end{itemize}
 
