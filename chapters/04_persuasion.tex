@@ -718,7 +718,7 @@ After having described in the previous sections the detection of the \emph{lingu
 %\todoHA{why combine? what are you hoping to find or learn? always make your thoughts and rationale very clear upfront }
 Our motivation is that we want to quantify with persuasion indicators what changes between related articles.
 % , from the difference analysis of the previous chapter (from a group of related articles, analyse the differences in terms of omissions, corroborations, fine-grained term differences), 
-In the previous chapter, we described a methodology to analyse the differences (omisssions, corroborations, fine-grained term analysis) from a group of related articles.
+In the previous chapter, we described a methodology to analyse the differences (omissions, corroborations, fine-grained term analysis) from a group of related articles.
 Now that we have here described how we can quantify persuasion with several detection techniques (sentiment and propaganda), we want to combine the two analyses together.
 
 In other words, we want to analyse the relationship between the linguistic techniques of persuasion, and the variations across the articles (from previous Chapter~\ref{chap:common_ground_search}).
@@ -1395,7 +1395,8 @@ This section contains the discussion of all the results of this chapter. We star
 
 % each RQ
 \begin{enumerate}[label={\textbf{RQ2.\arabic*:}},leftmargin=2cm]
-    \item \emph{To what extent could we automatically detect the persuasion techniques used by writers?} Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$). For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.
+    \item \emph{To what extent could we automatically detect the persuasion techniques used by writers?} Sentiment is detected through lexicons and sentiment treebanks. Propaganda, instead, is recognised with deep learning models trained on fine-grained datasets, which can also be quite unreliable (low F1 of $22.5\%$).
+          % For populism we do not have detection models, but for our initial findings it seems to be weakly correlated with propaganda.
           %\todoAW{This isn't a discussion, it's a summary.}
           Answered in Section~\ref{sec:lp_techniques}. %\todomargin{this is not a finding/discussion}
     \item \emph{Which persuasion techniques are detected more frequently than others?} We observed that the most common techniques relate to loaded language (through propaganda and sentiment detection). However, the most common techniques are not the ones that differ the most. More subtle techniques, like Doubt and Appeal to fear, are the ones that emerge more when doing a comparative analysis between multiple versions of the same article.
