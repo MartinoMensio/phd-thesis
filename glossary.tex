@@ -20,11 +20,16 @@
 
 \newacronym{ami}{AMI}{Adjusted Mutual Information~\citep{vinh2009information}}
 
+\newglossaryentry{news}
+{
+    name=news,
+    description={Information or reports about recent events \footnote{\url{https://dictionary.cambridge.org/dictionary/english/news}}. In this work, our main objective is to analyse multiple news reports from multiple sources to identify which contents (topics) and techniques (persuasion/propaganda) they contain}
+}
+
 \newglossaryentry{topic}
 {
     name=topic,
-    description={\todoAW{Not sure what this is adding. What's the difference between topics and events?}(wide): topics can be defined in a hierarchy, where top level are very wide (e.g. politics, tech, health, ...).
-            (narrow): a set of events that are related, for example that originated from a seminal\todoAW{? What does this mean?} event}
+    description={The topics of an news article are the main subjects that the article covers. They can be wide (e.g., politics, technology, health) or narrow (e.g., national security, nuclear power)}
 }
 \newglossaryentry{source}
 {
@@ -75,7 +80,7 @@
 \newglossaryentry{persuasion}
 {
     name=persuasion,
-    description={The act of influencing a person's beliefs, attitudes, intentions, motivations, or behaviours~\cite{gass2018persuasion}. We use this term to encompass several phenomena, such as sentiment, \gls{propaganda}, \gls{populism}, coercion}
+    description={The act of influencing a person's beliefs, attitudes, intentions, motivations, or behaviours~\cite{gass2018persuasion}, using either logical or illogical arguments. We use this term to encompass several phenomena, such as sentiment, \gls{propaganda}, \gls{populism}, coercion}
 }
 \newglossaryentry{populism}
 {
@@ -90,13 +95,16 @@
 \newglossaryentry{propaganda}
 {
     name=propaganda,
-    description={Use of language that has the specific goal to persuade the reader. It has many points in common with argumentation/rhetorics and is usually associated with deceiving techniques and partial points of view.
-            %\todoAW{Very vague. Does this accurately characterise how you use the term throughout the dissertation?}
-            It is a specific form of persuasion
-            %\todoAW{I'm not sure that this use of persuasion matches what you've written in the previous definition.}
-            that has the goal to indoctrinate
-            %\todoAW{So propaganda is specifically about indoctrination?}
-            population towards an individual or a particular agenda}
+    description={Persuasive set of techniques that demote logical reasoning, using deceivement and other means to make the targets avoid reasoning and accept the message as it is. It is a form of persuasion that has the goal to indoctrinate population towards an individual or a particular agenda}
+    % . It has many points in common with argumentation/rhetorics and is usually associated with deceiving techniques and partial points of view.
+    %                 %\todoAW{Very vague. Does this accurately characterise how you use the term throughout the dissertation?}
+    %                 It is a specific form of persuasion
+    %                 %\todoAW{I'm not sure that this use of persuasion matches what you've written in the previous definition.}
+    %                 that has the goal to indoctrinate
+    %                 %\todoAW{So propaganda is specifically about indoctrination?}
+    %                 population towards an individual or a particular agenda
+    %                 How a set of techniques (deceitful, skipping reasoning) is used to persuade the reader.
+    %                 }
 }
 \newglossaryentry{propaganda-technique}
 {
@@ -106,5 +114,5 @@
 \newglossaryentry{political-leaning}
 {
     name=political leaning,
-    description={From far left to far right, passing through the centre. In this work it is taken as a mono-dimensional simplification of political viewpoints}
+    description={A monodimensional simplification of political ideology, that only considers how much a source is aligned with a bipartisan ecosystem. In this view, the leaning can vary from far left to far right, passing through the centre}
 }
