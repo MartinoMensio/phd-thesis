@@ -232,47 +232,6 @@ In more detail, we have three main contributions:
 \end{enumerate}
 
 
-\section{Redefinitions}
-
-% actual results and limitations highlighted within the thesis. These revised working definitions should be intended to support future work as a set of revised hypotheses.
-
-After the analysis of the contributions, we can redefine some of the concepts that we used in this work. These definitions are intended to support future work as a set of revised hypotheses.
-
-% News: same as before
-
-Given that the analysis we can perform with the existing models is mainly a stylistic analysis, we have to drop our distinction of propaganda from persuasion based on the difference of intent.
-We used in this work propaganda as a set of persuasion techniques that is identified in the literature by an intent to deceive.
-We cannot observe this difference of intent with the analyses made in this work.
-
-For evaluating the difference of intent, at the current state of automated analysis, we need to rely on human evaluation.
-And this is not desirable because it means that we would need a lot of human annotations to train models that can recognise the intent of the persuasion techniques.
-
-To find a solution to this problem, we can move from a distinction of intent to a distinction based on the frequency and usage of terms across news sources and political orientation.
-
-% limitations
-To identify the techniques, we do not want to rely on a specific list and definition, that require dedicated data collection and annotation (see example of the propaganda corpus of~\citet{da2019fine}).
-Human-annotated datasets also fall easily into the problem of being imbalanced, and we cannot rely on them to have a good generalisation of the techniques used in the news articles, as described in this work.
-
-% how
-To overcome this problem, we want to be able to discover automatically linguistic patterns that are distinctive of the political leaning of the news articles.
-
-We can identify these patterns by observing the frequency of specific phrasing in articles and by identifying outliers. With the parallel analysis described in this work, we can more easily compare multiple articles that cover the same topic.
-
-% redefinition
-We can group them in two groups:
-
-\begin{enumerate}
-    \item linguistic patterns \emph{shared} across political orientations: this group contains linguistic patterns that are used by all political orientations.
-    \item linguistic patterns that are \emph{specific} to a political orientation: this group contains linguistic patterns that are used only by a specific political orientation.
-\end{enumerate}
-
-
-% Persuasion: set of techniques ???
-
-% Propaganda: outlier usage/pattern of language (style) that is distinctive from how other news sources describe the same piece of news. We need to take distance from the overly-simplified factor of leaning, and simply considering topic-related usage of style: clustering together similar term usage and identifying clusters and outliers.
-
-% Difference between persuasion and propaganda: intent difference needs human evaluation. From computational evaluation of style difference, it is too difficult. Need collaboration work between tech people and more social sciences. Goal: find human model and computational models to differentiate if the persuasion is propagandistic or not. Challenge: go beyond stylistic clues that instead cannot differentiate very well. Can potentially models be trained to recognise from the linguistic surface the intent? Or which type of knowledge is needed to recognise the intent? %
-
 \section{\statusgreen Implications of the Contributions}
 \label{sec:discussion_findings_implications}
 
@@ -395,6 +354,66 @@ In this way, it would become possible to do an analysis of how the interaction b
 
 
 By implementing the improvements described above, the cross-dimensional analysis presented in this thesis would be able to generalise better to different contexts, filling the gap of missing knowledge from new topics, political situations or different techniques that may emerge in a different timeframe.
+
+
+
+\section{Redefinitions}
+
+% actual results and limitations highlighted within the thesis. These revised working definitions should be intended to support future work as a set of revised hypotheses.
+
+After the analysis of the contributions and limitations, we can redefine some of the concepts that we used in this work. These definitions are intended to support future work as a set of revised hypotheses.
+
+% News: same as before
+
+\subsection{From Political Leaning to Political Ideology}
+
+Problem: political leaning over 1 axis only is oversimplified. We need to consider more factors that influence the political leaning of the news articles.
+For this reason, we need to consider the news lifecycle described above, considering factors such as funding, conglomerates, country, freedom of press, political situation.
+We can stop using the term ``Political Leaning" and instead use ``Political Ideology" to describe the set of factors that influence the political leaning of the news articles.
+
+\subsection{Persuasion vs Propaganda: from intent to frequency}
+Given that the analysis we can perform with the existing models is mainly a stylistic analysis, we have to drop our distinction of propaganda from persuasion based on the difference of intent.
+We used in this work propaganda as a set of persuasion techniques that is identified in the literature by an intent to deceive.
+We cannot observe this difference of intent with the analyses made in this work.
+For evaluating the difference of intent, at the current state of automated analysis, we would need to rely on human evaluation.
+And this is not desirable because it means that we would need a lot of human annotations to train models that can recognise the intent of the persuasion techniques.
+We do not want to rely on a specific list and definition, that require dedicated data collection and annotation (see example of the propaganda corpus of~\citet{da2019fine}).
+Human-annotated datasets also fall easily into the problem of being imbalanced, and we cannot rely on them to have a good generalisation of the techniques used in the news articles, as described in this work.
+
+% how
+To find a solution to this problem, we can move from a distinction of intent to a distinction based on the frequency and usage of terms across news sources and political orientation.
+We want to be able to discover automatically linguistic patterns that are distinctive of different partitions across news articles (e.g., political ideology, topic).
+
+To focus on the non-topical words (refer to the two different layers of information described in Chapter~\ref{ssec:lit_layers_of_info}), we can proceed in the following way:
+
+\begin{enumerate}
+    \item distinguish the layer of persuasion and ignore the topical level by using the approach described in Chapter~\ref{chap:common_ground_search}. The outputs of this analysis will be sentence-level clusters with variations at the word level to describe the same detail.
+    \item link the clusters with the political ideology of the news sources: in this way we can language usage according to many partitioning variables (e.g., leaning, funding, freedom of press, country).
+    \item identify patterns across the considered partitioning variables: we can identify patterns that are shared across all political orientations, or that are specific to a specific subgroup.
+\end{enumerate}
+
+With this analysis we can distinguish two different types of linguistic patterns:
+
+\begin{enumerate}
+    \item \emph{universal} linguistic patterns shared across a certain degree of partitions:
+    \item linguistic patterns that are \emph{specific} to a political orientation: this group contains linguistic patterns that are used only by a specific political orientation.
+\end{enumerate}
+
+
+TODO: redefinitions
+
+% Political leaning: we need to move from a simplified categorisation to a more complex one. We need to consider the funding of the news outlets, the conglomerates that they belong to, the freedom of press of the country, the political situation of the country. We need to encode these factors by hardcoded values, for which we have existing information (e.g. funding, conglomerates, country). We need to drive clusters derived from language usage on specific topics. %
+
+% Persuasion: set of techniques ???
+
+% Propaganda: outlier usage/pattern of language (style) that is distinctive from how other news sources describe the same piece of news. We need to take distance from the overly-simplified factor of leaning, and simply considering topic-related usage of style: clustering together similar term usage and identifying clusters and outliers.
+
+% Difference between persuasion and propaganda: intent difference needs human evaluation. From computational evaluation of style difference, it is too difficult. Need collaboration work between tech people and more social sciences. Goal: find human model and computational models to differentiate if the persuasion is propagandistic or not. Challenge: go beyond stylistic clues that instead cannot differentiate very well. Can potentially models be trained to recognise from the linguistic surface the intent? Or which type of knowledge is needed to recognise the intent? %
+
+\subsection{Revised Hypotheses}
+
+TODO: revised hypotheses
+
 
 \section{Relationships between the considered dimensions}
 
