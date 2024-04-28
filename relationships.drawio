@@ -1,20 +1,32 @@
-<mxfile host="app.diagrams.net" modified="2024-04-14T15:03:01.233Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="JYQZc2_TFbk2esBFxdnd" version="24.1.0" type="device">
+<mxfile host="app.diagrams.net" modified="2024-04-28T10:45:19.901Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="0itdvoD3c-1P8hNITpfY" version="24.3.1" type="device">
   <diagram name="Page-1" id="Jdo_nhZsNWoK9g8GEEn7">
-    <mxGraphModel dx="954" dy="526" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1195" dy="2235" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="z5WZhT_DYZlEkp2gaf5u-6" value="subject / event" style="ellipse;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;spacingTop=0;spacing=-20;" vertex="1" parent="1">
+          <mxGeometry x="360" y="420" width="280" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="z5WZhT_DYZlEkp2gaf5u-4" value="writing" style="ellipse;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;spacingTop=0;spacing=-20;" vertex="1" parent="1">
+          <mxGeometry x="230" y="-10" width="460" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="z5WZhT_DYZlEkp2gaf5u-5" value="techniques" style="ellipse;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;spacingTop=0;spacing=-20;" vertex="1" parent="1">
+          <mxGeometry y="200" width="440" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="z5WZhT_DYZlEkp2gaf5u-3" value="political sphere" style="ellipse;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;spacingTop=0;spacing=-20;" vertex="1" parent="1">
+          <mxGeometry x="620" y="160" width="280" height="200" as="geometry" />
+        </mxCell>
         <mxCell id="SBu9QOIPaGUO3_LgJ7AF-1" value="persuasion" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="210" y="200" width="120" height="60" as="geometry" />
+          <mxGeometry x="170" y="250" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="SBu9QOIPaGUO3_LgJ7AF-2" value="variations" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="390" y="40" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-3" value="political leaning" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="670" y="230" width="120" height="60" as="geometry" />
+        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-3" value="political leaning&lt;div&gt;(Left-Right)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="670" y="260" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="SBu9QOIPaGUO3_LgJ7AF-4" value="topics" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="390" y="400" width="120" height="60" as="geometry" />
+          <mxGeometry x="440" y="480" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="SBu9QOIPaGUO3_LgJ7AF-6" value="corroboration" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="270" y="100" width="120" height="60" as="geometry" />
@@ -26,36 +38,45 @@
           <mxGeometry x="510" y="100" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="SBu9QOIPaGUO3_LgJ7AF-9" value="sentiment" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="90" y="260" width="120" height="60" as="geometry" />
+          <mxGeometry x="50" y="310" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="SBu9QOIPaGUO3_LgJ7AF-10" value="propaganda" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="210" y="260" width="120" height="60" as="geometry" />
+          <mxGeometry x="170" y="310" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="SBu9QOIPaGUO3_LgJ7AF-11" value="populism" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="330" y="260" width="120" height="60" as="geometry" />
+          <mxGeometry x="290" y="310" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-12" value="term choices used to persuade reader" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-1" target="SBu9QOIPaGUO3_LgJ7AF-8" edge="1">
+        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-12" value="term choices used to persuade reader" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-1" target="SBu9QOIPaGUO3_LgJ7AF-8" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="360" y="320" as="sourcePoint" />
             <mxPoint x="460" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-13" value="slight correlation&lt;div&gt;classify leaning using propaganda features&lt;/div&gt;" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-11" target="SBu9QOIPaGUO3_LgJ7AF-3" edge="1">
+        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-13" value="slight correlation&lt;div&gt;classify leaning using propaganda features&lt;/div&gt;" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-11" target="SBu9QOIPaGUO3_LgJ7AF-3" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="360" y="360" as="sourcePoint" />
             <mxPoint x="460" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-14" value="propaganda changes across topics" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-10" target="SBu9QOIPaGUO3_LgJ7AF-4" edge="1">
+        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-14" value="propaganda changes across topics" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-10" target="SBu9QOIPaGUO3_LgJ7AF-4" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="360" y="320" as="sourcePoint" />
             <mxPoint x="460" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-15" value="topics change across leanings (agenda setting)" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-4" target="SBu9QOIPaGUO3_LgJ7AF-3" edge="1">
+        <mxCell id="SBu9QOIPaGUO3_LgJ7AF-15" value="topics change across leanings (agenda setting)" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-4" target="SBu9QOIPaGUO3_LgJ7AF-3" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="360" y="320" as="sourcePoint" />
             <mxPoint x="460" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z5WZhT_DYZlEkp2gaf5u-1" value="political ideology / news ecosystem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="670" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="z5WZhT_DYZlEkp2gaf5u-2" value="intent of creating a specific narrative" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.333;entryY=0.333;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;entryPerimeter=0;" edge="1" parent="1" source="SBu9QOIPaGUO3_LgJ7AF-2" target="z5WZhT_DYZlEkp2gaf5u-1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="640" y="130" as="sourcePoint" />
+            <mxPoint x="880" y="60" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
