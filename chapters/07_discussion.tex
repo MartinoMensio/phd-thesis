@@ -269,6 +269,7 @@ During this research path, we have encountered many limitations, both technical 
 
 % Limitations of your research: It is important to be aware of the limitations of your research. This will help to put your findings in context and avoid overstating their significance. What factors could have influenced your results? What areas of your research could have been improved?
 
+\subsection{Language}
 % Datasets and US
 The first limitation, that comes from the datasets used, is that we use news articles that come from the US. While this is a relevant country for the English language, we think that it is limiting that the news articles do not come from other English-speaking countries %\todoHA{what about non-English? isn’t this another limitation?} 
 such as the UK or international news.
@@ -287,12 +288,9 @@ Instead, this thesis makes use of existing published datasets to avoid these iss
 
 This limitation can be addressed by future works, collecting articles from different nations and building a more global dataset both for political leaning and for propaganda detection. In both cases, behind the technical difficulty of retrieving cleaned articles, there is a need to annotate the data and therefore manual effort is required. For political leaning, researchers can rely on distant supervision: using the leaning of the news source as the label for the articles. However, for fine-grained propaganda detection, the articles need to be analysed by trained expert annotators, who need to correctly identify the propaganda techniques. The annotations need to pass quality checks by computing properly inter-annotator agreement. With such comprehensive datasets, more comparative analysis would be possible across nations.
 
-Another limitation of this work is that we are
-%not training cutting-edge models to perform propaganda detection or political leaning classification.
-%For fine-grained propaganda detection, we are instead 
-relying on pre-trained models~\citep{da2019fine} for fine-grained propaganda detection, and
-%Instead, 
-for political leaning, we are training a neural network that has 2 layers. We use this network with pre-computed features (BERT encodings, TF-IDF of different subsets of terms, numerical features representing quantity of propaganda techniques) and therefore the training times are reduced significantly.
+\subsection{Models}
+Another limitation of this work is that we are relying on pre-trained models~\citep{da2019fine} for fine-grained propaganda detection, and for political leaning, we are training a neural network that has 2 layers.
+We use this network with pre-computed features (BERT encodings, TF-IDF of different subsets of terms, numerical features representing quantity of propaganda techniques) and therefore the training times are reduced significantly.
 In the past years, there has been a race to deploy huge and complex networks, that require significant amounts of computational power, besides the cost and time to run experiments (and environmental consequences).
 We stick to relatively simpler models, applying Occam's principle: we need to observe improvements on simpler models first.
 Our goal is to demonstrate the relationship between the involved features, and not primarily to get results that compete with the state of the art.
@@ -300,15 +298,63 @@ Our goal is to demonstrate the relationship between the involved features, and n
 
 This limitation can quite simply be faced using more recent and complex models, potentially involving generative models such as GPT-4~\citep{openai2023gpt4} to generate training data or even to classify documents and terms.
 
+
+%3: Conclusions: scope and limitations: expanded addressing the limit of the applicability of this work considering news life cycle and how news outlets are organised. This brief discussion should provide readers a clear understanding of the generalisability of the work and how the developed solutions can be made use of by the different actors involved in the news industry. This section should address how the quality of the techniques influence their applicability and the identified issues with datasets may or may not make these solutions appropriate for different tasks. For instance, in the viva, the candidate correctly discussed how the effects he discovered were likely to change through time, as the salience of particular topics and attitudes evolved. Some consideration of how his approach could be adapted to ‘future-proof’ the results and techniques (as far as possible) would be of interest.
+
+
+% What needs to be improved, to make this approach more future-proof:
+% Generally, the applicability of this work is limited by:
+% - news lifecycle and organisation of news outlets (funding, conglomerates, ...)
+% - quality of automated detection of techniques
+% - discovered effects may change with time
+
+\subsection{News Lifecycle and Organisation of News Outlets}
+% NEWS ECOSYSTEM
+Considering the news lifecycle and organisation of news outlets, this work is limited by the fact that we do not consider many aspects of the news ecosystem.
+To name a few factors that are important to understand the news articles and the persuasion techniques used in them:
+\begin{itemize}
+    \item The funding of the news outlets: news articles that are written by a news outlet that is funded by a political party are very different from the news articles that are written by a news outlet that is funded by the government, or by a news outlet that is funded by a private company.
+    \item The conglomerates that they belong to: news articles that are written by a news outlet that is part of a conglomerate that has other businesses are very different from the news articles that are written by a news outlet that is independent.
+    \item The freedom of press of the country: news articles that are written by a news outlet that is based in a country that has a free press are very different from the news articles that are written by a news outlet that is based in a country that has a censored press.
+    \item The political situation of the country: news articles that are written in a country that is in a war situation are very different from the news articles that are written in a country that is in a peaceful situation.
+\end{itemize}
+
+All these factors are very important to understand the news articles and the persuasion techniques used in them. This work is limited by the fact that we do not consider these factors, and instead we only use a simplified version of the political leaning of the news outlets (Left/Right axis).
+
+Therefore, future work should consider these factors to make the results more generalisable and more applicable to different tasks.
+Some of these factors may be encoded by hardcoded values, for which we have existing information (e.g. funding, conglomerates, country).
+Others may be driven by clusters derived from language usage on specific topics.
+
+\subsection{Quality of Automated Detection of Techniques}
+
+In this work we relied on poorly trained models that only rely on a set of techniques. For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very limiting factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
+
+To make this approach more future-proof,
+% we need to derive the technique analysis from the difference observation of language. In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
+we can try to exploit our work on parallel news reports analysis to dynamically derive techniques from the differences in language.
+% derive the technique analysis from the difference observation of language.
+Firstly, we can use the topic analysis to group articles related to the same event.
+Secondly, we can discover differences in language by comparing multiple articles that cover the same event.
+Finally, we can perform some clustering of the discovered differences, to group the articles into clusters that share similar differences.
+
+
+In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
+% derive technique analysis from difference observation of language. In this way the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
+
+% The quality of the automated detection of techniques is another limitation of this work. The techniques used in this work are based on a set of techniques that are defined in the literature. These techniques may change over time, and new techniques may emerge. Therefore, the results of this work may not be applicable to new techniques that may emerge in the future. To make this approach more future-proof, we need to derive the technique analysis from the difference observation of language. In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to the literature to describe them.
+
+
+\subsection{Time-specificity}
 Related to the topic analysis, we have a limitation that comes from the fact that the use of propaganda in topics could change with time. % and the nature of unfolding events. 
 For example, articles on sports could become propagandistic if some political or ideological issues intersect. %crop up (does happen).
 The current results may not be valid with future events.
 However, the presented methodology could be used to compute new results in different time frames.
 In this way, it would become possible to do an analysis of how the interaction between propaganda and topics evolves across time.
 % Also you have cross-over topics that could raise other challenges.
-% Another issue is determining what the propaganda language was used for. If left and right used the same propaganda types to talk about the same event then it’s possible that they used them for different purposes or in association with different points of parts of the event. So what should the next phd students do to analyse this further?
-% How could future students use your work to study impact of persuasive techniques on readers?
-% }
+
+
+By implementing the improvements described above, the cross-dimensional analysis presented in this thesis would be able to generalise better to different contexts, filling the gap of missing knowledge from new topics, political situations or different techniques that may emerge in a different timeframe.
+
 
 
 
