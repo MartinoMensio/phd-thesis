@@ -231,33 +231,6 @@ In more detail, we have three main contributions:
           % \item Imbalance is / is-not a problem for propaganda detection
 \end{enumerate}
 
-\section{Relationships between the considered dimensions}
-The relationships observed can be seen in the following figure
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=\linewidth]{relationships.pdf}
-    \caption{Relationships observed in this work}
-    \label{fig:relationships}
-\end{figure}
-
-\emph{Word-level variations vs persuasion}: we have observed how different news outlets describe the same news event, by using words that are specifically selected to explicitly or implicitly elicit the reader’s emotional reaction. By observing triples of articles (AllSides dataset), we have seen how different terms are being used to provide multiple versions of the same story. These choices of terms, in many cases result in a variation of the detected propaganda techniques: both as resulting techniques, and as term importance.
-
-We observed this change of persuasive/propagandist language by taking into consideration the simplified categorisation by \emph{political leaning} (left/center/right) and tried to characterise linguistic profiles depending on this variable.
-
-But we observed that this variation of language is also very specific to the emph{topic}. We observed how some topics are more controversial and find a higher quantity of propaganda, while others are more neutral and find less usage of linguistic techniques.
-
-Our idea is that, in order to completely understand and model the relationships between these multiple variables, we need to use a \emph{multidimensional model} that can capture these relationships altogether. Modelling only relationships between couples of factors does not enable us to get a good understanding.
-
-Each field of analysis needs some improvements to make this work:
-For \emph{persuasion and propaganda}, given the limitations of the currently available tools and models, we need something that is less reliant on handcrafted definitions of techniques and datasets that require a lot of expertise to create (propaganda techniques) and are also very difficult to reproduce and generalise in different contexts (country, language, culture)
-
-For \emph{political ideology}, the oversimplification of Left/Center/Right needs to be overcome. We need a less “labelled” version that is dependent on external annotation (L/C/R), but more dependent on facts: raw (funding info, news conglomerates, country) and aggregated (coverage of topics, ). In this way, a more multidimensional profile of news outlets can be built.
-
-Then, from their joint modelling, we can have a better understanding of how persuasion changes across news sources and topics. TODO: something more
-
-% Once this is done, we can then try to focus more on the \emph{distinction} between persuasion and propaganda, at the intersection between social science (more conceptually) and data science.
-
 
 \section{Redefinitions}
 
@@ -423,6 +396,47 @@ In this way, it would become possible to do an analysis of how the interaction b
 
 By implementing the improvements described above, the cross-dimensional analysis presented in this thesis would be able to generalise better to different contexts, filling the gap of missing knowledge from new topics, political situations or different techniques that may emerge in a different timeframe.
 
+\section{Relationships between the considered dimensions}
+
+Here we describe our hypothesis on the relationships between the considered dimensions, and how they can be modelled together.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{relationships.pdf}
+    \caption{Relationships observed in this work}
+    \label{fig:relationships}
+\end{figure}
+
+Observed:
+
+\begin{itemize}
+    \item \emph{Word-level variations vs persuasion}: we have observed how different news outlets describe the same news event, by using words that are specifically selected to explicitly or implicitly elicit the reader’s emotional reaction. By observing triples of articles (AllSides dataset), we have seen how different terms are being used to provide multiple versions of the same story. These choices of terms, in many cases result in a variation of the detected propaganda techniques: both as resulting techniques, and as term importance.
+
+    \item \emph{propaganda vs political leaning}: We observed this change of persuasive/propagandist language by taking into consideration the simplified categorisation by \emph{political leaning} (left/center/right) and tried to characterise linguistic profiles depending on this variable.
+
+    \item \emph{political leaning vs topic}: We observed that the topics covered vary depending on the political leaning of the news sources. This is also a known effect from the literature, called \emph{agenda setting}~\citep{mccombs1972agenda}.
+
+    \item \emph{propaganda vs topic}: But we observed that this variation of language is also very specific to the emph{topic}. We observed how some topics are more controversial and find a higher quantity of propaganda, while others are more neutral and find less usage of linguistic techniques.
+\end{itemize}
+
+Our idea is that, in order to completely understand and model the relationships between these multiple variables, we need to use a \emph{multidimensional model} that can capture these relationships altogether. Modelling only relationships between couples of factors does not enable us to get a good understanding.
+
+Therefore, taking into account the possible future works described in the previous section, we can build a model that is able to capture the relationships between the multiple dimensions of persuasion, propaganda, political leaning and topics.
+
+Each field of analysis needs some improvements to make this work
+(TODO:also link redefinitions here!!!):
+\begin{itemize}
+    \item For \emph{persuasion and propaganda}, given the limitations of the currently available tools and models, we need something that is less reliant on handcrafted definitions of techniques and datasets that require a lot of expertise to create (propaganda techniques) and are also very difficult to reproduce and generalise in different contexts (country, language, culture).
+
+    \item For \emph{political ideology}, the oversimplification of Left/Center/Right needs to be overcome. We need a less “labelled” version that is dependent on external annotation (L/C/R), but more dependent on facts: raw (funding info, news conglomerates, country) and aggregated (coverage of topics, ). In this way, a more multidimensional profile of news outlets can be built.
+\end{itemize}
+
+Then, from their joint modelling, we can have a better understanding of how persuasion changes across news sources and topics. TODO: something more
+
+% NEW RELATIONSHIPS:
+By
+
+% Once this is done, we can then try to focus more on the \emph{distinction} between persuasion and propaganda, at the intersection between social science (more conceptually) and data science.
 
 
 
