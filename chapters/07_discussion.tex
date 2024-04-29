@@ -367,9 +367,12 @@ After the analysis of the contributions and limitations, we can redefine some of
 
 \subsection{From Political Leaning to Political Ideology}
 
-Problem: political leaning over 1 axis only is oversimplified. We need to consider more factors that influence the political leaning of the news articles.
+As we discussed in the limitations, using the concept of Political Leaning over one single axis (Left to Right) is oversimplified.
+We need to consider more factors that influence the political leaning of the news articles.
 For this reason, we need to consider the news lifecycle described above, considering factors such as funding, conglomerates, country, freedom of press, political situation.
+
 We can stop using the term ``Political Leaning" and instead use ``Political Ideology" to describe the set of factors that influence the political leaning of the news articles.
+This multidimensional concepts needs to be used in all the stages of our anaysis: from parallel news reports analysis, to persuasion detection, to topic analysis.
 
 \subsection{Persuasion vs Propaganda: from intent to frequency}
 Given that the analysis we can perform with the existing models is mainly a stylistic analysis, we have to drop our distinction of propaganda from persuasion based on the difference of intent.
@@ -395,12 +398,11 @@ To focus on the non-topical words (refer to the two different layers of informat
 With this analysis we can distinguish two different types of linguistic patterns:
 
 \begin{enumerate}
-    \item \emph{universal} linguistic patterns shared across a certain degree of partitions:
+    \item \emph{universal} linguistic patterns shared across a certain degree of partitions: for example, these may represent techniques that are used by all the news sources, regardless of their political orientation.
     \item linguistic patterns that are \emph{specific} to a political orientation: this group contains linguistic patterns that are used only by a specific political orientation.
 \end{enumerate}
 
-
-TODO: redefinitions
+With this distinction, we can replace our distinction of intent with a distinction based on the frequency and usage of terms across news sources and political orientation.
 
 % Political leaning: we need to move from a simplified categorisation to a more complex one. We need to consider the funding of the news outlets, the conglomerates that they belong to, the freedom of press of the country, the political situation of the country. We need to encode these factors by hardcoded values, for which we have existing information (e.g. funding, conglomerates, country). We need to drive clusters derived from language usage on specific topics. %
 
@@ -412,7 +414,13 @@ TODO: redefinitions
 
 \subsection{Revised Hypotheses}
 
-TODO: revised hypotheses
+The revised hypotheses that we can derive from the redefinitions are:
+
+\begin{enumerate}
+    \item \emph{Political Ideology vs Topic}: the topics that are covered by news sources are influenced by the political ideology of the news sources. We can identify topics that are shared across all political ideologies, or that are specific to a narrower set.
+    \item \emph{Political Ideology vs Linguistic Patterns}: the linguistic patterns that are used in news articles are influenced by the political ideology of the news sources. We can identify patterns that are shared across all political ideologies, or that are specific to a specific ideology.
+    \item \emph{Topic vs Linguistic Patterns}: the linguistic patterns that are used in news articles are influenced by the topic of the news articles. We can identify patterns that are shared across all topics, or that are specific to a specific topic.
+\end{enumerate}
 
 
 \section{Relationships between the considered dimensions}
