@@ -375,8 +375,8 @@ We can stop using the term ``Political Leaning" and instead use ``Political Ideo
 This multidimensional concepts needs to be used in all the stages of our anaysis: from parallel news reports analysis, to persuasion detection, to topic analysis.
 
 \subsection{Persuasion vs Propaganda: from intent to frequency}
-Given that the analysis we can perform with the existing models is mainly a stylistic analysis, we have to drop our distinction of propaganda from persuasion based on the difference of intent.
-We used in this work propaganda as a set of persuasion techniques that is identified in the literature by an intent to deceive.
+Given that the analysis we can perform with the existing models is mainly a stylistic analysis, we have to drop our distinction between propaganda and persuasion based on the difference of intent.
+In this work we used the definition of propaganda as a set of persuasion techniques that is described in the literature by an intent to deceive.
 We cannot observe this difference of intent with the analyses made in this work.
 For evaluating the difference of intent, at the current state of automated analysis, we would need to rely on human evaluation.
 And this is not desirable because it means that we would need a lot of human annotations to train models that can recognise the intent of the persuasion techniques.
@@ -384,7 +384,7 @@ We do not want to rely on a specific list and definition, that require dedicated
 Human-annotated datasets also fall easily into the problem of being imbalanced, and we cannot rely on them to have a good generalisation of the techniques used in the news articles, as described in this work.
 
 % how
-To find a solution to this problem, we can move from a distinction of intent to a distinction based on the frequency and usage of terms across news sources and political orientation.
+To find a solution to this problem, we can move from a distinction of intent to a distinction based on the frequency and usage of terms across news sources and political ideology.
 We want to be able to discover automatically linguistic patterns that are distinctive of different partitions across news articles (e.g., political ideology, topic).
 
 To focus on the non-topical words (refer to the two different layers of information described in Chapter~\ref{ssec:lit_layers_of_info}), we can proceed in the following way:
@@ -392,17 +392,17 @@ To focus on the non-topical words (refer to the two different layers of informat
 \begin{enumerate}
     \item distinguish the layer of persuasion and ignore the topical level by using the approach described in Chapter~\ref{chap:common_ground_search}. The outputs of this analysis will be sentence-level clusters with variations at the word level to describe the same detail.
     \item link the clusters with the political ideology of the news sources: in this way we can language usage according to many partitioning variables (e.g., leaning, funding, freedom of press, country).
-    \item identify patterns across the considered partitioning variables: we can identify patterns that are shared across all political orientations, or that are specific to a specific subgroup.
+    \item identify patterns across the considered partitioning variables: we can identify patterns that are shared across all political ideologies, or that are specific to a specific subgroup.
 \end{enumerate}
 
 With this analysis we can distinguish two different types of linguistic patterns:
 
 \begin{enumerate}
-    \item \emph{universal} linguistic patterns shared across a certain degree of partitions: for example, these may represent techniques that are used by all the news sources, regardless of their political orientation.
-    \item linguistic patterns that are \emph{specific} to a political orientation: this group contains linguistic patterns that are used only by a specific political orientation.
+    \item \emph{universal} linguistic patterns shared across a certain degree of partitions: for example, these may represent techniques that are used by all the news sources, regardless of their ideology.
+    \item linguistic patterns that are \emph{specific} to a specific partitioning: this group contains linguistic patterns that are used only by some of the news sources and not by others (this can be related to some of the traits of the news sources).
 \end{enumerate}
 
-With this distinction, we can replace our distinction of intent with a distinction based on the frequency and usage of terms across news sources and political orientation.
+With this distinction, we can replace our distinction of intent with a distinction based on the frequency and usage of terms across news sources and political ideology.
 
 % Political leaning: we need to move from a simplified categorisation to a more complex one. We need to consider the funding of the news outlets, the conglomerates that they belong to, the freedom of press of the country, the political situation of the country. We need to encode these factors by hardcoded values, for which we have existing information (e.g. funding, conglomerates, country). We need to drive clusters derived from language usage on specific topics. %
 
