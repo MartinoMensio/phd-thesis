@@ -314,8 +314,8 @@ Considering the news lifecycle and organisation of news outlets, this work is li
 To name a few factors that are important to understand the news articles and the persuasion techniques used in them:
 \begin{itemize}
     \item The funding of the news outlets: news articles that are written by a news outlet that is funded by a political party are very different from the news articles that are written by a news outlet that is funded by the government, or by a news outlet that is funded by a private company.
-    \item The conglomerates that they belong to: news articles that are written by a news outlet that is part of a conglomerate that has other businesses are very different from the news articles that are written by a news outlet that is independent.
-    \item The freedom of press of the country: news articles that are written by a news outlet that is based in a country that has a free press are very different from the news articles that are written by a news outlet that is based in a country that has a censored press.
+    \item The conglomerates that they belong to: there are major differences between the news articles that are written by a news outlet that is part of a conglomerate that has other businesses, and the news articles that are written by a news outlet that is independent.
+    \item The freedom of press of the country: different degrees of freedom of press in different countries have a major impact on the news articles. For example, if the press is censored, there are many implications on the type of message that can be delivered to the public.
     \item The political situation of the country: news articles that are written in a country that is in a war situation are very different from the news articles that are written in a country that is in a peaceful situation.
 \end{itemize}
 
@@ -327,7 +327,7 @@ Others may be driven by clusters derived from language usage on specific topics.
 
 \subsection{Quality of Automated Detection of Techniques}
 
-In this work we relied on poorly trained models that only rely on a set of techniques. For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very limiting factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
+In this work we relied on models trained on limited datasets that only contain a pre-determined set of techniques annotated on a specific subset of articles (far-right propagandistic). For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very limiting factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
 
 To make this approach more future-proof,
 % we need to derive the technique analysis from the difference observation of language. In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
@@ -335,7 +335,7 @@ we can try to exploit our work on parallel news reports analysis to dynamically 
 % derive the technique analysis from the difference observation of language.
 Firstly, we can use the topic analysis to group articles related to the same event.
 Secondly, we can discover differences in language by comparing multiple articles that cover the same event.
-Finally, we can perform some clustering of the discovered differences, to group the articles into clusters that share similar differences.
+Finally, we can perform some clustering of the discovered differences, to group the articles into clusters that share similar language (with the help of social sciences).
 
 
 In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
@@ -359,9 +359,8 @@ By implementing the improvements described above, the cross-dimensional analysis
 
 \section{Redefinitions}
 
-% actual results and limitations highlighted within the thesis. These revised working definitions should be intended to support future work as a set of revised hypotheses.
 
-After the analysis of the contributions and limitations, we can redefine some of the concepts that we used in this work. These definitions are intended to support future work as a set of revised hypotheses.
+After the analysis of the contributions and limitations, we can redefine some of the concepts that we used in this work. These definitions are intended to support future work.
 
 % News: same as before
 
@@ -371,7 +370,7 @@ As we discussed in the limitations, using the concept of Political Leaning over 
 We need to consider more factors that influence the political leaning of the news articles.
 For this reason, we need to consider the news lifecycle described above, considering factors such as funding, conglomerates, country, freedom of press, political situation.
 
-We can stop using the term ``Political Leaning" and instead use ``Political Ideology" to describe the set of factors that influence the political leaning of the news articles.
+We can stop using the term ``Political Leaning" and instead use ``Political Ideology" to describe the set of factors in the news ecosystem that influence the writing of news articles.
 This multidimensional concepts needs to be used in all the stages of our anaysis: from parallel news reports analysis, to persuasion detection, to topic analysis.
 
 \subsection{Persuasion vs Propaganda: from intent to frequency}
@@ -437,11 +436,11 @@ Here we describe our hypothesis on the relationships between the considered dime
 \begin{itemize}
     \item \emph{Word-level variations vs persuasion}: we have observed how different news outlets describe the same news event, by using words that are specifically selected to explicitly or implicitly elicit the reader’s emotional reaction. By observing triples of articles (AllSides dataset), we have seen how different terms are being used to provide multiple versions of the same story. These choices of terms, in many cases result in a variation of the detected techniques: both as resulting techniques, and as term importance.
 
-    \item \emph{propaganda vs political leaning}: We observed this change of persuasive / propagandist language by taking into consideration the simplified categorisation by \emph{political leaning} (left/center/right) and tried to characterise linguistic profiles depending on this variable. Now, under the light of having redefined both the techniques and the political ideology, future works need to analyse how universal and specific linguistic patterns behave across different the different dimensions of political ideologies.
+    \item \emph{propaganda vs political leaning}: We observed this change of persuasive / propagandist language by taking into consideration the simplified categorisation by \emph{political leaning} (left/center/right) and tried to characterise linguistic profiles depending on this variable. Now, under the light of having redefined both the techniques and the political ideology, future works need to analyse how universal and specific linguistic patterns behave across the different dimensions of political ideologies.
 
     \item \emph{political leaning vs topic}: We observed that the topics covered vary depending on the political leaning of the news sources. This is also a known effect from the literature, called \emph{agenda setting}~\citep{mccombs1972agenda}. By using the wider concept of political ideology, future works need to analyse how the topics change across the many dimensions of political ideologies.
 
-    \item \emph{propaganda vs topic}: we observed that this variation of language is also very specific to the emph{topic}. Some topics are more controversial and find a higher quantity of propaganda, while others are more neutral and find less usage of linguistic techniques. Also here, as in the previous cases, we need to analyse how this relationship changes when we consider the wider concepts of linguistic patterns (universal vs specific) and political ideologies.
+    \item \emph{propaganda vs topic}: we observed that this variation of language is also very specific to the \emph{topic}. Some topics are more controversial and find a higher quantity of propaganda, while others are more neutral and find less usage of linguistic techniques. Also here, as in the previous cases, we need to analyse how this relationship changes when we consider the wider concepts of linguistic patterns (universal vs specific) and political ideologies.
 \end{itemize}
 
 Our idea is that, in order to completely understand and model the relationships between these multiple variables, we need to use a \emph{multidimensional model} that can capture these relationships altogether. Modelling only relationships between couples of factors does not enable us to get a good understanding.
