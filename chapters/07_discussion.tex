@@ -327,7 +327,7 @@ Others may be driven by clusters derived from language usage on specific topics.
 
 \subsection{Quality of Automated Detection of Techniques}
 
-In this work we relied on poorly trained models that only rely on a set of techniques. For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very limiting factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
+In this work we relied on models trained on limited datasets that only contain a pre-determined set of techniques annotated on a specific subset of articles (far-right propagandistic). For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very limiting factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
 
 To make this approach more future-proof,
 % we need to derive the technique analysis from the difference observation of language. In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
@@ -335,7 +335,7 @@ we can try to exploit our work on parallel news reports analysis to dynamically 
 % derive the technique analysis from the difference observation of language.
 Firstly, we can use the topic analysis to group articles related to the same event.
 Secondly, we can discover differences in language by comparing multiple articles that cover the same event.
-Finally, we can perform some clustering of the discovered differences, to group the articles into clusters that share similar differences.
+Finally, we can perform some clustering of the discovered differences, to group the articles into clusters that share similar language (with the help of social sciences).
 
 
 In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
