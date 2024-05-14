@@ -319,7 +319,7 @@ To name a few factors that are important to understand the news articles and the
     \item The political situation of the country: news articles that are written in a country that is in a war situation are very different from the news articles that are written in a country that is in a peaceful situation.
 \end{itemize}
 
-All these factors are very important to understand the news articles and the persuasion techniques used in them. This work is limited by the fact that we do not consider these factors, and instead we only use a simplified version of the political leaning of the news outlets (Left/Right axis).
+All these factors are very important to understand the news articles and the persuasion techniques used in them. In this work, we do not consider these factors, and instead we only use a simplified version of the political leaning of the news outlets (Left/Right axis).
 
 Therefore, future work should consider these factors to make the results more generalisable and more applicable to different tasks.
 Some of these factors may be encoded by hardcoded values, for which we have existing information (e.g. funding, conglomerates, country).
@@ -327,7 +327,7 @@ Others may be driven by clusters derived from language usage on specific topics.
 
 \subsection{Quality of Automated Detection of Techniques}
 
-In this work we relied on models trained on limited datasets that only contain a pre-determined set of techniques annotated on a specific subset of articles (far-right propagandistic). For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very limiting factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
+In this work we relied on models trained on limited datasets that only contain a pre-determined set of techniques annotated on a specific subset of articles (far-right propagandistic). For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very important factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
 
 To make this approach more future-proof,
 % we need to derive the technique analysis from the difference observation of language. In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
@@ -426,13 +426,6 @@ The revised hypotheses that we can derive from the redefinitions are:
 
 Here we describe our hypothesis on the relationships between the considered dimensions, and how they can be modelled together by taking into account the improved definitions above.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=\linewidth]{relationships.pdf}
-    \caption{Relationships observed in this work}
-    \label{fig:relationships}
-\end{figure}
-
 \begin{itemize}
     \item \emph{Word-level variations vs persuasion}: we have observed how different news outlets describe the same news event, by using words that are specifically selected to explicitly or implicitly elicit the reader’s emotional reaction. By observing triples of articles (AllSides dataset), we have seen how different terms are being used to provide multiple versions of the same story. These choices of terms, in many cases result in a variation of the detected techniques: both as resulting techniques, and as term importance.
 
@@ -444,6 +437,13 @@ Here we describe our hypothesis on the relationships between the considered dime
 \end{itemize}
 
 Our idea is that, in order to completely understand and model the relationships between these multiple variables, we need to use a \emph{multidimensional model} that can capture these relationships altogether. Modelling only relationships between couples of factors does not enable us to get a good understanding.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{relationships.pdf}
+    \caption{Relationships observed in this work}
+    \label{fig:relationships}
+\end{figure}
 
 In Figure~\ref{fig:relationships} we have drawn different spheres, that relate to the experimental chapters of this Thesis. We started with this work to explore the connections between them, but as we can see, many of the relationships are still missing. These relationships need to be modelled in a joint effort from two different communities:
 
