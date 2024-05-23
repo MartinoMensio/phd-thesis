@@ -269,6 +269,7 @@ During this research path, we have encountered many limitations, both technical 
 
 % Limitations of your research: It is important to be aware of the limitations of your research. This will help to put your findings in context and avoid overstating their significance. What factors could have influenced your results? What areas of your research could have been improved?
 
+\subsection{Language}
 % Datasets and US
 The first limitation, that comes from the datasets used, is that we use news articles that come from the US. While this is a relevant country for the English language, we think that it is limiting that the news articles do not come from other English-speaking countries %\todoHA{what about non-English? isn’t this another limitation?} 
 such as the UK or international news.
@@ -287,12 +288,9 @@ Instead, this thesis makes use of existing published datasets to avoid these iss
 
 This limitation can be addressed by future works, collecting articles from different nations and building a more global dataset both for political leaning and for propaganda detection. In both cases, behind the technical difficulty of retrieving cleaned articles, there is a need to annotate the data and therefore manual effort is required. For political leaning, researchers can rely on distant supervision: using the leaning of the news source as the label for the articles. However, for fine-grained propaganda detection, the articles need to be analysed by trained expert annotators, who need to correctly identify the propaganda techniques. The annotations need to pass quality checks by computing properly inter-annotator agreement. With such comprehensive datasets, more comparative analysis would be possible across nations.
 
-Another limitation of this work is that we are
-%not training cutting-edge models to perform propaganda detection or political leaning classification.
-%For fine-grained propaganda detection, we are instead 
-relying on pre-trained models~\citep{da2019fine} for fine-grained propaganda detection, and
-%Instead, 
-for political leaning, we are training a neural network that has 2 layers. We use this network with pre-computed features (BERT encodings, TF-IDF of different subsets of terms, numerical features representing quantity of propaganda techniques) and therefore the training times are reduced significantly.
+\subsection{Models}
+Another limitation of this work is that we are relying on pre-trained models~\citep{da2019fine} for fine-grained propaganda detection, and for political leaning, we are training a neural network that has 2 layers.
+We use this network with pre-computed features (BERT encodings, TF-IDF of different subsets of terms, numerical features representing quantity of propaganda techniques) and therefore the training times are reduced significantly.
 In the past years, there has been a race to deploy huge and complex networks, that require significant amounts of computational power, besides the cost and time to run experiments (and environmental consequences).
 We stick to relatively simpler models, applying Occam's principle: we need to observe improvements on simpler models first.
 Our goal is to demonstrate the relationship between the involved features, and not primarily to get results that compete with the state of the art.
@@ -300,15 +298,164 @@ Our goal is to demonstrate the relationship between the involved features, and n
 
 This limitation can quite simply be faced using more recent and complex models, potentially involving generative models such as GPT-4~\citep{openai2023gpt4} to generate training data or even to classify documents and terms.
 
+
+%3: Conclusions: scope and limitations: expanded addressing the limit of the applicability of this work considering news life cycle and how news outlets are organised. This brief discussion should provide readers a clear understanding of the generalisability of the work and how the developed solutions can be made use of by the different actors involved in the news industry. This section should address how the quality of the techniques influence their applicability and the identified issues with datasets may or may not make these solutions appropriate for different tasks. For instance, in the viva, the candidate correctly discussed how the effects he discovered were likely to change through time, as the salience of particular topics and attitudes evolved. Some consideration of how his approach could be adapted to ‘future-proof’ the results and techniques (as far as possible) would be of interest.
+
+
+% What needs to be improved, to make this approach more future-proof:
+% Generally, the applicability of this work is limited by:
+% - news lifecycle and organisation of news outlets (funding, conglomerates, ...)
+% - quality of automated detection of techniques
+% - discovered effects may change with time
+
+\subsection{News Lifecycle and Organisation of News Outlets}
+% NEWS ECOSYSTEM
+Considering the news lifecycle and organisation of news outlets, this work is limited by the fact that we do not consider many aspects of the news ecosystem.
+To name a few factors that are important to understand the news articles and the persuasion techniques used in them:
+\begin{itemize}
+    \item The funding of the news outlets: news articles that are written by a news outlet that is funded by a political party are very different from the news articles that are written by a news outlet that is funded by the government, or by a news outlet that is funded by a private company.
+    \item The conglomerates that they belong to: there are major differences between the news articles that are written by a news outlet that is part of a conglomerate that has other businesses, and the news articles that are written by a news outlet that is independent.
+    \item The freedom of press of the country: different degrees of freedom of press in different countries have a major impact on the news articles. For example, if the press is censored, there are many implications on the type of message that can be delivered to the public.
+    \item The political situation of the country: news articles that are written in a country that is in a war situation are very different from the news articles that are written in a country that is in a peaceful situation.
+\end{itemize}
+
+All these factors are very important to understand the news articles and the persuasion techniques used in them. In this work, we do not consider these factors, and instead we only use a simplified version of the political leaning of the news outlets (Left/Right axis).
+
+Therefore, future work should consider these factors to make the results more generalisable and more applicable to different tasks.
+Some of these factors may be encoded by hardcoded values, for which we have existing information (e.g. funding, conglomerates, country).
+Others may be driven by clusters derived from language usage on specific topics.
+
+\subsection{Quality of Automated Detection of Techniques}
+
+In this work we relied on models trained on limited datasets that only contain a pre-determined set of techniques annotated on a specific subset of articles (far-right propagandistic). For doing this analysis, we needed a dataset that is specifically annotated with respect to the propaganda techniques, and the annotators need to be experts on the field to be able to correctly identify the techniques. This is a very important factor, and limits the creation of such datasets. Furthermore, the techniques may change over time, and new ones may emerge. Therefore, the results of this work may not be applicable in the future.
+
+To make this approach more future-proof,
+% we need to derive the technique analysis from the difference observation of language. In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
+we can try to exploit our work on parallel news reports analysis to dynamically derive techniques from the differences in language.
+% derive the technique analysis from the difference observation of language.
+Firstly, we can use the topic analysis to group articles related to the same event.
+Secondly, we can discover differences in language by comparing multiple articles that cover the same event.
+Finally, we can perform some clustering of the discovered differences, to group the articles into clusters that share similar language (with the help of social sciences).
+
+
+In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
+% derive technique analysis from difference observation of language. In this way the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to literature to describe them.
+
+% The quality of the automated detection of techniques is another limitation of this work. The techniques used in this work are based on a set of techniques that are defined in the literature. These techniques may change over time, and new techniques may emerge. Therefore, the results of this work may not be applicable to new techniques that may emerge in the future. To make this approach more future-proof, we need to derive the technique analysis from the difference observation of language. In this way, the approach would be resistant to new techniques emerging. It would be only a matter of analysing the discovered techniques and linking them to the literature to describe them.
+
+
+\subsection{Time-specificity}
 Related to the topic analysis, we have a limitation that comes from the fact that the use of propaganda in topics could change with time. % and the nature of unfolding events. 
 For example, articles on sports could become propagandistic if some political or ideological issues intersect. %crop up (does happen).
 The current results may not be valid with future events.
 However, the presented methodology could be used to compute new results in different time frames.
 In this way, it would become possible to do an analysis of how the interaction between propaganda and topics evolves across time.
 % Also you have cross-over topics that could raise other challenges.
-% Another issue is determining what the propaganda language was used for. If left and right used the same propaganda types to talk about the same event then it’s possible that they used them for different purposes or in association with different points of parts of the event. So what should the next phd students do to analyse this further?
-% How could future students use your work to study impact of persuasive techniques on readers?
-% }
+
+
+By implementing the improvements described above, the cross-dimensional analysis presented in this thesis would be able to generalise better to different contexts, filling the gap of missing knowledge from new topics, political situations or different techniques that may emerge in a different timeframe.
+
+
+
+\section{Redefinitions}
+
+
+After the analysis of the contributions and limitations, we can redefine some of the concepts that we used in this work. These definitions are intended to support future work.
+
+% News: same as before
+
+\subsection{From Political Leaning to Political Ideology}
+
+As we discussed in the limitations, using the concept of Political Leaning over one single axis (Left to Right) is oversimplified.
+We need to consider more factors that influence the political leaning of the news articles.
+For this reason, we need to consider the news lifecycle described above, considering factors such as funding, conglomerates, country, freedom of press, political situation.
+
+We can stop using the term ``Political Leaning" and instead use ``Political Ideology" to describe the set of factors in the news ecosystem that influence the writing of news articles.
+This multidimensional concepts needs to be used in all the stages of our anaysis: from parallel news reports analysis, to persuasion detection, to topic analysis.
+
+\subsection{Persuasion vs Propaganda: from intent to frequency}
+Given that the analysis we can perform with the existing models is mainly a stylistic analysis, we have to drop our distinction between propaganda and persuasion based on the difference of intent.
+In this work we used the definition of propaganda as a set of persuasion techniques that is described in the literature by an intent to deceive.
+We cannot observe this difference of intent with the analyses made in this work.
+For evaluating the difference of intent, at the current state of automated analysis, we would need to rely on human evaluation.
+And this is not desirable because it means that we would need a lot of human annotations to train models that can recognise the intent of the persuasion techniques.
+We do not want to rely on a specific list and definition, that require dedicated data collection and annotation (see example of the propaganda corpus of~\citet{da2019fine}).
+Human-annotated datasets also fall easily into the problem of being imbalanced, and we cannot rely on them to have a good generalisation of the techniques used in the news articles, as described in this work.
+
+% how
+To find a solution to this problem, we can move from a distinction of intent to a distinction based on the frequency and usage of terms across news sources and political ideology.
+We want to be able to discover automatically linguistic patterns that are distinctive of different partitions across news articles (e.g., political ideology, topic).
+
+To focus on the non-topical words (refer to the two different layers of information described in Chapter~\ref{ssec:lit_layers_of_info}), we can proceed in the following way:
+
+\begin{enumerate}
+    \item distinguish the layer of persuasion and ignore the topical level by using the approach described in Chapter~\ref{chap:common_ground_search}. The outputs of this analysis will be sentence-level clusters with variations at the word level to describe the same detail.
+    \item link the clusters with the political ideology of the news sources: in this way we can language usage according to many partitioning variables (e.g., leaning, funding, freedom of press, country).
+    \item identify patterns across the considered partitioning variables: we can identify patterns that are shared across all political ideologies, or that are specific to a specific subgroup.
+\end{enumerate}
+
+With this analysis we can distinguish two different types of linguistic patterns:
+
+\begin{enumerate}
+    \item \emph{universal} linguistic patterns shared across a certain degree of partitions: for example, these may represent techniques that are used by all the news sources, regardless of their ideology.
+    \item linguistic patterns that are \emph{specific} to a specific partitioning: this group contains linguistic patterns that are used only by some of the news sources and not by others (this can be related to some of the traits of the news sources).
+\end{enumerate}
+
+With this distinction, we can replace our distinction of intent with a distinction based on the frequency and usage of terms across news sources and political ideology.
+
+% Political leaning: we need to move from a simplified categorisation to a more complex one. We need to consider the funding of the news outlets, the conglomerates that they belong to, the freedom of press of the country, the political situation of the country. We need to encode these factors by hardcoded values, for which we have existing information (e.g. funding, conglomerates, country). We need to drive clusters derived from language usage on specific topics. %
+
+% Persuasion: set of techniques ???
+
+% Propaganda: outlier usage/pattern of language (style) that is distinctive from how other news sources describe the same piece of news. We need to take distance from the overly-simplified factor of leaning, and simply considering topic-related usage of style: clustering together similar term usage and identifying clusters and outliers.
+
+% Difference between persuasion and propaganda: intent difference needs human evaluation. From computational evaluation of style difference, it is too difficult. Need collaboration work between tech people and more social sciences. Goal: find human model and computational models to differentiate if the persuasion is propagandistic or not. Challenge: go beyond stylistic clues that instead cannot differentiate very well. Can potentially models be trained to recognise from the linguistic surface the intent? Or which type of knowledge is needed to recognise the intent? %
+
+\subsection{Revised Hypotheses}
+
+The revised hypotheses that we can derive from the redefinitions are:
+
+\begin{enumerate}
+    \item \emph{Political Ideology vs Topic}: the topics that are covered by news sources are influenced by the political ideology of the news sources. We can identify topics that are shared across all political ideologies, or that are specific to a narrower set.
+    \item \emph{Political Ideology vs Linguistic Patterns}: the linguistic patterns that are used in news articles are influenced by the political ideology of the news sources. We can identify patterns that are shared across all political ideologies, or that are specific to a specific ideology.
+    \item \emph{Topic vs Linguistic Patterns}: the linguistic patterns that are used in news articles are influenced by the topic of the news articles. We can identify patterns that are shared across all topics, or that are specific to a specific topic.
+\end{enumerate}
+
+
+\section{Relationships between the considered dimensions}
+
+Here we describe our hypothesis on the relationships between the considered dimensions, and how they can be modelled together by taking into account the improved definitions above.
+
+\begin{itemize}
+    \item \emph{Word-level variations vs persuasion}: we have observed how different news outlets describe the same news event, by using words that are specifically selected to explicitly or implicitly elicit the reader’s emotional reaction. By observing triples of articles (AllSides dataset), we have seen how different terms are being used to provide multiple versions of the same story. These choices of terms, in many cases result in a variation of the detected techniques: both as resulting techniques, and as term importance.
+
+    \item \emph{propaganda vs political leaning}: We observed this change of persuasive / propagandist language by taking into consideration the simplified categorisation by \emph{political leaning} (left/center/right) and tried to characterise linguistic profiles depending on this variable. Now, under the light of having redefined both the techniques and the political ideology, future works need to analyse how universal and specific linguistic patterns behave across the different dimensions of political ideologies.
+
+    \item \emph{political leaning vs topic}: We observed that the topics covered vary depending on the political leaning of the news sources. This is also a known effect from the literature, called \emph{agenda setting}~\citep{mccombs1972agenda}. By using the wider concept of political ideology, future works need to analyse how the topics change across the many dimensions of political ideologies.
+
+    \item \emph{propaganda vs topic}: we observed that this variation of language is also very specific to the \emph{topic}. Some topics are more controversial and find a higher quantity of propaganda, while others are more neutral and find less usage of linguistic techniques. Also here, as in the previous cases, we need to analyse how this relationship changes when we consider the wider concepts of linguistic patterns (universal vs specific) and political ideologies.
+\end{itemize}
+
+Our idea is that, in order to completely understand and model the relationships between these multiple variables, we need to use a \emph{multidimensional model} that can capture these relationships altogether. Modelling only relationships between couples of factors does not enable us to get a good understanding.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{relationships.pdf}
+    \caption{Relationships observed in this work}
+    \label{fig:relationships}
+\end{figure}
+
+In Figure~\ref{fig:relationships} we have drawn different spheres, that relate to the experimental chapters of this Thesis. We started with this work to explore the connections between them, but as we can see, many of the relationships are still missing. These relationships need to be modelled in a joint effort from two different communities:
+
+\begin{itemize}
+    \item \emph{Social Sciences}: to understand the relationships between the political ideology of the news sources and the topics that they cover, and how this relates to the linguistic patterns that they use. This theoretical knowledge should drive the practical experimentation and help interpreting the results.
+    \item \emph{Data Sciences}: to create a computational model and improve the techniques for tackling each one of the spheres.
+\end{itemize}
+The close collaboration and the exchange of knowledge between these two communities will be crucial to model the relationships between the considered dimensions.
+
+% NEW RELATIONSHIPS:
+
+% Once this is done, we can then try to focus more on the \emph{distinction} between persuasion and propaganda, at the intersection between social science (more conceptually) and data science.
 
 
 
